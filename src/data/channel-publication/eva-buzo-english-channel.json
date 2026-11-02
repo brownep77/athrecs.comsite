@@ -1,0 +1,392 @@
+{
+  "slug": "eva-buzo-english-channel",
+  "name": "Eva Buzo",
+  "country": "Australia",
+  "aliases": [],
+  "highlight": "An overnight English Channel crossing on 5–6 June 2024, followed that summer by a swim from Italy to Albania.",
+  "biography": [
+    "Eva Buzo learned to swim with Wanda Surf Life Saving Club in Australia. In March 2022 she swam the 34 kilometres from New Norfolk to the Tasman Bridge on consecutive days. That July she swam 58 kilometres on Lake Geneva, from Château de Chillon to Hermance, in 25 hours 19 minutes 16 seconds.",
+    "Buzo left Dover on the night of 5 June 2024 and reached France the following morning. A seal joined her before dawn. She called it Trudy after Gertrude Ederle, the first woman to swim the Channel. Her crossing took 10 hours 49 minutes.",
+    "The official swim record gives a 23:17 departure and a 10:06 finish the next morning, with no stated time zone. Eddie Spelling piloted Pegasus and Tony Kenyon observed the swim. In a contemporary interview, Shakespeare Beach and Cap Gris-Nez are named as the two shores, with the start reported two minutes earlier.",
+    "In August 2024 Buzo became the first woman to swim across the Strait of Otranto from Italy to Albania. The Albanian National Olympic Committee recognised her swim with its Olympic Order."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sport",
+      "value": "Open-water swimming"
+    },
+    {
+      "label": "Sporting nationality",
+      "value": "Australia"
+    },
+    {
+      "label": "Channel observer",
+      "value": "Tony Kenyon"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo, 5–6 June 2024",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "One way from England to France. A contemporary interview identifies Shakespeare Beach, Dover, and Cap Gris-Nez."
+        },
+        {
+          "label": "Departure",
+          "text": "Wednesday 5 June 2024 at 23:17, federation clock"
+        },
+        {
+          "label": "Arrival",
+          "text": "Thursday 6 June 2024 at 10:06, federation clock"
+        },
+        {
+          "label": "Elapsed time",
+          "text": "10 hours 49 minutes"
+        },
+        {
+          "label": "Clock basis",
+          "text": "Both clock readings are reproduced as recorded. The register gives no UTC offset for either shore. The press account reports departure at 23:15."
+        },
+        {
+          "label": "Pilot and vessel",
+          "text": "Eddie Spelling piloted Pegasus."
+        },
+        {
+          "label": "Observer",
+          "text": "Tony Kenyon"
+        },
+        {
+          "label": "Ratifying organisation",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "Individual CS&PF record 445981",
+          "url": "https://cspf.co.uk/swim/445981"
+        },
+        {
+          "text": "CS&PF season results, 2024",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2024"
+        },
+        {
+          "text": "SWNS interview and crossing footage",
+          "url": "https://www.dailymotion.com/video/x90bpge"
+        },
+        {
+          "text": "The individual record identifies the ratifier, swimmer, duration, direction, crew and both clocks. Its date is the departure day. The season table lists the following day, when Buzo finished. The shore names come from the interview."
+        }
+      ],
+      "id": "buzo-2024"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Derwent River Big Swim, 24 March 2022",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "34 km solo, New Norfolk to the Tasman Bridge, Tasmania"
+        },
+        {
+          "label": "Time",
+          "text": "8:01:21"
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "Derwent River Big Swim honour roll, entry 43",
+          "url": "https://www.derwentriverbigswim.com/honour-roll"
+        },
+        {
+          "text": "The solo unassisted roll identifies Eva Buzo of Australia. The entry number is a sequence number."
+        }
+      ]
+    },
+    {
+      "title": "Derwent River Big Swim, 25 March 2022",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "34 km solo, New Norfolk to the Tasman Bridge, Tasmania"
+        },
+        {
+          "label": "Time",
+          "text": "8:32:21"
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "Derwent River Big Swim honour roll, entry 44",
+          "url": "https://www.derwentriverbigswim.com/honour-roll"
+        },
+        {
+          "text": "The solo unassisted roll identifies Eva Buzo of Australia. The entry number is a sequence number."
+        }
+      ]
+    },
+    {
+      "title": "Lake Geneva, 13–14 July 2022",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "Château de Chillon to Hermance, 58 km"
+        },
+        {
+          "label": "Time",
+          "text": "25:19:16"
+        },
+        {
+          "label": "Classification",
+          "text": "Adventure swims and non-standard routes"
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "Lake Geneva Swimming Association, Eva Buzo row",
+          "url": "https://www.lgsa.com/en/list-of-legends-old"
+        }
+      ]
+    },
+    {
+      "title": "Strait of Otranto, 17–19 August 2024",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "Italy to Albania"
+        },
+        {
+          "label": "Achievement",
+          "text": "First solo crossing by a woman"
+        },
+        {
+          "label": "Time",
+          "text": "Buzo reports 34 hours 52 minutes. Contemporary reports give approximate durations."
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "Eva Buzo’s swimming record",
+          "url": "https://evabuzo.com/portfolio/the-water/"
+        },
+        {
+          "text": "Albanian public broadcaster, Olympic Order presentation",
+          "url": "https://rtsh.al/rti/en/head-of-national-olympic-committee-ylli-awards-olympic-order-to-eva-buzo-first-woman-to-swim-across-the-otranto-strait-2/"
+        },
+        {
+          "text": "The award report corroborates the crossing and its historical significance. Exact elapsed time is attributed to the swimmer."
+        }
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "title": "August 2024",
+      "lines": [
+        {
+          "text": "Received the Albanian National Olympic Committee’s Olympic Order following her Strait of Otranto swim."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "A seal alongside Buzo during the crossing",
+      "lines": [
+        {
+          "text": "SWNS video and interview",
+          "url": "https://www.dailymotion.com/video/x90bpge"
+        },
+        {
+          "text": "A short excerpt from the swim. The federation record documents the completion."
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "How long did Eva Buzo take to swim the English Channel?",
+      "value": "She swam from England to France in 10 hours 49 minutes, finishing on 6 June 2024."
+    },
+    {
+      "label": "Who piloted Eva Buzo’s Channel swim?",
+      "value": "Eddie Spelling piloted Pegasus. Tony Kenyon observed the crossing."
+    },
+    {
+      "label": "Which route did Eva Buzo swim on Lake Geneva?",
+      "value": "In July 2022 she swam 58 kilometres from Château de Chillon to Hermance in 25 hours 19 minutes 16 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming & Piloting Federation",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/445981"
+        },
+        {
+          "text": "The individual record supplies Australia as nationality."
+        }
+      ]
+    },
+    {
+      "title": "Eva Buzo",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://evabuzo.com/portfolio/the-water/"
+        },
+        {
+          "text": "Club background and personal account of the Otranto swim."
+        }
+      ]
+    },
+    {
+      "title": "Albanian public broadcaster RTSH",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://rtsh.al/rti/en/head-of-national-olympic-committee-ylli-awards-olympic-order-to-eva-buzo-first-woman-to-swim-across-the-otranto-strait-2/"
+        },
+        {
+          "text": "Documents the award and the first crossing by a woman."
+        }
+      ]
+    },
+    {
+      "title": "SWNS interview",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.dailymotion.com/video/x90bpge"
+        },
+        {
+          "text": "Shore locations, the seal and its name."
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo, 5–6 June 2024",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "One way from England to France. A contemporary interview identifies Shakespeare Beach, Dover, and Cap Gris-Nez."
+        },
+        {
+          "label": "Departure",
+          "text": "Wednesday 5 June 2024 at 23:17, federation clock"
+        },
+        {
+          "label": "Arrival",
+          "text": "Thursday 6 June 2024 at 10:06, federation clock"
+        },
+        {
+          "label": "Elapsed time",
+          "text": "10 hours 49 minutes"
+        },
+        {
+          "label": "Clock basis",
+          "text": "Both clock readings are reproduced as recorded. The register gives no UTC offset for either shore. The press account reports departure at 23:15."
+        },
+        {
+          "label": "Pilot and vessel",
+          "text": "Eddie Spelling piloted Pegasus."
+        },
+        {
+          "label": "Observer",
+          "text": "Tony Kenyon"
+        },
+        {
+          "label": "Ratifying organisation",
+          "text": "Channel Swimming & Piloting Federation"
+        }
+      ],
+      "id": "buzo-2024"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Derwent River Big Swim, 24 March 2022",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "34 km solo, New Norfolk to the Tasman Bridge, Tasmania"
+        },
+        {
+          "label": "Time",
+          "text": "8:01:21"
+        }
+      ]
+    },
+    {
+      "title": "Derwent River Big Swim, 25 March 2022",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "34 km solo, New Norfolk to the Tasman Bridge, Tasmania"
+        },
+        {
+          "label": "Time",
+          "text": "8:32:21"
+        }
+      ]
+    },
+    {
+      "title": "Lake Geneva, 13–14 July 2022",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "Château de Chillon to Hermance, 58 km"
+        },
+        {
+          "label": "Time",
+          "text": "25:19:16"
+        },
+        {
+          "label": "Classification",
+          "text": "Adventure swims and non-standard routes"
+        }
+      ]
+    },
+    {
+      "title": "Strait of Otranto, 17–19 August 2024",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "Italy to Albania"
+        },
+        {
+          "label": "Achievement",
+          "text": "First solo crossing by a woman"
+        },
+        {
+          "label": "Time",
+          "text": "Buzo reports 34 hours 52 minutes. Contemporary reports give approximate durations."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-f29ae522c8102ee420c0"
+}

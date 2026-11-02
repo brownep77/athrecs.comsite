@@ -1,0 +1,530 @@
+{
+  "slug": "nejib-belhedi-english-channel",
+  "name": "Nejib Belhedi",
+  "country": "Tunisia",
+  "aliases": [
+    "Néjib Belhédi",
+    "Nejib BelHedi"
+  ],
+  "highlight": "First Tunisian Channel swimmer · 1993 solo in 16:35",
+  "biography": [
+    "Nejib Belhedi was born in Sfax, Tunisia, in 1952 and served in the Tunisian air force. His early distance swims took place close to home. On 25 June 1991 he swam from the Kerkennah Islands to Sfax. Two years later he travelled to England to attempt the Channel while still serving in the military. He recalled that his orders gave him only a short window to swim.",
+    "With Michael Oram piloting Aegean Blue and J. Woodward observing, Belhedi reached France in 16 hours 35 minutes. He described using the lights on the French shore to hold his course in the final stretch. The Channel Swimming Association recognised Tunisia with its 1993 award for a swimmer from a new country. The crossing also inspired the Belhedi Trophy, first presented at the association's Dover dinner in November 2008 for swimming on the season's highest tide.",
+    "Belhedi later swam the Tunisian coast in stages and developed Ouma, an invitation for children to swim in the sea. A Djerba event he organised in June 2013 brought together 450 children and teenagers. In his 2019 interview he described a programme open both to children learning to swim and to those who wanted to develop their skills."
+  ],
+  "flags": [
+    {
+      "code": "TN",
+      "abbr": "TUN",
+      "label": "Tunisia"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Source country",
+      "value": "Tunisia in the Channel Swimming Association record."
+    },
+    {
+      "label": "Born",
+      "value": "1952, Sfax, Tunisia."
+    },
+    {
+      "label": "Military career",
+      "value": "Retired as a lieutenant-colonel in the Tunisian air force."
+    },
+    {
+      "label": "Earlier home-water swim",
+      "value": "Kerkennah Islands to Sfax on 25 June 1991."
+    },
+    {
+      "label": "Channel recognition",
+      "value": "The CSA's 1993 award for a swimmer from a new country."
+    },
+    {
+      "label": "Youth swimming",
+      "value": "Organised the Swim of Peace Ouma event on Djerba in 2013."
+    }
+  ],
+  "crossings": [
+    {
+      "id": "belhedi-1993-solo",
+      "title": "Tunisia's first English Channel solo",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The swim is recorded under 15 September. Dover's athlete profile gives 15–16 September, and a later interview uses 16 September.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Wednesday, 15 September 1993 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "16h 35m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Belhedi's 2017 account reports a 10 a.m. start. The federation archive leaves both clocks blank, and the account does not attach a numeric departure date or time zone to 10 a.m.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "J. Woodward",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Belhedi recalled Force 4 conditions and a high tide as he approached the French coast.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful-swim record 2919 identifies Nejib Belhedi of Tunisia, one-way solo England to France, 1993, 16:35 and the new-country award. CS&PF historical entry 443563 credits CSA as ratifier and supplies date, pilot, boat and observer. Its 16:35:00 rendering adds zeroes to the ratifier's minute precision. Dover's dated individual entry agrees on 15 September and minute time. Its profile spans 15–16 September, while Le Petit Journal gives 16 September without labelling the phase."
+        },
+        {
+          "text": "Channel Swimming Association: Nejib Belhedi, 1993",
+          "url": "https://www.channelswimmingassociation.com/swim/2919/nejib-belhedi"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful individual record 2919 gives Tunisia, a one-way England-to-France solo, 16:35 and the 1993 new-country award.",
+          "label": "Supports"
+        },
+        {
+          "text": "The ratifying body publishes year and minute precision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical archive: Nejib Belhedi, 15 September 1993",
+          "url": "https://cspf.co.uk/swim/443563/nejib-belhedi-swim-on-15-september-1993"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443563 gives a generic date, age 41, Tunisia, E–F, CSA ratification, pilot Michael Oram, Aegean Blue and observer J. Woodward.",
+          "label": "Supports"
+        },
+        {
+          "text": "The compilation displays 16:35:00 with empty departure and arrival fields. CSA's own published elapsed time is to the minute.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.UK.com: Nejib BelHedi crossing",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1993-09-15/nejib-belhedi"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named 15 September 1993 result agrees with 16:35, identifies CSA, Mike Oram, Aegean Blue and J Woodward.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover.UK.com: Nejib BelHedi swimmer profile",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/nejib-belhedi"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named profile supplies Sfax birthplace, Tunisian nationality, spelling BelHedi, 15/16 September date span and the 2008 trophy presentation.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its wider North African first claim conflicts with documented earlier swims from Egypt.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Le Petit Journal, Tunis: interview with Nejib Belhedi",
+          "url": "https://lepetitjournal.com/vivre-a-tunis/sport-interview-nejib-belhedi-nageur-marathonien-263483"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2019 French-language interview uses Néjib Belhédi. It gives 1952 birth year, retired air force rank, 1991 Kerkennah–Sfax, the coastal stages and the aims of Ouma.",
+          "label": "Supports"
+        },
+        {
+          "text": "The interview's introduction dates the Channel feat 16 September. Its list of future Oceans Seven swims describes plans.",
+          "label": "Limitations"
+        },
+        {
+          "text": "WOWSA: Belhedi recalls the 1993 Channel swim",
+          "url": "https://www.openwaterswimming.com/having-strong-will-to-succeed/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2017 feature incorporating his account gives a 10 a.m. start and describes tide and Force 4 conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "No numeric departure date or time zone accompanies the clock. Earlier Egyptian crossings rule out the broader regional-first wording.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Kerkennah to Sfax",
+      "lines": [
+        {
+          "text": "1991-06-25"
+        },
+        {
+          "text": "Completed the Tunisian crossing that he identified as an early milestone."
+        }
+      ]
+    },
+    {
+      "title": "English Channel",
+      "lines": [
+        {
+          "text": "1993-09"
+        },
+        {
+          "text": "Completed an England-to-France solo, earning the CSA's new-country award."
+        }
+      ]
+    },
+    {
+      "title": "Belhedi Trophy",
+      "lines": [
+        {
+          "text": "2008-11-01"
+        },
+        {
+          "text": "The trophy associated with swims on the highest tide was presented for the first time at the CSA dinner in Dover."
+        }
+      ]
+    },
+    {
+      "title": "Tunisian coast in stages",
+      "lines": [
+        {
+          "text": "2012"
+        },
+        {
+          "text": "His 2019 interview describes the 1,400-kilometre coastal project as a series of swims."
+        }
+      ]
+    },
+    {
+      "title": "Youth swim on Djerba",
+      "lines": [
+        {
+          "text": "2013-06-02"
+        },
+        {
+          "text": "Organised the Ouma gathering at Athénée Beach, with children, teenagers and international guests."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Nejib BelHedi — Dover swimmer profile",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/nejib-belhedi"
+        },
+        {
+          "text": "Named swimmer page covering his Channel crossing and the trophy bearing his name."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Néjib Belhédi on Ouma and Tunisian swimming",
+      "lines": [
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://lepetitjournal.com/vivre-a-tunis/sport-interview-nejib-belhedi-nageur-marathonien-263483"
+        },
+        {
+          "text": "French-language written interview published in 2019."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Nejib Belhedi?",
+      "value": "This profile includes 1 selected solo performance. A continuous multi-way crossing counts as one performance."
+    },
+    {
+      "label": "When was Nejib Belhedi’s first listed Channel swim?",
+      "value": "The recorded swim date is Wednesday, 15 September 1993. Departure and arrival dates are unconfirmed."
+    },
+    {
+      "label": "How long did the first listed swim take?",
+      "value": "The recorded 1-way solo lasted 16h 35m. Published dates vary between 15 September, 15–16 September and 16 September. The 16h 35m crossing is recorded under 15 September."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Nejib Belhedi, 1993",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2919/nejib-belhedi"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful individual record 2919 gives Tunisia, a one-way England-to-France solo, 16:35 and the 1993 new-country award.",
+          "label": "Supports"
+        },
+        {
+          "text": "The ratifying body publishes year and minute precision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical archive: Nejib Belhedi, 15 September 1993",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443563/nejib-belhedi-swim-on-15-september-1993"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443563 gives a generic date, age 41, Tunisia, E–F, CSA ratification, pilot Michael Oram, Aegean Blue and observer J. Woodward.",
+          "label": "Supports"
+        },
+        {
+          "text": "The compilation displays 16:35:00 with empty departure and arrival fields. CSA's own published elapsed time is to the minute.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Nejib BelHedi swimmer profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/nejib-belhedi"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named profile supplies Sfax birthplace, Tunisian nationality, spelling BelHedi, 15/16 September date span and the 2008 trophy presentation.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its wider North African first claim conflicts with documented earlier swims from Egypt.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Nejib BelHedi crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1993-09-15/nejib-belhedi"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named 15 September 1993 result agrees with 16:35, identifies CSA, Mike Oram, Aegean Blue and J Woodward.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Le Petit Journal, Tunis: interview with Nejib Belhedi",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://lepetitjournal.com/vivre-a-tunis/sport-interview-nejib-belhedi-nageur-marathonien-263483"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2019 French-language interview uses Néjib Belhédi. It gives 1952 birth year, retired air force rank, 1991 Kerkennah–Sfax, the coastal stages and the aims of Ouma.",
+          "label": "Supports"
+        },
+        {
+          "text": "The interview's introduction dates the Channel feat 16 September. Its list of future Oceans Seven swims describes plans.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA: Belhedi recalls the 1993 Channel swim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/having-strong-will-to-succeed/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2017 feature incorporating his account gives a 10 a.m. start and describes tide and Force 4 conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "No numeric departure date or time zone accompanies the clock. Earlier Egyptian crossings rule out the broader regional-first wording.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA: Swim of Peace Ouma, Djerba",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/swim-of-peace-ouma-djerba-in-tunisia/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "June 2013 event report names Belhedi as organiser of the 2 June youth swim with 450 children and teenagers.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame: Abdellatief Abouheif",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/crocodile-of-nile/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Egyptian swimmer's 1955 France-to-England result establishes a North African crossing before 1993.",
+          "label": "Supports"
+        },
+        {
+          "text": "Context for the geographic scope of Belhedi's new-country honour.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA review of the June 2022 Italy–Tunisia attempt",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/what-happened-from-start-to-finish-of-nejib-belhedis-swim-between-italy-and-tunisia/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The review records time aboard the escort boat and missing exit and re-entry waypoints. It rejects a continuous unassisted classification.",
+          "label": "Supports"
+        },
+        {
+          "text": "The review concerns a different swim. It also records a separate review of a 2018 claim, without resolving that matter here.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "belhedi-1993-solo",
+      "title": "Tunisia's first English Channel solo",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Wednesday, 15 September 1993 (recorded swim date)"
+        },
+        {
+          "text": "16h 35m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published dates vary between 15 September, 15–16 September and 16 September. The 16h 35m crossing is recorded under 15 September.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-25c6c4c120bcc52482ec"
+}

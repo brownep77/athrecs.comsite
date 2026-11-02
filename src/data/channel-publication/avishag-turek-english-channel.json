@@ -1,0 +1,370 @@
+{
+  "slug": "avishag-turek-english-channel",
+  "name": "Avishag Turek",
+  "country": "Israel",
+  "aliases": [],
+  "highlight": "2017 Channel crossing · 13 hours 35 minutes",
+  "biography": [
+    "Avishag Turek is an Israeli open-water swimmer from Shefayim whose endurance career followed a long break from competition. She swam competitively as a child but left the sport as a teenager. In interviews she describes returning around twenty years later, encouraged by swimming coach Ori Sela. Her first open-water swim was in May 2013. The return eventually led from shorter sea swims to the English Channel.",
+    "On 1 August 2017 she completed the England-to-France crossing in 13 hours 35 minutes. The Channel Swimming Association records an arrival at 18:05, with Peter Reed piloting Rowena and Andy Pope observing. Her contemporary Jerusalem Post interview described her as the first Israeli woman to complete the crossing. She undertook the challenge in support of Make-A-Wish Israel.",
+    "Turek continued with Catalina in 2018 and Manhattan in June 2019, completing the three swims commonly known as the Triple Crown of Open Water Swimming. A 2019 organiser-supplied profile also described her tenth lengthwise crossing of the Sea of Galilee. In a separate interview that year, she discussed teaching swimming and helping people who fear water. Her involvement in a water-safety campaign connected her own return to swimming with encouraging safer participation by others."
+  ],
+  "flags": [
+    {
+      "code": "IL",
+      "label": "Israel",
+      "abbr": "ISR"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country",
+      "value": "Israel"
+    },
+    {
+      "label": "Home community in contemporary interviews",
+      "value": "Shefayim"
+    },
+    {
+      "label": "Return to open water",
+      "value": "First open-water swim in May 2013"
+    },
+    {
+      "label": "Channel completion",
+      "value": "1 August 2017 · 18:05, published zone unstated"
+    },
+    {
+      "label": "Channel elapsed time",
+      "value": "13 hours 35 minutes"
+    },
+    {
+      "label": "Channel support",
+      "value": "Peter Reed · Rowena · observer Andy Pope"
+    },
+    {
+      "label": "Challenge purpose",
+      "value": "Make-A-Wish Israel"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The contemporary athlete interview identifies this as the first Channel completion by an Israeli woman and explains her support for Make-A-Wish Israel."
+        },
+        {
+          "text": "13h 35m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 1 August 2017 · 18:05 · CSA swim 4661 explicitly records Completed 1st August 2017 6:05pm; time zone is unstated.",
+          "label": "Finished"
+        },
+        {
+          "text": "The association publishes an arrival clock, but no departure clock was checked; none has been calculated from elapsed time.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Peter Reed",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Rowena",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Andy Pope",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA swim 4661 is a named successful individual entry for Avishag Turek, country Israel, Solo, one way, England to France. Its Completed field supplies the finish date and 18:05 clock, with 13:35 elapsed and named pilot, vessel and observer. Ratifier-checked describes inspection of that published association record, not access to the original observer’s log. Her contemporary interview provides the personal and national-milestone context."
+        },
+        {
+          "text": "CSA: Avishag Turek, 2017 — swim 4661",
+          "url": "https://www.channelswimmingassociation.com/swim/4661/avishag-turek"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Israel, a one-way solo England-to-France crossing, completion on 1 August 2017 at 18:05, 13:35 elapsed, Peter Reed / Rowena and observer Andy Pope.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published association record inspected; the original observer log and departure clock were not available.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Tali Kord, The Jerusalem Post: Where Time Is Irrelevant — interview PDF",
+          "url": "https://www.swimming.co.il/wp-content/uploads/2017/08/jerusaelm-post-english-channel.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The original 2017 interview identifies Turek with Shefayim, her childhood competitive swimming, long break, return encouraged by Ori Sela, Make-A-Wish purpose and first Israeli woman milestone.",
+          "label": "Supports"
+        },
+        {
+          "text": "The PDF is hosted by her swimming organisation. Only statements inspected in the readable text are used; no sensitive family medical history is reproduced.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "turek-2017"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "First open-water swim",
+      "lines": [
+        {
+          "text": "May 2013"
+        },
+        {
+          "text": "Turek dates her open-water beginning to May 2013 in the 2019 organiser-supplied profile."
+        }
+      ]
+    },
+    {
+      "title": "English Channel completed",
+      "lines": [
+        {
+          "text": "Tuesday, 1 August 2017"
+        },
+        {
+          "text": "CSA records an England-to-France solo finish at 18:05 after 13:35."
+        }
+      ]
+    },
+    {
+      "title": "Catalina crossing",
+      "lines": [
+        {
+          "text": "2018"
+        },
+        {
+          "text": "The June 2019 profile reports her completion of Catalina the preceding year."
+        }
+      ]
+    },
+    {
+      "title": "Tenth Sea of Galilee length crossing",
+      "lines": [
+        {
+          "text": "March 2019"
+        },
+        {
+          "text": "The organiser-supplied profile records this further endurance milestone."
+        }
+      ]
+    },
+    {
+      "title": "Manhattan and Triple Crown",
+      "lines": [
+        {
+          "text": "Saturday, 1 June 2019"
+        },
+        {
+          "text": "The New York Open Water-supplied account reports the Manhattan completion that joined her Channel and Catalina swims."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Where Time Is Irrelevant: original athlete interview",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.swimming.co.il/wp-content/uploads/2017/08/jerusaelm-post-english-channel.pdf"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "The Jerusalem Post’s written interview, hosted as a PDF by the swimming organisation. It is a career account, not a swim recording."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Avishag Turek on returning to swimming and water safety",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.ynet.co.il/articles/0,7340,L-5564247,00.html"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Ynet’s original Hebrew interview from 2019, with personal swimming and teaching context."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Avishag Turek?",
+      "value": "This profile includes 1 selected solo performance for Avishag Turek. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Avishag Turek’s featured English Channel swim?",
+      "value": "The featured swim finished on Tuesday, 1 August 2017. Its exact start date is not confirmed here."
+    },
+    {
+      "label": "How long did Avishag Turek’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 13 hours and 35 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Avishag Turek, 2017 — swim 4661",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/4661/avishag-turek"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Israel, a one-way solo England-to-France crossing, completion on 1 August 2017 at 18:05, 13:35 elapsed, Peter Reed / Rowena and observer Andy Pope.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published association record inspected; the original observer log and departure clock were not available.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Tali Kord, The Jerusalem Post: Where Time Is Irrelevant — interview PDF",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.swimming.co.il/wp-content/uploads/2017/08/jerusaelm-post-english-channel.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The original 2017 interview identifies Turek with Shefayim, her childhood competitive swimming, long break, return encouraged by Ori Sela, Make-A-Wish purpose and first Israeli woman milestone.",
+          "label": "Supports"
+        },
+        {
+          "text": "The PDF is hosted by her swimming organisation. Only statements inspected in the readable text are used; no sensitive family medical history is reproduced.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Ynet: original Avishag Turek interview, August 2019",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.ynet.co.il/articles/0,7340,L-5564247,00.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person account of leaving competition as a teenager, returning around twenty years later, teaching swimming, helping people overcome fear of water and supporting a water-safety campaign.",
+          "label": "Supports"
+        },
+        {
+          "text": "Hebrew interview; occupation and activities are described at the time of the 2019 article.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Daily News of Open Water Swimming: Avishag Turek, An Inspirational Pioneer From Israel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://dailynewsofopenwaterswimming.com/avishag-turek-an-inspirational-pioneer-from-israel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original June 2019 report supplied by Rondi Davies of New York Open Water, including athlete quotations: first open-water swim in May 2013, 2018 Catalina, March 2019 tenth Sea of Galilee crossing and June 2019 Manhattan completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its overall-placing prose and results list disagree; no placing is used. These contextual career milestones are not new independently ratified event entries.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 1 August 2017 (completion)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "13h 35m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "18:05 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "turek-2017"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-d6f2e5085e66b4ecdff8"
+}

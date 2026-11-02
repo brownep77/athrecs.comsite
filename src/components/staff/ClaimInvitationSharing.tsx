@@ -4,22 +4,29 @@ import type { StaffContact } from "@/lib/athrecs/athlete-contact";
 import { STAFF_SENDER_LABEL } from "@/lib/athrecs/athlete-contact";
 import { claimInvitationSharing } from "@/lib/athrecs/claim-invitation-sharing";
 import { SOCIAL_LABELS, validateProfileConnection } from "@/lib/athrecs/profile-connections";
+import { intercomContactLinks } from "@/lib/athrecs/intercom-contact";
+import { IntercomContactDialog } from "./IntercomContactDialog";
 
 export function ClaimInvitationSharing({
   url,
   email,
+  userId,
   contact,
   newAthlete = false,
   emailBound = true,
 }: {
   url: string;
   email: string;
+  userId?: string;
   contact: StaffContact;
   newAthlete?: boolean;
   emailBound?: boolean;
 }) {
   const [message, setMessage] = useState("");
+  const [intercomChannel, setIntercomChannel] = useState<"email" | "chat" | null>(null);
   const links = claimInvitationSharing(url, contact, newAthlete, emailBound);
+  const intercomLinks = intercomContactLinks({ userId, email });
+  const canOpenIntercom = Boolean(intercomLinks.account || intercomLinks.email);
   const socialLinks = contact.socialLinks.flatMap((link) => {
     try {
       return [validateProfileConnection(link)];
@@ -45,6 +52,23 @@ export function ClaimInvitationSharing({
       <div className="flex flex-wrap gap-2">
         <Button
           type="button"
+          disabled={!canOpenIntercom}
+          onClick={() => setIntercomChannel("email")}
+          aria-haspopup="dialog"
+        >
+          Email invitation in Intercom
+        </Button>
+        <Button
+          type="button"
+          variant="secondary"
+          disabled={!canOpenIntercom}
+          onClick={() => setIntercomChannel("chat")}
+          aria-haspopup="dialog"
+        >
+          Message invitation in Intercom
+        </Button>
+        <Button
+          type="button"
           variant="secondary"
           onClick={() =>
             void navigator.clipboard
@@ -57,6 +81,13 @@ export function ClaimInvitationSharing({
         >
           Copy invitation message
         </Button>
+      </div>
+      <p className="text-xs text-muted">
+        Copy this private invitation into an email or Messenger conversation in Intercom. Review the
+        recipient and send there; opening Intercom does not send or mark the invitation delivered.
+      </p>
+      <p className="text-sm font-medium">Other messaging apps</p>
+      <div className="flex flex-wrap gap-2">
         {links.sms ? (
           <a
             href={links.sms}
@@ -122,8 +153,8 @@ export function ClaimInvitationSharing({
         the app.
       </p>
       <p className="text-xs text-muted">
-        Use your {STAFF_SENDER_LABEL} account. Review and send in the app; opening it does not send
-        a message or mark it delivered.{" "}
+        For other messaging apps, use your {STAFF_SENDER_LABEL} account. Intercom uses its connected
+        sender. Review and send in the app; opening it does not send a message or mark it delivered.{" "}
         {newAthlete
           ? emailBound
             ? "They must sign up or sign in with the invited email address."
@@ -135,6 +166,15 @@ export function ClaimInvitationSharing({
         <p role="status" className="text-sm">
           {message}
         </p>
+      ) : null}
+      {intercomChannel && canOpenIntercom ? (
+        <IntercomContactDialog
+          key={JSON.stringify([userId, email, url])}
+          contact={{ userId, email, phone: contact.phone }}
+          channel={intercomChannel}
+          draft={{ subject: "Is this your ATHRECS athlete profile?", body: links.message }}
+          onClose={() => setIntercomChannel(null)}
+        />
       ) : null}
     </section>
   );

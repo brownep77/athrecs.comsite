@@ -5,6 +5,7 @@ import {
   PLACEHOLDER,
   RACE_FORMAT,
 } from "./fixture-distance-policy.ts";
+import { partitionRaceEditions } from "./completed-race-presentation.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { withheldFixtureDateKeys } from "@/data/fixture-date-reviews";
 import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
@@ -564,12 +565,23 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         (
           select count(*)::int
           from results r
-          join athletes result_athlete on result_athlete.id = r.athlete_id
+          join athletes a on a.id = r.athlete_id
           where r.edition_id = ed.id
-            and (
-              r.result_visibility in ('public', 'public_figure')
-              or result_athlete.profile_type = 'Public figure'
-              or result_athlete.profile_visibility = 'public'
+            and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
+            and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
+              or (a.profile_visibility='private' and a.parent_athlete_id is null
+                and a.profile_details#>>'{nameReview,mode}'='results_only'
+                and not exists (select 1 from athlete_account_links owner where owner.athlete_id=a.id)))
+            and not exists (
+              select 1 from athlete_account_links l
+              join athlete_public_shares s on s.user_id = l.user_id
+              where l.athlete_id = a.id and l.status = 'active'
+                and (s.enabled = false or s.share_results = false)
+            )
+            and not exists (
+              select 1 from athlete_profile_hidden_results h
+              join athlete_account_links l on l.user_id = h.user_id and l.status = 'active'
+              where l.athlete_id = a.id and h.result_id = r.id
             )
         ) as result_count,
         (
@@ -673,9 +685,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
 
     // Stored editions include official holiday dates and cancellations. Never
     // fabricate a missing weekly occurrence or replace its venue start time.
-    const upcoming = editions
-      .filter((edition) => edition.event_date >= today)
-      .sort((a, b) => a.event_date.localeCompare(b.event_date));
+    const { upcoming, past } = partitionRaceEditions(editions, today);
 
     const relatedRows = await sql<
       Omit<EventListItem, "groups"> & {
@@ -782,10 +792,15 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       };
     });
 
+    const eastCoast = event.slug === "east-coast-10k";
+    const isTimingLink = (url: string | null) =>
+      Boolean(url && /^https?:\/\/(?:www\.)?totalracetiming\.co\.uk(?:\/|$)/i.test(url));
     return publicCatalogueContent(
       twoOceansRacePresentation(
         {
-          event,
+          event: eastCoast && isTimingLink(event.website)
+            ? { ...event, website: "https://www.gyrr.co.uk/" }
+            : event,
           groups,
           distances: fixtureDistanceBadges(
             event.sport,
@@ -793,8 +808,17 @@ export const getEventBySlug = createServerFn({ method: "GET" })
             editions,
           ),
           upcoming,
-          past: editions.filter((e) => e.event_date < today),
-          related,
+          past: eastCoast ? past.map((edition) => ({
+            ...edition,
+            results_official_url: isTimingLink(edition.results_official_url) ? null : edition.results_official_url,
+            result_links: edition.result_links.filter((link) => !isTimingLink(link.results_url)),
+            notes: edition.notes?.split(/(?<=[.!?])\s+|\n+/)
+              .filter((note) => !/total\s*race\s*timing|\bTRT (timed event|verified finish list)/i.test(note))
+              .join(" ").trim() || null,
+          })) : past,
+          related: eastCoast ? related.map((race) =>
+            isTimingLink(race.website) ? { ...race, website: "" } : race,
+          ) : related,
         },
         slug,
       ),
@@ -1303,7 +1327,15 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
       const { athleteSearchContent } = await import("./athlete-search-content");
       const { biographyParagraphs } = await import("./biography-presentation");
       const { reviewedBiographyPresentation } = await import("./reviewed-biography.server");
+      const channelArchive =
+        !identity.has_account_link &&
+        profile.shareBiography &&
+        profile.publishedBiography &&
+        profile.athlete.slug.endsWith("-english-channel")
+          ? await (await import("./english-channel.server")).nativeChannel(profile.athlete.slug)
+          : undefined;
       return buildPublicAthletePreview({
+        channelArchive,
         slug: profile.athlete.slug,
         displayName: profile.athlete.display_name,
         athleteNumber: profile.athlete.athlete_number,

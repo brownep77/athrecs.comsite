@@ -1,0 +1,591 @@
+{
+  "slug": "carina-bruwer-english-channel",
+  "name": "Carina Bruwer",
+  "country": "South Africa",
+  "aliases": [],
+  "highlight": "English Channel in 12 hours 3 minutes · Swimmer, musician and fundraiser",
+  "biography": [
+    "Carina Bruwer is a South African open-water swimmer, professional flautist and founder of Swim for Hope. Based in Cape Town, she has combined an international music career with solo swims across channels, straits and bays, using many of those challenges to support charitable causes.",
+    "Her English Channel crossing took place on 1 August 2005. She left Dover at 08:30 and completed the England-to-France swim in 12 hours and 3 minutes. The final approach became a prolonged struggle against the current. Recalling the crossing twenty years later, she described missing her intended landing at Cap Gris-Nez and reaching Wissant Beach instead. Peter Bales, a mentor and member of her support crew, helped her continue when her original time target slipped away.",
+    "That season also included a Strait of Gibraltar crossing in 3 hours and 35 minutes. In 2006 she crossed False Bay, and later projects took her through the Strait of Messina and along the coast from Nice to Ventimiglia. Her swimming has continued alongside performances with Sterling EQ, the instrumental group she founded.",
+    "Through Swim for Hope, Bruwer connects endurance swimming with fundraising for children’s health, education and opportunity. Her work links the discipline of sustained performance in the water with the practical needs of the communities and organisations she supports."
+  ],
+  "flags": [
+    {
+      "code": "ZA",
+      "label": "South Africa",
+      "abbr": "RSA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "South African"
+    },
+    {
+      "label": "Based in",
+      "value": "Cape Town, South Africa"
+    },
+    {
+      "label": "Channel crossing",
+      "value": "1 August 2005 — England → France"
+    },
+    {
+      "label": "Channel elapsed time",
+      "value": "12 hours 3 minutes"
+    },
+    {
+      "label": "Other profession",
+      "value": "Professional flautist; founder and member of Sterling EQ"
+    },
+    {
+      "label": "Fundraising initiative",
+      "value": "Founder of Swim for Hope"
+    },
+    {
+      "label": "Gibraltar crossing",
+      "value": "3 hours 35 minutes in 2005"
+    },
+    {
+      "label": "False Bay crossing",
+      "value": "10 hours 58 minutes in 2006"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo, 1 August 2005",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Bruwer’s first-person account names Peter Bales among the support crew and describes a finish at Wissant after missing Cap Gris-Nez."
+        },
+        {
+          "text": "Monday, 1 August 2005 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 3m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Monday, 1 August 2005 · 08:30 · Departure clock in the contemporary Sapa report; time zone not stated",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "08:30 is explicitly reported. No finish clock has been calculated from the elapsed duration. The retrospective account describes estimated distances, which are not treated as a measured track.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Wissant Beach, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Dave Whyte",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation, as identified by Dover’s individual record",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Changing weather and difficult currents during the final approach.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Dover’s individual record supplies date, route, duration and pilot. The CS&PF swimmer index confirms one successful solo in 2005. A contemporary report supplies departure time; Bruwer’s own account supplies the landing beach. A direct individual CS&PF swim record or original observer log was not obtained."
+        },
+        {
+          "text": "Dover.uk.com: Carina Bruwer, 1 August 2005",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2005-08-01/carina-bruwer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "CS&PF: Carina Bruwer’s entry in the solo swimmer index",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Carina Bruwer: South Africa, one successful solo in 2005.",
+          "label": "Supports"
+        },
+        {
+          "text": "Only the selected athlete’s index entry is used. It does not provide a date, duration, observer or vessel for her crossing.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Mail & Guardian / Sapa: Carina Bruwer Channel report, 2 August 2005",
+          "url": "https://mg.co.za/news/south-africa/2005-08-02-sa-swimmer-crosses-english-channel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Carina Bruwer: personal account of her 2005 Channel crossing",
+          "url": "https://carinabruwer.com/news/swimming-the-english-channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person account of the 1 August 2005 crossing, Wissant landing and Peter Bales’s support.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective recollection; distances are estimates. The article says only a few photographs remain and does not supply continuous crossing footage.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "carina-bruwer-2005"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Walker Bay crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2021 · exact day not confirmed"
+        },
+        {
+          "text": "Walker Bay, South Africa"
+        },
+        {
+          "text": "Completed the crossing; her official account identifies it as the first successful swim across Walker Bay."
+        },
+        {
+          "text": "6h 12m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "21 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Official athlete site, Signature swims: 2021 Walker Bay entry. Same career page includes her English Channel swim; no exact day or original ratification sheet supplied."
+        },
+        {
+          "text": "Carina Bruwer: official swimming career",
+          "url": "https://carinabruwer.com/swimmer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete career account; selected entries supply years, not exact dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "carina-bruwer-event-1-walker-bay-crossing"
+    },
+    {
+      "title": "False Bay crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2006 · exact day not confirmed"
+        },
+        {
+          "text": "False Bay, South Africa"
+        },
+        {
+          "text": "Completed the crossing; her account identifies her as the first South African woman and third swimmer to do so."
+        },
+        {
+          "text": "10h 58m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "34 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Official athlete site, Signature swims: 2006 False Bay entry, linked to the same Channel career. Year and minute-precision duration only."
+        },
+        {
+          "text": "Carina Bruwer: official swimming career",
+          "url": "https://carinabruwer.com/swimmer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete career account; selected entries supply years, not exact dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "carina-bruwer-event-2-false-bay-crossing"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Cape Point and Bizerte swims",
+      "lines": [
+        {
+          "text": "2004"
+        },
+        {
+          "text": "Completed open-water routes around Cape Point and near Bizerte, Tunisia."
+        }
+      ]
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "2005"
+        },
+        {
+          "text": "Swam from Spain to Morocco in 3 hours 35 minutes."
+        }
+      ]
+    },
+    {
+      "title": "English Channel completion",
+      "lines": [
+        {
+          "text": "Monday, 1 August 2005"
+        },
+        {
+          "text": "Finished England-to-France in 12 hours 3 minutes."
+        }
+      ]
+    },
+    {
+      "title": "False Bay crossing",
+      "lines": [
+        {
+          "text": "2006"
+        },
+        {
+          "text": "Completed the South African bay crossing in 10 hours 58 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Four Strait of Messina crossings",
+      "lines": [
+        {
+          "text": "2014"
+        },
+        {
+          "text": "Completed a quadruple crossing as part of her expanding open-water programme."
+        }
+      ]
+    },
+    {
+      "title": "Three-country coastal swim",
+      "lines": [
+        {
+          "text": "2018"
+        },
+        {
+          "text": "Completed a 21-kilometre coastal swim from Nice to Ventimiglia."
+        }
+      ]
+    },
+    {
+      "title": "Walker Bay crossing",
+      "lines": [
+        {
+          "text": "2021"
+        },
+        {
+          "text": "Completed the 21-kilometre South African route in 6 hours 12 minutes."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Carina Bruwer — official swimming features and interviews",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://carinabruwer.com/watch"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "The athlete’s official video collection includes interviews and coverage of other open-water routes. The collection page was inspected; individual videos were not played. This is not presented as footage of her 2005 Channel crossing."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Carina Bruwer?",
+      "value": "This profile includes 1 selected solo performance for Carina Bruwer. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Carina Bruwer’s featured English Channel swim?",
+      "value": "The featured swim started on Monday, 1 August 2005. Its exact completion date is not confirmed here."
+    },
+    {
+      "label": "How long did Carina Bruwer’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 12 hours and 3 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Dover.uk.com: Carina Bruwer, 1 August 2005",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2005-08-01/carina-bruwer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Carina Bruwer’s entry in the solo swimmer index",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Carina Bruwer: South Africa, one successful solo in 2005.",
+          "label": "Supports"
+        },
+        {
+          "text": "Only the selected athlete’s index entry is used. It does not provide a date, duration, observer or vessel for her crossing.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Mail & Guardian / Sapa: Carina Bruwer Channel report, 2 August 2005",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://mg.co.za/news/south-africa/2005-08-02-sa-swimmer-crosses-english-channel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Carina Bruwer: personal account of her 2005 Channel crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://carinabruwer.com/news/swimming-the-english-channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person account of the 1 August 2005 crossing, Wissant landing and Peter Bales’s support.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective recollection; distances are estimates. The article says only a few photographs remain and does not supply continuous crossing footage.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Carina Bruwer: official swimming biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://carinabruwer.com/swimmer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete career account; selected entries supply years, not exact dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Carina Bruwer: official music biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://carinabruwer.com/musician"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Carina Bruwer: Swim for Hope and cause work",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://carinabruwer.com/changemaker"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Carina Bruwer: official videos and swimming features",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://carinabruwer.com/watch"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo, 1 August 2005",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 1 August 2005 (start)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "12h 3m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "08:30 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "carina-bruwer-2005"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Walker Bay crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2021 · exact day not confirmed"
+        },
+        {
+          "text": "Walker Bay, South Africa"
+        },
+        {
+          "text": "Completed the crossing; her official account identifies it as the first successful swim across Walker Bay."
+        },
+        {
+          "text": "6h 12m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "21 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "carina-bruwer-event-1-walker-bay-crossing"
+    },
+    {
+      "title": "False Bay crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2006 · exact day not confirmed"
+        },
+        {
+          "text": "False Bay, South Africa"
+        },
+        {
+          "text": "Completed the crossing; her account identifies her as the first South African woman and third swimmer to do so."
+        },
+        {
+          "text": "10h 58m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "34 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "carina-bruwer-event-2-false-bay-crossing"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-88bf19092d8d29dfc217"
+}

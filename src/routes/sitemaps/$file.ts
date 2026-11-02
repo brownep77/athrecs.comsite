@@ -14,6 +14,14 @@ export const Route = createFileRoute("/sitemaps/$file")({
           const runningPaths: string[] = [];
           const modified = new Map<string, string>();
           if (!IS_RUNRECS_SITE) {
+            const { listPublishedChannel } = await import("@/lib/athrecs/english-channel.server");
+            const channel = await listPublishedChannel();
+            runningPaths.push("/swimming/english-channel");
+            for (const p of channel) {
+              const path = "/swimming/english-channel/" + p.slug;
+              runningPaths.push(path);
+              modified.set(path, p.checkedAt);
+            }
             const { EDITORIAL_ARTICLES } = await import("@/data/athrecs-editorial");
             const { editorialPath } = await import("@/lib/athrecs/editorial");
             for (const article of EDITORIAL_ARTICLES)

@@ -1,0 +1,2298 @@
+{
+  "slug": "alison-streeter-english-channel",
+  "name": "Alison Streeter",
+  "country": "England",
+  "aliases": [],
+  "highlight": "43 career crossings · first woman to complete a three-way swim",
+  "biography": [
+    "Alison Streeter is an English marathon swimmer whose career includes 43 English Channel crossings. She combined repeated solo crossings with increasingly demanding multi-way swims: her Hall of Fame record includes three doubles and one triple. In 1983 she became the first British woman to complete a two-way crossing, taking 21 hours and 16 minutes.",
+    "On 2–3 August 1990 she became the first woman to complete a continuous three-way English Channel swim. The England–France–England–France effort lasted 34 hours and 40 minutes, extending a career already distinguished by her first female North Channel crossing in 1988.",
+    "Her wider achievements included Catalina, Manhattan Island and Jersey swims. Awarded an MBE for services to swimming, she also used her swims to support charitable fundraising. Her career total counts individual Channel crossings, so a three-way effort contributes three crossings while remaining one continuous swim."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Career Channel crossings",
+      "value": "43"
+    },
+    {
+      "label": "Multi-way achievements",
+      "value": "Three doubles and one triple"
+    },
+    {
+      "label": "Historic triple",
+      "value": "2–3 August 1990 · 34h 40m"
+    },
+    {
+      "label": "North Channel milestone",
+      "value": "First woman to cross · 1988"
+    },
+    {
+      "label": "Honour",
+      "value": "MBE"
+    },
+    {
+      "label": "Specialism",
+      "value": "Marathon and multi-way swimming"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First three-way Channel swim by a woman",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "A continuous triple crossing: three Channel lengths in alternating directions, completed over Thursday and Friday."
+        },
+        {
+          "text": "34h 40m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Thursday, 2 August 1990 · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Friday, 3 August 1990 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Exact dates follow Guinness’s 2–3 August entry. Start and finish clocks have not been established. The leg times follow the CS&PF statistics; a secondary Dover listing differs by one minute on legs two and three.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 3-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association — historical result record",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 3-way swim."
+        },
+        {
+          "text": "10h 36m",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "10h 35m",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "13h 29m",
+          "label": "Leg 3 · England → France"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2432 confirms the solo three-way format and 34:40 total. Guinness explicitly dates the swim to 2–3 August 1990. CS&PF’s triple-crossing table supplies the displayed leg times. Secondary date/split discrepancies are retained in the research notes; no observer log has been inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Alison Streeter, 1990",
+          "url": "https://www.channelswimmingassociation.com/swim/2432/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Guinness World Records: first female triple crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/first-triple-crossing-of-the-english-channel-swimming-female-"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "CS&PF: multiple-crossing statistics, Alison Streeter row",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "streeter-1990"
+    },
+    {
+      "title": "First British woman’s Channel double",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The federation’s historical note identifies this as the first English woman’s double; the completed return is included in the single performance."
+        },
+        {
+          "text": "Wednesday, 3 August 1983 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "21h 16m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover prints 3/4 August. The historical entry reports departure 06:12:00 and arrival 03:28:00 but does not explicitly date those phases; they remain reported clocks only, with no time zone inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France–England",
+          "label": "Direction"
+        },
+        {
+          "text": "Ray Dixon",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Express",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "I. Muir",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "9h 22m 0s",
+          "label": "Leg 1 · England–France"
+        },
+        {
+          "text": "11h 54m 0s",
+          "label": "Leg 2 · France–England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA entry 2444 confirms the completed two-way. CS&PF historical entry 443284 supplies crew and generic date; its Doubles table row 12 provides the splits. Dover prints 3/4 August. None of these documents is the original observer report."
+        },
+        {
+          "text": "CSA: Alison Streeter, 1983 double",
+          "url": "https://www.channelswimmingassociation.com/swim/2444/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed two-way solo, 21:16, in 1983.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Streeter 1983 double",
+          "url": "https://cspf.co.uk/swim/443284"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "3 August 1983; combined route, crew, reported departure 06:12 and arrival 03:28.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Alison Streeter, August 1983 double",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1983-08-03/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dates the 21:16 continuous double to 3/4 August 1983.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; its Date field does not establish the departure or arrival phase.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: selected historical multiple-crossing rows",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected double-crossing rows: Streeter 1983 and 1995, Murphy 1970 and 1987, McCardel 2010; published leg splits.",
+          "label": "Supports"
+        },
+        {
+          "text": "A compiled historical table, not observer paperwork. Other rows contain apparent column errors; only the specified coherent rows are used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "streeter-1983-double"
+    },
+    {
+      "title": "France-to-England solo",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "This reverse-direction performance received the CSA’s Fastest Lady 1 Way F-E award."
+        },
+        {
+          "text": "Tuesday, 20 September 1988 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "8h 48m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The historical entry reports departure 14:30:00 and arrival 23:18:00 alongside a generic swim date. Their phase dates and time zone are not expressly identified, so no structured clocks are assigned.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France–England",
+          "label": "Direction"
+        },
+        {
+          "text": "Ray Dixon",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Express",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "I. Muir",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA entry 2404 confirms the successful 8:48 France-to-England solo and its award. CS&PF historical entry 443446 supplies 20 September 1988, the support team and reported clocks."
+        },
+        {
+          "text": "CSA: Alison Streeter, 1988 reverse solo",
+          "url": "https://www.channelswimmingassociation.com/swim/2404/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful France–England solo, 8:48; Fastest Lady 1 Way F-E award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Streeter, 20 September 1988",
+          "url": "https://cspf.co.uk/swim/443446"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Date, reverse route, 8:48:00, Ray Dixon/Channel Express, I. Muir, clocks 14:30/23:18.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "streeter-1988-france-england"
+    },
+    {
+      "title": "Shakespeare Bay–France–Folkestone double",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The historical entry describes an outward leg to Cap Gris Nez and a return finishing at Folkestone."
+        },
+        {
+          "text": "Friday, 21 July 1995 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "20h 55m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover prints 21/22 July. Departure 06:50:00 and arrival 03:45:00 appear in the historical database without explicit phase dates or a time zone; no calendar allocation is inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France–England",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Bay, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Folkestone, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "E. Ruston",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "8h 50m 0s",
+          "label": "Leg 1 · England–France"
+        },
+        {
+          "text": "12h 5m 0s",
+          "label": "Leg 2 · France–England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA entry 2453 confirms a successful 20:55 two-way. CS&PF historical entry 443615 gives 21 July, route landmarks and crew; Doubles row 21 supplies the split times. Dover dates the swim to 21/22 July."
+        },
+        {
+          "text": "CSA: Alison Streeter, 1995 double",
+          "url": "https://www.channelswimmingassociation.com/swim/2453/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed two-way solo, 20:55 in 1995.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Streeter 1995 double",
+          "url": "https://cspf.co.uk/swim/443615"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "21 July 1995; Shakespeare Bay–Cap Gris Nez–Folkestone; Michael Oram, Aegean Blue, E. Ruston and clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Alison Streeter, July 1995 double",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1995-07-21/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dates the completed 20:55 double to 21/22 July 1995.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; its Date field does not establish the departure or arrival phase.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: selected historical multiple-crossing rows",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected double-crossing rows: Streeter 1983 and 1995, Murphy 1970 and 1987, McCardel 2010; published leg splits.",
+          "label": "Supports"
+        },
+        {
+          "text": "A compiled historical table, not observer paperwork. Other rows contain apparent column errors; only the specified coherent rows are used.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "streeter-1995-double"
+    },
+    {
+      "title": "First Channel crossing, finishing at Wissant",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Tuesday, 31 August 1982 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 21m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The source gives departure 23:15:00 and arrival 10:36:00 with a generic 31 August Date field. No calendar allocation of those clocks is inferred. Trailing seconds are preserved as displayed, without implying original stopwatch precision.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Wissant, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Ray Dixon",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Express",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "J. Winyard",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical individual entry 443269 explicitly lists a completed one-way England-to-France performance and names CSA as the ratifying organisation. This is the federation-hosted historical account, not an inspected CSA decision or observer log."
+        },
+        {
+          "text": "CS&PF historical entry: Alison Streeter, 31 August 1982",
+          "url": "https://cspf.co.uk/swim/443269"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "11:21:00 England-to-France solo, Ray Dixon/Channel Express, J. Winyard, Wissant landing; Ratifying Organisation CSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "streeter-1982-first"
+    },
+    {
+      "title": "Shakespeare Beach–France–Folkestone double",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Wednesday, 5 August 1992 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "22h 20m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The historical record reports departure 05:32:00 and arrival 03:52:00 with a generic swim date. These clocks have no explicit phase dates or time zone. CSA prints the total to minutes.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, England",
+          "label": "Departure"
+        },
+        {
+          "text": "The Warren, Folkestone, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "J. Floyd",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "10h 29m 0s",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "11h 51m 0s",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful individual entry 2450 confirms the two-way 22:20 total. Historical entry 443522 is explicitly the combined performance; statistics Doubles row 18 supplies 10:29:00 and 11:51:00 legs, whose sum matches 22:20."
+        },
+        {
+          "text": "CSA: Alison Streeter, 1992 double",
+          "url": "https://www.channelswimmingassociation.com/swim/2450/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful two-way England–France–England swim in 22:20.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful individual result inspected; original observer documents were not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Alison Streeter, 5 August 1992",
+          "url": "https://cspf.co.uk/swim/443522"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Combined two-way, 22:20:00, Michael Oram/Aegean Blue, J. Floyd; Shakespeare Beach–Cap Gris Nez–Folkestone route and clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: selected multiple-crossing and record statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Streeter 1992 double, row 18; McCardel 2012 double, row 36; Cox 20 July 1972 record row.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical compilation. McCardel’s displayed 2012 splits sum to 19:20 although the total column says 19:21; that disagreement remains unresolved.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "streeter-1992-double"
+    },
+    {
+      "title": "English Channel solo to Cap Gris Nez",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Saturday, 24 July 2004 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 35m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Historical departure 03:25:00 and arrival 16:00:00 are not tied to separately stated phase dates; no structured clocks or time zone are inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "La Sirene slipway, Cap Gris Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Pamela Masden",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF 2004 successful-swims table, solo row 24 July, names Alison Streeter with 12:35:00 and Mike Oram/Aegean Blue. Historical entry 443904 agrees and provides observer and landing. The annual page’s ratification disclaimer remains applicable."
+        },
+        {
+          "text": "CS&PF: 2004 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo row: 24 July, Alison Streeter, Mike Oram/Aegean Blue, 12:35:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Select the year identified in the source title. The annual page states that results remain unofficial until ratified by the committee; no separate ratification decision was inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Alison Streeter, 24 July 2004",
+          "url": "https://cspf.co.uk/swim/443904"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France solo, 12:35:00, Michael Oram/Aegean Blue, Pamela Masden, La Sirene slipway landing and clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "streeter-2004"
+    },
+    {
+      "title": "July 1984 England-to-France solo",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Thursday, 26 July 1984 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 6m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The historical entry reports departure 23:28:00 and arrival 09:34:00 beside a generic swim date. It does not expressly date those phases; no structured clocks or inferred overnight finish date are assigned. Its seconds formatting is retained.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris Nez sandy dunes",
+          "label": "Arrival"
+        },
+        {
+          "text": "Ray Dixon",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Express",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "L. Dunsbee",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical entry 443313 records the named successful one-way, date, time and crew, with CSA in the Ratifying Organisation field. A corresponding CSA individual result was not inspected."
+        },
+        {
+          "text": "CS&PF historical entry: Alison Streeter, 26 July 1984",
+          "url": "https://cspf.co.uk/swim/443313"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France one-way, 10:06:00, Ray Dixon/Channel Express, L. Dunsbee, Cap Gris Nez sandy-dunes landing; reported clocks 23:28:00/09:34:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. The original observer report was not inspected, and its generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "streeter-1984-july"
+    },
+    {
+      "title": "September 1986 England-to-France solo",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Sunday, 28 September 1986 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 3m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The historical entry reports departure 08:15:00 and arrival 19:18:00 alongside a generic swim date, without expressly dated phases or a time zone. The displayed elapsed time retains CSA minute precision.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Blanc Nez",
+          "label": "Arrival"
+        },
+        {
+          "text": "Ray Dixon",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Express",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "N. Smith",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA entry 2763 confirms the successful one-way and 11:03 elapsed time. CS&PF historical entry 443366 supplies 28 September, the support team, landing and reported clocks."
+        },
+        {
+          "text": "CSA: Alison Streeter, 1986",
+          "url": "https://www.channelswimmingassociation.com/swim/2763/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful England-to-France one-way solo in 11:03.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful individual result inspected; original observer documentation was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Alison Streeter, 28 September 1986",
+          "url": "https://cspf.co.uk/swim/443366"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France one-way, 11:03:00, Ray Dixon/Channel Express, N. Smith, Cap Blanc Nez landing; reported clocks 08:15:00/19:18:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. The original observer report was not inspected, and its generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "streeter-1986-september"
+    },
+    {
+      "id": "streeter-1996-july-england-france",
+      "title": "England to Cap Gris Nez",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Friday, 26 July 1996 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "9h 30m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Departure 08:10:00 and arrival 17:40:00 appear beside the swim date. The entry gives no explicit phase dates or time zone.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris Nez",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Sea Satin",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "G. Pique",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical entry 443646 records the successful one-way crossing and reports CSA as ratifier. A corresponding CSA individual result was not inspected."
+        },
+        {
+          "text": "CS&PF historical record • Alison Streeter, 26 July 1996 (443646)",
+          "url": "https://cspf.co.uk/swim/443646"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England–France one-way in 09:30:00, landing at Cap Gris Nez. Michael Oram piloted Sea Satin and G. Pique observed. Reported clocks are 08:10:00 and 17:40:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The compiled individual entry names CSA as ratifying organisation. Its date field gives a swim date without separately dated departure and arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "id": "streeter-1996-august-france-england",
+      "title": "Cap Gris Nez to St Margaret’s Bay",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Tuesday, 20 August 1996 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "9h 31m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The historical entry gives departure at 02:14:00 and arrival at 11:45:00 alongside its generic date. The individual phases have no stated dates or time zone.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France–England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris Nez",
+          "label": "Departure"
+        },
+        {
+          "text": "St Margaret’s Bay",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "F. Richards",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual result 2428 confirms the successful reverse solo. CS&PF entry 443659 supplies the swim date, endpoints and crew for this separately dated swim."
+        },
+        {
+          "text": "Channel Swimming Association • Alison Streeter, 1996 (2428)",
+          "url": "https://www.channelswimmingassociation.com/swim/2428/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published completed one-way solo, France to England, 09:31.",
+          "label": "Supports"
+        },
+        {
+          "text": "The individual result gives the year and minute-precision time. The original observer report was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical record • Alison Streeter, 20 August 1996 (443659)",
+          "url": "https://cspf.co.uk/swim/443659"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "09:31:00 reverse solo from Cap Gris Nez to St Margaret’s Bay. Michael Oram piloted Aegean Blue, F. Richards observed, and the reported clocks are 02:14:00 and 11:45:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The compiled individual entry names CSA as ratifying organisation. Its date field gives a swim date without separately dated departure and arrival.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 20 August 1984 (event date)"
+        },
+        {
+          "text": "Catalina Channel, California, USA"
+        },
+        {
+          "text": "Completed the Catalina-to-mainland crossing."
+        },
+        {
+          "text": "9h 33m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF row 53 supplies the dated result. ISHOF connects this Catalina swimmer with the 43-crossing English Channel athlete."
+        },
+        {
+          "text": "Catalina Channel Swimming Federation — successful solos",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected historical rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "Register dates are retained as event dates, without inferred start or finish phase.",
+          "label": "Limitations"
+        },
+        {
+          "text": "ISHOF — Alison Streeter",
+          "url": "https://ishof.org/honoree/honoree-alison-streeter/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "English Channel, Catalina and North Channel career identity.",
+          "label": "Supports"
+        }
+      ],
+      "id": "alison-streeter-event-1-catalina-channel"
+    },
+    {
+      "title": "North Channel — Scotland to Northern Ireland",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Friday, 25 August 1989 (event date)"
+        },
+        {
+          "text": "North Channel"
+        },
+        {
+          "text": "Completed the Scotland-to-Northern-Ireland crossing."
+        },
+        {
+          "text": "10h 4m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Infinity’s 25 August 1989 row gives this result; ISHOF provides the Channel-to-North-Channel identity bridge."
+        },
+        {
+          "text": "Infinity Channel Swimming — solo register",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected dated rows, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "Operator register; no observer manuscript inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "ISHOF — Alison Streeter",
+          "url": "https://ishof.org/honoree/honoree-alison-streeter/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "English Channel, Catalina and North Channel career identity.",
+          "label": "Supports"
+        }
+      ],
+      "id": "alison-streeter-event-2-north-channel-scotland-to-northern-ireland"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First British woman to complete a double",
+      "lines": [
+        {
+          "text": "1983"
+        },
+        {
+          "text": "England–France–England in 21h 16m."
+        }
+      ]
+    },
+    {
+      "title": "North Channel first",
+      "lines": [
+        {
+          "text": "1988"
+        },
+        {
+          "text": "Became the first woman to swim the North Channel."
+        }
+      ]
+    },
+    {
+      "title": "Historic three-way crossing",
+      "lines": [
+        {
+          "text": "2–3 August 1990"
+        },
+        {
+          "text": "Completed England–France–England–France in 34h 40m."
+        }
+      ]
+    },
+    {
+      "title": "43 Channel crossings",
+      "lines": [
+        {
+          "text": "Career total"
+        },
+        {
+          "text": "The total includes multi-way legs, not 43 separate continuous attempts."
+        }
+      ]
+    },
+    {
+      "title": "France-to-England solo",
+      "lines": [
+        {
+          "text": "Tuesday, 20 September 1988"
+        },
+        {
+          "text": "CSA records 8:48; the historical database provides the day."
+        }
+      ]
+    },
+    {
+      "title": "First Channel crossing",
+      "lines": [
+        {
+          "text": "Tuesday, 31 August 1982"
+        },
+        {
+          "text": "The historical register records 11:21:00 and a Wissant landing with Ray Dixon piloting Channel Express."
+        }
+      ]
+    },
+    {
+      "title": "A further continuous double",
+      "lines": [
+        {
+          "text": "Wednesday, 5 August 1992"
+        },
+        {
+          "text": "Completed a 22:20 return swim from Shakespeare Beach via France to Folkestone."
+        }
+      ]
+    },
+    {
+      "title": "Late-career Channel solo",
+      "lines": [
+        {
+          "text": "Saturday, 24 July 2004"
+        },
+        {
+          "text": "CS&PF’s successful-swims table records 12:35:00, with a historical landing note at Cap Gris Nez."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Alison Streeter?",
+      "value": "This profile includes 11 selected solo performances for Alison Streeter. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Alison Streeter’s featured English Channel swim?",
+      "value": "The featured swim started on Thursday, 2 August 1990 and finished on Friday, 3 August 1990."
+    },
+    {
+      "label": "How long did Alison Streeter’s featured Channel swim take?",
+      "value": "The featured continuous 3-way solo swim has a published elapsed time of 34 hours and 40 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-alison-streeter/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "English Channel, Catalina and North Channel career identity.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Alison Streeter, 1990",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2432/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: first female triple crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/first-triple-crossing-of-the-english-channel-swimming-female-"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: multiple-crossing statistics, Alison Streeter row",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected double-crossing rows: Streeter 1983 and 1995, Murphy 1970 and 1987, McCardel 2010; published leg splits.",
+          "label": "Supports"
+        },
+        {
+          "text": "A compiled historical table, not observer paperwork. Other rows contain apparent column errors; only the specified coherent rows are used.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Irish Long Distance Swimming Association: North Channel history",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.ildsa.info/north-channel/history/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation — successful solos",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected historical rows.",
+          "label": "Supports"
+        },
+        {
+          "text": "Register dates are retained as event dates, without inferred start or finish phase.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Infinity Channel Swimming — solo register",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected dated rows, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "Operator register; no observer manuscript inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Alison Streeter, 1983 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2444/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed two-way solo, 21:16, in 1983.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Streeter 1983 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443284"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "3 August 1983; combined route, crew, reported departure 06:12 and arrival 03:28.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Alison Streeter, August 1983 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1983-08-03/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dates the 21:16 continuous double to 3/4 August 1983.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; its Date field does not establish the departure or arrival phase.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Alison Streeter, 1988 reverse solo",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2404/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful France–England solo, 8:48; Fastest Lady 1 Way F-E award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Streeter, 20 September 1988",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443446"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Date, reverse route, 8:48:00, Ray Dixon/Channel Express, I. Muir, clocks 14:30/23:18.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Alison Streeter, 1995 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2453/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed two-way solo, 20:55 in 1995.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful-result entry checked; original observer documentation was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Streeter 1995 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443615"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "21 July 1995; Shakespeare Bay–Cap Gris Nez–Folkestone; Michael Oram, Aegean Blue, E. Ruston and clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Alison Streeter, July 1995 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1995-07-21/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dates the completed 20:55 double to 21/22 July 1995.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; its Date field does not establish the departure or arrival phase.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Alison Streeter, 31 August 1982",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443269"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "11:21:00 England-to-France solo, Ray Dixon/Channel Express, J. Winyard, Wissant landing; Ratifying Organisation CSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Alison Streeter, 1992 double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2450/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful two-way England–France–England swim in 22:20.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful individual result inspected; original observer documents were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Alison Streeter, 5 August 1992",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443522"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Combined two-way, 22:20:00, Michael Oram/Aegean Blue, J. Floyd; Shakespeare Beach–Cap Gris Nez–Folkestone route and clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2004 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo row: 24 July, Alison Streeter, Mike Oram/Aegean Blue, 12:35:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Select the year identified in the source title. The annual page states that results remain unofficial until ratified by the committee; no separate ratification decision was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Alison Streeter, 24 July 2004",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443904"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France solo, 12:35:00, Michael Oram/Aegean Blue, Pamela Masden, La Sirene slipway landing and clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Alison Streeter, 26 July 1984",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443313"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France one-way, 10:06:00, Ray Dixon/Channel Express, L. Dunsbee, Cap Gris Nez sandy-dunes landing; reported clocks 23:28:00/09:34:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. The original observer report was not inspected, and its generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Alison Streeter, 1986",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2763/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful England-to-France one-way solo in 11:03.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CSA successful individual result inspected; original observer documentation was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Alison Streeter, 28 September 1986",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443366"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France one-way, 11:03:00, Ray Dixon/Channel Express, N. Smith, Cap Blanc Nez landing; reported clocks 08:15:00/19:18:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. The original observer report was not inspected, and its generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record • Alison Streeter, 26 July 1996 (443646)",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443646"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England–France one-way in 09:30:00, landing at Cap Gris Nez. Michael Oram piloted Sea Satin and G. Pique observed. Reported clocks are 08:10:00 and 17:40:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The compiled individual entry names CSA as ratifying organisation. Its date field gives a swim date without separately dated departure and arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association • Alison Streeter, 1996 (2428)",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2428/alison-streeter"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published completed one-way solo, France to England, 09:31.",
+          "label": "Supports"
+        },
+        {
+          "text": "The individual result gives the year and minute-precision time. The original observer report was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record • Alison Streeter, 20 August 1996 (443659)",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443659"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "09:31:00 reverse solo from Cap Gris Nez to St Margaret’s Bay. Michael Oram piloted Aegean Blue, F. Richards observed, and the reported clocks are 02:14:00 and 11:45:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The compiled individual entry names CSA as ratifying organisation. Its date field gives a swim date without separately dated departure and arrival.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First three-way Channel swim by a woman",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 2 August 1990 – Friday, 3 August 1990"
+        },
+        {
+          "text": "England → France → England → France"
+        },
+        {
+          "text": "34h 40m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-1990"
+    },
+    {
+      "title": "First British woman’s Channel double",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 3 August 1983 (recorded swim date)"
+        },
+        {
+          "text": "England–France–England"
+        },
+        {
+          "text": "21h 16m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-1983-double"
+    },
+    {
+      "title": "France-to-England solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 20 September 1988 (recorded swim date)"
+        },
+        {
+          "text": "France–England"
+        },
+        {
+          "text": "8h 48m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-1988-france-england"
+    },
+    {
+      "title": "Shakespeare Bay–France–Folkestone double",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 21 July 1995 (recorded swim date)"
+        },
+        {
+          "text": "England–France–England"
+        },
+        {
+          "text": "20h 55m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-1995-double"
+    },
+    {
+      "title": "First Channel crossing, finishing at Wissant",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 31 August 1982 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "11h 21m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-1982-first"
+    },
+    {
+      "title": "Shakespeare Beach–France–Folkestone double",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 5 August 1992 (recorded swim date)"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "22h 20m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-1992-double"
+    },
+    {
+      "title": "English Channel solo to Cap Gris Nez",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 24 July 2004 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "12h 35m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-2004"
+    },
+    {
+      "title": "July 1984 England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 26 July 1984 (recorded swim date)"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "10h 6m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-1984-july"
+    },
+    {
+      "title": "September 1986 England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 28 September 1986 (recorded swim date)"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "11h 3m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "streeter-1986-september"
+    },
+    {
+      "id": "streeter-1996-july-england-france",
+      "title": "England to Cap Gris Nez",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "Friday, 26 July 1996 (recorded swim date)"
+        },
+        {
+          "text": "9h 30m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    },
+    {
+      "id": "streeter-1996-august-france-england",
+      "title": "Cap Gris Nez to St Margaret’s Bay",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "France–England"
+        },
+        {
+          "text": "Tuesday, 20 August 1996 (recorded swim date)"
+        },
+        {
+          "text": "9h 31m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 20 August 1984 (event date)"
+        },
+        {
+          "text": "Catalina Channel, California, USA"
+        },
+        {
+          "text": "Completed the Catalina-to-mainland crossing."
+        },
+        {
+          "text": "9h 33m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "alison-streeter-event-1-catalina-channel"
+    },
+    {
+      "title": "North Channel — Scotland to Northern Ireland",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Friday, 25 August 1989 (event date)"
+        },
+        {
+          "text": "North Channel"
+        },
+        {
+          "text": "Completed the Scotland-to-Northern-Ireland crossing."
+        },
+        {
+          "text": "10h 4m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "alison-streeter-event-2-north-channel-scotland-to-northern-ireland"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-9031249dae512d21c190"
+}

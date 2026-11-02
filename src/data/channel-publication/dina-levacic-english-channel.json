@@ -1,0 +1,420 @@
+{
+  "slug": "dina-levacic-english-channel",
+  "name": "Dina Levačić",
+  "country": "Croatia",
+  "aliases": [
+    "Dina Levacic"
+  ],
+  "highlight": "2017 Channel solo · Triple Crown in 84 days",
+  "biography": [
+    "Dina Levačić is a Croatian marathon swimmer from Split, born on 14 March 1996. She began swimming as a young child and describes a two-kilometre event in Omiš at nine as her first official open-water swim. By thirteen she had completed the Faros Marathon. Six seasons on the FINA Grand Prix circuit followed, culminating in third place overall in 2016.",
+    "Her move into individual channel challenges in 2017 brought an English Channel crossing that completed the Triple Crown of Open Water Swimming in 84 days. The CSA records her England-to-France finish on 17 September in 11 hours 42 minutes, with Fred Mardle aboard Masterpiece and observer Jim Taylor. ILDSA's later Triple Crown summary instead reports 11 hours 41 minutes; that discrepancy remains visible. The CSA also awarded her its 2017 Swimmer from a New Country honour.",
+    "Levačić completed the North Channel in 2022 and the Oceans Seven in 2023. A ratified Bristol Channel swim that August completed her Original Triple Crown, alongside an Irish Triple Crown that year. Her swimming is also connected with charitable work and her educational rehabilitation studies. In 2024 her 104 Dalmatians project explored the islands of the Adriatic. IMSHOF recognises her as an Honor Swimmer in its Class of 2025."
+  ],
+  "flags": [
+    {
+      "code": "HR",
+      "label": "Croatia",
+      "abbr": "CRO"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Croatia — CSA individual record"
+    },
+    {
+      "label": "Born",
+      "value": "14 March 1996"
+    },
+    {
+      "label": "Swimming background",
+      "value": "Split; first official open-water swim at nine in Omiš"
+    },
+    {
+      "label": "International racing",
+      "value": "Third overall in the 2016 FINA Grand Prix series"
+    },
+    {
+      "label": "Triple Crown",
+      "value": "Completed in 84 days in 2017, according to IMSHOF"
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed in 2023"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "IMSHOF Honor Swimmer, Class of 2025"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo completing the Triple Crown",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA records 11:42; ILDSA's later Triple Crown summary gives 11:41:00. The one-minute discrepancy remains unresolved."
+        },
+        {
+          "text": "11h 42m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Sunday, 17 September 2017 · 19:07 · CSA's published completion clock; time zone not specified",
+          "label": "Finished"
+        },
+        {
+          "text": "The selected time and explicit completion date/clock follow CSA record 4750. ILDSA reports the same calendar date with 11:41:00. No departure clock is inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Fred Mardle",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Masterpiece",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Jim Taylor",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Inspected CSA individual record 4750, Dina Levačić 2017: Croatia, solo one-way England to France, completed 17 September at 7:07pm, 11:42 and named escort. This is the published successful-swim decision, not the observer log. ILDSA's Original Triple Crown line reports 17.09.2017 11:41:00, so the conflict is retained despite the checked CSA listing."
+        },
+        {
+          "text": "CSA: Dina Levačić, 2017, record 4750",
+          "url": "https://www.channelswimmingassociation.com/swim/4750/dina-leva-269-i-263"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful result: Croatia, solo England to France, completed 17 September 2017 at 7:07pm, 11:42; Fred Mardle / Masterpiece; Jim Taylor; Swimmer from a New Country award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published successful-swim decision inspected; no original observer log. Clock standard unspecified.",
+          "label": "Limitations"
+        },
+        {
+          "text": "ILDSA: Dina Levačić, Original and Irish Triple Crowns",
+          "url": "https://www.ildsa.info/dina-levacic-original-triple-crown-irish-triple-crown/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original Triple Crown line reports English Channel 17.09.2017 in 11:41:00; also lists North Channel 2022 and Bristol Channel 2023.",
+          "label": "Supports"
+        },
+        {
+          "text": "The Channel time differs by one minute from the CSA individual record; ILDSA is not the English Channel ratifier.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Dina Levačić biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_2bc57280281642b09e9cac2f6759944c.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Page 1: Croatia, Class of 2025, Faros at 13, six FINA Grand Prix seasons, 2016 third overall, 84-day 2017 Triple Crown, 2023 Oceans Seven and charity activity.",
+          "label": "Supports"
+        }
+      ],
+      "id": "dina-levacic-2017"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "FINA Grand Prix podium",
+      "lines": [
+        {
+          "text": "2016"
+        },
+        {
+          "text": "Finished third overall in her final Grand Prix season."
+        }
+      ]
+    },
+    {
+      "title": "Channel and Triple Crown",
+      "lines": [
+        {
+          "text": "Sunday, 17 September 2017"
+        },
+        {
+          "text": "Completed the English Channel solo; the selected record preserves the one-minute source discrepancy."
+        }
+      ]
+    },
+    {
+      "title": "North Channel completed",
+      "lines": [
+        {
+          "text": "2022"
+        },
+        {
+          "text": "Added the North Channel to her channel-swimming career."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven and Irish Triple Crown",
+      "lines": [
+        {
+          "text": "2023"
+        },
+        {
+          "text": "Completed both challenges during the year."
+        }
+      ]
+    },
+    {
+      "title": "Original Triple Crown completed",
+      "lines": [
+        {
+          "text": "Wednesday, 9 August 2023"
+        },
+        {
+          "text": "BCSA expressly ratified her Bristol Channel swim, completing the three-channel combination."
+        }
+      ]
+    },
+    {
+      "title": "104 Dalmatians project",
+      "lines": [
+        {
+          "text": "2024"
+        },
+        {
+          "text": "Undertook the Adriatic island-swimming project."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame class",
+      "lines": [
+        {
+          "text": "2025"
+        },
+        {
+          "text": "Recognised as an IMSHOF Honor Swimmer."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Dina Levačić — Hall of Fame biography",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_2bc57280281642b09e9cac2f6759944c.pdf"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "External IMSHOF athlete biography in PDF format."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dina Levačić — written interview",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.openwaterswimming.com/interview-with-dina-levacic-from-croatian-shores-to-the-2025-imshof-inductee/"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "WOWSA's January 2025 written interview about her swimming, preparation and charitable work."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Dina Levačić?",
+      "value": "This profile includes 1 selected solo performance for Dina Levačić. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Dina Levačić’s featured English Channel swim?",
+      "value": "The featured swim finished on Sunday, 17 September 2017. Its exact start date is not confirmed here. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Dina Levačić’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 11 hours and 42 minutes. CSA records 11:42; ILDSA's later Triple Crown summary gives 11:41:00. The one-minute discrepancy remains unresolved."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Dina Levačić, 2017, record 4750",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/4750/dina-leva-269-i-263"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful result: Croatia, solo England to France, completed 17 September 2017 at 7:07pm, 11:42; Fred Mardle / Masterpiece; Jim Taylor; Swimmer from a New Country award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published successful-swim decision inspected; no original observer log. Clock standard unspecified.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "ILDSA: Dina Levačić, Original and Irish Triple Crowns",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.ildsa.info/dina-levacic-original-triple-crown-irish-triple-crown/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original Triple Crown line reports English Channel 17.09.2017 in 11:41:00; also lists North Channel 2022 and Bristol Channel 2023.",
+          "label": "Supports"
+        },
+        {
+          "text": "The Channel time differs by one minute from the CSA individual record; ILDSA is not the English Channel ratifier.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Dina Levačić biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_2bc57280281642b09e9cac2f6759944c.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Page 1: Croatia, Class of 2025, Faros at 13, six FINA Grand Prix seasons, 2016 third overall, 84-day 2017 Triple Crown, 2023 Oceans Seven and charity activity.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA: interview with Dina Levačić",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/interview-with-dina-levacic-from-croatian-shores-to-the-2025-imshof-inductee/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Interview dated 13 January 2025: 14 March 1996 birth, Split upbringing, Omiš debut at nine, training background, educational rehabilitation studies and 104 Dalmatians project.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Bristol Channel Swimming Association: Dina Levacic",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.bcswimmers.com/dinalevacic"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named athlete page uses the unaccented name; expressly ratifies her 9 August 2023 Bristol Channel swim and confirms completion of the Original Triple Crown.",
+          "label": "Supports"
+        },
+        {
+          "text": "Bristol result and athlete report provide career context, not the English Channel elapsed time.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo completing the Triple Crown",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 17 September 2017 (completion)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "CSA records 11:42; ILDSA's later Triple Crown summary gives 11:41:00. The one-minute discrepancy remains unresolved."
+        },
+        {
+          "text": "11h 42m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "19:07 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "dina-levacic-2017"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-3e57324e9efe9fce0f21"
+}

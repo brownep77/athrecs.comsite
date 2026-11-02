@@ -1,0 +1,688 @@
+{
+  "slug": "christof-wandratsch-english-channel",
+  "name": "Christof Wandratsch",
+  "country": "Germany",
+  "aliases": [
+    "Wandi Wandratsch"
+  ],
+  "highlight": "Former Channel speed record holder · European marathon swimming champion",
+  "biography": [
+    "Christof “Wandi” Wandratsch built his Channel career on years of international marathon racing. Born in Nuremberg on 20 December 1966, he began swimming as a child, progressed through club competition and later combined his sport with work as a teacher. His first open-sea distance race, a 10-kilometre event near Palermo in 1984, brought an immediate victory.",
+    "European championship success followed in 1991 and 1995. He also competed across the professional marathon circuit, winning races in Europe, South America and Asia. His versatility included the Lake Zurich marathon and the much longer Around Atlantic City race, which he won in 1997.",
+    "On 20 August 2003 he entered the Channel at Dover at 05:30 local time. His England-to-France swim took seven hours twenty minutes, putting him close to the existing world best. Filmmaker Jörg Adolph followed this period of his career for Kanalschwimmer, alongside two other swimmers attempting the crossing.",
+    "Wandratsch returned in 2005 and established a new Channel speed record, listed by the federation as 7:03:52. That record stood until 2007. His ambitions subsequently extended to Lake Constance and ice swimming. Inducted into the International Marathon Swimming Hall of Fame in 2004, he remains associated with a breadth of distance events spanning racing, channel crossings and cold water."
+  ],
+  "flags": [
+    {
+      "code": "DE",
+      "label": "Germany",
+      "abbr": "GER"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "20 December 1966, Nuremberg, Germany"
+    },
+    {
+      "label": "Profession",
+      "value": "Teacher"
+    },
+    {
+      "label": "European titles",
+      "value": "Champion in 1991 and 1995"
+    },
+    {
+      "label": "Channel completions in this profile",
+      "value": "Two one-way solo swims, 2003 and 2005"
+    },
+    {
+      "label": "2003 departure",
+      "value": "05:30, Dover local time, 20 August"
+    },
+    {
+      "label": "2005 federation-listed time",
+      "value": "7:03:52; conflicting 7:03:25 appears on his own website"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, class of 2004"
+    },
+    {
+      "label": "Film",
+      "value": "Featured in Jörg Adolph’s Kanalschwimmer (2004)"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Channel crossing and European best",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "A near-record swim filmed during production of Kanalschwimmer."
+        },
+        {
+          "text": "7h 20m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Wednesday, 20 August 2003 · 05:30 · ZDF contemporary report: local time in Dover; UTC offset not specified",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "ZDF’s dated report identifies the departure clock in Dover local time. No finish clock is supplied or calculated.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Dover",
+          "label": "Departure"
+        },
+        {
+          "text": "Reg Brickell",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "ZDF reports average water temperature of 17.5°C and relatively heavy waves.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 3141 confirms the year, country, direction and 7:20 elapsed time. ZDF supplies the dated departure and conditions; Dover.UK.com identifies pilot Reg Brickell. No original observer log or boat name was located."
+        },
+        {
+          "text": "Channel Swimming Association: Christof Wandratsch, 2003",
+          "url": "https://www.channelswimmingassociation.com/swim/3141/christof-wandratsch"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "ZDF: contemporary report, 20 August 2003",
+          "url": "https://www.presseportal.de/pm/7840/473806"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: Christof Wandratsch, 20 August 2003",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2003-08-20/christof-wandratsch"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Filmportal: Kanalschwimmer credits",
+          "url": "https://www.filmportal.de/film/kanalschwimmer_b4ff1666defa471786403212b668bcff"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "wandratsch-2003"
+    },
+    {
+      "title": "Channel speed record, with a seconds discrepancy",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Set the overall Channel speed record, subsequently surpassed in 2007."
+        },
+        {
+          "text": "Monday, 1 August 2005 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "7h 3m 52s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The published swim date is not explicitly identified as departure or arrival. The athlete’s website prints 7:03:25; the federation and Dover.UK.com list 7:03:52. No start or finish clock was located.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Mike Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF’s named record row supplies 1 August 2005 and 7:03:52; Dover.UK.com corroborates that duration and identifies Mike Oram and Aegean Blue. The athlete’s conflicting seconds are retained rather than silently corrected. No original observer report was inspected."
+        },
+        {
+          "text": "CS&PF: solo records and historical statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: Christof Wandratsch, 1 August 2005",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2005-08-01/christof-wandratsch"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Christof Wandratsch: official biography",
+          "url": "https://wandratsch.de/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Christof Wandratsch",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_558036206e7545d4a0af815b0f8c6914.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "wandratsch-2005"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Lake Constance full-length crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 22 July 2013 (event date)"
+        },
+        {
+          "text": "Bodman, Germany → Bregenz, Austria"
+        },
+        {
+          "text": "Completed Bodman–Bregenz; the organiser lists this as its first north-to-south full-length solo crossing."
+        },
+        {
+          "text": "20h 41m 15s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "66.670 km (organiser-listed)",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Organiser’s first solo row gives date, route, 66.670 km and 20:41. The athlete’s corresponding 2013 milestone supplies 20:41:15 and links the organiser; seconds are athlete-reported."
+        },
+        {
+          "text": "Bodenseequerung: full-length crossing results",
+          "url": "https://www.bodenseequerung.de/laengsquerung/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First chronological solo row, 22 July 2013, Bodman–Bregenz.",
+          "label": "Supports"
+        },
+        {
+          "text": "Christof Wandratsch: official sporting milestones",
+          "url": "https://wandratsch.de/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete account; distinguishes additional seconds from the organiser’s minute-only Lake Constance table.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "christof-wandratsch-event-1-lake-constance-full-length-crossing"
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2007 · exact day not confirmed"
+        },
+        {
+          "text": "Strait of Gibraltar"
+        },
+        {
+          "text": "Completed a Strait of Gibraltar crossing."
+        },
+        {
+          "text": "2h 51m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Approximately 16 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Official athlete biography, 2007 milestone, gives approximately 16 km and 2:51. Same biography identifies his 2005 English Channel performance. Ratifier row and exact day not inspected."
+        },
+        {
+          "text": "Christof Wandratsch: official sporting milestones",
+          "url": "https://wandratsch.de/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete account; distinguishes additional seconds from the organiser’s minute-only Lake Constance table.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "christof-wandratsch-event-2-strait-of-gibraltar"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First open-sea race victory",
+      "lines": [
+        {
+          "text": "1984"
+        },
+        {
+          "text": "Won a 10-kilometre race near Palermo."
+        }
+      ]
+    },
+    {
+      "title": "European champion",
+      "lines": [
+        {
+          "text": "1991"
+        },
+        {
+          "text": "Won the European 25-kilometre championship at Terracina."
+        }
+      ]
+    },
+    {
+      "title": "Around Atlantic City winner",
+      "lines": [
+        {
+          "text": "1997"
+        },
+        {
+          "text": "Added the American marathon event to his international racing victories."
+        }
+      ]
+    },
+    {
+      "title": "First documented Channel crossing",
+      "lines": [
+        {
+          "text": "20 August 2003"
+        },
+        {
+          "text": "Completed England to France in 7:20 after a 05:30 local departure."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame recognition",
+      "lines": [
+        {
+          "text": "2004"
+        },
+        {
+          "text": "Joined the International Marathon Swimming Hall of Fame; Kanalschwimmer was released that year."
+        }
+      ]
+    },
+    {
+      "title": "Channel speed record",
+      "lines": [
+        {
+          "text": "1 August 2005"
+        },
+        {
+          "text": "Completed England to France in the federation-listed 7:03:52."
+        }
+      ]
+    },
+    {
+      "title": "Lake Constance endurance swim",
+      "lines": [
+        {
+          "text": "2006"
+        },
+        {
+          "text": "Completed a 63-kilometre Bodensee swim in 23:41."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Kanalschwimmer (2004) — producer’s documentary page",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.caligari.film/en-gb/kanalschwimmer"
+        },
+        {
+          "text": "Documentary"
+        },
+        {
+          "text": "Publisher or archive page inspected. This link is not an original continuous observer recording; video playback was not independently checked."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Christof Wandratsch?",
+      "value": "This profile includes 2 selected solo performances for Christof Wandratsch. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Christof Wandratsch’s featured English Channel swim?",
+      "value": "The featured swim started on Wednesday, 20 August 2003. Its exact completion date is not confirmed here."
+    },
+    {
+      "label": "How long did Christof Wandratsch’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 7 hours and 20 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Christof Wandratsch: official biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://wandratsch.de/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete account; distinguishes additional seconds from the organiser’s minute-only Lake Constance table.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Christof Wandratsch",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_558036206e7545d4a0af815b0f8c6914.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Christof Wandratsch, 2003",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3141/christof-wandratsch"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: solo records and historical statistics",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "ZDF: contemporary report, 20 August 2003",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.presseportal.de/pm/7840/473806"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Caligari Film: Kanalschwimmer producer page",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.caligari.film/en-gb/kanalschwimmer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Filmportal: Kanalschwimmer credits",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.filmportal.de/film/kanalschwimmer_b4ff1666defa471786403212b668bcff"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Bodenseequerung: full-length crossing results",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.bodenseequerung.de/laengsquerung/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First chronological solo row, 22 July 2013, Bodman–Bregenz.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Channel crossing and European best",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 20 August 2003 (start)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "7h 20m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "05:30 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "wandratsch-2003"
+    },
+    {
+      "title": "Channel speed record, with a seconds discrepancy",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 1 August 2005 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "7h 3m 52s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "wandratsch-2005"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Lake Constance full-length crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 22 July 2013 (event date)"
+        },
+        {
+          "text": "Bodman, Germany → Bregenz, Austria"
+        },
+        {
+          "text": "Completed Bodman–Bregenz; the organiser lists this as its first north-to-south full-length solo crossing."
+        },
+        {
+          "text": "20h 41m 15s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "66.670 km (organiser-listed)",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "christof-wandratsch-event-1-lake-constance-full-length-crossing"
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2007 · exact day not confirmed"
+        },
+        {
+          "text": "Strait of Gibraltar"
+        },
+        {
+          "text": "Completed a Strait of Gibraltar crossing."
+        },
+        {
+          "text": "2h 51m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Approximately 16 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "christof-wandratsch-event-2-strait-of-gibraltar"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-7c0c2e19ef762735c646"
+}

@@ -1,0 +1,574 @@
+{
+  "slug": "tina-neill-english-channel",
+  "name": "Tina Neill",
+  "country": "United States",
+  "aliases": [
+    "Tina Neil"
+  ],
+  "highlight": "Channel freestyle and backstroke successes · 2003 and 2005",
+  "biography": [
+    "Tina Neill is an American swimmer and coach whose Channel career includes freestyle and backstroke crossings. An All-America swimmer at the University of California, Davis, she later coached age-group, high-school and college swimmers. Her Macalester College profile records work with the college and its Masters programme, as well as a Davis High School team recognised as mythical national champions in 1993.",
+    "Neill completed her first Channel attempt on 26 July 2003. Swimming from Samphire Hoe to Strouanne, she took 11 hours 21 minutes, supported by coach Bob Pearson and her sister Kathy Guinn. In a later interview, she explained that her interest in open water had grown from looking at a Minnesota lake and wondering whether she could swim its length.",
+    "Having raced backstroke and individual medley in college, she chose backstroke for a second Channel swim. On 9 August 2005 she reached Wissant in 13 hours 22 minutes. Guinness recognises that performance in its female backstroke category. Contemporary claims that she was the first person to cross using backstroke overlook Haydn Welch’s 1993 swim. Neill’s account describes navigating beside the escort boat and maintaining a backward-facing position during feeds, practical adaptations that distinguished this effort from her earlier freestyle crossing."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Source-reported country",
+      "value": "USA — CS&PF historical records and Guinness"
+    },
+    {
+      "label": "College swimming",
+      "value": "University of California, Davis — All-America swimmer"
+    },
+    {
+      "label": "Coaching",
+      "value": "Macalester College and Macalester Masters"
+    },
+    {
+      "label": "First successful Channel attempt",
+      "value": "26 July 2003 · 11:21"
+    },
+    {
+      "label": "Backstroke crossing",
+      "value": "9 August 2005 · 13:22"
+    },
+    {
+      "label": "Name variant",
+      "value": "Guinness spells her surname Neil; college and federation records use Neill"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First successful Channel attempt",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "11h 21m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Saturday, 26 July 2003 · 08:39 · Swimming World reports departure on 26 July; time zone unstated",
+          "label": "Started"
+        },
+        {
+          "text": "Saturday, 26 July 2003 · 20:00 · Swimming World reports arrival on the same dated swim; time zone unstated",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Samphire Hoe",
+          "label": "Departure"
+        },
+        {
+          "text": "Strouanne",
+          "label": "Arrival"
+        },
+        {
+          "text": "Freestyle",
+          "label": "Stroke"
+        },
+        {
+          "text": "Duncan Taylor",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association — reported by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF named historical record 443858 gives Tina Neill, USA/Minnesota, 26 July 2003, E–F, 11:21:00 and CSA attribution. Swimming World’s dated first-attempt account, opening two paragraphs, establishes departure and arrival on that day at 08:39 and 20:00 and an elapsed 11:21. Minute precision follows that narrative; no time zone is inferred. Neill’s later interview identifies the first crossing as freestyle."
+        },
+        {
+          "text": "CS&PF historical record: Tina Neill, swim 443858",
+          "url": "https://cspf.co.uk/swim/443858"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "26 July 2003; Neill, Tina; USA, Minnesota; England-to-France 11:21:00; CSA attribution; pilot Duncan Taylor.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA ratification is reported by CS&PF; the original CSA individual result was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Swimming World: Minnesota Masters coach completes first Channel attempt",
+          "url": "https://www.swimmingworldmagazine.com/news/minnesota-masters-coach-completes-first-channel-attempt/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicit 26 July 2003 success; Samphire Hoe departure 08:39 and Strouanne arrival 20:00; 11 hours 21 minutes; Macalester coaching and support from Bob Pearson and Kathy Guinn.",
+          "label": "Supports"
+        },
+        {
+          "text": "No time-zone label supplied; wider success-rate and nationality ordinal claims are not adopted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Daily News of Open Water Swimming: Tina Neill interview, Going In Backwards And Swimming In Reverse",
+          "url": "https://dailynewsofopenwaterswimming.com/going-in-backwards-and-swimming-in-reverse/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2 March 2020 first-person interview: college backstroke and individual medley, Minnesota lake inspiration, second Channel choice, escort-boat sighting and backward-facing feeding; lists Haydn Welch’s 1993 backstroke crossing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective athlete interview; not a ratification document.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "neill-2003-solo"
+    },
+    {
+      "title": "Female backstroke record crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Female backstroke record: 13:22. Contemporary “first person” claims conflict with Haydn Welch’s 1993 backstroke crossing."
+        },
+        {
+          "text": "Tuesday, 9 August 2005 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 22m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Swimming World reports entering at 02:50 and landing at 16:12. The article is datelined 9 August; these clocks are retained without assuming phase-specific calendar dates or a time zone.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Samphire Hoe",
+          "label": "Departure"
+        },
+        {
+          "text": "Wissant",
+          "label": "Arrival"
+        },
+        {
+          "text": "Backstroke",
+          "label": "Stroke"
+        },
+        {
+          "text": "Reg Brickell Jr.",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association — reported by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical record 443988 gives 9 August 2005, Tina Neill, USA/Minnesota, E–F, 13:22:00 and CSA attribution. Guinness’s named female-backstroke record agrees on date and 13:22. Swimming World supplies the stroke and landing account but its first-person assertion is not accepted: the later Neill interview’s backstroke chronology includes Haydn Welch in 1993. The dispute concerns the historical first claim, not the consistently reported time."
+        },
+        {
+          "text": "CS&PF historical record: Tina Neill, swim 443988",
+          "url": "https://cspf.co.uk/swim/443988"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "9 August 2005; Neill, Tina; USA, Minnesota; England-to-France 13:22:00; CSA attribution; pilot Reg Brickell Jr.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA ratification is reported by CS&PF; the original CSA individual result was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Swimming World: Neill crosses English Channel swimming backstroke",
+          "url": "https://www.swimmingworldmagazine.com/news/neill-crosses-english-channel-swimming-backstroke?q=Neill-Crosses-English-Channel-Swimming-Backstroke"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Backstroke account dated 9 August: Samphire Hoe 02:50 to Wissant 16:12 in 13 hours 22 minutes; Reg Brickell and named family/coaching support.",
+          "label": "Supports"
+        },
+        {
+          "text": "Incorrectly calls her the first person to cross on backstroke; later evidence identifies Haydn Welch’s 1993 crossing. No time-zone label supplied.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Guinness World Records: Tina Neil, fastest female Channel backstroke crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/84919-fastest-crossing-of-the-english-channel-swimming-backstroke-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named USA swimmer; 9 August 2005; 13 hours 22 minutes; female backstroke category.",
+          "label": "Supports"
+        },
+        {
+          "text": "Spells the surname Neil with one final l; federation and college records use Neill.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Daily News of Open Water Swimming: Tina Neill interview, Going In Backwards And Swimming In Reverse",
+          "url": "https://dailynewsofopenwaterswimming.com/going-in-backwards-and-swimming-in-reverse/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2 March 2020 first-person interview: college backstroke and individual medley, Minnesota lake inspiration, second Channel choice, escort-boat sighting and backward-facing feeding; lists Haydn Welch’s 1993 backstroke crossing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective athlete interview; not a ratification document.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "neill-2005-backstroke"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "High-school coaching",
+      "lines": [
+        {
+          "text": "1993"
+        },
+        {
+          "text": "Macalester’s biography credits her work with Davis High School’s mythical national championship team."
+        }
+      ]
+    },
+    {
+      "title": "First Channel completion",
+      "lines": [
+        {
+          "text": "Saturday, 26 July 2003"
+        },
+        {
+          "text": "Completed the crossing on her first attempt in 11 hours 21 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Backstroke Channel crossing",
+      "lines": [
+        {
+          "text": "Tuesday, 9 August 2005"
+        },
+        {
+          "text": "Completed an England-to-France backstroke swim in 13 hours 22 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Explaining the backstroke approach",
+      "lines": [
+        {
+          "text": "Monday, 2 March 2020"
+        },
+        {
+          "text": "Discussed boat sighting, feeds and her choice of stroke in a published athlete interview."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Tina Neill on swimming backwards",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://dailynewsofopenwaterswimming.com/going-in-backwards-and-swimming-in-reverse/"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Written interview about backstroke technique and her Channel swims; no video playback implied."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Tina Neill?",
+      "value": "This profile includes 2 selected solo performances for Tina Neill. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Tina Neill’s featured English Channel swim?",
+      "value": "The featured swim started on Saturday, 26 July 2003 and finished on Saturday, 26 July 2003."
+    },
+    {
+      "label": "How long did Tina Neill’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 11 hours and 21 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical record: Tina Neill, swim 443858",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443858"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "26 July 2003; Neill, Tina; USA, Minnesota; England-to-France 11:21:00; CSA attribution; pilot Duncan Taylor.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA ratification is reported by CS&PF; the original CSA individual result was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Tina Neill, swim 443988",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443988"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "9 August 2005; Neill, Tina; USA, Minnesota; England-to-France 13:22:00; CSA attribution; pilot Reg Brickell Jr.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA ratification is reported by CS&PF; the original CSA individual result was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Macalester College Athletics: Tina Neill coach profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://athletics.macalester.edu/sports/womens-swimming-and-diving/roster/coaches/tina-neill/46"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "UC Davis All-America swimmer; coaching at age-group, high-school and college levels; Macalester Masters and assistant coaching; Davis High School 1993 team.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its first-person-ever Channel backstroke assertion is not adopted; the female category is supported by Guinness and the later swimmer interview.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Swimming World: Minnesota Masters coach completes first Channel attempt",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.swimmingworldmagazine.com/news/minnesota-masters-coach-completes-first-channel-attempt/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicit 26 July 2003 success; Samphire Hoe departure 08:39 and Strouanne arrival 20:00; 11 hours 21 minutes; Macalester coaching and support from Bob Pearson and Kathy Guinn.",
+          "label": "Supports"
+        },
+        {
+          "text": "No time-zone label supplied; wider success-rate and nationality ordinal claims are not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Swimming World: Neill crosses English Channel swimming backstroke",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.swimmingworldmagazine.com/news/neill-crosses-english-channel-swimming-backstroke?q=Neill-Crosses-English-Channel-Swimming-Backstroke"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Backstroke account dated 9 August: Samphire Hoe 02:50 to Wissant 16:12 in 13 hours 22 minutes; Reg Brickell and named family/coaching support.",
+          "label": "Supports"
+        },
+        {
+          "text": "Incorrectly calls her the first person to cross on backstroke; later evidence identifies Haydn Welch’s 1993 crossing. No time-zone label supplied.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: Tina Neil, fastest female Channel backstroke crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/84919-fastest-crossing-of-the-english-channel-swimming-backstroke-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named USA swimmer; 9 August 2005; 13 hours 22 minutes; female backstroke category.",
+          "label": "Supports"
+        },
+        {
+          "text": "Spells the surname Neil with one final l; federation and college records use Neill.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Daily News of Open Water Swimming: Tina Neill interview, Going In Backwards And Swimming In Reverse",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://dailynewsofopenwaterswimming.com/going-in-backwards-and-swimming-in-reverse/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "2 March 2020 first-person interview: college backstroke and individual medley, Minnesota lake inspiration, second Channel choice, escort-boat sighting and backward-facing feeding; lists Haydn Welch’s 1993 backstroke crossing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective athlete interview; not a ratification document.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First successful Channel attempt",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 26 July 2003"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "11h 21m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "08:39 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "20:00 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "neill-2003-solo"
+    },
+    {
+      "title": "Female backstroke record crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 9 August 2005 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Female backstroke record: 13:22. Contemporary “first person” claims conflict with Haydn Welch’s 1993 backstroke crossing."
+        },
+        {
+          "text": "13h 22m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "neill-2005-backstroke"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-3d44315c58c43c43831a"
+}

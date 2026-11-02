@@ -1,0 +1,844 @@
+{
+  "slug": "tom-blower-english-channel",
+  "name": "Tom Blower",
+  "country": "England",
+  "aliases": [
+    "Thomas Blower",
+    "Torpedo Tom"
+  ],
+  "highlight": "Three Channel crossings · pioneer of the North Channel",
+  "biography": [
+    "Tom Blower was a Nottingham endurance swimmer whose career connected river training, coastal racing and pioneering channel crossings. Born in Hyson Green in 1914, the miner’s son practised in the River Trent near the Meadows. His working life included employment as a sales representative, while his swimming earned him the nickname “Torpedo Tom”.",
+    "He won the Morecambe Cross Bay championship in four successive years, from 1935 to 1938. During that period he made his first English Channel crossing, swimming from Cap Gris-Nez to Abbots Cliff in August 1937. Captain H. W. Pearson piloted the swim aboard Lady Brassey.",
+    "Blower served in the Royal Navy during the Second World War. In 1947 he achieved the first successful North Channel swim between Ireland and Scotland, a feat that remained unrepeated until Kevin Murphy’s crossing in 1970. He returned to the English Channel in 1948, this time swimming from England to France with Freddie Upton and Sunbeam as his support team.",
+    "His third successful English Channel leg came in September 1951. It formed the completed outward portion of an unsuccessful double-crossing attempt, rather than a finished two-way swim. Blower later moved to Dartmouth and died in 1955. His place in marathon swimming history was recognised with induction into the International Marathon Swimming Hall of Fame in 1964."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Lifespan",
+      "value": "1914–1955"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Hyson Green, Nottingham, England"
+    },
+    {
+      "label": "Nickname",
+      "value": "Torpedo Tom"
+    },
+    {
+      "label": "Training river",
+      "value": "River Trent, near the Meadows in Nottingham"
+    },
+    {
+      "label": "English Channel record",
+      "value": "Three successful one-way crossings: 1937, 1948 and 1951"
+    },
+    {
+      "label": "North Channel",
+      "value": "First successful Ireland-to-Scotland crossing, 1947"
+    },
+    {
+      "label": "Morecambe champion",
+      "value": "Four consecutive Cross Bay titles, 1935–1938"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, class of 1964"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Channel crossing: Cap Gris-Nez to Abbots Cliff",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Wednesday, 4 August 1937 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 31m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Published date is not explicitly labelled departure or arrival. CSA and the Hall of Fame list 13:31; museum narrative passages also print 13:29. No start or finish clock was verified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez",
+          "label": "Departure"
+        },
+        {
+          "text": "Abbots Cliff",
+          "label": "Arrival"
+        },
+        {
+          "text": "H. W. Pearson",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Lady Brassey",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2247 supplies 13:31, England and the France-to-England route. Dover.UK.com identifies the date, endpoints, pilot and vessel. The museum archive itself contains both 13:29 and 13:31, so the disagreement is retained. No original observer report was inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Thomas Blower, 1937",
+          "url": "https://www.channelswimmingassociation.com/swim/2247/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: Thomas Blower, 4 August 1937",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1937-08-04/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum Channel Swimming archive: Tom Blower biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/blower-tom"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum: 1950s Channel swimming history",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Tom Blower",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_f724fb11160a4ae9aeb27c4918ded630.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "blower-1937"
+    },
+    {
+      "title": "England-to-France crossing with Freddie Upton",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "15h 31m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover.UK.com and the museum swimmer archive give 29 August; Dover Museum’s exhibition lists 30 August. CS&PF’s historical table and the swimmer archive give 15:31, while the Hall of Fame biography gives 15:26. Exact calendar date is withheld pending reconciliation; no clocks were verified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Archcliffe / Western Beach, Dover",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Gris-Nez",
+          "label": "Arrival"
+        },
+        {
+          "text": "Freddie Upton",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Sunbeam",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The museum swimmer archive labels this independently ratified. Dover.UK.com instead places it under “Daily Mail International Channel Race”; that organisational attribution is unresolved, so no ratifying body is assigned. CS&PF’s retrospective record table supports 15:31. Pilot, vessel and route are corroborated by museum and Dover records."
+        },
+        {
+          "text": "Dover Museum Channel Swimming archive: Tom Blower biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/blower-tom"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum: 1950s Channel swimming history",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Tom Blower",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_f724fb11160a4ae9aeb27c4918ded630.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: Thomas Blower, 29 August 1948",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1948-08-29/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "CS&PF: solo records and historical statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "blower-1948"
+    },
+    {
+      "title": "Completed outward leg of a two-way attempt",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The return leg was abandoned. This entry counts the successful outward crossing once, not a completed double."
+        },
+        {
+          "text": "Tuesday, 11 September 1951 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "18h 42m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The published date does not establish departure or arrival. Sources disagree on the duration of the abandoned return, which is not assigned a time here.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "St Margaret’s Bay",
+          "label": "Departure"
+        },
+        {
+          "text": "Calais",
+          "label": "Arrival"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2467 confirms 18:42 and England to France. Dover.UK.com supplies 11 September; the museum swimmer archive identifies St Margaret’s Bay and Calais. The Hall of Fame confirms this was the first leg of an abandoned two-way attempt. Pilot, boat and observer were not verified."
+        },
+        {
+          "text": "Channel Swimming Association: Thomas Blower, 1951",
+          "url": "https://www.channelswimmingassociation.com/swim/2467/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: Thomas Blower, 11 September 1951",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1951-09-11/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum Channel Swimming archive: Tom Blower biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/blower-tom"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum: 1950s Channel swimming history",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Tom Blower",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_f724fb11160a4ae9aeb27c4918ded630.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "blower-1951"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "North Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 28 July 1947 (event date)"
+        },
+        {
+          "text": "Donaghadee, Northern Ireland → Scotland"
+        },
+        {
+          "text": "Completed the first successful North Channel swim, from Ireland to Scotland."
+        },
+        {
+          "text": "15h 26m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "ILDSA history supplies 15:26. Infinity’s first historical row records 28 July; Dover’s biography describes 27–28 July and bridges his English Channel career. Published day retained without assuming departure."
+        },
+        {
+          "text": "Irish Long Distance Swimming Association: North Channel history",
+          "url": "https://www.ildsa.info/north-channel-history/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Tom Blower’s first successful North Channel swim and historical duration.",
+          "label": "Supports"
+        },
+        {
+          "text": "Infinity Channel Swimming: North Channel solo history",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Tom Blower, first row; published swim date and direction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Pilot-service retrospective table, not the 1947 observer log.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Dover: Tom Blower",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/blower-tom"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge and Dover–Ramsgate swim.",
+          "label": "Supports"
+        }
+      ],
+      "id": "tom-blower-event-1-north-channel"
+    },
+    {
+      "title": "Dover to Ramsgate",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1948 · exact day not confirmed"
+        },
+        {
+          "text": "Dover → Ramsgate, England"
+        },
+        {
+          "text": "Completed the coastal swim; the archive describes it as a route record at the time."
+        },
+        {
+          "text": "4h 36m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Channel Swimming Dover, final biographical paragraph, supplies year, route and duration within Blower’s Channel career. No exact day or original timing log supplied."
+        },
+        {
+          "text": "Channel Swimming Dover: Tom Blower",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/blower-tom"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge and Dover–Ramsgate swim.",
+          "label": "Supports"
+        }
+      ],
+      "id": "tom-blower-event-2-dover-to-ramsgate"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Born in Nottingham",
+      "lines": [
+        {
+          "text": "1914"
+        },
+        {
+          "text": "Grew up in Hyson Green and later trained in the River Trent."
+        }
+      ]
+    },
+    {
+      "title": "Morecambe racing success",
+      "lines": [
+        {
+          "text": "1935–1938"
+        },
+        {
+          "text": "Won the Cross Bay championship in four consecutive years."
+        }
+      ]
+    },
+    {
+      "title": "First English Channel crossing",
+      "lines": [
+        {
+          "text": "4 August 1937"
+        },
+        {
+          "text": "Swam Cap Gris-Nez to Abbots Cliff; the CSA lists 13:31."
+        }
+      ]
+    },
+    {
+      "title": "North Channel pioneer",
+      "lines": [
+        {
+          "text": "July 1947"
+        },
+        {
+          "text": "Became the first swimmer to complete the crossing between Ireland and Scotland."
+        }
+      ]
+    },
+    {
+      "title": "English Channel in the reverse direction",
+      "lines": [
+        {
+          "text": "August 1948"
+        },
+        {
+          "text": "Completed England to France with Freddie Upton piloting Sunbeam."
+        }
+      ]
+    },
+    {
+      "title": "Third successful Channel leg",
+      "lines": [
+        {
+          "text": "11 September 1951"
+        },
+        {
+          "text": "Finished the outward leg of an abandoned two-way attempt."
+        }
+      ]
+    },
+    {
+      "title": "Posthumous Hall of Fame recognition",
+      "lines": [
+        {
+          "text": "1964"
+        },
+        {
+          "text": "Inducted into the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Tom Blower?",
+      "value": "This profile includes 3 selected solo performances for Tom Blower. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Tom Blower’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Wednesday, 4 August 1937. The source does not establish whether that date means departure or arrival. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Tom Blower’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 13 hours and 31 minutes. Published sources disagree about details of this swim; the crossing record explains the differences."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Dover Museum Channel Swimming archive: Tom Blower biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/blower-tom"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge and Dover–Ramsgate swim.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: 1950s Channel swimming history",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Tom Blower",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_f724fb11160a4ae9aeb27c4918ded630.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Thomas Blower, 1937",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2247/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Thomas Blower, 1951",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2467/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Thomas Blower, 4 August 1937",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1937-08-04/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Thomas Blower, 29 August 1948",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1948-08-29/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Thomas Blower, 11 September 1951",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1951-09-11/thomas-blower"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Irish Long Distance Swimming Association: North Channel history",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.ildsa.info/north-channel-history/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Tom Blower’s first successful North Channel swim and historical duration.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Infinity Channel Swimming: North Channel solo history",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Tom Blower, first row; published swim date and direction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Pilot-service retrospective table, not the 1947 observer log.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Channel crossing: Cap Gris-Nez to Abbots Cliff",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 4 August 1937 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "13h 31m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "blower-1937"
+    },
+    {
+      "title": "England-to-France crossing with Freddie Upton",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1948 · exact day not recorded here"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "15h 31m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "blower-1948"
+    },
+    {
+      "title": "Completed outward leg of a two-way attempt",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 11 September 1951 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "18h 42m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "blower-1951"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "North Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 28 July 1947 (event date)"
+        },
+        {
+          "text": "Donaghadee, Northern Ireland → Scotland"
+        },
+        {
+          "text": "Completed the first successful North Channel swim, from Ireland to Scotland."
+        },
+        {
+          "text": "15h 26m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "tom-blower-event-1-north-channel"
+    },
+    {
+      "title": "Dover to Ramsgate",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1948 · exact day not confirmed"
+        },
+        {
+          "text": "Dover → Ramsgate, England"
+        },
+        {
+          "text": "Completed the coastal swim; the archive describes it as a route record at the time."
+        },
+        {
+          "text": "4h 36m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "tom-blower-event-2-dover-to-ramsgate"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-24cd1264da45dcb2c708"
+}

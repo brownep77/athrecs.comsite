@@ -1,0 +1,449 @@
+{
+  "slug": "mercedes-gleitze-english-channel",
+  "name": "Mercedes Gleitze",
+  "country": "England",
+  "aliases": [],
+  "highlight": "First British woman across the Channel · 7 October 1927",
+  "biography": [
+    "Mercedes Gleitze was an English endurance swimmer, born in Brighton on 18 November 1900. While working as a secretary in London she trained in the Thames, where she set a British women's distance-swimming record in 1923. She later left office work to prepare for a professional swimming career.",
+    "On Friday 7 October 1927, after seven unsuccessful attempts, she crossed the English Channel from France to England in 15 hours and 15 minutes. A later attempt to answer doubts about that achievement ended before she reached the opposite shore; it must not be counted as another successful crossing.",
+    "Gleitze went on to swim the Strait of Gibraltar in 1928 and undertake endurance events in Britain and overseas. Her swimming earnings helped establish a home for homeless people in Leicester. Her sporting and charitable work has since been recognised by swimming halls of fame and documented by her family."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "18 November 1900"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Brighton, England"
+    },
+    {
+      "label": "Died",
+      "value": "9 February 1981"
+    },
+    {
+      "label": "Channel milestone",
+      "value": "First British woman to complete a crossing"
+    },
+    {
+      "label": "Featured crossing",
+      "value": "France → England · 15h 15m"
+    },
+    {
+      "label": "Other major swim",
+      "value": "Strait of Gibraltar · 5 April 1928"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First successful Channel crossing by a British woman",
+      "lines": [
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "15h 15m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Friday, 7 October 1927 · 02:55 · Published historical clock; time zone not specified",
+          "label": "Started"
+        },
+        {
+          "text": "Friday, 7 October 1927 · 18:10 · Published historical clock; time zone not specified",
+          "label": "Finished"
+        },
+        {
+          "text": "The 02:55 and 18:10 clocks are published in Judy Middleton's historical account. Swim England and the family archive corroborate the date and 15h 15m duration. No time-zone offset has been assigned.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "Chalk rocks between South Foreland and St Margaret's Bay, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Fog reported in the local historical account.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The governing-body biography and family archive agree on 7 October 1927 and 15h 15m. The local historian supplies the clocks and landing location. AthRecs has inspected these published accounts, not an original observer report. The later unsuccessful vindication attempt is not an additional completed crossing."
+        },
+        {
+          "text": "Swim England: Mercedes Gleitze",
+          "url": "https://www.swimming.org/swimengland/mercedes-gleitze/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Mercedes Gleitze family archive: career summary",
+          "url": "https://www.mercedesgleitze.uk/personal-details-and-summary-of-career"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Judy Middleton: Mercedes Gleitze local history",
+          "url": "https://hovehistory.blogspot.com/2024/02/mercedes-gleitze-1900-1981.html"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "gleitze-1927"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 5 April 1928 (event date)"
+        },
+        {
+          "text": "Completed the strait; first person, according to Swim England."
+        },
+        {
+          "text": "12h 50m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Swim England’s named biography explicitly gives 5 April 1928 and 12h50m, together with her 1927 English Channel achievement. No original observer certificate inspected."
+        },
+        {
+          "text": "Swim England: Mercedes Gleitze",
+          "url": "https://www.swimming.org/swimengland/mercedes-gleitze/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named career biography links Channel identity to Gibraltar and the dated Worthing endurance swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective governing-body biography; original timing sheets were not inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mercedes-gleitze-event-1-strait-of-gibraltar"
+    },
+    {
+      "title": "Worthing endurance swim",
+      "lines": [
+        {
+          "text": "Pool swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 18 May 1933 – Saturday, 20 May 1933"
+        },
+        {
+          "text": "Corporation Baths, Worthing, England"
+        },
+        {
+          "text": "Completed a 47-hour pool endurance swim."
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Swim England names Corporation Baths, Worthing, and explicitly gives the 18–20 May 1933 date interval and duration. This is a pool endurance performance, not an open-water crossing or distance race."
+        },
+        {
+          "text": "Swim England: Mercedes Gleitze",
+          "url": "https://www.swimming.org/swimengland/mercedes-gleitze/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named career biography links Channel identity to Gibraltar and the dated Worthing endurance swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective governing-body biography; original timing sheets were not inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mercedes-gleitze-event-2-worthing-endurance-swim"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Thames swimming record",
+      "lines": [
+        {
+          "text": "1923"
+        },
+        {
+          "text": "Set a British women's record over the Putney–Silvertown course in 10h 45m."
+        }
+      ]
+    },
+    {
+      "title": "English Channel success",
+      "lines": [
+        {
+          "text": "7 October 1927"
+        },
+        {
+          "text": "Completed her successful France–England crossing on her eighth formal attempt."
+        }
+      ]
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "5 April 1928"
+        },
+        {
+          "text": "Completed the strait in 12h 50m."
+        }
+      ]
+    },
+    {
+      "title": "Endurance and charitable work",
+      "lines": [
+        {
+          "text": "1933"
+        },
+        {
+          "text": "Reached 47 hours in an endurance swim at Worthing; the Leicester home supported by her swimming earnings opened that year."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame recognition",
+      "lines": [
+        {
+          "text": "1969 / 2014"
+        },
+        {
+          "text": "Inducted into the International Marathon Swimming Hall of Fame and later the International Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Mercedes: The Spirit of a New Age — family archive documentary information",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.mercedesgleitze.uk/documentary"
+        },
+        {
+          "text": "Documentary"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Mercedes Gleitze?",
+      "value": "This profile includes 1 selected solo performance for Mercedes Gleitze. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Mercedes Gleitze’s featured English Channel swim?",
+      "value": "The featured swim started on Friday, 7 October 1927 and finished on Friday, 7 October 1927."
+    },
+    {
+      "label": "How long did Mercedes Gleitze’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 15 hours and 15 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Swim England: Mercedes Gleitze",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.swimming.org/swimengland/mercedes-gleitze/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named career biography links Channel identity to Gibraltar and the dated Worthing endurance swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective governing-body biography; original timing sheets were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame: Mercedes Gleitze",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-mercedes-gleitze/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Mercedes Gleitze family archive: career summary",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.mercedesgleitze.uk/personal-details-and-summary-of-career"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Judy Middleton: Mercedes Gleitze local history",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://hovehistory.blogspot.com/2024/02/mercedes-gleitze-1900-1981.html"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming & Piloting Federation",
+      "lines": [
+        {
+          "text": "Source for recorded country",
+          "url": "https://cspf.co.uk/swim/442813"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "CS&PF individual record 442813 names Gleitze, Mercedes. Both Nationality and Country read UK [England] for her 1927 France-to-England solo. The profile uses the named constituent country for display."
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First successful Channel crossing by a British woman",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 7 October 1927"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "15h 15m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "02:55 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "18:10 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Historical account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "gleitze-1927"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 5 April 1928 (event date)"
+        },
+        {
+          "text": "Completed the strait; first person, according to Swim England."
+        },
+        {
+          "text": "12h 50m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "mercedes-gleitze-event-1-strait-of-gibraltar"
+    },
+    {
+      "title": "Worthing endurance swim",
+      "lines": [
+        {
+          "text": "Pool swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 18 May 1933 – Saturday, 20 May 1933"
+        },
+        {
+          "text": "Corporation Baths, Worthing, England"
+        },
+        {
+          "text": "Completed a 47-hour pool endurance swim."
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "mercedes-gleitze-event-2-worthing-endurance-swim"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-312ed686a33edcb85713"
+}

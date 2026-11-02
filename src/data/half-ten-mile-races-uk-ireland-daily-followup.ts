@@ -45,6 +45,7 @@ const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
 const CURRENT_LIMERICK_PERMIT_SCAN_CHECKED_AT = "2026-10-29";
 const CURRENT_FERRIBY_SCAN_CHECKED_AT = "2026-10-31";
+const CURRENT_NOVEMBER_ENTRY_SCAN_CHECKED_AT = "2026-11-01";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -289,13 +290,12 @@ const seeds: RaceSeed[] = [
     distances: ["Marathon", "Half", "10mi", "10K", "5K"],
     organiser: "Glenmore A.C. / Eventmaster",
     url: "https://eventmaster.ie/event/3xxOfx4tZW",
-    status: "TBC",
-    hasEntry: false,
+    entryUrl: "https://eventmaster.ie/event/3xxOfx4tZW",
     priceAmount: 35,
     priceCurrency: "EUR",
-    checkedAt: CURRENT_ENTRY_STATE_SCAN_CHECKED_AT,
+    checkedAt: CURRENT_NOVEMBER_ENTRY_SCAN_CHECKED_AT,
     notes:
-      "The direct official registration page and Athletics Ireland calendar consistently confirm the 12 June 2027 festival, 10:00 start for the half marathon and 10-mile race, and approved permit 26/595. The half marathon costs €35 and the 10-mile race €30. Online sales open on 1 November 2026, so checkout remains hidden until it is live.",
+      "The direct official registration page and Athletics Ireland calendar consistently confirm the 12 June 2027 festival, 10:00 start for the half marathon and 10-mile race, and approved permit 26/595. Online sales opened as scheduled on 1 November 2026; the event-specific checkout now offers the half marathon at €35 and the 10-mile race at €30.",
   },
   {
     slug: "noreen-mccarthy-memorial-10-mile-2027",
@@ -2081,6 +2081,20 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The official organiser page consistently confirms the half marathon and 5K on 21 November 2027, its 09:00 half start and open £41 half entry, plus the stated 5% booking fee. The downstream half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Run Gatwick 5K card is enriched.",
   },
+  {
+    seriesSlug: "runthrough-finsbury-park-november-2027",
+    date: "2027-11-28",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/finsbury-park-5k-10k-half-marathon-junior-run-november-2027",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/finsbury-park-5k-10k-half-marathon-junior-run-november-2027",
+    publishAllDistances: true,
+    priceAmount: 32,
+    checkedAt: CURRENT_NOVEMBER_ENTRY_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 28 November 2027 half marathon, 10K, 5K and junior programme, the 09:30 half-marathon start and open £32 half entry. The half edition is attached to the existing Finsbury Park multi-distance card rather than creating a duplicate series.",
+  },
   ...[
     ["2027-01-17", "january"],
     ["2027-05-02", "may"],
@@ -2643,6 +2657,15 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
 
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
+  {
+    slug: "looe-10-miler-2028-provisional",
+    date: "2028-02-27",
+    country: "England",
+    reason:
+      "Checked 2026-11-01: the authorised SiEntries page exposes a 27 February 2028 10-mile record and a stated 11:00 start, but its linked deferment policy explicitly labels that 2028 date provisional and says the confirmed date will be announced later. Keep it unpublished until the organiser confirms the 2028 date; retry the event page, deferment policy and Looe Pioneers event page on 1 December 2026.",
+    sourceUrl:
+      "https://www.sientries.co.uk/event/looe-10-miler-2028-sun-27th-feb-28-2028",
+  },
   {
     slug: "kirkcudbright-half-marathon-buckland-burn-up-2027",
     date: "2027-05-29",

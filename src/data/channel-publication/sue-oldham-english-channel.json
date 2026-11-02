@@ -1,0 +1,705 @@
+{
+  "slug": "sue-oldham-english-channel",
+  "name": "Sue Oldham",
+  "country": "Australia",
+  "aliases": [
+    "Susan Oldham",
+    "Susan [Sue] Oldham"
+  ],
+  "highlight": "Two solo Channel crossings · Masters swimmer and relay teammate",
+  "biography": [
+    "Sue Oldham, also listed as Susan Oldham, developed her swimming career as an adult in Perth, Western Australia. In a 2013 interview she recalled joining a Masters club because swimming could fit around a job that involved frequent travel. Her early sessions were modest, but club friendships drew her into Rottnest Channel relay swimming and eventually longer individual challenges.",
+    "She began working with coach Pauline Pratt in 2003. Preparing for a Channel relay in 2006, she joined extra training with fellow swimmer Selwyn Jellie and then asked whether she could attempt a solo crossing herself. That summer she participated in the Masters relay and completed her own England-to-France swim. The historical record places her arrival at Cap Blanc Nez on 25 August, after 16 hours and three minutes. She was recognised as the oldest woman to cross at the time.",
+    "Oldham returned for another solo in 2010, completing 17 hours and 11 minutes and regaining the women’s age record. Her Channel involvement also continued through teamwork. In 2012 she joined Roger Allsopp, Kathy Phillips and Tom McCarthy in the four-person Barracudas Aquaholics relay. Her published account describes the swimmers taking one-hour turns and her final swim to the French shore. The team’s 15-hour-three-minute result is kept distinct from her two solo achievements."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Australia — individual historical records"
+    },
+    {
+      "label": "Swimming community",
+      "value": "Westcoast Masters, Perth"
+    },
+    {
+      "label": "Recorded name",
+      "value": "Susan [Sue] Oldham"
+    },
+    {
+      "label": "Coach",
+      "value": "Pauline Pratt"
+    },
+    {
+      "label": "Solo crossings",
+      "value": "2006: 16:03:00; 2010: 17:11:00"
+    },
+    {
+      "label": "Solo support",
+      "value": "Eddie Spelling and Anastasia on both inspected solo records"
+    },
+    {
+      "label": "Relay role",
+      "value": "Member of the four-person Barracudas Aquaholics team in 2012"
+    },
+    {
+      "label": "Age qualification",
+      "value": "Accounts differ on exact age; no birth date is inferred"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First solo Channel crossing",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Thursday, 24 August 2006 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "16h 3m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Friday, 25 August 2006 · 15:28:00 · CS&PF comment explicitly says arrival 15:28 on 25 August; time zone unstated",
+          "label": "Finished"
+        },
+        {
+          "text": "The generic record date is 24 August. Departure 23:25 is retained as a reported clock only; arrival on 25 August is explicit. No exact age is adopted because sources differ.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Samphire Hoe, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Blanc Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Eddie Spelling",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Anastasia",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Mick Daly",
+          "label": "Official observers"
+        },
+        {
+          "text": "CS&PF (historical record attribution)",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical individual record 444068 identifies Australia, route, time and support, and explicitly states arrival on the 25th. Masters Swimming Australia’s contemporary page 8 independently reports the 25 August finish and 16:03. The historical record’s ratifying-organisation field is reported without claiming inspection of the original committee decision."
+        },
+        {
+          "text": "CS&PF historical record: Susan [Sue] Oldham, 2006",
+          "url": "https://cspf.co.uk/swim/444068"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; 24 August 2006 record date; 16:03:00; Samphire Hoe to Cap Blanc Nez; explicit arrival 15:28 on 25 August; pilot Eddie Spelling, Anastasia, observer Mick Daly.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical record names CS&PF as ratifier. Original committee decision/log not inspected. Age 60 differs from age 61 in contemporary Masters newsletter.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Masters Swimming Australia: October 2006 newsletter, page 8",
+          "url": "https://mastersswimming.org.au/wp-content/uploads/2022/04/2006_10_Vol-4_No-3_National-Newsletter.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Sue Oldham, Westcoast Masters, 2006 relay participation and 25 August solo finish in 16:03; Pauline Pratt and group training.",
+          "label": "Supports"
+        },
+        {
+          "text": "Reports age 61, versus 60 in the individual record. An internal July/August relay-date discrepancy is not resolved by guessing; no exact 2006 relay date is promoted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "oldham-2006"
+    },
+    {
+      "title": "Second solo Channel crossing",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Sunday, 8 August 2010 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "17h 11m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The row supplies departure 08:50:00 and arrival 02:01:00, without explicit phase dates or time zone. They remain prose; no next-day finish is inferred from arithmetic.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Noires Mottes, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Eddie Spelling",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Anastasia",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Irene Wakeham",
+          "label": "Official observers"
+        },
+        {
+          "text": "CS&PF (historical record attribution)",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual historical record 444398 was inspected, including route, elapsed time, crew and age-record comment. Its later relay story independently recalls the successful 2010 solo. No original ratification decision or observer report was inspected."
+        },
+        {
+          "text": "CS&PF historical record: Susan [Sue] Oldham, 2010",
+          "url": "https://cspf.co.uk/swim/444398"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; 8 August 2010; England to France; 17:11:00; departure 08:50 and arrival 02:01; Eddie Spelling, Anastasia; observer Irene Wakeham; Noires Mottes landing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic date only; departure/arrival phase dates and clock standard not explicitly supplied. No new ratification claim is inferred from the database field.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: Barracudas Aquaholics relay story, 2012",
+          "url": "https://cspf.co.uk/swim-story/24/barracudas-aquaholics-relay"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Sue Oldham, Roger Allsopp, Kathy Phillips and Tom McCarthy; 15:03 team crossing, 23 July 2012; Samphire Hoe, Eddie Spelling and Anastasia.",
+          "label": "Supports"
+        },
+        {
+          "text": "Narrative mentions an early 22 July meeting but dates success 23 July; no departure date or clock is inferred. Team result is not an individual solo mark.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "oldham-2010"
+    },
+    {
+      "title": "Barracudas Aquaholics — four-person relay",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Four swimmers took one-hour turns. Oldham describes swimming the final portion to France."
+        },
+        {
+          "text": "Four-person relay. The elapsed time belongs to the team; no formal committee ratification decision was inspected."
+        },
+        {
+          "text": "Roger Allsopp · Kathy Phillips · Tom McCarthy · Sue Oldham",
+          "label": "Barracudas Aquaholics"
+        },
+        {
+          "text": "15h 3m",
+          "label": "Team elapsed time"
+        },
+        {
+          "text": "Duration of the team’s complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Monday, 23 July 2012 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Published narratives mention meeting early on 22 July but date the successful swim 23 July. Start date and all clocks remain unresolved; no date is invented to reconcile the narrative.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Relay · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Samphire Hoe, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Eddie Spelling",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Anastasia",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The federation-hosted team story and Oldham’s signed first-person account both name Sue with Roger Allsopp, Kathy Phillips and Tom McCarthy and give 15:03. The account explicitly describes finishing on 23 July. This is a documented four-person team performance, not a solo crossing or a committee ratification claim."
+        },
+        {
+          "text": "CS&PF: Barracudas Aquaholics relay story, 2012",
+          "url": "https://cspf.co.uk/swim-story/24/barracudas-aquaholics-relay"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Sue Oldham, Roger Allsopp, Kathy Phillips and Tom McCarthy; 15:03 team crossing, 23 July 2012; Samphire Hoe, Eddie Spelling and Anastasia.",
+          "label": "Supports"
+        },
+        {
+          "text": "Narrative mentions an early 22 July meeting but dates success 23 July; no departure date or clock is inferred. Team result is not an individual solo mark.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Sue Oldham’s relay account, published by Myrtleville Swimmers",
+          "url": "https://myrtlevilleswimmers.com/2012/10/15/tom-mccarthy-channel-relay-swim/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person account names the four relay swimmers, hour-long rotations, and completion on 23 July 2012 in 15:03.",
+          "label": "Supports"
+        },
+        {
+          "text": "Documented athlete account; no committee ratification record inspected. Meeting-date narrative is inconsistent with a simple 15-hour timeline, so start date remains unresolved.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "oldham-aquaholics-relay-2012"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Coaching with Pauline Pratt",
+      "lines": [
+        {
+          "text": "2003"
+        },
+        {
+          "text": "Oldham identifies this as the year she began working with Pratt."
+        }
+      ]
+    },
+    {
+      "title": "Masters Channel relay",
+      "lines": [
+        {
+          "text": "2006"
+        },
+        {
+          "text": "Participated with fellow Masters swimmers before her solo success; exact relay date remains unresolved."
+        }
+      ]
+    },
+    {
+      "title": "First solo Channel finish",
+      "lines": [
+        {
+          "text": "Friday, 25 August 2006"
+        },
+        {
+          "text": "Arrived at Cap Blanc Nez in 16:03:00."
+        }
+      ]
+    },
+    {
+      "title": "Second solo Channel record date",
+      "lines": [
+        {
+          "text": "Sunday, 8 August 2010"
+        },
+        {
+          "text": "The historical entry records 17:11:00 and a renewed women’s age record."
+        }
+      ]
+    },
+    {
+      "title": "Barracudas Aquaholics relay finish",
+      "lines": [
+        {
+          "text": "Monday, 23 July 2012"
+        },
+        {
+          "text": "Four swimmers completed the crossing in 15:03; this is a team time."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Sue Oldham — direct athlete interview",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://activeblu.blogspot.com/2013/02/sue-oldham-getting-better-with-age.html?m=0"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Written 2013 interview about learning to swim, Masters clubs, coaching and Channel preparation; not a film or observer report."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Barracudas Aquaholics — first-person relay account",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://myrtlevilleswimmers.com/2012/10/15/tom-mccarthy-channel-relay-swim/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Sue Oldham’s written account with team photographs, hosted by Myrtleville Swimmers. No complete video recording is claimed."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Sue Oldham?",
+      "value": "This profile includes 2 selected solo performances and 1 named relay participation for Sue Oldham. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Sue Oldham’s featured English Channel swim?",
+      "value": "The featured swim finished on Friday, 25 August 2006. Its exact start date is not confirmed here."
+    },
+    {
+      "label": "How long did Sue Oldham’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 16 hours, 3 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical record: Susan [Sue] Oldham, 2006",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444068"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; 24 August 2006 record date; 16:03:00; Samphire Hoe to Cap Blanc Nez; explicit arrival 15:28 on 25 August; pilot Eddie Spelling, Anastasia, observer Mick Daly.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical record names CS&PF as ratifier. Original committee decision/log not inspected. Age 60 differs from age 61 in contemporary Masters newsletter.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Susan [Sue] Oldham, 2010",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444398"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; 8 August 2010; England to France; 17:11:00; departure 08:50 and arrival 02:01; Eddie Spelling, Anastasia; observer Irene Wakeham; Noires Mottes landing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic date only; departure/arrival phase dates and clock standard not explicitly supplied. No new ratification claim is inferred from the database field.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Westcoast Masters: English Channel swimmers",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.westcoastmasters.org/english-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Club identifies Sue Oldham among its successful solo Channel swimmers and also as a relay participant.",
+          "label": "Supports"
+        },
+        {
+          "text": "Club acknowledgement, not original ratification evidence.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Emma Brunning / Active Blu: Meeting Sue, 2013 interview",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://activeblu.blogspot.com/2013/02/sue-oldham-getting-better-with-age.html?m=0"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Direct interview: began with Masters swimming as an adult; Rottnest relay progression; coaching with Pauline Pratt from 2003 and preparation for the 2006 Channel.",
+          "label": "Supports"
+        },
+        {
+          "text": "The interview’s rounded age for the later solo differs from the historical row; no birth date is inferred. Relevant interview paragraphs were inspected before a subsequent rate-limit response.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Masters Swimming Australia: October 2006 newsletter, page 8",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://mastersswimming.org.au/wp-content/uploads/2022/04/2006_10_Vol-4_No-3_National-Newsletter.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Sue Oldham, Westcoast Masters, 2006 relay participation and 25 August solo finish in 16:03; Pauline Pratt and group training.",
+          "label": "Supports"
+        },
+        {
+          "text": "Reports age 61, versus 60 in the individual record. An internal July/August relay-date discrepancy is not resolved by guessing; no exact 2006 relay date is promoted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Barracudas Aquaholics relay story, 2012",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim-story/24/barracudas-aquaholics-relay"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names Sue Oldham, Roger Allsopp, Kathy Phillips and Tom McCarthy; 15:03 team crossing, 23 July 2012; Samphire Hoe, Eddie Spelling and Anastasia.",
+          "label": "Supports"
+        },
+        {
+          "text": "Narrative mentions an early 22 July meeting but dates success 23 July; no departure date or clock is inferred. Team result is not an individual solo mark.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Sue Oldham’s relay account, published by Myrtleville Swimmers",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://myrtlevilleswimmers.com/2012/10/15/tom-mccarthy-channel-relay-swim/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person account names the four relay swimmers, hour-long rotations, and completion on 23 July 2012 in 15:03.",
+          "label": "Supports"
+        },
+        {
+          "text": "Documented athlete account; no committee ratification record inspected. Meeting-date narrative is inconsistent with a simple 15-hour timeline, so start date remains unresolved.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First solo Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 25 August 2006 (completion)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "16h 3m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "15:28:00 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "oldham-2006"
+    },
+    {
+      "title": "Second solo Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 8 August 2010 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "17h 11m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "oldham-2010"
+    },
+    {
+      "title": "Barracudas Aquaholics — four-person relay",
+      "lines": [
+        {
+          "text": "Relay · team performance"
+        },
+        {
+          "text": "Monday, 23 July 2012 (completion)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Four-person relay. The elapsed time belongs to the team; no formal committee ratification decision was inspected."
+        },
+        {
+          "text": "Roger Allsopp · Kathy Phillips · Tom McCarthy · Sue Oldham",
+          "label": "Barracudas Aquaholics"
+        },
+        {
+          "text": "15h 3m",
+          "label": "Team elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "oldham-aquaholics-relay-2012"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-0f7b5fe9fa20025342db"
+}

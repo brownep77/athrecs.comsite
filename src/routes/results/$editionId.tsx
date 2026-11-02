@@ -52,7 +52,7 @@ export const Route = createFileRoute("/results/$editionId")({
 });
 
 function RaceResultsPage() {
-  const { edition, results, hasMore } = Route.useLoaderData();
+  const { edition, results, hasMore, timingCredit } = Route.useLoaderData();
   const parkrun = isParkrunResult({ sport: edition.sport, eventName: edition.event_name });
   const columns = ["Pos", "Athlete", "Nationality", "Profile club", "Category", ...(parkrun ? ["Finish time"] : ["Performance", "Chip", "Gun"]), ""];
   const search = normalizeResultsSearch(Route.useSearch());
@@ -73,10 +73,11 @@ function RaceResultsPage() {
           This archive contains {edition.distance_code} performances from {edition.event_name}, held on {formatRaceDateShort(edition.event_date)}
           {edition.city ? ` in ${edition.city}` : ""}{edition.country ? `, ${edition.country}` : ""}.
           It contains the public records currently held by AthRecs, which may cover only part of the field.
-          Follow the credited provider links for the original results. Placings are retained from the source.
+          {!timingCredit && "Follow the credited provider links for the original results. "}Placings are retained from the source.
           Nationalities, where available, are as recorded for the race.
         </p>
         {parkrun ? <p className="max-w-3xl text-sm text-muted">{PARKRUN_TIMING_EXPLANATION}</p> : null}
+        {timingCredit && <p className="text-sm text-muted" aria-label="Results provider credit">Timing by {timingCredit}</p>}
         {credits.length ? <div className="space-y-1 text-sm text-muted" aria-label="Results provider credits">
           <p>Results credited to:</p>
           <ul className="flex flex-wrap gap-x-4 gap-y-2">{credits.map((credit) => <li key={credit.url}><a href={credit.url} target="_blank" rel="noreferrer" className="text-accent underline">{credit.name}</a></li>)}</ul>

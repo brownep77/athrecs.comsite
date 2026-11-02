@@ -1,0 +1,563 @@
+{
+  "slug": "hassan-abd-el-rehim-english-channel",
+  "name": "Hassan Abd el Rehim",
+  "country": "Egypt",
+  "aliases": [
+    "Hassan Abdel Rehim",
+    "Hassan Abd El Rehim"
+  ],
+  "highlight": "1950 Channel race winner · 10 hours 50 minutes",
+  "biography": [
+    "Hassan Abd el Rehim was an Egyptian army officer and a leading Channel swimmer in the years when international races attracted growing attention to the crossing. He completed four successful solo swims between 1948 and 1951, including crossings in both directions, building his career through repeated returns to the same demanding waterway.",
+    "His outstanding performance came in the 1950 Daily Mail Channel race. Swimming from France to England, he finished first in 10 hours and 50 minutes and established a Channel speed record that stood until 1960. Harry Sharp piloted his escort boat, Britannia, and he landed at South Foreland. The result placed him among the central figures of the post-war Channel racing era.",
+    "He returned for the 1951 race and finished third in 12 hours and 25 minutes, reaching Shakespeare Cliff. That swim used a different escort arrangement: E. Duggen piloted Early Morn. His swimming also extended beyond the Dover Strait. On 31 July 1952 he reached Lundy Island in the Bristol Channel, an achievement associated with an unusual prize offer of livestock or cash.",
+    "He was inducted into the International Marathon Swimming Hall of Fame in 1966. His record combines sustained participation, success in competitive Channel racing and a long-standing speed benchmark."
+  ],
+  "flags": [
+    {
+      "code": "EG",
+      "label": "Egypt",
+      "abbr": "EGY"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Egyptian"
+    },
+    {
+      "label": "Profession",
+      "value": "Army officer"
+    },
+    {
+      "label": "Successful solo Channel swims",
+      "value": "Four — 1948, 1949, 1950 and 1951"
+    },
+    {
+      "label": "Direction experience",
+      "value": "Completed crossings in both directions"
+    },
+    {
+      "label": "1950 Channel race",
+      "value": "Winner of the Daily Mail race in 10 hours 50 minutes"
+    },
+    {
+      "label": "1951 Channel race",
+      "value": "Third place in 12 hours 25 minutes"
+    },
+    {
+      "label": "Other documented swim",
+      "value": "English mainland to Lundy Island, 31 July 1952"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, 1966"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "1950 Daily Mail Channel race victory",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 50m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Published swim date only; exact start and finish clocks were not established. CSA, IMSHOF and Dover’s individual record agree on 10:50; one museum photo caption instead prints 10:49.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "South Foreland, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Harry Sharp",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Britannia",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association — public individual record checked",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2251 was checked for route, year and duration. Dover supplies the day; museum item d17701 supplies pilot, vessel and landing place. The duration discrepancy is disclosed. No original observer log was inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Hassan Abd el Rehim, 1950",
+          "url": "https://www.channelswimmingassociation.com/swim/2251/hassan-abd-el-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.uk.com: Hassan Abdel Rehim, 22 August 1950",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1950-08-22/hassan-abdel-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Hassan Abdel Rehim",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_fc49dda224dc4334a4c9cf041d043cbb.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum archive d17701: Hassan Abd El Rehim and Eileen Fenton",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/eileen-fenton-with-hassan-abd-el-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Hassan’s 1950 and 1951 pilot, escort vessel and landing places; 1952 Lundy swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations and age differ from other records. The 1950 duration shown here is 10:49; CSA, IMSHOF and the individual Dover record agree on 10:50. Photo reproduction rights are not assumed.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "hassan-abd-el-rehim-1950"
+    },
+    {
+      "title": "Third place in the 1951 Channel race",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Thursday, 16 August 1951 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 25m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover’s calendar date is retained as a published swim date. Exact departure and arrival times are unavailable.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Cliff, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "E. Duggen",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Early Morn",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The individual Dover record confirms date, route and 12:25; IMSHOF corroborates the duration. Museum item d17701 identifies the pilot, vessel and landing place. No direct ratifier entry or original observation paperwork for this particular swim was inspected."
+        },
+        {
+          "text": "Dover.uk.com: Hassan Abdel Rehim, 16 August 1951",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1951-08-16/hassan-abdel-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Hassan Abdel Rehim",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_fc49dda224dc4334a4c9cf041d043cbb.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum archive d17701: Hassan Abd El Rehim and Eileen Fenton",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/eileen-fenton-with-hassan-abd-el-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Hassan’s 1950 and 1951 pilot, escort vessel and landing places; 1952 Lundy swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations and age differ from other records. The 1950 duration shown here is 10:49; CSA, IMSHOF and the individual Dover record agree on 10:50. Photo reproduction rights are not assumed.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "hassan-abd-el-rehim-1951"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "England to Lundy Island",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 31 July 1952 (event date)"
+        },
+        {
+          "text": "Bristol Channel, England → Lundy Island"
+        },
+        {
+          "text": "Completed the Bristol Channel swim to Lundy."
+        },
+        {
+          "text": "16 miles",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The Channel Swimming Dover catalogue caption explicitly names Hassan and dates this 16-mile completion to 31 July 1952, immediately after detailing his Channel races. It supplies no elapsed time or precise mainland departure place."
+        },
+        {
+          "text": "Channel Swimming Dover: Eileen Fenton with Hassan Abd El Rehim",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/eileen-fenton-with-hassan-abd-el-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Museum catalogue caption connects his Channel race identity to the 31 July 1952 England–Lundy swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective museum caption; no elapsed time, observer report or precise departure point supplied. Image is not reproduced.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "hassan-abd-el-rehim-event-1-england-to-lundy-island"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First successful solo",
+      "lines": [
+        {
+          "text": "1948"
+        },
+        {
+          "text": "Began a sequence of four successful Channel seasons."
+        }
+      ]
+    },
+    {
+      "title": "Another Channel success",
+      "lines": [
+        {
+          "text": "1949"
+        },
+        {
+          "text": "Completed an England-to-France solo."
+        }
+      ]
+    },
+    {
+      "title": "Daily Mail race winner",
+      "lines": [
+        {
+          "text": "Tuesday, 22 August 1950"
+        },
+        {
+          "text": "The published swim record dates his 10-hour-50-minute France-to-England victory to 22 August."
+        }
+      ]
+    },
+    {
+      "title": "Third place in the Channel race",
+      "lines": [
+        {
+          "text": "Thursday, 16 August 1951"
+        },
+        {
+          "text": "Completed France-to-England in 12 hours 25 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Lundy Island swim",
+      "lines": [
+        {
+          "text": "Thursday, 31 July 1952"
+        },
+        {
+          "text": "Reached Lundy in the Bristol Channel."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame recognition",
+      "lines": [
+        {
+          "text": "1966"
+        },
+        {
+          "text": "Inducted as an Honor Swimmer of the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Hassan Abd el Rehim?",
+      "value": "This profile includes 2 selected solo performances for Hassan Abd el Rehim. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Hassan Abd el Rehim’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Tuesday, 22 August 1950. The source does not establish whether that date means departure or arrival. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Hassan Abd el Rehim’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 10 hours and 50 minutes. Published sources disagree about details of this swim; the crossing record explains the differences."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Hassan Abd el Rehim, 1950",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2251/hassan-abd-el-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Hassan Abdel Rehim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_fc49dda224dc4334a4c9cf041d043cbb.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum archive d17701: Hassan Abd El Rehim and Eileen Fenton",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/eileen-fenton-with-hassan-abd-el-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Hassan’s 1950 and 1951 pilot, escort vessel and landing places; 1952 Lundy swim. Museum catalogue caption connects his Channel race identity to the 31 July 1952 England–Lundy swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations and age differ from other records. The 1950 duration shown here is 10:49; CSA, IMSHOF and the individual Dover record agree on 10:50. Photo reproduction rights are not assumed. Retrospective museum caption; no elapsed time, observer report or precise departure point supplied. Image is not reproduced.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.uk.com: Hassan Abdel Rehim athlete record",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/hassan-abdel-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover.uk.com: Hassan Abdel Rehim, 22 August 1950",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1950-08-22/hassan-abdel-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover.uk.com: Hassan Abdel Rehim, 16 August 1951",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1951-08-16/hassan-abdel-rehim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: 1950s Channel swimming",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "1950 Daily Mail Channel race victory",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "10h 50m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "hassan-abd-el-rehim-1950"
+    },
+    {
+      "title": "Third place in the 1951 Channel race",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 16 August 1951 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "12h 25m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "hassan-abd-el-rehim-1951"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "England to Lundy Island",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Thursday, 31 July 1952 (event date)"
+        },
+        {
+          "text": "Bristol Channel, England → Lundy Island"
+        },
+        {
+          "text": "Completed the Bristol Channel swim to Lundy."
+        },
+        {
+          "text": "16 miles",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "hassan-abd-el-rehim-event-1-england-to-lundy-island"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-a9019c40691af3461a49"
+}

@@ -1,3 +1,4 @@
+import { ChannelNativeRecord } from "@/components/swimming/ChannelArchive";
 import { useEffect } from "react";
 import { SportBadge } from "@/components/races/EventBadges";
 import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOverview";
@@ -580,6 +581,9 @@ function AthleteContent() {
         )}
       </section>
 
+      {data.preview?.channelArchive ? (
+        <ChannelNativeRecord record={data.preview.channelArchive} />
+      ) : null}
       <nav
         aria-label="Profile sections"
         className="profile-section-nav flex flex-wrap gap-1 border-b border-border pb-2"

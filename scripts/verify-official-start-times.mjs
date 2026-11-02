@@ -1,3 +1,6 @@
+import { REEPHAM_CONFIRMATION_REVIEW } from "./lib/reepham-organiser-confirmation-2026-10-31-review.mjs";
+import reephamConfirmation from "../src/data/reepham-organiser-confirmation-2026-10-31.json" with { type: "json" };
+import { REEPHAM_LAP_STARTS_DETAILS } from "./lib/reepham-lap-starts-details.mjs";
 import assert from "node:assert/strict";
 import { bulkFixture } from "./collector-bulk-fixture.mjs";
 import { publishCheckedFixtures } from "./lib/checked-fixture-publication.mjs";
@@ -152,9 +155,7 @@ try {
     null,
   );
   // Apply the owner's distance-specific clarification, preserving both historical batches.
-  const lapDetails = {
-    "reepham-cross-country|2027-01-31": FIXTURE_DETAILS["reepham-cross-country|2027-01-31"],
-  };
+  const lapDetails = REEPHAM_LAP_STARTS_DETAILS;
   await sql.query("update editions set start_time='10:45' where id=109456641");
   await assert.rejects(
     publishCheckedFixtures(sql, publishing, lapDetails, REEPHAM_LAP_STARTS_REVIEW),
@@ -184,7 +185,10 @@ try {
     const before =
       REEPHAM_LAP_STARTS_REVIEW.baseline[`reepham-cross-country|2027-01-31|${distance}`];
     assert.equal(row.start_time, time);
-    assert.equal(checkedFixtureStart("reepham-cross-country", "2027-01-31", distance, null), time);
+    assert.equal(
+      checkedFixtureStart("reepham-cross-country", "2027-01-31", distance, null),
+      "10:15",
+    );
     assert(row.notes.startsWith(before.notes));
     assert.match(row.notes, /Owner clarification on 21 October 2026/);
     assert.equal(row.source_url, before.source_url);
@@ -310,10 +314,60 @@ try {
     "gear-10k-kings-lynn|2026-11-08",
     "marriotts-way-10k|2026-11-01",
     "lingwood-duathlon|2027-03-21",
-  ]) assert.ok(withheldFixtureDateKeys.includes(key), `Earlier date hold must remain: ${key}`);
+  ])
+    assert.ok(withheldFixtureDateKeys.includes(key), `Earlier date hold must remain: ${key}`);
   console.log(
     "Historical batches and Marriott organiser confirmation passed: exact scope, guarded replacements, rollback, source history, structured starts and replay safety.",
   );
+  // Rehearse the organiser correction with raw notes, never public decorated notes.
+  const reephamBefore = new Map();
+  for (const row of Object.values(REEPHAM_CONFIRMATION_REVIEW.baseline)) {
+    const [current] = await sql.query("select * from editions where id=$1", [row.id]);
+    assert.equal(current.start_time, row.start_time);
+    assert(!Object.hasOwn(row, "notes"), "public annotations are not a raw database baseline");
+    reephamBefore.set(row.id, current.notes);
+  }
+  await sql.query("update editions set start_time='10:45' where id=109456642");
+  await assert.rejects(
+    publishCheckedFixtures(sql, publishing, reephamConfirmation, REEPHAM_CONFIRMATION_REVIEW),
+    /Reviewed baseline changed/,
+  );
+  await sql.query("update editions set start_time='10:30' where id=109456642");
+  await assert.rejects(
+    publishCheckedFixtures(sql, publishing, reephamConfirmation, {
+      ...REEPHAM_CONFIRMATION_REVIEW,
+      startCorrections: undefined,
+    }),
+    /Start changed since review/,
+  );
+  const reephamConfirmed = await publishCheckedFixtures(
+    sql,
+    publishing,
+    reephamConfirmation,
+    REEPHAM_CONFIRMATION_REVIEW,
+  );
+  for (const before of Object.values(REEPHAM_CONFIRMATION_REVIEW.baseline)) {
+    const [row] = await sql.query("select * from editions where id=$1", [before.id]);
+    assert.equal(row.start_time, "10:15");
+    assert(row.notes.startsWith(reephamBefore.get(before.id)));
+    assert.match(row.notes, /31 October 2026 13:51 UTC/);
+  }
+  assert(
+    (
+      await publishCheckedFixtures(
+        sql,
+        publishing,
+        reephamConfirmation,
+        REEPHAM_CONFIRMATION_REVIEW,
+      )
+    ).alreadyPublished,
+  );
+  const reephamAudit = await sql.query(
+    "select before_json,after_json from catalogue_change_log where revision_id=$1",
+    [reephamConfirmed.revisionId],
+  );
+  assert.equal(reephamAudit.length, 2);
+  assert(reephamAudit.every((change) => change.after_json.record.start_time === "10:15"));
 } finally {
   await pg.close();
 }

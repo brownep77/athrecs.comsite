@@ -1,0 +1,607 @@
+{
+  "slug": "mariel-hawley-english-channel",
+  "name": "Mariel Hawley",
+  "country": "Mexico",
+  "aliases": [
+    "Mariel Hawley Davila"
+  ],
+  "highlight": "Mexican Channel solo swimmer and Sport City Mexico relay member",
+  "biography": [
+    "Mariel Hawley is a Mexican marathon swimmer, lawyer, author and speaker whose sporting projects have also supported children’s medical care. In her first-person account, she describes discovering sea swimming as a child while visiting Acapulco with her grandparents. She competed in pools as she grew up and returned to sustained open-water training after becoming a mother. A five-kilometre event in 2001 encouraged her to seek longer swims.",
+    "Her early English Channel experience came with Sport City Mexico, a six-person team that completed four consecutive crossings. That relay encouraged her to pursue a solo. On 12 August 2011 she completed the England-to-France crossing in a published 14 hours 33 minutes, accompanied by Mike Oram aboard Gallivant. Dover’s individual account places her landing at Sangatte. Together with Manhattan and Catalina swims, this completed her Triple Crown programme in 2012.",
+    "Hawley went on to complete the Oceans Seven in March 2019. Her professional biography identifies a law degree from Universidad Iberoamericana and the books Días Azules and Corazón de Mar. Through the Quiero Sonreír project, she has connected swimming with support for children needing cleft-lip and palate surgery or cancer treatment. Her public speaking brings together these experiences of sport, family life and work for others, giving her profile a scope beyond crossing times alone."
+  ],
+  "flags": [
+    {
+      "code": "MX",
+      "label": "Mexico",
+      "abbr": "MEX"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Mexico — speaker biography"
+    },
+    {
+      "label": "Education",
+      "value": "Law, Universidad Iberoamericana"
+    },
+    {
+      "label": "Solo Channel date",
+      "value": "12 August 2011"
+    },
+    {
+      "label": "Solo landing",
+      "value": "Sangatte beach, reported by Dover"
+    },
+    {
+      "label": "Channel relay",
+      "value": "Six-person Sport City Mexico four-way team"
+    },
+    {
+      "label": "Books",
+      "value": "Días Azules; Corazón de Mar"
+    },
+    {
+      "label": "Charitable project",
+      "value": "Quiero Sonreír"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Friday, 12 August 2011 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "14h 33m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "A swim date is published, but no phase-specific clock times were established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Sangatte beach, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Mike Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Gallivant",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF 2011 solo table, Mariel Hawley row dated 12 August, gives 14:33:00 and Mike Oram / Gallivant. Dover’s individual entry supplies the route and Sangatte landing. Her first-person account independently identifies the same solo. The annual disclaimer means no explicit committee ratification is asserted."
+        },
+        {
+          "text": "CS&PF: successful swims in 2011",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2011"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named result rows, crew and published elapsed precision.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page says results are unofficial until committee ratification; no separate decision or observer log inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Mariel Hawley Davila, 2011-08-12",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2011-08-12/mariel-hawley-davila"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual swim entry, date, route and named crew where given.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary compilation; generic swim date is not automatically a departure or arrival date.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Outdoor Swimming Society: Mariel Hawley first-person profile",
+          "url": "https://www.outdoorswimmingsociety.com/viva-mariel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Childhood, solo Channel, Triple Crown and Oceans Seven career bridge.",
+          "label": "Supports"
+        },
+        {
+          "text": "Calls the four-way relay 2006; federation and Dover give 2007. Its first-Mexican Oceans Seven claim is not adopted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "hawley-channel-2011"
+    },
+    {
+      "title": "Sport City Mexico four-way relay — conflicting date accounts",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Hawley is named on the six-person Sport City Mexico roster. The performance belongs to the relay team and is not an individual solo time."
+        },
+        {
+          "text": "Six-person four-way relay. Registers give 2007; a later recollection says 2006. Published date spans and clocks also conflict."
+        },
+        {
+          "text": "Luis Pineyro · Omar Diaz Gonzalez · Alejandro Moreno · Mayalen Noriega · Jorge Urreta · Mariel Hawley",
+          "label": "Sport City Mexico"
+        },
+        {
+          "text": "Sunday, 26 August 2007 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "42h 11m 0s",
+          "label": "Team elapsed time"
+        },
+        {
+          "text": "Duration of the team’s complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF’s 2007 relay row is dated 26 August. Dover’s athlete page says 24–26 August, while its swim page says 24/25 and reports 07:51 Friday to 02:11 Sunday; those clocks do not reconcile with its 42:11 total. Hawley’s later recollection says 2006. No start/finish dates or clocks have been inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Relay · 4-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Sea Satin",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 4-way swim."
+        },
+        {
+          "text": "8h 18m 0s",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "10h 44m 0s",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "11h 5m 0s",
+          "label": "Leg 3 · England → France"
+        },
+        {
+          "text": "12h 4m 0s",
+          "label": "Leg 4 · France → England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The CS&PF 2007 relay table names Sport City Mexico (6), Sea Satin and four splits summing to 42:11:00. Dover’s matching swim entry explicitly names Mariel Hawley in the roster; her athlete page connects the relay and 2011 solo. The total and team scope agree, but year/date/clock conflicts are retained pending original documentation."
+        },
+        {
+          "text": "CS&PF: successful swims in 2007",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2007"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named result rows, crew and published elapsed precision.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page says results are unofficial until committee ratification; no separate decision or observer log inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Sport City Mexico four-way relay",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2007-08-24/sport-city-mexico"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named six-person roster including Mariel, four leg times and crew.",
+          "label": "Supports"
+        },
+        {
+          "text": "Date range and reported clocks are internally inconsistent; this is a team performance, not four individual solos.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Mariel Hawley Davila athlete entry",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/mariel-hawley-davila"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Mexican identity and connection between solo and named relay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its relay count refers to crossings/legs, not four separate four-way performances.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Outdoor Swimming Society: Mariel Hawley first-person profile",
+          "url": "https://www.outdoorswimmingsociety.com/viva-mariel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Childhood, solo Channel, Triple Crown and Oceans Seven career bridge.",
+          "label": "Supports"
+        },
+        {
+          "text": "Calls the four-way relay 2006; federation and Dover give 2007. Its first-Mexican Oceans Seven claim is not adopted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "hawley-sport-city-relay-2007"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Longer open-water goals",
+      "lines": [
+        {
+          "text": "2001"
+        },
+        {
+          "text": "Her first-person account describes a five-kilometre event that encouraged longer swims."
+        }
+      ]
+    },
+    {
+      "title": "Sport City Mexico relay",
+      "lines": [
+        {
+          "text": "2007"
+        },
+        {
+          "text": "Federation records a four-way team swim; the date conflict is retained in its evidence."
+        }
+      ]
+    },
+    {
+      "title": "Manhattan swim",
+      "lines": [
+        {
+          "text": "2009"
+        },
+        {
+          "text": "Completed the Manhattan component of her later Triple Crown."
+        }
+      ]
+    },
+    {
+      "title": "English Channel solo",
+      "lines": [
+        {
+          "text": "Friday, 12 August 2011"
+        },
+        {
+          "text": "Completed the England-to-France crossing."
+        }
+      ]
+    },
+    {
+      "title": "Triple Crown",
+      "lines": [
+        {
+          "text": "2012"
+        },
+        {
+          "text": "Catalina completed her three-swim programme."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven completed",
+      "lines": [
+        {
+          "text": "Saturday, 30 March 2019"
+        },
+        {
+          "text": "Her first-person account dates the concluding Cook Strait swim to this day."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Mariel Hawley?",
+      "value": "This profile includes 1 selected solo performance and 1 named relay participation for Mariel Hawley. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Mariel Hawley’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Friday, 12 August 2011. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Mariel Hawley’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 14 hours, 33 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Outdoor Swimming Society: Mariel Hawley first-person profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.outdoorswimmingsociety.com/viva-mariel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Childhood, solo Channel, Triple Crown and Oceans Seven career bridge.",
+          "label": "Supports"
+        },
+        {
+          "text": "Calls the four-way relay 2006; federation and Dover give 2007. Its first-Mexican Oceans Seven claim is not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Allenamenti: Mariel Hawley biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://allenamenti.com.mx/conferencistas/mariel-hawley/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Mexican nationality, legal education, books and charitable projects.",
+          "label": "Supports"
+        },
+        {
+          "text": "Undated speaker biography with older organisational-role language; no current office is asserted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: successful swims in 2011",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2011"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named result rows, crew and published elapsed precision.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page says results are unofficial until committee ratification; no separate decision or observer log inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Mariel Hawley Davila, 2011-08-12",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2011-08-12/mariel-hawley-davila"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual swim entry, date, route and named crew where given.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary compilation; generic swim date is not automatically a departure or arrival date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: successful swims in 2007",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2007"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named result rows, crew and published elapsed precision.",
+          "label": "Supports"
+        },
+        {
+          "text": "Page says results are unofficial until committee ratification; no separate decision or observer log inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Sport City Mexico four-way relay",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2007-08-24/sport-city-mexico"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named six-person roster including Mariel, four leg times and crew.",
+          "label": "Supports"
+        },
+        {
+          "text": "Date range and reported clocks are internally inconsistent; this is a team performance, not four individual solos.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Mariel Hawley Davila athlete entry",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/mariel-hawley-davila"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Mexican identity and connection between solo and named relay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its relay count refers to crossings/legs, not four separate four-way performances.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 12 August 2011 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "14h 33m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "hawley-channel-2011"
+    },
+    {
+      "title": "Sport City Mexico four-way relay — conflicting date accounts",
+      "lines": [
+        {
+          "text": "Relay · team performance"
+        },
+        {
+          "text": "Sunday, 26 August 2007 (recorded swim date)"
+        },
+        {
+          "text": "England → France → England → France → England"
+        },
+        {
+          "text": "Six-person four-way relay. Registers give 2007; a later recollection says 2006. Published date spans and clocks also conflict."
+        },
+        {
+          "text": "Luis Pineyro · Omar Diaz Gonzalez · Alejandro Moreno · Mayalen Noriega · Jorge Urreta · Mariel Hawley",
+          "label": "Sport City Mexico"
+        },
+        {
+          "text": "42h 11m 0s",
+          "label": "Team elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "hawley-sport-city-relay-2007"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-73c90c07c14fb7201ba2"
+}

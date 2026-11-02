@@ -112,13 +112,18 @@ export function RegisteredAthletes() {
       ) : null}
       <aside
         className="rounded-xl border border-border bg-surface p-4 text-sm text-muted"
-        aria-label="Contact sender"
+        aria-label="Contact athletes through Intercom"
       >
-        <strong className="text-fg">Contact sender: {STAFF_SENDER_LABEL}</strong>
+        <strong className="text-fg">Email and message athletes through Intercom</strong>
         <p className="mt-1">
-          Select that SIM for SMS or sign into that number in WhatsApp, Telegram or Viber. Email
-          uses your mail app’s selected sender. Contact buttons open the app or profile for you to
-          compose and send. Recipient account and privacy settings may limit availability.
+          Open an athlete’s contact to compose and send in Intercom, where their conversations and
+          replies are kept. SMS, WhatsApp, Facebook and Instagram are available when the channel is
+          connected and Intercom allows the conversation.
+        </p>
+        <p className="mt-2">
+          Telegram, Viber and other contact apps remain available. For those apps, use{" "}
+          {STAFF_SENDER_LABEL} as the sender where applicable. Intercom uses its own connected
+          senders; your mail app uses its selected account.
         </p>
       </aside>
       <form

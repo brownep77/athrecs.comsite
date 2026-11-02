@@ -1,0 +1,419 @@
+{
+  "slug": "anita-sood-english-channel",
+  "name": "Anita Sood",
+  "country": "India",
+  "aliases": [
+    "Anita Sood-Mankar"
+  ],
+  "highlight": "1987 Channel crossing · 8 hours 15 minutes · CSA annual fastest-woman award",
+  "biography": [
+    "Anita Sood is an Indian swimmer whose career connects national pool competition with one of the notable Channel performances of the 1980s. She trained with Sandeep Divgikar at Mumbai’s Otters Club. Contemporary reporting about the coach describes Sood as an early leading pupil and links his long-distance coaching to her Channel preparation.",
+    "Her achievements in the pool had already brought national recognition: the Swimming Federation of India lists her as a 1983 Arjuna Award recipient. In a later interview, Sood singled out her victories at the 1986 Nationals among the memories she valued most from competition.",
+    "She crossed from England to France in 8 hours 15 minutes in 1987. Dover’s individual entry supplies the date, 17 August, while the Channel Swimming Association confirms the successful solo and names her as the recipient of its Fastest Swim by a Lady award for that year. The time and annual award capture the significance of the performance without treating a historical record description as a current ranking.",
+    "Sood’s 2004 interview also reflects on life after elite competition and the transition to family responsibilities. World Aquatics maintains an individual profile under Anita Sood, while the CS&PF’s swimmer index also records the surname form Sood-Mankar."
+  ],
+  "flags": [
+    {
+      "code": "IN",
+      "label": "India",
+      "abbr": "IND"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country",
+      "value": "India"
+    },
+    {
+      "label": "Also recorded as",
+      "value": "Anita Sood-Mankar"
+    },
+    {
+      "label": "Coach",
+      "value": "Sandeep Divgikar"
+    },
+    {
+      "label": "Club",
+      "value": "Otters Club, Mumbai"
+    },
+    {
+      "label": "National honour",
+      "value": "Arjuna Award, 1983"
+    },
+    {
+      "label": "Selected Channel crossing",
+      "value": "17 August 1987 · 8 hours 15 minutes"
+    },
+    {
+      "label": "CSA annual award",
+      "value": "Fastest Swim by a Lady, 1987"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The association’s individual entry also records its 1987 Fastest Swim by a Lady award. This is an annual historical honour, not a present-day speed ranking."
+        },
+        {
+          "text": "Monday, 17 August 1987 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "8h 15m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover supplies the swim day; the association gives the year and elapsed time. No departure or completion clock has been established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA swim 2778 explicitly identifies Anita Sood, India, a successful one-way solo England-to-France swim in 1987 and 08:15, followed by the CSA 1987 Fastest Swim by a Lady award. Dover’s individual entry supplies 17 August and agrees on the time and route. The national federation award list, coach reporting, original interview and World Aquatics athlete page support the biographical identity. Ratifier-checked means the published CSA entry was inspected; no original observer log, pilot or vessel was established."
+        },
+        {
+          "text": "CSA: Anita Sood, 1987 — swim 2778",
+          "url": "https://www.channelswimmingassociation.com/swim/2778/anita-sood"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names India, a one-way solo England-to-France completion in 1987, 08:15 elapsed and the CSA 1987 Fastest Swim by a Lady award.",
+          "label": "Supports"
+        },
+        {
+          "text": "The CSA page supplies the year, not the exact day or departure/arrival clocks.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.UK.com: Anita Sood, 17 August 1987",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1987-08-17/anita-sood"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Supplies 17 August 1987, 8:15, India, England-to-France route and age 21.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; pilot, vessel and observer are unknown. The date is not explicitly departure or arrival.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "anita-sood-1987"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Youth competition",
+      "lines": [
+        {
+          "text": "1977"
+        },
+        {
+          "text": "Won nine medals at the national age-group meet in Trivandrum."
+        }
+      ]
+    },
+    {
+      "title": "Arjuna Award",
+      "lines": [
+        {
+          "text": "1983"
+        },
+        {
+          "text": "The Swimming Federation of India lists Sood among its Arjuna Award recipients for swimming."
+        }
+      ]
+    },
+    {
+      "title": "National championship memories",
+      "lines": [
+        {
+          "text": "1986"
+        },
+        {
+          "text": "In her 2004 interview, Sood recalled her wins at the 1986 Nationals as a career highlight."
+        }
+      ]
+    },
+    {
+      "title": "English Channel in 8:15",
+      "lines": [
+        {
+          "text": "Monday, 17 August 1987"
+        },
+        {
+          "text": "The named CSA success and Dover’s dated entry document her England-to-France solo; CSA also lists its annual fastest-woman award."
+        }
+      ]
+    },
+    {
+      "title": "Reflecting on life after competition",
+      "lines": [
+        {
+          "text": "January 2004"
+        },
+        {
+          "text": "An original interview revisits her sporting memories and changing responsibilities after her elite swimming career."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Anita Sood: life after competitive swimming",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://timesofindia.indiatimes.com/bombay-times/now-im-a-chef-chauffeur-and-ayah/articleshow/436052.cms"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Original 2004 written interview with Sood about her career memories and life after competition. No full-crossing footage was established."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Anita Sood?",
+      "value": "This profile includes 1 selected solo performance for Anita Sood. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Anita Sood’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Monday, 17 August 1987. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Anita Sood’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 8 hours and 15 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Anita Sood, 1987 — swim 2778",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2778/anita-sood"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Names India, a one-way solo England-to-France completion in 1987, 08:15 elapsed and the CSA 1987 Fastest Swim by a Lady award.",
+          "label": "Supports"
+        },
+        {
+          "text": "The CSA page supplies the year, not the exact day or departure/arrival clocks.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Anita Sood, 17 August 1987",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1987-08-17/anita-sood"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Supplies 17 August 1987, 8:15, India, England-to-France route and age 21.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; pilot, vessel and observer are unknown. The date is not explicitly departure or arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "World Aquatics: Anita Sood — actual athlete profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.worldaquatics.com/athletes/1062396/anita-sood/profile"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "A real individual athlete page identifying Anita SOOD, nationality IND and Open Water.",
+          "label": "Supports"
+        },
+        {
+          "text": "The opened profile has no populated performance history; it is an identity/profile link, not independent evidence of her Channel time.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Swimming Federation of India: Hall of Fame",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.swimming.org.in/hallof-fame/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Anita-Sood row lists the Arjuna Award, 1983, Swimming.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "The Times of India: Now I’m a chef, chauffeur and ayah — Anita Sood interview",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://timesofindia.indiatimes.com/bombay-times/now-im-a-chef-chauffeur-and-ayah/articleshow/436052.cms"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original January 2004 interview with Sood about her competitive career, remembered wins at the 1986 Nationals and life after competition.",
+          "label": "Supports"
+        },
+        {
+          "text": "Personal circumstances are historical statements from 2004, not current residence or occupation.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "The Times of India: The pools brim with tears for Sandeep",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://timesofindia.indiatimes.com/city/mumbai/the-pools-brim-with-tears-for-sandeep/articleshow/931966368.cms"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original reporting and family quotations connect Anita Sood with coach Sandeep Divgikar, Otters Club and the transition into long-distance swimming.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical record superlatives in this retrospective are not presented as current records.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "India Today: contemporary 1979 swimming profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.indiatoday.in/magazine/sport/story/19790630-anita-sood-smita-desai-sandeep-divgikar-don-talbot-swimming-822167-2014-03-04"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account supports the single brief 1977 youth-medal milestone.",
+          "label": "Supports"
+        },
+        {
+          "text": "Use is limited to the short milestone; no extended source-derived biography is reproduced.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: solo Channel swimmers — Anita Sood-Mankar",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Sood-Mankar [Sood], Anita row explicitly links the surname variants and lists India, one solo crossing, 1987.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 17 August 1987 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "8h 15m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "anita-sood-1987"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-68853c80b18eb90a1057"
+}

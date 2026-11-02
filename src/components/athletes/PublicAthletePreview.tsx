@@ -1,3 +1,4 @@
+import { ChannelNativeRecord, ChannelFlags } from "../swimming/ChannelArchive";
 import { isParkrunResult, PARKRUN_TIMING_LABEL } from "@/lib/athrecs/parkrun-timing";
 import { SportBadge } from "@/components/races/EventBadges";
 import { Link } from "@tanstack/react-router";
@@ -56,7 +57,14 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
               <span className="text-sm text-muted">{profile.club}</span>
             )
           ) : null}
-          {profile.nationality ? <CountryFlag country={profile.nationality} showName /> : null}
+          {profile.channelArchive ? (
+            <span className="inline-flex items-center gap-2">
+              <ChannelFlags flags={profile.channelArchive.flags} />
+              {profile.nationality}
+            </span>
+          ) : profile.nationality ? (
+            <CountryFlag country={profile.nationality} showName />
+          ) : null}
           <span className="text-xs text-muted">
             {profile.sports.length > 1 ? "Sports:" : "Sport:"}
           </span>
@@ -81,6 +89,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
           compact
         />
       </section>
+      {profile.channelArchive ? <ChannelNativeRecord record={profile.channelArchive} /> : null}
       <div id="profile-achievements" className="scroll-mt-24">
         <AchievementSummary summary={profile.achievements ?? buildProfileAchievementSummary([])} />
       </div>
@@ -182,7 +191,11 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             />
           </>
         ) : (
-          <p className="text-sm text-muted">No published results yet.</p>
+          <p className="text-sm text-muted">
+            {profile.channelArchive
+              ? "Selected swimming performances appear in the English Channel record above."
+              : "No published results yet."}
+          </p>
         )}
         {pages > 1 ? (
           <nav

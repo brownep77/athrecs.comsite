@@ -1,0 +1,847 @@
+{
+  "slug": "brenda-fisher-english-channel",
+  "name": "Brenda Fisher",
+  "country": "England",
+  "aliases": [],
+  "highlight": "Two women’s Channel race victories · 1951 record of 12:42",
+  "biography": [
+    "Brenda Fisher was born on 9 June 1927 and grew up in Scartho, near Grimsby, the daughter of a trawler skipper. She learned to swim as a child and trained with Grimsby Mermaids under Mr McNally. Morecambe Bay became an early testing ground: the International Marathon Swimming Hall of Fame credits her with women’s victories there in 1948 and 1951.",
+    "Her best-known result came on 16 August 1951, when she swam from France to England in 12 hours and 42 minutes during the Daily Mail race. It was a women’s Channel record. She returned for the Butlin race in 1954 and again finished as the leading woman. The CSA lists that second crossing at 14 hours and 36 minutes.",
+    "Fisher also pursued international marathon events. Her 1956 season included the Nile race, described by the Hall of Fame as a two-day competition, and a Lake Ontario crossing. The available Ontario accounts disagree on her elapsed time, so the completion is recorded here without choosing one of the competing figures.",
+    "After competitive swimming she taught swimming in Grimsby. She received the British Empire Medal in 2018, died on 2 August 2022 and was inducted into the International Marathon Swimming Hall of Fame in 2023."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "9 June 1927"
+    },
+    {
+      "label": "Died",
+      "value": "2 August 2022"
+    },
+    {
+      "label": "Nationality",
+      "value": "England — CSA 1954 entry; 1951 entry contains a conflicting Wales field"
+    },
+    {
+      "label": "Home community",
+      "value": "Scartho and Grimsby, Lincolnshire"
+    },
+    {
+      "label": "Swimming club",
+      "value": "Grimsby Mermaids"
+    },
+    {
+      "label": "Channel achievements",
+      "value": "Women’s winner in the 1951 Daily Mail and 1954 Butlin races"
+    },
+    {
+      "label": "Honours",
+      "value": "BEM, 2018; IMSHOF induction, 2023"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Daily Mail race — women’s Channel record",
+      "lines": [
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "Thursday, 16 August 1951 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "12h 42m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The CSA obituary supplies 16 August 1951. CS&PF’s year-only row prints 07:30:00 departure and 20:12:00 arrival, without phase dates or clock standard; no structured start/finish dates are inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Dedicated CSA entry 2256 confirms 12:42 and the route; the association’s obituary supplies the date. The erroneous or conflicting Wales country field is not adopted. Original observer documentation has not been inspected. CS&PF record 442852 corroborates England and provides clocks, but its Butlins label conflicts with the CSA race account and is not adopted."
+        },
+        {
+          "text": "CSA: Brenda Fisher, 1951",
+          "url": "https://www.channelswimmingassociation.com/swim/2256/brenda-fisher"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1951 solo France-to-England crossing in 12:42.",
+          "label": "Supports"
+        },
+        {
+          "text": "The country field says Wales, conflicting with her 1954 CSA entry and museum biography; that field is not used for her displayed nationality.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CSA: Brenda Fisher BEM, 11 August 2022",
+          "url": "https://www.channelswimmingassociation.com/news/191/brenda-fisher-bem"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "16 August 1951 Channel date, Grimsby Mermaids, coach Mr McNally and swimming in memory of her brother.",
+          "label": "Supports"
+        },
+        {
+          "text": "Age given for 1951 is not used because it conflicts with the published birth date.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CSA: Brenda Fisher BEM — 2023 induction announcement",
+          "url": "https://www.channelswimmingassociation.com/news/195/brenda-fisher-bem-induction-imshof-2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Scartho background, 1951 and 1954 Channel victories, 1956 Nile and Ontario swims, teaching and 2018 BEM.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Ontario duration of 18:50 conflicts with the IMSHOF citation and museum caption.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical database: Brenda Fisher, 1951",
+          "url": "https://cspf.co.uk/swim/442852"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Year-only entry: UK [England], 12:42:00, departure 07:30:00 and arrival 20:12:00; CSA ratification reported.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Butlins race comment conflicts with the CSA biography identifying the Daily Mail race. Clocks have no phase dates or time zone.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "fisher-1951"
+    },
+    {
+      "title": "Butlin Channel race — first woman home",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "14h 36m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Exact swim day and clocks remain unresolved in the sources used.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual entry 2264 gives 14:36. The museum caption d30186 prints 14:25 in one paragraph and 14:36 later. The CSA value is displayed while the disagreement remains explicit; the first-woman result is corroborated by the association’s biography."
+        },
+        {
+          "text": "CSA: Brenda Fisher, 1954",
+          "url": "https://www.channelswimmingassociation.com/swim/2264/brenda-fisher"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England; 1954 solo France-to-England crossing in 14:36.",
+          "label": "Supports"
+        },
+        {
+          "text": "A museum caption contains both 14:25 and 14:36; the dedicated CSA result is retained with the discrepancy disclosed.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CSA: Brenda Fisher BEM — 2023 induction announcement",
+          "url": "https://www.channelswimmingassociation.com/news/195/brenda-fisher-bem-induction-imshof-2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Scartho background, 1951 and 1954 Channel victories, 1956 Nile and Ontario swims, teaching and 2018 BEM.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Ontario duration of 18:50 conflicts with the IMSHOF citation and museum caption.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Fisher with her trainer, item d30186",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/bob-paysour-brenda-fisher-mr-mcnally-of-grimsby-her-trainer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England, Morecambe and Channel career, photograph with trainer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Caption gives 18:51 for Ontario and inconsistent 1954 Channel times; these conflicts are retained in review notes.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "fisher-1954"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Morecambe Bay race",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1948 · exact day not confirmed"
+        },
+        {
+          "text": "Morecambe Bay, England"
+        },
+        {
+          "text": "Won the women’s race."
+        },
+        {
+          "text": "14.5 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "First woman",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "IMSHOF’s 2023 Fisher citation explicitly lists a 1948 women’s victory over 14.5 km and links this career to her two Channel race wins. No elapsed time or calendar day is supplied."
+        },
+        {
+          "text": "IMSHOF: Brenda Fisher, 2023 induction citation",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_9e278becde88458eafc7d26c56831e5d.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1948/1951 Morecambe Bay women’s wins, two-day 47 km Nile race, BEM and 2023 induction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Ontario time is printed as 18:20; that disputed time is not promoted to an authoritative result.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "brenda-fisher-event-1-morecambe-bay-race"
+    },
+    {
+      "title": "Nile race — two-day competition",
+      "lines": [
+        {
+          "text": "Open-water swimming · Staged event"
+        },
+        {
+          "text": "1956 · exact day not confirmed"
+        },
+        {
+          "text": "River Nile, Egypt"
+        },
+        {
+          "text": "Won the women’s competition; the event consisted of two days."
+        },
+        {
+          "text": "47 km across a two-day race",
+          "label": "Published distance"
+        },
+        {
+          "text": "First woman",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The IMSHOF citation describes a two-day 47 km race and a female record; the CSA biography corroborates the 1956 win. This is a staged race, not an uninterrupted solo crossing, and no total elapsed time is supplied."
+        },
+        {
+          "text": "IMSHOF: Brenda Fisher, 2023 induction citation",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_9e278becde88458eafc7d26c56831e5d.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1948/1951 Morecambe Bay women’s wins, two-day 47 km Nile race, BEM and 2023 induction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Ontario time is printed as 18:20; that disputed time is not promoted to an authoritative result.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CSA: Brenda Fisher BEM — 2023 induction announcement",
+          "url": "https://www.channelswimmingassociation.com/news/195/brenda-fisher-bem-induction-imshof-2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Scartho background, 1951 and 1954 Channel victories, 1956 Nile and Ontario swims, teaching and 2018 BEM.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Ontario duration of 18:50 conflicts with the IMSHOF citation and museum caption.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "brenda-fisher-event-2-nile-race-two-day-competition"
+    },
+    {
+      "title": "Lake Ontario crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1956 · exact day not confirmed"
+        },
+        {
+          "text": "Niagara to Toronto, Lake Ontario"
+        },
+        {
+          "text": "Completed the Niagara-to-Toronto crossing in September; elapsed time remains disputed."
+        },
+        {
+          "text": "51 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "All three named career sources support completion, but IMSHOF prints 18:20, the CSA 18:50, and Dover Museum 18:51. No time is selected. The CSA dates it to September 1956 without an exact day."
+        },
+        {
+          "text": "CSA: Brenda Fisher BEM — 2023 induction announcement",
+          "url": "https://www.channelswimmingassociation.com/news/195/brenda-fisher-bem-induction-imshof-2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Scartho background, 1951 and 1954 Channel victories, 1956 Nile and Ontario swims, teaching and 2018 BEM.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Ontario duration of 18:50 conflicts with the IMSHOF citation and museum caption.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Brenda Fisher, 2023 induction citation",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_9e278becde88458eafc7d26c56831e5d.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1948/1951 Morecambe Bay women’s wins, two-day 47 km Nile race, BEM and 2023 induction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Ontario time is printed as 18:20; that disputed time is not promoted to an authoritative result.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Fisher with her trainer, item d30186",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/bob-paysour-brenda-fisher-mr-mcnally-of-grimsby-her-trainer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England, Morecambe and Channel career, photograph with trainer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Caption gives 18:51 for Ontario and inconsistent 1954 Channel times; these conflicts are retained in review notes.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "brenda-fisher-event-3-lake-ontario-crossing"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Born",
+      "lines": [
+        {
+          "text": "Thursday, 9 June 1927"
+        },
+        {
+          "text": "Born into a Grimsby seafaring family; raised in Scartho."
+        }
+      ]
+    },
+    {
+      "title": "Morecambe Bay victory",
+      "lines": [
+        {
+          "text": "1948"
+        },
+        {
+          "text": "IMSHOF records a women’s win over 14.5 km."
+        }
+      ]
+    },
+    {
+      "title": "Women’s Channel record",
+      "lines": [
+        {
+          "text": "Thursday, 16 August 1951"
+        },
+        {
+          "text": "Completed France to England in 12:42."
+        }
+      ]
+    },
+    {
+      "title": "Second Channel race victory",
+      "lines": [
+        {
+          "text": "1954"
+        },
+        {
+          "text": "First woman home in the Butlin race; CSA time 14:36."
+        }
+      ]
+    },
+    {
+      "title": "International marathon season",
+      "lines": [
+        {
+          "text": "1956"
+        },
+        {
+          "text": "Completed the staged Nile race and crossed Lake Ontario."
+        }
+      ]
+    },
+    {
+      "title": "British Empire Medal",
+      "lines": [
+        {
+          "text": "2018"
+        },
+        {
+          "text": "Recognised for achievements in swimming."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame induction",
+      "lines": [
+        {
+          "text": "2023"
+        },
+        {
+          "text": "Honoured posthumously by IMSHOF."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Brenda Fisher and her trainer — Dover Museum",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/bob-paysour-brenda-fisher-mr-mcnally-of-grimsby-her-trainer"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "External historical photograph and catalogue, not swim footage or an observer report. Some caption timings conflict with the dedicated result sources."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Brenda Fisher?",
+      "value": "This profile includes 2 selected solo performances for Brenda Fisher. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Brenda Fisher’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Thursday, 16 August 1951. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Brenda Fisher’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 12 hours and 42 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Brenda Fisher, 1951",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2256/brenda-fisher"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1951 solo France-to-England crossing in 12:42.",
+          "label": "Supports"
+        },
+        {
+          "text": "The country field says Wales, conflicting with her 1954 CSA entry and museum biography; that field is not used for her displayed nationality.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Brenda Fisher, 1954",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2264/brenda-fisher"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England; 1954 solo France-to-England crossing in 14:36.",
+          "label": "Supports"
+        },
+        {
+          "text": "A museum caption contains both 14:25 and 14:36; the dedicated CSA result is retained with the discrepancy disclosed.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Brenda Fisher BEM — 2023 induction announcement",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/195/brenda-fisher-bem-induction-imshof-2023"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Scartho background, 1951 and 1954 Channel victories, 1956 Nile and Ontario swims, teaching and 2018 BEM.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Ontario duration of 18:50 conflicts with the IMSHOF citation and museum caption.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Brenda Fisher BEM, 11 August 2022",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/191/brenda-fisher-bem"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "16 August 1951 Channel date, Grimsby Mermaids, coach Mr McNally and swimming in memory of her brother.",
+          "label": "Supports"
+        },
+        {
+          "text": "Age given for 1951 is not used because it conflicts with the published birth date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Brenda Fisher, 2023 induction citation",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_9e278becde88458eafc7d26c56831e5d.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1948/1951 Morecambe Bay women’s wins, two-day 47 km Nile race, BEM and 2023 induction.",
+          "label": "Supports"
+        },
+        {
+          "text": "Ontario time is printed as 18:20; that disputed time is not promoted to an authoritative result.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Fisher with her trainer, item d30186",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/bob-paysour-brenda-fisher-mr-mcnally-of-grimsby-her-trainer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England, Morecambe and Channel career, photograph with trainer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Caption gives 18:51 for Ontario and inconsistent 1954 Channel times; these conflicts are retained in review notes.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical database: Brenda Fisher, 1951",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442852"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Year-only entry: UK [England], 12:42:00, departure 07:30:00 and arrival 20:12:00; CSA ratification reported.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its Butlins race comment conflicts with the CSA biography identifying the Daily Mail race. Clocks have no phase dates or time zone.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Daily Mail race — women’s Channel record",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 16 August 1951 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "12h 42m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Historical account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "fisher-1951"
+    },
+    {
+      "title": "Butlin Channel race — first woman home",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1954 · exact day not recorded here"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "14h 36m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "fisher-1954"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Morecambe Bay race",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1948 · exact day not confirmed"
+        },
+        {
+          "text": "Morecambe Bay, England"
+        },
+        {
+          "text": "Won the women’s race."
+        },
+        {
+          "text": "14.5 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "First woman",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "brenda-fisher-event-1-morecambe-bay-race"
+    },
+    {
+      "title": "Nile race — two-day competition",
+      "lines": [
+        {
+          "text": "Open-water swimming · Staged event"
+        },
+        {
+          "text": "1956 · exact day not confirmed"
+        },
+        {
+          "text": "River Nile, Egypt"
+        },
+        {
+          "text": "Won the women’s competition; the event consisted of two days."
+        },
+        {
+          "text": "47 km across a two-day race",
+          "label": "Published distance"
+        },
+        {
+          "text": "First woman",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "brenda-fisher-event-2-nile-race-two-day-competition"
+    },
+    {
+      "title": "Lake Ontario crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1956 · exact day not confirmed"
+        },
+        {
+          "text": "Niagara to Toronto, Lake Ontario"
+        },
+        {
+          "text": "Completed the Niagara-to-Toronto crossing in September; elapsed time remains disputed."
+        },
+        {
+          "text": "51 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Sources disagree · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "brenda-fisher-event-3-lake-ontario-crossing"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-ec175b665be2c3bb59aa"
+}

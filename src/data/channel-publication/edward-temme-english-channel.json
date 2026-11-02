@@ -1,0 +1,690 @@
+{
+  "slug": "edward-temme-english-channel",
+  "name": "Edward Harry Temme",
+  "country": "England",
+  "aliases": [
+    "Ted Temme",
+    "Edward H Temme"
+  ],
+  "highlight": "First swimmer successful in both directions · 1927 and 1934",
+  "biography": [
+    "Edward Harry Temme, usually known as Ted, combined Channel swimming with international water polo. Born in Plaistow in 1904, he swam for Plaistow United and worked for the Cornhill Insurance Group. His sporting life included captaining swimming and water-polo teams, representing Great Britain at the 1928 and 1936 Olympics and later managing public baths.",
+    "Temme first crossed the English Channel from France to England in August 1927. The Channel Swimming Association records 14 hours and 29 minutes. A contemporary TIME report describes his trudgeon stroke and identifies Thomas William Burgess as his coach. The Dover sources associate the crossing with the tug Alsace, although accounts differ on the exact English landing locality.",
+    "Temme completed the reverse direction in August 1934. CSA records 15 hours and 34 minutes; a contemporary Daily News report gives 15 hours and 54 minutes and dates completion to 18 August. The two successes, seven years apart, made him the first swimmer to complete the Channel in both directions; they were not a continuous return crossing. His second swim used Lady Brassey, with H. W. Pearson as pilot and Storey as trainer.",
+    "Temme remained active around the Channel after his own record swims. He coached Sam Rockett and supervised the first Daily Mail cross-Channel race in 1950. His career therefore extended from individual swimming to competition, coaching and event organisation."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Also known as",
+      "value": "Ted Temme; Edward H Temme"
+    },
+    {
+      "label": "Born",
+      "value": "16 September 1904 · Plaistow, England"
+    },
+    {
+      "label": "Died",
+      "value": "20 June 1978 · Padova, Italy"
+    },
+    {
+      "label": "Early employer",
+      "value": "Cornhill Insurance Group"
+    },
+    {
+      "label": "Club",
+      "value": "Plaistow United Swimming Club"
+    },
+    {
+      "label": "Olympic representation",
+      "value": "Great Britain · water polo · 1928 and 1936"
+    },
+    {
+      "label": "Channel distinction",
+      "value": "First person successful in both directions, in separate years"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "France to England",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Trained by Thomas William Burgess; escort Alsace is reported by Dover Museum."
+        },
+        {
+          "text": "Friday, 5 August 1927 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "14h 29m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "5 August is the recorded swim date; no independently verified phase clocks. Dover Museum names Abbots Cliff as the landing, while TIME names Lydden Spout, so no single exact finish locality is assigned.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France to England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez",
+          "label": "Departure"
+        },
+        {
+          "text": "Trudgeon, according to the contemporary TIME report",
+          "label": "Stroke"
+        },
+        {
+          "text": "Alsace",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record /swim/2239 identifies Edward H Temme, England, successful solo France–England, 1927, 14:29. Dover Museum gives 5 August. Olympedia links the Channel swimmer to the full name Edward Harry “Ted” Temme and Olympic career. Contemporary TIME corroborates 14:29, Cap Gris-Nez and coaching by Burgess. The public record was inspected, not the original observer log."
+        },
+        {
+          "text": "CSA: Edward H Temme, 1927",
+          "url": "https://www.channelswimmingassociation.com/swim/2239/edward-h-temme"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful record: England, solo France–England, 1927, 14:29.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only. The contemporary observer report and original ratification date were not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Between Wars",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named historical sections for Toth, Michel, Helmi and Temme, including selected dates, routes, coaches and support vessels.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective collection research. Several timings, attempt counts and landing descriptions differ from other sources; disagreements are retained or the uncertain detail omitted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Olympedia: Ted Temme",
+          "url": "https://www.olympedia.org/athletes/53954"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Full name, birth/death facts, swimming and water-polo career, Olympic appearances and later baths-management work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Scholarly retrospective biography. Its speculative explanation of missing the 1932 Olympics is not adopted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "TIME, 15 August 1927: Frog v. Eagle",
+          "url": "https://content.time.com/time/subscriber/article/0,33009,730927,00.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account of the first swim: insurance employment, Cap Gris-Nez departure, trudgeon stroke, 14:29 and Burgess’s coaching.",
+          "label": "Supports"
+        },
+        {
+          "text": "It names Lydden Spout for the landing, whereas Dover Museum names Abbots Cliff. No single landing point is normalised; comparisons with Ederle’s time are not adopted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "edward-temme-1927"
+    },
+    {
+      "title": "England to France",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "This completed reverse crossing followed the 1927 swim by seven years. The pair establishes success in both directions, not a continuous two-way Channel swim."
+        },
+        {
+          "text": "A contemporary report places completion on 18 August and gives 15h54m; later listings include 19 August and 15h34m."
+        },
+        {
+          "text": "Saturday, 18 August 1934 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 34m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "CSA-recorded duration; contemporary report gives 15h54m"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Saturday, 18 August 1934 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Record date 18 August is retained. The Daily News dispatch dated Monday 20 August explicitly describes the crossing as accomplished on Saturday, supporting finishDate 18 August without deriving a phase from elapsed time. Dover.UK’s 19 August remains an unresolved alternative; no overnight start/finish reconciliation is invented. The newspaper reports 15h54m, whereas CSA and the later listings publish 15h34m. Departure day and clocks remain unknown.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "South Foreland, Dover",
+          "label": "Departure"
+        },
+        {
+          "text": "Cap Blanc-Nez",
+          "label": "Arrival"
+        },
+        {
+          "text": "H. W. Pearson",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Lady Brassey",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2464 publishes England–France, 1934, 15:34. Dover Museum and the CS&PF historical table give 18 August; Dover.UK gives 19 August. The original Daily News, St John’s, 21 August 1934, page 6, reports in a London dispatch dated 20 August that Temme accomplished the reverse crossing on Saturday, 18 August, in 15h54m. The explicit completion wording supports the displayed finish date, but neither the alternative date nor the duration discrepancy is reconciled. No original observer report or ratification manuscript was inspected."
+        },
+        {
+          "text": "CSA: Edward H Temme, 1934",
+          "url": "https://www.channelswimmingassociation.com/swim/2464/edward-h-temme"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful record: England, solo England–France, 1934, 15:34.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only; day-level discrepancy arises between historical sources.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Between Wars",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named historical sections for Toth, Michel, Helmi and Temme, including selected dates, routes, coaches and support vessels.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective collection research. Several timings, attempt counts and landing descriptions differ from other sources; disagreements are retained or the uncertain detail omitted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: historical solo-swim statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel crossing-records table: Michel 9 September 1926, France–England 11:05; Temme 18 August 1934, England–France 15:34.",
+          "label": "Supports"
+        },
+        {
+          "text": "The page attributes its statistics to Julian Critchlow’s database. It is retrospective historical recognition, not a newly inspected CS&PF ratification decision. Zero-padded historical times do not establish second precision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.UK: Edward H Temme, 1934 individual swim",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1934-08-19/edward-h-temme"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named England–France 15:34 completion, pilot H W Pearson, escort Lady Brassey, South Foreland–Cap Blanc Nez, trainer Storey.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 19 August date differs from the 18 August date in Dover Museum and CS&PF historical statistics. Neither date is explicitly a phase date.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Dover: Edward H Temme biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/temme-edward-h"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Both successful directions, four intervening failed attempts, Dover Gold Cup, water polo and 1950 race supervision.",
+          "label": "Supports"
+        },
+        {
+          "text": "Both directions were completed in separate years; this is not evidence of a continuous double crossing.",
+          "label": "Limitations"
+        },
+        {
+          "text": "The Daily News, St John’s, 21 August 1934, page 6 — Two Swimmers Cross Channel",
+          "url": "https://dai.mun.ca/pdfs/dailynews/DailyNews19340821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "London dispatch dated 20 August says Temme accomplished the reverse crossing on Saturday, from South Foreland to Blanc Nez, in 15h54m.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original Memorial University Digital Archives scan visually inspected. Saturday is 18 August in the dated dispatch. Conflicts with CSA’s 15h34m and a retrospective 19 August listing; it is not a ratification decision. The estimated 38-mile track is not adopted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "edward-temme-1934"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Long-distance competition",
+      "lines": [
+        {
+          "text": "1925"
+        },
+        {
+          "text": "Placed third in the ASA long-distance championship on the Thames, according to Olympedia."
+        }
+      ]
+    },
+    {
+      "title": "First Channel crossing",
+      "lines": [
+        {
+          "text": "5 August 1927"
+        },
+        {
+          "text": "France to England in 14h29m."
+        }
+      ]
+    },
+    {
+      "title": "Olympic water polo",
+      "lines": [
+        {
+          "text": "1928"
+        },
+        {
+          "text": "Represented Great Britain in Amsterdam."
+        }
+      ]
+    },
+    {
+      "title": "Reverse Channel crossing",
+      "lines": [
+        {
+          "text": "August 1934"
+        },
+        {
+          "text": "CSA records 15h34m; a contemporary newspaper gives 15h54m and completion on 18 August. A later listing gives 19 August."
+        }
+      ]
+    },
+    {
+      "title": "Second Olympics",
+      "lines": [
+        {
+          "text": "1936"
+        },
+        {
+          "text": "Returned to the Olympic water-polo competition in Berlin."
+        }
+      ]
+    },
+    {
+      "title": "Coaching and organisation",
+      "lines": [
+        {
+          "text": "1950"
+        },
+        {
+          "text": "Coached Sam Rockett and supervised the first Daily Mail cross-Channel race."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Edward Harry Temme?",
+      "value": "This profile includes 2 selected solo performances for Edward Harry Temme. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Edward Harry Temme’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Friday, 5 August 1927. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Edward Harry Temme’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 14 hours and 29 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Edward H Temme, 1927",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2239/edward-h-temme"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful record: England, solo France–England, 1927, 14:29.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only. The contemporary observer report and original ratification date were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Edward H Temme, 1934",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2464/edward-h-temme"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful record: England, solo England–France, 1934, 15:34.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only; day-level discrepancy arises between historical sources.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Olympedia: Ted Temme",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.olympedia.org/athletes/53954"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Full name, birth/death facts, swimming and water-polo career, Olympic appearances and later baths-management work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Scholarly retrospective biography. Its speculative explanation of missing the 1932 Olympics is not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover: Edward H Temme biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/temme-edward-h"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Both successful directions, four intervening failed attempts, Dover Gold Cup, water polo and 1950 race supervision.",
+          "label": "Supports"
+        },
+        {
+          "text": "Both directions were completed in separate years; this is not evidence of a continuous double crossing.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Between Wars",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named historical sections for Toth, Michel, Helmi and Temme, including selected dates, routes, coaches and support vessels.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective collection research. Several timings, attempt counts and landing descriptions differ from other sources; disagreements are retained or the uncertain detail omitted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "TIME, 15 August 1927: Frog v. Eagle",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://content.time.com/time/subscriber/article/0,33009,730927,00.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account of the first swim: insurance employment, Cap Gris-Nez departure, trudgeon stroke, 14:29 and Burgess’s coaching.",
+          "label": "Supports"
+        },
+        {
+          "text": "It names Lydden Spout for the landing, whereas Dover Museum names Abbots Cliff. No single landing point is normalised; comparisons with Ederle’s time are not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK: Edward H Temme, 1934 individual swim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1934-08-19/edward-h-temme"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named England–France 15:34 completion, pilot H W Pearson, escort Lady Brassey, South Foreland–Cap Blanc Nez, trainer Storey.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 19 August date differs from the 18 August date in Dover Museum and CS&PF historical statistics. Neither date is explicitly a phase date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover: 1950 Daily Mail race history",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/history/channel-races/daily-mail-races/1950-daily-mail-cross-channel-race"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies organiser Ted Temme and dates his 1927 and 1934 Channel successes.",
+          "label": "Supports"
+        },
+        {
+          "text": "Used only for Temme’s career bridge and organiser role; contradictory race-result prose elsewhere on this page is not imported.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: historical solo-swim statistics",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel crossing-records table: Michel 9 September 1926, France–England 11:05; Temme 18 August 1934, England–France 15:34.",
+          "label": "Supports"
+        },
+        {
+          "text": "The page attributes its statistics to Julian Critchlow’s database. It is retrospective historical recognition, not a newly inspected CS&PF ratification decision. Zero-padded historical times do not establish second precision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "The Daily News, St John’s, 21 August 1934, page 6 — Two Swimmers Cross Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://dai.mun.ca/pdfs/dailynews/DailyNews19340821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "London dispatch dated 20 August says Temme accomplished the reverse crossing on Saturday, from South Foreland to Blanc Nez, in 15h54m.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original Memorial University Digital Archives scan visually inspected. Saturday is 18 August in the dated dispatch. Conflicts with CSA’s 15h34m and a retrospective 19 August listing; it is not a ratification decision. The estimated 38-mile track is not adopted.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "France to England",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 5 August 1927 (recorded swim date)"
+        },
+        {
+          "text": "France to England"
+        },
+        {
+          "text": "14h 29m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "edward-temme-1927"
+    },
+    {
+      "title": "England to France",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 18 August 1934 (completion)"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "A contemporary report places completion on 18 August and gives 15h54m; later listings include 19 August and 15h34m."
+        },
+        {
+          "text": "15h 34m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "edward-temme-1934"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-62495d3118460dbe88a1"
+}

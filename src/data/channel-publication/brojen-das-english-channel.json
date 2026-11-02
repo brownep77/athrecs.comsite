@@ -1,0 +1,508 @@
+{
+  "slug": "brojen-das-english-channel",
+  "name": "Brojen Das",
+  "country": "Pakistan",
+  "aliases": [],
+  "highlight": "First Asian Channel swimmer · Six successful crossings",
+  "biography": [
+    "Brojen Das was born on 9 December 1927 in Kuchiamora, in the region now known as Bangladesh. His Channel career took place while that region was East Pakistan, and his country is recorded as Pakistan. He developed his swimming in the rivers around Dhaka before taking on international marathon races.",
+    "In 1958 Das became the first Asian swimmer to cross the English Channel, finishing first among the men in that year’s Channel race. Further crossings followed, bringing his total to six by 1961. His France-to-England swim that September took 10 hours and 35 minutes and established a speed record that stood until 1964.",
+    "Das held the CSA’s King of the Channel title from 1960 to 1974. He entered the International Marathon Swimming Hall of Fame in 1965."
+  ],
+  "flags": [
+    {
+      "code": "PK",
+      "label": "Pakistan",
+      "abbr": "PAK"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "9 December 1927"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Kuchiamora, Bikrampur, Munshiganj — now Bangladesh"
+    },
+    {
+      "label": "Historical country in records",
+      "value": "Pakistan; his home region was East Pakistan during his Channel career"
+    },
+    {
+      "label": "Successful Channel crossings",
+      "value": "Six, completed between 1958 and 1961"
+    },
+    {
+      "label": "King of the Channel",
+      "value": "1960–1974"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, 1965"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First successful Channel crossing, 1958",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "14h 52m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Only the year is displayed here. Published historical accounts disagree about the exact August date, and the inspected CSA individual record supplies no day or month.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association — public record inspected",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2272 supplies Pakistan, France-to-England, 1958 and 14:52. The exact date remains unresolved. This is a check of the public CSA entry, not of an original observer’s report."
+        },
+        {
+          "text": "Channel Swimming Association: Brojen Das, 1958",
+          "url": "https://www.channelswimmingassociation.com/swim/2272/brojen-das"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Channel Swimming Association: Brojen Das, King of the Channel",
+          "url": "https://www.kingofthechannel.com/brojen-das"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "brojen-das-1958"
+    },
+    {
+      "title": "France-to-England record — 21 September 1961",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Thursday, 21 September 1961 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 35m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover publishes 21 September 1961 as the swim date without identifying it explicitly as departure or arrival date. It provides no start or finish clock times, so neither clock nor an inferred overnight date is added.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "CSA is identified by Dover’s record; original ratification paperwork not inspected",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The individual Dover record supplies the date, direction, Pakistan and 10:35. The Hall of Fame biography independently confirms the 1961 France-to-England speed record and duration. A direct CSA entry for this specific crossing was not inspected."
+        },
+        {
+          "text": "Dover.uk.com: Brojen Das, 21 September 1961",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1961-09-21/brojen-das"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Brojen Das biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_3039be9100ca4556960f8a6efb542008.pdf"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "brojen-das-1961-record"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Capri–Naples marathon swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1958 · exact day not confirmed"
+        },
+        {
+          "text": "Capri to Naples, Italy"
+        },
+        {
+          "text": "Completed the Capri-to-Naples race."
+        },
+        {
+          "text": "13h 18m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "IMSHOF’s own honoree biography, page 1, reports the 1958 finish in 13:18 and explicitly connects Das with his English Channel achievements. It provides neither exact race date nor placing."
+        },
+        {
+          "text": "IMSHOF — Brojen Das, honoree biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_3039be9100ca4556960f8a6efb542008.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Page 1: Channel identity and Capri–Naples completions.",
+          "label": "Supports"
+        },
+        {
+          "text": "Exact race dates and placings are not given.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "brojen-das-event-1-caprinaples-marathon-swim"
+    },
+    {
+      "title": "Capri–Naples marathon swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1959 · exact day not confirmed"
+        },
+        {
+          "text": "Capri to Naples, Italy"
+        },
+        {
+          "text": "Completed the race again in 1959."
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "IMSHOF’s page 1 explicitly lists a second Capri–Naples completion in 1959. It does not give that year’s time, exact day or placing; the 1958 duration is not reused."
+        },
+        {
+          "text": "IMSHOF — Brojen Das, honoree biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_3039be9100ca4556960f8a6efb542008.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Page 1: Channel identity and Capri–Naples completions.",
+          "label": "Supports"
+        },
+        {
+          "text": "Exact race dates and placings are not given.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "brojen-das-event-2-caprinaples-marathon-swim"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First Asian Channel swimmer",
+      "lines": [
+        {
+          "text": "1958"
+        },
+        {
+          "text": "Completed the crossing and finished first among the men in the Channel race."
+        }
+      ]
+    },
+    {
+      "title": "King of the Channel",
+      "lines": [
+        {
+          "text": "1960"
+        },
+        {
+          "text": "Became the first swimmer to reach four successful CSA Channel crossings."
+        }
+      ]
+    },
+    {
+      "title": "France-to-England speed record",
+      "lines": [
+        {
+          "text": "21 September 1961"
+        },
+        {
+          "text": "Completed the France-to-England record swim in 10 hours 35 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame induction",
+      "lines": [
+        {
+          "text": "1965"
+        },
+        {
+          "text": "Recognised as an Honor Swimmer by the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Brojen Das?",
+      "value": "This profile includes 2 selected solo performances for Brojen Das. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Brojen Das’s featured English Channel swim?",
+      "value": "The featured swim took place in 1958. Its exact day is not confirmed here. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Brojen Das’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 14 hours and 52 minutes. Published sources disagree about details of this swim; the crossing record explains the differences."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Brojen Das, 1958",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2272/brojen-das"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Brojen Das, King of the Channel",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.kingofthechannel.com/brojen-das"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Brojen Das biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_3039be9100ca4556960f8a6efb542008.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Page 1: Channel identity and Capri–Naples completions.",
+          "label": "Supports"
+        },
+        {
+          "text": "Exact race dates and placings are not given.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum Channel Swimming archive: Brojen Das",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/das-brojen"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dover.uk.com: Brojen Das, 21 September 1961",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1961-09-21/brojen-das"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First successful Channel crossing, 1958",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1958 · exact day not recorded here"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "14h 52m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "brojen-das-1958"
+    },
+    {
+      "title": "France-to-England record — 21 September 1961",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 21 September 1961 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "10h 35m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "brojen-das-1961-record"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Capri–Naples marathon swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1958 · exact day not confirmed"
+        },
+        {
+          "text": "Capri to Naples, Italy"
+        },
+        {
+          "text": "Completed the Capri-to-Naples race."
+        },
+        {
+          "text": "13h 18m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "brojen-das-event-1-caprinaples-marathon-swim"
+    },
+    {
+      "title": "Capri–Naples marathon swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "1959 · exact day not confirmed"
+        },
+        {
+          "text": "Capri to Naples, Italy"
+        },
+        {
+          "text": "Completed the race again in 1959."
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "brojen-das-event-2-caprinaples-marathon-swim"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-582ee31da25c8c4d2e81"
+}

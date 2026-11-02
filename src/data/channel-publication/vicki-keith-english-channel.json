@@ -1,0 +1,512 @@
+{
+  "slug": "vicki-keith-english-channel",
+  "name": "Vicki Keith",
+  "country": "Canada",
+  "aliases": [],
+  "highlight": "Butterfly Channel crossing · 23 hours 33 minutes",
+  "biography": [
+    "Vicki Keith is a Canadian marathon swimmer and coach known for taking butterfly into long-distance open water. Born in Winnipeg, Manitoba, on 26 February 1961, she began marathon-swimming training in 1984. She completed the first double crossing of Lake Ontario in 1987 and swam all five Great Lakes during 1988.",
+    "Her 1989 English Channel crossing formed part of a series of butterfly challenges. She left Shakespeare Beach on 10 July and reached France early the next morning, after 23 hours 33 minutes. Her published transcription of the observer log preserves the changing weather, feeding stops and sustained attention to her stroke.",
+    "After retiring from competitive marathon swimming, Keith developed opportunities for young athletes with physical disabilities. She founded the YMCA Penguins aquatics programme in Kingston in 2001 and continued coaching inclusive swimming. Her honours include the Order of Canada and induction into Canada’s Sports Hall of Fame in 2019."
+  ],
+  "flags": [
+    {
+      "code": "CA",
+      "label": "Canada",
+      "abbr": "CAN"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "26 February 1961"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Winnipeg, Manitoba, Canada"
+    },
+    {
+      "label": "Specialist stroke",
+      "value": "Butterfly"
+    },
+    {
+      "label": "Channel duration",
+      "value": "23 hours 33 minutes"
+    },
+    {
+      "label": "National honour",
+      "value": "Order of Canada, 1992"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, 2003"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel butterfly crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "23h 33m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Monday, 10 July 1989 · 03:15 · Observer-log transcription; time zone not specified",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 11 July 1989 · 02:48 · Observer-log transcription; time zone not specified",
+          "label": "Finished"
+        },
+        {
+          "text": "The athlete-published log explicitly dates the swim 10–11 July and supplies both clocks. Its time zone is unspecified; no conversion has been applied.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "French coast",
+          "label": "Arrival"
+        },
+        {
+          "text": "Butterfly",
+          "label": "Stroke"
+        },
+        {
+          "text": "Ron Solly",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Harbinger and Andante",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Ray Scott and Mike Stickler",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "The log reports 61°F water at departure and stronger winds and rough seas late in the swim.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2828 confirms the 1989 solo England-to-France crossing and 23:33 duration. Keith’s own website supplies a transcription credited to observers Ray Scott and Mike Stickler, including the clocks, escorts and pilot. The original signed observer document has not been authenticated here."
+        },
+        {
+          "text": "Channel Swimming Association: Vicki Keith, 1989",
+          "url": "https://www.channelswimmingassociation.com/swim/2828/vicki-keith"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Vicki Keith: athlete-published transcription of the 1989 Channel observer log",
+          "url": "https://vickikeith.wordpress.com/2019/05/11/official-log-of-english-channel-butterfly-swim/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "keith-1989"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Catalina Channel — butterfly",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Saturday, 23 September 1989 (event date)"
+        },
+        {
+          "text": "Completed Catalina Island → mainland using butterfly."
+        },
+        {
+          "text": "14h 53m 26s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF row 67 explicitly marks butterfly and Canada. IMSHOF’s named career biography connects the Catalina butterfly swimmer to the English Channel butterfly record."
+        },
+        {
+          "text": "CCSF: successful Catalina Channel solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named individual rows: swim date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The register date is not labelled departure or arrival; original observer paperwork was not inspected. Pre-1981 swims are retrospective entries.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Dr Vicki Keith biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_19a63c350d6742198e43b1744c8d3705.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named butterfly Channel/Catalina achievements and individual 1988 Great Lakes performances.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective hall-of-fame summary; no original Great Lakes observer log inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "vicki-keith-event-1-catalina-channel-butterfly"
+    },
+    {
+      "title": "Lake Ontario two-way",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 5 August 1987 – Friday, 7 August 1987"
+        },
+        {
+          "text": "Lake Ontario, Canada"
+        },
+        {
+          "text": "Completed Leslie Street Spit → Port Dalhousie → Queen’s Quay Terminal; first two-way crossing."
+        },
+        {
+          "text": "56h 10m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "SSO row 24 gives the 5–7 August 1987 interval, 56h10m, NSN direction and first-two-way flag. The page’s waypoint legend resolves the route abbreviations. IMSHOF provides the Channel/Catalina career identity bridge and corroborates the double’s duration. Counted as one event."
+        },
+        {
+          "text": "Solo Swims of Ontario: successful Lake Ontario swims",
+          "url": "https://www.soloswims.com/swims.htm"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual register rows: Marilyn Bell no. 1 and Vicki Keith no. 24, including route legend and two-way flag.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective register. Bell’s elapsed time conflicts with ISHOF; original observer paperwork was not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Dr Vicki Keith biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_19a63c350d6742198e43b1744c8d3705.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named butterfly Channel/Catalina achievements and individual 1988 Great Lakes performances.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective hall-of-fame summary; no original Great Lakes observer log inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "vicki-keith-event-2-lake-ontario-two-way"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Lake Ontario double",
+      "lines": [
+        {
+          "text": "1987"
+        },
+        {
+          "text": "Completed the first double crossing of Lake Ontario."
+        }
+      ]
+    },
+    {
+      "title": "Five Great Lakes",
+      "lines": [
+        {
+          "text": "1988"
+        },
+        {
+          "text": "Swam across all five Great Lakes."
+        }
+      ]
+    },
+    {
+      "title": "Butterfly across the Channel",
+      "lines": [
+        {
+          "text": "10–11 July 1989"
+        },
+        {
+          "text": "Completed England to France in 23 hours 33 minutes."
+        }
+      ]
+    },
+    {
+      "title": "YMCA Penguins founded",
+      "lines": [
+        {
+          "text": "2001"
+        },
+        {
+          "text": "Established an aquatics programme in Kingston for young swimmers with physical disabilities."
+        }
+      ]
+    },
+    {
+      "title": "National Hall of Fame",
+      "lines": [
+        {
+          "text": "2019"
+        },
+        {
+          "text": "Inducted into Canada’s Sports Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Vicki Keith?",
+      "value": "This profile includes 1 selected solo performance for Vicki Keith. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Vicki Keith’s featured English Channel swim?",
+      "value": "The featured swim started on Monday, 10 July 1989 and finished on Tuesday, 11 July 1989."
+    },
+    {
+      "label": "How long did Vicki Keith’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 23 hours and 33 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Vicki Keith, 1989",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2828/vicki-keith"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Vicki Keith: athlete-published transcription of the 1989 Channel observer log",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://vickikeith.wordpress.com/2019/05/11/official-log-of-english-channel-butterfly-swim/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Canada’s Sports Hall of Fame: Vicki Keith",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://halloffamers.sportshall.ca/?language=EN&vicki_keith="
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Vicki Keith honoree profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_19a63c350d6742198e43b1744c8d3705.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named butterfly Channel/Catalina achievements and individual 1988 Great Lakes performances.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective hall-of-fame summary; no original Great Lakes observer log inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CCSF: successful Catalina Channel solo swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named individual rows: swim date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "The register date is not labelled departure or arrival; original observer paperwork was not inspected. Pre-1981 swims are retrospective entries.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Solo Swims of Ontario: successful Lake Ontario swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.soloswims.com/swims.htm"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual register rows: Marilyn Bell no. 1 and Vicki Keith no. 24, including route legend and two-way flag.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective register. Bell’s elapsed time conflicts with ISHOF; original observer paperwork was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel butterfly crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 10 July 1989 – Tuesday, 11 July 1989"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "23h 33m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "03:15 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "02:48 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "keith-1989"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Catalina Channel — butterfly",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Saturday, 23 September 1989 (event date)"
+        },
+        {
+          "text": "Completed Catalina Island → mainland using butterfly."
+        },
+        {
+          "text": "14h 53m 26s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "vicki-keith-event-1-catalina-channel-butterfly"
+    },
+    {
+      "title": "Lake Ontario two-way",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 5 August 1987 – Friday, 7 August 1987"
+        },
+        {
+          "text": "Lake Ontario, Canada"
+        },
+        {
+          "text": "Completed Leslie Street Spit → Port Dalhousie → Queen’s Quay Terminal; first two-way crossing."
+        },
+        {
+          "text": "56h 10m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "vicki-keith-event-2-lake-ontario-two-way"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-ed2584d5e4ded66e2cd5"
+}

@@ -22,6 +22,7 @@ type TenMileSeed = {
   hasEntry?: boolean;
   priceAmount?: number;
   priceCurrency?: "EUR" | "GBP";
+  checkedAt?: string;
   notes?: string;
 };
 
@@ -124,10 +125,11 @@ const newSeriesSeeds: TenMileSeed[] = [
     surface: "Road",
     organiser: "Aghada Running Club",
     url: "https://eventmaster.ie/event/wbRvfPySRQ",
-    status: "TBC",
-    hasEntry: false,
+    priceAmount: 30,
+    priceCurrency: "EUR",
+    checkedAt: "2026-11-01",
     notes:
-      "The direct page shows approved permit 26/459 and a future sales window, but currently labels entries closed, so no live checkout is advertised.",
+      "The direct page confirms approved permit 26/459, the 7 March 2027 11:00 start and a measured 10-mile road race. Online sales opened as scheduled on 1 November 2026; the event-specific checkout now offers €30 entry.",
   },
 
   // England: official organiser and direct-registration pages for dated 2027 editions.
@@ -290,7 +292,7 @@ function entryOptionsFor(seed: TenMileSeed): EntryOptionSeed[] | undefined {
       status: seed.entryStatus ?? (status === "Closed" ? "closed" : "open"),
       ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
       ...(seed.priceCurrency ? { priceCurrency: seed.priceCurrency } : {}),
-      checkedAt: CHECKED_AT,
+      checkedAt: seed.checkedAt ?? CHECKED_AT,
       sourceUrl: seed.url,
       isVerified: true,
       isPrimary: true,
@@ -310,7 +312,7 @@ export const verifiedTenMileSeries: Series[] = newSeriesSeeds.map((seed) => ({
   surface: seed.surface,
   distances: seed.distances ?? ["10mi"],
   summary: `${seed.name} — an officially published 10-mile fixture at ${seed.area}, ${seed.city}.`,
-  description: `${seed.name} is listed by ${seed.organiser}. Its date, distance, surface and entry provenance were checked against the linked official event or registration page on ${CHECKED_AT}.`,
+  description: `${seed.name} is listed by ${seed.organiser}. Its date, distance, surface and entry provenance were checked against the linked official event or registration page on ${seed.checkedAt ?? CHECKED_AT}.`,
   organiser: seed.organiser,
   website: seed.url,
   source_url: seed.url,

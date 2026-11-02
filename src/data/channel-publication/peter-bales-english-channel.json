@@ -1,0 +1,325 @@
+{
+  "slug": "peter-bales-english-channel",
+  "name": "Peter Bales",
+  "country": "South Africa",
+  "aliases": [
+    "Peter Elwin Bales"
+  ],
+  "highlight": "1969 Channel solo · Cape open water swimming founder and pilot",
+  "biography": [
+    "Peter Bales is a South African open water swimmer, escort pilot and founding figure in the Cape Long Distance Swimming Association. The Channel federation's historical record identifies him as Peter Elwin Bales and records an England-to-France solo in 1969 in 13 hours 38 minutes, aged 29. Leonard Hutchinson piloted Envictor. The source supplies the year but no day or month, so the crossing is not assigned a more precise date.",
+    "A 2005 profile of Carina Bruwer identifies Bales as the first South African man to complete the Channel and names him among the crew for her own crossing. That continuing support role also defined his work in Cape Town. The CLDSA's history credits him and two friends with forming the association in the late 1960s to officiate and record Robben Island swims; its lifetime-member list includes him.",
+    "A February 2014 profile describes Bales's piloting career since 1969 and his partnership with Hugh Tucker. It recounts support for swimmers between Robben Island and the mainland and their work with Lynne Cox at Cape Point. Bales's involvement therefore extended beyond his own successful solo into navigation, observation and the preservation of other swimmers' achievements. The association credits him with officiating hundreds of swims, an attributed record of service rather than a count of his own crossings."
+  ],
+  "flags": [
+    {
+      "code": "ZA",
+      "label": "South Africa",
+      "abbr": "RSA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Full name in Channel record",
+      "value": "Peter Elwin Bales"
+    },
+    {
+      "label": "Channel solo",
+      "value": "1969 · England → France · 13:38:00"
+    },
+    {
+      "label": "Recorded age",
+      "value": "29 at the 1969 Channel crossing"
+    },
+    {
+      "label": "Historical distinction",
+      "value": "Identified by the 2005 Solo Swims profile as the first South African man to cross"
+    },
+    {
+      "label": "Association role",
+      "value": "Co-founder of the Cape Long Distance Swimming Association in the late 1960s"
+    },
+    {
+      "label": "Piloting",
+      "value": "WOWSA's 2014 profile dates his escort work to 1969"
+    },
+    {
+      "label": "Recognition",
+      "value": "Listed as a CLDSA lifetime member"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "1969 England-to-France solo",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "13h 38m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Record 443006 supplies year 1969 only and reports departure 03:37:00 and arrival 17:15:00. No calendar dates or clock standard are supplied, so clocks remain unstructured. The observer field is printed 'Maritn Parr'; a corrected identity is not inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Leonard Hutchinson",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Envictor",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association — reported by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical individual record 443006, Name through Observer, matches Peter Elwin Bales, South Africa, age 29, year 1969, one-way E-F and 13:38:00, explicitly attributed to CSA. The 2005 Solo Swims profile's Bales caption independently describes the 1969 E-F 13:38 performance. Direct CSA decision and original observer log were not inspected; no day/month has been invented."
+        },
+        {
+          "text": "CS&PF historical record: Peter Elwin Bales, 1969",
+          "url": "https://cspf.co.uk/swim/443006"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443006: full name, South Africa, age 29, year 1969, one-way E-F, 13:38:00, reported clocks and Leonard Hutchinson / Envictor.",
+          "label": "Supports"
+        },
+        {
+          "text": "No day or month supplied. Observer is printed 'Maritn Parr'; that possible typographical error is not silently normalised or adopted as a confirmed name.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Solo Swims: Carina Bruwer's 2005 Channel profile",
+          "url": "https://soloswims.com/bruwer.htm"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Crew row names Peter Bales; photo-caption paragraph identifies his 1969 13:38 crossing and first-South-African-man distinction.",
+          "label": "Supports"
+        },
+        {
+          "text": "A swimmer profile and historical account, not the original ratifier's 1969 decision.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "bales-1969"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "English Channel solo",
+      "lines": [
+        {
+          "text": "1969"
+        },
+        {
+          "text": "Completed England to France in 13:38:00; exact date is not supplied."
+        }
+      ]
+    },
+    {
+      "title": "Supporting another Channel swimmer",
+      "lines": [
+        {
+          "text": "Monday, 1 August 2005"
+        },
+        {
+          "text": "Carina Bruwer's published crossing profile names Bales among her crew."
+        }
+      ]
+    },
+    {
+      "title": "Piloting career profiled",
+      "lines": [
+        {
+          "text": "Monday, 24 February 2014"
+        },
+        {
+          "text": "WOWSA's dated feature describes his long partnership with Hugh Tucker and work supporting Cape swimmers."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Peter Bales: swimmer and pilot profile",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.openwaterswimming.com/peter-bales-73-year-young-legend-of/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Dated 2014 written profile about Bales's piloting and contribution to Cape swimming, with photographs."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Peter Bales?",
+      "value": "This profile includes 1 selected solo performance for Peter Bales. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Peter Bales’s featured English Channel swim?",
+      "value": "The featured swim took place in 1969. Its exact day is not confirmed here."
+    },
+    {
+      "label": "How long did Peter Bales’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 13 hours, 38 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical record: Peter Elwin Bales, 1969",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443006"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443006: full name, South Africa, age 29, year 1969, one-way E-F, 13:38:00, reported clocks and Leonard Hutchinson / Envictor.",
+          "label": "Supports"
+        },
+        {
+          "text": "No day or month supplied. Observer is printed 'Maritn Parr'; that possible typographical error is not silently normalised or adopted as a confirmed name.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Cape Long Distance Swimming Association: history and lifetime members",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cldsa.co.za/about-us/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "History section credits Bales with co-founding the association in the late 1960s and officiating hundreds of swims; lifetime-member list names him.",
+          "label": "Supports"
+        },
+        {
+          "text": "Formation is given only as late 1960s, not an exact year. No current committee position is inferred.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA: Peter Bales profile, 24 February 2014",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/peter-bales-73-year-young-legend-of/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named profile covering his piloting since 1969, work with Hugh Tucker and support of Robben Island and Cape Point swimmers.",
+          "label": "Supports"
+        },
+        {
+          "text": "Roles, age and approximate escort count are dated to the 2014 article, not asserted as current.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Solo Swims: Carina Bruwer's 2005 Channel profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://soloswims.com/bruwer.htm"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Crew row names Peter Bales; photo-caption paragraph identifies his 1969 13:38 crossing and first-South-African-man distinction.",
+          "label": "Supports"
+        },
+        {
+          "text": "A swimmer profile and historical account, not the original ratifier's 1969 decision.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "1969 England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1969 · exact day not recorded here"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "13h 38m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "bales-1969"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-efbad206bb0fd339808f"
+}

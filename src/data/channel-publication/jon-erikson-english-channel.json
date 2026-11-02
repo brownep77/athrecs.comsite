@@ -1,0 +1,786 @@
+{
+  "slug": "jon-erikson-english-channel",
+  "name": "Jon Erikson",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "First three-way English Channel swim · 38 hours 27 minutes",
+  "biography": [
+    "Jon Erikson grew up around the swimming ambitions of his father, Ted, and learned through Chicago Park District’s Ridge Park programme. His own marathon career began with an extraordinary first challenge: an English Channel crossing at fourteen in August 1969. He subsequently developed an international racing career, competing in Canadian lake and river events and professional swims in Mexico and Argentina.",
+    "The Channel remained central to his ambitions. After a double crossing in 1975, he completed a faster two-way swim in 1979 during an attempt to continue across a third time. In August 1981 he returned to accomplish the full three-way journey. Starting from England on 11 August, he reached France, returned to England and crossed to France once more, finishing on 12 August after 38 hours 27 minutes. His father was aboard the support boat, and Rosemary George was an important figure in his preparation and support.",
+    "Erikson later described a training approach that combined endurance with demanding, faster interval work. The triple crossing fulfilled his principal sporting ambition, and he retired from marathon swimming after it. His career connected a family tradition with a new Channel milestone: the first completed three-way swim. He entered the International Marathon Swimming Hall of Fame in 1981 and the International Swimming Hall of Fame in 2014, the year he died."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Swimming beginnings",
+      "value": "Ridge Park programme, Chicago Park District"
+    },
+    {
+      "label": "Father and mentor",
+      "value": "Ted Erikson, also a Channel swimmer"
+    },
+    {
+      "label": "Coach and supporter",
+      "value": "Rosemary George"
+    },
+    {
+      "label": "First Channel swim",
+      "value": "12 August 1969, aged 14"
+    },
+    {
+      "label": "Three-way achievement",
+      "value": "First completed Channel triple, 11–12 August 1981"
+    },
+    {
+      "label": "Triple elapsed time",
+      "value": "38 hours 27 minutes"
+    },
+    {
+      "label": "Hall of Fame honours",
+      "value": "IMSHOF, 1981; ISHOF, 2014"
+    },
+    {
+      "label": "Died",
+      "value": "2014"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Completed double during a three-way attempt",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "The completed two-way performance is retained as one record. The intended third crossing was not completed; the 8:38 opening leg is a split within this attempt."
+        },
+        {
+          "text": "Sunday, 19 August 1979 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "22h 16m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "19 August is the date attached to the opening leg in Ted Erikson’s later account. The full double’s separate start and finish dates and clock times have not been established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2440 gives a 22:16 two-way result. Its contemporary annual report explicitly describes the first two legs of a three-way attempt. Ted Erikson’s published interview dates Jon’s 8:38 opening leg to 19 August 1979; that leg is not entered as a separate swim."
+        },
+        {
+          "text": "Channel Swimming Association: Jon Erikson, 1979 two-way",
+          "url": "https://www.channelswimmingassociation.com/swim/2440/jon-erikson"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1979 England–France–England performance, 22:16; United States nationality.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA 1979 annual report in the BLDSA annual report, PDF pages 50–53",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSA-Annual-Report-1979.pdf#page=53"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Jon’s 22:16 completed two-way was the first two legs of a three-way attempt; also reports Mike Read’s 17th crossing and its duration.",
+          "label": "Supports"
+        },
+        {
+          "text": "Result-table dates and calendar dates appear in different sections; no exact start or finish clocks are supplied.",
+          "label": "Limitations"
+        },
+        {
+          "text": "World Open Water Swimming Association: Jon Erikson’s Thoughts 3 Decades Later, 2013 interview",
+          "url": "https://www.openwaterswimming.com/jon-eriksons-thoughts-3-decades-later/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete and father’s recollections, Rosemary George’s role, training approach and 19 August 1979 first-leg date.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective account locates the final landing near Calais; contemporary AP says Wissant. It incorrectly calls Ted the first double crosser.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "jon-erikson-1979-double"
+    },
+    {
+      "title": "First completed three-way English Channel swim",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Ted Erikson supported his son aboard the escort vessel. The three explicitly published leg durations are parts of the single continuous triple, not separate crossing records."
+        },
+        {
+          "text": "38h 27m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Tuesday, 11 August 1981 · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Wednesday, 12 August 1981 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "AP reports departure on Tuesday morning and arrival shortly before midnight Wednesday; no exact clock minutes or time-zone designation is supplied. Calendar dates are corroborated by Guinness. The elapsed duration is not used to calculate either clock.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 3-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Wissant, France, in the contemporary AP account",
+          "label": "Arrival"
+        },
+        {
+          "text": "Accord",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Tom Watch (contemporary AP); Rosemary George (Jon Erikson’s later account)",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 3-way swim."
+        },
+        {
+          "text": "10h 10m",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "13h 14m",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "15h 3m",
+          "label": "Leg 3 · England → France"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2430 confirms 38:27 for a three-way swim. Guinness gives 11–12 August. The contemporary AP report independently describes Tuesday departure and Wednesday arrival, supplies all three leg times and identifies Accord and observer Tom Watch. Jon’s later interview names Rosemary George as an observer; it differs from AP about the final landing location."
+        },
+        {
+          "text": "Channel Swimming Association: Jon Erikson, 1981 three-way",
+          "url": "https://www.channelswimmingassociation.com/swim/2430/jon-erikson"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First three-way performance, England–France–England–France, 38:27 in 1981.",
+          "label": "Supports"
+        },
+        {
+          "text": "Guinness World Records: first male triple Channel crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/first-crossing-of-the-english-channel-swimming-triple-(male);"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dates the 38:27 performance to 11–12 August 1981.",
+          "label": "Supports"
+        },
+        {
+          "text": "Associated Press: Swims Channel Three Times, Daily Reflector, 13 August 1981, page 15",
+          "url": "https://digital.lib.ecu.edu/encore/ncgre000/00000095/00094826/00094826.pdf#page=15"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary report of Tuesday departure, Wednesday completion, Wissant landing, explicit leg times, Accord and observer Tom Watch.",
+          "label": "Supports"
+        },
+        {
+          "text": "Spells Jon as John and misstates his father’s historical two-way duration; those errors are not adopted. The public original PDF was downloaded and visually inspected after the web reader returned 403.",
+          "label": "Limitations"
+        },
+        {
+          "text": "World Open Water Swimming Association: Jon Erikson’s Thoughts 3 Decades Later, 2013 interview",
+          "url": "https://www.openwaterswimming.com/jon-eriksons-thoughts-3-decades-later/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete and father’s recollections, Rosemary George’s role, training approach and 19 August 1979 first-leg date.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective account locates the final landing near Calais; contemporary AP says Wissant. It incorrectly calls Ted the first double crosser.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "jon-erikson-1981-triple"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Lake Michigan — Chicago to Michigan City",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Saturday, 21 August 1971 (event date)"
+        },
+        {
+          "text": "Chicago, Illinois → Michigan City, Indiana, USA"
+        },
+        {
+          "text": "Completed the Lake Michigan crossing."
+        },
+        {
+          "text": "25h 22m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "37 miles (historical source account)",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "ISHOF biography, paragraph following his first Channel swim, supplies date, route and duration and identifies father Ted. Published day does not specify start or finish."
+        },
+        {
+          "text": "International Swimming Hall of Fame: Jon Erikson",
+          "url": "https://ishof.org/honoree/honoree-jon-erikson/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Induction biography, not original timing sheets.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "jon-erikson-event-1-lake-michigan-chicago-to-michigan-city"
+    },
+    {
+      "title": "Chaleur Bay double crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Saturday, 13 August 1977 (event date)"
+        },
+        {
+          "text": "Chaleur Bay, Canada"
+        },
+        {
+          "text": "Completed a double crossing of Chaleur Bay."
+        },
+        {
+          "text": "16h 4m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "30 miles (historical source account)",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "ISHOF biography, 1976–1977 paragraph, explicitly identifies the double crossing and its date, distance and duration. Same honoree’s Channel career supplies the identity bridge."
+        },
+        {
+          "text": "International Swimming Hall of Fame: Jon Erikson",
+          "url": "https://ishof.org/honoree/honoree-jon-erikson/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Induction biography, not original timing sheets.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "jon-erikson-event-2-chaleur-bay-double-crossing"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First Channel crossing",
+      "lines": [
+        {
+          "text": "12 August 1969"
+        },
+        {
+          "text": "Completed his first marathon swim at fourteen."
+        }
+      ]
+    },
+    {
+      "title": "Lake Michigan crossing",
+      "lines": [
+        {
+          "text": "1971"
+        },
+        {
+          "text": "Added a Lake Michigan crossing to his growing marathon career."
+        }
+      ]
+    },
+    {
+      "title": "First Channel double",
+      "lines": [
+        {
+          "text": "1975"
+        },
+        {
+          "text": "Completed an England–France–England swim."
+        }
+      ]
+    },
+    {
+      "title": "Faster two-way swim",
+      "lines": [
+        {
+          "text": "1979"
+        },
+        {
+          "text": "Completed two legs in 22 hours 16 minutes during a three-way attempt."
+        }
+      ]
+    },
+    {
+      "title": "First completed triple",
+      "lines": [
+        {
+          "text": "11–12 August 1981"
+        },
+        {
+          "text": "Swam England–France–England–France in 38 hours 27 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Marathon Hall of Fame",
+      "lines": [
+        {
+          "text": "1981"
+        },
+        {
+          "text": "Inducted into the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame",
+      "lines": [
+        {
+          "text": "2014"
+        },
+        {
+          "text": "Recognised as an open-water swimming honoree."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Jon Erikson’s Hall of Fame induction video and speech",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://ishof.org/honoree/honoree-jon-erikson/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "The Hall of Fame profile links its induction video and Jon’s induction speech. This is career and ceremony material, not a full recording of the 1981 triple. The publisher page and its links were checked; video playback was not verified."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Jon Erikson?",
+      "value": "This profile includes 2 selected solo performances for Jon Erikson. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Jon Erikson’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 19 August 1979. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Jon Erikson’s featured Channel swim take?",
+      "value": "The featured continuous 2-way solo swim has a published elapsed time of 22 hours and 16 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Swimming Hall of Fame: Jon Erikson",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-jon-erikson/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "American nationality, Ridge Park beginnings, 1969 first swim, international career and retirement after the triple.",
+          "label": "Supports"
+        },
+        {
+          "text": "Several historical timings conflict with federation records; the selected crossings use CSA or contemporary timings. Induction biography, not original timing sheets.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Jon Erikson",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_da83630a193643c780ab7c44b84e08db.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1981 marathon Hall of Fame induction, international racing and 2014 ISHOF induction.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Jon Erikson, 1979 two-way",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2440/jon-erikson"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1979 England–France–England performance, 22:16; United States nationality.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Jon Erikson, 1981 three-way",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2430/jon-erikson"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First three-way performance, England–France–England–France, 38:27 in 1981.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Associated Press: Swims Channel Three Times, Daily Reflector, 13 August 1981, page 15",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://digital.lib.ecu.edu/encore/ncgre000/00000095/00094826/00094826.pdf#page=15"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary report of Tuesday departure, Wednesday completion, Wissant landing, explicit leg times, Accord and observer Tom Watch.",
+          "label": "Supports"
+        },
+        {
+          "text": "Spells Jon as John and misstates his father’s historical two-way duration; those errors are not adopted. The public original PDF was downloaded and visually inspected after the web reader returned 403.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: first male triple Channel crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/first-crossing-of-the-english-channel-swimming-triple-(male);"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dates the 38:27 performance to 11–12 August 1981.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "World Open Water Swimming Association: Jon Erikson’s Thoughts 3 Decades Later, 2013 interview",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/jon-eriksons-thoughts-3-decades-later/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete and father’s recollections, Rosemary George’s role, training approach and 19 August 1979 first-leg date.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective account locates the final landing near Calais; contemporary AP says Wissant. It incorrectly calls Ted the first double crosser.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA 1979 annual report in the BLDSA annual report, PDF pages 50–53",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSA-Annual-Report-1979.pdf#page=53"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Jon’s 22:16 completed two-way was the first two legs of a three-way attempt; also reports Mike Read’s 17th crossing and its duration.",
+          "label": "Supports"
+        },
+        {
+          "text": "Result-table dates and calendar dates appear in different sections; no exact start or finish clocks are supplied.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame: Ted Erikson obituary",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/passages-imshof-honoree-ted-erikson/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Ted’s education, occupation, Lake Michigan swims and 1978 honour; Jon’s death in 2014.",
+          "label": "Supports"
+        },
+        {
+          "text": "Not an original observer log; its statement about when Jon first bettered Ted’s double is inconsistent with other records.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Completed double during a three-way attempt",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 19 August 1979 (recorded swim date)"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "22h 16m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "jon-erikson-1979-double"
+    },
+    {
+      "title": "First completed three-way English Channel swim",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 11 August 1981 – Wednesday, 12 August 1981"
+        },
+        {
+          "text": "England → France → England → France"
+        },
+        {
+          "text": "38h 27m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "jon-erikson-1981-triple"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Lake Michigan — Chicago to Michigan City",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Saturday, 21 August 1971 (event date)"
+        },
+        {
+          "text": "Chicago, Illinois → Michigan City, Indiana, USA"
+        },
+        {
+          "text": "Completed the Lake Michigan crossing."
+        },
+        {
+          "text": "25h 22m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "37 miles (historical source account)",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "jon-erikson-event-1-lake-michigan-chicago-to-michigan-city"
+    },
+    {
+      "title": "Chaleur Bay double crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Saturday, 13 August 1977 (event date)"
+        },
+        {
+          "text": "Chaleur Bay, Canada"
+        },
+        {
+          "text": "Completed a double crossing of Chaleur Bay."
+        },
+        {
+          "text": "16h 4m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "30 miles (historical source account)",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "jon-erikson-event-2-chaleur-bay-double-crossing"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-ec8457b425f8047305e9"
+}

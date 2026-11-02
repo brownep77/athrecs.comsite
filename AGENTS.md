@@ -1,5 +1,7 @@
 # Athlete result evidence
 
+- Owner instruction, 30–31 October 2026: publish reviewed English Channel swimmer biographies and eligible profiles. The dedicated Channel archive includes reviewed source links and how the records were checked. Native profiles retain factual results and qualifications. Preserve claim and privacy gates, distinguish federation decisions from historical accounts and leave unresolved identities in editorial review.
+
 - Owner instruction, 23 October 2026: add federations and organisations to the
   Sources list for fixture, result and athlete-profile research, and reconcile
   earlier directory entries too. Preserve source capability evidence and original

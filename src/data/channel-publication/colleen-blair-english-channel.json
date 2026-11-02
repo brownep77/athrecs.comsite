@@ -1,0 +1,643 @@
+{
+  "slug": "colleen-blair-english-channel",
+  "name": "Colleen Blair",
+  "country": "Scotland",
+  "aliases": [
+    "Colleen Isla Blair"
+  ],
+  "highlight": "Scottish Triple Crown swimmer · Channel, Manhattan and ice swimming",
+  "biography": [
+    "Colleen Blair’s swimming career spans sea channels, long freshwater swims, competitive circumnavigations and ice swimming. The Channel Swimming and Piloting Federation’s historical database explicitly identifies her as Scottish. Her successful England-to-France swim took place on 16 August 1998, lasted 13 hours and 55 minutes and finished at Cap Blanc Nez. The entry names Michael Oram as pilot, Aegean Blue as the escort boat and Derek Fowler as observer.",
+    "Blair completed the Manhattan Island swim in 2001 and the Catalina Channel in 2014, becoming the first Scottish swimmer credited with the Triple Crown. Her programme also included the North Channel in 2008 and a pioneering North Minch crossing in 2018. These achievements sit within a much broader career across Scottish lochs and international open-water routes.",
+    "Her ice-swimming record adds another dimension. The International Ice Swimming Association lists a kilometre swim at Armagh in February 2015 and an Ice Mile at Loch Tay in February 2016, with the latter undertaken in water measured at 4.70°C. Those published rows preserve dates, distances and times separately from her Channel record.",
+    "Blair has also organised events, coached open-water swimmers and served as an observer. She received an MBE for services to swimming in 2021 and entered the International Marathon Swimming Hall of Fame in 2023."
+  ],
+  "flags": [
+    {
+      "code": "GB-SCT",
+      "label": "Scotland",
+      "abbr": "SCO"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Scotland — historical swim row says UK [Scotland]"
+    },
+    {
+      "label": "Channel date",
+      "value": "16 August 1998"
+    },
+    {
+      "label": "Channel time",
+      "value": "13:55:00"
+    },
+    {
+      "label": "Channel support",
+      "value": "Pilot Michael Oram; Aegean Blue; observer Derek Fowler"
+    },
+    {
+      "label": "Triple Crown",
+      "value": "First Scottish swimmer credited with completion, in 2014"
+    },
+    {
+      "label": "Ice Mile",
+      "value": "Loch Tay, 28 February 2016: 1.0800 mi in 0:33:00"
+    },
+    {
+      "label": "Honours",
+      "value": "MBE, 2021; IMSHOF induction, 2023"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Sunday, 16 August 1998 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 55m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The source labels 16 August 1998 only as the swim date, with departure 06:10:00 and arrival 20:05:00. It does not explicitly assign either phase to a calendar day or name the clock standard, so the clocks are retained here without structured start/finish dates or UTC conversion.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Blanc Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Derek Fowler",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association (reported in CS&PF historical record)",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual historical record 443708 was opened and inspected. It identifies Colleen Blair, Scotland, the completed one-way crossing, date, 13:55:00, clocks, crew, Cap Blanc Nez landing and CSA as ratifying organisation. This verifies the published row, not a newly inspected CSA observer report."
+        },
+        {
+          "text": "CS&PF historical database: Colleen Blair, 16 August 1998",
+          "url": "https://cspf.co.uk/swim/443708"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful row: UK [Scotland], 16 August 1998, E–F, 13:55:00, departure 06:10:00, arrival 20:05:00, CSA ratification, crew and landing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical database reports CSA ratification; original CSA observer report was not inspected. Clock standard unstated.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "blair-1998"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Manhattan Island Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 23 June 2001 (event date)"
+        },
+        {
+          "text": "Pier A, Battery, New York — counterclockwise Manhattan circuit"
+        },
+        {
+          "text": "Completed the counterclockwise solo circuit; twelfth in the published overall results."
+        },
+        {
+          "text": "8h 51m 23s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "12th overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "New York Open Water historical row 500 was inspected against column headings: Colleen Blair, 2001-06-23, 8:51:23, Pier A Battery, CCW, GBR, Place 12. WOWSA’s career account explicitly connects her 2001 Manhattan swim with her 1998 English Channel and 2014 Catalina swims."
+        },
+        {
+          "text": "New York Open Water: Manhattan solo results, row 500",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Colleen Blair; 23 June 2001; 8:51:23; Pier A, Battery; CCW; GBR; place 12.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical result hosted by the present organiser; original 2001 observer documents not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "WOWSA: Colleen Blair is Scotland’s first Triple Crown swimmer",
+          "url": "https://www.openwaterswimming.com/colleen-blair-is-scotlands-first-triple/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge: 1998 Channel, 2001 Manhattan and 2 October 2014 Catalina; first Scottish Triple Crown swimmer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective article; rounded times are superseded by specific organiser rows where available.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "colleen-blair-event-1-manhattan-island-swim"
+    },
+    {
+      "title": "Ireland Ice Swimming — 1 km",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 7 February 2015 (event date)"
+        },
+        {
+          "text": "Armagh, Northern Ireland"
+        },
+        {
+          "text": "Completed the IISA 1 km swim in 18:15.00; water temperature 3.10°C."
+        },
+        {
+          "text": "0h 18m 15s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The IISA member profile’s 1 km table, first row, names the 7 February 2015 Armagh event and 18:15.00. It belongs to Colleen Blair’s official profile with matching Scottish identity and swimming career. The stored 0:18:15 drops only zero hundredths; no placing is supplied."
+        },
+        {
+          "text": "International Ice Swimming Association: Colleen Blair",
+          "url": "https://internationaliceswimming.com/member-bio/?user=292"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Scotland, Aberfeldy; 28 February 2016 Loch Tay Ice Mile, 1.0800 mi in 0:33:00 at 4.70°C; 7 February 2015 Armagh 1 km in 18:15.00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Membership page and published performances do not establish account ownership.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "colleen-blair-event-2-ireland-ice-swimming-1-km"
+    },
+    {
+      "title": "Loch Tay Ice Mile",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 28 February 2016 (event date)"
+        },
+        {
+          "text": "Loch Tay, Kenmore, Scotland"
+        },
+        {
+          "text": "Completed an IISA-listed Ice Mile: 1.0800 mi in 0:33:00, at 4.70°C."
+        },
+        {
+          "text": "0h 33m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1.0800 mi",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "IISA member profile 292, Ice Miles row 1, explicitly records 28 February 2016, Loch Tay/Kenmore, 1.0800 mi, 0:33:00 and 4.70°C. This is the published governing-body performance entry; original observer paperwork was not accessed."
+        },
+        {
+          "text": "International Ice Swimming Association: Colleen Blair",
+          "url": "https://internationaliceswimming.com/member-bio/?user=292"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Scotland, Aberfeldy; 28 February 2016 Loch Tay Ice Mile, 1.0800 mi in 0:33:00 at 4.70°C; 7 February 2015 Armagh 1 km in 18:15.00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Membership page and published performances do not establish account ownership.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "colleen-blair-event-3-loch-tay-ice-mile"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "English Channel",
+      "lines": [
+        {
+          "text": "Sunday, 16 August 1998"
+        },
+        {
+          "text": "England to France in 13:55:00; landed at Cap Blanc Nez."
+        }
+      ]
+    },
+    {
+      "title": "Manhattan Island",
+      "lines": [
+        {
+          "text": "Saturday, 23 June 2001"
+        },
+        {
+          "text": "Completed the counterclockwise swim in 8:51:23, place 12 in the published results."
+        }
+      ]
+    },
+    {
+      "title": "North Channel",
+      "lines": [
+        {
+          "text": "2008"
+        },
+        {
+          "text": "Completed the crossing recorded in her Hall of Fame citation."
+        }
+      ]
+    },
+    {
+      "title": "Triple Crown completed",
+      "lines": [
+        {
+          "text": "Thursday, 2 October 2014"
+        },
+        {
+          "text": "The reported Catalina completion joined her Channel and Manhattan swims."
+        }
+      ]
+    },
+    {
+      "title": "Ice kilometre at Armagh",
+      "lines": [
+        {
+          "text": "Saturday, 7 February 2015"
+        },
+        {
+          "text": "IISA records 18:15.00 in water measured at 3.10°C."
+        }
+      ]
+    },
+    {
+      "title": "Loch Tay Ice Mile",
+      "lines": [
+        {
+          "text": "Sunday, 28 February 2016"
+        },
+        {
+          "text": "IISA records 1.0800 mi in 0:33:00."
+        }
+      ]
+    },
+    {
+      "title": "North Minch crossing",
+      "lines": [
+        {
+          "text": "2018"
+        },
+        {
+          "text": "IMSHOF records the pioneering crossing in 18:37."
+        }
+      ]
+    },
+    {
+      "title": "MBE",
+      "lines": [
+        {
+          "text": "2021"
+        },
+        {
+          "text": "Honoured for services to swimming."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame",
+      "lines": [
+        {
+          "text": "2023"
+        },
+        {
+          "text": "Inducted into IMSHOF as an Honor Swimmer."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Colleen Blair?",
+      "value": "This profile includes 1 selected solo performance for Colleen Blair. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Colleen Blair’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 16 August 1998. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Colleen Blair’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 13 hours, 55 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical database: Colleen Blair, 16 August 1998",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443708"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful row: UK [Scotland], 16 August 1998, E–F, 13:55:00, departure 06:10:00, arrival 20:05:00, CSA ratification, crew and landing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical database reports CSA ratification; original CSA observer report was not inspected. Clock standard unstated.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Ice Swimming Association: Colleen Blair",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://internationaliceswimming.com/member-bio/?user=292"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Scotland, Aberfeldy; 28 February 2016 Loch Tay Ice Mile, 1.0800 mi in 0:33:00 at 4.70°C; 7 February 2015 Armagh 1 km in 18:15.00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Membership page and published performances do not establish account ownership.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water: Manhattan solo results, row 500",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Colleen Blair; 23 June 2001; 8:51:23; Pier A, Battery; CCW; GBR; place 12.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical result hosted by the present organiser; original 2001 observer documents not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Colleen Blair MBE, 2023 induction citation",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_71fad18ba57342eda4f296aa18ad0997.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Scottish Triple Crown pioneer, North Channel 2008, North Minch 2018, coaching and organising, 2021 MBE, 2023 induction.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA: Colleen Blair is Scotland’s first Triple Crown swimmer",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/colleen-blair-is-scotlands-first-triple/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career identity bridge: 1998 Channel, 2001 Manhattan and 2 October 2014 Catalina; first Scottish Triple Crown swimmer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective article; rounded times are superseded by specific organiser rows where available.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 16 August 1998 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "13h 55m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "blair-1998"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Manhattan Island Swim",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 23 June 2001 (event date)"
+        },
+        {
+          "text": "Pier A, Battery, New York — counterclockwise Manhattan circuit"
+        },
+        {
+          "text": "Completed the counterclockwise solo circuit; twelfth in the published overall results."
+        },
+        {
+          "text": "8h 51m 23s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "12th overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "colleen-blair-event-1-manhattan-island-swim"
+    },
+    {
+      "title": "Ireland Ice Swimming — 1 km",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 7 February 2015 (event date)"
+        },
+        {
+          "text": "Armagh, Northern Ireland"
+        },
+        {
+          "text": "Completed the IISA 1 km swim in 18:15.00; water temperature 3.10°C."
+        },
+        {
+          "text": "0h 18m 15s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "colleen-blair-event-2-ireland-ice-swimming-1-km"
+    },
+    {
+      "title": "Loch Tay Ice Mile",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 28 February 2016 (event date)"
+        },
+        {
+          "text": "Loch Tay, Kenmore, Scotland"
+        },
+        {
+          "text": "Completed an IISA-listed Ice Mile: 1.0800 mi in 0:33:00, at 4.70°C."
+        },
+        {
+          "text": "0h 33m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "1.0800 mi",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "colleen-blair-event-3-loch-tay-ice-mile"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-bd9c0d2d2dec7908577d"
+}

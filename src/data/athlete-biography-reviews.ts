@@ -17,13 +17,51 @@ export const athleteBiographyReviews = [
   },
   {
     slug: "karen-sarahi-gonzalez-london-2025-fc604f093e5df9f2",
-    title: "Karen Sarahi Gonzalez (iluvsarahii) marathon results & biography",
+    title: "Karen Sarahi Gonzalez (iluvsarahii) marathon times & biography",
     description:
-      "Karen Sarahi Gonzalez’s running biography and results, including London 3:24:53 and New York marathon finishes in 2024 and 2025.",
-    alternateName: ["iluvsarahii", "Karen Sarahi Robles", "Karen Sarahi Gonzalez"],
-    headings: ["Karen Sarahi Gonzalez"],
+      "Karen Sarahi Gonzalez, known as iluvsarahii, ran London in 3:24:53 and New York in 3:34:00. Read about her running, from Team Maybelline to Boston and Chicago.",
+    alternateName: ["iluvsarahii", "Karen Sarahi Robles"],
+    sameAs: ["https://www.instagram.com/iluvsarahii/", "https://www.strava.com/athletes/128554991"],
+    headings: [
+      "",
+      "From freelance makeup artist to founder of LYBRE Lashes",
+      "New York and London marathon times",
+      "Boston and Chicago in 2026",
+      "Running for Team Maybelline",
+    ],
     paragraphs: [
-      "Karen Sarahi Gonzalez, known online as iluvsarahii, is a beauty creator, makeup artist and founder of LYBRE Lashes. She describes herself as a Mexican Latina and has built a community around beauty and self-expression. Running has become another sustained commitment: she completed the 2024 New York City Marathon in 3:37:47, ran London in 3:24:53 in April 2025, and returned to New York that November to finish in 3:34:00. She is listed for the 2026 New York City Marathon with Team Maybelline.",
+      "Karen Sarahi Gonzalez is a marathon runner and makeup artist known online as iluvsarahii. She also uses the name Karen Sarahi Robles. After finishing the Boston Marathon in 2026, she wrote about the surprise of becoming a distance runner as an adult. Sport had played little part in her childhood, yet Boston was already her sixth marathon.",
+      "Gonzalez traces her interest in makeup to getting ready with her mother. She went on to spend more than a decade working with clients and built a following for her beauty tutorials on Instagram and YouTube. Years of trimming and reshaping false lashes by hand gave her the idea for LYBRE Lashes. Gonzalez, who describes herself as Mexican Latina, chose the name for its connection to the Spanish word libre, meaning free.",
+      "At the New York City Marathon on 3 November 2024, Gonzalez finished in 3:37:47. The following spring she broke three and a half hours at the London Marathon, running 3:24:53 on 27 April 2025. When she returned to New York on 2 November, she reached halfway in 1:44:08 and crossed the finish in 3:34:00, taking 3 minutes 47 seconds off her time on the same course.",
+      "Gonzalez ran the Boston Marathon in 3:29:42 on 20 April 2026. In late July she began training for the Chicago Marathon, sharing the early starts and long runs with her followers. On 11 October she finished in 3:26:26. Chicago was her seventh marathon and her fourth World Marathon Major by her own count. Looking back on the race, she singled out the cheers through Pilsen as the moment she felt like a front-runner.",
+      "Gonzalez ran in New York for Team Maybelline in 2024, when the brand partnered with the National Alliance on Mental Illness to encourage conversations about mental health. In October 2026, New York Road Runners named her to Team Maybelline again for the New York City Marathon on 1 November.",
+    ],
+    mentions: [
+      { text: "New York City Marathon", url: "/races/new-york-city-marathon" },
+      { text: "London Marathon", url: "/races/london-marathon" },
+      { text: "Boston Marathon", url: "/races/boston-marathon" },
+      { text: "Chicago Marathon", url: "/races/chicago-marathon" },
+    ],
+    questions: [
+      {
+        question: "Who is the marathon runner iluvsarahii?",
+        answer:
+          "Karen Sarahi Gonzalez, also known as Karen Sarahi Robles, is the runner and beauty creator behind iluvsarahii. She founded LYBRE Lashes.",
+      },
+      {
+        question: "What was Karen Sarahi Gonzalez’s London Marathon time?",
+        answer: "She finished the 2025 London Marathon in 3 hours, 24 minutes and 53 seconds.",
+      },
+      {
+        question: "How fast has iluvsarahii run the New York City Marathon?",
+        answer:
+          "She ran 3:37:47 in 2024 and improved to 3:34:00 in 2025, an average of 8 minutes 10 seconds per mile in her second race.",
+      },
+      {
+        question: "How many marathons had Karen Sarahi Robles run by October 2026?",
+        answer:
+          "She counted Boston as her sixth marathon and Chicago as her seventh. Chicago was the fourth different World Marathon Major she had completed.",
+      },
     ],
   },
   {
@@ -103,7 +141,7 @@ export const athleteBiographyReviews = [
       "Russ Cook, the Hardest Geezer: his 352-day Africa run, Brighton and London Marathon results, Sahara Marathon, earlier challenges and rise to fame.",
     paragraphs: [
       "Russ Cook, known as the Hardest Geezer and also as Russell Cook, is a British endurance runner, adventurer and author from Worthing, West Sussex. His defining achievement is Project Africa: running from Cape Agulhas in South Africa to Ras Angela in Tunisia between 22 April 2023 and 7 April 2024. The 352-day expedition covered approximately 16,300 kilometres through 16 countries, linking the African mainland's southernmost and northernmost points. His account of that journey brought an international audience to a runner whose earlier challenges had already attracted an online following.",
-      "Cook's route into endurance sport began with a search for direction. He has described feeling dissatisfied with nights out and spontaneously running home to Worthing from Brighton. A friend then encouraged him to train for the Brighton Half Marathon. Completing it led to the Brighton Marathon and further running challenges. In his account, training offered something he had been missing: a routine, measurable progress and growing confidence in what he could achieve. His Brighton Marathon finish on 15 April 2018 is now documented at 3:42:59 chip time. He wore bib 16177 at the race, an early milestone before the expeditions that would bring him wider recognition.",
+      "Cook's route into endurance sport began with a search for direction. He has described feeling dissatisfied with nights out and spontaneously running home to Worthing from Brighton. A friend then encouraged him to train for the Brighton Half Marathon. On 25 February 2018 he ran the Brighton Half Marathon in 1:38:45 chip time, wearing bib 3683. Seven weeks later he completed the full marathon. In his account, training offered something he had been missing: a routine, measurable progress and growing confidence in what he could achieve. His Brighton Marathon finish on 15 April 2018 is now documented at 3:42:59 chip time. He wore bib 16177 at the race, an early milestone before the expeditions that would bring him wider recognition.",
       "In 2019, Cook ran from the Asian side of Istanbul to London without a support crew, carrying essentials in a backpack and sleeping in a hammock. A contemporary interview records 66 days to London, covering roughly 71 marathon distances through 11 countries. He then continued home to Worthing, bringing the full journey to 68 days and approximately 73 marathon distances. The challenge supported The Running Charity and established his interest in journeys measured in weeks rather than hours. Those marathon equivalents describe cumulative distance, not entries in 71 or 73 separate organised races.",
       "In 2020, Cook completed a marathon-distance challenge while pulling a car, in a reported nine hours and 56 minutes. The effort combined sustained running and pulling resistance, so its time belongs to that particular challenge rather than a conventional road-marathon comparison. Before Project Africa, he also documented a seven-day buried-alive endurance stunt. These unusual challenges helped establish the Hardest Geezer persona and an audience for his attempts to test physical and mental limits; the stunt is not a running result.",
       "His earlier fundraising also included a 68-mile run for West Sussex homelessness charity Turning Tides in 2020. Contemporary coverage reported that he completed the effort in 13 hours and raised more than £1,200 as part of the 2.6 Challenge.",
@@ -117,7 +155,7 @@ export const athleteBiographyReviews = [
       "After Project Africa, Cook brought his running to another large sporting audience during Euro 2024. He left Wembley on 11 June 2024 and reached Gelsenkirchen for England's opening match against Serbia, then continued running between host cities. The journey included a ferry crossing from Harwich to the Netherlands. Supported by Sports Direct and Score Draw, he directed his sponsorship towards The Running Charity. A recurrence of a back injury stopped him running the final leg to Berlin; he announced that change on 11 July. The challenge connected endurance running, football supporters and fundraising, while falling short of his original aim to run to every England match.",
       "In January 2025, Cook climbed Mount Kilimanjaro in Tanzania as part of the first Hardest Adventures group mission. Five selected participants joined the expedition free of charge. The 5,895-metre mountain introduced a different challenge from his long-distance running: altitude and the reduced oxygen available as the team climbed. Cook described struggling above 5,000 metres and credited the local guides and porters for their care. The resulting film followed the group's progress and the fact that not everyone reached the summit.",
       "On 25 February 2025, Cook completed the Sahara Marathon in 4:34:45, placing 21st overall. Held in the Saharawi refugee camps in southwest Algeria, the event combines desert running with support for the refugee community. Its published 42 km distance and desert setting distinguish this result from his road-marathon performances. The Sahara Marathon is a separate event from the multi-stage Marathon des Sables.",
-      "Cook has also tried backyard ultrarunning, where runners repeatedly start a new loop on the hour. Fellow competitor Sam Bodoano described racing alongside him at a Mackyard event on a hilly cycling circuit near London in May 2026. Cook's own video records 20 completed laps before he stopped during the 21st, struggling with stomach problems. His account shows how the repeated hourly starts, overnight running and limited recovery create a different test from a continuous road race.",
+      "Cook has also tried backyard ultrarunning, where runners repeatedly start a new loop on the hour. Fellow competitor Sam Bodoano described racing alongside him at the Mackyard backyard ultra, which started on 30 May 2026 at Redbridge Cycling Centre in Ilford. Cook's own video records 20 completed laps before he stopped during the 21st, struggling with stomach problems. His account shows how the repeated hourly starts, overnight running and limited recovery create a different test from a continuous road race.",
       "In 2025, Cook completed a run along the length of New Zealand in 73 days, travelling from Bluff to Cape Reinga. During the expedition he also attempted a faster 100 km effort. His account, reported in April 2025, recorded 100.3 km in 10 hours and 59 minutes of moving time, with 11 hours and 19 minutes elapsed including stops. This was an effort within his expedition; the moving time is not an official 100 km race result. Storms, difficult trails and injury made the wider journey a different test from his African road expedition.",
       "Cook also documented an outing with Rarámuri runner Arnulfo Quimare on the Caballo Blanco route in Mexico's Copper Canyon. The video follows an independent attempt on the route, with Cook eventually stopping before completing the full distance. It adds to his experience of ultrarunning terrain and culture, without establishing a finish in the organised Caballo Blanco race.",
       "In August 2025, Cook joined 247 Mission: Iceland, a relay from Hraunhafnartangi to Reykjavik. The seven-athlete team collectively covered 607 kilometres in a reported two days, with Cook sharing the running in relay legs. The University of Chichester recognised his achievements with an Honorary Master of Sport at its 2025 graduation ceremony. His memoir first appeared in October 2024, with the paperback Mind over Miles following in July 2025, taking his story of endurance and personal change to readers as well as viewers.",
@@ -125,7 +163,7 @@ export const athleteBiographyReviews = [
       "On 16 August 2026, Cook completed IRONMAN Leeds in 12:04:47. The swim was cancelled, so his result records the modified bike-and-run event. His published splits were 7:13:59 for the bike, 17:22 in transition and 4:33:27 for the run. The marathon split was part of the multisport event and is separate from his road-marathon personal best. On 12 September 2026, he also took first place at Great Yarmouth North Beach parkrun in 22:00, tackling its sand-and-shingle course. That is a parkrun finish time, which is not chip timed.",
       "Cook also completed the National Three Peaks Challenge, climbing Ben Nevis in Scotland, Scafell Pike in England and Yr Wyddfa, also called Snowdon, in Wales. His film, released in August 2026, records a finish in 23 hours and nine minutes, leaving 51 minutes inside the 24-hour target. Road transfers connected the three climbs. The challenge brought together mountain endurance and his community work, with a group from The Running Charity taking part. The time describes the filmed challenge, rather than a classified running-race result.",
       "His running has also helped others take on their own challenges. In 2024, he supported Marcus Skeet, known online as The Hull Boy, during the teenager's fundraising for Mind. He joined the final day of Skeet's April mile-a-day challenge and later supported his first marathon in London that September. This was a charity running project, rather than an additional timed London Marathon result for Cook.",
-      "Cook subsequently co-founded Hardest Adventures. Its origin story traces the idea to meeting his co-founder at the finish of Project Africa in Tunisia. The company combines group adventures with filmed missions. Its Colombia mission took Cook and a team into the jungle to document a trek towards Ciudad Perdida, the Lost City, on a planned 48 km route. His work with The Running Charity also includes talks, support for coaches and opportunities for young people to experience adventure. Together, his running, books and community projects show how the visibility earned on the road has developed into a wider public role. Project Africa remains the achievement that connects these strands: almost a year of sustained effort made visible to people around the world.",
+      "Cook subsequently co-founded Hardest Adventures. Its origin story traces the idea to meeting his co-founder at the finish of Project Africa in Tunisia. The company combines group adventures with filmed missions. On the Colombia mission, Cook and his team reached Ciudad Perdida, the Lost City. Their film shows the group arriving together. The expedition advertised a 48 km route, and the exact distance the group covered remains unknown. His work with The Running Charity also includes talks, support for coaches and opportunities for young people to experience adventure. Together, his running, books and community projects show how the visibility earned on the road has developed into a wider public role. Project Africa remains the achievement that connects these strands: almost a year of sustained effort made visible to people around the world.",
     ],
     headings: [
       "",

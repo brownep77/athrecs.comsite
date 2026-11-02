@@ -124,6 +124,7 @@ export function editorialPath(article: Pick<EditorialArticle, "kind" | "slug">) 
 
 export function editorialJsonLd(article: EditorialArticle, origin: string) {
   const url = `${origin}${editorialPath(article)}`;
+  const athleteSlugs = [...new Set(Object.values(article.athleteLinks ?? {}))];
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -137,6 +138,13 @@ export function editorialJsonLd(article: EditorialArticle, origin: string) {
         datePublished: article.publishedAt ?? article.date,
         dateModified: article.modifiedAt ?? article.publishedAt ?? article.date,
         inLanguage: "en-GB",
+        ...(athleteSlugs.length
+          ? {
+              mentions: athleteSlugs.map((slug) => ({
+                "@id": `${origin}/athletes/${slug}#athlete`,
+              })),
+            }
+          : {}),
         articleSection: article.kind === "news" ? "Sports news" : "Race reports",
         ...(article.author
           ? { author: { "@type": "Organization", name: article.author, url: `${origin}/about-us` } }

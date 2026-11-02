@@ -1,0 +1,1072 @@
+{
+  "slug": "michelle-macy-english-channel",
+  "name": "Michelle Macy",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "Three English Channel solos · Oceans Seven completed in 2013",
+  "biography": [
+    "Michelle Macy is an American marathon swimmer whose career grew from competitive swimming into a wide-ranging programme of channel, lake and island swims. A published profile describes her swimming through college before pursuing marathon challenges while working at Nike. She has also used the MacySwim for a Cure initiative to support breast-cancer research at the University of Minnesota.",
+    "Macy completed her first English Channel solo in 2007, recording 10 hours 2 minutes and receiving the Channel Swimming Association’s fastest American swim award that year. She returned in 2009 and 2012, with all three successful England-to-France crossings appearing in the association’s records. Beyond the Channel, the Catalina federation records her 2008 crossing in 10:12:31, while New Zealand’s recognised-swim list places her Cook Strait crossing on 3 March 2010.",
+    "Her North Channel swim in July 2013 completed Oceans Seven, making her the first American and third person to finish the challenge according to the contemporary pilot-service account. Her Hall of Fame biography also recognises pioneering work in Alaska, speed achievements around Jersey and repeated success at the Pennock Island Challenge. Inducted as an IMSHOF Honor Swimmer in 2019, Macy has combined individual endurance goals with fundraising and participation in the wider swimming community."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country",
+      "value": "United States"
+    },
+    {
+      "label": "English Channel solos",
+      "value": "Three · 2007, 2009 and 2012"
+    },
+    {
+      "label": "Fastest listed Channel solo",
+      "value": "10:02 · 2007"
+    },
+    {
+      "label": "CSA award",
+      "value": "Fastest American Swim · 2007"
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed with the North Channel in July 2013"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "IMSHOF Honor Swimmer · 2019"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo · 2007",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Saturday, 22 September 2007 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 2m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "No verified departure or arrival clock is available.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Mike Philips",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Personally inspected the CSA successful entry for Michelle Macy in 2007: United States, solo, one-way England to France, 10:02. The matching Dover archive supplies the date and crew details. IMSHOF independently identifies her three Channel solos and connects them to her broader career."
+        },
+        {
+          "text": "Channel Swimming Association: Michelle Macy, 2007",
+          "url": "https://www.channelswimmingassociation.com/swim/3229/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed one-way England-to-France solo swim in 2007, 10:02; United States.",
+          "label": "Supports"
+        },
+        {
+          "text": "The public entry supplies the year and elapsed time; the day and additional crew details come from the separately cited Dover archive.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover archive: Michelle Macy, 2007-09-22",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2007-09-22/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Exact published swim date, route, pilot and escort boat; 2007 observer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Independent historical archive; the CSA entry separately establishes successful completion and elapsed time.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Michelle Macy athlete biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4c258c17d4114b4483216ce0a6b8a821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States identity, 2019 induction, three Channel swims, Oceans Seven, other career achievements and charity work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations are rounded; the event records below retain the more precise federation values.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "michelle-macy-channel-2007"
+    },
+    {
+      "title": "English Channel solo · 2009",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Tuesday, 30 June 2009 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 37m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "No verified departure or arrival clock is available.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Personally inspected the CSA successful entry for Michelle Macy in 2009: United States, solo, one-way England to France, 11:37. The matching Dover archive supplies the date and crew details. IMSHOF independently identifies her three Channel solos and connects them to her broader career."
+        },
+        {
+          "text": "Channel Swimming Association: Michelle Macy, 2009",
+          "url": "https://www.channelswimmingassociation.com/swim/3261/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed one-way England-to-France solo swim in 2009, 11:37; United States.",
+          "label": "Supports"
+        },
+        {
+          "text": "The public entry supplies the year and elapsed time; the day and additional crew details come from the separately cited Dover archive.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover archive: Michelle Macy, 2009-06-30",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2009-06-30/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Exact published swim date, route, pilot and escort boat; 2007 observer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Independent historical archive; the CSA entry separately establishes successful completion and elapsed time.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Michelle Macy athlete biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4c258c17d4114b4483216ce0a6b8a821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States identity, 2019 induction, three Channel swims, Oceans Seven, other career achievements and charity work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations are rounded; the event records below retain the more precise federation values.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "michelle-macy-channel-2009"
+    },
+    {
+      "title": "English Channel solo · 2012",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Thursday, 26 July 2012 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 35m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover’s individual page prints 26/27 July 2012; its index uses 26 July. The earlier date is retained as recordDate, with no inferred departure/arrival clocks.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Personally inspected the CSA successful entry for Michelle Macy in 2012: United States, solo, one-way England to France, 10:35. The matching Dover archive supplies the date and crew details. IMSHOF independently identifies her three Channel solos and connects them to her broader career."
+        },
+        {
+          "text": "Channel Swimming Association: Michelle Macy, 2012",
+          "url": "https://www.channelswimmingassociation.com/swim/3368/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed one-way England-to-France solo swim in 2012, 10:35; United States.",
+          "label": "Supports"
+        },
+        {
+          "text": "The public entry supplies the year and elapsed time; the day and additional crew details come from the separately cited Dover archive.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover archive: Michelle Macy, 2012-07-26",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2012-07-26/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Exact published swim date, route, pilot and escort boat; 2007 observer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Independent historical archive; the CSA entry separately establishes successful completion and elapsed time.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Michelle Macy athlete biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4c258c17d4114b4483216ce0a6b8a821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States identity, 2019 induction, three Channel swims, Oceans Seven, other career achievements and charity work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations are rounded; the event records below retain the more precise federation values.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "michelle-macy-channel-2012"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Tuesday, 7 October 2008 (event date)"
+        },
+        {
+          "text": "Catalina Island to the California mainland"
+        },
+        {
+          "text": "Completed a solo Catalina-to-mainland crossing."
+        },
+        {
+          "text": "10h 12m 31s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF successful solo register, swimmer 164: Michelle Macy, 7 October 2008, CM, 10:12:31. The register’s nationality convention indicates USA. Her Hall of Fame career identifies the same Catalina crossing, rounding the duration to 10:13."
+        },
+        {
+          "text": "Catalina Channel Swimming Federation: successful solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected successful solo entries; swimmer number, date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "A date of swim does not identify the departure or arrival clock. The register says swimmers are from the USA except where another country is printed.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Michelle Macy athlete biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4c258c17d4114b4483216ce0a6b8a821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States identity, 2019 induction, three Channel swims, Oceans Seven, other career achievements and charity work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations are rounded; the event records below retain the more precise federation values.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "michelle-macy-event-1-catalina-channel"
+    },
+    {
+      "title": "Cook Strait",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 3 March 2010 (event date)"
+        },
+        {
+          "text": "New Zealand: North Island to South Island"
+        },
+        {
+          "text": "Completed a North Island-to-South Island solo crossing."
+        },
+        {
+          "text": "8h 2m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "NZOWSA recognised-swim row 75: Michelle Macy, United States of America, 3 March 2010, 08:02:00, North Island to South Island. The unstarred entry is a recognised historical swim; no separate NZOWSA ratification is claimed. IMSHOF corroborates the event and duration."
+        },
+        {
+          "text": "NZOWSA: recognised Cook Strait swims",
+          "url": "https://www.nzowsa.nz/cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named entries, countries, event dates, durations and direction.",
+          "label": "Supports"
+        },
+        {
+          "text": "An asterisk identifies NZOWSA ratification. The historical Macy, Miller and More entries used here are unstarred; recognition is not represented as fresh NZOWSA ratification.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Michelle Macy athlete biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4c258c17d4114b4483216ce0a6b8a821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States identity, 2019 induction, three Channel swims, Oceans Seven, other career achievements and charity work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations are rounded; the event records below retain the more precise federation values.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "michelle-macy-event-2-cook-strait"
+    },
+    {
+      "title": "North Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 15 July 2013 (event date)"
+        },
+        {
+          "text": "Northern Ireland to Scotland"
+        },
+        {
+          "text": "Completed the North Channel and her Oceans Seven campaign; reported at the time as a new crossing record."
+        },
+        {
+          "text": "9h 34m 39s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The opened Guinness record page explicitly identifies Michelle Macy (USA), 15 July 2013, Northern Ireland to Scotland, 9:34:39, and attributes verification to ILDSA. The contemporary Nelsons Boats caption corroborates her completion of Oceans Seven. The original ILDSA observer report was not inspected."
+        },
+        {
+          "text": "Guinness World Records: Michelle Macy North Channel record",
+          "url": "https://www.guinnessworldrecords.es/world-records/595030-fastest-swim-crossing-of-the-north-channel-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicitly records Michelle Macy, USA, 15 July 2013, 9:34:39, Northern Ireland to Scotland, with verification attributed to ILDSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Guinness reports ILDSA verification; the underlying ILDSA observer report was not inspected. No claim about the present record standing is needed for this historical performance.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Nelsons Boats: Michelle Macy North Channel completion",
+          "url": "https://www.nelsonsboats.co.uk/north-channel-swim-pilot-boat/attachment/150713-swimmer-michelle-macy-11c/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pilot-service archive caption dated 15 July 2013; 9:34 crossing, first American and third Oceans Seven finisher.",
+          "label": "Supports"
+        },
+        {
+          "text": "A dated contemporary photograph caption, not the observer report. Duration is printed only to minutes; no current record claim is made.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Michelle Macy athlete biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4c258c17d4114b4483216ce0a6b8a821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States identity, 2019 induction, three Channel swims, Oceans Seven, other career achievements and charity work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations are rounded; the event records below retain the more precise federation values.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "michelle-macy-event-3-north-channel"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First English Channel solo",
+      "lines": [
+        {
+          "text": "Saturday, 22 September 2007"
+        },
+        {
+          "text": "10:02; CSA fastest American swim award for 2007."
+        }
+      ]
+    },
+    {
+      "title": "Catalina completed",
+      "lines": [
+        {
+          "text": "Tuesday, 7 October 2008"
+        },
+        {
+          "text": "CCSF records 10:12:31."
+        }
+      ]
+    },
+    {
+      "title": "Second English Channel solo",
+      "lines": [
+        {
+          "text": "Tuesday, 30 June 2009"
+        },
+        {
+          "text": "The CSA records 11:37; Dover provides the day."
+        }
+      ]
+    },
+    {
+      "title": "Cook Strait completed",
+      "lines": [
+        {
+          "text": "Wednesday, 3 March 2010"
+        },
+        {
+          "text": "NZOWSA’s recognised list records 8:02:00, North Island to South Island."
+        }
+      ]
+    },
+    {
+      "title": "Third English Channel solo",
+      "lines": [
+        {
+          "text": "Thursday, 26 July 2012"
+        },
+        {
+          "text": "10:35; Dover’s detailed entry spans 26/27 July."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven completed",
+      "lines": [
+        {
+          "text": "Monday, 15 July 2013"
+        },
+        {
+          "text": "Guinness records 9:34:39 on 15 July; the contemporary pilot-service account identifies it as the completion of Oceans Seven."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame induction",
+      "lines": [
+        {
+          "text": "2019"
+        },
+        {
+          "text": "Recognised as an IMSHOF Honor Swimmer."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Michelle Macy on Channel swimming and Oceans Seven",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.pdxmonthly.com/news-and-city-life/2016/05/endurance-swimmer-michelle-macy-sets-out-to-paddle-from-ireland-to-scotland-again"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Original written interview from 2016 about her swimming background and Channel ambitions. Retrospective context rather than continuous footage or observer evidence."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Michelle Macy?",
+      "value": "This profile includes 3 selected solo performances for Michelle Macy. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Michelle Macy’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Saturday, 22 September 2007. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Michelle Macy’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 10 hours and 2 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "IMSHOF: Michelle Macy athlete biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4c258c17d4114b4483216ce0a6b8a821.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States identity, 2019 induction, three Channel swims, Oceans Seven, other career achievements and charity work.",
+          "label": "Supports"
+        },
+        {
+          "text": "Some durations are rounded; the event records below retain the more precise federation values.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA: Michelle Macy induction profile and athlete comments",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/michelle-macy-enters-international_19/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Her swimming background, work at Nike, Oceans Seven in 2013 and career bridge between the selected events.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original published profile with athlete comments; individual result registers take precedence for precise elapsed times.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Michelle Macy, 2007",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3229/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed one-way England-to-France solo swim in 2007, 10:02; United States.",
+          "label": "Supports"
+        },
+        {
+          "text": "The public entry supplies the year and elapsed time; the day and additional crew details come from the separately cited Dover archive.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Michelle Macy, 2009",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3261/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed one-way England-to-France solo swim in 2009, 11:37; United States.",
+          "label": "Supports"
+        },
+        {
+          "text": "The public entry supplies the year and elapsed time; the day and additional crew details come from the separately cited Dover archive.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Michelle Macy, 2012",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/3368/michelle-macy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Completed one-way England-to-France solo swim in 2012, 10:35; United States.",
+          "label": "Supports"
+        },
+        {
+          "text": "The public entry supplies the year and elapsed time; the day and additional crew details come from the separately cited Dover archive.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation: successful solo swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected successful solo entries; swimmer number, date, direction and elapsed time.",
+          "label": "Supports"
+        },
+        {
+          "text": "A date of swim does not identify the departure or arrival clock. The register says swimmers are from the USA except where another country is printed.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "NZOWSA: recognised Cook Strait swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nzowsa.nz/cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named entries, countries, event dates, durations and direction.",
+          "label": "Supports"
+        },
+        {
+          "text": "An asterisk identifies NZOWSA ratification. The historical Macy, Miller and More entries used here are unstarred; recognition is not represented as fresh NZOWSA ratification.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Nelsons Boats: Michelle Macy North Channel completion",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nelsonsboats.co.uk/north-channel-swim-pilot-boat/attachment/150713-swimmer-michelle-macy-11c/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pilot-service archive caption dated 15 July 2013; 9:34 crossing, first American and third Oceans Seven finisher.",
+          "label": "Supports"
+        },
+        {
+          "text": "A dated contemporary photograph caption, not the observer report. Duration is printed only to minutes; no current record claim is made.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: Michelle Macy North Channel record",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.es/world-records/595030-fastest-swim-crossing-of-the-north-channel-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicitly records Michelle Macy, USA, 15 July 2013, 9:34:39, Northern Ireland to Scotland, with verification attributed to ILDSA.",
+          "label": "Supports"
+        },
+        {
+          "text": "Guinness reports ILDSA verification; the underlying ILDSA observer report was not inspected. No claim about the present record standing is needed for this historical performance.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Portland Monthly: original Michelle Macy interview",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.pdxmonthly.com/news-and-city-life/2016/05/endurance-swimmer-michelle-macy-sets-out-to-paddle-from-ireland-to-scotland-again"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First-person account of competitive swimming, Nike, the September 2007 Channel swim and subsequent Triple Crown and Oceans Seven.",
+          "label": "Supports"
+        },
+        {
+          "text": "Written interview from 2016, not a film or observer record.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: solo swimmer directory",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career coverage: Nora Toledano Cadena seven crossings including one double, 1992–2025; Michelle Macy three, 2007–2012; Antonio Argüelles three, 1999–2021.",
+          "label": "Supports"
+        },
+        {
+          "text": "Julian Critchlow compilation; multiway legs contribute to crossing counts. This is not individual committee paperwork.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo · 2007",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 22 September 2007 (recorded swim date)"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "10h 2m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "michelle-macy-channel-2007"
+    },
+    {
+      "title": "English Channel solo · 2009",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 30 June 2009 (recorded swim date)"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "11h 37m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "michelle-macy-channel-2009"
+    },
+    {
+      "title": "English Channel solo · 2012",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 26 July 2012 (recorded swim date)"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "10h 35m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "michelle-macy-channel-2012"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Tuesday, 7 October 2008 (event date)"
+        },
+        {
+          "text": "Catalina Island to the California mainland"
+        },
+        {
+          "text": "Completed a solo Catalina-to-mainland crossing."
+        },
+        {
+          "text": "10h 12m 31s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "michelle-macy-event-1-catalina-channel"
+    },
+    {
+      "title": "Cook Strait",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 3 March 2010 (event date)"
+        },
+        {
+          "text": "New Zealand: North Island to South Island"
+        },
+        {
+          "text": "Completed a North Island-to-South Island solo crossing."
+        },
+        {
+          "text": "8h 2m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "michelle-macy-event-2-cook-strait"
+    },
+    {
+      "title": "North Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Monday, 15 July 2013 (event date)"
+        },
+        {
+          "text": "Northern Ireland to Scotland"
+        },
+        {
+          "text": "Completed the North Channel and her Oceans Seven campaign; reported at the time as a new crossing record."
+        },
+        {
+          "text": "9h 34m 39s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratification reported by source · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "michelle-macy-event-3-north-channel"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-f2eaecab350e120bb1ba"
+}

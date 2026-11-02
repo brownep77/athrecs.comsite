@@ -8,6 +8,7 @@ import {
 import type { FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Search, UserRound } from "lucide-react";
 import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard";
+import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { getAthleteDirectory } from "@/lib/athrecs/athlete-directory-api";
 import { ATHLETE_INDEXING_HEADER } from "@/lib/athrecs/athlete-search-policy";
 import { absoluteUrl, siteGraphMeta } from "@/lib/athrecs/seo";
@@ -97,6 +98,7 @@ function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
             Discover the people behind the performances. Search published profiles and explore their
             sporting records.
           </p>
+          <ChatPrompt kind="results" className="mt-3" />
         </div>
         <Link
           to="/my-athlete-profile"

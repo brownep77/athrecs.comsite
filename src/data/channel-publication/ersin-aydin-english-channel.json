@@ -1,0 +1,511 @@
+{
+  "slug": "ersin-aydin-english-channel",
+  "name": "Ersin Aydın",
+  "country": "Turkey",
+  "aliases": [
+    "Ersin Aydin"
+  ],
+  "highlight": "Two separate Channel solos, France to England in 1975 and England to France in 1977",
+  "biography": [
+    "Ersin Aydın learned to swim in irrigation canals in Adana, where he was born in 1947. He began club swimming with Adana Demirspor at twelve and joined Galatasaray in 1964. As a Turkish national swimmer he competed in distance races at home and overseas. Galatasaray records an early success at the Çanakkale marathon and ninth place in a field of 36 at the international Nile marathon, where he swam for 10 hours 55 minutes.",
+    "Aydın crossed the English Channel in each direction on separate visits. In August 1975 he swam from France to England in 16 hours 40 minutes with J. Heath piloting Opportunity. Two years later he swam from England to France in 13 hours 40 minutes, escorted by Fred Mardle aboard Joan of Arc. Between the two swims, in 1976, he published a book on swimming titled Yüzme.",
+    "His career also took him to the Black Sea, the Sea of Marmara, the Bosphorus and the Dardanelles. He coached at Galatasaray as well as swimming for the club. The International Marathon Swimming Hall of Fame inducted him as an Honor Swimmer from Türkiye in 1979, the year he retired from professional competition."
+  ],
+  "flags": [
+    {
+      "code": "TR",
+      "abbr": "TUR",
+      "label": "Turkey"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Turkey, as recorded by the Channel Swimming Association"
+    },
+    {
+      "label": "Birthplace and year",
+      "value": "Adana, 1947"
+    },
+    {
+      "label": "First swimming club",
+      "value": "Adana Demirspor"
+    },
+    {
+      "label": "Galatasaray",
+      "value": "Joined in 1964 and later coached at the club"
+    },
+    {
+      "label": "Channel directions",
+      "value": "France to England in 1975 and England to France in 1977"
+    },
+    {
+      "label": "Published work",
+      "value": "Yüzme, 1976"
+    },
+    {
+      "label": "Hall of fame",
+      "value": "International Marathon Swimming Hall of Fame, class of 1979"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "aydin-1975",
+      "title": "France-to-England Channel crossing",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Monday, 18 August 1975 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "16h 40m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France to England",
+          "label": "Direction"
+        },
+        {
+          "text": "J. Heath",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Opportunity",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "M. Morford",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical entry 443089 identifies Ersin Aydin of Turkey and gives a one-way France-to-England swim in 16:40:00 on its 18 August record date. It reports CSA ratification and names J. Heath, Opportunity and M. Morford. Galatasaray, IMSHOF and Dover corroborate the completion to minute precision."
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation · Aydın, 1975",
+          "url": "https://cspf.co.uk/swim/443089"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical entry 443089. France to England in 16:40:00, with the CSA named as ratifying organisation.",
+          "label": "Supports"
+        },
+        {
+          "text": "Galatasaray Sports Club · Ersin Aydın",
+          "url": "https://www.galatasaray.org/haber/su-sporlari/yuzme/vefat-ve-bassagligi-ersin-aydin/46677"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Club biography covering his sporting education, Nile race, two Channel crossings and book.",
+          "label": "Supports"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame · Ersin Aydin",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_8c5463886603438a927fd5de91ca2f79.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Bilingual honouree biography, 1979 class, both Channel swims, wider routes and the hall’s account of his Cyprus swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover Channel Swimming · 18 August 1975",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1975-08-18/ersin-aydin"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Corroborates the successful France-to-England solo, nationality, date, elapsed time and CSA attribution.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "id": "aydin-1977",
+      "title": "England-to-France Channel crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Wednesday, 7 September 1977 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 40m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "Fred Mardle",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Joan of Arc",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "M. Orford",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful-swim entry 2597 names Ersin Aydin of Turkey, lists a completed one-way England-to-France solo in 1977 and gives 13:40. CS&PF entry 443144 supplies the generic 7 September record date, Fred Mardle, Joan of Arc and observer M. Orford."
+        },
+        {
+          "text": "Channel Swimming Association · Ersin Aydin, 1977",
+          "url": "https://www.channelswimmingassociation.com/swim/2597/ersin-aydin"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Turkey, one-way solo from England to France, 13:40.",
+          "label": "Supports"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation · Aydın, 1977",
+          "url": "https://cspf.co.uk/swim/443144"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical entry 443144 gives the generic record date, pilot, boat and observer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Galatasaray Sports Club · Ersin Aydın",
+          "url": "https://www.galatasaray.org/haber/su-sporlari/yuzme/vefat-ve-bassagligi-ersin-aydin/46677"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Club biography covering his sporting education, Nile race, two Channel crossings and book.",
+          "label": "Supports"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame · Ersin Aydin",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_8c5463886603438a927fd5de91ca2f79.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Bilingual honouree biography, 1979 class, both Channel swims, wider routes and the hall’s account of his Cyprus swim.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Joined Galatasaray",
+      "lines": [
+        {
+          "text": "1964"
+        },
+        {
+          "text": "Transferred from Adana Demirspor to Galatasaray."
+        }
+      ]
+    },
+    {
+      "title": "France-to-England crossing",
+      "lines": [
+        {
+          "text": "1975-08"
+        },
+        {
+          "text": "Completed a one-way Channel swim in 16 hours 40 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Yüzme published",
+      "lines": [
+        {
+          "text": "1976"
+        },
+        {
+          "text": "His book on swimming appeared between his two Channel crossings."
+        }
+      ]
+    },
+    {
+      "title": "England-to-France crossing",
+      "lines": [
+        {
+          "text": "1977-09"
+        },
+        {
+          "text": "Completed the reverse direction in 13 hours 40 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Honoured by the marathon swimming hall of fame",
+      "lines": [
+        {
+          "text": "1979"
+        },
+        {
+          "text": "Recognised as an Honor Swimmer from Türkiye and retired from professional competition that year."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Ersin Aydın?",
+      "value": "The profile includes 2 selected solo performances. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was the first listed Channel swim?",
+      "value": "The recorded swim date is Monday, 18 August 1975. Departure and completion dates are unconfirmed."
+    },
+    {
+      "label": "How long did that swim take?",
+      "value": "The recorded 1-way solo time is 16h 40m 0s."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Galatasaray Sports Club · Ersin Aydın",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.galatasaray.org/haber/su-sporlari/yuzme/vefat-ve-bassagligi-ersin-aydin/46677"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Club biography covering his sporting education, Nile race, two Channel crossings and book.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame · Ersin Aydin",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_8c5463886603438a927fd5de91ca2f79.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Bilingual honouree biography, 1979 class, both Channel swims, wider routes and the hall’s account of his Cyprus swim.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Anadolu Agency · profile of Ersin Aydın",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.aa.com.tr/tr/spor/kulaclariyla-denizleri-asan-efsane-yuzucu-ersin-aydin/1873134"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Original reporting with his daughter. Gives Adana, 1947, early swimming, coaching and retirement from professional competition.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association · Ersin Aydin, 1977",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2597/ersin-aydin"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Turkey, one-way solo from England to France, 13:40.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming & Piloting Federation · Aydın, 1975",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443089"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical entry 443089. France to England in 16:40:00, with the CSA named as ratifying organisation.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming & Piloting Federation · Aydın, 1977",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443144"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical entry 443144 gives the generic record date, pilot, boat and observer.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Dover Channel Swimming · 18 August 1975",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1975-08-18/ersin-aydin"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Corroborates the successful France-to-England solo, nationality, date, elapsed time and CSA attribution.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "aydin-1975",
+      "title": "France-to-England Channel crossing",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "France to England"
+        },
+        {
+          "text": "Monday, 18 August 1975 (recorded swim date)"
+        },
+        {
+          "text": "16h 40m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    },
+    {
+      "id": "aydin-1977",
+      "title": "England-to-France Channel crossing",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "Wednesday, 7 September 1977 (recorded swim date)"
+        },
+        {
+          "text": "13h 40m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-877d715b7e08dccd478b"
+}
