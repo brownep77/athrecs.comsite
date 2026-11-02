@@ -63,6 +63,12 @@ export async function startClubConfirmation(
     }
     if (data.contact.toLowerCase() === app.submitted_email?.trim().toLowerCase())
       throw new Error("Use an independent officer contact distinct from the applicant's email.");
+    const [dispute] = await tx`select 1 from club_access_notices
+      where application_id=${app.id} and revision=${app.revision} and disputed_at is not null limit 1`;
+    if (dispute)
+      throw new Error(
+        "This request is disputed. Request a revised application before contacting another officer.",
+      );
     const [prior] = await tx<{
       status: string;
       recent: boolean;

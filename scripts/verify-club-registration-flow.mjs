@@ -427,12 +427,52 @@ try {
   await page
     .getByLabel("Training sessions", { exact: true })
     .fill("Synthetic Wednesday training at 7 pm.");
+  await page
+    .getByLabel("Public contact page", { exact: true })
+    .fill("https://club.example.test/contact");
   await page.getByRole("button", { name: "Publish club details", exact: true }).click();
   await page.getByText("Club details published.", { exact: true }).waitFor();
   await page.goto(`${origin}/clubs/${clubs[1].slug}`, { waitUntil: "networkidle" });
   await page.getByRole("heading", { name: "From the club", exact: true }).waitFor();
   await page.getByText("Synthetic Wednesday training at 7 pm.", { exact: true }).waitFor();
   await page.getByRole("link", { name: "Request club access", exact: true }).waitFor();
+  const published = await rpc("athletics/api", "getClubBySlug", clubs[1].slug);
+  assert.equal(
+    published.club.clubUpdate.biography,
+    "We are a synthetic club used in this isolated test.",
+  );
+  assert.equal(published.club.clubUpdate.contact_url, "https://club.example.test/contact");
+
+  // Exercise private athlete endpoints using the approved club representative's session.
+  const athleteApi = "lib/athrecs/athlete-account-api";
+  await sql`insert into athlete_private_profiles(user_id, verified_email, full_name, privacy_notice_version, privacy_acknowledged_at)
+    values (${stranger.user.id}, ${stranger.user.email}, 'Unrelated private athlete', 'test', now())
+    on conflict (user_id) do update set full_name=excluded.full_name`;
+  const forgedTarget = { userId: stranger.user.id };
+  const owner = await rpc(athleteApi, "getMyAthleteAccount", undefined, stranger.token);
+  assert.equal(owner.fullName, "Unrelated private athlete");
+  const account = await rpc(athleteApi, "getMyAthleteAccount", forgedTarget, officer.token);
+  assert.equal(account.verifiedEmail, officer.user.email);
+  assert(!JSON.stringify(account).includes(owner.fullName));
+  await assert.rejects(
+    () => rpc(athleteApi, "listStaffAthleteAccounts", {}, officer.token),
+    /Forbidden/,
+  );
+  await rpc(
+    athleteApi,
+    "saveMyAthleteRacingName",
+    {
+      ...forgedTarget,
+      fullName: "Synthetic representative",
+      privacyAcknowledged: true,
+    },
+    officer.token,
+  );
+  assert.equal(
+    (await rpc(athleteApi, "getMyAthleteAccount", undefined, stranger.token)).fullName,
+    owner.fullName,
+  );
+
   const after = await sql`select
     (select count(*)::int from athletes) as athletes,
     (select count(*)::int from results) as results,
