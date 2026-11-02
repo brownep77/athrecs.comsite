@@ -8,7 +8,7 @@ import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
 
 /** Retain source fractions only when they agree with the stored finish to within rounding. */
-function recordedMark(row: ProfileResult): string {
+export function recordedMark(row: Pick<ProfileResult, "details" | "finishTimeSeconds">): string {
   const mark = row.details?.reportedPerformance?.trim();
   const seconds = mark ? historicalTime(mark) : null;
   return mark &&
