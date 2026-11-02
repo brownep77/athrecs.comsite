@@ -1,4 +1,5 @@
 import type { Sql } from "../db";
+import { indexableApprovedAthleteSql } from "./athlete-search-policy.server.ts";
 import type { EditorialArticle } from "./editorial";
 import {
   editorialAthleteNames,
@@ -8,11 +9,6 @@ import {
 } from "./editorial-athletes.ts";
 
 type ReviewedLink = { name: string; athleteId: number | null; removed: boolean };
-
-const publicEligibility = `(a.profile_visibility='public' or a.profile_type='Public figure')
-  and exists(select 1 from athlete_resolved_ids public_id where public_id.athlete_id=a.id)
-  and not exists(select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
-    where l.athlete_id=a.id and l.status='active' and (s.enabled=false or s.share_results=false))`;
 
 async function reviewedLinks(sql: Sql, article: EditorialArticle): Promise<ReviewedLink[]> {
   const rows = await sql.query<{ value: Record<string, unknown> }>(
@@ -57,7 +53,7 @@ export async function readPublicEditorialAthleteLinks(
     `
     select wanted.name,a.slug from jsonb_to_recordset($1::jsonb) wanted(name text,slug text,id int)
     join athletes a on (wanted.id is not null and a.id=wanted.id) or (wanted.id is null and a.slug=wanted.slug)
-    where ${publicEligibility}`,
+    where ${indexableApprovedAthleteSql}`,
     [JSON.stringify([...targets.values()])],
   );
   return Object.fromEntries(rows.map((row) => [row.name, row.slug]));
@@ -83,7 +79,7 @@ export async function readEditorialAthleteReview(sql: Sql, article: EditorialArt
     `
     select a.id as "athleteId", coalesce(i.athlete_number::text,'') as "athleteNumber",a.display_name as name,
       a.display_name as "searchName",a.slug,coalesce(c.name,a.source_club_name,'') as club,
-      coalesce(a.country,'') as country,(${publicEligibility}) as public,'athlete:'||a.id as "searchKey"
+      coalesce(a.country,'') as country,(${indexableApprovedAthleteSql}) as public,'athlete:'||a.id as "searchKey"
     from athletes a left join athlete_resolved_ids i on i.athlete_id=a.id left join clubs c on c.id=a.club_id
     where trim(regexp_replace(athlete_directory_search_fold(a.display_name),'\\s+',' ','g'))=any($1::text[])
       or a.id=any($2::int[]) or a.slug=any($3::text[])
@@ -96,13 +92,13 @@ export async function readEditorialAthleteReview(sql: Sql, article: EditorialArt
     order by name,"athleteNumber","athleteId"`,
     [keys, reviewedIds, existingSlugs],
   );
-  const configured = new Map(Object.entries(article.athleteLinks ?? {}));
+  const configured = new Map<string, string | null>(Object.entries(article.athleteLinks ?? {}));
   for (const review of reviews) {
     configured.delete(review.name);
-    const candidate = review.removed
-      ? undefined
-      : rows.find((row) => row.athleteId === review.athleteId);
-    if (candidate?.slug) configured.set(review.name, candidate.slug);
+    if (!review.removed && review.athleteId) {
+      const candidate = rows.find((row) => row.athleteId === review.athleteId);
+      configured.set(review.name, candidate?.slug ?? null);
+    }
   }
   return {
     checkedAt: new Date().toISOString(),
@@ -144,7 +140,7 @@ export async function saveEditorialAthleteLink(
     const [candidate] = await sql.query<{ id: number }>(
       `select a.id from athletes a
       where (($1::int is not null and a.id=$1) or ($1::int is null and a.slug=$2))
-        and ${publicEligibility}`,
+        and ${indexableApprovedAthleteSql}`,
       [input.athleteId ?? null, input.athleteSlug ?? null],
     );
     if (!candidate)

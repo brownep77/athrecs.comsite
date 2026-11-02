@@ -51,6 +51,8 @@ export type EditorialSearch = {
 export type EditorialArticle = {
   slug: string;
   kind: EditorialKind;
+  // Also list a news report in Race Reports while retaining its canonical news URL.
+  listInRaceReports?: boolean;
   date: string;
   displayDate: string;
   title: string;
@@ -184,7 +186,7 @@ export function filterEditorialArticles(
   return articles
     .filter(
       (article) =>
-        article.kind === kind &&
+        (article.kind === kind || (kind === "race-reports" && article.listInRaceReports)) &&
         (!search.level || editorialLevels(article).includes(search.level)) &&
         (!search.sport || article.sports.includes(search.sport)) &&
         (search.country || search.area || search.county
@@ -197,14 +199,13 @@ export function filterEditorialArticles(
 
 export function editorialLocationOptions(
   articles: readonly EditorialArticle[],
+  kind: EditorialKind,
   search: EditorialSearch,
 ) {
-  const locations = articles
-    .filter(
-      (article) =>
-        (!search.level || editorialLevels(article).includes(search.level)) &&
-        (!search.sport || article.sports.includes(search.sport)),
-    )
+  const locations = filterEditorialArticles(articles, kind, {
+    level: search.level,
+    sport: search.sport,
+  })
     .flatMap((article) => article.locations)
     .filter(
       (location) =>

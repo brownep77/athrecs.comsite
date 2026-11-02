@@ -3,6 +3,7 @@ import type { EditorialArticle } from "../lib/athrecs/editorial";
 export const AUCKLAND_MARATHON_2026_RESULTS: EditorialArticle = {
   slug: "auckland-marathon-2026-results-gualter-dennehy",
   kind: "news",
+  listInRaceReports: true,
   date: "2026-11-02",
   displayDate: "2 November 2026",
   author: "AthRecs Editorial",

@@ -13,7 +13,8 @@ async function articleFor(slug: string) {
   const { EDITORIAL_ARTICLES } = await import("../../data/athrecs-editorial");
   const article = EDITORIAL_ARTICLES.find((item) => item.slug === slug);
   if (!article) throw new Error("Article not found.");
-  return article;
+  const { legacyEditorialLinks } = await import("./editorial-legacy-links.server");
+  return { ...article, athleteLinks: legacyEditorialLinks[slug] ?? article.athleteLinks };
 }
 async function liveDatabase(write = false) {
   const { getSql, dbSource } = await import("../db");
