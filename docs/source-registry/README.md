@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1630 unique sources as of 2 November 2026. Only 41 are enabled; the other 1589 remain
+The registry contains 1637 unique sources as of 2 November 2026. Only 41 are enabled; the other 1596 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -85,9 +85,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1630 sources create exactly one source job;
+- all 1637 sources create exactly one source job;
 - the 41 enabled and rights-approved sources are queued;
-- the other 1589 sources are retained as blocked jobs with their reason;
+- the other 1596 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -519,4 +519,35 @@ Existing result-provider registrations are retained. The new sources use
 collection nor verifies participant results. Individual source captures and
 identity-review evidence remain outside source control.
 
-The registry now contains 1630 sources: 41 enabled and 1589 disabled.
+That batch brought the registry to 1630 sources: 41 enabled and 1589 disabled.
+
+
+## Auckland and Dublin athlete research sources, 2 November 2026
+
+Added seven disabled manual research sources after inspecting their actual pages:
+Athletics Canterbury official result PDFs, the Timaru Ten organiser, Dublin
+Athletics club reports, the Paralympics Ireland athlete directory, and a Spinal
+Support NZ publication containing a first-person sporting account. Pakuranga
+Athletic Club newsletters and Auckland City Tri Club public honour-board/racing
+pages were also inspected for club and event context. Narrative and club accounts
+do not replace original result rows or establish a cross-event identity link.
+The unresolved athlete matches remain held. No athlete-specific private audit is
+included in the registry.
+
+Athletics Canterbury's two inspected PDFs identify the 24 October 2026 Timaru Ten
+and the 1 August 2026 New Zealand cross-country championships. Their upload
+directory is not the event date. Preserve the actual timing headings, tenths of a
+second where supplied, distances and classification groups.
+
+Appended successful source checks to the existing Dublin Marathon, SportSplits,
+Timing Sports and Athletics New Zealand entries without replacing earlier check
+dates or failed retrieval outcomes. The Dublin organiser's public search now
+returned selected actual marathon and wheelchair rows. Its Chip Time and Finish
+Time columns remain separate, and Finish Time is not relabelled Gun Time.
+Timing Sports already covers the inspected Wellington result destination; no
+duplicate Wellington or Sporty provider was added.
+
+All seven additions remain disabled. Existing enabled flags, permission records,
+page limits and rate limits are unchanged. The registry contains 1637 sources:
+41 enabled and 1596 disabled. Registration neither starts collection nor verifies
+all participants or permits unrelated personal-data reuse.
