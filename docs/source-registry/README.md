@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1641 unique sources as of 2 November 2026. Only 41 are enabled; the other 1600 remain
+The registry contains 1656 unique sources as of 2 November 2026. Only 41 are enabled; the other 1615 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -85,9 +85,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1641 sources create exactly one source job;
+- all 1656 sources create exactly one source job;
 - the 41 enabled and rights-approved sources are queued;
-- the other 1600 sources are retained as blocked jobs with their reason;
+- the other 1615 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -590,3 +590,38 @@ All seven additions remain disabled. Existing enabled flags, permission records,
 page limits and rate limits are unchanged. The registry contains 1641 sources:
 41 enabled and 1600 disabled. Registration neither starts collection nor verifies
 all participants or permits unrelated personal-data reuse.
+
+
+## Reviewed road and track result sources, 2 November 2026
+
+Registered fifteen disabled manual research sources after checking the canonical
+registry and wider event inventory. The first six cover British Milers Club,
+Run North West through Nifty Entries, Mesa Marathon, Sri Chinmoy UK, Washington
+Huskies and Oregon Ducks. Original organiser and timer result tables remain
+distinct from university-maintained performance lists. Oregon coverage includes
+the opened 2019 indoor and outdoor season lists; BMC coverage includes the opened
+2017, 2018, 2022 and 2024 meeting tables. The existing UK Results entry retains
+its earlier checks and adds the inspected UKtimers-credited event tables.
+
+Nine further entries cover Flash Results, Record Timing, original result reports
+hosted by Iowa State, Michigan, USC, Shaftesbury Barnet Harriers and Livingston AC,
+and the Reading Half Marathon and Run Norwich organiser archives. Archive hosts
+retain the original federation, organiser and timing-provider credits. Run Norwich
+reuses its existing historical-source identity and participant-review policy.
+Reading's shared Shopify CDN reference is restricted to the exact organiser-owned
+results PDF; it does not permit general Shopify traversal.
+
+Existing Czech federation, Ultimate Sport Service, Sparta Copenhagen, SeaWheeze,
+Sportstats and RTRT entries receive dated capability notes and actual event-level
+URLs. RTRT is the presentation platform and Sportstats the credited timer for the
+inspected SeaWheeze event. That successful check does not overwrite earlier
+unreadable destinations or establish API access. Keep gun and net times, overall,
+gender and category positions, race sections, indoor/outdoor environments and
+original timing precision separate.
+
+Concurrent Auckland and Dublin registrations and capability updates are retained.
+All fifteen additions use `enabled=0` and `follow_history_links=0`; existing worker
+controls, rights records and permission fields are unchanged. Registration does
+not enable collection, approve participant reuse or verify an individual result.
+Private athlete captures, identity decisions and database receipts remain outside
+source control. The registry now contains 1656 sources: 41 enabled and 1615 disabled.
