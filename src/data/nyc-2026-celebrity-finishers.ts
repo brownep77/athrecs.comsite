@@ -129,6 +129,8 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
       sources: [
         { label: "NYRR race-day report", url: nyrrReport },
         { label: "NYRR’s announced runners and their causes", url: "https://prod.nyrr.org/news/2026/10/13/new-york-road-runners-announces-a-listers-taking-on-2026-tcs-new-york-city-marathon" },
+        { label: "Premier League: James Milner’s retirement", url: "https://www.premierleague.com/en/news/4672466/milner-retires-after-setting-record-for-premier-league-appearances/" },
+        { label: "James Milner on his marathon debut and foundation", url: "https://www.letsrun.com/news/2026/10/james-milner-on-his-nyc-marathon-debut-and-liverpools-brutal-workouts/" },
         { label: "EFE’s finish-line interview with Martín Fiz", url: "https://efe.com/deportes/2026-11-01/martin-fiz-despedida-maraton-nueva-york/" },
       ],
     },
@@ -137,7 +139,7 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
       heading: "A first marathon at 80 and a family day for Zarna Garg",
       paragraphs: [
         "Mildred Baker was in her late seventies when she started running with NYRR Striders. She finished her first half marathon last year, and on Sunday the 80-year-old from the Bronx completed her first full marathon in 7:03:49.",
-        "Comedian Zarna Garg had spent years watching her children’s swimming meets and skating competitions. This time she asked her two older children to walk a marathon with her. The finish records tell their own family story. Zarna and her son Brij each recorded 9:21:51 and her daughter Zoya recorded 9:21:53. Zarna had her first marathon finish.",
+        "Comedian Zarna Garg had spent years watching her children’s swimming meets and skating competitions. This time she asked her two older children to walk a marathon with her. On Sunday she completed her first marathon in 9:21:51.",
         "For ABC7’s Liz Cho, one of the best moments came at mile eight in Brooklyn, where she spotted her mother and her daughter Lulu. She finished her first marathon in 4:15:07. Her colleague Mike Marza completed his second in 3:50:39. Both ran for the Alzheimer’s Association in honour of fellow anchor Bill Ritter, who was there to welcome them at the finish.",
       ],
       sources: [
@@ -163,7 +165,7 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
       heading: "Five New York medals for a team from Canterbury",
       paragraphs: [
         "A group from New Zealand set out to help Te Tahi Youth fit out its centre at Eastgate in Christchurch. All five made it home. Former All Blacks Kieran Read, Ryan Crotty and Colin Slade earned their medals alongside Crusaders team manager Aaron Webb and endurance athlete Shane Thrower. Read crossed in 5:56:47 and Crotty in 4:13:27. Slade recorded 3:27:52, Webb 3:39:10 and Thrower 3:39:40.",
-        "The reason those five entries belonged together was back in Canterbury. The Eastgate centre will give young people a place to get free health care, counselling and help finding work. The team’s fundraiser is linked below for those who cheered them on from either side of the world.",
+        "The reason those five entries belonged together was back in Canterbury. The Eastgate centre will give young people a place to get free health care, counselling and help finding work. Te Tahi Youth’s Our 42 fundraising campaign is linked below for those who cheered them on from either side of the world.",
       ],
       sources: [
         { label: "Te Tahi Youth’s Our 42 fundraiser", url: "https://givealittle.co.nz/cause/our-42" },
@@ -187,8 +189,8 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
   links: [
     { label: "Before the race — our original roster", url: "/news/new-york-marathon-2026-famous-runners-global-roster" },
     { label: "Professional race results and podium stories", url: "/news/new-york-city-marathon-2026-results" },
-    { label: "James Milner portrait by Eric The Fish", url: "https://commons.wikimedia.org/wiki/File:LFC_Parade_2019_01_James_Milner.jpg" },
-    { label: "Jennifer Connelly portrait by Karon Liu", url: "https://commons.wikimedia.org/wiki/File:Jennifer_Connelly_2010_TIFF.jpg" },
+    { label: "LFC Parade 2019 01 James Milner — Eric The Fish", url: "https://commons.wikimedia.org/wiki/File:LFC_Parade_2019_01_James_Milner.jpg" },
+    { label: "Jennifer Connelly 2010 TIFF — Karon Liu", url: "https://commons.wikimedia.org/wiki/File:Jennifer_Connelly_2010_TIFF.jpg" },
     { label: "Creative Commons Attribution 2.0 licence", url: "https://creativecommons.org/licenses/by/2.0/" },
     { label: "Tiki Barber portrait by Paul D. Honnick, U.S. Navy", url: "https://commons.wikimedia.org/wiki/File:Tiki_Barber_070204-N-6674H-105_0V0GR_crop.jpg" },
   ],
