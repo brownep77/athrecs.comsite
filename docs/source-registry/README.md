@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1630 unique sources as of 2 November 2026. Only 41 are enabled; the other 1589 remain
+The registry contains 1634 unique sources as of 2 November 2026. Only 41 are enabled; the other 1593 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -519,4 +519,44 @@ Existing result-provider registrations are retained. The new sources use
 collection nor verifies participant results. Individual source captures and
 identity-review evidence remain outside source control.
 
-The registry now contains 1630 sources: 41 enabled and 1589 disabled.
+That batch brought the registry to 1630 sources: 41 enabled and 1589 disabled.
+
+
+## Spanish national result documents and archival recovery — 2 November 2026
+
+Registered four disabled manual research references after checking the canonical
+registry, managed sources and wider repository inventory for duplicate providers.
+FECANTRI hosts an inspected, working copy of the 2024 Merida national triathlon
+result book; the Spanish Triathlon Federation remains the original publisher and
+Conersys retains its data-processing credit. Triatlon Noticias supplies an
+inspected secondary transcript of the 2021 Valladolid duathlon relay results.
+Neither source establishes complete archive coverage.
+
+The Conersys and Spanish Modern Pentathlon Federation (FEPM) additions record
+complete indexed historical result documents whose original PDF links currently
+return 404. These are archival research references, not working result feeds or
+fresh live source comparisons. FEPM's inspected 2022 national laser-run report
+retains Runvasport credit and explicitly separates combined running and
+laser-pistol shooting from standalone running.
+
+The existing RockTheSport entry now records two working 2021 Alcobendas talent
+duathlon result PDFs and their exact blob host. The existing Runvasport document
+entry retains its original Cigales entry-list reference and adds the recovered
+complete indexed team finish report, with the current download failure preserved.
+Team totals, individual elapsed marks, relay legs and distinct classification
+scopes must not be interchanged. Exact youth distances remain unresolved where
+only a result document was available.
+
+The existing ResultadosCarreras entry now identifies the inspected 2021 Primavera
+5 km option as virtual and preserves its 12–21 February participation window.
+This window does not establish an individual completion day, and a self-selected
+virtual route does not establish a certified road 5 km performance. Only the
+observed event-level results URL is recorded; athlete-specific identifiers are
+excluded.
+
+All four additions use `enabled=0` and `follow_history_links=0`. The three existing
+entries remain disabled. Registration does not authorise automated collection,
+settle data-reuse rights or verify an athlete result. Participant names, identities,
+private audits and individual result captures are excluded from this change.
+
+The registry contains 1634 sources: 41 enabled and 1593 disabled.
