@@ -59,7 +59,9 @@ export async function myClubApplications(sql: Sql, userId: string) {
       a.details->>'representativeName' as applicant,a.details->>'representativeRole' as role,
       a.status, n.disputed_at is not null as disputed
     from club_access_notices n join club_registration_applications a on a.id=n.application_id
-    join clubs c on c.id=n.club_id join club_representatives r on r.club_id=c.id and r.user_id=n.recipient_id
+    left join club_officer_confirmations cf on cf.application_id=a.id and cf.revision=n.revision
+    join clubs c on c.id=n.club_id and c.id=coalesce(a.club_id, cf.target_club_id)
+    join club_representatives r on r.club_id=c.id and r.user_id=n.recipient_id
     join club_registration_applications owner on owner.id=r.application_id
     join "user" u on u.id=r.user_id and u."emailVerified" and u.email=owner.submitted_email
     where n.recipient_id=${userId} and r.status='active' and owner.status='approved' and
@@ -310,9 +312,12 @@ export async function disputeClubNotice(
       await tx`select id from club_registration_applications where id=${id} and status='pending' and revision=${revision} for update`;
     await requireClubRepresentative(tx, userId, clubId);
     if (!app) throw new Error("This request has already been reviewed.");
-    const [notice] =
-      await tx`update club_access_notices set disputed_at=now() where application_id=${id}
-      and revision=${revision} and recipient_id=${userId} and club_id=${clubId} and disputed_at is null returning club_id`;
+    const [notice] = await tx`update club_access_notices n set disputed_at=now()
+      from club_registration_applications a left join club_officer_confirmations cf
+        on cf.application_id=a.id and cf.revision=a.revision
+      where a.id=${id} and n.application_id=a.id and n.revision=${revision} and n.recipient_id=${userId}
+        and n.club_id=${clubId} and n.club_id=coalesce(a.club_id, cf.target_club_id)
+        and n.disputed_at is null returning n.club_id`;
     if (!notice) throw new Error("This request is unavailable.");
     await audit(tx, id, userId, "representative_disputed", { revision, clubId });
     return { saved: true };
