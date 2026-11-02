@@ -62,6 +62,7 @@ import { Route as ApiAthleteInboxSyncRouteImport } from './routes/api/athlete-in
 import { Route as ApiAthletePhotosRouteImport } from './routes/api/athlete-photos'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
+import { Route as ApiClubConfirmationRouteImport } from './routes/api/club-confirmation'
 import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scanner-worker'
 import { Route as ApiCollectionStatsWorkerRouteImport } from './routes/api/collection-stats-worker'
 import { Route as ApiDiagnosticsRouteImport } from './routes/api/diagnostics'
@@ -384,6 +385,11 @@ const ApiAthleteProfilePhotoRoute = ApiAthleteProfilePhotoRouteImport.update({
 const ApiCatalogueAutomationRoute = ApiCatalogueAutomationRouteImport.update({
   id: '/api/catalogue-automation',
   path: '/api/catalogue-automation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiClubConfirmationRoute = ApiClubConfirmationRouteImport.update({
+  id: '/api/club-confirmation',
+  path: '/api/club-confirmation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiClubScannerWorkerRoute = ApiClubScannerWorkerRouteImport.update({
@@ -724,6 +730,7 @@ export interface FileRoutesByFullPath {
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-confirmation': typeof ApiClubConfirmationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
@@ -834,6 +841,7 @@ export interface FileRoutesByTo {
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-confirmation': typeof ApiClubConfirmationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
@@ -945,6 +953,7 @@ export interface FileRoutesById {
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-confirmation': typeof ApiClubConfirmationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
@@ -1057,6 +1066,7 @@ export interface FileRouteTypes {
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-confirmation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
@@ -1167,6 +1177,7 @@ export interface FileRouteTypes {
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-confirmation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
@@ -1277,6 +1288,7 @@ export interface FileRouteTypes {
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-confirmation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
@@ -1388,6 +1400,7 @@ export interface RootRouteChildren {
   ApiAthletePhotosRoute: typeof ApiAthletePhotosRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
+  ApiClubConfirmationRoute: typeof ApiClubConfirmationRoute
   ApiClubScannerWorkerRoute: typeof ApiClubScannerWorkerRoute
   ApiCollectionStatsWorkerRoute: typeof ApiCollectionStatsWorkerRoute
   ApiDiagnosticsRoute: typeof ApiDiagnosticsRoute
@@ -1817,6 +1830,13 @@ declare module '@tanstack/react-router' {
       path: '/api/catalogue-automation'
       fullPath: '/api/catalogue-automation'
       preLoaderRoute: typeof ApiCatalogueAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/club-confirmation': {
+      id: '/api/club-confirmation'
+      path: '/api/club-confirmation'
+      fullPath: '/api/club-confirmation'
+      preLoaderRoute: typeof ApiClubConfirmationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/club-scanner-worker': {
@@ -2260,6 +2280,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAthletePhotosRoute: ApiAthletePhotosRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
+  ApiClubConfirmationRoute: ApiClubConfirmationRoute,
   ApiClubScannerWorkerRoute: ApiClubScannerWorkerRoute,
   ApiCollectionStatsWorkerRoute: ApiCollectionStatsWorkerRoute,
   ApiDiagnosticsRoute: ApiDiagnosticsRoute,

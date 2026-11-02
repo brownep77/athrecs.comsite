@@ -12,6 +12,7 @@ import {
 import {
   getClubRegistrationReviewQueue,
   reviewClubRegistration,
+  confirmClubOfficer,
 } from "@/lib/clubs/registration-api";
 import {
   CLUB_STATUS_LABELS,
@@ -116,6 +117,31 @@ function ReviewApplication({
     enabled: !app.club_id,
     staleTime: 60000,
   });
+  const [sourceUrl, setSource] = useState("");
+  const [contact, setContact] = useState("");
+  const [replyNote, setReply] = useState("");
+  const [method, setMethod] = useState<"email" | "manual">("email");
+  const targetClubId = app.club_id ?? (resolvedClub ? Number(resolvedClub) : null);
+  const confirmed =
+    app.confirmation_status === "confirmed" && app.confirmation_club_id === targetClubId;
+  const confirmation = useMutation({
+    mutationFn: () =>
+      confirmClubOfficer({
+        data: {
+          id: app.id,
+          revision: app.revision,
+          targetClubId,
+          method,
+          sourceUrl,
+          contact,
+          replyNote,
+        },
+      }),
+    onSuccess: refresh,
+    onError: () => {
+      void refresh();
+    },
+  });
   const review = useMutation({
     mutationFn: (action: ClubReview["action"]) =>
       reviewClubRegistration({
@@ -219,6 +245,86 @@ function ReviewApplication({
               </ClubCheck>
             </>
           )}
+          {app.status === "pending" && (
+            <section className="space-y-3 rounded-lg border border-border p-4">
+              <h3 className="font-semibold">Confirmation from the club</h3>
+              <p role="status">Officer response: {app.confirmation_status ?? "Awaiting contact"}</p>
+              {app.confirmation_source && (
+                <p className="break-words text-sm">
+                  Recorded contact: {app.confirmation_contact} · {app.confirmation_source} ·{" "}
+                  {app.confirmation_method}. {app.confirmation_note}
+                </p>
+              )}
+              {app.confirmation_status === "disputed" && (
+                <p role="alert">
+                  Approval is blocked. Investigate with a current officer before requesting a
+                  revised application or rejecting the claim.
+                </p>
+              )}
+              {!["confirmed", "disputed"].includes(app.confirmation_status ?? "") && (
+                <>
+                  <p className="text-sm text-muted">
+                    Find the current club officer through the official club or governing-body
+                    directory. Use a different officer if the applicant controls the contact route.
+                    For a handover, check the appointment with the current committee.
+                  </p>
+                  <label className="block text-sm font-semibold">
+                    Verification route
+                    <select
+                      className={clubInput}
+                      value={method}
+                      onChange={(e) => setMethod(e.target.value as typeof method)}
+                    >
+                      <option value="email">Email a single-use confirmation link</option>
+                      <option value="manual">Record a direct reply from a club officer</option>
+                    </select>
+                  </label>
+                  <ClubField
+                    label="Official contact source"
+                    value={sourceUrl}
+                    onChange={setSource}
+                    type="url"
+                    max={1000}
+                    hint="Independently find the public club or governing-body page that identifies this contact."
+                  />
+                  <ClubField
+                    label={
+                      method === "email"
+                        ? "Officer email address"
+                        : "Officer name, role and contact route"
+                    }
+                    value={contact}
+                    onChange={setContact}
+                    max={254}
+                  />
+                  {method === "manual" && (
+                    <ClubField
+                      label="Officer’s reply"
+                      value={replyNote}
+                      onChange={setReply}
+                      max={1200}
+                      multiline
+                      hint="Record who replied, when, which club and which named applicant and account they authorised. Use a genuine reply through an independently sourced channel."
+                    />
+                  )}
+                  <ClubError error={confirmation.error} />
+                  <Button
+                    variant="secondary"
+                    disabled={
+                      confirmation.isPending ||
+                      (!targetClubId && !createListing) ||
+                      !sourceUrl ||
+                      !contact ||
+                      (method === "manual" && replyNote.trim().length < 30)
+                    }
+                    onClick={() => confirmation.mutate()}
+                  >
+                    {method === "email" ? "Send confirmation request" : "Record club confirmation"}
+                  </Button>
+                </>
+              )}
+            </section>
+          )}
           <ClubField
             label="Message to the applicant"
             value={message}
@@ -259,7 +365,11 @@ function ReviewApplication({
                   review.isPending ||
                   message.trim().length < 10 ||
                   evidenceNote.trim().length < 30 ||
-                  (action === "approved" && (!identityChecked || !authorityChecked))
+                  (action === "approved" &&
+                    (!identityChecked ||
+                      !authorityChecked ||
+                      !confirmed ||
+                      app.status !== "pending"))
                 }
                 onClick={() => review.mutate(action)}
               >

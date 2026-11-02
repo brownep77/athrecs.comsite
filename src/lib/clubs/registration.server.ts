@@ -1,8 +1,11 @@
+import { notifyClubRepresentatives } from "./confirmation.server.ts";
 import { randomUUID } from "node:crypto";
 import type { Sql } from "../db.ts";
 import {
   CLUB_NOTICE_VERSION,
   clubSaveSchema,
+  clubContentSchema,
+  type ClubContent,
   clubReviewSchema,
   registrationKey,
   type ClubApplication,
@@ -42,7 +45,27 @@ export async function myClubApplications(sql: Sql, userId: string) {
     where a.user_id = $1 order by a.updated_at desc`,
     [userId],
   );
-  return { email: user.email, emailVerified: user.verified, applications };
+  const notices = await sql<{
+    id: string;
+    revision: number;
+    club_id: number;
+    club_name: string;
+    applicant: string;
+    role: string;
+    status: string;
+    disputed: boolean;
+  }>`
+    select distinct a.id, n.revision, c.id as club_id,c.name as club_name,
+      a.details->>'representativeName' as applicant,a.details->>'representativeRole' as role,
+      a.status, n.disputed_at is not null as disputed
+    from club_access_notices n join club_registration_applications a on a.id=n.application_id
+    join clubs c on c.id=n.club_id join club_representatives r on r.club_id=c.id and r.user_id=n.recipient_id
+    join club_registration_applications owner on owner.id=r.application_id
+    join "user" u on u.id=r.user_id and u."emailVerified" and u.email=owner.submitted_email
+    where n.recipient_id=${userId} and r.status='active' and owner.status='approved' and
+      ((a.status='pending' and a.revision=n.revision) or (a.status='approved' and a.revision=n.revision+1))
+    order by c.name,a.id`;
+  return { email: user.email, emailVerified: user.verified, applications, notices };
 }
 
 export async function saveClubApplication(sql: Sql, userId: string, input: ClubSave) {
@@ -75,6 +98,12 @@ export async function saveClubApplication(sql: Sql, userId: string, input: ClubS
     if (existing) {
       if (!editable.has(existing.status))
         throw new Error("This application is closed. Contact AthRecs to change your authority.");
+      if (existing.status === "pending") {
+        const [dispute] =
+          await tx`select 1 from club_officer_confirmations where application_id=${existing.id} and revision=${existing.revision} and status='disputed'
+          union all select 1 from club_access_notices where application_id=${existing.id} and revision=${existing.revision} and disputed_at is not null`;
+        if (dispute) throw new Error("This request is under staff review.");
+      }
       if (existing.club_id !== data.clubId)
         throw new Error("The selected club cannot change. Start a separate application.");
       if (existing.revision !== data.revision)
@@ -111,6 +140,8 @@ export async function saveClubApplication(sql: Sql, userId: string, input: ClubS
           ${data.submit ? user.email : null}, ${data.submit ? CLUB_NOTICE_VERSION : null},
           case when ${data.submit} then now() else null end)`;
     }
+    if (data.submit)
+      await notifyClubRepresentatives(tx, id, (existing?.revision ?? 0) + 1, data.clubId);
     await audit(tx, id, userId, data.submit ? "submitted" : "draft_saved", {
       revision: (existing?.revision ?? 0) + 1,
       details: data.details,
@@ -147,9 +178,14 @@ export async function clubReviewQueue(sql: Sql, status: string, page: number) {
     from club_registration_applications where status = ${status}`;
   const applications = await sql.query<ClubReviewApplication>(
     `select ${columns}, a.user_id,
-    a.submitted_email, (select count(*)::int from club_representatives r
+    a.submitted_email, cf.target_club_id as confirmation_club_id,
+    case when exists(select 1 from club_access_notices n where n.application_id=a.id and n.revision=a.revision and n.disputed_at is not null)
+      then 'disputed' when cf.status='pending' and cf.expires_at<=now() then 'expired' else cf.status end as confirmation_status,
+    cf.method as confirmation_method, cf.source_url as confirmation_source, cf.contact as confirmation_contact, cf.reply_note as confirmation_note,
+    (select count(*)::int from club_representatives r
       where r.club_id = a.club_id and r.status = 'active') as active_representatives
     from club_registration_applications a left join clubs c on c.id = a.club_id
+    left join club_officer_confirmations cf on cf.application_id=a.id and cf.revision=a.revision
     where a.status = $1 order by a.updated_at, a.id limit 25 offset $2`,
     [status, (page - 1) * 25],
   );
@@ -218,6 +254,15 @@ export async function reviewClubApplication(sql: Sql, reviewerId: string, input:
       }
       const [club] = await tx`select id from clubs where id = ${clubId} for update`;
       if (!club) throw new Error("Directory club not found.");
+      const [confirmation] = await tx`select 1 from club_officer_confirmations cf
+        where cf.application_id=${app.id} and cf.revision=${app.revision} and cf.status='confirmed'
+        and cf.target_club_id is not distinct from ${data.createListing ? null : clubId}::int
+        and not exists(select 1 from club_access_notices n where n.application_id=cf.application_id and n.revision=cf.revision and n.disputed_at is not null)`;
+      if (!confirmation)
+        throw new Error(
+          "Independent club confirmation is required for this application and listing. Resolve any disputed request first.",
+        );
+      await notifyClubRepresentatives(tx, app.id, app.revision, clubId);
       const [other] = await tx`select application_id from club_representatives
         where club_id = ${clubId} and user_id = ${app.user_id} and application_id <> ${app.id}`;
       if (other)
@@ -251,4 +296,48 @@ export async function requireClubRepresentative(sql: Sql, userId: string, clubId
     where r.user_id = ${userId} and r.club_id = ${clubId} and r.status = 'active'
       and a.status = 'approved' and u."emailVerified" and u.email = a.submitted_email`;
   if (!allowed) throw new Error("Verified club representative access is required.");
+}
+
+export async function disputeClubNotice(
+  sql: Sql,
+  userId: string,
+  id: string,
+  revision: number,
+  clubId: number,
+) {
+  return sql.transaction(async (tx) => {
+    const [app] =
+      await tx`select id from club_registration_applications where id=${id} and status='pending' and revision=${revision} for update`;
+    await requireClubRepresentative(tx, userId, clubId);
+    if (!app) throw new Error("This request has already been reviewed.");
+    const [notice] =
+      await tx`update club_access_notices set disputed_at=now() where application_id=${id}
+      and revision=${revision} and recipient_id=${userId} and club_id=${clubId} and disputed_at is null returning club_id`;
+    if (!notice) throw new Error("This request is unavailable.");
+    await audit(tx, id, userId, "representative_disputed", { revision, clubId });
+    return { saved: true };
+  });
+}
+
+export async function saveClubContent(sql: Sql, userId: string, input: ClubContent) {
+  const d = clubContentSchema.parse(input);
+  return sql.transaction(async (tx) => {
+    // Serialise edits and revocation at the active appointment.
+    const [appointment] = await tx<{ id: string }>`select a.id from club_registration_applications a
+      join club_representatives r on r.application_id=a.id where r.club_id=${d.clubId} and r.user_id=${userId} for update of a`;
+    await requireClubRepresentative(tx, userId, d.clubId);
+    await tx`select id from clubs where id=${d.clubId} for update`;
+    const [current] = await tx<{
+      revision: number;
+    }>`select revision from club_profile_updates where club_id=${d.clubId}`;
+    if ((current?.revision ?? 0) !== d.revision)
+      throw new Error(
+        "The club profile has changed. Reopen the editor to load the latest version.",
+      );
+    await tx`insert into club_profile_updates(club_id,biography,training,contact_url,revision)
+      values(${d.clubId},${d.biography},${d.training},${d.contactUrl},1) on conflict(club_id) do update
+      set biography=excluded.biography,training=excluded.training,contact_url=excluded.contact_url,revision=club_profile_updates.revision+1`;
+    await audit(tx, appointment.id, userId, "profile_updated", d);
+    return { saved: true };
+  });
 }

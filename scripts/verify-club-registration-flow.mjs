@@ -348,6 +348,65 @@ try {
     .fill(
       "PRIVATE TEST RECORD: independently checked fictional appointment in the disposable database.",
     );
+  // Capture the outgoing message at its transport boundary. No real email leaves this test.
+  const confirmations = await server.ssrLoadModule("/src/lib/clubs/confirmation.server.ts");
+  let confirmationUrl;
+  await confirmations.startClubConfirmation(
+    sql,
+    reviewer.user.id,
+    {
+      id: app.id,
+      revision: app.revision,
+      targetClubId: app.club_id,
+      method: "email",
+      sourceUrl: "https://club.example.test/committee",
+      contact: "chair@example.test",
+      replyNote: "",
+    },
+    async (mail) => {
+      confirmationUrl = mail.actionUrl;
+    },
+  );
+  const publicPage = await browser.newPage();
+  observe(publicPage);
+  const link = new URL(confirmationUrl);
+  const verifyPath = origin + link.pathname;
+  const response = await publicPage.goto(verifyPath + link.hash);
+  assert.match(response.headers()["cache-control"], /no-store/);
+  assert.equal(
+    (await sql`select status from club_officer_confirmations where application_id=${app.id}`)[0]
+      .status,
+    "pending",
+  );
+  assert.equal(
+    (
+      await publicPage.request.post(verifyPath, {
+        headers: { origin: "https://untrusted.example" },
+        form: { token: link.hash.slice(1), answer: "confirmed" },
+      })
+    ).status(),
+    403,
+  );
+  await publicPage.getByRole("button", { name: "Confirm appointment", exact: true }).click();
+  await publicPage.getByRole("heading", { name: "Confirmation received", exact: true }).waitFor();
+  assert.equal(
+    (
+      await publicPage.request.post(verifyPath, {
+        headers: { origin },
+        form: { token: link.hash.slice(1), answer: "confirmed" },
+      })
+    ).status(),
+    410,
+  );
+  await publicPage.close();
+  await reviewPage.reload({ waitUntil: "networkidle" });
+  await reviewPage.getByText("Officer response: confirmed", { exact: true }).waitFor();
+  await reviewPage
+    .getByLabel("Message to the applicant", { exact: true })
+    .fill("Synthetic appointment approved for this isolated test.");
+  await reviewPage
+    .getByLabel("Private verification record", { exact: true })
+    .fill("PRIVATE TEST RECORD: independently confirmed officer appointment in isolated test.");
   for (const checkbox of await reviewPage.getByRole("checkbox").all()) await checkbox.check();
   await reviewPage.getByRole("button", { name: "Approve representative", exact: true }).click();
   await reviewPage.getByText("No applications in this view.", { exact: true }).waitFor();
@@ -361,6 +420,19 @@ try {
   );
   await page.goto(`${origin}/clubs/account`, { waitUntil: "networkidle" });
   await page.getByText("Representative approved", { exact: true }).waitFor();
+  await page.getByRole("button", { name: "Edit club profile", exact: true }).click();
+  await page
+    .getByLabel("Club biography", { exact: true })
+    .fill("We are a synthetic club used in this isolated test.");
+  await page
+    .getByLabel("Training sessions", { exact: true })
+    .fill("Synthetic Wednesday training at 7 pm.");
+  await page.getByRole("button", { name: "Publish club details", exact: true }).click();
+  await page.getByText("Club details published.", { exact: true }).waitFor();
+  await page.goto(`${origin}/clubs/${clubs[1].slug}`, { waitUntil: "networkidle" });
+  await page.getByRole("heading", { name: "From the club", exact: true }).waitFor();
+  await page.getByText("Synthetic Wednesday training at 7 pm.", { exact: true }).waitFor();
+  await page.getByRole("link", { name: "Request club access", exact: true }).waitFor();
   const after = await sql`select
     (select count(*)::int from athletes) as athletes,
     (select count(*)::int from results) as results,
