@@ -22,9 +22,9 @@ export const Route = createFileRoute("/news/")({
       : {
           links: [{ rel: "canonical", href: `${SITE_URL}/news` }],
           meta: siteGraphMeta({
-            title: "Sports News by country, area and county | ATHRECS.com",
+            title: "World, Continental, National & Local Sports News | AthRecs",
             description:
-              "Browse sports news, event announcements and local updates on AthRecs by sport, country, area and county.",
+              "Explore world, continental, national and local sports news, results and athlete stories. Follow the UK, Ireland, USA, New Zealand, Australia, Canada and more.",
             url: `${SITE_URL}/news`,
           }),
         },

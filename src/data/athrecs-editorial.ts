@@ -6,6 +6,8 @@ import { NEWS_ARTICLES } from "./runrecs-news";
 import { BURE_REPORT } from "./bure-valley-2026";
 import { NEW_YORK_MARATHON_2026 } from "./new-york-marathon-2026";
 import type { EditorialArticle } from "../lib/athrecs/editorial";
+import { AUCKLAND_MARATHON_2026_RESULTS } from "./auckland-marathon-2026-results";
+import { DUBLIN_MARATHON_2026_RESULTS } from "./dublin-marathon-2026-results";
 
 // Reuse the already-published report without changing its text or the RunRecs feed.
 // Add news as kind: "news". Tag only locations and sports actually covered.
@@ -14,10 +16,17 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
-  NYC_2026_CELEBRITY_FINISHERS,
-  NEW_YORK_MARATHON_2026_RESULTS,
-  NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS,
-  NEW_YORK_MARATHON_2026,
+  AUCKLAND_MARATHON_2026_RESULTS,
+  DUBLIN_MARATHON_2026_RESULTS,
+  ...[
+    NYC_2026_CELEBRITY_FINISHERS,
+    NEW_YORK_MARATHON_2026_RESULTS,
+    NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS,
+    NEW_YORK_MARATHON_2026,
+  ].map((article): EditorialArticle => ({
+    ...article,
+    coverageLevels: ["world", "continent", "national", "local"],
+  })),
   ...OCTOBER_WEEKEND_PREVIEWS,
   BURE_REPORT,
   ...(publishedReport
