@@ -32,14 +32,21 @@ try {
     const article = page.locator("main article").first();
     const bounds = await article.boundingBox();
     assert.ok(bounds && bounds.x >= 0 && bounds.x + bounds.width <= width + 1, `Article exceeds ${width}px`);
-    const table = article.getByRole("region").first();
+    const table = article.getByRole("table").first().locator("..");
+    assert.equal(await table.getAttribute("role"), "region");
+    assert.equal(await table.getAttribute("tabindex"), "0");
     await table.focus();
     const sizes = await table.evaluate((element) => {
       element.scrollLeft = element.scrollWidth;
       return [element.clientWidth, element.scrollWidth, element.scrollLeft];
     });
     assert.ok(sizes[0] <= width);
-    if (width < 512) assert.ok(sizes[1] > sizes[0] && sizes[2] > 0, "Table must scroll inside its region");
+    if (width < 512) {
+      assert.ok(
+        sizes[1] > sizes[0] && sizes[2] > 0,
+        `Table must scroll at ${width}px (client, content, scroll offset: ${sizes.join(", ")})`,
+      );
+    }
     await page.close();
     console.log(`${country}: same canonical from both desks; article and table checked at ${width}px`);
   }
