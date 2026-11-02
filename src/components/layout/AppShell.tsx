@@ -128,7 +128,9 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       VITE_FLAG_LANGUAGE_PICKER: import.meta.env.VITE_FLAG_LANGUAGE_PICKER,
     }),
   );
-  const compact = IS_ATHRECS_SITE && (pathname === "/" || pathname.startsWith("/sports/"));
+  const compact =
+    IS_ATHRECS_SITE &&
+    (pathname === "/" || pathname === "/search" || pathname.startsWith("/sports/"));
   const mobileNav = compact
     ? [
         nav[0],

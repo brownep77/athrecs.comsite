@@ -24,6 +24,7 @@ import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as ReviewResultsRouteImport } from './routes/review-results'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as SiteMapRouteImport } from './routes/site-map'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
@@ -192,6 +193,11 @@ const RaceSeriesRoute = RaceSeriesRouteImport.update({
 const ReviewResultsRoute = ReviewResultsRouteImport.update({
   id: '/review-results',
   path: '/review-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteMapRoute = SiteMapRouteImport.update({
@@ -693,6 +699,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/search': typeof SearchRoute
   '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
@@ -804,6 +811,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/search': typeof SearchRoute
   '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
@@ -916,6 +924,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/search': typeof SearchRoute
   '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
@@ -1029,6 +1038,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/search'
     | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
@@ -1140,6 +1150,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/search'
     | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
@@ -1251,6 +1262,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/search'
     | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
@@ -1363,6 +1375,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
   ReviewResultsRoute: typeof ReviewResultsRoute
+  SearchRoute: typeof SearchRoute
   SiteMapRoute: typeof SiteMapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SponsorshipRoute: typeof SponsorshipRoute
@@ -1564,6 +1577,13 @@ declare module '@tanstack/react-router' {
       path: '/review-results'
       fullPath: '/review-results'
       preLoaderRoute: typeof ReviewResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/site-map': {
@@ -2243,6 +2263,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
   ReviewResultsRoute: ReviewResultsRoute,
+  SearchRoute: SearchRoute,
   SiteMapRoute: SiteMapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SponsorshipRoute: SponsorshipRoute,
