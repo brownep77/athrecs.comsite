@@ -4,6 +4,11 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Search, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { listPublicResultEditions } from "@/lib/athrecs/public-results-api";
+import {
+  getMerseaCoverage,
+  matchesMerseaDirectory,
+  merseaPath,
+} from "@/lib/athrecs/mersea-results";
 import { normalizeResultsSearch } from "@/lib/athrecs/public-results-search";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
@@ -22,7 +27,10 @@ export const Route = createFileRoute("/results/")({
     distance?: string;
     page?: number;
   } => {
-    const search = normalizeResultsSearch(raw);
+    const search = normalizeResultsSearch({
+      ...raw,
+      year: typeof raw.year === "number" ? String(raw.year) : raw.year,
+    });
     return {
       q: search.q || undefined,
       sport: search.sport || undefined,
@@ -37,10 +45,14 @@ export const Route = createFileRoute("/results/")({
   },
   loaderDeps: ({ search }) => normalizeResultsSearch(search),
   loader: async ({ deps }) => {
-    const data = await listPublicResultEditions({ data: deps });
+    const includeMersea = matchesMerseaDirectory(deps);
+    const [data, merseaCoverage] = await Promise.all([
+      listPublicResultEditions({ data: deps }),
+      includeMersea && deps.year ? getMerseaCoverage({ data: deps.year }) : null,
+    ]);
     const filtered = Object.entries(deps).some(([key, value]) => key !== "page" && Boolean(value));
     if (!filtered && deps.page > 1 && !data.editions.length) throw notFound();
-    return data;
+    return { ...data, showMersea: includeMersea && (!deps.year || merseaCoverage !== null) };
   },
   staleTime: 60_000,
   head: ({ match, loaderData }) => {
@@ -74,6 +86,11 @@ export const Route = createFileRoute("/results/")({
       <a href="/results" className="text-accent underline">
         Try again
       </a>
+      <p>
+        <a href={merseaPath} className="text-accent underline">
+          Browse the Mersea 10-mile archive
+        </a>
+      </p>
     </div>
   ),
   component: ResultsPage,
@@ -216,6 +233,21 @@ function ResultsPage() {
             <span className="text-sm">Winners summary & official full results →</span>
           </a>
         ) : null}
+        {data.showMersea && (
+          <Link
+            to={merseaPath}
+            search={search.year ? { year: Number(search.year) } : {}}
+            className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/30 bg-accent-soft p-4 font-semibold text-accent no-underline hover:bg-elevated"
+          >
+            <span>Mersea Island Lions 10 Mile · {search.year || "West Mersea, Essex"}</span>
+            <span className="text-sm">
+              {search.year
+                ? "View edition and available results"
+                : "Browse historical editions and search runners"}{" "}
+              →
+            </span>
+          </Link>
+        )}
         <a
           href="/results/berlin-marathon-2026"
           className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/30 bg-accent-soft p-4 font-semibold text-accent no-underline hover:bg-elevated"
@@ -223,10 +255,12 @@ function ResultsPage() {
           <span>Berlin Marathon · 27 September 2026</span>
           <span className="text-sm">Men, women & age categories →</span>
         </a>
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="font-display text-xl font-semibold">Race results archive</h2>
-          <span className="text-xs text-muted">Newest first</span>
-        </div>
+        {(data.editions.length > 0 || !data.showMersea) && (
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-display text-xl font-semibold">Race results archive</h2>
+            <span className="text-xs text-muted">Newest first</span>
+          </div>
+        )}
         {data.editions.length ? (
           <div className="grid gap-3 md:grid-cols-2">
             {data.editions.map((edition) => (
@@ -257,7 +291,7 @@ function ResultsPage() {
               </Link>
             ))}
           </div>
-        ) : (
+        ) : data.showMersea ? null : (
           <div className="rounded-xl border border-border bg-surface p-8 text-center">
             <h3 className="font-semibold">No recorded race results match this search</h3>
             <p className="mt-2 text-sm text-muted">
