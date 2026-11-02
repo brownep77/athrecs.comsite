@@ -623,6 +623,7 @@ export function countryFlag(value: string | null | undefined) {
       wls: "Wales",
       "gb-wls": "Wales",
       "northern ireland": "Northern Ireland",
+      "northern irish": "Northern Ireland",
       nir: "Northern Ireland",
       "gb-nir": "Northern Ireland",
     } as Record<string, string>
@@ -638,14 +639,8 @@ export function countryFlag(value: string | null | undefined) {
               ? "GB-WLS"
               : "GB",
       name: home,
-      emoji:
-        home === "England"
-          ? "🏴\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}"
-          : home === "Scotland"
-            ? "🏴\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}"
-            : home === "Wales"
-              ? "🏴\u{E0067}\u{E0062}\u{E0077}\u{E006C}\u{E0073}\u{E007F}"
-              : "🇬🇧",
+      // One UK flag throughout AthRecs; keep the nation for geography/matching.
+      emoji: "🇬🇧",
     };
   const code = aliases[key] ?? regions.get(key);
   return {
@@ -655,6 +650,12 @@ export function countryFlag(value: string | null | undefined) {
       ? String.fromCodePoint(...[...code].map((letter) => letter.charCodeAt(0) + 127397))
       : "",
   };
+}
+
+/** Flag artwork is a display choice, separate from geographic/matching codes. */
+export function countryFlagImageCode(value: string | null | undefined): string {
+  const { code } = countryFlag(value);
+  return code.startsWith("GB-") ? "GB" : code;
 }
 
 const abbreviations: Readonly<Record<string, string>> = {
@@ -686,6 +687,7 @@ export function countryNameAliases(): Record<string, string> {
     "wls",
     "gb-wls",
     "northern ireland",
+    "northern irish",
     "nir",
     "gb-nir",
   ]);
