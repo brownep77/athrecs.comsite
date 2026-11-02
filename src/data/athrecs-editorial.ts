@@ -1,4 +1,5 @@
 import { NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS } from "./new-york-marathon-2026-famous-runners";
+import { NYC_2026_CELEBRITY_FINISHERS } from "./nyc-2026-celebrity-finishers";
 import { NEW_YORK_MARATHON_2026_RESULTS } from "./new-york-marathon-2026-results";
 import { OCTOBER_WEEKEND_PREVIEWS } from "./october-weekend-previews";
 import { NEWS_ARTICLES } from "./runrecs-news";
@@ -13,6 +14,7 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  NYC_2026_CELEBRITY_FINISHERS,
   NEW_YORK_MARATHON_2026_RESULTS,
   NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS,
   NEW_YORK_MARATHON_2026,

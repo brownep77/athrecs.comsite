@@ -115,6 +115,10 @@ export const NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS: EditorialArticle = {
   },
   links: [
     {
+      label: "After the race — celebrity finishes and athlete profiles",
+      url: "/news/new-york-city-marathon-2026-celebrity-results",
+    },
+    {
       label: "Race preview: professional field, route and start times",
       url: "/news/new-york-city-marathon-2026-preview",
     },
