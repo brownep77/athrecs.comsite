@@ -1,0 +1,1936 @@
+{
+  "alison-streeter-english-channel": {
+    "baseRevision": "channel-9031249dae512d21c190",
+    "paragraph": "Streeter swam in both directions in 1992. On 21 September she left France at 13:41 and reached Shakespeare Beach at 00:26 the next day. In New York she raced around Manhattan in 1987, 1999 and 2000, taking fourth place in 1987.",
+    "events": [
+      {
+        "id": "nyow-123",
+        "kind": "Manhattan Island swim",
+        "date": "1987-08-09",
+        "duration": "7:47:30",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "GBR",
+        "refs": [
+          {
+            "text": "New York Open Water, result 123",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 4
+      },
+      {
+        "id": "cspf-443472",
+        "kind": "English Channel solo",
+        "date": "1989-09-24",
+        "duration": "09:41:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443472",
+            "url": "https://cspf.co.uk/swim/443472"
+          }
+        ],
+        "landing": "Wissant",
+        "startTime": "07:59:00",
+        "finishTime": "17:40:00",
+        "observer": "K. Chambers",
+        "pilot": "Ray Dixon",
+        "boat": "Channel Express"
+      },
+      {
+        "id": "cspf-443498",
+        "kind": "English Channel solo",
+        "date": "1990-09-26",
+        "duration": "09:50:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443498",
+            "url": "https://cspf.co.uk/swim/443498"
+          }
+        ],
+        "landing": "Pointe de Court Dune, Cap Gris-Nez",
+        "startTime": "04:30:00",
+        "finishTime": "14:20:00",
+        "observer": "D. Ford",
+        "pilot": "R. Brown",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443506",
+        "kind": "English Channel solo",
+        "date": "1991-08-14",
+        "duration": "10:07:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443506",
+            "url": "https://cspf.co.uk/swim/443506"
+          }
+        ],
+        "landing": "a quarter of a mile east of Wissant",
+        "startTime": "05:39:00",
+        "finishTime": "15:46:00",
+        "observer": "U. Haevecker",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443510",
+        "kind": "English Channel solo",
+        "date": "1991-09-08",
+        "duration": "09:53:00",
+        "route": "France to England",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443510",
+            "url": "https://cspf.co.uk/swim/443510"
+          }
+        ],
+        "landing": "St Margaret’s Bay",
+        "startTime": "10:05:00",
+        "finishTime": "19:58:00",
+        "observer": "N. Trusty",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443514",
+        "kind": "English Channel solo",
+        "date": "1992-06-27",
+        "duration": "11:41:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443514",
+            "url": "https://cspf.co.uk/swim/443514"
+          }
+        ],
+        "landing": "Wissant",
+        "startTime": "09:10:00",
+        "finishTime": "20:51:00",
+        "observer": "F. Richards",
+        "pilot": "Barrie Darling",
+        "boat": "Harbinger"
+      },
+      {
+        "id": "cspf-443515",
+        "kind": "English Channel solo",
+        "date": "1992-07-08",
+        "duration": "10:40:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443515",
+            "url": "https://cspf.co.uk/swim/443515"
+          }
+        ],
+        "landing": "Cap Gris-Nez",
+        "startTime": "05:30:00",
+        "finishTime": "16:10:00",
+        "observer": "F. Richards",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443521",
+        "kind": "English Channel solo",
+        "date": "1992-07-28",
+        "duration": "11:12:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443521",
+            "url": "https://cspf.co.uk/swim/443521"
+          }
+        ],
+        "landing": "Cap Gris-Nez",
+        "startTime": "09:47:00",
+        "finishTime": "20:59:00",
+        "observer": "F. Richards",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443538",
+        "kind": "English Channel solo",
+        "date": "1992-08-22",
+        "duration": "11:17:00",
+        "route": "France to England",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443538",
+            "url": "https://cspf.co.uk/swim/443538"
+          }
+        ],
+        "landing": "Shakespeare Beach",
+        "startTime": "00:37:00",
+        "finishTime": "11:54:00",
+        "observer": "L. Oram.",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443543",
+        "kind": "English Channel solo",
+        "date": "1992-09-21",
+        "duration": "10:45:00",
+        "route": "France to England",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443543",
+            "url": "https://cspf.co.uk/swim/443543"
+          }
+        ],
+        "endDate": "1992-09-22",
+        "landing": "Shakespeare Beach",
+        "startTime": "13:41:00",
+        "finishTime": "00:26:00",
+        "observer": "F. Richards",
+        "note": "The historical register associates this landing with the Queen of the Channel title.",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443544",
+        "kind": "English Channel solo",
+        "date": "1993-07-12",
+        "duration": "10:16:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443544",
+            "url": "https://cspf.co.uk/swim/443544"
+          }
+        ],
+        "landing": "half a mile below Cap Gris-Nez (register wording)",
+        "startTime": "05:14:00",
+        "finishTime": "15:30:00",
+        "observer": "L. Williams",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443560",
+        "kind": "English Channel solo",
+        "date": "1993-08-28",
+        "duration": "11:14:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443560",
+            "url": "https://cspf.co.uk/swim/443560"
+          }
+        ],
+        "landing": "Cap Blanc-Nez",
+        "startTime": "10:58:00",
+        "finishTime": "22:12:00",
+        "observer": "L. Williams/T. Woodroffe",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443567",
+        "kind": "English Channel solo",
+        "date": "1993-09-25",
+        "duration": "10:17:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443567",
+            "url": "https://cspf.co.uk/swim/443567"
+          }
+        ],
+        "landing": "just east of Cap Gris-Nez",
+        "startTime": "08:03:00",
+        "finishTime": "18:20:00",
+        "observer": "L. Williams",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443570",
+        "kind": "English Channel solo",
+        "date": "1994-07-16",
+        "duration": "11:26:00",
+        "route": "France to England",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443570",
+            "url": "https://cspf.co.uk/swim/443570"
+          }
+        ],
+        "landing": "Folkestone Beach",
+        "startTime": "06:00:00",
+        "finishTime": "17:26:00",
+        "observer": "K. Coombes",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443583",
+        "kind": "English Channel solo",
+        "date": "1994-08-01",
+        "duration": "10:48:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443583",
+            "url": "https://cspf.co.uk/swim/443583"
+          }
+        ],
+        "landing": "Le Petit Blanc-Nez",
+        "startTime": "07:38:00",
+        "finishTime": "18:26:00",
+        "observer": "K. Coombes/L. Williams",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443603",
+        "kind": "English Channel solo",
+        "date": "1994-09-02",
+        "duration": "09:40:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443603",
+            "url": "https://cspf.co.uk/swim/443603"
+          }
+        ],
+        "departure": "Abbot’s Cliff",
+        "landing": "Cap Gris-Nez",
+        "startTime": "09:58:00",
+        "finishTime": "19:38:00",
+        "observer": "K. Coombes",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443608",
+        "kind": "English Channel solo",
+        "date": "1994-09-28",
+        "duration": "10:24:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443608",
+            "url": "https://cspf.co.uk/swim/443608"
+          }
+        ],
+        "landing": "just east of Cap Gris-Nez",
+        "startTime": "04:54:00",
+        "finishTime": "15:18:00",
+        "observer": "N. Trusty",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443611",
+        "kind": "English Channel solo",
+        "date": "1995-07-07",
+        "duration": "11:53:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443611",
+            "url": "https://cspf.co.uk/swim/443611"
+          }
+        ],
+        "landing": "Wissant",
+        "startTime": "06:10:00",
+        "finishTime": "18:03:00",
+        "observer": "F. Richards",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443634",
+        "kind": "English Channel solo",
+        "date": "1995-08-21",
+        "duration": "09:55:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443634",
+            "url": "https://cspf.co.uk/swim/443634"
+          }
+        ],
+        "landing": "Cap Gris-Nez",
+        "startTime": "08:38:00",
+        "finishTime": "18:33:00",
+        "observer": "F. Richards",
+        "note": "The register links this swim with equalling Michael Read’s crossing count.",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443635",
+        "kind": "English Channel solo",
+        "date": "1995-09-04",
+        "duration": "10:58:00",
+        "route": "France to England",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443635",
+            "url": "https://cspf.co.uk/swim/443635"
+          }
+        ],
+        "departure": "Cap Gris-Nez",
+        "landing": "Dover Harbour beach",
+        "startTime": "05:01:00",
+        "finishTime": "15:59:00",
+        "observer": "F. Richards",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443665",
+        "kind": "English Channel solo",
+        "date": "1997-06-29",
+        "duration": "11:35:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443665",
+            "url": "https://cspf.co.uk/swim/443665"
+          }
+        ],
+        "landing": "Pointe du Riden",
+        "startTime": "06:02:00",
+        "finishTime": "17:37:00",
+        "observer": "-",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443693",
+        "kind": "English Channel solo",
+        "date": "1997-09-08",
+        "duration": "11:14:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443693",
+            "url": "https://cspf.co.uk/swim/443693"
+          }
+        ],
+        "startTime": "02:47:00",
+        "finishTime": "14:01:00",
+        "observer": "P. Coffey",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443703",
+        "kind": "English Channel solo",
+        "date": "1998-08-02",
+        "duration": "10:56:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443703",
+            "url": "https://cspf.co.uk/swim/443703"
+          }
+        ],
+        "landing": "Pointe du Riden",
+        "startTime": "07:08:00",
+        "finishTime": "18:04:00",
+        "observer": "P. Coffey",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "nyow-437",
+        "kind": "Manhattan Island swim",
+        "date": "1999-06-12",
+        "duration": "7:20:18",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "GBR",
+        "refs": [
+          {
+            "text": "New York Open Water, result 437",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 10
+      },
+      {
+        "id": "cspf-443722",
+        "kind": "English Channel solo",
+        "date": "1999-07-06",
+        "duration": "11:03:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443722",
+            "url": "https://cspf.co.uk/swim/443722"
+          }
+        ],
+        "startTime": "04:41:00",
+        "finishTime": "15:44:00",
+        "observer": "G. Elliott",
+        "pilot": "Michael Oram",
+        "boat": "Sea Satin"
+      },
+      {
+        "id": "nyow-481",
+        "kind": "Manhattan Island swim",
+        "date": "2000-06-17",
+        "duration": "9:05:39",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "GBR",
+        "refs": [
+          {
+            "text": "New York Open Water, result 481",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 23
+      },
+      {
+        "id": "cspf-443758",
+        "kind": "English Channel solo",
+        "date": "2000-08-06",
+        "duration": "12:28:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443758",
+            "url": "https://cspf.co.uk/swim/443758"
+          }
+        ],
+        "observer": "L. Wakeham",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443774",
+        "kind": "English Channel solo",
+        "date": "2001-07-26",
+        "duration": "14:24:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming & Piloting Federation",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443774",
+            "url": "https://cspf.co.uk/swim/443774"
+          }
+        ],
+        "landing": "east of the restaurant at Cap Gris-Nez",
+        "startTime": "04:34:00",
+        "finishTime": "18:58:00",
+        "observer": "Jacqueline Carter",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443848",
+        "kind": "English Channel solo",
+        "date": "2003-07-05",
+        "duration": "12:58:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming & Piloting Federation",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443848",
+            "url": "https://cspf.co.uk/swim/443848"
+          }
+        ],
+        "landing": "Cap Blanc-Nez",
+        "startTime": "02:45:00",
+        "finishTime": "15:43:00",
+        "observer": "Jacqueline Carter",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      },
+      {
+        "id": "cspf-443898",
+        "kind": "English Channel solo",
+        "date": "2003-09-20",
+        "duration": "13:44:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming & Piloting Federation",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443898",
+            "url": "https://cspf.co.uk/swim/443898"
+          }
+        ],
+        "landing": "Cap Petite Blanc near Wissant Bay (register wording)",
+        "startTime": "06:01:00",
+        "finishTime": "19:45:00",
+        "observer": "Frank Richards",
+        "pilot": "Michael Oram",
+        "boat": "Aegean Blue"
+      }
+    ]
+  },
+  "chloe-mccardel-english-channel": {
+    "baseRevision": "channel-7ead580ac1c02fdc3f67",
+    "paragraph": "McCardel crossed from England to France on 4 August 2021 in 9 hours 55 minutes. The CSA awarded her both its fastest solo and fastest women’s swim for that season. Sixteen days later she made her 40th CSA crossing. She had also crossed the Catalina Channel from the island to the California mainland in 2019.",
+    "events": [
+      {
+        "id": "cspf-444851",
+        "kind": "English Channel solo",
+        "date": "2014-09-07",
+        "duration": "09:12:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 444851",
+            "url": "https://cspf.co.uk/swim/444851"
+          }
+        ],
+        "startTime": "10:50:00",
+        "finishTime": "20:02:00",
+        "observer": "Keith Oiller",
+        "pilot": "Eric Hartley",
+        "boat": "Pathfinder"
+      },
+      {
+        "id": "cspf-444876",
+        "kind": "English Channel solo",
+        "date": "2015-06-29",
+        "duration": "08:52:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 444876",
+            "url": "https://cspf.co.uk/swim/444876"
+          }
+        ],
+        "startTime": "10:10:00",
+        "finishTime": "19:02:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-444878",
+        "kind": "English Channel solo",
+        "date": "2015-07-03",
+        "duration": "09:56:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 444878",
+            "url": "https://cspf.co.uk/swim/444878"
+          }
+        ],
+        "startTime": "00:46:00",
+        "finishTime": "10:42:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-444879",
+        "kind": "English Channel solo",
+        "date": "2015-07-05",
+        "duration": "09:48:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 444879",
+            "url": "https://cspf.co.uk/swim/444879"
+          }
+        ],
+        "startTime": "02:46:00",
+        "finishTime": "12:34:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-444974",
+        "kind": "English Channel solo",
+        "date": "2016-06-10",
+        "duration": "10:45:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 444974",
+            "url": "https://cspf.co.uk/swim/444974"
+          }
+        ],
+        "startTime": "03:08:00",
+        "finishTime": "13:53:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-444975",
+        "kind": "English Channel solo",
+        "date": "2016-06-17",
+        "duration": "10:21:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 444975",
+            "url": "https://cspf.co.uk/swim/444975"
+          }
+        ],
+        "startTime": "08:55:00",
+        "finishTime": "19:16:00",
+        "observer": "Keith Oiller",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-444976",
+        "kind": "English Channel solo",
+        "date": "2016-06-22",
+        "duration": "09:48:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 444976",
+            "url": "https://cspf.co.uk/swim/444976"
+          }
+        ],
+        "startTime": "13:01:00",
+        "finishTime": "22:49:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445077",
+        "kind": "English Channel solo",
+        "date": "2016-09-11",
+        "duration": "08:51:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445077",
+            "url": "https://cspf.co.uk/swim/445077"
+          }
+        ],
+        "startTime": "06:10:00",
+        "finishTime": "15:01:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445089",
+        "kind": "English Channel solo",
+        "date": "2016-09-20",
+        "duration": "10:00:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445089",
+            "url": "https://cspf.co.uk/swim/445089"
+          }
+        ],
+        "startTime": "01:45:00",
+        "finishTime": "11:45:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445104",
+        "kind": "English Channel solo",
+        "date": "2016-10-09",
+        "duration": "10:00:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445104",
+            "url": "https://cspf.co.uk/swim/445104"
+          }
+        ],
+        "startTime": "02:55:00",
+        "finishTime": "12:55:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445107",
+        "kind": "English Channel solo",
+        "date": "2016-10-22",
+        "duration": "10:19:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445107",
+            "url": "https://cspf.co.uk/swim/445107"
+          }
+        ],
+        "startTime": "03:10:00",
+        "finishTime": "13:29:00",
+        "observer": "Phil Collins",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445108",
+        "kind": "English Channel solo",
+        "date": "2016-10-25",
+        "duration": "10:29:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445108",
+            "url": "https://cspf.co.uk/swim/445108"
+          }
+        ],
+        "startTime": "06:23:00",
+        "finishTime": "16:52:00",
+        "observer": "Phil Collins",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445222",
+        "kind": "English Channel solo",
+        "date": "2017-09-27",
+        "duration": "10:17:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445222",
+            "url": "https://cspf.co.uk/swim/445222"
+          }
+        ],
+        "startTime": "02:55:00",
+        "finishTime": "13:12:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445328",
+        "kind": "English Channel solo",
+        "date": "2018-08-29",
+        "duration": "10:00:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445328",
+            "url": "https://cspf.co.uk/swim/445328"
+          }
+        ],
+        "startTime": "12:55:00",
+        "finishTime": "22:55:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445337",
+        "kind": "English Channel solo",
+        "date": "2018-09-02",
+        "duration": "10:51:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445337",
+            "url": "https://cspf.co.uk/swim/445337"
+          }
+        ],
+        "startTime": "03:20:00",
+        "finishTime": "14:11:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445343",
+        "kind": "English Channel solo",
+        "date": "2018-09-13",
+        "duration": "10:18:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445343",
+            "url": "https://cspf.co.uk/swim/445343"
+          }
+        ],
+        "startTime": "02:30:00",
+        "finishTime": "12:48:00",
+        "observer": "Reg Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Viking Princess"
+      },
+      {
+        "id": "cspf-445398",
+        "kind": "English Channel solo",
+        "date": "2019-07-23",
+        "duration": "10:35:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445398",
+            "url": "https://cspf.co.uk/swim/445398"
+          }
+        ],
+        "startTime": "02:15:00",
+        "finishTime": "12:50:00",
+        "observer": "Keith Oiller",
+        "pilot": "Eric Hartley",
+        "boat": "Pathfinder"
+      },
+      {
+        "id": "cspf-445436",
+        "kind": "English Channel solo",
+        "date": "2019-08-12",
+        "duration": "10:04:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445436",
+            "url": "https://cspf.co.uk/swim/445436"
+          }
+        ],
+        "startTime": "08:51:00",
+        "finishTime": "18:55:00",
+        "observer": "Andrew King",
+        "pilot": "Andy King/James King",
+        "boat": "Louise Jane"
+      },
+      {
+        "id": "catalina-2019-09-27",
+        "kind": "Catalina Channel solo",
+        "date": "2019-09-27",
+        "duration": "10:05:36",
+        "route": "Santa Catalina Island to the California mainland",
+        "nationality": "Australia",
+        "ratifier": "Catalina Channel Swimming Federation",
+        "refs": [
+          {
+            "text": "Catalina Channel Swimming Federation, September 27, 2019 · Chloe McCardel, Australia",
+            "url": "https://swimcatalina.org/swim-successes/"
+          }
+        ]
+      },
+      {
+        "id": "cspf-445530",
+        "kind": "English Channel solo",
+        "date": "2020-07-30",
+        "duration": "09:44:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445530",
+            "url": "https://cspf.co.uk/swim/445530"
+          }
+        ],
+        "startTime": "07:00:00",
+        "finishTime": "16:44:00",
+        "observer": "Keith Oiller",
+        "pilot": "Andy King/James King",
+        "boat": "Louise Jane"
+      },
+      {
+        "id": "cspf-445537",
+        "kind": "English Channel solo",
+        "date": "2020-08-04",
+        "duration": "10:24:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445537",
+            "url": "https://cspf.co.uk/swim/445537"
+          }
+        ],
+        "startTime": "00:20:00",
+        "finishTime": "10:44:00",
+        "observer": "Keith Oiller",
+        "pilot": "Andy King/James King",
+        "boat": "Louise Jane"
+      },
+      {
+        "id": "cspf-445544",
+        "kind": "English Channel solo",
+        "date": "2020-08-07",
+        "duration": "09:45:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445544",
+            "url": "https://cspf.co.uk/swim/445544"
+          }
+        ],
+        "startTime": "02:20:00",
+        "finishTime": "12:05:00",
+        "observer": "R. Brickell",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      },
+      {
+        "id": "cspf-445602",
+        "kind": "English Channel solo",
+        "date": "2020-09-22",
+        "duration": "11:08:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445602",
+            "url": "https://cspf.co.uk/swim/445602"
+          }
+        ],
+        "startTime": "02:35:00",
+        "finishTime": "13:43:00",
+        "observer": "R. Brickell",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      },
+      {
+        "id": "cspf-445606",
+        "kind": "English Channel solo",
+        "date": "2020-10-17",
+        "duration": "10:12:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445606",
+            "url": "https://cspf.co.uk/swim/445606"
+          }
+        ],
+        "startTime": "00:55:00",
+        "finishTime": "11:07:00",
+        "observer": "R. Brickell",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      },
+      {
+        "id": "cspf-445618",
+        "kind": "English Channel solo",
+        "date": "2021-07-18",
+        "duration": "10:35:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445618",
+            "url": "https://cspf.co.uk/swim/445618"
+          }
+        ],
+        "startTime": "05:35:00",
+        "finishTime": "16:10:00",
+        "observer": "R. Brickell",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      },
+      {
+        "id": "cspf-445628",
+        "kind": "English Channel solo",
+        "date": "2021-07-21",
+        "duration": "10:22:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445628",
+            "url": "https://cspf.co.uk/swim/445628"
+          },
+          {
+            "text": "Channel Swimming Association swim 5291",
+            "url": "https://www.channelswimmingassociation.com/swim/5291/chloe-mccardel"
+          }
+        ],
+        "startTime": "08:10:00",
+        "finishTime": "18:32:00",
+        "observer": "R. Brickell",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      },
+      {
+        "id": "cspf-445646",
+        "kind": "English Channel solo",
+        "date": "2021-08-04",
+        "duration": "09:55:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445646",
+            "url": "https://cspf.co.uk/swim/445646"
+          },
+          {
+            "text": "Channel Swimming Association swim 5307",
+            "url": "https://www.channelswimmingassociation.com/swim/5307/chloe-mccardel"
+          }
+        ],
+        "startTime": "07:20:00",
+        "finishTime": "17:15:00",
+        "observer": "R. Brickell",
+        "note": "The CSA awarded this swim its fastest solo and fastest swim by a woman for the 2021 season.",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      },
+      {
+        "id": "cspf-445655",
+        "kind": "English Channel solo",
+        "date": "2021-08-20",
+        "duration": "12:10:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445655",
+            "url": "https://cspf.co.uk/swim/445655"
+          },
+          {
+            "text": "Channel Swimming Association swim 5314",
+            "url": "https://www.channelswimmingassociation.com/swim/5314/chloe-mccardel"
+          },
+          {
+            "text": "CSA account of the 40th crossing",
+            "url": "https://www.channelswimmingassociation.com/news/185/chloe-mccardel-queen-channel"
+          }
+        ],
+        "startTime": "08:15:00",
+        "finishTime": "20:25:00",
+        "observer": "R. Brickell",
+        "note": "The CSA counted this as McCardel’s 40th CSA crossing.",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      },
+      {
+        "id": "cspf-445698",
+        "kind": "English Channel solo",
+        "date": "2021-09-21",
+        "duration": "10:57:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445698",
+            "url": "https://cspf.co.uk/swim/445698"
+          },
+          {
+            "text": "Channel Swimming Association swim 5364",
+            "url": "https://www.channelswimmingassociation.com/swim/5364/chloe-mccardel"
+          }
+        ],
+        "startTime": "00:30:00",
+        "finishTime": "11:27:00",
+        "observer": "R. Brickell",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      },
+      {
+        "id": "cspf-445702",
+        "kind": "English Channel solo",
+        "date": "2021-10-07",
+        "duration": "10:54:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 445702",
+            "url": "https://cspf.co.uk/swim/445702"
+          },
+          {
+            "text": "Channel Swimming Association swim 5371",
+            "url": "https://www.channelswimmingassociation.com/swim/5371/chloe-mccardel"
+          }
+        ],
+        "startTime": "00:15:00",
+        "finishTime": "11:09:00",
+        "observer": "R. Brickell",
+        "pilot": "Reg Brickell Jr/Ray Brickell",
+        "boat": "Viking Princess II"
+      }
+    ]
+  },
+  "des-renford-english-channel": {
+    "baseRevision": "channel-773725b6cb0ce9b568e4",
+    "paragraph": "Renford crossed twice within six days in 1975. On 29 July he swam from France to England in 14 hours 22 minutes, with B. Reed on Accord. On 3 August he returned to France in 13 hours 8 minutes, escorted by Reg Brickell Sr on Helen Ann Marie. They were separate solo swims.",
+    "events": [
+      {
+        "id": "cspf-443023",
+        "kind": "English Channel solo",
+        "date": "1970-08-27",
+        "duration": "12:55:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443023",
+            "url": "https://cspf.co.uk/swim/443023"
+          }
+        ],
+        "observer": "F. Gill",
+        "pilot": "Reg Brickell Sr",
+        "boat": "Helen Ann Marie"
+      },
+      {
+        "id": "cspf-443062",
+        "kind": "English Channel solo",
+        "date": "1974-08-13",
+        "duration": "12:41:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443062",
+            "url": "https://cspf.co.uk/swim/443062"
+          }
+        ],
+        "observer": "R. Scott",
+        "pilot": "Val Noakes",
+        "boat": "Accord"
+      },
+      {
+        "id": "cspf-443071",
+        "kind": "English Channel solo",
+        "date": "1975-07-29",
+        "duration": "14:22:00",
+        "route": "France to England",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443071",
+            "url": "https://cspf.co.uk/swim/443071"
+          }
+        ],
+        "observer": "M. Morford",
+        "pilot": "B. Reed",
+        "boat": "Accord"
+      },
+      {
+        "id": "cspf-443074",
+        "kind": "English Channel solo",
+        "date": "1975-08-03",
+        "duration": "13:08:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443074",
+            "url": "https://cspf.co.uk/swim/443074"
+          }
+        ],
+        "observer": "R.W. Brickell",
+        "pilot": "Reg Brickell Sr",
+        "boat": "Helen Ann Marie"
+      },
+      {
+        "id": "cspf-443102",
+        "kind": "English Channel solo",
+        "date": "1975-09-01",
+        "duration": "13:12:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443102",
+            "url": "https://cspf.co.uk/swim/443102"
+          }
+        ],
+        "observer": "R.W. Brickell",
+        "pilot": "Reg Brickell Sr",
+        "boat": "Helen Ann Marie"
+      },
+      {
+        "id": "cspf-443107",
+        "kind": "English Channel solo",
+        "date": "1976-08-04",
+        "duration": "12:02:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443107",
+            "url": "https://cspf.co.uk/swim/443107"
+          }
+        ],
+        "observer": "P. Cox",
+        "pilot": "Reg Brickell Sr",
+        "boat": "Helen Ann Marie"
+      },
+      {
+        "id": "cspf-443126",
+        "kind": "English Channel solo",
+        "date": "1977-07-21",
+        "duration": "13:35:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443126",
+            "url": "https://cspf.co.uk/swim/443126"
+          }
+        ],
+        "observer": "R.W. Brickell",
+        "pilot": "Reg Brickell Sr",
+        "boat": "Helen Ann Marie"
+      },
+      {
+        "id": "cspf-443160",
+        "kind": "English Channel solo",
+        "date": "1978-08-22",
+        "duration": "14:01:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443160",
+            "url": "https://cspf.co.uk/swim/443160"
+          }
+        ],
+        "pilot": "B. Wellard",
+        "boat": "New Venture"
+      },
+      {
+        "id": "cspf-443180",
+        "kind": "English Channel solo",
+        "date": "1979-08-04",
+        "duration": "11:42:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443180",
+            "url": "https://cspf.co.uk/swim/443180"
+          }
+        ],
+        "observer": "A. Floydd",
+        "pilot": "Reg Brickell Sr",
+        "boat": "Helen Ann Marie"
+      },
+      {
+        "id": "cspf-443206",
+        "kind": "English Channel solo",
+        "date": "1979-09-04",
+        "duration": "12:43:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443206",
+            "url": "https://cspf.co.uk/swim/443206"
+          }
+        ],
+        "observer": "F. Richards",
+        "pilot": "Val Noakes",
+        "boat": "Fair Chance"
+      },
+      {
+        "id": "cspf-443219",
+        "kind": "English Channel solo",
+        "date": "1980-08-23",
+        "duration": "13:48:00",
+        "route": "England to France",
+        "nationality": "Australia",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443219",
+            "url": "https://cspf.co.uk/swim/443219"
+          }
+        ],
+        "observer": "M. Palmer",
+        "pilot": "Peter Reed",
+        "boat": "2 Brothers"
+      }
+    ]
+  },
+  "mervyn-sharp-english-channel": {
+    "baseRevision": "channel-17b1425b5f4eb990b243",
+    "paragraph": "Sharp completed two England-to-France swims in 1969. One took 14 hours 29 minutes and was the outward crossing of an attempted double. The other took 19 hours 41 minutes. His 15-hour-14-minute crossing on 31 July 1970 came eight days before he raced at Windermere.",
+    "events": [
+      {
+        "id": "cspf-442992",
+        "kind": "English Channel solo",
+        "date": "1968",
+        "duration": "17:52:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 442992",
+            "url": "https://cspf.co.uk/swim/442992"
+          },
+          {
+            "text": "Dover Museum’s list of Sharp’s seven swims",
+            "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sharp-mervyn"
+          }
+        ]
+      },
+      {
+        "id": "cspf-443003",
+        "kind": "English Channel solo",
+        "date": "1969",
+        "duration": "14:29:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443003",
+            "url": "https://cspf.co.uk/swim/443003"
+          },
+          {
+            "text": "Dover Museum’s list of Sharp’s seven swims",
+            "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sharp-mervyn"
+          }
+        ],
+        "landing": "four miles north-northeast of the S.W. Ridge Buoy",
+        "startTime": "07:16:00",
+        "finishTime": "21:45:00",
+        "observer": "Peter Bales; Anthony Waltham Smith",
+        "note": "Sharp attempted a return crossing. The register credits one completed crossing.",
+        "pilot": "H. Reed",
+        "boat": "Accord"
+      },
+      {
+        "id": "cspf-443014",
+        "kind": "English Channel solo",
+        "date": "1970-07-31",
+        "duration": "15:14:00",
+        "route": "England to France",
+        "nationality": "UK [England]",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443014",
+            "url": "https://cspf.co.uk/swim/443014"
+          },
+          {
+            "text": "Dover Museum’s list of Sharp’s seven swims",
+            "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sharp-mervyn"
+          }
+        ],
+        "observer": "P. Frayne",
+        "pilot": "Leonard Hutchinson",
+        "boat": "Envictor"
+      }
+    ]
+  },
+  "nora-toledano-cadena-english-channel": {
+    "baseRevision": "channel-90a7c5b26619f69363c2",
+    "paragraph": "In 1995 Toledano finished third around Manhattan in 8 hours 9 minutes 8 seconds. She returned in 2001 and finished eighth. In September 2005 she swam from Samphire Hoe to Pointe du Riden in 10 hours 4 minutes, with Michael Oram piloting Gallivant and Laura López Bonilla observing.",
+    "events": [
+      {
+        "id": "cspf-443539",
+        "kind": "English Channel solo",
+        "date": "1992-09-18",
+        "duration": "11:35:00",
+        "route": "England to France",
+        "nationality": "Mexico",
+        "ratifier": "Channel Swimming Association",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 443539",
+            "url": "https://cspf.co.uk/swim/443539"
+          }
+        ],
+        "startTime": "05:00:00",
+        "finishTime": "16:35:00",
+        "observer": "R.W. Brickell",
+        "pilot": "Reg Brickell Jr",
+        "boat": "Helen Ann Marie"
+      },
+      {
+        "id": "nyow-353",
+        "kind": "Manhattan Island swim",
+        "date": "1995-08-13",
+        "duration": "8:09:08",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "MEX",
+        "refs": [
+          {
+            "text": "New York Open Water, result 353",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 3
+      },
+      {
+        "id": "nyow-496",
+        "kind": "Manhattan Island swim",
+        "date": "2001-06-23",
+        "duration": "8:13:57",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "MEX",
+        "refs": [
+          {
+            "text": "New York Open Water, result 496",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 8
+      },
+      {
+        "id": "cspf-444015",
+        "kind": "English Channel solo",
+        "date": "2005-09-02",
+        "duration": "10:04:00",
+        "route": "England to France",
+        "nationality": "Mexico",
+        "ratifier": "Channel Swimming & Piloting Federation",
+        "refs": [
+          {
+            "text": "CS&PF historical swim 444015",
+            "url": "https://cspf.co.uk/swim/444015"
+          }
+        ],
+        "departure": "Samphire Hoe",
+        "landing": "Pointe du Riden",
+        "startTime": "10:42:00",
+        "finishTime": "20:46:00",
+        "observer": "Laura López Bonilla",
+        "pilot": "Michael Oram",
+        "boat": "Gallivant"
+      }
+    ]
+  },
+  "shelley-taylor-smith-english-channel": {
+    "baseRevision": "channel-f0fe9317f0188ba7de98",
+    "paragraph": "Taylor-Smith’s Manhattan swims took her around the island from two starting points. She finished third from Mill Rock in 1984 and first from Pier A at the Battery in 1987. On 14 July 1995 she made the circuit from Mill Rock in 5 hours 45 minutes 25 seconds.",
+    "events": [
+      {
+        "id": "nyow-51",
+        "kind": "Manhattan Island swim",
+        "date": "1984-08-26",
+        "duration": "7:53:22",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Mill Rock",
+        "landing": "Mill Rock",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 51",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 3
+      },
+      {
+        "id": "nyow-77",
+        "kind": "Manhattan Island swim",
+        "date": "1985-07-28",
+        "duration": "7:44:44",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Mill Rock",
+        "landing": "Mill Rock",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 77",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 1
+      },
+      {
+        "id": "nyow-102",
+        "kind": "Manhattan Island swim",
+        "date": "1985-10-12",
+        "duration": "6:12:29",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Mill Rock",
+        "landing": "Mill Rock",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 102",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 1
+      },
+      {
+        "id": "nyow-120",
+        "kind": "Manhattan Island swim",
+        "date": "1987-08-09",
+        "duration": "7:24:54",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 120",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 1
+      },
+      {
+        "id": "nyow-159",
+        "kind": "Manhattan Island swim",
+        "date": "1988-08-27",
+        "duration": "7:27:44",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 159",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 1
+      },
+      {
+        "id": "nyow-192",
+        "kind": "Manhattan Island swim",
+        "date": "1989-08-19",
+        "duration": "7:32:34",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 192",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 1
+      },
+      {
+        "id": "nyow-349",
+        "kind": "Manhattan Island swim",
+        "date": "1995-07-14",
+        "duration": "5:45:25",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Mill Rock",
+        "landing": "Mill Rock",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 349",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          },
+          {
+            "text": "Women’s Museum of Australia, Shelley Taylor-Smith",
+            "url": "https://www.wmoa.com.au/t-herstory/4"
+          }
+        ]
+      },
+      {
+        "id": "nyow-407",
+        "kind": "Manhattan Island swim",
+        "date": "1998-07-11",
+        "duration": "7:18:07",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 407",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 1
+      }
+    ]
+  },
+  "susie-maroney-english-channel": {
+    "baseRevision": "channel-3126f5d8d8fec1ac6f0e",
+    "paragraph": "After her Manhattan victories in 1990 and 1994, Maroney returned to New York in June 1999. She made the counterclockwise circuit from Pier A at the Battery in 7 hours 15 minutes 59 seconds, placing eighth.",
+    "events": [
+      {
+        "id": "nyow-435",
+        "kind": "Manhattan Island swim",
+        "date": "1999-06-12",
+        "duration": "7:15:59",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 435",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 8
+      }
+    ]
+  },
+  "linda-mcgill-english-channel": {
+    "baseRevision": "channel-4f13e8ffc608a100808d",
+    "paragraph": "McGill’s three Manhattan results from 1983 to 1986 include swims from Pier A at the Battery and from Mill Rock. Her quickest of the three was 8 hours 23 minutes 10 seconds from Mill Rock in 1984.",
+    "events": [
+      {
+        "id": "nyow-42",
+        "kind": "Manhattan Island swim",
+        "date": "1983-07-24",
+        "duration": "9:10:55",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 42",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 17
+      },
+      {
+        "id": "nyow-61",
+        "kind": "Manhattan Island swim",
+        "date": "1984-08-26",
+        "duration": "8:23:10",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Mill Rock",
+        "landing": "Mill Rock",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 61",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 13
+      },
+      {
+        "id": "nyow-114",
+        "kind": "Manhattan Island swim",
+        "date": "1986-08-09",
+        "duration": "8:48:16",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "AUS",
+        "refs": [
+          {
+            "text": "New York Open Water, result 114",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 12
+      }
+    ]
+  },
+  "antonio-arguelles-english-channel": {
+    "baseRevision": "channel-9ce9c3b49e269e8fc0b8",
+    "paragraph": "Argüelles swam from Catalina Island to the California mainland in July 1999 and again in October 2008, July 2009 and January 2017. His July 2009 crossing took 10 hours 25 minutes 2 seconds. Five weeks earlier he had finished twelfth around Manhattan.",
+    "events": [
+      {
+        "id": "nyow-398",
+        "kind": "Manhattan Island swim",
+        "date": "1997-07-19",
+        "duration": "7:52:16",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "MEX",
+        "refs": [
+          {
+            "text": "New York Open Water, result 398",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 8
+      },
+      {
+        "id": "catalina-1999-07-12",
+        "kind": "Catalina Channel solo",
+        "date": "1999-07-12",
+        "duration": "12:25:43",
+        "route": "Santa Catalina Island to the California mainland",
+        "nationality": "Mexico",
+        "ratifier": "Catalina Channel Swimming Federation",
+        "refs": [
+          {
+            "text": "Catalina Channel Swimming Federation, July 12, 1999 · Antonio Arguelles, Mexico",
+            "url": "https://swimcatalina.org/swim-successes/"
+          }
+        ]
+      },
+      {
+        "id": "catalina-2008-10-13",
+        "kind": "Catalina Channel solo",
+        "date": "2008-10-13",
+        "duration": "13:10:30",
+        "route": "Santa Catalina Island to the California mainland",
+        "nationality": "Mexico",
+        "ratifier": "Catalina Channel Swimming Federation",
+        "refs": [
+          {
+            "text": "Catalina Channel Swimming Federation, October 13, 2008 · Antonio Arguelles, Mexico",
+            "url": "https://swimcatalina.org/swim-successes/"
+          }
+        ]
+      },
+      {
+        "id": "nyow-648",
+        "kind": "Manhattan Island swim",
+        "date": "2009-06-06",
+        "duration": "8:21:11",
+        "route": "Counterclockwise around Manhattan",
+        "departure": "Pier A, Battery",
+        "landing": "Pier A, Battery",
+        "nationality": "MEX",
+        "refs": [
+          {
+            "text": "New York Open Water, result 648",
+            "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+          }
+        ],
+        "place": 12
+      },
+      {
+        "id": "catalina-2009-07-13",
+        "kind": "Catalina Channel solo",
+        "date": "2009-07-13",
+        "duration": "10:25:02",
+        "route": "Santa Catalina Island to the California mainland",
+        "nationality": "Mexico",
+        "ratifier": "Catalina Channel Swimming Federation",
+        "refs": [
+          {
+            "text": "Catalina Channel Swimming Federation, July 13th 2009 · Antonio Arguelles, Mexico",
+            "url": "https://swimcatalina.org/swim-successes/"
+          }
+        ]
+      },
+      {
+        "id": "catalina-2017-01-15",
+        "kind": "Catalina Channel solo",
+        "date": "2017-01-15",
+        "duration": "14:27:34",
+        "route": "Santa Catalina Island to the California mainland",
+        "nationality": "Mexico",
+        "ratifier": "Catalina Channel Swimming Federation",
+        "refs": [
+          {
+            "text": "Catalina Channel Swimming Federation, January 15, 2017 · Antonio Argüelles, Mexico",
+            "url": "https://swimcatalina.org/swim-successes/"
+          }
+        ]
+      }
+    ]
+  }
+}
