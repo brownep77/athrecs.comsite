@@ -1,0 +1,385 @@
+{
+  "slug": "owen-okeefe-english-channel",
+  "name": "Owen O’Keefe",
+  "country": "Ireland",
+  "aliases": [
+    "Owen O'Keefe"
+  ],
+  "highlight": "At 16 the Fermoy swimmer crossed solo in 10h19. Four years later he swam in the six-person Crosóige Mara relay.",
+  "biography": [
+    "Owen O’Keefe swam for Fermoy Swimming Club in County Cork. On 21 September 2009, aged 16, he became the youngest Irish swimmer at the time to complete a solo English Channel crossing. Lance Oram guided him from England to France aboard Sea Satin.",
+    "In July 2013 O’Keefe swam the second turn in the six-person Crosóige Mara relay. The team reached France and returned to Shakespeare Beach in 20 hours 29 minutes. Later that summer he swam around Jersey in 9 hours 35 minutes and covered the River Blackwater from Fermoy to Youghal in 12 hours 8 minutes.",
+    "The Irish Long Distance Swimming Association also records his 2010 Strait of Gibraltar crossing. He entered the Ireland Marathon Swimming Hall of Fame in its class of 2020."
+  ],
+  "flags": [
+    {
+      "code": "IE",
+      "label": "Ireland",
+      "abbr": "IRL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality",
+      "value": "Ireland"
+    },
+    {
+      "label": "Club at the 2009 crossing",
+      "value": "Fermoy Swimming Club"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "okeefe-solo-2009",
+      "title": "Solo from England to France, 21 September 2009",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "10 hours 19 minutes, ratified by the CS&PF."
+        },
+        {
+          "label": "Departure and arrival",
+          "text": "01:41 from Abbot’s Cliff at the western end of Samphire Hoe. The register gives a 12:00 finish, and Sport Ireland places the landing at Cap Gris-Nez. The register does not specify a time zone."
+        },
+        {
+          "label": "Date discrepancy",
+          "text": "Sport Ireland calls the swim a Sunday. The federation’s dated record and season table both give Monday 21 September."
+        },
+        {
+          "label": "Escort",
+          "text": "Pilot Lance Oram, vessel Sea Satin, observer Irene Wakeham and trainer Jackie Power."
+        },
+        {
+          "label": "Record at the time",
+          "text": "Youngest Irish solo swimmer, aged 16. Accounts differ on his national speed ranking."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF individual record 444331",
+          "url": "https://cspf.co.uk/swim/444331"
+        },
+        {
+          "text": "CS&PF 2009 season table",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2009"
+        },
+        {
+          "text": "Sport Ireland’s contemporary report",
+          "url": "https://www.sportireland.ie/news/swimming-lisa-cummins-first-irish-swimmer-to-complete-2-way-channel-crossing"
+        },
+        {
+          "text": "Owen O’Keefe’s contemporary relay account",
+          "url": "https://fermoyfish.wordpress.com/2013/07/17/we-did-it/"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association, class of 2020",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        },
+        {
+          "text": "Owen O’Keefe’s account of his swims",
+          "url": "https://fermoyfish.wordpress.com/about/"
+        }
+      ]
+    },
+    {
+      "id": "okeefe-crosoige-2013",
+      "title": "Crosóige Mara two-way relay, 13 July 2013",
+      "lines": [
+        {
+          "label": "Team performance",
+          "text": "Six-person relay from England to France and back in 20:29:00. The official team splits are 10:18:59 and 10:10:01."
+        },
+        {
+          "label": "Route and clocks",
+          "text": "O’Keefe reports a 01:14 start at Abbot’s Cliff, a French landing south of Cap Gris-Nez and a finish at Shakespeare Beach. The reported start and official duration imply about 21:43. The finish clock is calculated."
+        },
+        {
+          "label": "Team members",
+          "text": "Carol Cashell, Owen O’Keefe, Caitlin Desmond, Lynne Lynch, Maeve Ryan and Eoin O’Riordan."
+        },
+        {
+          "label": "Escort",
+          "text": "Mike Oram piloted Gallivant. O’Keefe names the two CS&PF observers as Mike Ball and Jim Boucher."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF 2013 relay results",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2013"
+        },
+        {
+          "text": "Owen O’Keefe’s contemporary relay account",
+          "url": "https://fermoyfish.wordpress.com/2013/07/17/we-did-it/"
+        },
+        {
+          "text": "Owen O’Keefe’s account of his swims",
+          "url": "https://fermoyfish.wordpress.com/about/"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "okeefe-gibraltar-2010",
+      "title": "Strait of Gibraltar, 22 July 2010",
+      "lines": [
+        {
+          "label": "Solo crossing",
+          "text": "O’Keefe swam from Spain to Morocco in 3 hours 52 minutes. The Irish association gives the distance as 14.4 km."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association, class of 2020",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        },
+        {
+          "text": "Owen O’Keefe’s Strait of Gibraltar report",
+          "url": "https://fermoyfish.wordpress.com/bigswims/gibraltar/"
+        }
+      ]
+    },
+    {
+      "id": "okeefe-jersey-2013",
+      "title": "Around Jersey, 24 July 2013",
+      "lines": [
+        {
+          "label": "Solo swim",
+          "text": "O’Keefe circled Jersey in 9 hours 35 minutes. The Irish association records this as the fastest men’s time at that point."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association, class of 2020",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        },
+        {
+          "text": "Owen O’Keefe’s dated Jersey swim report",
+          "url": "https://fermoyfish.wordpress.com/2013/07/28/round-jersey-solo-completed/"
+        }
+      ]
+    },
+    {
+      "id": "okeefe-blackwater-2013",
+      "title": "Fermoy to Youghal, 16 August 2013",
+      "lines": [
+        {
+          "label": "Solo swim",
+          "text": "O’Keefe swam the 60 km River Blackwater route in 12 hours 8 minutes."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association, class of 2020",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        },
+        {
+          "text": "Owen O’Keefe’s Blackwater finish report",
+          "url": "https://fermoyfish.wordpress.com/2013/08/17/fermoy-to-youghal-swim-completed/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "How old was Owen O’Keefe when he swam the Channel?",
+      "value": "He was 16 when he swam from England to France on 21 September 2009."
+    },
+    {
+      "label": "Who piloted Owen O’Keefe’s solo crossing?",
+      "value": "Lance Oram piloted Sea Satin. Irene Wakeham was the observer."
+    },
+    {
+      "label": "What was Crosóige Mara’s relay time?",
+      "value": "The six-person team completed its two-way Channel crossing in 20 hours 29 minutes in July 2013."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF individual record 444331",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444331"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF 2009 season table",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2009"
+        }
+      ]
+    },
+    {
+      "title": "Sport Ireland’s contemporary report",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.sportireland.ie/news/swimming-lisa-cummins-first-irish-swimmer-to-complete-2-way-channel-crossing"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF 2013 relay results",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2013"
+        }
+      ]
+    },
+    {
+      "title": "Owen O’Keefe’s contemporary relay account",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://fermoyfish.wordpress.com/2013/07/17/we-did-it/"
+        }
+      ]
+    },
+    {
+      "title": "Irish Long Distance Swimming Association, class of 2020",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        }
+      ]
+    },
+    {
+      "title": "Owen O’Keefe’s account of his swims",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://fermoyfish.wordpress.com/about/"
+        }
+      ]
+    },
+    {
+      "title": "Owen O’Keefe’s dated Jersey swim report",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://fermoyfish.wordpress.com/2013/07/28/round-jersey-solo-completed/"
+        }
+      ]
+    },
+    {
+      "title": "Owen O’Keefe’s Blackwater finish report",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://fermoyfish.wordpress.com/2013/08/17/fermoy-to-youghal-swim-completed/"
+        }
+      ]
+    },
+    {
+      "title": "Owen O’Keefe’s Strait of Gibraltar report",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://fermoyfish.wordpress.com/bigswims/gibraltar/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "okeefe-solo-2009",
+      "title": "Solo from England to France, 21 September 2009",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "10 hours 19 minutes, ratified by the CS&PF."
+        },
+        {
+          "label": "Departure and arrival",
+          "text": "01:41 from Abbot’s Cliff at the western end of Samphire Hoe. The register gives a 12:00 finish, and Sport Ireland places the landing at Cap Gris-Nez. The register does not specify a time zone."
+        },
+        {
+          "label": "Date discrepancy",
+          "text": "Sport Ireland calls the swim a Sunday. The federation’s dated record and season table both give Monday 21 September."
+        },
+        {
+          "label": "Escort",
+          "text": "Pilot Lance Oram, vessel Sea Satin, observer Irene Wakeham and trainer Jackie Power."
+        },
+        {
+          "label": "Record at the time",
+          "text": "Youngest Irish solo swimmer, aged 16. Accounts differ on his national speed ranking."
+        }
+      ]
+    },
+    {
+      "id": "okeefe-crosoige-2013",
+      "title": "Crosóige Mara two-way relay, 13 July 2013",
+      "lines": [
+        {
+          "label": "Team performance",
+          "text": "Six-person relay from England to France and back in 20:29:00. The official team splits are 10:18:59 and 10:10:01."
+        },
+        {
+          "label": "Route and clocks",
+          "text": "O’Keefe reports a 01:14 start at Abbot’s Cliff, a French landing south of Cap Gris-Nez and a finish at Shakespeare Beach. The reported start and official duration imply about 21:43. The finish clock is calculated."
+        },
+        {
+          "label": "Team members",
+          "text": "Carol Cashell, Owen O’Keefe, Caitlin Desmond, Lynne Lynch, Maeve Ryan and Eoin O’Riordan."
+        },
+        {
+          "label": "Escort",
+          "text": "Mike Oram piloted Gallivant. O’Keefe names the two CS&PF observers as Mike Ball and Jim Boucher."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "okeefe-gibraltar-2010",
+      "title": "Strait of Gibraltar, 22 July 2010",
+      "lines": [
+        {
+          "label": "Solo crossing",
+          "text": "O’Keefe swam from Spain to Morocco in 3 hours 52 minutes. The Irish association gives the distance as 14.4 km."
+        }
+      ]
+    },
+    {
+      "id": "okeefe-jersey-2013",
+      "title": "Around Jersey, 24 July 2013",
+      "lines": [
+        {
+          "label": "Solo swim",
+          "text": "O’Keefe circled Jersey in 9 hours 35 minutes. The Irish association records this as the fastest men’s time at that point."
+        }
+      ]
+    },
+    {
+      "id": "okeefe-blackwater-2013",
+      "title": "Fermoy to Youghal, 16 August 2013",
+      "lines": [
+        {
+          "label": "Solo swim",
+          "text": "O’Keefe swam the 60 km River Blackwater route in 12 hours 8 minutes."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-92f72f1cbbb4628cb84d"
+}

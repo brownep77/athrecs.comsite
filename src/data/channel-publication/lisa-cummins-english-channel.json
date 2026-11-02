@@ -1,0 +1,241 @@
+{
+  "slug": "lisa-cummins-english-channel",
+  "name": "Lisa Cummins",
+  "country": "Ireland",
+  "aliases": [],
+  "highlight": "The first Irish swimmer to complete a solo double Channel crossing. The federation lists 35 hours for her swim in September 2009.",
+  "biography": [
+    "Lisa Cummins trained in open water off Cork with Eilis Burns and swam indoors with Source Masters. In September 2009 she set out from Abbot’s Cliff near Dover, landed on the French coast at Wissant and swam back to Dungeness. She was the first Irish swimmer to complete a solo two-way crossing.",
+    "The federation’s season results give 35 hours. Cummins’s own account explains that her return split included her time ashore in France. The published accounts disagree on the final clock reading.",
+    "In July 2018 Cummins swam twice around Manhattan. New York Open Water lists the swimmer from County Cork in third place at the 40 Bridges event, with a combined time of 21 hours 2 minutes 20 seconds."
+  ],
+  "flags": [
+    {
+      "code": "IE",
+      "label": "Ireland",
+      "abbr": "IRL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality",
+      "value": "Ireland"
+    },
+    {
+      "label": "Training base in 2009",
+      "value": "Cork"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cummins-double-2009",
+      "title": "England to France and back, 19–20 September 2009",
+      "lines": [
+        {
+          "label": "Ratified result",
+          "text": "One solo two-way swim. The CS&PF season table gives 14h36 plus 20h24 for a total of 35h00."
+        },
+        {
+          "label": "Outbound",
+          "text": "10:35 on 19 September, Abbot’s Cliff, to 01:11 on 20 September, Wissant beach. These are reported swim clocks. The sources do not specify a time zone."
+        },
+        {
+          "label": "Return",
+          "text": "The leg record gives 01:18 to 21:42. Cummins herself gives the same restart but a 21:35 finish and says the return split included the seven minutes ashore. Sport Ireland places the finish on the south shore of Dungeness."
+        },
+        {
+          "label": "Timing discrepancy",
+          "text": "The federation’s detailed clocks span 35h07. Cummins’s start and finish span the registered 35h00. Sport Ireland reported 10:24 to about 21:44 and 35h20. The Irish Examiner reported 35h36. The exact finish clock remains disputed."
+        },
+        {
+          "label": "Escort",
+          "text": "Lance Oram piloted Sea Satin. Tanya Harding observed and Eilis Burns trained Cummins."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF 2009 season results, solo swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2009"
+        },
+        {
+          "text": "CS&PF outbound leg 444327",
+          "url": "https://cspf.co.uk/swim/444327"
+        },
+        {
+          "text": "CS&PF return leg 444328",
+          "url": "https://cspf.co.uk/swim/444328"
+        },
+        {
+          "text": "Lisa Cummins’s first-person account and published splits",
+          "url": "https://swimmingthechannel2009.blogspot.com/"
+        },
+        {
+          "text": "Sport Ireland’s report of 22 September 2009",
+          "url": "https://www.sportireland.ie/news/swimming-lisa-cummins-first-irish-swimmer-to-complete-2-way-channel-crossing"
+        },
+        {
+          "text": "Irish Examiner’s report of 22 September 2009",
+          "url": "https://www.irishexaminer.com/news/arid-20101506.html"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "cummins-40-bridges-2018",
+      "title": "40 Bridges, twice around Manhattan, 20–21 July 2018",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "Third overall, 21:02:20. Both laps started and finished at Pier A. The organiser gives 9:30:45 for the first lap and 11:31:35 for the second."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, 40 Bridges results",
+          "url": "https://www.nyopenwater.org/40-bridges-swim/"
+        },
+        {
+          "text": "New York Open Water, individual Manhattan laps",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "Who was the first Irish swimmer to swim the Channel both ways?",
+      "value": "Lisa Cummins completed the first Irish solo double crossing on 19–20 September 2009."
+    },
+    {
+      "label": "How long did Lisa Cummins’s Channel swim take?",
+      "value": "The CS&PF season table lists 35 hours, with splits of 14 hours 36 minutes and 20 hours 24 minutes."
+    },
+    {
+      "label": "Where did Lisa Cummins touch land?",
+      "value": "She left Abbot’s Cliff, landed at Wissant in France and returned to the English coast at Dungeness."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF 2009 season results, solo swims",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2009"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF outbound leg 444327",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444327"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF return leg 444328",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444328"
+        }
+      ]
+    },
+    {
+      "title": "Lisa Cummins’s first-person account and published splits",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimmingthechannel2009.blogspot.com/"
+        }
+      ]
+    },
+    {
+      "title": "Sport Ireland’s report of 22 September 2009",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.sportireland.ie/news/swimming-lisa-cummins-first-irish-swimmer-to-complete-2-way-channel-crossing"
+        }
+      ]
+    },
+    {
+      "title": "Irish Examiner’s report of 22 September 2009",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.irishexaminer.com/news/arid-20101506.html"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, 40 Bridges results",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/40-bridges-swim/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, individual Manhattan laps",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cummins-double-2009",
+      "title": "England to France and back, 19–20 September 2009",
+      "lines": [
+        {
+          "label": "Ratified result",
+          "text": "One solo two-way swim. The CS&PF season table gives 14h36 plus 20h24 for a total of 35h00."
+        },
+        {
+          "label": "Outbound",
+          "text": "10:35 on 19 September, Abbot’s Cliff, to 01:11 on 20 September, Wissant beach. These are reported swim clocks. The sources do not specify a time zone."
+        },
+        {
+          "label": "Return",
+          "text": "The leg record gives 01:18 to 21:42. Cummins herself gives the same restart but a 21:35 finish and says the return split included the seven minutes ashore. Sport Ireland places the finish on the south shore of Dungeness."
+        },
+        {
+          "label": "Timing discrepancy",
+          "text": "The federation’s detailed clocks span 35h07. Cummins’s start and finish span the registered 35h00. Sport Ireland reported 10:24 to about 21:44 and 35h20. The Irish Examiner reported 35h36. The exact finish clock remains disputed."
+        },
+        {
+          "label": "Escort",
+          "text": "Lance Oram piloted Sea Satin. Tanya Harding observed and Eilis Burns trained Cummins."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "cummins-40-bridges-2018",
+      "title": "40 Bridges, twice around Manhattan, 20–21 July 2018",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "Third overall, 21:02:20. Both laps started and finished at Pier A. The organiser gives 9:30:45 for the first lap and 11:31:35 for the second."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-67b1885a66389969709e"
+}
