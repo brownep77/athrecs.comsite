@@ -26,3 +26,13 @@ export const revokeAthleteReviewLink=createServerFn({method:'POST'}).middleware(
 export const loadAthleteReview=createServerFn({method:'POST'}).middleware([authMiddleware]).validator((input:z.input<typeof token>)=>token.parse(input)).handler(async({data,context})=>(await import('./service.server')).reviewInvitation(data.token,{userId:context.userId,staff:false}));
 export const respondToAthleteReview=createServerFn({method:'POST'}).middleware([authMiddleware]).validator((input:{token:string;responses:{index:number;response:'yes'|'no'|'unsure';note:string}[];declaration:true})=>z.object({token:z.string().regex(/^[a-f0-9]{64}$/),responses:z.array(z.object({index:z.number().int().min(1).max(250),response:z.enum(['yes','no','unsure']),note:z.string().trim().max(1000)}).strict()).min(1).max(250),declaration:z.literal(true)}).strict().parse(input)).handler(async({data,context})=>(await import('./service.server')).respondInvitation(data,{userId:context.userId,staff:false}));
 export const reviewStaffPastedResults=createServerFn({method:'POST'}).middleware([staffMiddleware]).validator((input:z.input<typeof review>)=>review.parse(input)).handler(async({data,context})=>(await import('./publication.server')).reviewBatch(data,{userId:context.userId,staff:true}));
+
+export const listMyOwnerRaceReviews = createServerFn({ method: "POST" }).middleware([authMiddleware])
+  .handler(async ({ context }) => (await import("./owner-review.server")).listOwnerRaceReviews(context.userId));
+
+export const answerMyOwnerRaceReview = createServerFn({ method: "POST" }).middleware([authMiddleware])
+  .validator((input: unknown) => z.object({
+    athleteId: z.number().int().positive(), key: z.string().max(80), version: z.string().regex(/^[a-f0-9]{64}$/),
+    response: z.enum(["yes", "no"]),
+  }).strict().parse(input))
+  .handler(async ({ context, data }) => (await import("./owner-review.server")).recordOwnerRaceAnswer(context.userId, data));

@@ -21,6 +21,7 @@ const presentation=load('src/lib/athrecs/profile-result-presentation.ts',{'./par
 const scope={IS_RUNRECS_SITE:false},db={getSql:async()=>sql,dbSource:'neon'};
 const service=load('src/lib/athlete-workspace/service.server.ts',{'node:crypto':crypto,'../db':db,'../site-scope':scope,'./core':core,'../athrecs/profile-result-presentation':presentation});
 const publication=load('src/lib/athlete-workspace/publication.server.ts',{'node:crypto':crypto,'../db':db,'../site-scope':scope,'./core':core});
+const ownerReview=load('src/lib/athlete-workspace/owner-review.server.ts',{'node:crypto':crypto,zod,'../db':db,'../site-scope':scope,'./core':core});
 const staff={userId:'workspace-staff',staff:true},owner={userId:'workspace-owner',staff:false},stranger={userId:'workspace-stranger',staff:false};
 const source='https://example.test/official-results';
 const row=(index,race='Workspace Synthetic 10K',time='00:40:00.1')=>({index,race,date:'2026-09-20',distance:'10K',time,timingBasis:'chip',sourceUrl:source,bib:String(index),place:String(index)});
@@ -129,6 +130,24 @@ try{
   assert.equal(JSON.stringify(publicDetails).includes(originalApproval.note),false,'The approval reason is not a public result note');
   const perf={resultId:1,editionId:1,sport:'Running',surface:'Road',distanceCode:'10K',distanceKm:10,status:'finished',finishTimeSeconds:2400,chipTimeSeconds:2400,gunTimeSeconds:null,overallPlace:1,category:null,sourceUrls:[source],details:details.readResultDetails({profileExcluded:true,privateReason:'not exposed'})};
   assert.equal('privateReason' in perf.details,false);assert.equal(records.combineProfileResults([perf]).length,0);assert.equal(records.findPersonalBests([perf]).length,0);assert.equal(records.findPersonalBests([{...perf,details:{profileExcluded:false}}]).length,1);
+  const candidates=['41','83'].map(bib=>({key:'synthetic-'+bib,race:'Synthetic Road Race',date:'2020-02-08',distance:'Half',time:'01:31:00',timingBasis:'chip',bib,place:'',sourceUrl:source,alternativeGroup:'synthetic-2020'}));
+  await sql`update athletes set profile_details=profile_details || jsonb_build_object('sourceReview',jsonb_build_object('ownerReviewCandidates',${JSON.stringify(candidates)}::jsonb)) where id=${managed.id}`;
+  assert.deepEqual(await ownerReview.listOwnerRaceReviews(stranger.userId),[]);
+  const [queue]=await ownerReview.listOwnerRaceReviews(owner.userId);
+  assert.deepEqual(queue.rows.map(r=>r.response),[null,null]);
+  const [first,second]=queue.rows.map(({key,version})=>({athleteId:managed.id,key,version,response:'yes'}));
+  const publicCount=async()=>(await sql`select count(*)::int as n from results where athlete_id=${managed.id}`)[0].n;
+  const beforeAnswers=await publicCount();
+  await assert.rejects(()=>ownerReview.recordOwnerRaceAnswer(stranger.userId,first),/approved/);
+  await assert.rejects(()=>ownerReview.recordOwnerRaceAnswer(owner.userId,{...first,version:'0'.repeat(64)}),/changed/);
+  await ownerReview.recordOwnerRaceAnswer(owner.userId,first);
+  await ownerReview.recordOwnerRaceAnswer(owner.userId,first);
+  await assert.rejects(()=>ownerReview.recordOwnerRaceAnswer(owner.userId,second),/only one/);
+  await ownerReview.recordOwnerRaceAnswer(owner.userId,{...second,response:'no'});
+  assert.deepEqual((await ownerReview.listOwnerRaceReviews(owner.userId))[0].rows.map(r=>r.response),['yes','no']);
+  const answers=await sql`select entries#>>'{0,state}' as state from athlete_result_proposals where athlete_id=${managed.id} and input_hash=any(${[first.version,second.version]}::text[]) order by state`;
+  assert.deepEqual(answers.map(r=>r.state),['pending','rejected']);
+  assert.equal(await publicCount(),beforeAnswers,'No identity response publishes a result');
   scope.IS_RUNRECS_SITE=true;await assert.rejects(()=>service.workspace(null,staff),/AthRecs/);
   console.log('PASS: real PostgreSQL, ownership/IDOR, optimistic edits, strict table parsing, private proposals and evidence, required per-race approval notes with actor/time, staff-only readback, member/public stripping, recipient binding, hashed expiring single-use links, denials, owner-confirmed additions, exact timing, cross-athlete source-row conflicts, duplicate-note preservation, atomic rollback, replay receipts, unassigned submissions and reversible profile-only removal. Synthetic records only.');
 }finally{await client.end();}

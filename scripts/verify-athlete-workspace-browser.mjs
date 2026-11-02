@@ -13,6 +13,9 @@ const approvalNote='Opened the official source and checked bib and identity.';
 const result={verified:false,syntheticTest:false,id:11,race:'Existing Synthetic 10K',date:'2026-09-20',distance:'10K',time:'00:40:00.1',excluded:false,staffApproval:{note:historicalNote,approvedBy:'synthetic-staff',approvedAt:'2026-09-26T12:00:00.000Z',requestId:'00000000-0000-4000-8000-000000000010'}};
 writeFileSync(resolve(root,'api.js'),`window.calls=[];window.workspace={profile:${JSON.stringify(profile)},profileVersion:'${'a'.repeat(64)}',editable:true,linked:[],results:[${JSON.stringify(result)}],batches:[],email:'staff@example.test'};
 const clone=x=>JSON.parse(JSON.stringify(x));
+const ownerRows=['41','83'].map((bib,i)=>({key:'synthetic-'+bib,race:'Synthetic Road Race',date:'2020-02-08',time:i?'01:50:00':'01:31:00',bib,hint:'',version:String(i).repeat(64),alternativeGroup:'synthetic-2020',response:null}));
+export async function listMyOwnerRaceReviews(){return [{athleteId:7,athleteName:'Synthetic Athlete',rows:clone(ownerRows)}]}
+export async function answerMyOwnerRaceReview({data}){ownerRows.find(r=>r.key===data.key).response=data.response;return {recorded:true}}
 export async function searchStaffAthletes(){return [{id:7,name:'Synthetic Athlete',club:'Synthetic Club',visibility:'public',slug:'synthetic-athlete'}]}
 export async function getStaffWorkspace(){return clone(window.workspace)}
 export const getMyWorkspace=getStaffWorkspace;
@@ -98,6 +101,12 @@ try{
   await page.goto('http://127.0.0.1:8102/?member=1');await page.getByRole('heading',{name:'Edit Synthetic Athlete',exact:true}).waitFor();
   assert.equal(await page.getByText('Approval note',{exact:true}).count(),0);assert.equal(await page.getByText(historicalNote,{exact:true}).count(),0);
   assert.equal(await page.getByLabel('Why I approved these races',{exact:true}).count(),0);assert.equal(await page.evaluate(()=>window.calls.length),0);
+  const matches=page.getByRole('heading',{name:'Possible races for Synthetic Athlete'}).locator('..');
+  const yes=matches.getByRole('button',{name:'Mine',exact:true}),no=matches.getByRole('button',{name:'Not mine',exact:true});
+  await yes.first().waitFor();assert.equal(await yes.count(),2);assert(await yes.nth(0).isEnabled());assert(await yes.nth(1).isEnabled());
+  await yes.first().click();await matches.getByText('Marked as mine',{exact:true}).waitFor();
+  assert(await yes.isDisabled(),'The second alternative cannot be confirmed');assert(await no.isEnabled());
+  await no.click();await matches.getByText('Not mine',{exact:true}).waitFor();assert.equal(await yes.count(),0);
   const storedPanel=page.getByRole('heading',{name:'Stored races on this profile',exact:true}).locator('..');
   const unverifiedRace=storedPanel.getByRole('row').filter({hasText:'Existing Synthetic 10K'});
   await unverifiedRace.getByRole('button',{name:'Verify result',exact:true}).click();
