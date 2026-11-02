@@ -1,0 +1,236 @@
+{
+  "slug": "colm-oneill-english-channel",
+  "name": "Colm O’Neill",
+  "country": "Ireland",
+  "aliases": [
+    "Colm O'Neill"
+  ],
+  "highlight": "Two years after crossing to France, the Dublin swimmer went from Scotland to Northern Ireland in 11 hours 25 minutes 5 seconds.",
+  "biography": [
+    "Colm O’Neill of County Dublin swam from England to France in 11 hours 42 minutes in 2002. Two years later he crossed from Scotland to Northern Ireland. The Ireland Marathon Swimming Hall of Fame identifies him as the second swimmer from Ireland to complete both channels, after Ted Keenan.",
+    "O’Neill finished tenth in the 2008 Manhattan Island Marathon Swim. In 2011 he joined the Irish Sea fundraising relay known as The Swim. His induction into the Ireland Marathon Swimming Hall of Fame in 2020 also recognised his work mentoring open-water swimmers in Cork."
+  ],
+  "flags": [
+    {
+      "code": "IE",
+      "label": "Ireland",
+      "abbr": "IRL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality",
+      "value": "Ireland"
+    },
+    {
+      "label": "County in the Channel register",
+      "value": "County Dublin"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "oneill-english-2002",
+      "title": "England to France, 19 July 2002",
+      "lines": [
+        {
+          "label": "Route and clocks",
+          "text": "The CS&PF records a 07:28 departure from England and a 19:10 finish in France, an elapsed time of 11 hours 42 minutes. It gives no named beaches. The register does not specify a time zone."
+        },
+        {
+          "label": "Escort and ratification",
+          "text": "Lance Oram piloted Sea Satin, with Eddie Spelling as observer. The CS&PF ratified the solo crossing."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF crossing register, swim 443810",
+          "url": "https://cspf.co.uk/swim/443810"
+        },
+        {
+          "text": "CS&PF 2002 season results",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2002"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "oneill-north-2004",
+      "title": "North Channel, 31 July 2004",
+      "lines": [
+        {
+          "label": "Direction and time",
+          "text": "Scotland to Northern Ireland in 11 hours 25 minutes 5 seconds."
+        },
+        {
+          "label": "Escort",
+          "text": "Brian Meharg piloted Purple Heather."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Infinity Channel Swimming, North Channel solo register",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association, North Channel history",
+          "url": "https://www.ildsa.info/north-channel-history/"
+        },
+        {
+          "text": "Ireland Marathon Swimming Hall of Fame, class of 2020",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        }
+      ]
+    },
+    {
+      "id": "oneill-manhattan-2008",
+      "title": "Manhattan Island Marathon Swim, 5 July 2008",
+      "lines": [
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan from Pier A at the Battery."
+        },
+        {
+          "label": "Result",
+          "text": "7:55:47, 10th overall. The historical results list this finish as entry 623."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, Manhattan solo results",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Ireland Marathon Swimming Hall of Fame, class of 2020",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Colm O’Neill swim the English Channel?",
+      "value": "He reached France on 19 July 2002 after 11 hours 42 minutes."
+    },
+    {
+      "label": "Who piloted Colm O’Neill’s English Channel swim?",
+      "value": "Lance Oram guided him aboard Sea Satin."
+    },
+    {
+      "label": "Which way did Colm O’Neill swim the North Channel?",
+      "value": "He swam from Scotland to Northern Ireland on 31 July 2004 in 11 hours 25 minutes 5 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF crossing register, swim 443810",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/443810"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF 2002 season results",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2002"
+        }
+      ]
+    },
+    {
+      "title": "Infinity Channel Swimming, North Channel solo register",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        }
+      ]
+    },
+    {
+      "title": "Irish Long Distance Swimming Association, North Channel history",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.ildsa.info/north-channel-history/"
+        }
+      ]
+    },
+    {
+      "title": "Ireland Marathon Swimming Hall of Fame, class of 2020",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, Manhattan solo results",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "oneill-english-2002",
+      "title": "England to France, 19 July 2002",
+      "lines": [
+        {
+          "label": "Route and clocks",
+          "text": "The CS&PF records a 07:28 departure from England and a 19:10 finish in France, an elapsed time of 11 hours 42 minutes. It gives no named beaches. The register does not specify a time zone."
+        },
+        {
+          "label": "Escort and ratification",
+          "text": "Lance Oram piloted Sea Satin, with Eddie Spelling as observer. The CS&PF ratified the solo crossing."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "oneill-north-2004",
+      "title": "North Channel, 31 July 2004",
+      "lines": [
+        {
+          "label": "Direction and time",
+          "text": "Scotland to Northern Ireland in 11 hours 25 minutes 5 seconds."
+        },
+        {
+          "label": "Escort",
+          "text": "Brian Meharg piloted Purple Heather."
+        }
+      ]
+    },
+    {
+      "id": "oneill-manhattan-2008",
+      "title": "Manhattan Island Marathon Swim, 5 July 2008",
+      "lines": [
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan from Pier A at the Battery."
+        },
+        {
+          "label": "Result",
+          "text": "7:55:47, 10th overall. The historical results list this finish as entry 623."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-61108fb5c6c24deb61f0"
+}
