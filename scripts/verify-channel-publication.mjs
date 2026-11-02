@@ -95,3 +95,90 @@ console.log(
     data.reduce((a, p) => a + channelListing(p).swims, 0) +
     " swims.",
 );
+
+const { expandedChannelProfile } = await import("../src/lib/athrecs/channel-edition.server.ts");
+const edition = JSON.parse(
+  fs.readFileSync(
+    new URL("../src/data/channel-editions/2026-11-02-endurance.json", import.meta.url),
+  ),
+);
+const expanded = new Map();
+let additions = 0;
+for (const [slug, supplement] of Object.entries(edition)) {
+  const base = entries.get(slug);
+  const next = expandedChannelProfile(base, supplement);
+  const ids = [...next.crossings, ...next.otherEvents].map((c) => c.id);
+  assert.equal(new Set(ids).size, ids.length);
+  assert.deepEqual(
+    next.nativeCrossings.map((c) => c.id),
+    next.crossings.map((c) => c.id),
+  );
+  assert.deepEqual(
+    next.nativeOtherEvents.map((c) => c.id),
+    next.otherEvents.map((c) => c.id),
+  );
+  assert.doesNotMatch(JSON.stringify(channelNative(next)), /https?:\/\//);
+  assert.equal(next.biography.at(-1), supplement.paragraph);
+  assert.notEqual(next.revision, base.revision);
+  expanded.set(slug, next);
+  additions += supplement.events.length;
+  for (const e of supplement.events) {
+    assert.match(e.duration, /^\d+:[0-5]\d:[0-5]\d$/);
+    assert.match(e.date, /^\d{4}(-\d{2}-\d{2})?$/);
+    assert(e.refs.every((ref) => new URL(ref.url).protocol === "https:"));
+    if (e.startTime && e.finishTime) {
+      const seconds = (mark) => mark.split(":").reduce((a, b) => a * 60 + Number(b), 0);
+      assert.equal(
+        (seconds(e.finishTime) - seconds(e.startTime) + 86400) % 86400,
+        seconds(e.duration),
+        e.id,
+      );
+      if (e.date.length === 10) assert.equal(Boolean(e.endDate), e.startTime > e.finishTime);
+    }
+  }
+}
+
+const versionDb = new PGlite();
+try {
+  const base = entries.get(Object.keys(edition)[0]);
+  const next = expanded.get(base.slug);
+  await versionDb.exec(
+    "create table athletes(id int,slug text,bio text,display_name text,profile_visibility text,profile_details jsonb);create table athlete_identifiers(athlete_id int);create table athlete_account_links(athlete_id int);create table network_audit_log(entity_type text,entity_id text,action text,after_value jsonb);insert into athlete_identifiers values(1);",
+  );
+  const sql = { query: async (q, args) => (await versionDb.query(q, args)).rows };
+  const read = () => readReviewedChannelRows(sql, entries, base.slug, expanded);
+  await versionDb.query("insert into athletes values(1,$1,$2,$3,'public',$4)", [
+    base.slug,
+    base.biography.join("\n\n"),
+    base.name,
+    JSON.stringify({ channelArchiveRevision: base.revision }),
+  ]);
+  for (const p of [base, next]) {
+    const bio = p.biography.join("\n\n");
+    await versionDb.query("update athletes set bio=$1, profile_details=$2", [
+      bio,
+      JSON.stringify({ channelArchiveRevision: p.revision }),
+    ]);
+    assert.equal((await read()).length, 0);
+    for (const [action, fields] of [
+      [
+        "athlete.profile_admin_published",
+        { profile_visibility: "public", channelArchiveRevision: p.revision },
+      ],
+      ["athlete.biography_admin_published", { biography: bio }],
+    ]) {
+      await versionDb.query("insert into network_audit_log values('athlete','1',$1,$2)", [
+        action,
+        JSON.stringify({ athleteId: 1, ...fields }),
+      ]);
+    }
+    assert.equal((await read())[0].revision, p.revision);
+  }
+  await versionDb.exec("insert into athlete_account_links values(1)");
+  assert.equal((await read()).length, 0);
+} finally {
+  await versionDb.close();
+}
+console.log(
+  "Checked " + additions + " additional performances and both receipt-bound archive editions.",
+);
