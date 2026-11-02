@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1344 unique sources as of 28 October 2026. Only 41 are enabled; the other 1303 remain
+The registry contains 1625 unique sources as of 2 November 2026. Only 41 are enabled; the other 1584 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -85,9 +85,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1344 sources create exactly one source job;
+- all 1625 sources create exactly one source job;
 - the 41 enabled and rights-approved sources are queued;
-- the other 1303 sources are retained as blocked jobs with their reason;
+- the other 1584 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -480,3 +480,21 @@ research does not enable automatic collection. Source-specific notes preserve th
 race-day distinction, stale route data, retrieval failures and unresolved edition
 announcements. The complete registry now has 1,344 sources: 41 enabled and 1,303
 disabled. Existing bulk-run count assertions were reconciled to this inventory.
+
+
+## Spanish multisport and athletics result sources — 2 November 2026
+
+Registered 16 disabled sources after comparing the static registry, managed
+source records and wider event inventory. Coverage is limited to the actual
+federation, organiser, timing and archive documents reviewed. Existing World
+Triathlon, World Athletics, RFEA and Spanish Triathlon Federation entries are
+retained without duplicate registrations.
+
+Original publisher and timing-provider credits are preserved for mirrored
+documents. Assessment sheets and entry lists remain distinct from completed-race
+results; inaccessible result links and incomplete archive coverage are identified
+in the source notes. Athlete-specific captures, matching decisions and publication
+receipts remain private. All additions use enabled=0 and follow_history_links=0.
+Registration does not authorise automated collection or verify participant results.
+
+The current registry contains 1625 sources: 41 enabled and 1584 disabled.
