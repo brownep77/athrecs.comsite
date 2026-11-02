@@ -71,5 +71,7 @@ export const Route = createFileRoute("/swimming/english-channel/$slug")({
       })),
     };
   },
-  component: () => <ChannelArticle p={Route.useLoaderData()} />,
+  component: function EnglishChannelArticlePage() {
+    return <ChannelArticle p={Route.useLoaderData()} />;
+  },
 });

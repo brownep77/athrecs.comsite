@@ -43,5 +43,7 @@ export const Route = createFileRoute("/swimming/english-channel/")({
       ],
     };
   },
-  component: () => <ChannelDirectory items={Route.useLoaderData()} />,
+  component: function EnglishChannelDirectoryPage() {
+    return <ChannelDirectory items={Route.useLoaderData()} />;
+  },
 });
