@@ -1,0 +1,184 @@
+{
+  "slug": "conor-gunn-english-channel",
+  "name": "Conor Gunn",
+  "country": "Northern Ireland",
+  "aliases": [],
+  "highlight": "Gunn crossed in 9h11 in 1994, midway through a run of ten consecutive Irish 17 km championship wins.",
+  "biography": [
+    "Conor Gunn was 22 when he crossed from England to France on 2 September 1994. D. Ford piloted Sea Satin, with Joe Gunn listed as trainer. The swim earned the Channel Swimming Association’s award for the fastest swim by a British person that season.",
+    "Between 1992 and 2001 Gunn won the Irish men’s 17 km open-water championship ten years in succession. He placed second over 10.5 miles on Windermere in 1993. In 2001 he finished 13th around Manhattan, and in 2020 he entered the Ireland Marathon Swimming Hall of Fame."
+  ],
+  "flags": [
+    {
+      "code": "GB-NIR",
+      "label": "Northern Ireland",
+      "abbr": "NIR"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting country on the Channel result",
+      "value": "Northern Ireland in the CSA register. The CS&PF lists Ireland for the same swim."
+    },
+    {
+      "label": "Sporting country at Manhattan",
+      "value": "New York Open Water lists GBR for his 2001 result."
+    }
+  ],
+  "crossings": [
+    {
+      "id": "gunn-english-1994",
+      "title": "England to France, 2 September 1994",
+      "lines": [
+        {
+          "label": "Crossing",
+          "text": "09:47 departure and 18:58 arrival, giving 9 hours 11 minutes. The register identifies the two countries but gives no named beaches. The register does not specify a time zone."
+        },
+        {
+          "label": "Escort",
+          "text": "Pilot D. Ford on Sea Satin, observer N. Trusty and trainer Joe Gunn."
+        },
+        {
+          "label": "Award",
+          "text": "CSA 1994 award for the fastest swim by a British person."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF crossing register, swim 443602",
+          "url": "https://cspf.co.uk/swim/443602"
+        },
+        {
+          "text": "Channel Swimming Association results, Conor Gunn",
+          "url": "https://www.channelswimmingassociation.com/swim/2949/conor-gunn"
+        },
+        {
+          "text": "Ireland Marathon Swimming Hall of Fame, class of 2020",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "gunn-manhattan-2001",
+      "title": "Manhattan Island Marathon Swim, 23 June 2001",
+      "lines": [
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan from Pier A at the Battery."
+        },
+        {
+          "label": "Result",
+          "text": "8:55:36, 13th overall. The historical results list this finish as entry 501."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, Manhattan solo results",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "Ireland Marathon Swimming Hall of Fame, class of 2020",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "How fast did Conor Gunn swim the English Channel?",
+      "value": "He crossed solo in 9 hours 11 minutes on 2 September 1994."
+    },
+    {
+      "label": "Which country do the Channel registers give for Conor Gunn?",
+      "value": "The CSA lists Northern Ireland and the CS&PF lists Ireland for the same crossing."
+    },
+    {
+      "label": "How many Irish 17 km championships did Conor Gunn win in a row?",
+      "value": "He won ten consecutive men’s titles, from 1992 through 2001."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF crossing register, swim 443602",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/443602"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association results, Conor Gunn",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swim/2949/conor-gunn"
+        }
+      ]
+    },
+    {
+      "title": "Ireland Marathon Swimming Hall of Fame, class of 2020",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2020/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, Manhattan solo results",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "gunn-english-1994",
+      "title": "England to France, 2 September 1994",
+      "lines": [
+        {
+          "label": "Crossing",
+          "text": "09:47 departure and 18:58 arrival, giving 9 hours 11 minutes. The register identifies the two countries but gives no named beaches. The register does not specify a time zone."
+        },
+        {
+          "label": "Escort",
+          "text": "Pilot D. Ford on Sea Satin, observer N. Trusty and trainer Joe Gunn."
+        },
+        {
+          "label": "Award",
+          "text": "CSA 1994 award for the fastest swim by a British person."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "gunn-manhattan-2001",
+      "title": "Manhattan Island Marathon Swim, 23 June 2001",
+      "lines": [
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan from Pier A at the Battery."
+        },
+        {
+          "label": "Result",
+          "text": "8:55:36, 13th overall. The historical results list this finish as entry 501."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-bbb8c33129ccaade76f4"
+}

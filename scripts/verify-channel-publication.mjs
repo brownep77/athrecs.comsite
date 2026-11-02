@@ -35,6 +35,16 @@ for (const p of data) {
       if (line.url) assert(["https:", "http:"].includes(new URL(line.url).protocol));
 }
 const entries = new Map(data.map((p) => [p.slug, p]));
+for (const slug of ["owen-okeefe-english-channel", "carol-cashell-english-channel"]) {
+  assert.equal(channelListing(entries.get(slug)).relay, true, slug + " missing from relay filter");
+}
+const independentSolo = {
+  ...data[0],
+  nativeCrossings: [
+    { title: "Independent solo after a relay", lines: [{ label: "Solo result", text: "12h" }] },
+  ],
+};
+assert.equal(channelListing(independentSolo).relay, false);
 const db = new PGlite();
 const sql = { query: async (q, args) => (await db.query(q, args)).rows };
 try {

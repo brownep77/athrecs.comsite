@@ -35,9 +35,11 @@ export function channelListing(p: ChannelProfile) {
     events: p.otherEvents.length,
     checkedAt: p.checkedAt,
     eventNames: p.otherEvents.map((c) => c.title),
-    relay: p.nativeCrossings.some((c) =>
-      c.lines.some((l) =>
-        /relay.*team performance|team elapsed time/i.test([l.label, l.text].join(" ")),
+    relay: p.nativeCrossings.some((card) =>
+      card.lines.some(
+        (line) =>
+          /relay.*team performance|team elapsed time/i.test([line.label, line.text].join(" ")) ||
+          (/\brelay\b/i.test(card.title) && /^team (performance|result)$/i.test(line.label ?? "")),
       ),
     ),
   };
