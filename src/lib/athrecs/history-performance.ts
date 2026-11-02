@@ -45,8 +45,13 @@ export function historicalDistance(discipline: string, sport: string) {
     }
   }
   if (sport === "Athletics") {
-    const metres = /^(\d+(?:\.\d+)?)\s*(?:m|metres|meters)?$/i.exec(code);
-    if (metres) return { code: `${Number(metres[1])}m`, km: Number(metres[1]) / 1000 };
+    // World Athletics uses grouped metre labels such as "10,000 Metres".
+    // Accept only valid thousands groups, retaining the original source label.
+    const metres = /^((?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?)\s*(?:m|metres|meters)?$/i.exec(code);
+    if (metres) {
+      const distanceMetres = Number(metres[1].replaceAll(",", ""));
+      return { code: `${distanceMetres}m`, km: distanceMetres / 1000 };
+    }
     if (/^mile$/i.test(code)) return { code: "Mile", km: 1.609344 };
     if (/^2 miles$/i.test(code)) return { code: "2 miles", km: 3.218688 };
   }

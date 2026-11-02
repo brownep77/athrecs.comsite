@@ -149,6 +149,7 @@ jobs:
           node scripts/verify-result-source-sync.mjs
           node scripts/verify-anz-import.mjs
           node scripts/verify-historical-personal-bests.mjs
+          node scripts/verify-bowden-road-pb-metadata.mjs
 
       - name: Verify independent result evidence comparisons
         run: node scripts/verify-result-evidence-audit.mjs
