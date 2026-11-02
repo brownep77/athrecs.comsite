@@ -2,7 +2,11 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { PGlite } from "@electric-sql/pglite";
 import { readReviewedChannelRows } from "../src/lib/athrecs/channel-publication-query.ts";
-import { channelNative, channelListing } from "../src/lib/athrecs/english-channel.ts";
+import {
+  channelNative,
+  channelListing,
+  channelQuestions,
+} from "../src/lib/athrecs/english-channel.ts";
 const dir = new URL("../src/data/channel-publication/", import.meta.url);
 const data = fs
   .readdirSync(dir)
@@ -136,6 +140,20 @@ for (const [slug, supplement] of Object.entries(edition)) {
       if (e.date.length === 10) assert.equal(Boolean(e.endDate), e.startTime > e.finishTime);
     }
   }
+}
+
+for (const [slug, counts] of [
+  ["alison-streeter-english-channel", "38 selected solo performances"],
+  ["des-renford-english-channel", "19 selected solo performances"],
+  [
+    "shelley-taylor-smith-english-channel",
+    "1 selected solo performance and 1 named relay participation",
+  ],
+]) {
+  const p = expanded.get(slug);
+  const questions = channelQuestions(p);
+  assert(questions[0].value.includes(counts));
+  assert.deepEqual(questions.slice(1), p.questions.slice(1));
 }
 
 const versionDb = new PGlite();
