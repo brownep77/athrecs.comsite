@@ -102,6 +102,12 @@ jobs:
       - name: Verify sports directory coverage and jurisdiction filters
         run: node scripts/verify-sports-directory.mjs
 
+      - name: Editorial geography, substantial reports and private athlete linking
+        run: |
+          node --experimental-strip-types scripts/verify-editorial-browse.mjs
+          node --experimental-strip-types scripts/verify-editorial-athletes.mjs
+          node --experimental-strip-types scripts/verify-editorial-reports.mjs
+
       - name: Verify location race pages and automatic date rollover
         run: node scripts/verify-event-colours.mjs
 

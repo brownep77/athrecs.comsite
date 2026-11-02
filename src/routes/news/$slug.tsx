@@ -5,9 +5,10 @@ import { EditorialArticlePage } from "@/components/editorial/EditorialArticlePag
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { editorialJsonLd } from "@/lib/athrecs/editorial";
+import { getPublicEditorialAthleteLinks } from "@/lib/athrecs/editorial-athletes-api";
 
 export const Route = createFileRoute("/news/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     if (!IS_RUNRECS_SITE) {
       const editorial = EDITORIAL_ARTICLES.find((item) => item.slug === params.slug);
       if (!editorial) throw notFound();
@@ -17,7 +18,11 @@ export const Route = createFileRoute("/news/$slug")({
           params: { slug: editorial.slug },
           statusCode: 301,
         });
-      return { article: editorial, editorial };
+      const article = {
+        ...editorial,
+        athleteLinks: await getPublicEditorialAthleteLinks({ data: { slug: editorial.slug } }),
+      };
+      return { article, editorial: article };
     }
     const article = getNewsArticle(params.slug);
     if (!article) throw notFound();
