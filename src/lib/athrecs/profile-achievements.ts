@@ -3,6 +3,7 @@ import { countryFlag } from "./country-flags.ts";
 import { eligiblePerformance, performanceGroup } from "./profile-records.ts";
 import { isDisqualified } from "./result-details.ts";
 import { hasFinishMark } from "./profile-result-presentation.ts";
+import { normalizeDistanceCode } from "./distance.ts";
 import {
   achievementEvidenceVerified,
   achievementResultVerified,
@@ -168,13 +169,20 @@ export function buildProfileAchievements(
           row.meeting.trim().toLowerCase(),
           row.venue.trim().toLowerCase(),
           row.date || `${row.yearLabel || row.year}:${row.sourceDate}`,
-          row.discipline.trim().toLowerCase(),
+          normalizeDistanceCode(row.discipline).toLowerCase(),
           row.performance,
           row.place,
         ])
       : result.editionId > 0
         ? `edition:${result.editionId}`
-        : JSON.stringify([result.eventSlug, result.eventDate, result.sport, result.distanceCode]);
+        : JSON.stringify([
+            result.eventSlug,
+            result.eventDate,
+            result.sport,
+            normalizeDistanceCode(result.distanceCode),
+            result.distanceKm,
+            result.surface,
+          ]);
     const group = editions.get(key) ?? [];
     group.push(result);
     editions.set(key, group);

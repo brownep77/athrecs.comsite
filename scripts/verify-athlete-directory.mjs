@@ -52,6 +52,94 @@ try {
   assert.equal(before.publicAthletes, null);
   assert.equal(before.publicResults, null);
   console.log("[athlete-directory] Catalogue ready; checking discovery and privacy");
+  const accentFixtures = [
+    ["accent-jose", "José Carlos Accentfixture", "public"],
+    ["accent-plain", "Jose Plain Accentfixture", "public"],
+    ["accent-composed", "Zoë Accentfixture", "public"],
+    ["accent-decomposed", "Zoe\u0308 Accentfixture", "public"],
+    ["accent-unrelated", "Joseph Carlos Accentfixture", "public"],
+    ["accent-private", "José Private Accentfixture", "private"],
+    ["accent-script", "王 测试目录", "public"],
+  ];
+  for (const [slug, name, visibility] of accentFixtures) {
+    await sql`insert into athletes (slug, display_name, profile_visibility)
+      values (${slug}, ${name}, ${visibility})`;
+  }
+  for (const q of [
+    "Jose Carlos Accentfixture",
+    "José Carlos Accentfixture",
+    "JOSE\u0301 CARLOS ACCENTFIXTURE",
+  ]) {
+    const found = await rpc("athlete-directory-api", "getAthleteDirectory", { q });
+    assert.deepEqual(
+      found.athletes.map((athlete) => athlete.slug),
+      ["accent-jose"],
+    );
+    assert.equal(
+      found.athletes[0].display_name,
+      "José Carlos Accentfixture",
+      "Display spelling stays unchanged",
+    );
+  }
+  assert.equal(
+    (await rpc("athlete-directory-api", "getAthleteDirectory", { q: "José Plain Accentfixture" }))
+      .total,
+    1,
+    "An accented query also finds an unaccented stored name",
+  );
+  for (const q of ["Jose", "José"]) {
+    const found = await rpc("athlete-directory-api", "getAthleteDirectory", { q });
+    assert(
+      found.athletes.some((athlete) => athlete.slug === "accent-jose"),
+      "The indexed prefilter must fold accents too",
+    );
+    assert(
+      !found.athletes.some((athlete) => athlete.slug === "accent-private"),
+      "Accent folding preserves profile privacy",
+    );
+  }
+  for (const q of ["Zoe Accentfixture", "Zoë Accentfixture", "Zoe\u0308 Accentfixture"]) {
+    const firstAccentPage = await rpc("athlete-directory-api", "getAthleteDirectory", {
+      q,
+      pageSize: 1,
+    });
+    const lastAccentPage = await rpc("athlete-directory-api", "getAthleteDirectory", {
+      q,
+      pageSize: 1,
+      page: 2,
+    });
+    assert.equal(firstAccentPage.athletes.length, 1);
+    assert.equal(firstAccentPage.hasMore, true);
+    assert.equal(firstAccentPage.total, null);
+    assert.equal(lastAccentPage.total, 2);
+    assert.equal(lastAccentPage.hasMore, false);
+    assert.deepEqual(
+      [firstAccentPage.athletes[0].slug, lastAccentPage.athletes[0].slug].sort(),
+      ["accent-composed", "accent-decomposed"],
+      "Canonical Unicode forms match without duplicates or changes to bounded pagination",
+    );
+  }
+  for (const q of ["%José Carlos Accentfixture%", "José_", "\u0301\u0308", "\u0301 \u0308"]) {
+    assert.equal(
+      (await rpc("athlete-directory-api", "getAthleteDirectory", { q })).total,
+      0,
+      "Literal wildcards and accent-only queries must never broaden discovery",
+    );
+  }
+  assert.equal(
+    (await rpc("athlete-directory-api", "getAthleteDirectory", { q: "测试目录" })).total,
+    1,
+    "Accent folding preserves non-Latin text",
+  );
+  const accentHtmlResponse = await fetch(`${origin}/athletes?q=Jose+Carlos+Accentfixture`);
+  assert.equal(accentHtmlResponse.status, 200);
+  const accentHtml = load(await accentHtmlResponse.text());
+  assert.equal(
+    accentHtml('main a[href="/athletes/accent-jose"]').length,
+    1,
+    "The anonymous directory route exposes the same matching profile link",
+  );
+  assert(accentHtml("main").text().includes("José Carlos Accentfixture"));
   const fields = [
     ["alpha", "Directory Fixture Alpha", "England", "public"],
     ["beta", "Directory Fixture Beta", "Scotland", "public"],
@@ -234,6 +322,35 @@ try {
   const [alphaResult] = await sql`select id from results where athlete_id=${alpha.id}`;
   await sql`insert into athlete_public_shares (user_id, slug, enabled, share_results)
     values ('directory-owner', 'directory-owner-fixture', true, true)`;
+  const [accentClub] = await sql`insert into clubs(slug,name)
+    values ('accent-search-club','São Clube Accentfixture') returning id`;
+  await sql`update athletes set city='Évora Accentfixture',club_id=${accentClub.id} where id=${alpha.id}`;
+  for (const q of [
+    "Evora Accentfixture",
+    "Évora Accentfixture",
+    "Sao Clube Accentfixture",
+    "São Clube Accentfixture",
+  ]) {
+    assert.equal(
+      (await rpc("athlete-directory-api", "getAthleteDirectory", { q })).athletes[0]?.id,
+      alpha.id,
+    );
+  }
+  await sql`update athlete_public_shares set share_location=false,share_club=false where user_id='directory-owner'`;
+  for (const q of [
+    "Evora Accentfixture",
+    "Évora Accentfixture",
+    "Sao Clube Accentfixture",
+    "São Clube Accentfixture",
+  ]) {
+    assert.equal(
+      (await rpc("athlete-directory-api", "getAthleteDirectory", { q })).total,
+      0,
+      "Folded candidates cannot disclose owner-hidden location or club fields",
+    );
+  }
+  await sql`update athlete_public_shares set share_location=true,share_club=true where user_id='directory-owner'`;
+  await sql`update athletes set city=null,club_id=null where id=${alpha.id}`;
   await sql`insert into athlete_profile_hidden_results (user_id, result_id)
     values ('directory-owner', ${alphaResult.id})`;
   const hidden = await readFixture();

@@ -1,0 +1,359 @@
+{
+  "nl-hypotheekshop-stadsloop-appingedam-6bdd83|2026-10-03": {
+    "summary": "Stadsloop Appingedam road races and children’s runs.",
+    "timeZone": "Europe/Amsterdam",
+    "sourceUrl": "https://stadsloopappingedam.nl/praktisch/starttijden-en-tarieven/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "17:30",
+        "note": "The organiser’s 3 October 2026 programme confirms the adult 10K at 17:30.",
+        "publicNote": "Adult 10K."
+      },
+      "5K": {
+        "time": "16:30",
+        "note": "The organiser’s 3 October 2026 programme confirms the adult 5K at 16:30.",
+        "publicNote": "Adult 5K."
+      },
+      "800m": {
+        "time": "15:00",
+        "note": "Correct the imported 14:00: the 800m for ages 7–12 starts at 15:00; younger children start at 14:00.",
+        "publicNote": "Children aged 7–12."
+      },
+      "100m": {
+        "time": "14:00",
+        "note": "Dated organiser programme: 100m for children aged 3 and under.",
+        "publicNote": "Children aged 3 and under."
+      },
+      "400m": {
+        "time": "14:00",
+        "note": "Dated organiser programme: 400m for children aged 4–6.",
+        "publicNote": "Children aged 4–6."
+      }
+    }
+  },
+  "perth-running-festival-marathon|2026-10-11": {
+    "summary": "Perth Running Festival marathon from Optus Stadium.",
+    "timeZone": "Australia/Perth",
+    "sourceUrl": "https://perthrunningfestival.com.au/marathon/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "06:00",
+        "note": "The 2026 organiser page separates the 05:45 assembly from the 06:00 marathon start.",
+        "publicNote": "Assembly 05:45 at Optus Stadium; follow your allocated starting group."
+      }
+    }
+  },
+  "anglesey-trail-half-marathon|2026-11-01": {
+    "summary": "Anglesey Trail Half Marathon and 10K in Newborough Forest.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://alwaysaimhighevents.com/content/files/Anglesey-Trail-Final-Instructions-2026.pdf",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "08:15",
+        "note": "Final instructions, page 6, supersede the generic usually-08:30 page. Checked both distance sections visually.",
+        "publicNote": "Safety briefing 08:00. Registration 07:00–08:00 at Newborough Forest."
+      },
+      "10K": {
+        "time": "08:45",
+        "note": "Final instructions, page 6, show the 10K start at 08:45, separate from its briefing and registration.",
+        "publicNote": "Safety briefing 08:30. Registration 07:30–08:30 at Newborough Forest."
+      }
+    },
+    "place": {
+      "city": "Newborough",
+      "county": "Anglesey"
+    }
+  },
+  "attack-of-the-zombie-cows|2026-10-31": {
+    "summary": "Attack of the Zombie Cows is an eight-hour running and walking challenge at Samphire Hoe.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "8H": {
+        "time": "08:30",
+        "note": "Dated organiser page confirms one eight-hour challenge. Five imported fixed-distance options are not separately advertised races.",
+        "publicNote": "Complete as many laps as you choose within eight hours. The planned 3.28-mile loop is weather dependent."
+      }
+    },
+    "place": {
+      "city": "Dover"
+    }
+  },
+  "rosliston-rumble-autumn|2026-11-01": {
+    "summary": "Rosliston Rumble Autumn is a six-hour trail challenge in Rosliston Forest, Derbyshire.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://rasselbock.co.uk/event/rosliston-rumble-weekend-edition-autumn-2026/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "6H": {
+        "time": "09:00",
+        "note": "The organiser’s event index gives 1 November 2026; the linked FAQ confirms six hours from 09:00. The imported 31 October half marathon is incorrect.",
+        "publicNote": "Run as many 5.275 km laps as you choose within six hours. Completed laps determine your total distance."
+      }
+    },
+    "place": {
+      "city": "Rosliston",
+      "county": "Derbyshire"
+    }
+  },
+  "running-gp-croft-motor-circuit-november|2026-11-01": {
+    "summary": "Running GP at Croft Motor Circuit, with eight race distances from the junior mile to the marathon.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runninggrandprix.com/event/croft-running-festival-november-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "note": "Dated 1 November organiser programme and linked event guide page 5 agree on this distance-specific start.",
+        "publicNote": "Race pack collection closes 30 minutes before your start.",
+        "sourceUrl": "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/running-gp-croft-motor-circuit/2026-11-01/croft-event-guide-new-3-FczXIRTTBGuFuqt9NY8iPdNNlbPgSy.pdf"
+      },
+      "20mi": {
+        "time": "09:15",
+        "note": "Dated 1 November organiser programme and linked event guide page 5 agree on this distance-specific start.",
+        "publicNote": "Race pack collection closes 30 minutes before your start.",
+        "sourceUrl": "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/running-gp-croft-motor-circuit/2026-11-01/croft-event-guide-new-3-FczXIRTTBGuFuqt9NY8iPdNNlbPgSy.pdf"
+      },
+      "26.2K": {
+        "time": "09:30",
+        "note": "Dated 1 November organiser programme and linked event guide page 5 agree on this distance-specific start.",
+        "publicNote": "Metric marathon: 26.2 kilometres. Race pack collection 08:00–09:00.",
+        "sourceUrl": "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/running-gp-croft-motor-circuit/2026-11-01/croft-event-guide-new-3-FczXIRTTBGuFuqt9NY8iPdNNlbPgSy.pdf"
+      },
+      "Half": {
+        "time": "09:45",
+        "note": "Dated 1 November organiser programme and linked event guide page 5 agree on this distance-specific start.",
+        "publicNote": "Race pack collection closes 30 minutes before your start.",
+        "sourceUrl": "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/running-gp-croft-motor-circuit/2026-11-01/croft-event-guide-new-3-FczXIRTTBGuFuqt9NY8iPdNNlbPgSy.pdf"
+      },
+      "10mi": {
+        "time": "10:00",
+        "note": "Dated 1 November organiser programme and linked event guide page 5 agree on this distance-specific start.",
+        "publicNote": "Race pack collection closes 30 minutes before your start.",
+        "sourceUrl": "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/running-gp-croft-motor-circuit/2026-11-01/croft-event-guide-new-3-FczXIRTTBGuFuqt9NY8iPdNNlbPgSy.pdf"
+      },
+      "10K": {
+        "time": "10:15",
+        "note": "Dated 1 November organiser programme and linked event guide page 5 agree on this distance-specific start.",
+        "publicNote": "Race pack collection closes 30 minutes before your start.",
+        "sourceUrl": "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/running-gp-croft-motor-circuit/2026-11-01/croft-event-guide-new-3-FczXIRTTBGuFuqt9NY8iPdNNlbPgSy.pdf"
+      },
+      "5K": {
+        "time": "10:30",
+        "note": "Dated 1 November organiser programme and linked event guide page 5 agree on this distance-specific start.",
+        "publicNote": "Race pack collection closes 30 minutes before your start.",
+        "sourceUrl": "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/running-gp-croft-motor-circuit/2026-11-01/croft-event-guide-new-3-FczXIRTTBGuFuqt9NY8iPdNNlbPgSy.pdf"
+      },
+      "1mi Junior": {
+        "time": "12:00",
+        "note": "Dated 1 November organiser programme and linked event guide page 5 agree on this distance-specific start.",
+        "publicNote": "Junior mile. Collect your pack 10:30–11:30; meet at the blue flag 15 minutes before the start.",
+        "sourceUrl": "https://ogphybuho2txgsbq.public.blob.vercel-storage.com/event-guides/running-gp-croft-motor-circuit/2026-11-01/croft-event-guide-new-3-FczXIRTTBGuFuqt9NY8iPdNNlbPgSy.pdf"
+      }
+    },
+    "displayName": "Running GP Croft Motor Circuit",
+    "place": {
+      "city": "Dalton-on-Tees",
+      "county": "North Yorkshire"
+    }
+  },
+  "london-morun|2026-11-08": {
+    "summary": "London MoRun at East Sheen Gate, Richmond Park.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.mo-running.com/london",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "note": "The 2026 event page Timings section confirms this exact distance start.",
+        "publicNote": "Registration opens 08:00 and closes ten minutes before your race."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "The 2026 event page Timings section confirms this exact distance start.",
+        "publicNote": "Registration closes ten minutes before your race."
+      },
+      "1.5K Mini": {
+        "time": "11:45",
+        "note": "The event-specific programme confirms the children’s 1.5K Mini MoRun at 11:45.",
+        "publicNote": "Children’s Mini MoRun; collect your race pack before registration closes."
+      },
+      "5K": {
+        "time": "10:00",
+        "note": "The dated London programme gives 10:00 for both 5K and 10K.",
+        "publicNote": "Registration closes ten minutes before your race."
+      }
+    }
+  },
+  "london-riverside-morun|2026-11-29": {
+    "summary": "London Richmond Riverside MoRun from Ham Street Riverside.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.mo-running.com/london-richmond-riverside",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "note": "The 2026 event page Timings section confirms this exact distance start.",
+        "publicNote": "Registration opens 08:00 and closes ten minutes before your race."
+      },
+      "10K": {
+        "time": "10:00",
+        "note": "The 2026 event page Timings section confirms this exact distance start.",
+        "publicNote": "Registration closes ten minutes before your race."
+      },
+      "1.5K Mini": {
+        "time": "11:45",
+        "note": "The event-specific programme confirms the children’s 1.5K Mini MoRun at 11:45.",
+        "publicNote": "Children’s Mini MoRun; collect your race pack before registration closes."
+      }
+    }
+  },
+  "shepshed-7|2026-11-01": {
+    "summary": "Shepshed 7 and the one-mile fun run from Iveshead School.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://shepshedrc.org.uk/wp-content/uploads/2026/09/Shepshed_7_2026_Entrant_Information-1.pdf",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "7mi": {
+        "time": "11:00",
+        "note": "Dated final guide pages 2–3 and authorised EventEntry confirm 11:00; EventEntry is full as checked 26 October.",
+        "publicNote": "Main race sold out. Number collection from 08:30; parking is limited.",
+        "sourceUrl": "https://www.evententry.co.uk/shepshed-7"
+      },
+      "1mi Fun Run": {
+        "time": "10:00",
+        "note": "The 2026 final guide page 3 explicitly advertises the approximately one-mile fun run.",
+        "publicNote": "Approximately one mile; £5 entry on the day."
+      }
+    }
+  },
+  "brutal-halloween|2026-10-31": {
+    "summary": "Brutal Halloween at Hogmoor Inclosure, Bordon, with adult, junior and canicross races.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://racesignup.co.uk/brutal-halloween-hogmoor",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": null,
+        "note": "The authorised 2026 entry page calls these initial planned timings and says final details will be emailed on 30 October. Preserve the qualification; do not claim a final exact clock.",
+        "publicNote": "Three laps. Planned adult start 18:00; bring a headtorch.",
+        "label": "18:00 planned · check final instructions"
+      },
+      "6.6K": {
+        "time": null,
+        "note": "The authorised 2026 entry page calls these initial planned timings and says final details will be emailed on 30 October. Preserve the qualification; do not claim a final exact clock.",
+        "publicNote": "Two laps. Planned adult start 18:00; bring a headtorch.",
+        "label": "18:00 planned · check final instructions"
+      },
+      "3.3K Junior": {
+        "time": null,
+        "note": "The authorised 2026 entry page calls these initial planned timings and says final details will be emailed on 30 October. Preserve the qualification; do not claim a final exact clock.",
+        "publicNote": "One lap for children; under-10s must be accompanied. Planned start 17:45.",
+        "label": "17:45 planned · check final instructions"
+      },
+      "6.6K Canicross": {
+        "time": null,
+        "note": "The authorised 2026 entry page calls these initial planned timings and says final details will be emailed on 30 October. Preserve the qualification; do not claim a final exact clock.",
+        "publicNote": "Two laps with your dog. Planned start 17:55.",
+        "label": "17:55 planned · check final instructions"
+      }
+    }
+  },
+  "corofin-loops|2026-11-01": {
+    "summary": "Corofin Loop 8K and 10-mile road races in County Galway.",
+    "timeZone": "Europe/Dublin",
+    "sourceUrl": "https://eventmaster.ie/event/oOlbck3tLm",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "8K": {
+        "time": null,
+        "note": "The dated entry page gives 09:00 at event level, but does not establish individual distance clocks. Earlier years are not evidence for 2026. Recheck 27 October.",
+        "publicNote": "The programme is listed from 09:00; your distance’s start still needs confirmation. Check live entry availability."
+      },
+      "10M": {
+        "time": null,
+        "note": "The dated entry page gives 09:00 at event level, but does not establish individual distance clocks. Earlier years are not evidence for 2026. Recheck 27 October.",
+        "publicNote": "The programme is listed from 09:00; your distance’s start still needs confirmation. The 10-mile race is sold out."
+      }
+    }
+  },
+  "winter-sugar-loaf-junior-fell-races|2026-11-01": {
+    "summary": "Winter Sugar Loaf junior fell races in Abergavenny.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://welshfellrunnersassociation.org.uk/en/races/winter-sugar-loaf-juniors-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "1.78K U8/U10": {
+        "time": null,
+        "note": "The federation confirms 1 November and an 11:00 programme start but does not separate age-category clocks. The linked image is a 2024 route map, not the 2026 timetable.",
+        "publicNote": "Programme from 11:00; category start to be confirmed. Registration from 10:00 at Fro Car Park. Park at Great Bettws Farm, about 900 m away.",
+        "label": "Programme from 11:00 · Category start TBC"
+      },
+      "3.44K U12/U14": {
+        "time": null,
+        "note": "The federation confirms 1 November and an 11:00 programme start but does not separate age-category clocks. The linked image is a 2024 route map, not the 2026 timetable.",
+        "publicNote": "Programme from 11:00; category start to be confirmed. Registration from 10:00 at Fro Car Park. Park at Great Bettws Farm, about 900 m away.",
+        "label": "Programme from 11:00 · Category start TBC"
+      },
+      "5.3K U16/U18": {
+        "time": null,
+        "note": "The federation confirms 1 November and an 11:00 programme start but does not separate age-category clocks. The linked image is a 2024 route map, not the 2026 timetable.",
+        "publicNote": "Programme from 11:00; category start to be confirmed. Registration from 10:00 at Fro Car Park. Park at Great Bettws Farm, about 900 m away.",
+        "label": "Programme from 11:00 · Category start TBC"
+      }
+    }
+  },
+  "haldon-halloween-twilight-run|2026-10-30": {
+    "summary": "Halloween Twilight Run in Haldon Forest.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.purplegeckoevents.co.uk/halloween-twilight-run-haldon",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": null,
+        "note": "The dated organiser page confirms 10K; authorised Results Base entry is inaccessible and no current detailed timetable was opened. Old Cardinham 2021 clocks on the same page are unrelated.",
+        "publicNote": "Headtorch trail run. The 10K start is still awaiting confirmation.",
+        "sourceUrl": "https://www.resultsbase.net/event/7773"
+      }
+    }
+  },
+  "scorrier-house-halloween-twilight-run|2026-11-01": {
+    "summary": "Halloween Twilight Run at Scorrier House, Cornwall.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.purplegeckoevents.co.uk/halloween-twilight-run-haldon",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": null,
+        "note": "The dated organiser page confirms 10K; authorised Results Base entry is inaccessible and no current detailed timetable was opened. Old Cardinham 2021 clocks on the same page are unrelated.",
+        "publicNote": "Headtorch trail run. The 10K start is still awaiting confirmation.",
+        "sourceUrl": "https://www.resultsbase.net/event/7772"
+      }
+    },
+    "place": {
+      "county": "Cornwall"
+    }
+  },
+  "run-to-remember-5k-ie|2026-11-01": {
+    "summary": "Run to Remember 5K run and walk in Kildare Town, County Kildare.",
+    "timeZone": "Europe/Dublin",
+    "sourceUrl": "https://justrunsevents.ie/upcoming-events",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": null,
+        "note": "JustRuns lists the date, 5K and county; its linked 2026 Njuko entry renders no readable content and direct retrieval returned 403. Start remains unchecked; retry 27 October.",
+        "publicNote": "5K run and walk. Start time still to be confirmed.",
+        "sourceUrl": "https://in.njuko.com/run-to-remember-5k-2026"
+      }
+    },
+    "place": {
+      "city": "Kildare Town",
+      "county": "Kildare"
+    }
+  }
+}

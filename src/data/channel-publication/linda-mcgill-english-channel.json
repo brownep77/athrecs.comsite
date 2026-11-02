@@ -1,0 +1,902 @@
+{
+  "slug": "linda-mcgill-english-channel",
+  "name": "Linda McGill",
+  "country": "Australia",
+  "aliases": [
+    "Linda Kruk"
+  ],
+  "highlight": "First Australian Channel swimmer · three solos and a 1967 women’s record",
+  "biography": [
+    "Linda McGill was an Australian swimmer who moved from international pool competition into marathon swimming. Born in Sydney on 17 December 1945, she became a Commonwealth Games gold medallist and represented Australia at the 1964 Tokyo Olympics. Her subsequent open-water career gave her a different arena in which to establish national firsts and endurance records.",
+    "During a visit to Britain and Europe in 1965, Channel swimming became an unexpected challenge. She completed a France-to-England crossing in 11 hours and 12 minutes, becoming the first Australian to swim the Channel. The CSA commemorates the achievement on 7 August. The crossing made her an Australian pioneer in a challenge then dominated by swimmers from other nations.",
+    "McGill returned in 1967 for two more successful crossings, both again from France to England. Dover Museum places their finishes on 9 and 29 September. The first took 13 hours and two minutes; the second established a women’s record recorded by the CSA as nine hours and 59 minutes.",
+    "Her wider career included pioneering swims in Australian waters and around Hong Kong Island. An MBE and International Marathon Swimming Hall of Fame induction followed in 1968, with Australian Marathon Swimming Hall of Fame recognition in 2020. She died on 30 July 2025, leaving a career that connected elite pool swimming with the development of marathon swimming."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Australia — CSA individual results"
+    },
+    {
+      "label": "Born",
+      "value": "17 December 1945, Sydney"
+    },
+    {
+      "label": "Died",
+      "value": "30 July 2025, Gold Coast"
+    },
+    {
+      "label": "Also recorded as",
+      "value": "Linda Kruk, her married name"
+    },
+    {
+      "label": "Channel achievements",
+      "value": "First Australian swimmer; three France-to-England solos"
+    },
+    {
+      "label": "1967 record",
+      "value": "CSA 9:59, minute precision; more precise historical accounts differ"
+    },
+    {
+      "label": "Olympic career",
+      "value": "Represented Australia at Tokyo 1964"
+    },
+    {
+      "label": "Honours",
+      "value": "MBE and IMSHOF, 1968; Australian Marathon Swimming Hall of Fame, 2020"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Australian English Channel crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Saturday, 7 August 1965 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 12m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF prints departure 15:33:00 and arrival 02:45:00 for the year-only entry; phase dates remain unresolved. The CSA story’s departure from Dover is not interpreted as the start of the registered France-to-England swim.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Peter Frayne (CS&PF historical record)",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2322 confirms a successful France-to-England solo in 11:12. The association’s commemorative account supplies 7 August 1965; CS&PF historical record 442968 names observer Peter Frayne. No original observer manuscript was inspected."
+        },
+        {
+          "text": "CSA: Linda McGill, 1965",
+          "url": "https://www.channelswimmingassociation.com/swim/2322/linda-mcgill"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; successful solo France-to-England crossing in 11:12, 1965.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published successful row; original observer report not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CSA: Linda McGill — first Australian swimmer",
+          "url": "https://www.channelswimmingassociation.com/news/215/linda-mcgill-first-australian-swimmer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First Australian Channel swimmer on 7 August 1965; two further swims in 1967; 1968 MBE/IMSHOF and 2020 Australian Hall of Fame.",
+          "label": "Supports"
+        },
+        {
+          "text": "The account’s embarking from Dover on 6 August does not establish a water start from England; her registered swimming route is France to England.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical record: Linda McGill, 1965",
+          "url": "https://cspf.co.uk/swim/442968"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "11:12:00, reported departure 15:33:00 and arrival 02:45:00; observer Peter Frayne; CSA ratification attributed.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only; clock phase dates are not explicit.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mcgill-1965"
+    },
+    {
+      "title": "Second English Channel crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "13h 2m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Saturday, 9 September 1967 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Finish date is supplied by the museum; no departure date or clock was established.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2337 gives the successful 13:02 France-to-England swim. Dover Museum’s profile identifies it as the earlier of her two 1967 successes, and its chronological comparison gives 9 September with an explicit finish-date policy."
+        },
+        {
+          "text": "CSA: Linda McGill, 1967 — 13:02",
+          "url": "https://www.channelswimmingassociation.com/swim/2337/linda-mcgill"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Distinct successful France-to-England crossing in 13:02 in 1967.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year-only individual record; exact finish date supplied separately by Dover Museum.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: FAQ and 1967 chronological comparison",
+          "url": "https://www.channelswimmingdover.org.uk/content/category/faqs"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1967 McGill successes listed on 9 and 29 September; explicit policy that successful-swim dates are finish dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dates paired with successive 1967 performances through the museum athlete biography and CSA individual rows; original newspaper sources were not separately inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Linda McGill profile",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/mcgill-linda"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; three France-to-England successes: 1965 11:12, then 1967 13:02 and 9:59; Olympian and first Australian Channel swimmer.",
+          "label": "Supports"
+        }
+      ],
+      "id": "mcgill-1967-september-first"
+    },
+    {
+      "title": "Third crossing — women’s Channel record",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA and contemporary reports give 9h59m to the minute; exact seconds remain unresolved."
+        },
+        {
+          "text": "9h 59m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "CSA 9:59 (minute precision)"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Friday, 29 September 1967 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The contemporary newspaper confirms the existing finish date and route but provides no clocks or seconds. CS&PF reports departure 04:30:00 and arrival 14:29:00 without phase dates. Its 09:59:00 formatting does not establish whether zero seconds were actually measured; it cannot by itself settle the Women’s Register’s 9:59:57. No additional stopwatch precision is assigned.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez",
+          "label": "Departure"
+        },
+        {
+          "text": "St Margaret’s Bay",
+          "label": "Arrival"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2338 gives 9:59 at minute precision. Dover Museum’s chronology identifies the later 1967 completion as 29 September. Amigoe di Curaçao, 30 September 1967, page 7, independently reports a Friday finish, Cap Gris-Nez to St Margaret’s Bay, in 9h59m; TIME’s 6 October issue also reports 9h59m. Neither supplies seconds. The Australian Women’s Register gives 9:59:57; CS&PF formats 9:59:00. The displayed minute precision is retained, with exact seconds unresolved."
+        },
+        {
+          "text": "CSA: Linda McGill, 1967 — 9:59",
+          "url": "https://www.channelswimmingassociation.com/swim/2338/linda-mcgill"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Distinct successful France-to-England crossing in 9:59, 1967.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA publishes minute precision; no trailing seconds are inferred.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: FAQ and 1967 chronological comparison",
+          "url": "https://www.channelswimmingdover.org.uk/content/category/faqs"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1967 McGill successes listed on 9 and 29 September; explicit policy that successful-swim dates are finish dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dates paired with successive 1967 performances through the museum athlete biography and CSA individual rows; original newspaper sources were not separately inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Linda McGill profile",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/mcgill-linda"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; three France-to-England successes: 1965 11:12, then 1967 13:02 and 9:59; Olympian and first Australian Channel swimmer.",
+          "label": "Supports"
+        },
+        {
+          "text": "CS&PF historical record: Linda McGill, 1967 record swim",
+          "url": "https://cspf.co.uk/swim/442991"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "9:59:00; reported departure 04:30:00 and arrival 14:29:00; CSA attributed.",
+          "label": "Supports"
+        },
+        {
+          "text": "The database’s zero-second format differs from the more precise 9:59:57 in the Women’s Register. Clocks are retained as reported context, without imposing a stopwatch precision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Australian Women’s Register: Linda McGill",
+          "url": "https://www.womenaustralia.info/entries/mcgill-linda/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth 17 December 1945, Sydney; death 30 July 2025, Gold Coast; married name Linda Kruk; 1962 Commonwealth medal and Channel career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Provides 9:59:57 for the record crossing, while CSA only gives minutes. The greater precision is retained as an attributed alternative, not silently substituted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Linda McGill induction citation",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4fbc7022f888443ba4feb8f61e3edcc2.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia, 1968 Honor Swimmer; three Channel crossings; 1964 Olympic participation and wider marathon career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its unqualified claim that the 1967 record stood until 1975 needs directional scope: the federation-hosted chronology lists Cox’s faster overall women’s time in 1972 and Nicholas’s France-to-England women’s record in 1975. Do not repeat 1975 as the overall women’s record expiry.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Amigoe di Curaçao, 30 September 1967, page 7 — In recordtijd over het Kanaal",
+          "url": "https://ufdcimages.uflib.ufl.edu/UF/00/10/14/47/09090/09-30-1967.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary report names Linda McGill, Friday completion, 9h59m, Cap Gris-Nez departure and landing at St Margaret’s Bay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original University of Florida Digital Collections scan visually inspected. Friday in the Saturday 30 September issue corroborates 29 September. Minute precision only; does not establish exact seconds, phase clocks or ratification.",
+          "label": "Limitations"
+        },
+        {
+          "text": "TIME, 6 October 1967 — People",
+          "url": "https://content.time.com/time/subscriber/article/0,33009,844012,00.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account reports McGill’s 9h59m women’s Channel record and a France-to-England swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Named article body inspected. No seconds or exact crossing date. Its Olympic-ban anecdote and comparison with Ederle are not adopted as independently verified biography.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mcgill-1967-record"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Born in Sydney",
+      "lines": [
+        {
+          "text": "Monday, 17 December 1945"
+        },
+        {
+          "text": "Date and place recorded by the Australian Women’s Register."
+        }
+      ]
+    },
+    {
+      "title": "Commonwealth Games gold",
+      "lines": [
+        {
+          "text": "1962"
+        },
+        {
+          "text": "Pool-swimming success preceded her marathon career."
+        }
+      ]
+    },
+    {
+      "title": "Tokyo Olympics",
+      "lines": [
+        {
+          "text": "1964"
+        },
+        {
+          "text": "Represented Australia in Olympic swimming."
+        }
+      ]
+    },
+    {
+      "title": "First Australian Channel swimmer",
+      "lines": [
+        {
+          "text": "Saturday, 7 August 1965"
+        },
+        {
+          "text": "CSA’s commemorative date for her 11:12 France-to-England crossing."
+        }
+      ]
+    },
+    {
+      "title": "Second Channel finish",
+      "lines": [
+        {
+          "text": "Saturday, 9 September 1967"
+        },
+        {
+          "text": "Dover Museum’s chronology places the 13:02 crossing first."
+        }
+      ]
+    },
+    {
+      "title": "Women’s Channel record",
+      "lines": [
+        {
+          "text": "Friday, 29 September 1967"
+        },
+        {
+          "text": "Her third crossing; CSA records 9:59."
+        }
+      ]
+    },
+    {
+      "title": "MBE and international recognition",
+      "lines": [
+        {
+          "text": "1968"
+        },
+        {
+          "text": "Received the MBE and entered IMSHOF."
+        }
+      ]
+    },
+    {
+      "title": "Australian marathon recognition",
+      "lines": [
+        {
+          "text": "2020"
+        },
+        {
+          "text": "Inducted into the Australian Marathon Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Linda McGill?",
+      "value": "This profile includes 3 selected solo performances for Linda McGill. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Linda McGill’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Saturday, 7 August 1965. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Linda McGill’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 11 hours and 12 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Linda McGill, 1965",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2322/linda-mcgill"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; successful solo France-to-England crossing in 11:12, 1965.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published successful row; original observer report not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Linda McGill, 1967 — 13:02",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2337/linda-mcgill"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Distinct successful France-to-England crossing in 13:02 in 1967.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year-only individual record; exact finish date supplied separately by Dover Museum.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Linda McGill, 1967 — 9:59",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2338/linda-mcgill"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Distinct successful France-to-England crossing in 9:59, 1967.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA publishes minute precision; no trailing seconds are inferred.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Linda McGill — first Australian swimmer",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/215/linda-mcgill-first-australian-swimmer"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "First Australian Channel swimmer on 7 August 1965; two further swims in 1967; 1968 MBE/IMSHOF and 2020 Australian Hall of Fame.",
+          "label": "Supports"
+        },
+        {
+          "text": "The account’s embarking from Dover on 6 August does not establish a water start from England; her registered swimming route is France to England.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: FAQ and 1967 chronological comparison",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/category/faqs"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1967 McGill successes listed on 9 and 29 September; explicit policy that successful-swim dates are finish dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dates paired with successive 1967 performances through the museum athlete biography and CSA individual rows; original newspaper sources were not separately inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Linda McGill profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/mcgill-linda"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia; three France-to-England successes: 1965 11:12, then 1967 13:02 and 9:59; Olympian and first Australian Channel swimmer.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Australian Women’s Register: Linda McGill",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.womenaustralia.info/entries/mcgill-linda/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth 17 December 1945, Sydney; death 30 July 2025, Gold Coast; married name Linda Kruk; 1962 Commonwealth medal and Channel career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Provides 9:59:57 for the record crossing, while CSA only gives minutes. The greater precision is retained as an attributed alternative, not silently substituted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "IMSHOF: Linda McGill induction citation",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_4fbc7022f888443ba4feb8f61e3edcc2.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Australia, 1968 Honor Swimmer; three Channel crossings; 1964 Olympic participation and wider marathon career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its unqualified claim that the 1967 record stood until 1975 needs directional scope: the federation-hosted chronology lists Cox’s faster overall women’s time in 1972 and Nicholas’s France-to-England women’s record in 1975. Do not repeat 1975 as the overall women’s record expiry.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Swimming Australia: remembering Linda McGill",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.swimming.org.au/articles/celebrating-the-life-of-linda-mcgill"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1964 Olympian and Commonwealth gold medallist; first Australian Channel swimmer; obituary context.",
+          "label": "Supports"
+        },
+        {
+          "text": "Memorial invitation date wording is internally inconsistent and is not used as a life date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Linda McGill, 1965",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442968"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "11:12:00, reported departure 15:33:00 and arrival 02:45:00; observer Peter Frayne; CSA ratification attributed.",
+          "label": "Supports"
+        },
+        {
+          "text": "Year only; clock phase dates are not explicit.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Linda McGill, 1967 record swim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442991"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "9:59:00; reported departure 04:30:00 and arrival 14:29:00; CSA attributed.",
+          "label": "Supports"
+        },
+        {
+          "text": "The database’s zero-second format differs from the more precise 9:59:57 in the Women’s Register. Clocks are retained as reported context, without imposing a stopwatch precision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical statistics — women’s record chronology",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The named record rows separate McGill’s 1967 9:59, Cox’s 1972 overall women’s 9:57 and Nicholas’s 1975 France-to-England women’s 9:46.",
+          "label": "Supports"
+        },
+        {
+          "text": "Credits Julian Critchlow’s historical database; not a newly inspected ratification decision. Used only to distinguish the scope of record longevity.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Amigoe di Curaçao, 30 September 1967, page 7 — In recordtijd over het Kanaal",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ufdcimages.uflib.ufl.edu/UF/00/10/14/47/09090/09-30-1967.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary report names Linda McGill, Friday completion, 9h59m, Cap Gris-Nez departure and landing at St Margaret’s Bay.",
+          "label": "Supports"
+        },
+        {
+          "text": "Original University of Florida Digital Collections scan visually inspected. Friday in the Saturday 30 September issue corroborates 29 September. Minute precision only; does not establish exact seconds, phase clocks or ratification.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "TIME, 6 October 1967 — People",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://content.time.com/time/subscriber/article/0,33009,844012,00.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account reports McGill’s 9h59m women’s Channel record and a France-to-England swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Named article body inspected. No seconds or exact crossing date. Its Olympic-ban anecdote and comparison with Ederle are not adopted as independently verified biography.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Australian English Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 7 August 1965 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "11h 12m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mcgill-1965"
+    },
+    {
+      "title": "Second English Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 9 September 1967 (completion)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "13h 2m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mcgill-1967-september-first"
+    },
+    {
+      "title": "Third crossing — women’s Channel record",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 29 September 1967 (completion)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "CSA and contemporary reports give 9h59m to the minute; exact seconds remain unresolved."
+        },
+        {
+          "text": "9h 59m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mcgill-1967-record"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-4f13e8ffc608a100808d"
+}

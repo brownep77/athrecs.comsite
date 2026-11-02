@@ -125,7 +125,10 @@ export async function loadRegistrations(
         else 'Welcome queued' end from signup_welcome_deliveries w where w.user_id=u.id) as "welcomeStatus",
       exists(select 1 from athlete_profile_result_confirmations c where c.user_id=u.id) as "resultsConfirmed",
       u."createdAt"::text as "signedUpAt", p.updated_at::text as "profileSavedAt",
-      p.club_or_team as club, concat_ws(', ',p.city,p.region,p.country) as location,
+      p.club_or_team as club,
+      concat_ws(', ',
+        coalesce(nullif(concat_ws(', ',nullif(trim(p.city),''),nullif(trim(p.region),''),nullif(trim(p.postcode),'')),''),nullif(u."signupLocation",'')),
+        coalesce(nullif(trim(p.country),''),nullif(u."signupCountry",''))) as location,
       coalesce(activity.sign_in_count,0)::int as "signInCount",
       activity.last_sign_in_at::text as "lastSignInAt",
       array(select sport_code from athlete_sport_profiles sp where sp.user_id=u."id"

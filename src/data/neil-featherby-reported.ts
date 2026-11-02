@@ -410,12 +410,17 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     event: "Leicester Marathon",
     distance: "Marathon",
     location: "Leicester, England",
-    reportedDate: "Year not established",
-    reportedTime: "Time not supplied",
-    reportedPlace: "1st",
-    evidenceLabel: "Biography-reported",
-    uncertainty: "Biography reports this result; date and time not supplied.",
+    reportedDate: "23 September 1984",
+    reportedTime: "2:25:01",
+    reportedPlace: "1st male",
+    evidenceLabel: "Contemporary newspaper report",
+    uncertainty:
+      "A contemporary newspaper report supplies the date, winning time and Norfolk Olympiads affiliation. The original organiser result sheet and timing method remain unverified.",
     sources: [
+      {
+        label: "Leicester Mercury report reproduced in The Harrier, issue 222, page 16",
+        url: "https://www.huncoteharriersac.co.uk/wp-content/uploads/2025/01/222_2024_Nov_Newsletter.pdf",
+      },
       {
         label: "Sportlink biography",
         url: "https://www.sportlink.co.uk/pages/neil-featherby",
@@ -526,6 +531,12 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
       },
     ],
   },
+  {"id":"great-race-1990-stage-15","entryKind":"stage","event":"Sun Life Great Race — Stage 15","distance":"10.5 miles","location":"Solihull to Coventry, England","reportedDate":"September 1990 · exact day unconfirmed","reportedTime":"55:03","reportedPlace":"43rd","evidenceLabel":"Athlete diary — unverified","uncertainty":"Reported in Neil Featherby's published race diary. Stage distance and time retained as reported; this is one component of the multi-stage race, not a separate full-race finish or standalone PB. Exact day remains unconfirmed.","sources":[{"label":"Neil Featherby / Eastern Daily Press","url":"https://www.edp24.co.uk/sport/26579149.final-stages-extraordinary-1990-great-race/"}]},
+  {"id":"great-race-1990-stage-16","entryKind":"stage","event":"Sun Life Great Race — Stage 16","distance":"7.3 miles","location":"Coventry to Kenilworth, England","reportedDate":"September 1990 · exact day unconfirmed","reportedTime":"39:31","reportedPlace":"52nd","evidenceLabel":"Athlete diary — unverified","uncertainty":"Reported in Neil Featherby's published race diary. Stage distance and time retained as reported; this is one component of the multi-stage race, not a separate full-race finish or standalone PB. Exact day remains unconfirmed.","sources":[{"label":"Neil Featherby / Eastern Daily Press","url":"https://www.edp24.co.uk/sport/26579149.final-stages-extraordinary-1990-great-race/"}]},
+  {"id":"great-race-1990-stage-17","entryKind":"stage","event":"Sun Life Great Race — Stage 17","distance":"13.1 miles","location":"Daventry to Northampton, England","reportedDate":"September 1990 · exact day unconfirmed","reportedTime":"70:52","reportedPlace":"52nd","evidenceLabel":"Athlete diary — unverified","uncertainty":"Reported in Neil Featherby's published race diary. Stage distance and time retained as reported; this is one component of the multi-stage race, not a separate full-race finish or standalone PB. Exact day remains unconfirmed.","sources":[{"label":"Neil Featherby / Eastern Daily Press","url":"https://www.edp24.co.uk/sport/26579149.final-stages-extraordinary-1990-great-race/"}]},
+  {"id":"great-race-1990-stage-18","entryKind":"stage","event":"Sun Life Great Race — Stage 18","distance":"6.5 miles","location":"Milton Keynes Time Trial, England","reportedDate":"September 1990 · exact day unconfirmed","reportedTime":"35:53","reportedPlace":"54th","evidenceLabel":"Athlete diary — unverified","uncertainty":"Reported in Neil Featherby's published race diary. Stage distance and time retained as reported; this is one component of the multi-stage race, not a separate full-race finish or standalone PB. Exact day remains unconfirmed.","sources":[{"label":"Neil Featherby / Eastern Daily Press","url":"https://www.edp24.co.uk/sport/26579149.final-stages-extraordinary-1990-great-race/"}]},
+  {"id":"great-race-1990-stage-19","entryKind":"stage","event":"Sun Life Great Race — Stage 19","distance":"11.7 miles","location":"Hitchin to Knebworth, England","reportedDate":"September 1990 · exact day unconfirmed","reportedTime":"65:50","reportedPlace":"51st","evidenceLabel":"Athlete diary — unverified","uncertainty":"Reported in Neil Featherby's published race diary. Stage distance and time retained as reported; this is one component of the multi-stage race, not a separate full-race finish or standalone PB. Exact day remains unconfirmed.","sources":[{"label":"Neil Featherby / Eastern Daily Press","url":"https://www.edp24.co.uk/sport/26579149.final-stages-extraordinary-1990-great-race/"}]},
+  {"id":"great-race-1990-stage-20","entryKind":"stage","event":"Sun Life Great Race — Stage 20","distance":"10.0 miles","location":"London, England","reportedDate":"September 1990 · exact day unconfirmed","reportedTime":"53:01","reportedPlace":"55th","evidenceLabel":"Athlete diary — unverified","uncertainty":"Reported in Neil Featherby's published race diary. Stage distance and time retained as reported; this is one component of the multi-stage race, not a separate full-race finish or standalone PB. Exact day remains unconfirmed.","sources":[{"label":"Neil Featherby / Eastern Daily Press","url":"https://www.edp24.co.uk/sport/26579149.final-stages-extraordinary-1990-great-race/"}]},
 ];
 
 // PB-only biography claims do not create invented races. Race-linked PBs retain

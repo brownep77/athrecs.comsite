@@ -46,7 +46,9 @@ assert.equal(
   5,
   "The duplicate identity alias set is incomplete",
 );
-assert.equal(nonStandardDistanceResearchQueue.length, 3, "The held review queue is incomplete");
+assert.equal(nonStandardDistanceResearchQueue.length, 2, "The two unresolved date conflicts stay held");
+assert.equal(nonStandardDistanceEditionOverrides["allithwaite-8|2026-11-07|Other"].distance, "8mi (approx.)");
+assert.equal(nonStandardDistanceEditionOverrides["allithwaite-8|2026-11-07|Other"].distanceKm, 12.874752);
 
 const normalizedName = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, "");
 const upstreamSlugs = new Set(runabcSeries.map((series) => series.slug));

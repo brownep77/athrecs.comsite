@@ -1,0 +1,853 @@
+{
+  "slug": "cindy-nicholas-english-channel",
+  "name": "Cindy Nicholas",
+  "country": "Canada",
+  "aliases": [
+    "Cynthia Nicholas",
+    "Cynthia Maria Theresa Nicholas"
+  ],
+  "highlight": "First woman to complete a continuous Channel double · five career doubles",
+  "biography": [
+    "Cindy Nicholas, recorded in the Channel register as Cynthia Nicholas, was born in Toronto on 20 August 1957. She progressed from childhood competition into marathon swimming as a teenager. On 16 August 1974 she crossed Lake Ontario in 15 hours and 10 minutes, a performance that brought her to national attention and preceded her first English Channel crossing the following year.",
+    "Her career combined solo crossings with professional races. In August 1976 she won the women’s division at Lac St Jean. She also raced and set crossing marks in other Canadian waters, including Chaleur Bay. Those performances provide a wider view of an athlete often remembered primarily for the Channel.",
+    "On 7–8 September 1977, Nicholas became the first woman to swim from England to France and back without stopping. Her 19-hour-55-minute double was an overall record. She eventually accumulated 19 Channel crossings, including five doubles, and improved her double-crossing mark to 18 hours and 55 minutes in 1982. This profile presents selected individually checked swims rather than treating that career total as a complete event list.",
+    "Nicholas was appointed to the Order of Canada in 1979. She later practised law and represented Scarborough Centre in Ontario’s provincial parliament from 1987 to 1990. She died on 19 May 2016."
+  ],
+  "flags": [
+    {
+      "code": "CA",
+      "label": "Canada",
+      "abbr": "CAN"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "20 August 1957, Toronto"
+    },
+    {
+      "label": "Died",
+      "value": "19 May 2016"
+    },
+    {
+      "label": "Nationality",
+      "value": "Canada — explicitly recorded by the CSA"
+    },
+    {
+      "label": "Channel career total",
+      "value": "19 crossings, including five doubles; selected swims documented here"
+    },
+    {
+      "label": "1977 first",
+      "value": "First woman to complete an English Channel double crossing"
+    },
+    {
+      "label": "1982 double",
+      "value": "18 hours 55 minutes"
+    },
+    {
+      "label": "Beyond swimming",
+      "value": "Lawyer; Ontario provincial parliament, 1987–1990"
+    },
+    {
+      "label": "Honour",
+      "value": "Order of Canada, 1979"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First female English Channel double crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "19h 55m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Wednesday, 7 September 1977 · 07:50 · Departure clock reported by Guinness; clock standard unstated",
+          "label": "Started"
+        },
+        {
+          "text": "Thursday, 8 September 1977 · 03:45 · Return clock reported by Guinness; clock standard unstated",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, Dover",
+          "label": "Departure"
+        },
+        {
+          "text": "Shakespeare Beach, Dover",
+          "label": "Arrival"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "8h 58m",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "10h 57m",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual entry 2438 confirms the completed two-way swim and 19:55. Guinness supplies the two calendar dates and endpoint clocks; ISHOF prints both leg splits. No time zone has been guessed and no original observer log has been inspected."
+        },
+        {
+          "text": "CSA: Cynthia Nicholas, 1977 double crossing",
+          "url": "https://www.channelswimmingassociation.com/swim/2438/cynthia-nicholas"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Canada; 1977 two-way swim beginning England to France; 19:55 and first lady two-way award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Guinness World Records: first female double Channel crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/764779-first-double-swim-crossing-of-the-english-channel-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "7–8 September 1977; 07:50 Shakespeare Beach departure, 03:45 return next day, 19:55 total.",
+          "label": "Supports"
+        },
+        {
+          "text": "Clock standard is not stated; no UTC offset is inferred.",
+          "label": "Limitations"
+        },
+        {
+          "text": "International Swimming Hall of Fame: Cindy Nicholas",
+          "url": "https://ishof.org/honoree/honoree-cindy-nicholas/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career biography, Lake Ontario 1974, Lac St Jean 1976, Chaleur Bay 1977, double-crossing splits and later legal/parliamentary career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective narrative; several historical summaries vary from other sources. The 1976 Lac St Jean distance conflicts with Canada’s Sports Hall, so distance is omitted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "nicholas-1977-double"
+    },
+    {
+      "title": "1982 record double crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "18h 55m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual entry 2442 was inspected: 1982, solo two way beginning England to France, 18:55, with World Record 2 Way Swim award. It supplies no exact day or clocks."
+        },
+        {
+          "text": "CSA: Cynthia Nicholas, 1982 record double",
+          "url": "https://www.channelswimmingassociation.com/swim/2442/cynthia-nicholas"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1982 England–France–England double in 18:55; world-record award.",
+          "label": "Supports"
+        }
+      ],
+      "id": "nicholas-1982-record-double"
+    },
+    {
+      "title": "Separate 1982 double crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "20h 9m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual entry 2443 is a distinct completed two-way swim of 20:09 in 1982. The source gives no exact day; chronological order within that year is not inferred."
+        },
+        {
+          "text": "CSA: Cynthia Nicholas, 1982 second double",
+          "url": "https://www.channelswimmingassociation.com/swim/2443/cynthia-nicholas"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "A separate 1982 England–France–England double in 20:09.",
+          "label": "Supports"
+        }
+      ],
+      "id": "nicholas-1982-second-double"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Lake Ontario crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Friday, 16 August 1974 (event date)"
+        },
+        {
+          "text": "Youngstown, New York → Ontario Place, Toronto"
+        },
+        {
+          "text": "Completed the crossing in a then-record 15:10."
+        },
+        {
+          "text": "15h 10m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Canada’s Sports Hall supplies 16 August 1974 and 15:10; ISHOF identifies the Youngstown–Ontario Place route and matches this athlete to her Channel career. No departure clock is inferred from the narrative."
+        },
+        {
+          "text": "Canada’s Sports Hall of Fame: Cindy Nicholas",
+          "url": "https://halloffamers.sportshall.ca/?cindy_nicholas=&language=EN"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Lake Ontario date and time, 8 August 1976 Lac St Jean women’s victory, 1979 Order of Canada and 19 Channel crossings.",
+          "label": "Supports"
+        },
+        {
+          "text": "International Swimming Hall of Fame: Cindy Nicholas",
+          "url": "https://ishof.org/honoree/honoree-cindy-nicholas/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career biography, Lake Ontario 1974, Lac St Jean 1976, Chaleur Bay 1977, double-crossing splits and later legal/parliamentary career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective narrative; several historical summaries vary from other sources. The 1976 Lac St Jean distance conflicts with Canada’s Sports Hall, so distance is omitted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "cindy-nicholas-event-1-lake-ontario-crossing"
+    },
+    {
+      "title": "Lac St Jean professional race",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Sunday, 8 August 1976 (event date)"
+        },
+        {
+          "text": "Lac St Jean, Quebec, Canada"
+        },
+        {
+          "text": "First woman and fifth overall."
+        },
+        {
+          "text": "9h 14m 31s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "First woman; fifth overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Canada’s Sports Hall supplies 8 August 1976 and the women’s win. ISHOF gives fifth overall and 9:14.31, rendered as 9:14:31 elapsed. The sources describe different race distances (25 versus 21 miles), so distance is intentionally unresolved."
+        },
+        {
+          "text": "Canada’s Sports Hall of Fame: Cindy Nicholas",
+          "url": "https://halloffamers.sportshall.ca/?cindy_nicholas=&language=EN"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Lake Ontario date and time, 8 August 1976 Lac St Jean women’s victory, 1979 Order of Canada and 19 Channel crossings.",
+          "label": "Supports"
+        },
+        {
+          "text": "International Swimming Hall of Fame: Cindy Nicholas",
+          "url": "https://ishof.org/honoree/honoree-cindy-nicholas/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career biography, Lake Ontario 1974, Lac St Jean 1976, Chaleur Bay 1977, double-crossing splits and later legal/parliamentary career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective narrative; several historical summaries vary from other sources. The 1976 Lac St Jean distance conflicts with Canada’s Sports Hall, so distance is omitted.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "cindy-nicholas-event-2-lac-st-jean-professional-race"
+    },
+    {
+      "title": "Chaleur Bay crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 7 August 1977 (event date)"
+        },
+        {
+          "text": "Grand Anse, New Brunswick → Paspebiac, Quebec"
+        },
+        {
+          "text": "First woman to complete the crossing, according to the Hall of Fame."
+        },
+        {
+          "text": "7h 22m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "ISHOF’s athlete biography explicitly identifies 7 August 1977, the Grand Anse–Paspebiac route and 7:22; Canada’s Sports Hall corroborates the first-woman crossing in 1977. These are retrospective accounts, not an inspected observer report."
+        },
+        {
+          "text": "International Swimming Hall of Fame: Cindy Nicholas",
+          "url": "https://ishof.org/honoree/honoree-cindy-nicholas/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career biography, Lake Ontario 1974, Lac St Jean 1976, Chaleur Bay 1977, double-crossing splits and later legal/parliamentary career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective narrative; several historical summaries vary from other sources. The 1976 Lac St Jean distance conflicts with Canada’s Sports Hall, so distance is omitted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Canada’s Sports Hall of Fame: Cindy Nicholas",
+          "url": "https://halloffamers.sportshall.ca/?cindy_nicholas=&language=EN"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Lake Ontario date and time, 8 August 1976 Lac St Jean women’s victory, 1979 Order of Canada and 19 Channel crossings.",
+          "label": "Supports"
+        }
+      ],
+      "id": "cindy-nicholas-event-3-chaleur-bay-crossing"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Born in Toronto",
+      "lines": [
+        {
+          "text": "Tuesday, 20 August 1957"
+        },
+        {
+          "text": "Birth date and birthplace supplied by Canada’s Sports Hall of Fame."
+        }
+      ]
+    },
+    {
+      "title": "Lake Ontario breakthrough",
+      "lines": [
+        {
+          "text": "Friday, 16 August 1974"
+        },
+        {
+          "text": "Completed the crossing in 15:10."
+        }
+      ]
+    },
+    {
+      "title": "Lac St Jean women’s winner",
+      "lines": [
+        {
+          "text": "Sunday, 8 August 1976"
+        },
+        {
+          "text": "Women’s victory in the professional race."
+        }
+      ]
+    },
+    {
+      "title": "First female Channel double begins",
+      "lines": [
+        {
+          "text": "Wednesday, 7 September 1977"
+        },
+        {
+          "text": "Left Shakespeare Beach at 07:50 and returned at 03:45 on 8 September."
+        }
+      ]
+    },
+    {
+      "title": "Order of Canada",
+      "lines": [
+        {
+          "text": "1979"
+        },
+        {
+          "text": "National recognition of her sporting achievements."
+        }
+      ]
+    },
+    {
+      "title": "Faster double crossing",
+      "lines": [
+        {
+          "text": "1982"
+        },
+        {
+          "text": "The CSA records an 18:55 double and another double of 20:09 that year."
+        }
+      ]
+    },
+    {
+      "title": "Provincial public service",
+      "lines": [
+        {
+          "text": "1987–1990"
+        },
+        {
+          "text": "Represented Scarborough Centre in Ontario’s parliament."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Cindy Nicholas?",
+      "value": "This profile includes 3 selected solo performances for Cindy Nicholas. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Cindy Nicholas’s featured English Channel swim?",
+      "value": "The featured swim started on Wednesday, 7 September 1977 and finished on Thursday, 8 September 1977."
+    },
+    {
+      "label": "How long did Cindy Nicholas’s featured Channel swim take?",
+      "value": "The featured continuous 2-way solo swim has a published elapsed time of 19 hours and 55 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA: Cynthia Nicholas, 1977 double crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2438/cynthia-nicholas"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Canada; 1977 two-way swim beginning England to France; 19:55 and first lady two-way award.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Cynthia Nicholas, 1982 record double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2442/cynthia-nicholas"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1982 England–France–England double in 18:55; world-record award.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Cynthia Nicholas, 1982 second double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2443/cynthia-nicholas"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "A separate 1982 England–France–England double in 20:09.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: first female double Channel crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/764779-first-double-swim-crossing-of-the-english-channel-female"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "7–8 September 1977; 07:50 Shakespeare Beach departure, 03:45 return next day, 19:55 total.",
+          "label": "Supports"
+        },
+        {
+          "text": "Clock standard is not stated; no UTC offset is inferred.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Swimming Hall of Fame: Cindy Nicholas",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/honoree/honoree-cindy-nicholas/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career biography, Lake Ontario 1974, Lac St Jean 1976, Chaleur Bay 1977, double-crossing splits and later legal/parliamentary career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective narrative; several historical summaries vary from other sources. The 1976 Lac St Jean distance conflicts with Canada’s Sports Hall, so distance is omitted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Canada’s Sports Hall of Fame: Cindy Nicholas",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://halloffamers.sportshall.ca/?cindy_nicholas=&language=EN"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth/death dates, Lake Ontario date and time, 8 August 1976 Lac St Jean women’s victory, 1979 Order of Canada and 19 Channel crossings.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Cindy Nicholas obituary",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/129/swimmer-cindy-nicholas-has-passed-away-58"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "19 crossings, five doubles, Queen of the Channel from 1978 and 1982 record double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career total is context, not a claim that every crossing has been individually added here.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Cynthia (Cindy) Nicholas",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/nicholas-cynthia-cindy"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identity bridge between Cynthia and Cindy, 19 crossings including five doubles, and Ontario parliamentary service.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First female English Channel double crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 7 September 1977 – Thursday, 8 September 1977"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "19h 55m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "07:50 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "03:45 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "nicholas-1977-double"
+    },
+    {
+      "title": "1982 record double crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1982 · exact day not recorded here"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "18h 55m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "nicholas-1982-record-double"
+    },
+    {
+      "title": "Separate 1982 double crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1982 · exact day not recorded here"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "20h 9m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "nicholas-1982-second-double"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Lake Ontario crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Friday, 16 August 1974 (event date)"
+        },
+        {
+          "text": "Youngstown, New York → Ontario Place, Toronto"
+        },
+        {
+          "text": "Completed the crossing in a then-record 15:10."
+        },
+        {
+          "text": "15h 10m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "cindy-nicholas-event-1-lake-ontario-crossing"
+    },
+    {
+      "title": "Lac St Jean professional race",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Sunday, 8 August 1976 (event date)"
+        },
+        {
+          "text": "Lac St Jean, Quebec, Canada"
+        },
+        {
+          "text": "First woman and fifth overall."
+        },
+        {
+          "text": "9h 14m 31s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "First woman; fifth overall",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "cindy-nicholas-event-2-lac-st-jean-professional-race"
+    },
+    {
+      "title": "Chaleur Bay crossing",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 7 August 1977 (event date)"
+        },
+        {
+          "text": "Grand Anse, New Brunswick → Paspebiac, Quebec"
+        },
+        {
+          "text": "First woman to complete the crossing, according to the Hall of Fame."
+        },
+        {
+          "text": "7h 22m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "cindy-nicholas-event-3-chaleur-bay-crossing"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-2038716e7504286ac821"
+}

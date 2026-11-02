@@ -314,8 +314,11 @@ try {
     ],
   };
   await sql`update athletes set profile_details=${JSON.stringify(nationalityDetails)}::jsonb where id=${a.id}`;
+  await sql`update athletes set profile_roles='Professional athlete,Running legend,Running legend,Private review label' where id=${a.id}`;
   const p = await read();
   assert.equal(p.displayName, "Synthetic DUV Public");
+  assert.deepEqual(p.profileStatuses, ["Running legend", "Professional athlete"]);
+  assert(!JSON.stringify(p).includes("Private review label"));
   assert(!JSON.stringify(p).includes("Unpublished test biography"));
   assert(!JSON.stringify(p).includes("1980-01-01"));
   assert.equal(p.entries.length, 0);
@@ -435,6 +438,9 @@ try {
   assert.equal(page.status, 200);
   assert.equal(page.headers.get("x-robots-tag"), "index, follow");
   assert(html.includes("Synthetic DUV Public"));
+  assert(html.includes('aria-label="Profile status"'));
+  assert(html.includes(">Running legend</"));
+  assert(!html.includes("Private review label"));
   assert(!html.includes("Unpublished test biography"));
   assert(html.includes("Antigua &amp; Barbuda"));
   assert(!html.includes("As listed by"), "Nationality credits remain in staff evidence");

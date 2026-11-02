@@ -220,6 +220,7 @@ try {
   await db.exec(
     "insert into events(id,slug,name,sport,country,city,surface) values(1001,'alias','Swedish alias fixture','Running','SWE','Gothenburg','Road');insert into editions(id,event_id,event_date,distance_code) values(2,1001,'2027-01-01','10K')",
   );
+  await db.exec("alter table events add column region text");
   const sql = { query: async (text, params) => (await db.query(text, params)).rows };
   const selection = await readSportFixtures(
     sql,

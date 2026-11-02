@@ -1,0 +1,802 @@
+{
+  "slug": "doreen-miller-english-channel",
+  "name": "Doreen Miller",
+  "country": "United States",
+  "aliases": [
+    "Dori Miller"
+  ],
+  "highlight": "2014 Channel double · 26 hours 21 minutes",
+  "biography": [
+    "Doreen Miller, widely known as Dori, is an American Channel swimmer whose endurance career continued after she moved to Australia. Her New England Masters Hall of Fame profile traces her swimming to age eleven in New Haven, Connecticut, followed by an athletic scholarship to the University of Maryland. She moved to Sydney in 2009 and joined Bondi Surf Club the following year.",
+    "Miller’s Channel record includes one-way swims in 2008, 2010 and 2012. The 2012 effort illustrates the difference between crossing the Channel and completing a double: she reached France in 11 hours 45 minutes 15 seconds, then attempted a return that ended unsuccessfully after a further 8 hours 57 minutes 45 seconds.",
+    "In 2014 she completed the double with pilot Lance Oram aboard Sea Satin. Her outward leg took 12 hours 8 minutes and the return 14 hours 13 minutes, totalling 26 hours 21 minutes. The historical register dates the swim to 4 August, the annual table to 5 August, and a separate summary to 4/5 August. The Hall of Fame’s stray reference to 2016 conflicts with its own list and the federation’s 2014 season review.",
+    "Her later recognition included New South Wales’s Masters surf-lifesaving athlete award in 2014, a national Masters Legend honour in 2022 and New England Masters Hall of Fame recognition in 2023."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Source-reported country",
+      "value": "American — CS&PF season review; USA — historical records"
+    },
+    {
+      "label": "Also known as",
+      "value": "Dori Miller"
+    },
+    {
+      "label": "Early swimming",
+      "value": "New Haven, Connecticut; competitive swimmer from age eleven"
+    },
+    {
+      "label": "College",
+      "value": "University of Maryland swimming scholarship"
+    },
+    {
+      "label": "Australian move",
+      "value": "Sydney in 2009; Bondi Surf Club from 2010"
+    },
+    {
+      "label": "Completed Channel double",
+      "value": "2014 · 26 hours 21 minutes"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "New England LMSC, 2023"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "2010 England-to-France solo",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "Saturday, 7 August 2010 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 38m 30s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Historical record lists 22:04:00 and 08:42:30 beside the generic 7 August swim date. Calendar dates for the two clock readings are not inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Pointe du Nid de Corbet",
+          "label": "Arrival"
+        },
+        {
+          "text": "Chris Osmond",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Seafarer II",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Garry Salter",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation — listed attribution",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical entry 444395 identifies Doreen Miller, USA, 7 August 2010, E–F, 10:38:30 and the named escort details. Annual 2010 table, 7 August Doreen (Dori) Miller row, agrees on time and pilot/vessel and bridges the alias. Its generic pending-ratification disclaimer is retained; no separate committee decision was inspected."
+        },
+        {
+          "text": "CS&PF historical record: Doreen Miller, swim 444395",
+          "url": "https://cspf.co.uk/swim/444395"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "7 August 2010; USA; England-to-France 10:38:30; Chris Osmond, Seafarer II, observer Garry Salter and landing place.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic Date and recorded clocks do not establish phase-specific calendar dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF 2010 swims: 7 August Doreen (Dori) Miller row",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2010"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named 7 August row; Chris Osmond, Seafarer II; 10:38:30; Doreen/Dori name equivalence.",
+          "label": "Supports"
+        },
+        {
+          "text": "Annual page states results are unofficial until ratified; a separate committee decision was not inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "miller-2010-solo"
+    },
+    {
+      "title": "2012 outward crossing in an unfinished double attempt",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "One completed England-to-France crossing. The subsequent return leg ended unsuccessfully after 8:57:45."
+        },
+        {
+          "text": "Wednesday, 8 August 2012 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 45m 15s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The historical row gives 04:22:00 departure and 16:07:15 arrival for the completed first leg. Its comment reports the later return attempt ending at 01:05. These clocks are not assigned inferred calendar dates.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Wissant Beach West",
+          "label": "Arrival"
+        },
+        {
+          "text": "Chris Osmond",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Seafarer II",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Alan Bushby; Geoffry Cox",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation — listed attribution",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Named CS&PF historical entry 444562 gives Doreen Miller, USA, 8 August 2012 and an E–F completion in 11:45:15. Its comment explicitly says she continued on an unsuccessful second leg lasting 8:57:45. The card therefore records one completed way only. Escort and observer fields are copied from the labelled record; no explicit committee decision was inspected."
+        },
+        {
+          "text": "CS&PF historical record: Doreen Miller, swim 444562",
+          "url": "https://cspf.co.uk/swim/444562"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "8 August 2012; USA; E–F 11:45:15; Chris Osmond, Seafarer II; observers Alan Bushby and Geoffry Cox; unsuccessful return leg lasting 8:57:45.",
+          "label": "Supports"
+        },
+        {
+          "text": "The completed first crossing must not be presented as a completed double. Generic Date does not define departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "miller-2012-outward"
+    },
+    {
+      "title": "Continuous two-way Channel swim",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "One continuous double, 26:21. Historical records give 4 August 2014; the annual table gives 5 August. Hall of Fame prose says 2016, contradicting its own list and the federation’s 2014 review."
+        },
+        {
+          "text": "Monday, 4 August 2014 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "26h 21m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Historical leg rows list 03:12:00 departure, 15:20:00 turn at Wissant and 05:33:00 finish, all alongside a generic 4 August date. No departure/arrival calendar dates are inferred. Dover’s summary describes 4/5 August.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Samphire Hoe",
+          "label": "Departure"
+        },
+        {
+          "text": "St Margaret’s",
+          "label": "Arrival"
+        },
+        {
+          "text": "Lance Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Sea Satin",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Amanda Smith; Laura Austin",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation — listed attribution",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "12h 8m 0s",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "14h 13m 0s",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical entries 444794 and 444795 label the two legs of Doreen Miller’s single continuous double: 12:08:00 E–F and 14:13:00 F–E. Their sum is 26:21:00. The annual 2014 Dori Miller row and federation season review agree on the completed double and elapsed time. The historic date is 4 August, the annual row 5 August and Dover’s individual summary 4/5 August. The Hall of Fame’s 2016 sentence conflicts with these and its own 2014 bullet. No explicit committee decision was inspected."
+        },
+        {
+          "text": "CS&PF historical record: Doreen Miller, first leg 444794",
+          "url": "https://cspf.co.uk/swim/444794"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "4 August 2014; USA; two-way first leg E–F 12:08:00; Lance Oram, Sea Satin; observers Amanda Smith and Laura Austin; Samphire Hoe, Wissant and St Margaret’s.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic date differs from annual table’s 5 August; start and finish clocks lack explicit phase dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical record: Doreen Miller, second leg 444795",
+          "url": "https://cspf.co.uk/swim/444795"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Same continuous 2014 double: second leg F–E 14:13:00; same pilot, vessel and observers.",
+          "label": "Supports"
+        },
+        {
+          "text": "This is the return leg of one performance, not an additional independent swim.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF 2014 swims: Dori Miller double",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2014"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "5 August Dori Miller row; Lance Oram, Sea Satin; 12:08:00 plus 14:13:00 equals 26:21:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic unofficial-until-ratified disclaimer. The row’s 5 August date differs from historical records dated 4 August.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: Review of 2014 season",
+          "url": "https://cspf.co.uk/article/87/review-of-2014-season"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies American Dori Miller, 43, living at Bondi Beach, and her Lance Oram-piloted two-way in 26 hours 21 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "Season review confirms recognition in 2014 but does not give a dated committee ratification decision.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Channel Swimming: Doreen Miller, 4/5 August 2014",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2014-08-04/doreen-miller"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Independent summary dates the double to 4/5 August 2014 and gives 26:21 with 12:08 and 14:13 legs.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation, not federation ratification; country is not supplied.",
+          "label": "Limitations"
+        },
+        {
+          "text": "New England LMSC Hall of Fame: Dori Miller",
+          "url": "https://www.nelmsc.org/hof/2023/6/12/dori-millernbsp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named 2023 honoree profile; New Haven upbringing, swimming from eleven, Maryland scholarship, Sydney move, Bondi club, surf-lifesaving honours and Channel career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Internally inconsistent: achievement list dates the 26:21 double to 2014, while prose says 2016. Federation records and season review support 2014.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "miller-2014-two-way"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Channel solo",
+      "lines": [
+        {
+          "text": "Friday, 8 August 2008"
+        },
+        {
+          "text": "The federation’s named historical entry records an England-to-France solo."
+        }
+      ]
+    },
+    {
+      "title": "Move to Sydney",
+      "lines": [
+        {
+          "text": "2009"
+        },
+        {
+          "text": "Her Hall of Fame biography dates her move to Australia to 2009."
+        }
+      ]
+    },
+    {
+      "title": "Outward crossing, unfinished return",
+      "lines": [
+        {
+          "text": "Wednesday, 8 August 2012"
+        },
+        {
+          "text": "Completed the first leg in 11:45:15 before an unsuccessful second leg."
+        }
+      ]
+    },
+    {
+      "title": "Continuous Channel double",
+      "lines": [
+        {
+          "text": "2014"
+        },
+        {
+          "text": "Completed the two legs in a combined 26:21; calendar-date discrepancies are retained with the performance."
+        }
+      ]
+    },
+    {
+      "title": "Masters Legend honour",
+      "lines": [
+        {
+          "text": "2022"
+        },
+        {
+          "text": "The Hall of Fame biography records Surf Life Saving Australia recognition."
+        }
+      ]
+    },
+    {
+      "title": "New England Hall of Fame profile",
+      "lines": [
+        {
+          "text": "Monday, 12 June 2023"
+        },
+        {
+          "text": "The regional Masters body published its Dori Miller honoree biography."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Doreen Miller?",
+      "value": "This profile includes 3 selected solo performances for Doreen Miller. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Doreen Miller’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Saturday, 7 August 2010. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Doreen Miller’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 10 hours, 38 minutes and 30 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "New England LMSC Hall of Fame: Dori Miller",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nelmsc.org/hof/2023/6/12/dori-millernbsp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named 2023 honoree profile; New Haven upbringing, swimming from eleven, Maryland scholarship, Sydney move, Bondi club, surf-lifesaving honours and Channel career.",
+          "label": "Supports"
+        },
+        {
+          "text": "Internally inconsistent: achievement list dates the 26:21 double to 2014, while prose says 2016. Federation records and season review support 2014.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Doreen Miller, swim 444215",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444215"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "8 August 2008; USA; named successful England-to-France solo.",
+          "label": "Supports"
+        },
+        {
+          "text": "Used only for career chronology and country. Its 10:17 differs from the immediate athlete blog’s uncertain 10:13 or 10:16; no 2008 elapsed time is adopted in this profile.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Doreen Miller, swim 444395",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444395"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "7 August 2010; USA; England-to-France 10:38:30; Chris Osmond, Seafarer II, observer Garry Salter and landing place.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic Date and recorded clocks do not establish phase-specific calendar dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Doreen Miller, swim 444562",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444562"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "8 August 2012; USA; E–F 11:45:15; Chris Osmond, Seafarer II; observers Alan Bushby and Geoffry Cox; unsuccessful return leg lasting 8:57:45.",
+          "label": "Supports"
+        },
+        {
+          "text": "The completed first crossing must not be presented as a completed double. Generic Date does not define departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Doreen Miller, first leg 444794",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444794"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "4 August 2014; USA; two-way first leg E–F 12:08:00; Lance Oram, Sea Satin; observers Amanda Smith and Laura Austin; Samphire Hoe, Wissant and St Margaret’s.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic date differs from annual table’s 5 August; start and finish clocks lack explicit phase dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Doreen Miller, second leg 444795",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444795"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Same continuous 2014 double: second leg F–E 14:13:00; same pilot, vessel and observers.",
+          "label": "Supports"
+        },
+        {
+          "text": "This is the return leg of one performance, not an additional independent swim.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF 2010 swims: 7 August Doreen (Dori) Miller row",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2010"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named 7 August row; Chris Osmond, Seafarer II; 10:38:30; Doreen/Dori name equivalence.",
+          "label": "Supports"
+        },
+        {
+          "text": "Annual page states results are unofficial until ratified; a separate committee decision was not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF 2014 swims: Dori Miller double",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2014"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "5 August Dori Miller row; Lance Oram, Sea Satin; 12:08:00 plus 14:13:00 equals 26:21:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "Generic unofficial-until-ratified disclaimer. The row’s 5 August date differs from historical records dated 4 August.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Review of 2014 season",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/article/87/review-of-2014-season"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies American Dori Miller, 43, living at Bondi Beach, and her Lance Oram-piloted two-way in 26 hours 21 minutes.",
+          "label": "Supports"
+        },
+        {
+          "text": "Season review confirms recognition in 2014 but does not give a dated committee ratification decision.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Channel Swimming: Doreen Miller, 4/5 August 2014",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2014-08-04/doreen-miller"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Independent summary dates the double to 4/5 August 2014 and gives 26:21 with 12:08 and 14:13 legs.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation, not federation ratification; country is not supplied.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "2010 England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 7 August 2010 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "10h 38m 30s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "miller-2010-solo"
+    },
+    {
+      "title": "2012 outward crossing in an unfinished double attempt",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 8 August 2012 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "One completed England-to-France crossing. The subsequent return leg ended unsuccessfully after 8:57:45."
+        },
+        {
+          "text": "11h 45m 15s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "miller-2012-outward"
+    },
+    {
+      "title": "Continuous two-way Channel swim",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 4 August 2014 (recorded swim date)"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "One continuous double, 26:21. Historical records give 4 August 2014; the annual table gives 5 August. Hall of Fame prose says 2016, contradicting its own list and the federation’s 2014 review."
+        },
+        {
+          "text": "26h 21m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "miller-2014-two-way"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-1c8c155c8ead18e1a45b"
+}

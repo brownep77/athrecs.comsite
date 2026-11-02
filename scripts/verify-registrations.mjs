@@ -1,4 +1,5 @@
 // Complete staff registrations flow using synthetic data and disposable PGlite.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "vite";
@@ -12,6 +13,8 @@ for (const key of [
   "POSTGRES_URL_NON_POOLING",
   "RESEND_API_KEY",
   "ATHRECS_CLAIMS_EMAILS",
+  "VITE_INTERCOM_APP_ID",
+  "INTERCOM_SECRET_KEY",
 ])
   process.env[key] = "";
 process.env.VITE_AUTH_ENABLED = "true";
@@ -79,7 +82,7 @@ try {
   database = await db.getPglite();
   const sql = await db.getSql();
   const staff = await post("sign-up/email", {
-    name: "Synthetic Staff",
+    ...signupDetails("Synthetic Staff"),
     email: "staff@example.test",
     password: "Registration-test-password!",
   });
@@ -101,6 +104,12 @@ try {
     "Account without completed profile is visible",
   );
   assert.equal(before.accounts[0].signInCount, 1, "Signup session counted once");
+  assert.equal(before.accounts[0].name, "Synthetic Staff");
+  assert.equal(
+    before.accounts[0].location,
+    "Norwich, England",
+    "Staff can see the required signup location before an athlete profile is completed",
+  );
   assert.equal(lastHeaders.get("cache-control"), "private, no-store");
   assert(lastHeaders.get("vary").includes("Authorization"));
   assert.equal(before.accounts[0].signedUpAt.slice(0, 10), new Date().toISOString().slice(0, 10));
@@ -153,7 +162,7 @@ try {
   );
   await assert.rejects(() => read({ page: 0 }, token));
   const ordinary = await post("sign-up/email", {
-    name: "Synthetic Ordinary",
+    ...signupDetails("Synthetic Ordinary"),
     email: "ordinary@example.test",
     password: "Registration-test-password!",
   });
@@ -176,6 +185,21 @@ try {
   await sql`insert into athlete_account_links(athlete_id,user_id,user_email,status) values(991201,'registration-1','athlete-1@example.test','active'),(991203,'registration-1','athlete-1@example.test','revoked')`;
   const one = (await read({ q: "Synthetic Club" }, token)).accounts[0];
   assert.equal(one.userId, "registration-1");
+  assert.equal(one.location, "", "Legacy accounts without location data retain an empty location");
+  await sql`update "user" set "signupCountry"='England',"signupLocation"='Norwich' where id='registration-1'`;
+  assert.equal(
+    (await read({ q: "Synthetic Club" }, token)).accounts[0].location,
+    "Norwich, England",
+    "A profile with blank address fields retains the registration location fallback",
+  );
+  await sql`update athlete_private_profiles set city='Cambridge',region='Cambridgeshire',postcode='CB2 1TN',country='England' where user_id='registration-1'`;
+  assert.equal(
+    (await read({ q: "Synthetic Club" }, token)).accounts[0].location,
+    "Cambridge, Cambridgeshire, CB2 1TN, England",
+    "Later profile address details take precedence over the original registration location",
+  );
+  await sql`update athlete_private_profiles set city='',region='',postcode='',country='' where user_id='registration-1'`;
+  await sql`update "user" set "signupCountry"=null,"signupLocation"=null where id='registration-1'`;
   assert.equal(one.signInCount, 0, "No historical login total is fabricated");
   assert.equal(one.lastSignInAt, null);
   assert.equal(
@@ -368,6 +392,11 @@ try {
     });
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
+    await page
+      .context()
+      .route("**/*", (route) =>
+        new URL(route.request().url()).origin === origin ? route.continue() : route.abort(),
+      );
     await page.goto(`${origin}/admin/athlete-accounts`, {
       waitUntil: "networkidle",
       timeout: 120000,
@@ -404,23 +433,71 @@ try {
       .getByLabel("Contact details source", { exact: true })
       .fill("Synthetic athlete confirmed by test");
     await card.getByRole("button", { name: "Save private contact details", exact: true }).click();
-    await card.getByRole("link", { name: "WhatsApp", exact: true }).waitFor();
+    await card
+      .getByRole("button", { name: "Save private contact details", exact: true })
+      .waitFor({ state: "hidden" });
+    const beforeHandoff = (await sql`select count(*)::int as total from athlete_messages`)[0].total;
+    for (const name of [
+      "Email in Intercom",
+      "Message in Intercom",
+      "SMS in Intercom",
+      "WhatsApp in Intercom",
+      "Instagram reply in Intercom",
+    ]) {
+      await card.getByRole("button", { name, exact: true }).click();
+      const dialog = page.getByRole("dialog");
+      await dialog.getByRole("heading", { name, exact: true }).waitFor();
+      const href = await dialog
+        .getByRole("link", { name: "Open athlete in Intercom", exact: true })
+        .getAttribute("href");
+      const url = new URL(href);
+      assert.equal(url.origin, "https://app.intercom.com");
+      assert.equal(url.pathname, "/apps/uyeuotsk/users/show");
+      assert.deepEqual([...url.searchParams], [["user_id", "registration-1"]]);
+      const fallback = new URL(
+        await dialog.getByRole("link", { name: "Find by email", exact: true }).getAttribute("href"),
+      );
+      assert.deepEqual([...fallback.searchParams], [["email", "athlete-1@example.test"]]);
+      assert.equal(await dialog.getByRole("button", { name: /^Send/ }).count(), 0);
+      if (name === "Instagram reply in Intercom") {
+        assert((await dialog.innerText()).includes("Social contacts may be separate"));
+        assert(!(await dialog.innerText()).includes("If no contact exists, add the athlete"));
+      }
+      await page.keyboard.press("Escape");
+      await dialog.waitFor({ state: "hidden" });
+    }
     assert.equal(
-      await card.getByRole("link", { name: "WhatsApp", exact: true }).getAttribute("href"),
+      (await sql`select count(*)::int as total from athlete_messages`)[0].total,
+      beforeHandoff,
+      "Opening Intercom contact options does not record a sent message",
+    );
+    await card.getByText("Other contact apps", { exact: true }).click();
+    assert.equal(
+      await card.getByRole("link", { name: "WhatsApp app", exact: true }).getAttribute("href"),
       "https://wa.me/447700900123",
     );
     assert.equal(
-      await card.getByRole("link", { name: "SMS", exact: true }).getAttribute("href"),
+      await card.getByRole("link", { name: "SMS in phone app", exact: true }).getAttribute("href"),
       "sms:+447700900123",
     );
     assert.equal(
-      await card.getByRole("link", { name: "Telegram", exact: true }).getAttribute("href"),
+      await card.getByRole("link", { name: "Email in mail app", exact: true }).getAttribute("href"),
+      "mailto:athlete-1%40example.test",
+    );
+    assert.equal(
+      await card.getByRole("link", { name: "Telegram app", exact: true }).getAttribute("href"),
       "https://t.me/synthetic_runner",
     );
+    assert.equal(
+      await card
+        .getByRole("link", { name: "View Instagram profile", exact: true })
+        .getAttribute("href"),
+      "https://www.instagram.com/synthetic_runner/",
+    );
     assert(
-      (await page.getByLabel("Contact sender", { exact: true }).innerText()).includes(
-        "+44 7581 764764",
-      ),
+      await page
+        .getByText("Email and message athletes through Intercom", { exact: true })
+        .isVisible(),
     );
     // Inspect destinations only: never open messaging apps or send messages.
     await mkdir("artifacts", { recursive: true });
@@ -443,7 +520,7 @@ try {
     await page.screenshot({ path: "artifacts/registrations-mobile.png", fullPage: true });
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: actual staff page, search, claim link, saved-details switch and mobile layout with no browser errors.",
+      "PASS: actual staff page, exact Intercom handoffs without sending, native contact fallbacks, search, claim link, saved-details switch and mobile layout with no browser errors.",
     );
   }
 } finally {

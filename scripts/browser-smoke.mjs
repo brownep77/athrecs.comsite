@@ -4,6 +4,7 @@
  * Targets stay restricted to loopback HTTP(S). Screenshots may only be written
  * inside the checked-out workspace (or /workspace in the app-builder image).
  */
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import { mkdirSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import { dirname, resolve } from "node:path";
@@ -64,7 +65,7 @@ try {
     const signup = await page.request.post(`${origin}/api/auth/sign-up/email`, {
       headers: { origin },
       data: {
-        name: "Profile Smoke Viewer",
+        ...signupDetails("Profile Smoke Viewer"),
         email: `profile-smoke-${randomUUID()}@example.test`,
         password: `Smoke-only-${randomUUID()}`,
       },

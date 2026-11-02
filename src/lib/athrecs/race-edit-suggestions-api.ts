@@ -6,6 +6,7 @@ import { getSql } from "@/lib/db";
 import { eventByPublicSlug } from "./event-slug.server";
 import { raceEditPath } from "./race-edit-target";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { notifyRaceEdit } from "./race-edit-alerts.server";
 
 const suggestionSchema = z.object({
   pageType: z.enum(["catalogue", "road", "ultra"]).default("catalogue"),
@@ -60,7 +61,7 @@ export const submitRaceEdit = createServerFn({ method: "POST" })
     }
     if (!race) throw new Error("This race page is no longer available.");
     const target = race;
-    return sql.transaction(async (tx) => {
+    const submitted = await sql.transaction(async (tx) => {
       await tx`select id from "user" where id=${context.userId} for update`;
       const [count] = await tx<{ count: number }>`select count(*)::int as count
         from race_edit_suggestions where user_id=${context.userId}
@@ -73,6 +74,8 @@ export const submitRaceEdit = createServerFn({ method: "POST" })
           ${data.suggestion}, ${data.evidenceUrl}, ${data.pageType}, ${raceEditPath(target.slug, data.pageType)}) returning id`;
       return { id: row.id };
     });
+    await notifyRaceEdit(submitted.id);
+    return submitted;
   });
 
 export const getRaceEdits = createServerFn({ method: "GET" })

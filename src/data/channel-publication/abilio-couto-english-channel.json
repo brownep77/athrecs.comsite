@@ -1,0 +1,870 @@
+{
+  "slug": "abilio-couto-english-channel",
+  "name": "Abílio Couto",
+  "country": "Brazil",
+  "aliases": [
+    "Abilio Couto",
+    "Baron Abílio Couto"
+  ],
+  "highlight": "Three Channel crossings · England-to-France record setter in 1959",
+  "biography": [
+    "Abílio Couto was a Brazilian marathon swimmer whose achievements helped establish open-water swimming as an organised sport in his home country. Born in 1924, he competed internationally and later helped create Brazil’s first national open-water championships and the Ilhabela–Caraguatatuba event.",
+    "His English Channel ambitions initially met repeated setbacks. Four attempts in 1957 ended or were cancelled amid cold, navigation problems and bad weather. He returned the next year after selling possessions to finance the trip. On 10 August 1958 he completed the France-to-England crossing in 12 hours and 45 minutes, supported by his Argentine coach Miguel Maciel. Fog, passing ships and opposing tides made the final approach difficult.",
+    "Couto returned for two successful swims in 1959. His England-to-France time of 12 hours and 49 minutes established a directional speed record, while his other crossing took 11 hours and 33 minutes. His wider career included Gibraltar, Lake Michigan, the Suez Canal and the Nile, alongside international long-distance races.",
+    "After his death in 1998, Couto entered the International Marathon Swimming Hall of Fame’s class of 2001. His family represented him at the following year’s ceremony and donated his Channel record trophy, preserving a tangible link to the achievement."
+  ],
+  "flags": [
+    {
+      "code": "BR",
+      "label": "Brazil",
+      "abbr": "BRA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "1924"
+    },
+    {
+      "label": "Died",
+      "value": "1998"
+    },
+    {
+      "label": "Nationality",
+      "value": "Brazilian"
+    },
+    {
+      "label": "Successful Channel crossings",
+      "value": "Three — one in 1958 and two in 1959"
+    },
+    {
+      "label": "Channel speed record",
+      "value": "England → France, 12 hours 49 minutes in 1959; held until 1960"
+    },
+    {
+      "label": "National sporting honour",
+      "value": "Cruz do Mérito Esportivo, 1966"
+    },
+    {
+      "label": "Sport development",
+      "value": "Helped establish Brazil’s national open-water championships"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, class of 2001"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First successful English Channel crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Couto completed the crossing with Miguel Maciel supporting his campaign."
+        },
+        {
+          "text": "12h 45m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Sunday, 10 August 1958 · 03:40 · Clock published in the family archive’s historical account; time standard unspecified",
+          "label": "Started"
+        },
+        {
+          "text": "Sunday, 10 August 1958 · 16:25 · Clock explicitly published in the account’s English text; time standard unspecified",
+          "label": "Finished"
+        },
+        {
+          "text": "Both clocks are explicitly published in the family archive. No modern time-zone conversion has been made.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "St Margaret’s Bay, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Captain Hutchinson",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Victor",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "M. J. Wood",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association — public individual record checked",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "Fog reduced visibility; opposing tides slowed the approach to England.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2270 confirms the year, route and duration. The family account supplies date, clocks and support details; Dover corroborates the date. The underlying observer manuscript was not independently inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Abilio Couto, 1958",
+          "url": "https://www.channelswimmingassociation.com/swim/2270/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Abílio Couto family archive: English Channel accounts",
+          "url": "https://www.abiliocouto.com/canal-da-manchaenglish-channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1958 date and explicit departure/arrival clocks; pilot, vessel, observer, endpoints and historical crossing narratives.",
+          "label": "Supports"
+        },
+        {
+          "text": "Family archive’s prose account of reports, not independently inspected original paperwork. Its 1959 England-to-France date conflicts with Dover; several other clock notations are ambiguous.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.uk.com: Abilio Couto athlete record",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Three successful solos and published record dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 29 September 1959 England-to-France date conflicts with the family account’s 11 September.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abilio-couto-1958"
+    },
+    {
+      "title": "England-to-France speed record, 1959",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "12h 49m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Exact calendar date remains unresolved: the family account says 11 September, while Dover lists 29 September. No single date or calculated finish clock is presented. The family account publishes a 07:20 departure clock with no time standard; it is not attached to a phase date while the calendar day remains disputed.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Victor",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association — public individual record checked",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2476 confirms the 1959 England-to-France solo and 12:49. IMSHOF confirms its speed-record significance. The departure clock and vessel come from the family account; conflicting day-level dates remain disclosed."
+        },
+        {
+          "text": "Channel Swimming Association: Abilio Couto, England–France, 1959",
+          "url": "https://www.channelswimmingassociation.com/swim/2476/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Abílio Couto",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_dffb259ec2294a42a5424eed332282e4.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Abílio Couto family archive: English Channel accounts",
+          "url": "https://www.abiliocouto.com/canal-da-manchaenglish-channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1958 date and explicit departure/arrival clocks; pilot, vessel, observer, endpoints and historical crossing narratives.",
+          "label": "Supports"
+        },
+        {
+          "text": "Family archive’s prose account of reports, not independently inspected original paperwork. Its 1959 England-to-France date conflicts with Dover; several other clock notations are ambiguous.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.uk.com: Abilio Couto athlete record",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Three successful solos and published record dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 29 September 1959 England-to-France date conflicts with the family account’s 11 September.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abilio-couto-1959-england-france"
+    },
+    {
+      "title": "Third successful Channel crossing, 1959",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Saturday, 26 September 1959 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 33m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "26 September is Dover’s published swim date, not an independently established departure or arrival date. The family account gives a relative two-week interval, with ambiguous clocks; these have not been converted into dates or precise clock fields.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "South Foreland, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Channel Swimming Association — public individual record checked",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2295 confirms route, year and 11:33. Dover supplies the calendar date; the family archive supplies endpoints. No original observation sheet or signed ratification certificate was inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Abilio Couto, France–England, 1959",
+          "url": "https://www.channelswimmingassociation.com/swim/2295/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.uk.com: Abilio Couto athlete record",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Three successful solos and published record dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 29 September 1959 England-to-France date conflicts with the family account’s 11 September.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Abílio Couto family archive: English Channel accounts",
+          "url": "https://www.abiliocouto.com/canal-da-manchaenglish-channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1958 date and explicit departure/arrival clocks; pilot, vessel, observer, endpoints and historical crossing narratives.",
+          "label": "Supports"
+        },
+        {
+          "text": "Family archive’s prose account of reports, not independently inspected original paperwork. Its 1959 England-to-France date conflicts with Dover; several other clock notations are ambiguous.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abilio-couto-1959-france-england"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Jacuí River",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1959 · exact day not confirmed"
+        },
+        {
+          "text": "Triunfo → Porto Alegre, Brazil"
+        },
+        {
+          "text": "Completed a solo swim from Triunfo to Porto Alegre, according to the family chronology."
+        },
+        {
+          "text": "16h 1m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "60 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The official family career timeline’s 1959 entry identifies this route, 60km and 16h01m. It separately identifies Couto’s English Channel career. Independent ratification and an exact day were not established."
+        },
+        {
+          "text": "Abílio Couto: family biography and career chronology",
+          "url": "https://www.abiliocouto.com/biografia--biography"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Family archive connects the Channel swimmer with named 1959 Jacuí and 1963 Paranoá solo swims.",
+          "label": "Supports"
+        },
+        {
+          "text": "First-party family chronology; not independent ratification. Exact days and original observer paperwork were not established.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abilio-couto-event-1-jacui-river"
+    },
+    {
+      "title": "Lake Paranoá",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1963 · exact day not confirmed"
+        },
+        {
+          "text": "Lake Paranoá, Brasília, Brazil"
+        },
+        {
+          "text": "Completed a solo swim from Torto Bridge to the Peninsula of Ministers, according to the family chronology."
+        },
+        {
+          "text": "7h 17m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "25 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The family career timeline’s 1963 entry gives 25km and 7h17m for this distinct swim. No original log or independent ratification was inspected; exact event day remains absent."
+        },
+        {
+          "text": "Abílio Couto: family biography and career chronology",
+          "url": "https://www.abiliocouto.com/biografia--biography"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Family archive connects the Channel swimmer with named 1959 Jacuí and 1963 Paranoá solo swims.",
+          "label": "Supports"
+        },
+        {
+          "text": "First-party family chronology; not independent ratification. Exact days and original observer paperwork were not established.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abilio-couto-event-2-lake-paranoa"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "First Channel campaign",
+      "lines": [
+        {
+          "text": "1957"
+        },
+        {
+          "text": "Four attempts were interrupted or cancelled before he returned to Brazil."
+        }
+      ]
+    },
+    {
+      "title": "First successful crossing",
+      "lines": [
+        {
+          "text": "Sunday, 10 August 1958"
+        },
+        {
+          "text": "Swam from France to England in 12 hours 45 minutes."
+        }
+      ]
+    },
+    {
+      "title": "England-to-France record",
+      "lines": [
+        {
+          "text": "1959"
+        },
+        {
+          "text": "Set a directional speed record of 12 hours 49 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Third successful Channel swim",
+      "lines": [
+        {
+          "text": "1959"
+        },
+        {
+          "text": "Completed another France-to-England crossing in 11 hours 33 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Brazilian sporting honour",
+      "lines": [
+        {
+          "text": "1966"
+        },
+        {
+          "text": "Received the Cruz do Mérito Esportivo."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame class",
+      "lines": [
+        {
+          "text": "2001"
+        },
+        {
+          "text": "Named an Honor Swimmer of the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    },
+    {
+      "title": "Family accepts the honour",
+      "lines": [
+        {
+          "text": "May 2002"
+        },
+        {
+          "text": "His grandson represented him at the Fort Lauderdale ceremony, where the family donated his Channel record trophy."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Abílio Couto — family film archive and interviews",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.abiliocouto.com/videos"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Family archive with recovered personal film excerpts, interviews and television features. The catalogue page was inspected; the individual films were not played or checked as continuous evidence of a Channel crossing."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Abílio Couto?",
+      "value": "This profile includes 3 selected solo performances for Abílio Couto. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Abílio Couto’s featured English Channel swim?",
+      "value": "The featured swim started on Sunday, 10 August 1958 and finished on Sunday, 10 August 1958."
+    },
+    {
+      "label": "How long did Abílio Couto’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 12 hours and 45 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Abilio Couto, 1958",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2270/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Abilio Couto, England–France, 1959",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2476/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Abilio Couto, France–England, 1959",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2295/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Abílio Couto family archive: English Channel accounts",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.abiliocouto.com/canal-da-manchaenglish-channel"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1958 date and explicit departure/arrival clocks; pilot, vessel, observer, endpoints and historical crossing narratives.",
+          "label": "Supports"
+        },
+        {
+          "text": "Family archive’s prose account of reports, not independently inspected original paperwork. Its 1959 England-to-France date conflicts with Dover; several other clock notations are ambiguous.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Abílio Couto family archive: biography and highlights",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.abiliocouto.com/biografia--biography"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Family archive connects the Channel swimmer with named 1959 Jacuí and 1963 Paranoá solo swims.",
+          "label": "Supports"
+        },
+        {
+          "text": "First-party family chronology; not independent ratification. Exact days and original observer paperwork were not established.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Abílio Couto",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_dffb259ec2294a42a5424eed332282e4.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Abílio Couto family archive: Hall of Fame",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.abiliocouto.com/hall-da-fama-hall-of-fame"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover.uk.com: Abilio Couto athlete record",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/abilio-couto"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Three successful solos and published record dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 29 September 1959 England-to-France date conflicts with the family account’s 11 September.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Abílio Couto family archive: films and interviews",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.abiliocouto.com/videos"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First successful English Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 10 August 1958"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "12h 45m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "03:40 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "16:25 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abilio-couto-1958"
+    },
+    {
+      "title": "England-to-France speed record, 1959",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1959 · exact day not recorded here"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "12h 49m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abilio-couto-1959-england-france"
+    },
+    {
+      "title": "Third successful Channel crossing, 1959",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 26 September 1959 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "11h 33m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abilio-couto-1959-france-england"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Jacuí River",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1959 · exact day not confirmed"
+        },
+        {
+          "text": "Triunfo → Porto Alegre, Brazil"
+        },
+        {
+          "text": "Completed a solo swim from Triunfo to Porto Alegre, according to the family chronology."
+        },
+        {
+          "text": "16h 1m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "60 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "abilio-couto-event-1-jacui-river"
+    },
+    {
+      "title": "Lake Paranoá",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1963 · exact day not confirmed"
+        },
+        {
+          "text": "Lake Paranoá, Brasília, Brazil"
+        },
+        {
+          "text": "Completed a solo swim from Torto Bridge to the Peninsula of Ministers, according to the family chronology."
+        },
+        {
+          "text": "7h 17m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "25 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "abilio-couto-event-2-lake-paranoa"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-a60e67ed9073a677070f"
+}

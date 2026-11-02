@@ -5,6 +5,7 @@ import { calendarUtc } from "./event-calendar.ts";
 import { calendarTimeZoneForPlace } from "./timezone.ts";
 import { filterCountryName, resolveCountry } from "./countries.ts";
 import { nextRaceEdition } from "./race-search-content.ts";
+import { verifiedOrganiserUrl } from "./race-organiser.ts";
 
 type Edition = {
   event_date: string;
@@ -19,6 +20,7 @@ type Event = {
   slug: string;
   name?: string;
   website?: string | null;
+  organiser?: string | null;
   city?: string | null;
   county?: string | null;
   country?: string | null;
@@ -91,7 +93,13 @@ export function racePageMetadata<T extends Edition>(event: Event, upcoming: T[])
       countryCode: /^[A-Z]{2}$/.test(country.iso) && country.iso !== "UN" ? country.iso : undefined,
     },
     // A general event-directory URL does not identify an organiser's own website.
-    organiserWebsite: review?.website ?? guide?.organiser?.url,
+    organiserWebsite:
+      review?.website ??
+      guide?.organiser?.url ??
+      verifiedOrganiserUrl(
+        review?.organiser ?? guide?.organiser?.name ?? event.organiser,
+        event.website,
+      ),
     organiser: review?.organiser ?? guide?.organiser?.name,
   };
 }

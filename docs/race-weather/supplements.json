@@ -1,0 +1,209 @@
+{
+  "st-albans-half-marathon|2026-06-14": {
+    "station": "EGGW",
+    "name": "London Luton",
+    "latitude": 51.875,
+    "longitude": -0.368,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 160.3
+  },
+  "run-snetterton|2024-07-31": {
+    "station": "EGUL",
+    "name": "Lakenheath Raf",
+    "latitude": 52.417,
+    "longitude": 0.567,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 10.0
+  },
+  "love-luton-half-marathon-10k|2021-10-31": {
+    "station": "EGGW",
+    "name": "London Luton",
+    "latitude": 51.875,
+    "longitude": -0.368,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 160.3
+  },
+  "milton-keynes-marathon|2021-06-27": {
+    "station": "EGTC",
+    "name": "Cranfield",
+    "latitude": 52.072,
+    "longitude": -0.617,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 109.1
+  },
+  "marrakech-marathon|2020-01-26": {
+    "station": "GMMX",
+    "name": "Menara",
+    "latitude": 31.607,
+    "longitude": -8.036,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 467.9
+  },
+  "hackney-half-marathon|2019-05-19": {
+    "station": "EGLC",
+    "name": "London City",
+    "latitude": 51.505,
+    "longitude": 0.055,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 5.8
+  },
+  "madrid-marathon|2019-04-27": {
+    "station": "LEMD",
+    "name": "Adolfo Suarez Madrid Barajas",
+    "latitude": 40.494,
+    "longitude": -3.567,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 609.6
+  },
+  "cebu-marathon|2011-01-09": {
+    "station": "RPVM",
+    "name": "Mactan Cebu Intl",
+    "latitude": 10.308,
+    "longitude": 123.979,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 9.4
+  },
+  "brussels-airport-marathon|2009-10-04": {
+    "station": "EBBR",
+    "name": "Brussels Natl",
+    "latitude": 50.901,
+    "longitude": 4.484,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 56.1
+  },
+  "wa-adidas-stockholm-half-marathon-7236393|2008-09-06": {
+    "station": "ESSB",
+    "name": "Bromma",
+    "latitude": 59.354,
+    "longitude": 17.942,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 14.3
+  },
+  "brentwood-half-marathon|2008-03-09": {
+    "station": "EGLC",
+    "name": "London City",
+    "latitude": 51.505,
+    "longitude": 0.055,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 5.8
+  },
+  "roding-valley-half-marathon|2008-03-02": {
+    "station": "EGLL",
+    "name": "London Heathrow",
+    "latitude": 51.478,
+    "longitude": -0.461,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 25.3
+  },
+  "ea-runevents-great-bentley-half-marathon-great-bentley|2008-02-03": {
+    "station": "EGUW",
+    "name": "Wattisham",
+    "latitude": 52.127,
+    "longitude": 0.956,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 86.6
+  },
+  "burnham-beeches-half-marathon|2007-08-19": {
+    "station": "EGLL",
+    "name": "London Heathrow",
+    "latitude": 51.478,
+    "longitude": -0.461,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 25.3
+  },
+  "ostersund-marathon|2007-07-21": {
+    "station": "ESNZ",
+    "name": "Are Ostersund",
+    "latitude": 63.2,
+    "longitude": 14.5,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 376.0
+  },
+  "brentwood-half-marathon|2007-03-25": {
+    "station": "EGLL",
+    "name": "London Heathrow",
+    "latitude": 51.478,
+    "longitude": -0.461,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 25.3
+  },
+  "benfleet-15-historic|2007-01-28": {
+    "station": "EGMC",
+    "name": "Southend",
+    "latitude": 51.571,
+    "longitude": 0.696,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 14.9
+  },
+  "dartford-10-les-witton-memorial|2007-01-21": {
+    "station": "EGLL",
+    "name": "London Heathrow",
+    "latitude": 51.478,
+    "longitude": -0.461,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 25.3
+  },
+  "firstenergy-akron-marathon|2006-09-30": {
+    "station": "AKR",
+    "name": "Akron Fulton Intl Airport",
+    "latitude": 41.037,
+    "longitude": -81.463,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 318.1
+  },
+  "toronto-waterfront-marathon|2006-09-24": {
+    "station": "CYYZ",
+    "name": "Lester B Pearson Intl",
+    "latitude": 43.677,
+    "longitude": -79.631,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 173.4
+  },
+  "burnham-beeches-half-marathon|2006-08-20": {
+    "station": "EGLL",
+    "name": "London Heathrow",
+    "latitude": 51.478,
+    "longitude": -0.461,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 25.3
+  },
+  "london-marathon|2006-04-23": {
+    "station": "EGLL",
+    "name": "London Heathrow",
+    "latitude": 51.478,
+    "longitude": -0.461,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 25.3
+  },
+  "brentwood-half-marathon|2006-03-12": {
+    "station": "EGLL",
+    "name": "London Heathrow",
+    "latitude": 51.478,
+    "longitude": -0.461,
+    "identitySource": "https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv",
+    "checkedOn": "2026-10-26",
+    "elevation": 25.3
+  }
+}

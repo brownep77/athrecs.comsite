@@ -72,6 +72,8 @@ import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
 import { racePageMetadata, raceEditionStart } from "@/lib/athrecs/race-page-metadata";
 import { publicOrganiserName } from "@/lib/athrecs/seo";
 import { reviewedRacePage } from "@/data/race-page-reviews";
+import { diamondLeagueMeetingForSlug } from "@/data/diamond-league";
+import { DiamondLeagueTv } from "@/components/discovery/DiamondLeagueGuide";
 
 type EditionRow = {
   id: number;
@@ -268,6 +270,7 @@ export function RacePageContent({
   athleteLinks?: Awaited<ReturnType<typeof getEventAthleteLinks>>;
 }) {
   const { event, groups, distances, upcoming, past, related } = data;
+  const diamondLeagueMeeting = diamondLeagueMeetingForSlug(event.slug);
   const raceBiography = raceSearchContent(data).biography;
   const isRunningEvent = event.sport === "Running" || event.sport === "Parkrun";
   const qualification = raceQualifications[event.slug];
@@ -853,8 +856,12 @@ export function RacePageContent({
         />
       )}
 
+      {diamondLeagueMeeting ? <DiamondLeagueTv meeting={diamondLeagueMeeting} /> : null}
+
       <EditionResultsLinks
         items={pastWithResults}
+        eventName={event.name}
+        timingCredit={event.slug === "east-coast-10k" ? "Total Race Timing" : undefined}
         onAthrecsResults={(id) => {
           setResultsEditionId(id);
           requestAnimationFrame(() => {
@@ -974,6 +981,7 @@ export function RacePageContent({
 
       <EditionList
         title="Past races"
+        eventSlug={event.slug}
         items={pastPreview}
         hidden={pastHidden}
         onResults={(id) => {
@@ -1165,9 +1173,13 @@ function canonicalResultUrl(url: string): string {
 
 function EditionResultsLinks({
   items,
+  eventName,
+  timingCredit,
   onAthrecsResults,
 }: {
   items: EditionRow[];
+  eventName: string;
+  timingCredit?: string;
   onAthrecsResults: (id: number) => void;
 }) {
   const [showAll, setShowAll] = useState(false);
@@ -1195,7 +1207,7 @@ function EditionResultsLinks({
             </h2>
           </div>
           <p className="mt-1 text-xs text-subtle">
-            Public-figure or athlete-approved ATHRECS results, plus verified organiser links.
+            {timingCredit ? `Timing by ${timingCredit}` : "Public-figure or athlete-approved ATHRECS results, plus verified organiser links."}
           </p>
         </div>
         {grouped.length > 0 ? (
@@ -1252,6 +1264,27 @@ function EditionResultsLinks({
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
+                  {!IS_RUNRECS_SITE &&
+                    editions
+                      .filter((edition) => edition.result_count > 0)
+                      .map((edition) => (
+                        <Link
+                          key={edition.id}
+                          to="/results/$editionId"
+                          params={{
+                            editionId: resultSlug({
+                              edition_id: edition.id,
+                              event_name: eventName,
+                              event_date: edition.event_date,
+                              distance_code: edition.distance_code,
+                            }),
+                          }}
+                          className="inline-flex min-h-11 items-center rounded-md border border-accent/40 px-3 text-xs font-medium text-accent"
+                        >
+                          Full AthRecs results ·{" "}
+                          {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
+                        </Link>
+                      ))}
                   {editions
                     .filter((edition) => edition.result_count > 0)
                     .map((edition) => (
@@ -1307,6 +1340,7 @@ function EditionList({
   title,
   items,
   calendarEvent,
+  eventSlug = calendarEvent?.slug,
   hidden = 0,
   onResults,
   country,
@@ -1315,6 +1349,7 @@ function EditionList({
   title: string;
   items: EditionRow[];
   calendarEvent?: Parameters<typeof catalogueCalendarRace>[0];
+  eventSlug?: string;
   hidden?: number;
   onResults?: (id: number) => void;
   country?: string;
@@ -1332,21 +1367,15 @@ function EditionList({
       ) : (
         <div className="grid gap-2">
           {visibleItems.map((ed) => {
-            const st = effectiveStatus(ed.event_date, ed.status as EntryStatus);
-            const publicNote = calendarEvent
-              ? (FIXTURE_DETAILS[`${calendarEvent.slug}|${ed.event_date}`]?.starts[ed.distance_code]
+            const st = ed.status === "Finished" && !calendarEvent ? "Finished" : effectiveStatus(ed.event_date, ed.status as EntryStatus);
+            const publicNote = eventSlug
+              ? (FIXTURE_DETAILS[`${eventSlug}|${ed.event_date}`]?.starts[ed.distance_code]
                   ?.publicNote ?? ed.notes)
               : ed.notes;
-            const start =
-              ed.start_label ??
-              formatStartTime(ed.start_time, {
-                timeZone: calendarEvent
-                  ? FIXTURE_DETAILS[`${calendarEvent.slug}|${ed.event_date}`]?.timeZone
-                  : undefined,
-                country,
-                county,
-                date: ed.event_date,
-              });
+            const start = eventSlug
+              ? raceEditionStart({ ...calendarEvent, slug: eventSlug, country, county }, ed)
+              : (ed.start_label ??
+                formatStartTime(ed.start_time, { country, county, date: ed.event_date }));
             return (
               <div
                 key={`${ed.id}-${ed.event_date}`}

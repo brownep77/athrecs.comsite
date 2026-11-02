@@ -1,0 +1,26 @@
+[
+  {
+    "duplicateSlug": "wa-27e-huis-hypotheek-stadsloop-appingedam-7235539",
+    "canonicalSlug": "nl-hypotheekshop-stadsloop-appingedam-6bdd83",
+    "date": "2026-10-03",
+    "duplicateEventId": 3065384,
+    "canonicalEventId": 3301651,
+    "duplicateDistances": ["10K", "Other"],
+    "retainedDistances": ["100m", "400m", "800m", "5K", "10K"],
+    "sourceUrl": "https://stadsloopappingedam.nl/praktisch/starttijden-en-tarieven/",
+    "checkedAt": "2026-10-26",
+    "note": "The organiser confirms the postponed 28th edition on 3 October. Keep the existing three-distance canonical event, add its two younger children’s distances, and preserve the federation results and original misleading 27th-edition title in storage."
+  },
+  {
+    "duplicateSlug": "croft-running-festival-november-2026",
+    "canonicalSlug": "running-gp-croft-motor-circuit-november",
+    "date": "2026-11-01",
+    "duplicateEventId": 3059830,
+    "canonicalEventId": 4375811,
+    "duplicateDistances": ["10mi", "5K"],
+    "retainedDistances": ["Marathon", "20mi", "26.2K", "Half", "10mi", "10K", "5K", "1mi Junior"],
+    "sourceUrl": "https://www.runninggrandprix.com/event/croft-running-festival-november-2026",
+    "checkedAt": "2026-10-26",
+    "note": "Keep the fuller canonical event. Carry across the independently verified 10-mile option and add the metric marathon and junior mile; hold unsupported 16mi. The dated organiser guide confirms all eight starts."
+  }
+]

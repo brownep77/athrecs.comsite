@@ -1,4 +1,8 @@
-import { emailOTPClient, genericOAuthClient } from "better-auth/client/plugins";
+import {
+  emailOTPClient,
+  genericOAuthClient,
+  inferAdditionalFields,
+} from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 import {
   AUTH_DIALOG_EVENT,
@@ -9,10 +13,16 @@ import {
 } from "./auth-methods";
 import { GROK_PROVIDERS } from "./providers";
 import { reportBrowserDiagnostic } from "../browser-diagnostics";
+import { endIntercomSession } from "../athrecs/intercom";
+import { signupUserFields } from "./signup-details";
 
 /** Same-origin Better Auth client. Preview sessions use a bearer token. */
 export const authClient = createAuthClient({
-  plugins: [genericOAuthClient(), emailOTPClient()],
+  plugins: [
+    genericOAuthClient(),
+    emailOTPClient(),
+    inferAdditionalFields({ user: signupUserFields }),
+  ],
   fetchOptions: {
     async customFetchImpl(input, init) {
       try {
@@ -105,11 +115,24 @@ export async function signInWithProvider(
 ): Promise<void> {
   const callbackURL = safeAuthCallback(options.callbackURL);
   const errorCallbackURL = safeAuthCallback(options.errorCallbackURL, callbackURL);
+  const additionalData = options.signupDetails
+    ? { athrecsSignup: options.signupDetails }
+    : undefined;
   const preview = inLivePreview();
-  const popup = preview && isBrokerProvider(providerId) ? openSignInPopup(providerId) : null;
+  if (preview && isBrokerProvider(providerId) && options.signupDetails) {
+    // The legacy preview popup only supports existing-account sign-in. Do not
+    // send personal registration fields in its GET URL or redirect an iframe
+    // into a provider that requires top-level authentication.
+    throw new Error(
+      "Use email to create your account in this preview. Social registration is available on athrecs.com.",
+    );
+  }
+  const usePreviewPopup = preview && isBrokerProvider(providerId);
+  const popup = usePreviewPopup ? openSignInPopup(providerId) : null;
 
   const hadBearer = Boolean(getBearerToken());
   if (hadBearer || !preview) {
+    endIntercomSession(true);
     try {
       await authClient.signOut();
     } catch {
@@ -118,7 +141,7 @@ export async function signInWithProvider(
   }
   setBearerToken(null);
 
-  if (preview && isBrokerProvider(providerId)) {
+  if (usePreviewPopup) {
     if (!popup) throw new Error("Pop-up blocked — allow pop-ups for sign-in");
     const token = await waitForPopupToken(popup);
     if (!token) throw new Error("Sign-in was cancelled or failed");
@@ -140,6 +163,7 @@ export async function signInWithProvider(
       callbackURL,
       errorCallbackURL,
       disableRedirect: true,
+      additionalData,
     });
     if (error) throw new Error(error.message ?? "Google sign-in failed");
     if (!data?.url) throw new Error("Google sign-in could not be opened. Try again or use email.");
@@ -152,6 +176,7 @@ export async function signInWithProvider(
       providerId,
       callbackURL,
       errorCallbackURL,
+      additionalData,
     });
     if (error) throw new Error(error.message ?? "Sign-in failed");
     if (!data?.url) throw new Error("Sign-in could not be opened. Try again or use email.");
@@ -164,6 +189,7 @@ export async function signInWithProvider(
     callbackURL,
     errorCallbackURL,
     disableRedirect: true,
+    additionalData,
   });
   if (error) throw new Error(error.message ?? `${providerId} sign-in failed`);
   if (!data?.url) throw new Error("Sign-in could not be opened. Try again or use email.");
@@ -213,6 +239,7 @@ function waitForPopupToken(popup: Window): Promise<string | null> {
 }
 
 export async function signOut(redirectTo = "/"): Promise<void> {
+  endIntercomSession();
   try {
     await authClient.signOut();
   } finally {

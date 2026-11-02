@@ -1,5 +1,6 @@
 import type { RacePlacePageData } from "./race-places";
 import { sportGuideText } from "./sport-guide-text";
+import { isColombiaRunningGuide } from "./colombia-race-guide";
 
 export type RaceCopyPart = string | { text: string; href: string };
 export type RaceCopyParagraph = RaceCopyPart[];
@@ -112,6 +113,7 @@ export function racePlaceCopy(data: RacePlacePageData) {
   );
   const eventWord = data.upcomingCount === 1 ? "event" : "events";
   const hasUpcoming = data.upcomingCount > 0;
+  const colombia = isColombiaRunningGuide(data);
   const heading = data.archive
     ? `Past races and dates to be announced in ${location}`
     : data.place.kind === "world"
@@ -187,7 +189,7 @@ export function racePlaceCopy(data: RacePlacePageData) {
   if (data.total && !data.archive) {
     if (data.facet.sport) {
       const guide = sportGuideText(data.facet.sport.sport);
-      intro.push([guide.intro]);
+      if (!colombia) intro.push([guide.intro]);
       questions.push({
         question: `What should I check before a ${data.facet.sport.label.toLowerCase()} event in ${data.place.name}?`,
         answer: [guide.planning],
@@ -247,6 +249,26 @@ export function racePlaceCopy(data: RacePlacePageData) {
         "Once its listed dates have passed, a race moves to the past-editions view unless another upcoming edition is recorded. Cancelled events also leave the upcoming list. The race guide stays available, and the event returns when a new date is added.",
       ],
     });
+    if (colombia) {
+      questions.push({
+        question: "Are race start times shown in Colombian local time?",
+        answer: [
+          "Yes. Colombia uses UTC−5. Read the published start for your specific distance and wave; bib collection and meeting times can be different. A start that has not been confirmed is labelled as unverified, so check the organiser’s latest race instructions before travelling.",
+        ],
+      });
+      questions.push({
+        question: "How do I choose between a road race and a trail race in Colombia?",
+        answer: [
+          "Use the road and trail views to compare the recorded event types. For road races, check the route, distance and any wave arrangements. For trail races and ultramarathons, also check elevation gain, cut-offs, mandatory equipment and transport between the start and finish. The organiser’s current course guide is the place to confirm those details.",
+        ],
+      });
+      questions.push({
+        question: "What do inscripción, recorrido and entrega de kits mean?",
+        answer: [
+          "On Spanish-language race websites, inscripción means registration or entry, recorrido is the route, and entrega de kits means race-pack collection. Hora de salida is the start time. Select the correct year and distance before following the event’s entry instructions.",
+        ],
+      });
+    }
   }
 
   const shortLocation = data.place.kind === "world" ? "Worldwide" : data.place.name;
@@ -259,14 +281,20 @@ export function racePlaceCopy(data: RacePlacePageData) {
         : data.place.kind === "region"
           ? "sports & events calendar"
           : `${focus === "Triathlons" ? "triathlon" : focus === "Athletics events" ? "athletics" : "race"} calendar`;
-  const title = `${shortLocation} ${titleFocus}${data.archive ? " — past editions" : ""}${data.page > 1 ? ` — page ${data.page}` : ""}${data.place.kind === "region" && parent && parent.name !== data.place.name ? ` | ${parent.name}` : ""} | AthRecs`;
-  const description = data.archive
+  const title = `${shortLocation} ${colombia && !data.facet.distance && !data.facet.terrain ? "running race calendar" : titleFocus}${data.archive ? " — past editions" : ""}${data.page > 1 ? ` — page ${data.page}` : ""}${data.place.kind === "region" && parent && parent.name !== data.place.name ? ` | ${parent.name}` : ""} | AthRecs`;
+  let description = data.archive
     ? `Browse ${number(data.archiveCount)} race guides in ${location} awaiting a new date or with past editions. Find recorded events and links to the upcoming calendar.`
     : !data.total
       ? `Race listings for ${location} are not available yet. Browse the surrounding locations on AthRecs to plan your next event.`
       : !hasUpcoming
         ? `Explore ${number(data.total)} recorded events in ${location}. Browse race guides and past editions, and check back for new dates on AthRecs.`
         : `Find ${number(data.upcomingCount)} upcoming ${data.facet.sport ? (data.upcomingCount === 1 ? focus.toLowerCase().replace(/s$/, "") : focus.toLowerCase()) : eventWord} in ${location}.${raceTypes.length && !data.facet.distance ? ` Includes ${list(raceTypes.slice(0, 3))}.` : ""} Compare dates and entry details on AthRecs.`;
+  if (colombia && hasUpcoming && !data.facet.distance && !data.facet.terrain) {
+    intro.splice(0, 1, [
+      `Find your next running race in Colombia. Compare ${number(data.upcomingCount)} upcoming ${eventWord} by date, distance and location, with local start times where confirmed and links to official race information.`,
+    ]);
+    description = `Find ${number(data.upcomingCount)} upcoming running ${data.upcomingCount === 1 ? "race" : "races"} in Colombia. Compare dates, distances, Colombian local start times and official entry information on AthRecs.`;
+  }
   if (data.filters.month || data.filters.city)
     intro.unshift([
       `Showing ${data.filters.city ? `events in ${data.filters.city}` : "events"}${data.filters.month ? ` during ${new Date(`${data.filters.month}-01T12:00:00Z`).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" })}` : ""}.`,

@@ -6,6 +6,7 @@ export type AuthDialogOptions = {
   callbackURL?: string;
   errorCallbackURL?: string;
   mode?: AuthDialogMode;
+  signupDetails?: SignupDetails;
 };
 
 export type DirectSocialProviderId =
@@ -62,3 +63,4 @@ export function athleteAuthDestination(callbackURL: string, findResults: boolean
   }
   return `${url.pathname}${url.search}${url.hash}`;
 }
+import type { SignupDetails } from "./signup-details";

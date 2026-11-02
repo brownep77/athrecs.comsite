@@ -3,6 +3,7 @@ import { personalBestGroup } from "./profile-records.ts";
 import { selectProfilePersonalBests } from "./reported-personal-bests.ts";
 import { historicalTime } from "./history-performance.ts";
 import { formatDuration } from "./format.ts";
+import { normalizeDistanceCode } from "./distance.ts";
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
 
@@ -30,7 +31,7 @@ export function profilePersonalBestSummary(
       id: `${personalBestGroup(row)}|${candidate.kind === "reported" ? (candidate.value.qualification ?? "") : ""}`,
       sport: isParkrunResult(row) ? "Parkrun" : row.sport,
       surface: isParkrunResult(row) ? "Parkrun" : row.surface,
-      distance: row.distanceCode,
+      distance: normalizeDistanceCode(row.distanceCode),
       mark:
         candidate.kind === "reported"
           ? (candidate.value.displayMark ?? formatDuration(row.finishTimeSeconds))

@@ -1,4 +1,5 @@
 // Synthetic end-to-end authentication and staff data tests. No live accounts or email.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { readFile, mkdir } from "node:fs/promises";
 import { PGlite } from "@electric-sql/pglite";
@@ -224,7 +225,7 @@ try {
   assert.equal(helpers.clientSignInMethod("/get-session"), null);
 
   const staff = await post("sign-up/email", {
-    name: "Synthetic Staff",
+    ...signupDetails("Synthetic Staff"),
     email: "staff@example.test",
     password,
   });
@@ -234,7 +235,7 @@ try {
   await sql`insert into account(id,"accountId","providerId","userId","createdAt","updatedAt") values('staff-google','staff-google','google',${staff.body.user.id},now(),now())`;
   await sql`update "user" set "emailVerified"=true where id=${staff.body.user.id}`;
   const client = await post("sign-up/email", {
-    name: "Synthetic Client",
+    ...signupDetails("Synthetic Client"),
     email: "client@example.test",
     password,
   });

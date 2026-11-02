@@ -38,6 +38,7 @@ try {
     insert into events values (1,'calendar-test','Test race 🏃','England','Norfolk','Norwich','https://example.test');
     insert into editions values (1,1,'2027-07-04','Half',21.0975,'Open','10:00',null,null,null,null),(2,1,'2027-07-04','10K',10,'Open',null,null,null,null,null);
   `);
+  await database.exec("alter table events add column sport text default 'Running'");
   await database.exec(
     fs.readFileSync("migrations/20261023_race_calendar_subscriptions.sql", "utf8"),
   );

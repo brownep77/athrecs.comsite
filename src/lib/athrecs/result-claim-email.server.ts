@@ -1,4 +1,7 @@
 import { authEmailConfigured, sendAthrecsAuthEmail } from "@/lib/auth/email.server";
+import { staffNotificationRecipients } from "@/lib/auth/staff-notifications.server";
+import { dbSource, getSql, type Sql } from "@/lib/db";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export type ClaimEmailStatus =
   "pending" | "needs_info" | "approved" | "rejected" | "withdrawn" | "revoked";
@@ -38,18 +41,25 @@ function staffOrigin(): string {
 }
 
 export function staffRecipients(): string[] {
-  const raw =
-    process.env.ATHRECS_CLAIMS_EMAILS?.trim() ||
-    process.env.ATHRECS_STAFF_EMAILS?.trim() ||
-    "info@athrecs.com";
+  // This is an explicit mail-routing override. The staff sign-in allowlist must
+  // never implicitly become a list of notification recipients.
+  const raw = process.env.ATHRECS_CLAIMS_EMAILS?.trim() || "";
   return [
     ...new Set(
       raw
         .split(",")
         .map((email) => email.trim().toLowerCase())
-        .filter((email) => /^\S+@\S+\.\S+$/.test(email)),
+        .filter(
+          (email) => email.length <= 254 && /^[^\s@<>,;]+@[^\s@<>,;]+\.[^\s@<>,;]+$/.test(email),
+        ),
     ),
   ];
+}
+
+export async function claimNotificationRecipients(sql: Sql, synthetic = false): Promise<string[]> {
+  if (synthetic) return staffNotificationRecipients(sql, "results", true);
+  const configured = staffRecipients();
+  return configured.length ? configured : staffNotificationRecipients(sql, "results");
 }
 
 function claimSummary(context: ClaimEmailContext): string {
@@ -88,6 +98,42 @@ export async function notifyResultClaimSubmitted(
   const claimUrl = `${publicOrigin()}/claim-results?resultId=${context.resultId}`;
   const reviewUrl = `${staffOrigin()}/admin/result-claims`;
   const summary = claimSummary(context);
+  const notifyPendingStaff = async () => {
+    if (
+      !notifyStaff ||
+      selfConfirmed ||
+      context.claimantEmail.toLowerCase() === "paul@athrecs.com" ||
+      process.env.VERCEL_ENV !== "production" ||
+      dbSource !== "neon" ||
+      IS_RUNRECS_SITE
+    )
+      return;
+    try {
+      const sql = await getSql();
+      const [claim] = await sql<{ synthetic: boolean }>`select
+        athrecs_is_test_user(claimant_user_id) or exists(
+          select 1 from athrecs_test_athletes t where t.athlete_id=result_claims.athlete_id
+        ) as synthetic from result_claims where id=${context.claimId}`;
+      const recipients = await claimNotificationRecipients(sql, claim?.synthetic ?? false);
+      await Promise.all(
+        recipients.map((to) =>
+          deliver("claim-submitted-staff", {
+            to,
+            testOnly: claim?.synthetic ?? false,
+            subject: `New ATHRECS result claim #${context.claimId}`,
+            heading: "A result claim needs review",
+            message: `${context.claimantEmail} submitted claim #${context.claimId} for ${summary}. Evidence remains private in the staff claim queue.`,
+            actionLabel: "Review claims",
+            actionUrl: reviewUrl,
+          }),
+        ),
+      );
+    } catch {
+      // This legacy pending-claim path is best-effort. A routing/read failure
+      // must not turn an already committed claim into an apparent failed save.
+      console.error("[claim-email] Staff notification routing could not be loaded.");
+    }
+  };
 
   await Promise.all([
     ...(notifyAthlete
@@ -109,19 +155,7 @@ export async function notifyResultClaimSubmitted(
           }),
         ]
       : []),
-    ...(notifyStaff && !selfConfirmed && context.claimantEmail.toLowerCase() !== "paul@athrecs.com"
-      ? staffRecipients()
-      : []
-    ).map((to) =>
-      deliver("claim-submitted-staff", {
-        to,
-        subject: `New ATHRECS result claim #${context.claimId}`,
-        heading: "A result claim needs review",
-        message: `${context.claimantEmail} submitted claim #${context.claimId} for ${summary}. Evidence remains private in the staff claim queue.`,
-        actionLabel: "Review claims",
-        actionUrl: reviewUrl,
-      }),
-    ),
+    notifyPendingStaff(),
   ]);
 }
 

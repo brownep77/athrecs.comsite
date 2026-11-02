@@ -1,5 +1,14 @@
 const KM_PER_MILE = 1.609344;
 
+/** Display/comparison only: retain source spelling in stored evidence. */
+export function normalizeDistanceCode(code: string): string {
+  const label = code.trim();
+  const km = /^(\d+(?:\.\d+)?)\s*k(?:m)?$/i.exec(label);
+  // Only a standalone distance is an alias. Never strip course qualifications,
+  // convert track metres to road kilometres, or rewrite multisport formats.
+  return km ? `${Number(km[1])}K` : label;
+}
+
 const CODE_KM: Record<string, number> = {
   "1K": 1,
   "3K": 3,

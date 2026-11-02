@@ -1,0 +1,433 @@
+{
+  "media-maraton-de-cucuta|2026-11-15": {
+    "displayName": "Media Maratón de Cúcuta",
+    "summary": "A 21K, 10K and recreational 5K road-running programme in Cúcuta, Norte de Santander.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://app.spikessystem.com/registro/media-maraton-de-cucuta",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "21K": {
+        "time": "05:30",
+        "sourceUrl": "https://app.spikessystem.com/registro/media-maraton-de-cucuta"
+      },
+      "10K": {
+        "time": "06:15",
+        "sourceUrl": "https://app.spikessystem.com/registro/media-maraton-de-cucuta"
+      },
+      "5K": {
+        "time": "06:20",
+        "sourceUrl": "https://app.spikessystem.com/registro/media-maraton-de-cucuta",
+        "publicNote": "Recreational 5K."
+      }
+    }
+  },
+  "media-maraton-uraba-corre|2026-11-22": {
+    "displayName": "Media Maratón Urabá Corre",
+    "summary": "Road races of 21K, 13K and 7.5K from Apartadó in Colombia’s Urabá area.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://urabacorre.com.co/wp-content/uploads/2026/06/REGLAMENTO-MEDIA-MARATON-URABA-CORRE-2026-REGLAMENTO.pdf",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "21K": {
+        "time": "05:35",
+        "sourceUrl": "https://urabacorre.com.co/wp-content/uploads/2026/06/REGLAMENTO-MEDIA-MARATON-URABA-CORRE-2026-REGLAMENTO.pdf",
+        "publicNote": "Race start from the edition-specific regulations; the general 05:30 event time is not this distance’s start."
+      },
+      "13K": {
+        "time": "05:35",
+        "sourceUrl": "https://urabacorre.com.co/wp-content/uploads/2026/06/REGLAMENTO-MEDIA-MARATON-URABA-CORRE-2026-REGLAMENTO.pdf",
+        "publicNote": "Race start from the edition-specific regulations; the general 05:30 event time is not this distance’s start."
+      },
+      "7.5K": {
+        "time": "05:50",
+        "sourceUrl": "https://urabacorre.com.co/wp-content/uploads/2026/06/REGLAMENTO-MEDIA-MARATON-URABA-CORRE-2026-REGLAMENTO.pdf",
+        "publicNote": "Race start from the edition-specific regulations; the general 05:30 event time is not this distance’s start."
+      }
+    }
+  },
+  "media-maraton-de-manizales|2026-11-29": {
+    "displayName": "Media Maratón de Manizales",
+    "summary": "A 21K, 10K and 5K road-race programme in Manizales, Caldas.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://mediamaratonmanizales.com/wp-content/uploads/2026/09/reglamentommm.pdf",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "21K": {
+        "time": "06:00",
+        "sourceUrl": "https://mediamaratonmanizales.com/wp-content/uploads/2026/09/reglamentommm.pdf"
+      },
+      "10K": {
+        "time": "07:30",
+        "sourceUrl": "https://mediamaratonmanizales.com/wp-content/uploads/2026/09/reglamentommm.pdf"
+      },
+      "5K": {
+        "time": "08:30",
+        "sourceUrl": "https://mediamaratonmanizales.com/wp-content/uploads/2026/09/reglamentommm.pdf"
+      }
+    }
+  },
+  "vchallenges-maraton-de-bogota|2026-11-29": {
+    "displayName": "VCHALLENGES — Maratón de Bogotá",
+    "summary": "A 42.195 km marathon, 32K and 21K starting at Parque Obelisco in Bogotá.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges42k",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "Marathon": {
+        "time": "06:30",
+        "sourceUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges42k"
+      },
+      "32K": {
+        "time": "06:30",
+        "sourceUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges32k"
+      },
+      "21K": {
+        "time": "06:30",
+        "sourceUrl": "https://www.vchallenges.co/2026/challenge/details/vchallenges21k"
+      }
+    }
+  },
+  "media-maraton-del-mar-cartagena|2027-02-21": {
+    "displayName": "Media Maratón del Mar Sistecrédito",
+    "summary": "A half marathon and 10K in Cartagena de Indias, starting at the Sociedad Portuaria.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://mediamaratondelmar.com/pages/informacion-2027",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "Half": {
+        "time": "05:20",
+        "sourceUrl": "https://mediamaratondelmar.com/pages/informacion-2027",
+        "publicNote": "Advertised as 21K. Use the organiser’s transport to access the Sociedad Portuaria start."
+      },
+      "10K": {
+        "time": "05:50",
+        "sourceUrl": "https://mediamaratondelmar.com/pages/informacion-2027"
+      }
+    }
+  },
+  "cristal-run-fest|2027-04-04": {
+    "displayName": "Cristal RUN FEST",
+    "summary": "A 3K, 7K and 15K running festival based at Parque Norte in Medellín.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://mcmeventos.com/pages/cristal-run-fest",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "15K": {
+        "time": null,
+        "sourceUrl": "https://mcmeventos.com/pages/cristal-run-fest",
+        "publicNote": "Start time not yet verified for this edition."
+      },
+      "7K": {
+        "time": null,
+        "sourceUrl": "https://mcmeventos.com/pages/cristal-run-fest",
+        "publicNote": "Start time not yet verified for this edition."
+      },
+      "3K": {
+        "time": null,
+        "sourceUrl": "https://mcmeventos.com/pages/cristal-run-fest",
+        "publicNote": "Start time not yet verified for this edition."
+      }
+    }
+  },
+  "maraton-de-cali|2027-04-25": {
+    "displayName": "Maratón de Cali",
+    "summary": "A 42.195 km road marathon and 15K in Cali, Valle del Cauca.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://maratondecali.co/",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "Marathon": {
+        "time": null,
+        "sourceUrl": "https://maratondecali.co/",
+        "publicNote": "Start time not yet verified for this edition."
+      },
+      "15K": {
+        "time": null,
+        "sourceUrl": "https://maratondecali.co/",
+        "publicNote": "Start time not yet verified for this edition."
+      }
+    }
+  },
+  "21k-covenas|2027-05-30": {
+    "displayName": "21K Coveñas",
+    "summary": "A 10K and 21K road-running event in Coveñas, Sucre.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://mcmeventos.com/pages/21k-covenas-2027",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "21K": {
+        "time": null,
+        "sourceUrl": "https://mcmeventos.com/pages/21k-covenas-2027",
+        "publicNote": "Start time not yet verified for this edition."
+      },
+      "10K": {
+        "time": null,
+        "sourceUrl": "https://mcmeventos.com/pages/21k-covenas-2027",
+        "publicNote": "Start time not yet verified for this edition."
+      }
+    }
+  },
+  "media-maraton-regiones-colombia|2027-07-11": {
+    "displayName": "Media Maratón Regiones Colombia",
+    "summary": "A 21K, competitive 10K and recreational 5K in Cartagena de Indias.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://www.mmregionescolombia.com/reglamento.html",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "21K": {
+        "time": null,
+        "sourceUrl": "https://www.mmregionescolombia.com/reglamento.html",
+        "publicNote": "Start time not yet verified for this edition."
+      },
+      "10K": {
+        "time": null,
+        "sourceUrl": "https://www.mmregionescolombia.com/reglamento.html",
+        "publicNote": "Start time not yet verified for this edition."
+      },
+      "5K": {
+        "time": null,
+        "sourceUrl": "https://www.mmregionescolombia.com/reglamento.html",
+        "publicNote": "Recreational 5K."
+      }
+    }
+  },
+  "media-maraton-de-bogota-2026-ad1d6f7a|2027-07-25": {
+    "displayName": "Media Maratón de Bogotá",
+    "summary": "Bogotá’s half marathon and 10K, with separate starts beside Parque Simón Bolívar.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://www.mediamaratonbogota.com/reglamento",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "Half": {
+        "time": "08:30",
+        "sourceUrl": "https://www.mediamaratonbogota.com/reglamento",
+        "publicNote": "Half marathon / 21K. The official rules state 21,097 metres. First wave 08:30; later waves 08:38, 08:46 and 08:54. Follow your assigned wave.",
+        "label": "First wave 08:30 COT · waves until 08:54"
+      },
+      "10K": {
+        "time": "10:00",
+        "sourceUrl": "https://www.mediamaratonbogota.com/reglamento",
+        "publicNote": "First wave 10:00; later waves 10:08, 10:16 and 10:24. Follow your assigned wave.",
+        "label": "First wave 10:00 COT · waves until 10:24"
+      }
+    },
+    "eventStartTime": "08:30"
+  },
+  "media-maraton-del-cafe-pereira|2026-11-01": {
+    "displayName": "Media Maratón del Café",
+    "summary": "A 21K, 10K and 5K in Pereira, starting and finishing at Villa Olímpica.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://www.mediamaratoncafe.com.co/",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "21K": {
+        "time": null,
+        "sourceUrl": "https://www.mediamaratoncafe.com.co/",
+        "publicNote": "Start time not yet verified. The entry index’s 05:00 is a general event time, not a confirmed distance start."
+      },
+      "10K": {
+        "time": null,
+        "sourceUrl": "https://www.mediamaratoncafe.com.co/",
+        "publicNote": "Start time not yet verified. The entry index’s 05:00 is a general event time, not a confirmed distance start."
+      },
+      "5K": {
+        "time": null,
+        "sourceUrl": "https://www.mediamaratoncafe.com.co/",
+        "publicNote": "Start time not yet verified. The entry index’s 05:00 is a general event time, not a confirmed distance start."
+      }
+    }
+  },
+  "media-maraton-de-la-frontera-ipiales|2026-11-29": {
+    "displayName": "Media Maratón de la Frontera",
+    "summary": "A 21K, 10K and 5K road-running programme in Ipiales, Nariño.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://mediamaratonfrontera.com/",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "21K": {
+        "time": null,
+        "sourceUrl": "https://mediamaratonfrontera.com/",
+        "publicNote": "The organiser says the timetable is to be announced. Start time not yet verified."
+      },
+      "10K": {
+        "time": null,
+        "sourceUrl": "https://mediamaratonfrontera.com/",
+        "publicNote": "The organiser says the timetable is to be announced. Start time not yet verified."
+      },
+      "5K": {
+        "time": null,
+        "sourceUrl": "https://mediamaratonfrontera.com/",
+        "publicNote": "The organiser says the timetable is to be announced. Start time not yet verified."
+      }
+    }
+  },
+  "salento-trail-challenge|2026-11-01": {
+    "displayName": "Salento Trail Challenge",
+    "summary": "Trail races of 5K, 10K, 21K and 42K from the main square in Salento, Quindío.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://www.salentotrailchallenge.com/5k",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "5K": {
+        "time": "07:30",
+        "sourceUrl": "https://www.salentotrailchallenge.com/5k",
+        "publicNote": "07:30 is the current linked route-page start. Reconfirm the final 2026 instructions; route downloads are being updated."
+      },
+      "10K": {
+        "time": "07:30",
+        "sourceUrl": "https://www.salentotrailchallenge.com/10k",
+        "publicNote": "07:30 is the current linked route-page start. Reconfirm the final 2026 instructions; route downloads are being updated."
+      },
+      "21K": {
+        "time": "07:30",
+        "sourceUrl": "https://www.salentotrailchallenge.com/21k",
+        "publicNote": "07:30 is the current linked route-page start. Reconfirm the final 2026 instructions; route downloads are being updated."
+      },
+      "42K": {
+        "time": "07:30",
+        "sourceUrl": "https://www.salentotrailchallenge.com/42k",
+        "publicNote": "07:30 is the current linked route-page start. Reconfirm the final 2026 instructions; route downloads are being updated."
+      }
+    }
+  },
+  "pitalito-trail-tour|2026-11-08": {
+    "displayName": "Pitalito Trail Tour",
+    "summary": "A 10K, 21K and 42K trail-running programme in Pitalito, Huila.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://sabicann.com/pitalito-trail-tour/",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "42K": {
+        "time": "05:00",
+        "sourceUrl": "https://sabicann.com/pitalito-trail-tour/"
+      },
+      "21K": {
+        "time": "07:00",
+        "sourceUrl": "https://sabicann.com/pitalito-trail-tour/"
+      },
+      "10K": {
+        "time": "07:00",
+        "sourceUrl": "https://sabicann.com/pitalito-trail-tour/"
+      }
+    }
+  },
+  "columbia-trail-challenge|2026-11-15": {
+    "displayName": "Columbia Trail Challenge",
+    "summary": "A mountain trail event from Choachí’s main square, including the 11 km route branded as 10K.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://columbiatrailchallenge.com/rutasdecarrera/",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "11K": {
+        "time": "09:00",
+        "sourceUrl": "https://columbiatrailchallenge.com/rutasdecarrera/",
+        "publicNote": "The organiser markets this as 10K and publishes a technical route distance of 11 km."
+      }
+    }
+  },
+  "del-mar-a-la-cima|2026-11-28": {
+    "displayName": "Del Mar a la Cima",
+    "summary": "A multi-distance trail and ultra weekend in the Santa Marta coastal area of Magdalena.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://delmaralacima.com/ficha-tecnica-110k/",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "110K": {
+        "time": "07:00",
+        "sourceUrl": "https://delmaralacima.com/ficha-tecnica-110k/",
+        "publicNote": "Organiser’s race name: 110K Teyuna. Published trail distance: approximately 110 km."
+      },
+      "81.2K": {
+        "time": "07:00",
+        "sourceUrl": "https://delmaralacima.com/ficha-tecnica-80k/",
+        "publicNote": "Organiser’s race name: 80K. Published trail distance: approximately 81.2 km."
+      }
+    }
+  },
+  "del-mar-a-la-cima|2026-11-29": {
+    "displayName": "Del Mar a la Cima",
+    "summary": "A multi-distance trail and ultra weekend in the Santa Marta coastal area of Magdalena.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://delmaralacima.com/ficha-tecnica-42k/",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "42.4K": {
+        "time": "03:00",
+        "sourceUrl": "https://delmaralacima.com/ficha-tecnica-42k/",
+        "publicNote": "Organiser’s race name: 42K. Published trail distance: approximately 42.4 km."
+      },
+      "25.5K": {
+        "time": "05:45",
+        "sourceUrl": "https://delmaralacima.com/ficha-tecnica-24k/",
+        "publicNote": "Organiser’s race name: 24K. Published trail distance: approximately 25.5 km."
+      },
+      "14.5K": {
+        "time": "06:00",
+        "sourceUrl": "https://delmaralacima.com/ficha-tecnica-13k/",
+        "publicNote": "Organiser’s race name: 13K. Published trail distance: approximately 14.5 km."
+      }
+    }
+  },
+  "the-desert-marathon-colombia|2027-05-28": {
+    "displayName": "The Desert Marathon",
+    "summary": "Three-stage desert races of approximately 50, 76 and 100 km in La Guajira.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://tdmrace.com/reglamento/",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "100K": {
+        "time": null,
+        "sourceUrl": "https://tdmrace.com/reglamento/",
+        "publicNote": "Total distance over three stages, 28–30 May 2027. Kit collection is on 27 May. First-stage start time not yet verified."
+      },
+      "76K": {
+        "time": null,
+        "sourceUrl": "https://tdmrace.com/reglamento/",
+        "publicNote": "Total distance over three stages, 28–30 May 2027. Kit collection is on 27 May. First-stage start time not yet verified."
+      },
+      "50K": {
+        "time": null,
+        "sourceUrl": "https://tdmrace.com/reglamento/",
+        "publicNote": "Total distance over three stages, 28–30 May 2027. Kit collection is on 27 May. First-stage start time not yet verified."
+      }
+    }
+  },
+  "chicamocha-canyon-race|2027-06-05": {
+    "displayName": "Chicamocha Canyon Race",
+    "summary": "Four trail and ultra routes of approximately 24, 46, 81 and 167 km through Santander.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "167K": {
+        "time": "08:00",
+        "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+        "publicNote": "Organiser’s race name: 100 miles. Published trail distance: approximately 167 km. Start: Centro Comercial El Puente, San Gil. Finish: Centro Comercial El Puente, San Gil."
+      }
+    }
+  },
+  "chicamocha-canyon-race|2027-06-06": {
+    "displayName": "Chicamocha Canyon Race",
+    "summary": "Four trail and ultra routes of approximately 24, 46, 81 and 167 km through Santander.",
+    "timeZone": "America/Bogota",
+    "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+    "checkedAt": "2026-10-28",
+    "starts": {
+      "81K": {
+        "time": "06:00",
+        "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+        "publicNote": "Organiser’s race name: 80K. Published trail distance: approximately 81 km. Start: Centro Comercial El Puente, San Gil. Finish: Centro Comercial El Puente, San Gil."
+      },
+      "46K": {
+        "time": "07:00",
+        "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+        "publicNote": "Organiser’s race name: Maratón 46K. Published trail distance: approximately 46 km. Start: Jordán. Finish: Centro Comercial El Puente, San Gil."
+      },
+      "24K": {
+        "time": "08:00",
+        "sourceUrl": "https://chicamochacanyonrace.com/es/cronograma",
+        "publicNote": "Organiser’s race name: Media maratón 24K. Published trail distance: approximately 24 km. Start: Jordán. Finish: Parque principal, Barichara."
+      }
+    }
+  }
+}

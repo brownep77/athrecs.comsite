@@ -4,20 +4,23 @@ import { sourceHistorySports, type HistoryResult } from "./profile-history-resul
 import { isWmmSource, publicProfileResultNotes } from "./profile-source-presentation.ts";
 import { hasHistoryFinish, resultVerification } from "./profile-result-presentation.ts";
 import { competitionRound } from "./competition-awards.ts";
+import { normalizeDistanceCode } from "./distance.ts";
 
 const normal = (value: string) => value.trim().toLowerCase().replace(/\s+/g, " ");
 
 export function profileDisciplineLabel(value: string): string {
   if (/^mile$/i.test(value.trim())) return "Mile";
   if (/^2 miles$/i.test(value.trim())) return "2 miles";
-  return value
-    .trim()
-    .replace(/^mile road$/i, "1mi")
-    .replace(/^Half$/i, "Half marathon")
-    .replace(/^Half Marathon$/i, "Half marathon")
-    .replace(/\s*(?:kilometres|kilometers|km)(?: road)?$/i, "K")
-    .replace(/\s*(?:miles?|mi)(?: road)?$/i, "mi")
-    .replace(/^([\d,]+)\s+metres$/i, "$1m");
+  return normalizeDistanceCode(
+    value
+      .trim()
+      .replace(/^mile road$/i, "1mi")
+      .replace(/^Half$/i, "Half marathon")
+      .replace(/^Half Marathon$/i, "Half marathon")
+      .replace(/\s*(?:kilometres|kilometers|km)(?: road)?$/i, "K")
+      .replace(/\s*(?:miles?|mi)(?: road)?$/i, "mi")
+      .replace(/^([\d,]+)\s+metres$/i, "$1m"),
+  );
 }
 
 /** Road and track distances must never collapse into the same performance. */

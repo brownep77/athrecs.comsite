@@ -4,6 +4,7 @@ import { profilePersonalBestSummary } from "../src/lib/athrecs/profile-personal-
 import { buildProfileAchievements } from "../src/lib/athrecs/profile-achievements.ts";
 import { profileAchievementResults } from "../src/lib/athrecs/profile-history-results.ts";
 import { withoutProfileEvidence } from "../src/lib/athrecs/profile-evidence.ts";
+import { historicalDistance } from "../src/lib/athrecs/history-performance.ts";
 
 const row = (extra = {}) => ({
   year: 2020,
@@ -27,6 +28,38 @@ assert.equal(bests([row()])[0].value.finishTimeSeconds, 1082);
 assert.equal(bests([row({ verificationStatus: "unverified" })]).length, 1);
 assert.equal(bests([row({ verificationStatus: "unverified" })])[0].verified, false);
 assert.equal(bests([row()])[0].verified, true);
+const legacyMarathon = row({ discipline: "Marathon", performance: "2:45:12" });
+const legacyHalf = row({ discipline: "Half Marathon", performance: "1:18:45" });
+delete legacyMarathon.verificationStatus;
+delete legacyHalf.verificationStatus;
+const legacyHistories = [
+  { ...histories([legacyMarathon, legacyHalf])[0], provider: "World Athletics" },
+];
+const legacyBefore = JSON.stringify(legacyHistories);
+const legacyBests = selectProfilePersonalBests([], [], legacyHistories);
+assert.deepEqual(
+  legacyBests.map(({ value, verified }) => [value.distanceCode, value.finishTimeSeconds, verified]),
+  [
+    ["Half", 4725, true],
+    ["Marathon", 9912, true],
+  ],
+  "Published legacy World Athletics marks count without an explicit verification field",
+);
+assert.equal(
+  bests([legacyMarathon])[0].verified,
+  false,
+  "Missing verification on an ordinary source never acquires a verification tick",
+);
+assert.deepEqual(
+  profilePersonalBestSummary([], withoutProfileEvidence(legacyHistories)),
+  profilePersonalBestSummary([], legacyHistories),
+  "Legacy PBs and verification survive the public evidence projection",
+);
+assert.equal(
+  JSON.stringify(legacyHistories),
+  legacyBefore,
+  "PB selection does not write verification statuses or change source history",
+);
 const fasterPending = [
   row(),
   row({ date: "2021-05-10", performance: "17:59", verificationStatus: "unverified" }),
@@ -65,6 +98,44 @@ assert.equal(
 );
 assert.equal(bests([track])[0].value.finishTimeSeconds, 972.55);
 assert.equal(profilePersonalBestSummary([], histories([track]))[0].mark, "16:12.55");
+const groupedTrack = row({
+  discipline: "10,000 Metres",
+  performance: "32:26.25",
+  date: "2021-05-10",
+  labels: [],
+  meeting: "Synthetic track meeting",
+});
+const groupedBests = bests([
+  { ...groupedTrack, discipline: "10000", date: "2020-05-10", performance: "32:30.00" },
+  groupedTrack,
+]);
+assert.equal(groupedBests.length, 1, "Grouped and ungrouped metre labels share a track PB");
+assert.equal(groupedBests[0].value.sport, "Athletics");
+assert.equal(groupedBests[0].value.surface, "Track");
+assert.equal(groupedBests[0].value.distanceCode, "10000m");
+assert.equal(groupedBests[0].value.distanceKm, 10);
+assert.equal(groupedBests[0].value.finishTimeSeconds, 1946.25);
+assert.equal(profilePersonalBestSummary([], histories([groupedTrack]))[0].mark, "32:26.25");
+assert.equal(
+  bests([groupedTrack, row({ discipline: "10K", performance: "33:00" })]).length,
+  2,
+  "Comma-formatted track metres remain separate from road kilometres",
+);
+for (const [discipline, code, km] of [
+  ["1,500 metres", "1500m", 1.5],
+  ["5,000 Metres", "5000m", 5],
+  ["10,000m", "10000m", 10],
+]) {
+  assert.deepEqual(historicalDistance(discipline, "Athletics"), { code, km });
+}
+for (const discipline of ["10,00 Metres", "1,23,456m", "1000,000 Metres", "10,000 Metres Relay"]) {
+  assert.equal(historicalDistance(discipline, "Athletics").km, 0, discipline);
+}
+assert.equal(
+  historicalDistance("10,000 Metres", "Running").km,
+  0,
+  "Metre normalization requires an independently classified track discipline",
+);
 assert.equal(bests([row(), track, row({ discipline: "parkrun", labels: [] })]).length, 3);
 assert.equal(bests([row({ discipline: "5 Miles" })])[0].value.distanceKm, 8.04672);
 assert.equal(bests([row({ discipline: "Half Marathon" })])[0].value.distanceCode, "Half");
@@ -108,6 +179,11 @@ for (const extra of [
 ]) {
   assert.equal(bests([row(extra)]).length, 0, JSON.stringify(extra));
   assert.equal(bests([{ ...reported, ...extra }]).length, 0, `reported ${JSON.stringify(extra)}`);
+  assert.equal(
+    bests([row({ ...extra, verificationStatus: undefined })]).length,
+    0,
+    `legacy ${JSON.stringify(extra)}`,
+  );
 }
 assert.equal(
   bests([row(), row({ performance: "17:59" })]).length,

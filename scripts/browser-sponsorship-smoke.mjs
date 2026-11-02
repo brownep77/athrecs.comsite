@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // Full enquiry round trip against disposable CI PostgreSQL and loopback only.
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { chromium } from "playwright";
@@ -25,7 +26,7 @@ try {
   const context = await browser.newContext();
   const signup = await context.request.post(new URL("/api/auth/sign-up/email", baseUrl).href, {
     headers: { Origin: new URL(baseUrl).origin },
-    data: { name: "CI Sponsorship Organiser", email, password: `Ci-${randomUUID()}!` },
+    data: { ...signupDetails("CI Sponsorship Organiser"), email, password: `Ci-${randomUUID()}!` },
   });
   assert.equal(signup.ok(), true, `Test sign-up returned ${signup.status()}`);
   const account = await pool.query(

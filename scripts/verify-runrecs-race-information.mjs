@@ -19,6 +19,9 @@ const { supplementedStart } = await moduleFrom("src/data/runrecs-race-guides.ts"
 const { effectiveStatus, statusLabel } = await moduleFrom("src/lib/athrecs/format.ts");
 const { withheldFixtureDateKeys } = await moduleFrom("src/data/fixture-date-reviews.ts");
 const { retainedFixtureAliasSlugs } = await moduleFrom("src/data/fixture-deduplication.ts");
+const { unconfirmedFixtureEditionIds } = await moduleFrom(
+  "src/lib/athrecs/fixture-distance-policy.server.ts",
+);
 const today = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/London",
   year: "numeric",
@@ -96,16 +99,21 @@ try {
   await db.exec(`
     insert into events (id, slug, name, sport, county, city) values
       (900001, 'fixture-running', 'Race Information Fixture', 'Running', 'Norfolk', 'Norwich'),
-      (900002, 'fixture-swimming', 'Swim Information Fixture', 'Swimming', 'Norfolk', 'Norwich');
-    insert into event_distances (event_id, distance_code) values (900001, '5K'), (900001, '10K'), (900002, '5K');
+      (900002, 'fixture-swimming', 'Swim Information Fixture', 'Swimming', 'Norfolk', 'Norwich'),
+      (900004, 'fixture-held-distance', 'Held Distance Fixture', 'Running', 'Norfolk', 'Norwich');
+    insert into event_distances (event_id, distance_code) values
+      (900001, '5K'), (900001, '10K'), (900001, 'Other'), (900002, '5K'), (900004, 'TBC');
     insert into editions (id, event_id, event_date, distance_code, distance_km, start_time, status) values
       (900001, 900001, '2099-10-01', '5K', 5, '09:00', 'Open'),
       (900002, 900001, '2099-10-01', '10K', 10, '10:30', 'Open'),
       (900003, 900001, '2099-11-01', '5K', 5, null, 'Open'),
-      (900004, 900002, '2099-10-01', '5K', 5, '08:00', 'Open');
+      (900004, 900002, '2099-10-01', '5K', 5, '08:00', 'Open'),
+      (900006, 900001, '2099-09-01', 'Other', 0, '07:00', 'Open'),
+      (900007, 900004, '2099-09-01', 'TBC', 0, '07:30', 'Open');
     insert into edition_entry_options (edition_id, provider_code, provider_name, entry_url, entry_type, status, is_verified, is_primary) values
       (900001, 'fixture', 'Fixture entry', 'https://example.com/5k', 'official', 'open', true, true),
-      (900002, 'fixture', 'Fixture entry', 'https://example.com/10k', 'official', 'open', true, true);
+      (900002, 'fixture', 'Fixture entry', 'https://example.com/10k', 'official', 'open', true, true),
+      (900006, 'fixture', 'Held fixture entry', 'https://example.com/held-distance', 'official', 'open', true, true);
   `);
   const source = await readFile("src/lib/running/catalogue.server.ts", "utf8");
   await db.exec(`insert into events(id,slug,name,sport,country,city) values
@@ -114,9 +122,15 @@ try {
     (900005,900003,'2099-10-01','Marathon','Open');`);
   const query = source.match(/const rows = await sql<RawEventRow>`([\s\S]*?)`;/)?.[1];
   assert(query, "Production listing query must be exercised");
+  const sql = async (parts, ...params) => {
+    const text = parts.reduce((text, part, index) => text + (index ? `$${index}` : "") + part, "");
+    return sql.query(text, params);
+  };
+  sql.query = async (text, params = []) => (await db.query(text, params)).rows;
   const defaults = {
     retainedFixtureAliasSlugs,
     withheldFixtureDateKeys,
+    heldDistanceIds: await unconfirmedFixtureEditionIds(sql, today),
     today,
     requestedSport: null,
     q: null,
@@ -133,14 +147,29 @@ try {
     fetchLimit: 100,
     offset: 0,
   };
-  const sql = async (parts, ...params) => {
-    const text = parts.reduce((text, part, index) => text + (index ? `$${index}` : "") + part, "");
-    return (await db.query(text, params)).rows;
-  };
   const runQuery = new Function("sql", ...Object.keys(defaults), `return sql\`${query}\`;`);
-  const list = (filters = {}) => runQuery(sql, ...Object.values({ ...defaults, ...filters }));
+  // Match production context: derive current holds through the real helper for every query.
+  const queryValues = async (filters = {}) => {
+    const values = { ...defaults, ...filters };
+    values.heldDistanceIds = await unconfirmedFixtureEditionIds(sql, values.today);
+    return Object.values(values);
+  };
+  const list = async (filters = {}) => runQuery(sql, ...(await queryValues(filters)));
+  assert.deepEqual([...defaults.heldDistanceIds].sort((a, b) => a - b), [900006, 900007]);
   const [race] = await list();
   assert.equal((await list()).length, 1, "RunRecs excludes other sports");
+  assert.equal(race.next_date, "2099-10-01", "An earlier held edition cannot become the next race");
+  assert.equal(race.upcoming_count, 3, "Held editions stay out of upcoming totals");
+  assert.deepEqual(race.distances_csv.split(",").sort(), ["10K", "5K"]);
+  assert.equal((await list({ q: "%held distance fixture%" })).length, 0);
+  for (const distance of ["Other", "TBC"])
+    assert.equal((await list({ distance })).length, 0, "Held distance filters return no fixtures");
+  assert.equal((await list({ dateFrom: "2099-09-01", dateTo: "2099-09-30" })).length, 0);
+  assert.equal(
+    (await db.query("select count(*)::int as count from editions where id in (900006,900007)")).rows[0].count,
+    2,
+    "Held editions remain stored for research",
+  );
   assert.equal(
     (await db.query("select count(*) from events where id=900003")).rows[0].count,
     1,
@@ -149,8 +178,8 @@ try {
   assert.equal(race.next_start_time, "09:00");
   assert.equal(race.next_entry_url, "https://example.com/5k");
   assert.deepEqual(JSON.parse(race.next_starts_json), [
-    { distance: "5K", time: "09:00" },
-    { distance: "10K", time: "10:30" },
+    { distance: "5K", distanceKm: 5, time: "09:00" },
+    { distance: "10K", distanceKm: 10, time: "10:30" },
   ]);
   const [tenK] = await list({ distance: "10K" });
   assert.equal(tenK.next_start_time, "10:30");
@@ -211,6 +240,12 @@ try {
   await db.exec(
     "delete from editions where event_id between 900010 and 900013; delete from event_distances where event_id between 900010 and 900013; delete from events where id between 900010 and 900013;",
   );
+  await db.exec(`
+    delete from edition_entry_options where edition_id=900006;
+    delete from editions where id in (900006,900007);
+    delete from event_distances where (event_id=900001 and distance_code='Other') or event_id=900004;
+    delete from events where id=900004;
+  `);
   // A shared materialized edition set turns each per-event lookup into a full
   // catalogue scan. Exercise enough rows to inspect the actual indexed plan.
   await db.exec(`
@@ -228,7 +263,7 @@ try {
     const text = parts.reduce((text, part, index) => text + (index ? `$${index}` : "") + part, "");
     return (await db.query(`explain (format json) ${text}`, params)).rows;
   };
-  const plan = await runQuery(explain, ...Object.values(defaults));
+  const plan = await runQuery(explain, ...(await queryValues()));
   assert(
     !JSON.stringify(plan).includes('"Node Type":"CTE Scan"'),
     "Per-event lookups must not repeatedly scan a materialized catalogue",

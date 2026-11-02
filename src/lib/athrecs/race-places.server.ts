@@ -1,3 +1,5 @@
+import { fixtureDistanceLabel } from "./fixture-distance-policy.ts";
+import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
 import { fixtureTimeZone } from "./fixture-presentation";
@@ -39,16 +41,17 @@ export async function queryRacePlaceRows(
   options: { compact?: boolean; eventIds?: number[] } = {},
 ): Promise<PlaceRace[]> {
   if (options.eventIds?.length === 0) return [];
+  const heldDistanceIds = await unconfirmedFixtureEditionIds(sql, now.slice(0, 10));
   // The shared index needs dates for filters and rollover, but not descriptions,
   // entry links or source links for every future edition in the world.
   // Tuples also avoid repeating JSON property names for recurring fixtures.
-  type EditionTuple = [string, string, string, string | null];
+  type EditionTuple = [string, string, string, string | null, number | null];
   const endDate = `case when ed.end_source_url is not null and ed.end_checked_at is not null
           and ed.end_date >= ed.event_date then ed.end_date::text end`;
   const editionJson = options.compact
-    ? `json_build_array(ed.event_date::text, ed.distance_code, ed.status, ${endDate})`
+    ? `json_build_array(ed.event_date::text, ed.distance_code, ed.status, ${endDate}, ed.distance_km)`
     : `json_build_object(
-        'date', ed.event_date::text, 'distance', ed.distance_code, 'status', ed.status, 'entryUrl', ed.entry_url,
+        'date', ed.event_date::text, 'distance', ed.distance_code, 'distanceKm', ed.distance_km, 'status', ed.status, 'entryUrl', ed.entry_url,
         'startTime', ed.start_time, 'sourceUrl', ed.source_url, 'endDate', ${endDate})`;
   const rows = await sql.query<
     Omit<PlaceRace, "timeZone" | "editions"> & { editions: (PlaceEdition | EditionTuple)[] }
@@ -65,9 +68,10 @@ export async function queryRacePlaceRows(
       coalesce((select json_agg(${editionJson}
         order by ed.event_date, ed.distance_code) from editions ed
       where ed.event_id=e.id and coalesce(ed.end_date, ed.event_date) >= $1::date - interval '2 days'
+        and not (ed.id = any($5::int[]))
         and not ((coalesce(e.slug, '') || '|' || ed.event_date::text) = any($4::text[]))), '[]') as editions
     from events e where e.sport in ('Running','Athletics','Triathlon','Parkrun','Cycling','Swimming','Duathlon')
-      ${options.eventIds ? "and e.id = any($5::int[])" : ""}
+      ${options.eventIds ? "and e.id = any($6::int[])" : ""}
       and not (e.slug = any($2::text[]))
       and not exists (select 1 from jsonb_to_recordset($3::jsonb) a(old_slug text, current_slug text)
         join events target on target.slug = coalesce((select current_slug from slug_redirects
@@ -79,6 +83,7 @@ export async function queryRacePlaceRows(
       retainedFixtureAliasSlugs,
       aliases,
       withheldFixtureDateKeys,
+      heldDistanceIds,
       ...(options.eventIds ? [options.eventIds] : []),
     ],
   );
@@ -88,7 +93,13 @@ export async function queryRacePlaceRows(
       editions: race.editions
         .map((edition): PlaceEdition =>
           Array.isArray(edition)
-            ? { date: edition[0], distance: edition[1], status: edition[2], endDate: edition[3] }
+            ? {
+                date: edition[0],
+                distance: edition[1],
+                status: edition[2],
+                endDate: edition[3],
+                distanceKm: edition[4],
+              }
             : edition,
         )
         .filter(
@@ -99,6 +110,7 @@ export async function queryRacePlaceRows(
           const checked = detail?.starts[edition.distance];
           return {
             ...edition,
+            distance: fixtureDistanceLabel(edition.distance, edition.distanceKm),
             startTime: checked
               ? checked.time
               : edition.sourceUrl && !/runabc\.co\.uk/i.test(edition.sourceUrl)

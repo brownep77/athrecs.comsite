@@ -1,3 +1,8 @@
+import { athleteBiographyReviews } from "./athlete-biography-reviews.ts";
+const paulaBiography = athleteBiographyReviews.find(
+  (review) => review.slug === "paula-radcliffe",
+)!.paragraphs;
+
 // Public sporting biographies checked 6 October 2026. Partial career coverage.
 // Editorial highlights never create canonical results, verified PBs or rankings.
 export const britishMarathonCareers = [
@@ -923,7 +928,7 @@ export const britishMarathonCareers = [
     "slug": "paula-radcliffe",
     "name": "Paula Radcliffe",
     "gender": "F",
-    "bio": "Paula Radcliffe is a British distance runner whose 2:15:25 victory at the 2003 London Marathon became a defining world-record performance. The organiser’s honours list records London victories in 2002, 2003 and 2005. Her career also includes track, cross-country and half-marathon racing, as well as four Olympic appearances.",
+    "bio": paulaBiography.join("\n\n"),
     "sources": [
       {
         "label": "London Marathon official medallists",
@@ -931,9 +936,94 @@ export const britishMarathonCareers = [
         "locator": "Named athlete row under Men or Women; edition date, placing and time."
       },
       {
-        "label": "Team GB Paula Radcliffe profile",
+        "label": "Team GB Paula Radcliffe",
         "url": "https://www.teamgb.com/athlete/paula-radcliffe/66Nj0LCaGIkH5htNhJFGdi",
-        "locator": "Indexed sporting biography; opened page returned navigation only; London wins verified against organiser table."
+        "locator": "Indexed official Games Breakdown: Atlanta 1996 fifth; Sydney 2000 fourth; Athens 2004 two DNFs; Beijing 2008 23rd; 2026 OBE. Direct open returned navigation only."
+      },
+      {
+        "label": "NYRR Hall of Fame",
+        "url": "https://www.nyrr.org/about/hall-of-fame/paula-radcliffe",
+        "locator": "Indexed organiser biography and career table: early life, seven London/New York/Chicago wins, marathon records, honours. Direct open entered waiting room; no access bypass."
+      },
+      {
+        "label": "World Athletics World Half icons",
+        "url": "https://worldathletics.org/heritage/news/paula-radcliffe-world-half-marathon-champions",
+        "locator": "Opened article: Veracruz 2000, Bristol 2001 and Vilamoura 2003 titles; Bristol 1:06:47; Seville 1999 silver."
+      },
+      {
+        "label": "World Athletics cross-country statistics",
+        "url": "https://iaafmedia.s3.amazonaws.com/competitioninfo/a7f6728d-3619-4652-9727-4bfcac244440.pdf",
+        "locator": "2015 Facts and Figures PDF: page 3 host cities; page 6 senior women medallists; page 7 junior medallists. Boston 1992; Turin 1997; Marrakech 1998; Belfast 1999; Ostend 2001; Dublin 2002."
+      },
+      {
+        "label": "Paula Radcliffe official international placings",
+        "url": "https://www.paularadcliffe.com/stats-major-international-placings/",
+        "locator": "Opened career-year entries: track finals, European/Commonwealth titles, European cross-country wins and Berlin 2011 third. Historical results only; outdated current-record headline not reused."
+      },
+      {
+        "label": "World Athletics European Cross Country 2003",
+        "url": "https://worldathletics.org/competition/calendar-results/results/7125870%3FeventId%3D10230007",
+        "locator": "Official competition heading identifies Edinburgh, 14 December 2003; win confirmed by athlete official career list."
+      },
+      {
+        "label": "FIDAL Ferrara 1998 retrospective",
+        "url": "https://www.fidal.it/content/Ferrara-1998-agli-azzurri-l-Europeo-di-campestre/44772",
+        "locator": "Opened European cross-country account: senior women first Paula Radcliffe 18:07, Ferrara."
+      },
+      {
+        "label": "World Athletics 2002 Athlete of the Year",
+        "url": "https://worldathletics.org/news/news/hicham-el-guerrouj-and-paula-radcliffe-are-20",
+        "locator": "Opened award report; Commonwealth and European track gold, 30:01.09 European record, London and Chicago records."
+      },
+      {
+        "label": "World Athletics Helsinki 2005 final day",
+        "url": "https://worldathletics.org/competitions/world-athletics-championships/10th-iaaf-world-championships-in-athletics-6937596/news/news/helsinki-2005-highlights-day-9-final-sess",
+        "locator": "Opened report: marathon gold in 2:20:57, championship record."
+      },
+      {
+        "label": "World Athletics San Juan record",
+        "url": "https://worldathletics.org/news/news/radcliffe-heads-to-puerto-rico-with-brussels",
+        "locator": "Opened 2004 report: 30:21 world road 10km record in San Juan on 23 February 2003."
+      },
+      {
+        "label": "Laureus 2008 Comeback award",
+        "url": "https://www.laureus.com/world-sports-awards/2008/laureus-world-comeback-of-the-year/paula-radcliffe",
+        "locator": "Opened official winner page and 2007 New York comeback account."
+      },
+      {
+        "label": "Team GB 2026 New Year Honours",
+        "url": "https://www.teamgb.com/article/kings-new-year-honours-list-2026-torvill-and-dean-to-receive-top-honours/42BqZyI9wHox8xQHWezxBJ",
+        "locator": "OBE; Tokyo and Boston marathon return in 2025. Article Atlanta/Athens typo not reused; Olympic cities taken from Games Breakdown."
+      },
+      {
+        "label": "NYRR 2025 media guide",
+        "url": "https://webassets.nyrr.org/nyrrwebsiteassets/TCSNYCM25_Media%20Guide_DIGITAL_M2_2.pdf",
+        "locator": "Printed page 31: 2015 Hall of Fame inductees include Paula Radcliffe."
+      },
+      {
+        "label": "NYRR Fifth Avenue Mile champions",
+        "url": "https://webassets.nyrr.org/nyrrwebsiteassets/2025_New_Balance_5th_Avenue_Mile_Race_Notes.pdf",
+        "locator": "Women champions table: Radcliffe 1996, 4:26.69; 1997, 4:22.96."
+      },
+      {
+        "url": "https://www.lboro.ac.uk/schools/sport-exercise-health-sciences/news/2024/experts-in-sport-paula-radcliffe-mbe/",
+        "label": "Loughborough University official biography",
+        "locator": "Opened 26 October 2026: first-class Modern European Studies degree, 1996."
+      },
+      {
+        "url": "https://podcasts.apple.com/gb/podcast/paulas-run-club/id1786774007",
+        "label": "Paula’s Run Club publisher listing",
+        "locator": "Opened 26 October 2026: co-hosts Paula Radcliffe and Chris Thompson; training, motivation, interviews and listener questions."
+      },
+      {
+        "url": "https://podcasts.apple.com/us/podcast/paula-radcliffe/id1705148059?i=1000773522199",
+        "label": "June 2026 interview publisher listing",
+        "locator": "Retained prior owner-authorised review: Monaco residence described in interview published 20 June 2026; dated statement, not inferred from club."
+      },
+      {
+        "url": "https://www.powerof10.uk/Home/Club/09a2b137-18be-460a-adcc-cc46351e0c4f",
+        "label": "Bedford & County AC and historical coaching record",
+        "locator": "Retained owner-supplied profile review: first claim Bedford & County AC, England; Alex Stanton through 1999 and Gary Lough 2000–2004 are historical ranges, not a complete coaching timeline."
       }
     ],
     "achievements": [
@@ -983,9 +1073,7 @@ export const britishMarathonCareers = [
         ]
       }
     ],
-    "biography": [
-      "Paula Radcliffe is a British distance runner whose 2:15:25 victory at the 2003 London Marathon became a defining world-record performance. The organiser’s honours list records London victories in 2002, 2003 and 2005. Her career also includes track, cross-country and half-marathon racing, as well as four Olympic appearances."
-    ],
+    "biography": paulaBiography,
     "biographySources": [
       {
         "label": "London Marathon official medallists",
@@ -993,12 +1081,98 @@ export const britishMarathonCareers = [
         "locator": "Named athlete row under Men or Women; edition date, placing and time."
       },
       {
-        "label": "Team GB Paula Radcliffe profile",
+        "label": "Team GB Paula Radcliffe",
         "url": "https://www.teamgb.com/athlete/paula-radcliffe/66Nj0LCaGIkH5htNhJFGdi",
-        "locator": "Indexed sporting biography; opened page returned navigation only; London wins verified against organiser table."
+        "locator": "Indexed official Games Breakdown: Atlanta 1996 fifth; Sydney 2000 fourth; Athens 2004 two DNFs; Beijing 2008 23rd; 2026 OBE. Direct open returned navigation only."
+      },
+      {
+        "label": "NYRR Hall of Fame",
+        "url": "https://www.nyrr.org/about/hall-of-fame/paula-radcliffe",
+        "locator": "Indexed organiser biography and career table: early life, seven London/New York/Chicago wins, marathon records, honours. Direct open entered waiting room; no access bypass."
+      },
+      {
+        "label": "World Athletics World Half icons",
+        "url": "https://worldathletics.org/heritage/news/paula-radcliffe-world-half-marathon-champions",
+        "locator": "Opened article: Veracruz 2000, Bristol 2001 and Vilamoura 2003 titles; Bristol 1:06:47; Seville 1999 silver."
+      },
+      {
+        "label": "World Athletics cross-country statistics",
+        "url": "https://iaafmedia.s3.amazonaws.com/competitioninfo/a7f6728d-3619-4652-9727-4bfcac244440.pdf",
+        "locator": "2015 Facts and Figures PDF: page 3 host cities; page 6 senior women medallists; page 7 junior medallists. Boston 1992; Turin 1997; Marrakech 1998; Belfast 1999; Ostend 2001; Dublin 2002."
+      },
+      {
+        "label": "Paula Radcliffe official international placings",
+        "url": "https://www.paularadcliffe.com/stats-major-international-placings/",
+        "locator": "Opened career-year entries: track finals, European/Commonwealth titles, European cross-country wins and Berlin 2011 third. Historical results only; outdated current-record headline not reused."
+      },
+      {
+        "label": "World Athletics European Cross Country 2003",
+        "url": "https://worldathletics.org/competition/calendar-results/results/7125870%3FeventId%3D10230007",
+        "locator": "Official competition heading identifies Edinburgh, 14 December 2003; win confirmed by athlete official career list."
+      },
+      {
+        "label": "FIDAL Ferrara 1998 retrospective",
+        "url": "https://www.fidal.it/content/Ferrara-1998-agli-azzurri-l-Europeo-di-campestre/44772",
+        "locator": "Opened European cross-country account: senior women first Paula Radcliffe 18:07, Ferrara."
+      },
+      {
+        "label": "World Athletics 2002 Athlete of the Year",
+        "url": "https://worldathletics.org/news/news/hicham-el-guerrouj-and-paula-radcliffe-are-20",
+        "locator": "Opened award report; Commonwealth and European track gold, 30:01.09 European record, London and Chicago records."
+      },
+      {
+        "label": "World Athletics Helsinki 2005 final day",
+        "url": "https://worldathletics.org/competitions/world-athletics-championships/10th-iaaf-world-championships-in-athletics-6937596/news/news/helsinki-2005-highlights-day-9-final-sess",
+        "locator": "Opened report: marathon gold in 2:20:57, championship record."
+      },
+      {
+        "label": "World Athletics San Juan record",
+        "url": "https://worldathletics.org/news/news/radcliffe-heads-to-puerto-rico-with-brussels",
+        "locator": "Opened 2004 report: 30:21 world road 10km record in San Juan on 23 February 2003."
+      },
+      {
+        "label": "Laureus 2008 Comeback award",
+        "url": "https://www.laureus.com/world-sports-awards/2008/laureus-world-comeback-of-the-year/paula-radcliffe",
+        "locator": "Opened official winner page and 2007 New York comeback account."
+      },
+      {
+        "label": "Team GB 2026 New Year Honours",
+        "url": "https://www.teamgb.com/article/kings-new-year-honours-list-2026-torvill-and-dean-to-receive-top-honours/42BqZyI9wHox8xQHWezxBJ",
+        "locator": "OBE; Tokyo and Boston marathon return in 2025. Article Atlanta/Athens typo not reused; Olympic cities taken from Games Breakdown."
+      },
+      {
+        "label": "NYRR 2025 media guide",
+        "url": "https://webassets.nyrr.org/nyrrwebsiteassets/TCSNYCM25_Media%20Guide_DIGITAL_M2_2.pdf",
+        "locator": "Printed page 31: 2015 Hall of Fame inductees include Paula Radcliffe."
+      },
+      {
+        "label": "NYRR Fifth Avenue Mile champions",
+        "url": "https://webassets.nyrr.org/nyrrwebsiteassets/2025_New_Balance_5th_Avenue_Mile_Race_Notes.pdf",
+        "locator": "Women champions table: Radcliffe 1996, 4:26.69; 1997, 4:22.96."
+      },
+      {
+        "url": "https://www.lboro.ac.uk/schools/sport-exercise-health-sciences/news/2024/experts-in-sport-paula-radcliffe-mbe/",
+        "label": "Loughborough University official biography",
+        "locator": "Opened 26 October 2026: first-class Modern European Studies degree, 1996."
+      },
+      {
+        "url": "https://podcasts.apple.com/gb/podcast/paulas-run-club/id1786774007",
+        "label": "Paula’s Run Club publisher listing",
+        "locator": "Opened 26 October 2026: co-hosts Paula Radcliffe and Chris Thompson; training, motivation, interviews and listener questions."
+      },
+      {
+        "url": "https://podcasts.apple.com/us/podcast/paula-radcliffe/id1705148059?i=1000773522199",
+        "label": "June 2026 interview publisher listing",
+        "locator": "Retained prior owner-authorised review: Monaco residence described in interview published 20 June 2026; dated statement, not inferred from club."
+      },
+      {
+        "url": "https://www.powerof10.uk/Home/Club/09a2b137-18be-460a-adcc-cc46351e0c4f",
+        "label": "Bedford & County AC and historical coaching record",
+        "locator": "Retained owner-supplied profile review: first claim Bedford & County AC, England; Alex Stanton through 1999 and Gary Lough 2000–2004 are historical ranges, not a complete coaching timeline."
       }
     ],
-    "reportedHighlights": []
+    "reportedHighlights": [],
+    "biographyCheckedAt": "2026-10-26"
   },
   {
     "slug": "mara-yamauchi",

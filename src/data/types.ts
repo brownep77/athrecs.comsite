@@ -23,6 +23,7 @@ export type Sport =
   | "Walking";
 
 export type Series = {
+  region?: string | null;
   /** Stable ID from the fuller production catalogue, when one exists. */
   source_id?: number;
   slug: string;

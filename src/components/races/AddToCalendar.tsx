@@ -18,6 +18,7 @@ export function AddToCalendar({ race }: { race: CalendarRace }) {
       <Button
         type="button"
         variant="secondary"
+        className="border-[#a77ca7] bg-[#c8a2c8] text-[#3b1647]"
         disabled
         title={unavailable ?? undefined}
         aria-label={label}
@@ -50,7 +51,7 @@ export function AddToCalendar({ race }: { race: CalendarRace }) {
     <details className="group min-w-0" suppressHydrationWarning>
       <summary
         aria-label={label}
-        className="inline-flex min-h-11 cursor-pointer list-none items-center justify-center gap-2 rounded-md border border-violet-700 bg-violet-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-violet-800 hover:bg-violet-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-700 focus-visible:ring-offset-2 focus-visible:ring-offset-surface [&::-webkit-details-marker]:hidden"
+        className="inline-flex min-h-11 cursor-pointer list-none items-center justify-center gap-2 rounded-md border border-[#a77ca7] bg-[#c8a2c8] px-4 py-2 text-sm font-medium text-[#3b1647] transition-colors hover:border-[#906290] hover:bg-[#b890b8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6f3f7d] focus-visible:ring-offset-2 focus-visible:ring-offset-surface [&::-webkit-details-marker]:hidden"
       >
         <CalendarPlus className="h-4 w-4" aria-hidden="true" /> Add to calendar
         <ChevronDown

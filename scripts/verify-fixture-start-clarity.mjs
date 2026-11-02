@@ -51,6 +51,7 @@ try {
       (3,2,'${date}','Other',0,null,'https://example.org/unknown'),
       (4,2,'${date}','10K',10,'10:00','https://example.org/ten');
   `);
+  await db.exec("alter table events add column region text");
   const sql = { query: async (query, params) => (await db.query(query, params)).rows };
   const result = await readSportFixtures(sql, RUNNING_FIXTURE_SCOPE, date);
   const hamburg = result.fixtures.find((item) => item.slug === slug);
@@ -62,12 +63,15 @@ try {
     assert.ok(start.note.includes(time));
     assert.ok(start.calendarRace.raceDayInformation.includes(time));
   }
-  assert.equal(buildCalendarEvent(start.calendarRace).startUtc, null,
-    "Wave programmes remain date-only until the runner knows their assigned block");
+  assert.equal(
+    buildCalendarEvent(start.calendarRace).startUtc,
+    null,
+    "Wave programmes remain date-only until the runner knows their assigned block",
+  );
   assert.equal(
     result.fixtures.find((item) => item.slug === "unrelated-race").starts.length,
-    2,
-    "Do not assume an unrelated unknown distance is a duplicate",
+    1,
+    "Unconfirmed distance is held without deleting it or suppressing the confirmed sibling",
   );
   assert.equal(
     (await db.query("select count(*)::int n from editions")).rows[0].n,

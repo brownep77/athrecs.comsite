@@ -1,0 +1,956 @@
+{
+  "slug": "antonio-abertondo-english-channel",
+  "name": "Antonio Abertondo",
+  "country": "Argentina",
+  "aliases": [],
+  "highlight": "First two-way English Channel swim · 43h 10m · 1961",
+  "biography": [
+    "Antonio Abertondo was an Argentine marathon swimmer whose achievements extended from South American rivers to long ocean crossings. He completed swims across the Río de la Plata in 1946 and 1950, then crossed the Strait of Gibraltar in 1950 in 7 hours and 42 minutes.",
+    "His English Channel career included the 1950 and 1951 Daily Mail races and the 1954 Butlin race. In September 1961 he became the first swimmer to complete a continuous two-way Channel crossing, travelling from England to France and back in 43 hours and 10 minutes. The account includes a brief four-minute stop on the French shore; it was one continuous multi-way undertaking, not two separate attempts.",
+    "Abertondo also completed prolonged swims down the Mississippi River in 1952 and 1955. The International Marathon Swimming Hall of Fame honoured him in 1964. His Channel profile retains the clear agreement on duration while identifying conflicting published completion dates.",
+    "His Channel career developed through the organised races of the 1950s. He finished eighth in the 1950 Daily Mail race, fourteenth in the 1951 edition and sixth in the 1954 Butlin race. Photographs preserved in the Sam Rockett collection document this period; a catalogue caption identifies Carlos Artuz as his trainer."
+  ],
+  "flags": [
+    {
+      "code": "AR",
+      "label": "Argentina",
+      "abbr": "ARG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country",
+      "value": "Argentina"
+    },
+    {
+      "label": "Channel milestone",
+      "value": "First continuous two-way crossing"
+    },
+    {
+      "label": "Featured swim",
+      "value": "England → France → England · 43h 10m"
+    },
+    {
+      "label": "Career Channel crossings",
+      "value": "5 individual crossings in the Hall of Fame summary"
+    },
+    {
+      "label": "International recognition",
+      "value": "Marathon Swimming Hall of Fame · 1964"
+    },
+    {
+      "label": "Date qualification",
+      "value": "September 1961 · published completion dates differ"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First continuous two-way English Channel swim",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "The Hall of Fame describes a four-minute onshore stop in France within the two-way undertaking."
+        },
+        {
+          "text": "43h 10m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Wednesday, 20 September 1961 · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Guinness dates the swim 20–22 September 1961; Dover lists 20–21 September. CS&PF’s table gives 20 September as its record date and leg durations of 18h 50m and 24h 20m. The shared start date is retained; completion day and clock times remain unresolved. Dover Museum’s general Records and Firsts page also prints 43h 05m, differing from the 43h 10m in CSA, Guinness and the museum’s individual photograph catalogue.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 2-way swim."
+        },
+        {
+          "text": "18h 50m",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "24h 20m",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2433 establishes the first male two-way swim and 43:10. The Hall of Fame supports the shore stop; the CS&PF retrospective table supplies leg durations. Museum and Guinness date/time differences remain visible. No original observer document or contemporary report establishing the claimed 08:35 and 03:45 clocks was inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Antonio Abertondo, 1961",
+          "url": "https://www.channelswimmingassociation.com/swim/2433/antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "International Marathon Swimming Hall of Fame: Antonio Abertondo",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_d8d4aa8e2254495a8d14bc4e856336d6.pdf"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Guinness World Records: first male double Channel crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/first-crossing-of-the-english-channel-swimming-double-(male)"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Dover.UK.com: first two-way record date",
+          "url": "https://www.dover.uk.com/channel-swimming/records"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "CS&PF: selected multiple-crossing statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published dates and leg durations for Rush’s 1985 double and 1987 triple, and Abertondo’s 1961 double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective table credited to Julian Critchlow’s database; not an original observer log or proof of separate CS&PF ratification. Date column does not identify departure or arrival.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Abertondo photograph d30117",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Keystone photograph catalogue from the Sam Rockett collection; records government sponsorship and race placings in 1950, 1951 and 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Catalogue commentary is retrospective. The caption queries the companion’s identity as pilot; it must not be used to name a pilot.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Records and Firsts",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Records--Firsts.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies Ederle’s and Abertondo’s pioneering swims, but prints different elapsed times.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective summary prints 14h 33m for Ederle and 43h 05m for Abertondo. Those figures are not adopted over the individual CSA records.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abertondo-1961"
+    },
+    {
+      "title": "Daily Mail International Channel race — eighth finisher",
+      "lines": [
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "Listed eighth among the race’s nine finishers."
+        },
+        {
+          "text": "Tuesday, 22 August 1950 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "Time not confirmed",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "22 August is the published race/swim date; the inspected museum sources do not establish his individual elapsed time, departure clock or arrival clock.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Dover Museum’s race history and photograph catalogue agree on the successful 1950 race and placing. This is retrospective museum documentation, not an individually inspected federation timing sheet."
+        },
+        {
+          "text": "Dover Museum: 1950s races and swimmers",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful France-to-England races in 1950, 1951 and 1954; ordered 1950 and 1951 finisher lists.",
+          "label": "Supports"
+        },
+        {
+          "text": "Internally inconsistent: Abertondo’s personal list says 28 July 1951, while its 16 August Daily Mail race list includes him. It is not a complete federation register.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Abertondo photograph d30117",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Keystone photograph catalogue from the Sam Rockett collection; records government sponsorship and race placings in 1950, 1951 and 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Catalogue commentary is retrospective. The caption queries the companion’s identity as pilot; it must not be used to name a pilot.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abertondo-1950-daily-mail"
+    },
+    {
+      "title": "Second Daily Mail International Channel race — fourteenth finisher",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "The museum’s race list and photograph catalogue identify Abertondo as the fourteenth finisher."
+        },
+        {
+          "text": "Thursday, 16 August 1951 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "Time not confirmed",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "16 August follows the specific Daily Mail race section and photograph catalogue. The same museum history’s personal list instead prints 28 July 1951. Neither date is promoted to an independently confirmed departure or arrival. Elapsed time and clocks remain unconfirmed.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Successful 1951 race documented in museum sources and the existing Hall of Fame biography, but the museum has an internal date inconsistency. The specific race identification is preferred with the contradiction retained. No original result sheet has been inspected."
+        },
+        {
+          "text": "Dover Museum: 1950s races and swimmers",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful France-to-England races in 1950, 1951 and 1954; ordered 1950 and 1951 finisher lists.",
+          "label": "Supports"
+        },
+        {
+          "text": "Internally inconsistent: Abertondo’s personal list says 28 July 1951, while its 16 August Daily Mail race list includes him. It is not a complete federation register.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Abertondo photograph d30117",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Keystone photograph catalogue from the Sam Rockett collection; records government sponsorship and race placings in 1950, 1951 and 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Catalogue commentary is retrospective. The caption queries the companion’s identity as pilot; it must not be used to name a pilot.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abertondo-1951-daily-mail"
+    },
+    {
+      "title": "Butlin International Channel race — sixth finisher",
+      "lines": [
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "The museum photograph catalogue records sixth place in the 1954 race."
+        },
+        {
+          "text": "Saturday, 21 August 1954 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "Time not confirmed",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "21 August is the published race/swim date. His individual elapsed time and start/finish clocks were not established in these inspected sources.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The museum history and two photograph catalogues support the race and placing. The group photograph’s narrative and location taxonomy disagree on Cap Gris Nez versus Cap Blanc Nez, so no exact starting beach is assigned."
+        },
+        {
+          "text": "Dover Museum: 1950s races and swimmers",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful France-to-England races in 1950, 1951 and 1954; ordered 1950 and 1951 finisher lists.",
+          "label": "Supports"
+        },
+        {
+          "text": "Internally inconsistent: Abertondo’s personal list says 28 July 1951, while its 16 August Daily Mail race list includes him. It is not a complete federation register.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Abertondo photograph d30117",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Keystone photograph catalogue from the Sam Rockett collection; records government sponsorship and race placings in 1950, 1951 and 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Catalogue commentary is retrospective. The caption queries the companion’s identity as pilot; it must not be used to name a pilot.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: 1954 competitors photograph d30207",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/bob-paysour-jenny-james-torfic-bleik-amp-antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies Abertondo among 1954 race competitors and names Carlos Artuz as his trainer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Caption describes Cap Gris Nez but location taxonomy says Cap Blanc Nez. Do not use it alone to establish a precise start site or the 1961 support crew.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "abertondo-1954-butlin"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Río de la Plata",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1946 · exact day not confirmed"
+        },
+        {
+          "text": "Uruguay → Argentina"
+        },
+        {
+          "text": "Completed Uruguay → Argentina."
+        },
+        {
+          "text": "29h 30m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "40 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "IMSHOF’s named one-page biography records the 1946 40km swim and 29h30m separately from his later 1950 crossing, and links both to the English Channel double swimmer. Day and original log were not established."
+        },
+        {
+          "text": "IMSHOF: Antonio Abertondo biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_d8d4aa8e2254495a8d14bc4e856336d6.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named career connects English Channel doubles with the 1946 Río de la Plata swim and 1950 Gibraltar crossing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective hall-of-fame account; no original timing or observer records inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "antonio-abertondo-event-1-rio-de-la-plata"
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1950 · exact day not confirmed"
+        },
+        {
+          "text": "Completed the strait in 7h42m."
+        },
+        {
+          "text": "7h 42m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "IMSHOF’s named biography records this 1950 swim and explains that its speed record lasted less than five weeks. Exact day and original ratification were not established; no current record claim is made."
+        },
+        {
+          "text": "IMSHOF: Antonio Abertondo biography",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_d8d4aa8e2254495a8d14bc4e856336d6.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named career connects English Channel doubles with the 1946 Río de la Plata swim and 1950 Gibraltar crossing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective hall-of-fame account; no original timing or observer records inspected.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "antonio-abertondo-event-2-strait-of-gibraltar"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Río de la Plata",
+      "lines": [
+        {
+          "text": "1946 / 1950"
+        },
+        {
+          "text": "Completed crossings from Uruguay to Argentina."
+        }
+      ]
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "1950"
+        },
+        {
+          "text": "Swam the strait in 7h 42m."
+        }
+      ]
+    },
+    {
+      "title": "Channel races",
+      "lines": [
+        {
+          "text": "1950–1954"
+        },
+        {
+          "text": "Completed the 1950 and 1951 Daily Mail events and the 1954 Butlin event."
+        }
+      ]
+    },
+    {
+      "title": "Mississippi River swims",
+      "lines": [
+        {
+          "text": "1952 / 1955"
+        },
+        {
+          "text": "Completed two long downstream endurance swims."
+        }
+      ]
+    },
+    {
+      "title": "First two-way Channel swim",
+      "lines": [
+        {
+          "text": "September 1961"
+        },
+        {
+          "text": "Completed England–France–England in 43h 10m."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame",
+      "lines": [
+        {
+          "text": "1964"
+        },
+        {
+          "text": "Honoured by the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Antonio Abertondo?",
+      "value": "This profile includes 4 selected solo performances for Antonio Abertondo. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Antonio Abertondo’s featured English Channel swim?",
+      "value": "The featured swim started on Wednesday, 20 September 1961. Its exact completion date is not confirmed here. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Antonio Abertondo’s featured Channel swim take?",
+      "value": "The featured continuous 2-way solo swim has a published elapsed time of 43 hours and 10 minutes. Published sources disagree about details of this swim; the crossing record explains the differences."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Antonio Abertondo, 1961",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2433/antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Antonio Abertondo",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_d8d4aa8e2254495a8d14bc4e856336d6.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named career connects English Channel doubles with the 1946 Río de la Plata swim and 1950 Gibraltar crossing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective hall-of-fame account; no original timing or observer records inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: first male double Channel crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/first-crossing-of-the-english-channel-swimming-double-(male)"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: first two-way record date",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/records"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: selected multiple-crossing statistics",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published dates and leg durations for Rush’s 1985 double and 1987 triple, and Abertondo’s 1961 double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective table credited to Julian Critchlow’s database; not an original observer log or proof of separate CS&PF ratification. Date column does not identify departure or arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Abertondo photograph d30117",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Keystone photograph catalogue from the Sam Rockett collection; records government sponsorship and race placings in 1950, 1951 and 1954.",
+          "label": "Supports"
+        },
+        {
+          "text": "Catalogue commentary is retrospective. The caption queries the companion’s identity as pilot; it must not be used to name a pilot.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: 1954 competitors photograph d30207",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/bob-paysour-jenny-james-torfic-bleik-amp-antonio-abertondo"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies Abertondo among 1954 race competitors and names Carlos Artuz as his trainer.",
+          "label": "Supports"
+        },
+        {
+          "text": "Caption describes Cap Gris Nez but location taxonomy says Cap Blanc Nez. Do not use it alone to establish a precise start site or the 1961 support crew.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: 1950s races and swimmers",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/1950s-Hayday.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Successful France-to-England races in 1950, 1951 and 1954; ordered 1950 and 1951 finisher lists.",
+          "label": "Supports"
+        },
+        {
+          "text": "Internally inconsistent: Abertondo’s personal list says 28 July 1951, while its 16 August Daily Mail race list includes him. It is not a complete federation register.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Records and Firsts",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Records--Firsts.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Identifies Ederle’s and Abertondo’s pioneering swims, but prints different elapsed times.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective summary prints 14h 33m for Ederle and 43h 05m for Abertondo. Those figures are not adopted over the individual CSA records.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First continuous two-way English Channel swim",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 20 September 1961 (start)"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "43h 10m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abertondo-1961"
+    },
+    {
+      "title": "Daily Mail International Channel race — eighth finisher",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 22 August 1950 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "Time not confirmed",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Historical account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abertondo-1950-daily-mail"
+    },
+    {
+      "title": "Second Daily Mail International Channel race — fourteenth finisher",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 16 August 1951 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "Time not confirmed",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abertondo-1951-daily-mail"
+    },
+    {
+      "title": "Butlin International Channel race — sixth finisher",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 21 August 1954 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "Time not confirmed",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Historical account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "abertondo-1954-butlin"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Río de la Plata",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1946 · exact day not confirmed"
+        },
+        {
+          "text": "Uruguay → Argentina"
+        },
+        {
+          "text": "Completed Uruguay → Argentina."
+        },
+        {
+          "text": "29h 30m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "40 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "antonio-abertondo-event-1-rio-de-la-plata"
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1950 · exact day not confirmed"
+        },
+        {
+          "text": "Completed the strait in 7h42m."
+        },
+        {
+          "text": "7h 42m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "antonio-abertondo-event-2-strait-of-gibraltar"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-8eff5f87b1cf4148464d"
+}

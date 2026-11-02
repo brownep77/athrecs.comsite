@@ -1,0 +1,644 @@
+{
+  "slug": "rashmi-sharma-english-channel",
+  "name": "Rashmi Sharma",
+  "country": "India",
+  "aliases": [],
+  "highlight": "Three recorded one-way Channel completions · 2006, 2007 and 2009",
+  "biography": [
+    "Rashmi Sharma is an Indian open-water swimmer associated with Kolkata’s Kidderpore area. Her Channel record includes three England-to-France completions: 11 hours 47 minutes in 2006, 13 hours 6 minutes in 2007 and 13 hours 50 minutes in 2009. The federation’s historical entries list India and attribute each swim to the Channel Swimming Association.",
+    "Her 2007 season also brought the Rosemary George Trophy for a meritorious CSA swim. An October UNI interview reported that an August return-crossing attempt had remained unfinished because of bad weather, but did not identify the attempt’s day. That report does not establish its relationship to the dated one-way result. In the same interview she explained that she had chosen long-distance swimming for the opportunities it offered and described the difficulty of finding sponsors.",
+    "Sharma subsequently shared international challenges with her sister Richa. The Indian Express reported their Gibraltar crossing in August 2009, followed by Rashmi’s third Channel success. Its reported completion day differs from the generic date in the federation record, a distinction retained here. After returning to Kolkata, she again spoke about the uncertainty that inadequate financial backing created for future swims.",
+    "By September 2011, the sisters had also completed an Algoa Bay swim in South Africa, according to a contemporary PTI report."
+  ],
+  "flags": [
+    {
+      "code": "IN",
+      "label": "India",
+      "abbr": "IND"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Recorded nationality",
+      "value": "India — historical federation records"
+    },
+    {
+      "label": "Home sporting context",
+      "value": "Kidderpore, Kolkata — contemporary reporting"
+    },
+    {
+      "label": "Selected Channel completions",
+      "value": "2006, 2007 and 2009 · all one-way"
+    },
+    {
+      "label": "Fastest listed Channel swim",
+      "value": "11 hours 47 minutes · 2006"
+    },
+    {
+      "label": "2007 recognition",
+      "value": "Rosemary George Trophy"
+    },
+    {
+      "label": "Swimming partnership",
+      "value": "Sister Richa Sharma · Gibraltar and Algoa Bay"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First listed Channel completion",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Wednesday, 19 July 2006 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 47m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Inspected CS&PF historical entry 444031: Rashmi Sharma, India, 1 Way, 19 July 2006, 11:47:00; ratifying organisation CSA. Dover’s athlete profile and the Indian statistical bulletin also list the performance. No original CSA decision or observer log was inspected."
+        },
+        {
+          "text": "CS&PF historical record: Rashmi Sharma, 2006",
+          "url": "https://cspf.co.uk/swim/444031"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Channel Swimming: Rashmi Sharma athlete profile",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/rashmi-sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Actual swimmer profile: Indian nationality, three listed one-way swims and 2007 Rosemary George Trophy.",
+          "label": "Supports"
+        },
+        {
+          "text": "India Swimming Statistical Bulletin 2024: Indian English Channel swimmers",
+          "url": "https://indiaswimming.com/wp-content/uploads/2024/09/Records-of-Indian-Swimmers-of-ENGLISH-CHANNEL-1875-2023.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Printed page C51, rows 37, 40 and 44 list Sharma’s three crossings; the footnote records her 2007 Rosemary George Trophy.",
+          "label": "Supports"
+        }
+      ],
+      "id": "rashmi-sharma-2006"
+    },
+    {
+      "title": "Second one-way Channel completion",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Recorded as one-way. A separate report describes an unfinished August two-way attempt; its linkage to this entry is unconfirmed."
+        },
+        {
+          "text": "Friday, 24 August 2007 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 6m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "Fred Mardle",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Samallen P40",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Inspected CS&PF historical entry 444134: Rashmi Sharma, India, 1 Way, 24 August 2007, 13:06:00, CSA attribution and Fred Mardle/Samallen P40. UNI’s October interview separately describes an unfinished two-way attempt in August but does not give its date. Its linkage to this individual entry is unconfirmed; no completed two-way is claimed."
+        },
+        {
+          "text": "CS&PF historical record: Rashmi Sharma, 2007",
+          "url": "https://cspf.co.uk/swim/444134"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Channel Swimming: Rashmi Sharma athlete profile",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/rashmi-sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Actual swimmer profile: Indian nationality, three listed one-way swims and 2007 Rosemary George Trophy.",
+          "label": "Supports"
+        },
+        {
+          "text": "UNI / OneIndia: English Channel swimmer looking for sponsors, October 2007",
+          "url": "https://www.oneindia.com/2007/10/12/english-channel-swimmer-looking-for-sponsors-1192262580.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary interview: two completed crossings, ambitions and weather-shortened return attempt in August.",
+          "label": "Supports"
+        },
+        {
+          "text": "Future plans are not completion evidence.",
+          "label": "Limitations"
+        },
+        {
+          "text": "India Swimming Statistical Bulletin 2024: Indian English Channel swimmers",
+          "url": "https://indiaswimming.com/wp-content/uploads/2024/09/Records-of-Indian-Swimmers-of-ENGLISH-CHANNEL-1875-2023.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Printed page C51, rows 37, 40 and 44 list Sharma’s three crossings; the footnote records her 2007 Rosemary George Trophy.",
+          "label": "Supports"
+        }
+      ],
+      "id": "rashmi-sharma-2007"
+    },
+    {
+      "title": "Third one-way Channel completion",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Federation record dated 13 August; contemporary reporting gives completion on 14 August. Departure date unconfirmed."
+        },
+        {
+          "text": "Thursday, 13 August 2009 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 50m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Friday, 14 August 2009 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF’s generic Date field is retained as recordDate. The Indian Express explicitly reports completion on 14 August, retained as finishDate. Neither source establishes a departure date, so an overnight crossing is not inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England to France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Viking Princess",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Inspected CS&PF historical entry 444298: Rashmi Sharma, India, 1 Way, 13 August 2009, 13:50:00 and CSA attribution. The Indian Express article of 20 August, paragraph beginning “Rashmi and Richa together”, explicitly gives 14 August as the Channel completion date. Both source roles are preserved; elapsed time itself is not disputed by that report."
+        },
+        {
+          "text": "CS&PF historical record: Rashmi Sharma, 2009",
+          "url": "https://cspf.co.uk/swim/444298"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Channel Swimming: Rashmi Sharma athlete profile",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/rashmi-sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Actual swimmer profile: Indian nationality, three listed one-way swims and 2007 Rosemary George Trophy.",
+          "label": "Supports"
+        },
+        {
+          "text": "The Indian Express: Swimming sisters Rashmi, Richa rue lack of funds, 20 August 2009",
+          "url": "https://indianexpress.com/article/cities/kolkata/swimming-sisters-rashmi-richa-rue-lack-of-funds/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary interview, Gibraltar swim with Richa, and Channel completion reported on 14 August.",
+          "label": "Supports"
+        },
+        {
+          "text": "The reported completion day differs from the federation’s generic 13 August date; the departure date is unresolved.",
+          "label": "Limitations"
+        },
+        {
+          "text": "India Swimming Statistical Bulletin 2024: Indian English Channel swimmers",
+          "url": "https://indiaswimming.com/wp-content/uploads/2024/09/Records-of-Indian-Swimmers-of-ENGLISH-CHANNEL-1875-2023.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Printed page C51, rows 37, 40 and 44 list Sharma’s three crossings; the footnote records her 2007 Rosemary George Trophy.",
+          "label": "Supports"
+        }
+      ],
+      "id": "rashmi-sharma-2009"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "First listed Channel success",
+      "lines": [
+        {
+          "text": "Wednesday, 19 July 2006"
+        },
+        {
+          "text": "Completed England to France in 11 hours 47 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Second one-way completion",
+      "lines": [
+        {
+          "text": "Friday, 24 August 2007"
+        },
+        {
+          "text": "Completed England to France in 13 hours 6 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Rosemary George Trophy",
+      "lines": [
+        {
+          "text": "2007"
+        },
+        {
+          "text": "Her Channel effort received the CSA meritorious-swim award."
+        }
+      ]
+    },
+    {
+      "title": "Third Channel completion",
+      "lines": [
+        {
+          "text": "August 2009"
+        },
+        {
+          "text": "Recorded 13 hours 50 minutes; source date roles remain qualified."
+        }
+      ]
+    },
+    {
+      "title": "Algoa Bay with Richa",
+      "lines": [
+        {
+          "text": "September 2011"
+        },
+        {
+          "text": "A contemporary PTI report describes the sisters completing their South African swim."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Rashmi Sharma?",
+      "value": "This profile includes 3 selected solo performances for Rashmi Sharma. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Rashmi Sharma’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Wednesday, 19 July 2006. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Rashmi Sharma’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 11 hours, 47 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Dover Channel Swimming: Rashmi Sharma athlete profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swimmers/rashmi-sharma"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Actual swimmer profile: Indian nationality, three listed one-way swims and 2007 Rosemary George Trophy.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Rashmi Sharma, 2006",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444031"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Rashmi Sharma, 2007",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444134"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Rashmi Sharma, 2009",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444298"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "UNI / OneIndia: English Channel swimmer looking for sponsors, October 2007",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.oneindia.com/2007/10/12/english-channel-swimmer-looking-for-sponsors-1192262580.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary interview: two completed crossings, ambitions and weather-shortened return attempt in August.",
+          "label": "Supports"
+        },
+        {
+          "text": "Future plans are not completion evidence.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "The Indian Express: Swimming sisters Rashmi, Richa rue lack of funds, 20 August 2009",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://indianexpress.com/article/cities/kolkata/swimming-sisters-rashmi-richa-rue-lack-of-funds/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary interview, Gibraltar swim with Richa, and Channel completion reported on 14 August.",
+          "label": "Supports"
+        },
+        {
+          "text": "The reported completion day differs from the federation’s generic 13 August date; the departure date is unresolved.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "PTI / Times of India: Sisters swim across Indian Ocean, 28 September 2011",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://timesofindia.indiatimes.com/sports/more-sports/others/sisters-swim-across-indian-ocean/articleshow/10162417.cms"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Reports Rashmi and Richa completing an Algoa Bay swim and recalls Rashmi’s three Channel crossings.",
+          "label": "Supports"
+        },
+        {
+          "text": "The separately planned South Atlantic swim is not treated as completed.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "India Swimming Statistical Bulletin 2024: Indian English Channel swimmers",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://indiaswimming.com/wp-content/uploads/2024/09/Records-of-Indian-Swimmers-of-ENGLISH-CHANNEL-1875-2023.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Printed page C51, rows 37, 40 and 44 list Sharma’s three crossings; the footnote records her 2007 Rosemary George Trophy.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First listed Channel completion",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 19 July 2006 (recorded swim date)"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "11h 47m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "rashmi-sharma-2006"
+    },
+    {
+      "title": "Second one-way Channel completion",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 24 August 2007 (recorded swim date)"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "Recorded as one-way. A separate report describes an unfinished August two-way attempt; its linkage to this entry is unconfirmed."
+        },
+        {
+          "text": "13h 6m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "rashmi-sharma-2007"
+    },
+    {
+      "title": "Third one-way Channel completion",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 14 August 2009 (completion)"
+        },
+        {
+          "text": "England to France"
+        },
+        {
+          "text": "Federation record dated 13 August; contemporary reporting gives completion on 14 August. Departure date unconfirmed."
+        },
+        {
+          "text": "13h 50m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "rashmi-sharma-2009"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-9b3639f84ea62ec73873"
+}

@@ -1,0 +1,637 @@
+{
+  "slug": "ray-cossum-english-channel",
+  "name": "Ray Cossum",
+  "country": "United Kingdom (Northern Ireland)",
+  "aliases": [
+    "Raymond Cossum"
+  ],
+  "highlight": "France-to-England solo in 13:41 and coach of Ireland's 1978 junior Channel relay",
+  "biography": [
+    "Ray Cossum grew up near the English Channel in Folkestone, Kent, and settled in Derry after serving there in the Royal Navy. He taught crews how to escape from submarines and later worked as a commercial diver. Off the Donegal coast he helped salvage artefacts from the wreck of the Laurentic. Above the water, Lough Swilly became his training ground. In 1964 he swam from Buncrana to Rathmullan in 2 hours 15 minutes. Two years later he made the return journey without stopping in 4 hours 14 minutes.",
+    "A 2020 interview with Cossum dates his departure from France to 31 July 1970 after two earlier Channel attempts. He landed near Folkestone after 13 hours 41 minutes, with H. Reed piloting Accord. The Irish Long Distance Swimming Association recognises him as the first swimmer from Ireland to make the crossing. The Channel federation records his country as Northern Ireland within the United Kingdom.",
+    "In 1978 he and his son Des helped coach an Irish junior Channel relay. The under-16 team crossed in 8 hours 40 minutes after a year of training and fundraising. Cossum later served as a director and vice-president of the Channel Swimming Association. The Ireland Marathon Swimming Hall of Fame named him among its 2021 Honour Swimmers. He died in 2022 at the age of 91."
+  ],
+  "flags": [
+    {
+      "code": "GB-NIR",
+      "abbr": "NIR",
+      "label": "United Kingdom (Northern Ireland)"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Full name in the swim record",
+      "value": "Raymond Cossum"
+    },
+    {
+      "label": "Born",
+      "value": "17 September 1931 in Folkestone, Kent"
+    },
+    {
+      "label": "Federation country and nationality",
+      "value": "UK [Northern Ireland]"
+    },
+    {
+      "label": "Residence",
+      "value": "Settled permanently in Derry in 1951, according to Tower Museum."
+    },
+    {
+      "label": "Maritime work",
+      "value": "Submarine escape instructor, commercial diver and salvage engineer"
+    },
+    {
+      "label": "Irish swimming history",
+      "value": "ILDSA credits his 1970 solo as the first by a swimmer from Ireland."
+    },
+    {
+      "label": "Channel service",
+      "value": "Channel Swimming Association director and vice-president"
+    },
+    {
+      "label": "Died",
+      "value": "17 November 2022, aged 91"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "ray-cossum-1970",
+      "title": "France to England, finishing near Folkestone",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CS&PF and Cossum's anniversary interview support a 31 July 1970 start. Tower Museum dates the swim to 1 August, and CSA's obituary says 1971. The recorded time is 13:41.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Friday, 31 July 1970 · Start or finish date not specified by this field",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 41m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Friday, 31 July 1970 · 17:15:00 · Departure clock in the CS&PF historical record. Derry Now identifies 31 July as the day he set off.",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF prints 17:15:00 departure and 06:56:00 arrival. Derry Now expressly places departure on 31 July 1970, but its later description also associates the landing with 31 July. Tower Museum dates the swim to 1 August without identifying the phase. The arrival's calendar date and both clocks' time standard remain unconfirmed.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Near Folkestone, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "H. Reed",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Accord",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "M. Morford",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association, as reported by CS&PF",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical individual record 443015 matches Raymond Cossum, UK [Northern Ireland], age 38, one way from France to England, 31 July 1970, 13:41:00 and named crew. It attributes ratification to CSA. ILDSA concurs on 1970 and 13:41. Tower Museum gives 1 August 1970 and CSA's 2022 obituary gives 1971. No separate result is established by the obituary."
+        },
+        {
+          "text": "CS&PF historical record — Raymond Cossum, 31 July 1970",
+          "url": "https://cspf.co.uk/swim/443015"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443015 gives the nationality as UK [Northern Ireland], age 38, the generic date 31 July 1970, one way from France to England in 13:41:00, departure 17:15:00 and arrival 06:56:00. It credits pilot H. Reed, Accord and observer M. Morford.",
+          "label": "Supports"
+        },
+        {
+          "text": "The entry attributes ratification to CSA and gives no clock standard or arrival date.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Derry Now — Ray Cossum recalls his Channel swim",
+          "url": "https://www.derrynow.com/news/features/today-marks-the-50th-anniversary-of-a-remarkable-and-historic-achievement-by-a-derry-man-8055945"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 31 July 2020 interview explicitly dates the departure from France to 31 July 1970 and describes a landing near Folkestone in 13:41 after two previous attempts.",
+          "label": "Supports"
+        },
+        {
+          "text": "A later sentence also associates the landing with 31 July. The federation clock times run from evening to morning and Tower Museum dates the swim to 1 August.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Tower Museum — Ray Cossum and the Laurentic",
+          "url": "https://towermuseumcollections.com/wp-content/uploads/2019/01/Programme.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The named profile on printed page 14 covers Folkestone, Royal Navy service, the move to Derry, both Lough Swilly swims, the Channel solo and coaching with his son Des.",
+          "label": "Supports"
+        },
+        {
+          "text": "It dates the Channel swim to 1 August 1970 without distinguishing departure from landing.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association — Ray Cossum, Class of 2021",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2021/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Ray Cossum section credits his 13:41 solo in 1970 as the first by a swimmer from Ireland. It describes swims in Lough Swilly, Lough Neagh and Windermere, his training of the 1978 under-16 relay and its 8:40 crossing.",
+          "label": "Supports"
+        },
+        {
+          "text": "The relay time belongs to the team he coached. The Irish association's geographic description is distinct from the CS&PF nationality field.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Association — remembrance of Ray Cossum",
+          "url": "https://www.channelswimmingassociation.com/news/194/ray-cossum-17th-sept-1931-november-2022"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The obituary gives 17 September 1931 and 17 November 2022, his director and vice-president roles and his career as a submarine escape instructor and salvage diver.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its narrative says 1971 for France to England. CS&PF, ILDSA, Tower Museum and Cossum's 2020 interview place the documented 13:41 swim in 1970.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "ray-cossum-lough-swilly-1964",
+      "title": "Lough Swilly, Buncrana to Rathmullan",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1964 · exact day not confirmed"
+        },
+        {
+          "text": "Lough Swilly, County Donegal, Ireland"
+        },
+        {
+          "text": "Completed the crossing from Buncrana to Rathmullan."
+        },
+        {
+          "text": "5 miles",
+          "label": "Published distance"
+        },
+        {
+          "text": "2h 15m",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Tower Museum's named Ray Cossum profile on printed page 14 places the five-mile crossing in 1964 in 2 hours 15 minutes. Cossum's Derry Now interview identifies this as the stretch of Lough Swilly where he trained."
+        },
+        {
+          "text": "Tower Museum — Ray Cossum and the Laurentic",
+          "url": "https://towermuseumcollections.com/wp-content/uploads/2019/01/Programme.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The named profile on printed page 14 covers Folkestone, Royal Navy service, the move to Derry, both Lough Swilly swims, the Channel solo and coaching with his son Des.",
+          "label": "Supports"
+        },
+        {
+          "text": "It dates the Channel swim to 1 August 1970 without distinguishing departure from landing.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Derry Now — Ray Cossum recalls his Channel swim",
+          "url": "https://www.derrynow.com/news/features/today-marks-the-50th-anniversary-of-a-remarkable-and-historic-achievement-by-a-derry-man-8055945"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 31 July 2020 interview explicitly dates the departure from France to 31 July 1970 and describes a landing near Folkestone in 13:41 after two previous attempts.",
+          "label": "Supports"
+        },
+        {
+          "text": "A later sentence also associates the landing with 31 July. The federation clock times run from evening to morning and Tower Museum dates the swim to 1 August.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "id": "ray-cossum-lough-swilly-return-1966",
+      "title": "Lough Swilly, Buncrana to Rathmullan and back",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1966 · exact day not confirmed"
+        },
+        {
+          "text": "Lough Swilly, County Donegal, Ireland"
+        },
+        {
+          "text": "Completed the continuous outward and return swim."
+        },
+        {
+          "text": "4h 14m",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Tower Museum, printed page 14, Ray Cossum profile, explicitly gives the route from Buncrana to Rathmullan and back, the year 1966 and the continuous elapsed time of 4 hours 14 minutes."
+        },
+        {
+          "text": "Tower Museum — Ray Cossum and the Laurentic",
+          "url": "https://towermuseumcollections.com/wp-content/uploads/2019/01/Programme.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The named profile on printed page 14 covers Folkestone, Royal Navy service, the move to Derry, both Lough Swilly swims, the Channel solo and coaching with his son Des.",
+          "label": "Supports"
+        },
+        {
+          "text": "It dates the Channel swim to 1 August 1970 without distinguishing departure from landing.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Buncrana to Rathmullan",
+      "lines": [
+        {
+          "text": "1964"
+        },
+        {
+          "text": "Swam the five-mile route across Lough Swilly in 2 hours 15 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Lough Swilly return swim",
+      "lines": [
+        {
+          "text": "1966"
+        },
+        {
+          "text": "Completed Buncrana to Rathmullan and back in 4 hours 14 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Departure from France",
+      "lines": [
+        {
+          "text": "1970-07-31"
+        },
+        {
+          "text": "The federation's 13:41 France-to-England swim is dated 31 July. Cossum's anniversary interview identifies that day as his departure."
+        }
+      ]
+    },
+    {
+      "title": "Junior Channel relay coaching",
+      "lines": [
+        {
+          "text": "1978"
+        },
+        {
+          "text": "Helped prepare the Irish under-16 team for its 8:40 Channel crossing."
+        }
+      ]
+    },
+    {
+      "title": "Irish Hall of Fame",
+      "lines": [
+        {
+          "text": "2021"
+        },
+        {
+          "text": "Named an Honour Swimmer in the Ireland Marathon Swimming Hall of Fame."
+        }
+      ]
+    },
+    {
+      "title": "Death",
+      "lines": [
+        {
+          "text": "2022-11-17"
+        },
+        {
+          "text": "CSA commemorated its former director and vice-president, aged 91."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Ray Cossum recalls leaving France and landing near Folkestone",
+      "lines": [
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://www.derrynow.com/news/features/today-marks-the-50th-anniversary-of-a-remarkable-and-historic-achievement-by-a-derry-man-8055945"
+        },
+        {
+          "text": "Written anniversary interview with Cossum by Ciaran O'Neill, published on 31 July 2020."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Tower Museum profile of Ray Cossum",
+      "lines": [
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Open media page",
+          "url": "https://towermuseumcollections.com/wp-content/uploads/2019/01/Programme.pdf"
+        },
+        {
+          "text": "Printed page 14 of the museum programme describes his swimming, coaching, naval service and diving."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Ray Cossum?",
+      "value": "This profile includes 1 selected solo performance. A continuous multi-way crossing counts as one performance."
+    },
+    {
+      "label": "When was Ray Cossum’s first listed Channel swim?",
+      "value": "The reported departure was Friday, 31 July 1970."
+    },
+    {
+      "label": "How long did the first listed swim take?",
+      "value": "The recorded 1-way solo lasted 13h 41m 0s. The 31 July 1970 departure is reported explicitly. Other accounts date this swim to 1 August or give the year as 1971. The recorded time is 13h 41m."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical record — Raymond Cossum, 31 July 1970",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443015"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Record 443015 gives the nationality as UK [Northern Ireland], age 38, the generic date 31 July 1970, one way from France to England in 13:41:00, departure 17:15:00 and arrival 06:56:00. It credits pilot H. Reed, Accord and observer M. Morford.",
+          "label": "Supports"
+        },
+        {
+          "text": "The entry attributes ratification to CSA and gives no clock standard or arrival date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Derry Now — Ray Cossum recalls his Channel swim",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.derrynow.com/news/features/today-marks-the-50th-anniversary-of-a-remarkable-and-historic-achievement-by-a-derry-man-8055945"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The 31 July 2020 interview explicitly dates the departure from France to 31 July 1970 and describes a landing near Folkestone in 13:41 after two previous attempts.",
+          "label": "Supports"
+        },
+        {
+          "text": "A later sentence also associates the landing with 31 July. The federation clock times run from evening to morning and Tower Museum dates the swim to 1 August.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Tower Museum — Ray Cossum and the Laurentic",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://towermuseumcollections.com/wp-content/uploads/2019/01/Programme.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The named profile on printed page 14 covers Folkestone, Royal Navy service, the move to Derry, both Lough Swilly swims, the Channel solo and coaching with his son Des.",
+          "label": "Supports"
+        },
+        {
+          "text": "It dates the Channel swim to 1 August 1970 without distinguishing departure from landing.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association — remembrance of Ray Cossum",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/194/ray-cossum-17th-sept-1931-november-2022"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The obituary gives 17 September 1931 and 17 November 2022, his director and vice-president roles and his career as a submarine escape instructor and salvage diver.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its narrative says 1971 for France to England. CS&PF, ILDSA, Tower Museum and Cossum's 2020 interview place the documented 13:41 swim in 1970.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Irish Long Distance Swimming Association — Ray Cossum, Class of 2021",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2021/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Ray Cossum section credits his 13:41 solo in 1970 as the first by a swimmer from Ireland. It describes swims in Lough Swilly, Lough Neagh and Windermere, his training of the 1978 under-16 relay and its 8:40 crossing.",
+          "label": "Supports"
+        },
+        {
+          "text": "The relay time belongs to the team he coached. The Irish association's geographic description is distinct from the CS&PF nationality field.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "ray-cossum-1970",
+      "title": "France to England, finishing near Folkestone",
+      "lines": [
+        {
+          "text": "Solo · 1-way"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "Friday, 31 July 1970 (recorded swim date)"
+        },
+        {
+          "text": "Friday, 31 July 1970 (departure)"
+        },
+        {
+          "text": "13h 41m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "17:15:00 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "The 31 July 1970 departure is reported explicitly. Other accounts date this swim to 1 August or give the year as 1971. The recorded time is 13h 41m.",
+          "label": "Qualification"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "ray-cossum-lough-swilly-1964",
+      "title": "Lough Swilly, Buncrana to Rathmullan",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1964 · exact day not confirmed"
+        },
+        {
+          "text": "Lough Swilly, County Donegal, Ireland"
+        },
+        {
+          "text": "Completed the crossing from Buncrana to Rathmullan."
+        },
+        {
+          "text": "5 miles",
+          "label": "Published distance"
+        },
+        {
+          "text": "2h 15m",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ]
+    },
+    {
+      "id": "ray-cossum-lough-swilly-return-1966",
+      "title": "Lough Swilly, Buncrana to Rathmullan and back",
+      "lines": [
+        {
+          "text": "Open water swimming · Solo"
+        },
+        {
+          "text": "1966 · exact day not confirmed"
+        },
+        {
+          "text": "Lough Swilly, County Donegal, Ireland"
+        },
+        {
+          "text": "Completed the continuous outward and return swim."
+        },
+        {
+          "text": "4h 14m",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-ff0091af1c270187b871"
+}

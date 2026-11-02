@@ -1,0 +1,780 @@
+{
+  "slug": "philip-rush-english-channel",
+  "name": "Philip Rush",
+  "country": "New Zealand",
+  "aliases": [],
+  "highlight": "Continuous three-way Channel swim · 28 hours 21 minutes",
+  "biography": [
+    "Philip Rush is a New Zealand marathon swimmer whose career includes repeated crossings of the English Channel and Cook Strait. His long-distance achievements also extend to Lake Taupo, where he completed the first double crossing. His recorded career includes ten Channel crossings and eight Cook Strait crossings.",
+    "In 1987 Rush completed a continuous three-way English Channel swim: England to France, back to England, then to France again. The complete performance took 28 hours 21 minutes. That demanding sequence is presented here as one continuous swim with three legs.",
+    "Rush completed Cook Strait doubles in 1984 and 1988. He later applied that experience to supporting other marathon swimmers. Through Cook Strait Swim, he provides guidance on preparation and works alongside navigators and boat crews during crossing attempts, extending his involvement from athlete to guide and supporter.",
+    "His 1987 support team included coach Tony Keenan and escort pilot Michael Oram. A report published that week describes calm conditions and Rush considering a fourth length before finishing after three. In a later filmed interview, he discussed the Channel swim alongside his Cook Strait and Lake Taupō career."
+  ],
+  "flags": [
+    {
+      "code": "NZ",
+      "label": "New Zealand",
+      "abbr": "NZL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Discipline",
+      "value": "Marathon swimming"
+    },
+    {
+      "label": "Featured route",
+      "value": "England → France → England → France"
+    },
+    {
+      "label": "Continuous three-way time",
+      "value": "28 hours 21 minutes"
+    },
+    {
+      "label": "Career Channel crossings",
+      "value": "10 recorded career crossings"
+    },
+    {
+      "label": "Career Cook Strait crossings",
+      "value": "8 recorded career crossings"
+    },
+    {
+      "label": "Later role",
+      "value": "Cook Strait swimming guide and supporter"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Continuous three-way English Channel crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Coach Tony Keenan reported the completed triple to the contemporary press. Rush considered a fourth leg. The published leg durations total 28h 21m and belong to this one continuous performance."
+        },
+        {
+          "text": "Sunday, 16 August 1987 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "28h 21m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF lists 16 August 1987 as the record date; it is displayed without treating it as a confirmed departure or arrival date. Guinness’s narrative gives 16–17 August, its date field gives 18 August, and Dover gives 15–16 August. The AP report published on 20 August says the coach spoke on Tuesday; it does not date the finish to Tuesday. Exact start and finish clocks remain unconfirmed.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 3-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram — identified in the retrospective athlete-interview summary",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "A contemporary Associated Press report describes little wind, limited boat traffic and comfortable water temperature.",
+          "label": "Conditions"
+        },
+        {
+          "text": "Individual crossing times",
+          "heading": true
+        },
+        {
+          "text": "These legs form one continuous 3-way swim."
+        },
+        {
+          "text": "7h 55m",
+          "label": "Leg 1 · England → France"
+        },
+        {
+          "text": "8h 15m",
+          "label": "Leg 2 · France → England"
+        },
+        {
+          "text": "12h 11m",
+          "label": "Leg 3 · England → France"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2431 establishes the three-way route and 28:21 total. The contemporary AP report independently supports that total. CS&PF’s retrospective table, credited to Julian Critchlow’s database, supplies 7:55, 8:15 and 12:11 legs; it is not an inspected original observer log. Conflicting calendar dates remain unresolved."
+        },
+        {
+          "text": "Channel Swimming Association: Philip Rush, 1987",
+          "url": "https://www.channelswimmingassociation.com/swim/2431/philip-rush"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Guinness World Records: fastest male triple Channel crossing",
+          "url": "https://www.guinnessworldrecords.com/world-records/86249-fastest-crossing-of-the-english-channel-swimming-triple-e-f-e-f-male"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Dover.UK.com: Philip Rush three-way swim; secondary archive with conflicting date",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1987-08-15/philip-rush"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "CS&PF: selected multiple-crossing statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published dates and leg durations for Rush’s 1985 double and 1987 triple, and Abertondo’s 1961 double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective table credited to Julian Critchlow’s database; not an original observer log or proof of separate CS&PF ratification. Date column does not identify departure or arrival.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Cayman Compass, 20 August 1987: Associated Press report",
+          "url": "https://www.caymancompass.com/1987/08/20/swimmer-makes-triple-channel-crossing"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary report of Rush’s 28h 21m triple, coach Tony Keenan and favourable conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "Digitised text warns of transcription errors. “Said Tuesday” dates the coach’s statement, not the swim’s completion. No exact start or finish clocks.",
+          "label": "Limitations"
+        },
+        {
+          "text": "WOWSA Live: Philip Rush interview and publisher summary",
+          "url": "https://www.openwaterswimming.com/philip-rush-talks-about-epic-swims-on-wowsa-live/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective athlete interview page; publisher summary identifies Tony Keenan and escort pilot Michael Oram.",
+          "label": "Supports"
+        },
+        {
+          "text": "Publisher page and embedded-player URL were inspected, not video playback. A later fetch returned a server certificate error; availability is intermittent.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "rush-1987"
+    },
+    {
+      "title": "Two-way English Channel crossing",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "The retrospective multiple-crossings table lists 9h 03m and 8h 53m legs, totalling 17h 56m."
+        },
+        {
+          "text": "Monday, 9 September 1985 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "17h 56m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "9 September is the published record date. Its role as departure or arrival is unspecified; exact clocks and a separate finish date have not been inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "Not recorded here",
+          "label": "Direction"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Selected entry inspected in CS&PF’s published multiple-crossings table, credited to Julian Critchlow’s database. It establishes a two-way performance and durations, but does not by itself establish the route order, named observers or original ratification documentation."
+        },
+        {
+          "text": "CS&PF: selected multiple-crossing statistics",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published dates and leg durations for Rush’s 1985 double and 1987 triple, and Abertondo’s 1961 double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective table credited to Julian Critchlow’s database; not an original observer log or proof of separate CS&PF ratification. Date column does not identify departure or arrival.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "rush-1985-two-way"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Cook Strait",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 24 February 1980 (event date)"
+        },
+        {
+          "text": "New Zealand"
+        },
+        {
+          "text": "Completed North Island → South Island."
+        },
+        {
+          "text": "8h 56m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "NZOWSA row 12 gives the named New Zealand swimmer’s date, route and duration. The direct career interview connects his English Channel and Cook Strait history."
+        },
+        {
+          "text": "NZOWSA: Cook Strait recognised swims",
+          "url": "https://www.nzowsa.nz/cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named rows, nationality, recorded date, route and duration.",
+          "label": "Supports"
+        },
+        {
+          "text": "Only starred entries explicitly indicate NZOWSA ratification; these historical selected rows are unstarred. Original observer records were not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Otago Daily Times: interview with Philip Rush, 9 January 2012",
+          "url": "https://www.odt.co.nz/sport/swimming-dominant-ocean-swimmer-for-a-decade-t4ob0vx5"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Interview connects English Channel and Cook Strait career, including his 1984 and 1988 doubles and a best 16h16m.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective interview; another ODT retrospective prints 16h15m for the 1984 double.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "philip-rush-event-1-cook-strait"
+    },
+    {
+      "title": "Cook Strait two-way",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Tuesday, 13 March 1984 (event date)"
+        },
+        {
+          "text": "New Zealand"
+        },
+        {
+          "text": "Completed North Island → South Island → North Island, the first non-stop double. Published elapsed accounts differ by one minute."
+        },
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "NZ History explicitly identifies the 13 March 1984 non-stop double. NZOWSA rows 26–27 show 7:51 and 8:25 legs; Rush’s 2012 interview reports 16:16, whereas a 2011 ODT retrospective reports 16:15. Completion is supported; total timing remains qualified. Counted once."
+        },
+        {
+          "text": "NZOWSA: Cook Strait recognised swims",
+          "url": "https://www.nzowsa.nz/cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named rows, nationality, recorded date, route and duration.",
+          "label": "Supports"
+        },
+        {
+          "text": "Only starred entries explicitly indicate NZOWSA ratification; these historical selected rows are unstarred. Original observer records were not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "NZ History: first woman swims Cook Strait",
+          "url": "https://nzhistory.govt.nz/page/first-woman-swim-cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Government history corroborates Cox’s 4 February 1975 swim at 12h07m and Rush’s 13 March 1984 non-stop double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical interpretation, not an original ratification certificate.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Otago Daily Times: interview with Philip Rush, 9 January 2012",
+          "url": "https://www.odt.co.nz/sport/swimming-dominant-ocean-swimmer-for-a-decade-t4ob0vx5"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Interview connects English Channel and Cook Strait career, including his 1984 and 1988 doubles and a best 16h16m.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective interview; another ODT retrospective prints 16h15m for the 1984 double.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Otago Daily Times: Rush swims Cook Strait twice, 7 August 2011",
+          "url": "https://www.odt.co.nz/sport/greatest-moments-in-otago-sport-number-95-bgrgsu9c"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective gives the date and double completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 16h15m conflicts with NZOWSA leg durations and the 2012 interview’s 16h16m.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "philip-rush-event-2-cook-strait-two-way"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Cook Strait double",
+      "lines": [
+        {
+          "text": "13 March 1984"
+        },
+        {
+          "text": "Completed a north-to-south and return crossing."
+        }
+      ]
+    },
+    {
+      "title": "Three-way English Channel",
+      "lines": [
+        {
+          "text": "1987"
+        },
+        {
+          "text": "Completed a continuous three-way swim in 28 hours 21 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Another Cook Strait double",
+      "lines": [
+        {
+          "text": "9 February 1988"
+        },
+        {
+          "text": "Completed another continuous out-and-back crossing."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Philip Rush discusses his Channel and Cook Strait swims — WOWSA Live",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.openwaterswimming.com/philip-rush-talks-about-epic-swims-on-wowsa-live/"
+        },
+        {
+          "text": "Interview"
+        },
+        {
+          "text": "Retrospective athlete interview. Publisher page, summary and embedded-player link inspected; playback was not independently inspected. Availability was intermittent during review. This is not a continuous recording of the 1987 crossing."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Philip Rush?",
+      "value": "This profile includes 2 selected solo performances for Philip Rush. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Philip Rush’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 16 August 1987. The source does not establish whether that date means departure or arrival. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Philip Rush’s featured Channel swim take?",
+      "value": "The featured continuous 3-way solo swim has a published elapsed time of 28 hours and 21 minutes. Published sources disagree about details of this swim; the crossing record explains the differences."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Philip Rush, 1987",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2431/philip-rush"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records: fastest male triple Channel crossing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.guinnessworldrecords.com/world-records/86249-fastest-crossing-of-the-english-channel-swimming-triple-e-f-e-f-male"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Swimming New Zealand archive: Philip Rush, Team Stroke Foundation",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://archive.swimming.org.nz/article.php?group_id=6827"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Cook Strait Swim: Philip Rush and the support service",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cookstraitswim.co.nz/our-services/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "New Zealand Open Water Swimming Association: recognised Cook Strait swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nzowsa.nz/cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected named rows, nationality, recorded date, route and duration.",
+          "label": "Supports"
+        },
+        {
+          "text": "Only starred entries explicitly indicate NZOWSA ratification; these historical selected rows are unstarred. Original observer records were not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: selected multiple-crossing statistics",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-swims-statistics"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published dates and leg durations for Rush’s 1985 double and 1987 triple, and Abertondo’s 1961 double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective table credited to Julian Critchlow’s database; not an original observer log or proof of separate CS&PF ratification. Date column does not identify departure or arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Cayman Compass, 20 August 1987: Associated Press report",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.caymancompass.com/1987/08/20/swimmer-makes-triple-channel-crossing"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary report of Rush’s 28h 21m triple, coach Tony Keenan and favourable conditions.",
+          "label": "Supports"
+        },
+        {
+          "text": "Digitised text warns of transcription errors. “Said Tuesday” dates the coach’s statement, not the swim’s completion. No exact start or finish clocks.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "WOWSA Live: Philip Rush interview and publisher summary",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.openwaterswimming.com/philip-rush-talks-about-epic-swims-on-wowsa-live/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective athlete interview page; publisher summary identifies Tony Keenan and escort pilot Michael Oram.",
+          "label": "Supports"
+        },
+        {
+          "text": "Publisher page and embedded-player URL were inspected, not video playback. A later fetch returned a server certificate error; availability is intermittent.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Otago Daily Times: interview with Philip Rush, 9 January 2012",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.odt.co.nz/sport/swimming-dominant-ocean-swimmer-for-a-decade-t4ob0vx5"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Interview connects English Channel and Cook Strait career, including his 1984 and 1988 doubles and a best 16h16m.",
+          "label": "Supports"
+        },
+        {
+          "text": "Retrospective interview; another ODT retrospective prints 16h15m for the 1984 double.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "NZ History: first woman swims Cook Strait",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://nzhistory.govt.nz/page/first-woman-swim-cook-strait"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Government history corroborates Cox’s 4 February 1975 swim at 12h07m and Rush’s 13 March 1984 non-stop double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical interpretation, not an original ratification certificate.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Otago Daily Times: Rush swims Cook Strait twice, 7 August 2011",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.odt.co.nz/sport/greatest-moments-in-otago-sport-number-95-bgrgsu9c"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Retrospective gives the date and double completion.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its 16h15m conflicts with NZOWSA leg durations and the 2012 interview’s 16h16m.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Continuous three-way English Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 16 August 1987 (recorded swim date)"
+        },
+        {
+          "text": "England → France → England → France"
+        },
+        {
+          "text": "28h 21m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "rush-1987"
+    },
+    {
+      "title": "Two-way English Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 9 September 1985 (recorded swim date)"
+        },
+        {
+          "text": "17h 56m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "rush-1985-two-way"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Cook Strait",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Sunday, 24 February 1980 (event date)"
+        },
+        {
+          "text": "New Zealand"
+        },
+        {
+          "text": "Completed North Island → South Island."
+        },
+        {
+          "text": "8h 56m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "philip-rush-event-1-cook-strait"
+    },
+    {
+      "title": "Cook Strait two-way",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Tuesday, 13 March 1984 (event date)"
+        },
+        {
+          "text": "New Zealand"
+        },
+        {
+          "text": "Completed North Island → South Island → North Island, the first non-stop double. Published elapsed accounts differ by one minute."
+        },
+        {
+          "text": "Sources disagree · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "philip-rush-event-2-cook-strait-two-way"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-87e4b1559a3379f67213"
+}

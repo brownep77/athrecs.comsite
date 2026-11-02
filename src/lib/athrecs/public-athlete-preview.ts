@@ -1,4 +1,7 @@
+import type { ChannelNative } from "./english-channel";
 import { buildProfileTimeline } from "./profile-timeline";
+import { publicProfileStatuses } from "./athlete-profile-roles";
+import type { BiographyPresentation } from "./biography-presentation";
 import {
   buildProfileAchievementSummary,
   type ProfileAchievementSummary,
@@ -47,7 +50,10 @@ export type PublicAthletePreview = {
   nationalitySource: SourceNationality | null;
   details?: PublicProfileDetails;
   sports: string[];
+  profileStatuses?: string[];
   biography: string[];
+  biographyPresentation?: BiographyPresentation;
+  channelArchive?: ChannelNative;
   biographySources: { label: string; url: string }[];
   careerSummary: PublicCareerSummary | null;
   achievements?: ProfileAchievementSummary;
@@ -74,7 +80,10 @@ export function buildPublicAthletePreview(input: {
   nationalitySource?: SourceNationality | null;
   details?: PublicProfileDetails;
   sports?: readonly string[];
+  profileRoles?: readonly string[];
   biography?: readonly string[];
+  biographyPresentation?: BiographyPresentation;
+  channelArchive?: ChannelNative;
   biographySources?: readonly { label: string; url: string }[];
   results: readonly ProfileResult[];
   histories: readonly SourceHistory[];
@@ -121,9 +130,11 @@ export function buildPublicAthletePreview(input: {
     clubSlug: input.club ? (input.clubSlug ?? null) : null,
     nationality: input.nationality ?? null,
     nationalitySource: null,
+    ...(input.channelArchive ? { channelArchive: input.channelArchive } : {}),
     publicLicenceCredits: profileResultLicenceCredits(input.histories),
     ...(input.details ? { details: input.details } : {}),
     sports,
+    profileStatuses: publicProfileStatuses(input.profileRoles),
     achievements: buildProfileAchievementSummary(timeline.results, input.histories),
     personalBests: profilePersonalBestSummary(timeline.results, input.histories),
     championshipMedals: (input.anzMedals ?? []).map(
@@ -146,6 +157,9 @@ export function buildPublicAthletePreview(input: {
           }),
         ],
     biographySources: [],
+    ...(input.biography?.length && input.biographyPresentation
+      ? { biographyPresentation: input.biographyPresentation }
+      : {}),
     careerSummary:
       input.biography?.length === 0
         ? null

@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { CollectorPage } from "@/components/admin/race-collector";
+import { COLLECTOR_COUNTRIES } from "@/lib/race-collector/core";
 import { previewFixtureFile, saveFixtureFile } from "@/lib/race-collector/fixture-upload-api";
 import {
   FIXTURE_UPLOAD_BYTES,
@@ -22,8 +23,8 @@ export function FixtureImportPage({
   const [input, setInput] = useState<FixtureUploadInput>({
     content: "",
     format: "csv",
-    label: "UK running fixtures 2026–2027",
-    scope: UK_FIXTURE_SCOPE,
+    label: "Running fixtures 2026–2027",
+    scope: { ...UK_FIXTURE_SCOPE, countries: COLLECTOR_COUNTRIES.map((c) => c.code) },
   });
   const [preview, setPreview] = useState<Awaited<ReturnType<typeof previewFixtureFile>>>();
   const [notice, setNotice] = useState("");
@@ -92,6 +93,9 @@ export function FixtureImportPage({
           ← Staff tools
         </Link>
         <h1 className="text-3xl font-semibold text-fg">Import running fixtures</h1>
+        <p className="text-xs font-medium uppercase tracking-wide text-muted">
+          File importer · built in ChatGPT
+        </p>
         <p className="max-w-3xl text-sm text-muted">
           Upload a CSV or JSON file, check the preview, then review and publish the ready races.
           Imports work even while automated research is paused. Up to 500 distance listings per
@@ -143,11 +147,20 @@ export function FixtureImportPage({
               Start countries
               <select
                 className={field}
-                value={input.scope.countries.join(",")}
+                value={input.scope.countries.length > 3 ? "ALL" : input.scope.countries.join(",")}
                 onChange={(e) =>
-                  update({ scope: { ...input.scope, countries: e.target.value.split(",") } })
+                  update({
+                    scope: {
+                      ...input.scope,
+                      countries:
+                        e.target.value === "ALL"
+                          ? COLLECTOR_COUNTRIES.map((c) => c.code)
+                          : e.target.value.split(","),
+                    },
+                  })
                 }
               >
+                <option value="ALL">Worldwide (all countries)</option>
                 <option value="GB">United Kingdom</option>
                 <option value="GB,IE">United Kingdom and Ireland</option>
                 <option value="IE">Republic of Ireland</option>
@@ -155,7 +168,7 @@ export function FixtureImportPage({
             </label>
           </div>
           <p className="text-xs text-muted">
-            Northern Ireland is included in the UK. Distances from above zero through 500 miles, in
+            Worldwide is the default; each row's country says where it starts. Northern Ireland is included in the UK. Distances from above zero through 500 miles, in
             miles or kilometres. Parkrun uses its separate verified fixture workflow.
           </p>
           <label className="block space-y-2 text-sm font-medium">

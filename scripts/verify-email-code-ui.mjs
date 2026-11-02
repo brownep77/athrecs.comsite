@@ -100,7 +100,8 @@ try {
   const privacy = signInDialog.getByRole("link", { name: "privacy notice", exact: true });
   // Let the password form finish its initial autofocus before testing the focus loop.
   await page.waitForFunction(
-    () => document.activeElement instanceof HTMLInputElement && document.activeElement.type === "email",
+    () =>
+      document.activeElement instanceof HTMLInputElement && document.activeElement.type === "email",
   );
   await close.focus();
   await page.keyboard.press("Shift+Tab");
@@ -151,6 +152,29 @@ try {
     { newPassword: "Test-reset-password-123!", token: "fixture-reset-token" },
   ]);
   assert.equal(new URL(page.url()).searchParams.has("token"), false);
+
+  // Better Auth serializes callback error messages with underscores. A new social
+  // user who omitted required details must land on a usable registration form.
+  await page.goto(
+    `${origin}/athlete-account?auth=1&authMode=signin&error=Enter_your_first_and_last_name_to_create_an_account.`,
+    {
+      waitUntil: "networkidle",
+    },
+  );
+  const registrationDialog = page.getByRole("dialog");
+  await registrationDialog.getByLabel("First name", { exact: true }).waitFor();
+  await registrationDialog.getByLabel("Last name", { exact: true }).waitFor();
+  await registrationDialog.getByRole("combobox", { name: "Country", exact: true }).waitFor();
+  await registrationDialog
+    .getByLabel("Town, city, postcode or ZIP code", { exact: true })
+    .waitFor();
+  assert.equal(
+    await registrationDialog
+      .getByRole("tab", { name: "Create account", exact: true })
+      .getAttribute("aria-selected"),
+    "true",
+  );
+  await registrationDialog.getByRole("alert").waitFor();
   assert.deepEqual(pageErrors, []);
   console.log(
     "Authentication browser checks passed: email codes, keyboard containment, focus restoration and fresh-link password reset.",

@@ -1,0 +1,168 @@
+{
+  "run-yorkshire-half-marathon-10k-5k|2026-10-04": {
+    "summary": "Roundhay Park programme: half marathon 09:30, 10K 10:00 and 5K 10:15.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://runnation.co.uk/r/Roundhay-HalfMarathon-october-2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "09:30",
+        "sourceUrl": "https://runnation.co.uk/r/Roundhay-HalfMarathon-october-2026",
+        "note": "Opened 2026 organiser half-marathon page."
+      },
+      "10K": {
+        "time": "10:00",
+        "sourceUrl": "https://runnation.co.uk/r/roundhay10K-october-2026",
+        "note": "Opened 2026 organiser 10K page."
+      },
+      "5K": {
+        "time": "10:15",
+        "sourceUrl": "https://runnation.co.uk/r/roundhay5K-october-2026",
+        "note": "Opened 2026 organiser 5K page."
+      }
+    }
+  },
+  "ea-runevents-wimbledon-common-series-wimbledon|2026-12-20": {
+    "summary": "Christmas races at The Causeway: 10K 09:30 and 5K 09:50. Check the final event guide before travelling.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.letsdothis.com/gb/e/runthrough-wimbledon-common-5k-10k-christmas-run-december-2026-257167",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "5K": {
+        "time": "09:50",
+        "note": "The dated authorised entry timetable and organiser Christmas distance FAQ agree. The main event body incorrectly describes a half marathon and links to Blackburn; it is not used for the Christmas programme."
+      },
+      "10K": {
+        "time": "09:30",
+        "note": "Dated authorised entry race-day timetable, corroborated by https://www.runthrough.co.uk/help/wimbledon-common-5k-10k-christmas-run-distances-and-start-times. Main-page 09:50 10K conflicts within a mismatched half-marathon programme."
+      }
+    },
+    "displayName": "Wimbledon Common 5K & 10K Christmas Run"
+  },
+  "temple-newsam-10-2027|2027-01-10": {
+    "summary": "St Theresa's AC ten-mile race starts at 10:00 on the Temple Newsam estate.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://racebest.com/races/qq342",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10mi": {
+        "time": "10:00",
+        "note": "2027 RaceBest entry programme and organiser TNT page identify the same ten-mile race."
+      }
+    }
+  },
+  "zurich-san-sebastian-marathon|2026-11-22": {
+    "summary": "The marathon starts at 09:00 local time; the separately advertised 10K starts earlier.",
+    "timeZone": "Europe/Madrid",
+    "sourceUrl": "https://zurichmaratonsansebastian.com/en/i-am-a-runner/regulation/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "note": "2026 organiser regulations, marathon programme; the 08:15 time belongs to the separate 10K."
+      }
+    }
+  },
+  "cologne-marathon|2026-10-04": {
+    "summary": "Half marathon starts from 08:30; marathon and relay from 10:30. Start blocks have later departures.",
+    "timeZone": "Europe/Berlin",
+    "sourceUrl": "https://generali-koeln-marathon.de/wp-content/uploads/2026/09/20260831_FAQ-vor-der-Veranstaltung.pdf",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "08:30",
+        "label": "From 08:30 · start blocks until 09:45",
+        "note": "2026 organiser FAQ sections 4.1 and 4.7: half-marathon first and last starts."
+      },
+      "Marathon": {
+        "time": "10:30",
+        "label": "From 10:30 · start blocks until 10:50",
+        "note": "2026 organiser FAQ: marathon and relay start blocks."
+      },
+      "Marathon Relay": {
+        "time": "10:30",
+        "label": "From 10:30 · start blocks until 10:50",
+        "note": "Four-person relay remains a distinct race option."
+      }
+    }
+  },
+  "beneva-quebec-city-marathon|2026-10-04": {
+    "summary": "Quebec City marathon starts from 08:00 in waves.",
+    "timeZone": "America/Toronto",
+    "sourceUrl": "https://www.jecoursqc.com/en/beneva-quebec-city-marathon-presented-by-montellier/schedule/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:00",
+        "label": "From 08:00 · wave starts",
+        "note": "The organiser explicitly labels this retained schedule as 2026 reference information."
+      }
+    }
+  },
+  "chicago-marathon|2026-10-11": {
+    "summary": "Chicago marathon: professionals 07:30, high-performance field 07:32; general waves 07:35, 08:00 and 08:35.",
+    "timeZone": "America/Chicago",
+    "sourceUrl": "https://cdn.chicagomarathon.com/app/uploads/2026/10/05135337/2026-Bank-of-America-Chicago-Marathon-Particicpant-Guide_FR.pdf",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "07:30",
+        "label": "Elite 07:30 · waves 07:35 / 08:00 / 08:35",
+        "note": "2026 participant guide, pp. 2–3. High-performance start 07:32. Wheelchair men/women 07:20/07:21 and handcycles 07:23 are separate categories.",
+        "publicNote": "High-performance field 07:32; wheelchair men 07:20, wheelchair women 07:21, handcycles 07:23. Use your assigned start."
+      }
+    }
+  },
+  "mbna-chester-marathon|2026-10-11": {
+    "summary": "MBNA Chester Marathon starts at 09:00, including the Top Flight wave.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.topflightraces.com/chester-marathon/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "09:00",
+        "note": "Top Flight organiser identifies this as a wave of the MBNA Chester Marathon, not an additional marathon.",
+        "publicNote": "Includes the Top Flight wave. The metric marathon is a separate race."
+      }
+    }
+  },
+  "wa-tc-10k-7245303|2026-10-03": {
+    "summary": "TC 10K in St Paul: professional championship start 07:15; general race start 07:30.",
+    "timeZone": "America/Chicago",
+    "sourceUrl": "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/tc10k",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "07:15",
+        "label": "Championship 07:15 · general race 07:30",
+        "note": "2026 organiser TC 10K page confirms 07:30 general race; linked professional-athlete programme confirms 07:15 championship start.",
+        "publicNote": "Professional USATF championship field starts at 07:15; general runners at 07:30."
+      }
+    },
+    "place": {
+      "city": "St Paul",
+      "state": "Minnesota"
+    }
+  },
+  "ea-runevents-hadleigh-10-5-2-hadleigh|2026-11-22": {
+    "summary": "Hadleigh programme: junior 2K 10:00, ten miles 11:00 and five miles 11:05.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.hadleigh-hares.co.uk/hadleigh-10-and-5-mile-races2026",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "2K": {
+        "time": "10:00",
+        "note": "Organiser's 2026 programme confirms junior 2K, under 16; children under six need adult accompaniment.",
+        "publicNote": "Junior race for under-16s; children under six must be accompanied by an adult."
+      },
+      "10mi": {
+        "time": "11:00",
+        "note": "2026 organiser race-day timetable supersedes stored federation 10:00."
+      },
+      "5mi": {
+        "time": "11:05",
+        "note": "2026 organiser race-day timetable supersedes stored federation 10:00."
+      }
+    }
+  }
+}

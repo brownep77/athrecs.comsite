@@ -198,11 +198,17 @@ const resultKeys = results.map(
   (result) => `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
 );
 assert.equal(new Set(resultKeys).size, resultKeys.length, "Recoverable result keys must be unique");
+// PR #1014 (c0a8fdde) removed these unsupported Run Norwich seeds from the catalogue.
+for (const key of [
+  "run-norwich|2022-07-24|10K|anya-culling",
+  "run-norwich|2024-07-21|10K|holly-archer",
+])
+  assert(!resultKeys.includes(key), `Unsupported result seed must stay excluded: ${key}`);
 assert.equal(
   results.filter(
     (result) => !["mo-farah", "david-goggins", "rich-roll"].includes(result.athleteSlug),
   ).length,
-  2_594,
+  2_592,
   "Existing canonical retained results changed unexpectedly",
 );
 assert.equal(

@@ -322,6 +322,72 @@ assert(
   !graph.some((x) => ["FAQPage", "SportsEvent"].includes(x["@type"])),
   "no inapplicable rich-result markup",
 );
+// Colombia guidance follows the live selection without turning an archive,
+// another sport or a neighbouring country into a running promotion.
+const { isColombiaRunningGuide, colombiaCityLinks } =
+  await import("../src/lib/athrecs/colombia-race-guide.ts");
+const colombiaRows = [
+  race(801, {
+    name: "Synthetic Bogotá road race",
+    country: "Colombia",
+    county: "Bogotá D.C.",
+    city: "Bogotá",
+    timeZone: "America/Bogota",
+    surface: "Road",
+    editions: [edition("2027-01-01")],
+  }),
+  race(802, {
+    country: "Colombia",
+    county: "Santander",
+    city: "San Gil",
+    surface: "Trail",
+    timeZone: "America/Bogota",
+    editions: [{ ...edition("2027-02-01"), distance: "50K" }],
+  }),
+  race(803, {
+    country: "Colombia",
+    county: "Valle del Cauca",
+    city: "Cali",
+    surface: "Road",
+    timeZone: "America/Bogota",
+    editions: [edition("2027-03-01")],
+  }),
+];
+const colombiaKey = "south-america/colombia/running";
+const colombiaPage = racePlacePage(colombiaRows, colombiaKey, now);
+assert(isColombiaRunningGuide(colombiaPage));
+assert(colombiaPage.indexable);
+assert.equal(racePlaceCopy(colombiaPage).title, "Colombia running race calendar | AthRecs");
+assert(prose(racePlaceCopy(colombiaPage).intro[0]).includes("3 upcoming events"));
+assert(racePlaceCopy(colombiaPage).questions.some((item) => prose(item.answer).includes("UTC−5")));
+const colombiaFiltered = racePlacePage(colombiaRows, colombiaKey, now, 1, false, {
+  month: "2027-01",
+  city: "Bogotá",
+});
+assert.equal(colombiaFiltered.upcomingCount, 1);
+assert(racePlaceCopy(colombiaFiltered).description.includes("1 upcoming running race"));
+assert(!colombiaFiltered.indexable, "filter URLs preserve their existing noindex policy");
+const bogotaLink = colombiaCityLinks(colombiaFiltered).find((item) => item.name === "Bogotá");
+const bogotaUrl = new URL(bogotaLink.href, "https://www.athrecs.com");
+assert.equal(bogotaUrl.searchParams.get("city"), "Bogotá");
+assert.equal(bogotaUrl.searchParams.get("month"), "2027-01");
+assert.equal(bogotaUrl.hash, "#upcoming-races");
+assert(!isColombiaRunningGuide(racePlacePage(colombiaRows, colombiaKey, now, 1, true)));
+assert(!isColombiaRunningGuide(page), "other countries retain their existing presentation");
+const colombiaOtherSport = racePlacePage(
+  [{ ...colombiaRows[0], sport: "Triathlon" }],
+  "south-america/colombia/triathlon",
+  now,
+);
+assert(!isColombiaRunningGuide(colombiaOtherSport));
+const colombiaAfter = racePlacePage(colombiaRows, colombiaKey, "2028-01-01T12:00:00Z");
+assert(!racePlaceCopy(colombiaAfter).description.includes("3 upcoming"));
+const colombiaGraph = JSON.parse(racePlaceHead(colombiaPage).scripts[0].children)["@graph"];
+assert.equal(
+  colombiaGraph.find((item) => item["@type"] === "CollectionPage").abstract,
+  racePlaceCopy(colombiaPage).intro.map(prose).join(" "),
+);
+assert(!colombiaGraph.some((item) => ["Event", "SportsEvent", "FAQPage"].includes(item["@type"])));
 // Explicit surface taxonomy and navigation must remain scoped through geography.
 const terrainRows = [
   ...[401, 402, 403].map((id) => race(id, { surface: "Road", editions: [edition("2027-05-01")] })),
@@ -376,6 +442,9 @@ await db.exec(`create table events(id int, slug text, name text, sport text, cou
 await db.exec(
   "alter table events add column surface text; update events set surface='Road' where sport='Running'",
 );
+await db.exec(
+  "alter table editions add column id serial primary key; alter table editions add column distance_km double precision;",
+);
 const sql = { query: async (text, values) => (await db.query(text, values)).rows };
 const loaded = await queryRacePlaceRows(sql, now);
 assert.equal(loaded.length, 1, "public sport boundary");
@@ -426,12 +495,13 @@ assert.deepEqual(racePlaceSitemapPaths(compactRows), racePlaceSitemapPaths(fullR
 let detailReads = [];
 const boundedSql = {
   query: async (text, params) => {
+    if (text.includes("select ed.id from editions ed")) return sql.query(text, params);
     assert(
-      text.includes("e.id = any($5::int[])"),
+      text.includes("e.id = any($6::int[])"),
       "detail query must be scoped before aggregation",
     );
-    assert(params[4].length > 0 && params[4].length <= 43, "bounded visible event IDs");
-    detailReads.push(params[4]);
+    assert(params[5].length > 0 && params[5].length <= 43, "bounded visible event IDs");
+    detailReads.push(params[5]);
     return sql.query(text, params);
   },
 };

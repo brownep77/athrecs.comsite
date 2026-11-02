@@ -1,0 +1,1081 @@
+{
+  "slug": "nora-toledano-cadena-english-channel",
+  "name": "Nora Toledano Cadena",
+  "country": "Mexico",
+  "aliases": [
+    "Nora Toledano"
+  ],
+  "highlight": "First Latin American woman to complete a two-way English Channel swim",
+  "biography": [
+    "Nora Toledano Cadena is a Mexican marathon swimmer, coach and organiser whose contribution extends from individual crossings to the development of other swimmers. Her Channel career began in 1992. In 1994 she completed a two-way crossing, becoming the first Latin American woman to do so. The Channel Swimming Association records the combined swim at 23 hours 38 minutes and associates it with its Most Meritorious Swim award.",
+    "Toledano also raced on the FINA professional circuit from 1998 to 2006. Her International Marathon Swimming Hall of Fame profile describes long swims in Mexico and around Manhattan, as well as the Triple Crown and completion of the Oceans Seven in 2019. Separate federation records document her Catalina crossing in 2016 and Molokai crossing in 2017, illustrating the international breadth of that later programme.",
+    "Her work on shore has been equally sustained. She helped develop organised crossing activity between Cozumel and the Maya Riviera, organised World Cup marathon swimming in Mexico and co-authored an open-water swimming book with Antonio Argüelles. ISHOF credits her with coaching, crewing for or advising more than 100 Mexican distance swimmers, alongside athletes from other countries. Inducted into IMSHOF in 2006, she joined its executive committee in 2022 and received the Poseidon Award in 2025 for her contribution to marathon swimming.",
+    "Her Channel career continued in 2025: the CS&PF results list a 6 August England-to-France swim in 11:12:00, also reported by Ellis Marine Services. The federation-hosted directory checked on 31 October 2026 lists seven successful widths across 1992–2025, including one double; the older six-crossing biography is a historical snapshot."
+  ],
+  "flags": [
+    {
+      "code": "MX",
+      "label": "Mexico",
+      "abbr": "MEX"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Nationality",
+      "value": "Mexico — ISHOF and CSA"
+    },
+    {
+      "label": "Channel distinction",
+      "value": "Two-way completion in 1994"
+    },
+    {
+      "label": "Recorded double time",
+      "value": "23 hours 38 minutes"
+    },
+    {
+      "label": "Professional circuit",
+      "value": "FINA, 1998–2006"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "IMSHOF Honor Swimmer, 2006"
+    },
+    {
+      "label": "Oceans Seven",
+      "value": "Completed in 2019"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Two-way English Channel crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Friday, 5 August 1994 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "23h 38m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "5 August is Dover’s swim date. Neither inspected entry establishes start or finish clocks.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Mike Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2452 was inspected: Mexico, solo, two-way, 1994 and 23:38. Dover supplies the day, complete route and pilot. This verifies the published ratifier entry, not the underlying observation sheets."
+        },
+        {
+          "text": "CSA: Nora Toledano Cadena, 1994",
+          "url": "https://www.channelswimmingassociation.com/swim/2452/nora-toledano-cadena"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Two-way solo, 23:38, Mexico, 1994 and Most Meritorious Swim award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Individual entry supplies year only; no observer report or clock times.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover: Nora Toledano Cadena, 5 August 1994",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1994-08-05/nora-toledano-cadena"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Calendar date, full two-way route and pilot.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary compilation; date is not expressly identified as start or finish.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "toledano-channel-double-1994"
+    },
+    {
+      "title": "Completed outward crossing before the later double",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "A completed first width of an unfinished two-way attempt. This was a separate performance from her successful August 1994 double already in the profile."
+        },
+        {
+          "text": "Completed first crossing; the intended return leg was abandoned."
+        },
+        {
+          "text": "Thursday, 30 June 1994 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "9h 40m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The supplied day is a generic swim date; departure and arrival clocks are blank.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Jr",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Helen Ann Marie",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "J. Woodward / R. Scott",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association (reported by CS&PF)",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical entry 443569 records a successful one-way on 30 June and explicitly attributes its ratifying organisation to CSA. The original CSA decision and observer report were not inspected. Its comment says the second leg was abandoned."
+        },
+        {
+          "text": "CS&PF historical entry: Nora Toledano Cadena, June 1994",
+          "url": "https://cspf.co.uk/swim/443569"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "30 June 1994; successful England–France 9:40:00, crew, and explicit abandoned return-leg note.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "toledano-1994-june-solo"
+    },
+    {
+      "title": "1997 England-to-France solo",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "A separate Channel solo three years after her two-way success."
+        },
+        {
+          "text": "Monday, 11 August 1997 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 51m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "11 August is the source’s generic swim date. No phase dates, clocks or observer name are supplied.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Aegean Blue",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association (reported by CS&PF)",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical entry 443678 names Nora Toledano Cadena, Mexico, and records the 11 August 1997 one-way. It reports CSA as the ratifying organisation; no original ratification paperwork was inspected."
+        },
+        {
+          "text": "CS&PF historical entry: Nora Toledano Cadena, August 1997",
+          "url": "https://cspf.co.uk/swim/443678"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "11 August 1997; England–France 11:51:00, Michael Oram and Aegean Blue.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "toledano-1997-solo"
+    },
+    {
+      "title": "2025 Channel return",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "The current federation-hosted career directory lists seven successful Channel widths through 2025, including the two legs of one double. The pilot-service page links a video labelled with her name; its footage has not been reviewed."
+        },
+        {
+          "text": "Wednesday, 6 August 2025 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 12m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Departure 07:23:00 and arrival 18:35:00 are printed beside a generic Date field. The phase dates and time zone are not explicitly stated, so these remain reported clocks in this note.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England–France",
+          "label": "Direction"
+        },
+        {
+          "text": "Simon Ellis; annual list also names Marilyn Critchley",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "High Hopes",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Suzannah McHugh",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF individual entry 446181 and its 2025 successful-swim row agree on 6 August and 11:12:00. Ellis Marine Services independently lists the completed 2025 solo. The annual page’s pending-ratification disclaimer means this source check is not presented as an inspected committee decision."
+        },
+        {
+          "text": "CS&PF: Nora Toledano Cadena, 6 August 2025",
+          "url": "https://cspf.co.uk/swim/446181"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "11:12:00 England–France solo, date, Simon Ellis/High Hopes, observer Suzannah McHugh and reported 07:23/18:35 clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CS&PF database entry; the ratifying-body label is not an inspected committee decision. Generic Date and separate clocks do not explicitly date the phases.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: 2025 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2025"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Nora Toledano row, 6 August, 11:12:00; Simon Ellis / Marilyn Critchley / High Hopes.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list retains the disclaimer that results are unofficial until committee ratification. No separate decision or observer log was inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Ellis Marine Services: 2025 Channel swimmers",
+          "url": "https://channelswimming.ellismarineservices.com/2025-channel-swimmers/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pilot-service annual account identifies Nora Toledano’s completed 11h12 solo in 2025 and provides an external video link.",
+          "label": "Supports"
+        },
+        {
+          "text": "The page and its video-link label were inspected; video playback and footage contents were not verified. No reuse licence is asserted.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF: solo swimmer directory",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career coverage: Nora Toledano Cadena seven crossings including one double, 1992–2025; Michelle Macy three, 2007–2012; Antonio Argüelles three, 1999–2021.",
+          "label": "Supports"
+        },
+        {
+          "text": "Julian Critchlow compilation; multiway legs contribute to crossing counts. This is not individual committee paperwork.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "toledano-2025-solo"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Tuesday, 23 August 2016 (event date)"
+        },
+        {
+          "text": "California, United States"
+        },
+        {
+          "text": "Completed mainland to Catalina."
+        },
+        {
+          "text": "12h 37m 27s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "CCSF row 383 matches her full name and Mexico; career identity is corroborated by IMSHOF."
+        },
+        {
+          "text": "Catalina Channel Swimming Federation: successful solo swims",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual result rows; CM = Catalina to mainland, MC = reverse, MCM = double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Date of Swim does not by itself specify departure or arrival; clocks and logs not inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Nora Toledano Cadena athlete profile",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_ef51d4e82ff841c4bdb40fbdfed928b5.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete identity, professional career, coaching, authorship, honours and Oceans Seven.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its six-crossing summary is historical, not a current career total.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "nora-toledano-cadena-event-1-catalina-channel"
+    },
+    {
+      "title": "Molokai Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2017 · exact day not confirmed"
+        },
+        {
+          "text": "Hawaii, United States"
+        },
+        {
+          "text": "Completed a solo crossing in July 2017."
+        },
+        {
+          "text": "14h 28m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "MCSA entry 54 lists Nora Toledano at 14:28. Her IMSHOF Oceans Seven profile supplies the career bridge. Exact day and logs were not available."
+        },
+        {
+          "text": "Molokai Channel Swimmers Association: swimmer listing",
+          "url": "https://molokaichannelswimmersassociation.blogspot.com/p/channel-swimmer-listing.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Nora Toledano, entry 54: July 2017, 14:28.",
+          "label": "Supports"
+        },
+        {
+          "text": "Month and year only; no clock times or observer documentation displayed.",
+          "label": "Limitations"
+        },
+        {
+          "text": "IMSHOF: Nora Toledano Cadena athlete profile",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_ef51d4e82ff841c4bdb40fbdfed928b5.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete identity, professional career, coaching, authorship, honours and Oceans Seven.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its six-crossing summary is historical, not a current career total.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "nora-toledano-cadena-event-2-molokai-channel"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Channel career begins",
+      "lines": [
+        {
+          "text": "1992"
+        },
+        {
+          "text": "First Channel success in the IMSHOF career account."
+        }
+      ]
+    },
+    {
+      "title": "Two-way English Channel",
+      "lines": [
+        {
+          "text": "Friday, 5 August 1994"
+        },
+        {
+          "text": "Dover supplies the swim date; CSA confirms the two-way result."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame",
+      "lines": [
+        {
+          "text": "2006"
+        },
+        {
+          "text": "Inducted as an IMSHOF Honor Swimmer."
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Tuesday, 23 August 2016"
+        },
+        {
+          "text": "Completed a mainland-to-island crossing."
+        }
+      ]
+    },
+    {
+      "title": "Molokai Channel",
+      "lines": [
+        {
+          "text": "2017"
+        },
+        {
+          "text": "MCSA lists her crossing in July."
+        }
+      ]
+    },
+    {
+      "title": "Oceans Seven",
+      "lines": [
+        {
+          "text": "2019"
+        },
+        {
+          "text": "Completed the seven-swim challenge."
+        }
+      ]
+    },
+    {
+      "title": "Sport administration",
+      "lines": [
+        {
+          "text": "2022"
+        },
+        {
+          "text": "Joined the IMSHOF executive committee."
+        }
+      ]
+    },
+    {
+      "title": "Poseidon Award",
+      "lines": [
+        {
+          "text": "2025"
+        },
+        {
+          "text": "Recognised by ISHOF for contributions to marathon swimming."
+        }
+      ]
+    },
+    {
+      "title": "Channel return in 11:12",
+      "lines": [
+        {
+          "text": "Wednesday, 6 August 2025"
+        },
+        {
+          "text": "CS&PF and the pilot service record a new solo; the directory now covers seven successful widths through 2025."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Nora Toledano Cadena?",
+      "value": "This profile includes 4 selected solo performances for Nora Toledano Cadena. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Nora Toledano Cadena’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Friday, 5 August 1994. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Nora Toledano Cadena’s featured Channel swim take?",
+      "value": "The featured continuous 2-way solo swim has a published elapsed time of 23 hours and 38 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "IMSHOF: Nora Toledano Cadena athlete profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_ef51d4e82ff841c4bdb40fbdfed928b5.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Athlete identity, professional career, coaching, authorship, honours and Oceans Seven.",
+          "label": "Supports"
+        },
+        {
+          "text": "Its six-crossing summary is historical, not a current career total.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "ISHOF: Nora Toledano, 2025 Poseidon Award",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/nora-toledano-cadena-to-receive-the-2025-poseidon-award/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Mexican nationality and contribution as swimmer, coach, organiser and administrator.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Nora Toledano Cadena, 1994",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2452/nora-toledano-cadena"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Two-way solo, 23:38, Mexico, 1994 and Most Meritorious Swim award.",
+          "label": "Supports"
+        },
+        {
+          "text": "Individual entry supplies year only; no observer report or clock times.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover: Nora Toledano Cadena, 5 August 1994",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1994-08-05/nora-toledano-cadena"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Calendar date, full two-way route and pilot.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary compilation; date is not expressly identified as start or finish.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation: successful solo swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual result rows; CM = Catalina to mainland, MC = reverse, MCM = double.",
+          "label": "Supports"
+        },
+        {
+          "text": "Date of Swim does not by itself specify departure or arrival; clocks and logs not inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Molokai Channel Swimmers Association: swimmer listing",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://molokaichannelswimmersassociation.blogspot.com/p/channel-swimmer-listing.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Nora Toledano, entry 54: July 2017, 14:28.",
+          "label": "Supports"
+        },
+        {
+          "text": "Month and year only; no clock times or observer documentation displayed.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Nora Toledano Cadena, June 1994",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443569"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "30 June 1994; successful England–France 9:40:00, crew, and explicit abandoned return-leg note.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Nora Toledano Cadena, August 1997",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/443678"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "11 August 1997; England–France 11:51:00, Michael Oram and Aegean Blue.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; its Ratifying Organisation field reports CSA. A generic Date field does not establish departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: Nora Toledano Cadena, 6 August 2025",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/446181"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "11:12:00 England–France solo, date, Simon Ellis/High Hopes, observer Suzannah McHugh and reported 07:23/18:35 clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Published CS&PF database entry; the ratifying-body label is not an inspected committee decision. Generic Date and separate clocks do not explicitly date the phases.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2025 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2025"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Nora Toledano row, 6 August, 11:12:00; Simon Ellis / Marilyn Critchley / High Hopes.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual list retains the disclaimer that results are unofficial until committee ratification. No separate decision or observer log was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Ellis Marine Services: 2025 Channel swimmers",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://channelswimming.ellismarineservices.com/2025-channel-swimmers/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Pilot-service annual account identifies Nora Toledano’s completed 11h12 solo in 2025 and provides an external video link.",
+          "label": "Supports"
+        },
+        {
+          "text": "The page and its video-link label were inspected; video playback and footage contents were not verified. No reuse licence is asserted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: solo swimmer directory",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career coverage: Nora Toledano Cadena seven crossings including one double, 1992–2025; Michelle Macy three, 2007–2012; Antonio Argüelles three, 1999–2021.",
+          "label": "Supports"
+        },
+        {
+          "text": "Julian Critchlow compilation; multiway legs contribute to crossing counts. This is not individual committee paperwork.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Two-way English Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 5 August 1994 (recorded swim date)"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "23h 38m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "toledano-channel-double-1994"
+    },
+    {
+      "title": "Completed outward crossing before the later double",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 30 June 1994 (recorded swim date)"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "Completed first crossing; the intended return leg was abandoned."
+        },
+        {
+          "text": "9h 40m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "toledano-1994-june-solo"
+    },
+    {
+      "title": "1997 England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 11 August 1997 (recorded swim date)"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "11h 51m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "toledano-1997-solo"
+    },
+    {
+      "title": "2025 Channel return",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 6 August 2025 (recorded swim date)"
+        },
+        {
+          "text": "England–France"
+        },
+        {
+          "text": "11h 12m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "toledano-2025-solo"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Catalina Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Tuesday, 23 August 2016 (event date)"
+        },
+        {
+          "text": "California, United States"
+        },
+        {
+          "text": "Completed mainland to Catalina."
+        },
+        {
+          "text": "12h 37m 27s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Ratifying body's record checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "nora-toledano-cadena-event-1-catalina-channel"
+    },
+    {
+      "title": "Molokai Channel",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "2017 · exact day not confirmed"
+        },
+        {
+          "text": "Hawaii, United States"
+        },
+        {
+          "text": "Completed a solo crossing in July 2017."
+        },
+        {
+          "text": "14h 28m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "nora-toledano-cadena-event-2-molokai-channel"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-90a7c5b26619f69363c2"
+}

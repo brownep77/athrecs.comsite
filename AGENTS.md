@@ -1,5 +1,7 @@
 # Athlete result evidence
 
+- Owner instruction, 30–31 October 2026: publish reviewed English Channel swimmer biographies and eligible profiles. The dedicated Channel archive includes reviewed source links and how the records were checked. Native profiles retain factual results and qualifications. Preserve claim and privacy gates, distinguish federation decisions from historical accounts and leave unresolved identities in editorial review.
+
 - Owner instruction, 23 October 2026: add federations and organisations to the
   Sources list for fixture, result and athlete-profile research, and reconcile
   earlier directory entries too. Preserve source capability evidence and original
@@ -9,6 +11,14 @@
   source check identifies missing registrations.
 
 ## Fixture dates and start times
+
+- Owner instruction, 26 October 2026: all published race fixtures need a confirmed
+  distance. Research each edition against its organiser, authorised entry programme
+  or governing body. Do not infer distance from a race name. Keep unresolved
+  upcoming race editions in staff review and out of public fixtures, announcements
+  and calendar exports. Split multi-distance and age-category programmes accurately.
+  Timed races retain their confirmed duration; never invent a fixed total.
+  Review source evidence separately from automated completeness screening.
 
 - Owner instruction, 25 October 2026: every race within the next **three calendar
   months** requires exhaustive reasonable start-time research. Follow
@@ -52,6 +62,17 @@
 These rules apply to athlete profiles, race histories, imports, catalogue seeds,
 publication and personal-best calculations in this repository.
 
+- Owner instruction, 31 October 2026: actively pursue result verification when
+  adding or reviewing athlete histories. A secondary finish report is a lead:
+  follow the organiser's edition-specific results link and search the official
+  timing provider by full name, surname/aliases and bib where available. Use the
+  public interactive results or permitted exports when search indexing omits the
+  athlete. Do not stop at a news report or search snippet when an official result
+  is reasonably accessible. Compare the actual row and identity evidence before
+  marking `source_verified`; retain published timing precision and separate ranks.
+  If verification remains unresolved, record the sources attempted and the
+  specific missing evidence or conflict in the private audit. Never replace
+  missing evidence with an automatic verification tick.
 - Owner instruction, 25 October 2026: loosen held-result identity review sensibly
   using `docs/reviewed-source-identity-policy.md`. A fixed ten-year age separation
   or opposite recorded sex is not required for a source-supported distinct-person
@@ -168,3 +189,15 @@ publication and personal-best calculations in this repository.
   Apply the public catalogue projection before returning fixture or result data;
   never treat a directory URL as an official entry/results fallback. Keep the
   primary-source publication guard in force.
+
+## Fixture counties and regions
+
+- Owner instruction, 26 October 2026: show county/local administrative area before
+  the broader region on fixtures, with both searchable. Start with UK and Ireland
+  and support equivalent county/state/province hierarchies elsewhere. Keep country,
+  county and region distinct. Do not put source-directory regions into county.
+- Follow `docs/fixture-geography/county-region-process.md`. Exact recorded-locality
+  enrichment is not a fresh venue check. Inspect the actual venue when the marketed
+  city differs, boundaries are involved, or an event uses several starts/venues.
+  Do not guess a county from a title, fuzzy place match, organiser HQ or first
+  geocoder result. Preserve sources, original fields and unresolved review reasons.

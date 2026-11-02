@@ -48,11 +48,25 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Verify Intercom identity and account session isolation
+        run: npm run verify:intercom
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Verify Intercom welcome displays on desktop and mobile
+        run: npm run verify:intercom-welcome
+
+      - name: Race weather timezones, missing data and compact layout
+        run: |
+          python scripts/verify-race-weather.py
+          node scripts/verify-race-weather.mjs
+
       - name: Verify profile setup, former clubs and staff alerts on mobile and desktop
         run: node --experimental-strip-types scripts/verify-profile-setup.mjs --browser
+
+      - name: Verify submission notification routing and retries
+        run: npm run verify:submission-alerts
 
       - name: Quick sign-up and default result discovery
         run: |
@@ -71,9 +85,14 @@ jobs:
       - name: Verify World Athletics refresh preservation
         run: node scripts/verify-world-athletics-refresh.mjs
 
+      - name: Verify Diamond League dates and country coverage
+        run: npm run verify:diamond-league
+
       - name: Verify public catalogue source policy and reviewed duplicates
         run: node --experimental-strip-types scripts/verify-public-catalogue-content.mjs
 
+      - name: Withhold unconfirmed fixture distances
+        run: node scripts/verify-fixture-distance-publication.mjs
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 
@@ -130,6 +149,7 @@ jobs:
           node scripts/verify-result-source-sync.mjs
           node scripts/verify-anz-import.mjs
           node scripts/verify-historical-personal-bests.mjs
+          node scripts/verify-bowden-road-pb-metadata.mjs
 
       - name: Verify independent result evidence comparisons
         run: node scripts/verify-result-evidence-audit.mjs
@@ -174,6 +194,11 @@ jobs:
         run: |
           node scripts/verify-combined-result-groups.mjs
           node scripts/verify-result-conflict-flow.mjs
+
+      - name: Verify Colombia calendar and audited publication
+        run: |
+          npm run verify:colombia-running-calendar
+          npm run verify:colombia-publication
 
       - name: Type-check, lint and verify
         run: npm run ci:verify

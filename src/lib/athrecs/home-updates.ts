@@ -20,6 +20,7 @@ export type HomeSportUpdate = {
   distance: string;
   status: string;
   providerName: string | null;
+  resultsUrl: string | null;
   publishedAt: string;
 };
 

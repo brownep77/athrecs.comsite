@@ -1,0 +1,403 @@
+{
+  "slug": "sunny-lowry-english-channel",
+  "name": "Sunny Lowry",
+  "country": "England",
+  "aliases": [
+    "Ethel Sunny Lowry",
+    "Ethel (Sunny) I. Lowry"
+  ],
+  "highlight": "1933 Channel crossing · later CSA president",
+  "biography": [
+    "Ethel ‘Sunny’ Lowry combined Channel swimming with a long career supporting other swimmers. Her early marathon experience included Windermere and Colwyn Bay, followed by training with Jabez Wolffe. Dover Museum describes her selection from a large group of applicants and her preparation on the Kent coast. She made unsuccessful Channel attempts in 1932 and earlier in 1933 before completing the crossing that August.",
+    "The surviving museum transcription of the witnesses’ affidavit places her departure at Cap Gris Nez on the evening of 28 August and her arrival at St Margaret’s Bay the following morning. The CSA records 15 hours 41 minutes. She wore a two-piece costume, preserved by Dover Museum, that allowed greater movement than the heavier one-piece clothing promoted for women.",
+    "Recognition did not arrive immediately: the museum records CSA acceptance in March 1958. Lowry later became a founding member of the British Long Distance Swimming Association and served as CSA president from 2000 to 2007. Her crossing remains firmly documented, although museum captions disagree over its date and one exhibit gives a different duration. This profile follows the affidavit dates and CSA time while retaining those differences alongside the performance."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "2 January 1911"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Longsight, Manchester"
+    },
+    {
+      "label": "Died",
+      "value": "21 February 2008"
+    },
+    {
+      "label": "Trainer",
+      "value": "Jabez Wolffe"
+    },
+    {
+      "label": "CSA president",
+      "value": "2000–2007"
+    },
+    {
+      "label": "Association role",
+      "value": "Founding member, British Long Distance Swimming Association"
+    },
+    {
+      "label": "Recognition of 1933 swim",
+      "value": "CSA recognition reported in March 1958"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Third-attempt Channel success",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "CSA records 15:41; the witness affidavit dates the swim 28–29 August 1933. Other museum captions give 15:45 or 25–26 August."
+        },
+        {
+          "text": "15h 41m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Monday, 28 August 1933 · 18:36 · Clock reported in the museum’s witness-affidavit transcription; time zone not stated",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 29 August 1933 · 10:17 · Clock reported in the museum’s witness-affidavit transcription; time zone not stated",
+          "label": "Finished"
+        },
+        {
+          "text": "Historical clocks are preserved as transcribed, without a time-zone conversion. The source’s elapsed duration is retained independently; no clock arithmetic was used to manufacture the result.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "St Margaret’s Bay, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Louis Courthes (affidavit transcription spelling)",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Isabelle",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming Association — historical recognition reported in March 1958; swim appears in current CSA register",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA successful-swim entry 2245 gives England, solo, one way, France to England, 1933 and 15:41. Dover Museum item d13102 transcribes the dated departure and arrival and names pilot Louis Courthes. The Between Wars exhibit supplies Isabelle but prints 15:45; certificate item d60116 prints 25–26 August in one caption and 28 August elsewhere. The selected dates follow the phase-specific affidavit transcription, while elapsed time follows the CSA entry. The conflicting accounts remain visible."
+        },
+        {
+          "text": "Channel Swimming Association: Ethel (Sunny) I. Lowry, 1933",
+          "url": "https://www.channelswimmingassociation.com/swim/2245/ethel-sunny-i-lowry"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful-swim record 2245: England; solo, one way, France to England; 1933; 15:41.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover Museum archive: Sunny Lowry witness affidavit, d13102",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/sunny-lowrys-successful-channel-swim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published affidavit transcription: 28 August 1933 at 18:36, Gris Nez; 29 August at 10:17, St Margaret’s Bay; pilot Louis Courthes and trainer Jabez Wolffe.",
+          "label": "Supports"
+        },
+        {
+          "text": "Museum transcription of the historical affidavit, not a fresh examination of original observer paperwork. No clock standard is stated.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum: Between Wars, Ethel Sunny Lowry section",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Training selection, third-attempt success, two-piece suit, Isabelle escort and 28–29 August 1933 dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Exhibit states 15:45, contrasting with CSA and affidavit account at 15:41; spells the captain Courtez.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover Museum archive: Sunny Lowry certificate photograph, d60116",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/sunny-lowry-with-her-channel-swimming-certificate"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Caption dates certificate award to 30 March 1958; surrounding account dates CSA recognition to March 1958.",
+          "label": "Supports"
+        },
+        {
+          "text": "Opening caption says swim was 25–26 August 1933, while the same page says 28 August. Its separate image Date field is also inconsistent; neither is used as the swim date.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "sunny-lowry-1933-fe"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Successful Channel crossing begins",
+      "lines": [
+        {
+          "text": "Monday, 28 August 1933"
+        },
+        {
+          "text": "The witness affidavit records an evening departure from Gris Nez, followed by arrival at St Margaret’s Bay on 29 August."
+        }
+      ]
+    },
+    {
+      "title": "CSA recognition",
+      "lines": [
+        {
+          "text": "March 1958"
+        },
+        {
+          "text": "Dover Museum dates recognition of her 1933 crossing to March 1958."
+        }
+      ]
+    },
+    {
+      "title": "CSA presidency",
+      "lines": [
+        {
+          "text": "2000–2007"
+        },
+        {
+          "text": "Served as president of the Channel Swimming Association, as recorded by IMSHOF."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Sunny Lowry?",
+      "value": "This profile includes 1 selected solo performance for Sunny Lowry. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Sunny Lowry’s featured English Channel swim?",
+      "value": "The featured swim started on Monday, 28 August 1933 and finished on Tuesday, 29 August 1933. Conflicting details are identified in the crossing record."
+    },
+    {
+      "label": "How long did Sunny Lowry’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 15 hours and 41 minutes. CSA records 15:41; the witness affidavit dates the swim 28–29 August 1933. Other museum captions give 15:45 or 25–26 August."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Dover Museum / Channel Swimming Dover: Ethel Sunny Lowry",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/lowry-ethel-sunny"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Named biography, trainer, successful route, earlier attempts, later CSA recognition and presidency.",
+          "label": "Supports"
+        },
+        {
+          "text": "The archive gives a 2003 Hall of Fame induction; the current IMSHOF biography is headed 2008. No unqualified induction year is adopted.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Ethel (Sunny) I. Lowry, 1933",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2245/ethel-sunny-i-lowry"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Individual successful-swim record 2245: England; solo, one way, France to England; 1933; 15:41.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum archive: Sunny Lowry witness affidavit, d13102",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/sunny-lowrys-successful-channel-swim"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Published affidavit transcription: 28 August 1933 at 18:36, Gris Nez; 29 August at 10:17, St Margaret’s Bay; pilot Louis Courthes and trainer Jabez Wolffe.",
+          "label": "Supports"
+        },
+        {
+          "text": "Museum transcription of the historical affidavit, not a fresh examination of original observer paperwork. No clock standard is stated.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Between Wars, Ethel Sunny Lowry section",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dovermuseum.co.uk/Exhibitions/Channel-Swimmers/Between-Wars.aspx"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Training selection, third-attempt success, two-piece suit, Isabelle escort and 28–29 August 1933 dates.",
+          "label": "Supports"
+        },
+        {
+          "text": "Exhibit states 15:45, contrasting with CSA and affidavit account at 15:41; spells the captain Courtez.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum archive: Sunny Lowry certificate photograph, d60116",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/sunny-lowry-with-her-channel-swimming-certificate"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Caption dates certificate award to 30 March 1958; surrounding account dates CSA recognition to March 1958.",
+          "label": "Supports"
+        },
+        {
+          "text": "Opening caption says swim was 25–26 August 1933, while the same page says 28 August. Its separate image Date field is also inconsistent; neither is used as the swim date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: Sunny Lowry biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_73981bd10f4c48f591f183046d51a347.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "One-page biography: CSA presidency 2000–2007, British Long Distance Swimming Association founding membership, training and 15:41 Channel swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Heading gives Honor Administrator, Great Britain, 2008; the museum biography instead reports induction in 2003.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "The Guardian: Sunny Lowry obituary",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.theguardian.com/theguardian/2008/feb/27/5"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Birth and death dates in closing biographical line; birthplace in biographical paragraph.",
+          "label": "Supports"
+        },
+        {
+          "text": "Used only for these concise life details.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Third-attempt Channel success",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Monday, 28 August 1933 – Tuesday, 29 August 1933"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "CSA records 15:41; the witness affidavit dates the swim 28–29 August 1933. Other museum captions give 15:45 or 25–26 August."
+        },
+        {
+          "text": "15h 41m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "18:36 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "10:17 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "sunny-lowry-1933-fe"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-62c8ee96352a453f7f84"
+}

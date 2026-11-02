@@ -1,0 +1,404 @@
+{
+  "slug": "mihir-sen-english-channel",
+  "name": "Mihir Sen",
+  "country": "India",
+  "aliases": [],
+  "highlight": "1958 English Channel solo · 14 hours 45 minutes",
+  "biography": [
+    "Mihir Sen was an Indian swimmer whose sporting career combined a Channel crossing with an unusually wide range of long-distance swims. Born in 1930, he trained as a lawyer and joined the Calcutta High Court in 1956. His English Channel crossing followed in September 1958: he completed an England-to-France solo in 14 hours and 45 minutes.",
+    "Sen subsequently pursued a series of swims across internationally significant waterways. During 1966 he crossed the Palk Strait between India and Sri Lanka, the Strait of Gibraltar, the Dardanelles and the Bosphorus. He also swam the Panama Canal that October. These achievements within one calendar year demonstrate the geographical breadth of his marathon swimming career.",
+    "The International Marathon Swimming Hall of Fame lists Sen among its 1966 inductees, recognising a career that extended well beyond his English Channel achievement."
+  ],
+  "flags": [
+    {
+      "code": "IN",
+      "label": "India",
+      "abbr": "IND"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "1930"
+    },
+    {
+      "label": "Country in Channel record",
+      "value": "India"
+    },
+    {
+      "label": "Profession",
+      "value": "Lawyer; joined the Calcutta High Court in 1956"
+    },
+    {
+      "label": "Channel route",
+      "value": "England → France"
+    },
+    {
+      "label": "Channel elapsed time",
+      "value": "14 hours 45 minutes"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "International Marathon Swimming Hall of Fame, 1966"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "1958 England-to-France solo",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "14h 45m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Saturday, 27 September 1958 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Completion date comes from the anniversary account. CSA publishes the year and elapsed duration; exact departure and arrival clock times are not established by these inspected sources.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association — public record inspected",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2474 was inspected and supplies country, direction, year and elapsed time. The Telegraph supplies the completion date. This checks published records; it does not imply inspection of an original observer log."
+        },
+        {
+          "text": "Channel Swimming Association: Mihir Sen, 1958",
+          "url": "https://www.channelswimmingassociation.com/swim/2474/mihir-sen"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "The Telegraph: Mihir Sen anniversary profile",
+          "url": "https://www.telegraphindia.com/my-kolkata/people/salute-to-mihir-sen-on-65th-anniversary-of-english-channel-conquest/cid/1969315"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "mihir-sen-1958"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Palk Strait",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Tuesday, 5 April 1966 – Wednesday, 6 April 1966"
+        },
+        {
+          "text": "Palk Strait, Sri Lanka–India"
+        },
+        {
+          "text": "Completed the crossing between Sri Lanka and India."
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The Nehru Archive’s biographical entry identifies Sen’s English Channel career and dates the Palk Strait swim to 5–6 April 1966. No original log or consistent primary elapsed time was available in this review."
+        },
+        {
+          "text": "Nehru Archive — Mihir Sen",
+          "url": "https://nehruarchive.in/people/mihir-sen"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1966 crossing dates and English Channel career identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical biographical note; no original observation log or elapsed time provided.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mihir-sen-event-1-palk-strait"
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 24 August 1966 (event date)"
+        },
+        {
+          "text": "Strait of Gibraltar"
+        },
+        {
+          "text": "Completed the Europe–Africa crossing."
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The Nehru Archive identifies the Channel swimmer and lists this Gibraltar success on 24 August 1966. Its entry does not provide elapsed time or an observation report."
+        },
+        {
+          "text": "Nehru Archive — Mihir Sen",
+          "url": "https://nehruarchive.in/people/mihir-sen"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1966 crossing dates and English Channel career identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical biographical note; no original observation log or elapsed time provided.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mihir-sen-event-2-strait-of-gibraltar"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Legal career",
+      "lines": [
+        {
+          "text": "1956"
+        },
+        {
+          "text": "Joined the Calcutta High Court after training as a lawyer."
+        }
+      ]
+    },
+    {
+      "title": "English Channel completion",
+      "lines": [
+        {
+          "text": "27 September 1958"
+        },
+        {
+          "text": "Completed his England-to-France solo in 14 hours 45 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Palk Strait swim",
+      "lines": [
+        {
+          "text": "1966-04-05 – 1966-04-06"
+        },
+        {
+          "text": "Swam between India and Sri Lanka."
+        }
+      ]
+    },
+    {
+      "title": "Panama Canal swim",
+      "lines": [
+        {
+          "text": "1966-10-29 – 1966-10-31"
+        },
+        {
+          "text": "Added the Panama Canal to his 1966 long-distance achievements."
+        }
+      ]
+    },
+    {
+      "title": "Marathon swimming recognition",
+      "lines": [
+        {
+          "text": "1966"
+        },
+        {
+          "text": "Inducted into the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Mihir Sen?",
+      "value": "This profile includes 1 selected solo performance for Mihir Sen. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Mihir Sen’s featured English Channel swim?",
+      "value": "The featured swim finished on Saturday, 27 September 1958. Its exact start date is not confirmed here."
+    },
+    {
+      "label": "How long did Mihir Sen’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 14 hours and 45 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Mihir Sen, 1958",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2474/mihir-sen"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "The Nehru Archive: Mihir Sen",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://nehruarchive.in/people/mihir-sen"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1966 crossing dates and English Channel career identity.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical biographical note; no original observation log or elapsed time provided.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: honorees by induction year",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/honorees-by-induction-year"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "The Telegraph: Mihir Sen anniversary profile",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.telegraphindia.com/my-kolkata/people/salute-to-mihir-sen-on-65th-anniversary-of-english-channel-conquest/cid/1969315"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "1958 England-to-France solo",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Saturday, 27 September 1958 (completion)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "14h 45m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "mihir-sen-1958"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Palk Strait",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Tuesday, 5 April 1966 – Wednesday, 6 April 1966"
+        },
+        {
+          "text": "Palk Strait, Sri Lanka–India"
+        },
+        {
+          "text": "Completed the crossing between Sri Lanka and India."
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "mihir-sen-event-1-palk-strait"
+    },
+    {
+      "title": "Strait of Gibraltar",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "Wednesday, 24 August 1966 (event date)"
+        },
+        {
+          "text": "Strait of Gibraltar"
+        },
+        {
+          "text": "Completed the Europe–Africa crossing."
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "mihir-sen-event-2-strait-of-gibraltar"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-33a85bb160c0be16710d"
+}

@@ -271,6 +271,26 @@ function nameHash(name: string) {
   for (const c of name) hash = Math.imul(hash ^ c.codePointAt(0)!, 16777619);
   return (hash >>> 0).toString(16);
 }
+// An existing event whose stored "city" is only a county or region (for example "Suffolk") does not
+// contradict a specific town on the same dated edition, so that difference alone no longer holds it.
+const COUNTY_OR_REGION_NAMES = new Set([
+  ...["bedfordshire", "berkshire", "buckinghamshire", "cambridgeshire", "cheshire", "cornwall"],
+  ...["cumbria", "derbyshire", "devon", "dorset", "durham", "essex", "gloucestershire"],
+  ...["hampshire", "herefordshire", "hertfordshire", "kent", "lancashire", "leicestershire"],
+  ...["lincolnshire", "norfolk", "northamptonshire", "northumberland", "nottinghamshire"],
+  ...["oxfordshire", "rutland", "shropshire", "somerset", "staffordshire", "suffolk", "surrey"],
+  ...["sussex", "east sussex", "west sussex", "warwickshire", "wiltshire", "worcestershire"],
+  ...["yorkshire", "north yorkshire", "south yorkshire", "west yorkshire", "east yorkshire"],
+  ...["isle of wight", "greater london", "greater manchester", "merseyside", "tyne and wear"],
+  ...["west midlands", "antrim", "armagh", "down", "fermanagh", "londonderry", "tyrone"],
+  ...["carlow", "cavan", "clare", "cork", "donegal", "galway", "kerry", "kildare", "kilkenny"],
+  ...["laois", "leitrim", "limerick", "longford", "louth", "mayo", "meath", "monaghan"],
+  ...["offaly", "roscommon", "sligo", "tipperary", "waterford", "westmeath", "wexford"],
+  ...["wicklow"],
+]);
+function isCountyOrRegionName(value: string) {
+  return COUNTY_OR_REGION_NAMES.has(normalizedName(value));
+}
 export function reconcile(
   c: Candidate,
   events: Identity[],
@@ -313,7 +333,15 @@ export function reconcile(
     };
   if (events.some((e) => e.slug === slug && e.id !== event?.id))
     return { ...base, status: "held", reason: "Slug already belongs to a different event" };
-  if (event?.city && c.city && normalizedName(event.city) !== normalizedName(c.city))
+  if (
+    event?.city &&
+    c.city &&
+    normalizedName(event.city) !== normalizedName(c.city) &&
+    !(
+      isCountyOrRegionName(event.city) &&
+      editions.some((d) => d.eventId === event.id && d.date === c.date)
+    )
+  )
     return {
       ...base,
       status: "held",

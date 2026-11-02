@@ -1,5 +1,16 @@
+import { REEPHAM_LAP_STARTS_DETAILS } from "./lib/reepham-lap-starts-details.mjs";
+import { REEPHAM_CONFIRMATION_REVIEW } from "./lib/reepham-organiser-confirmation-2026-10-31-review.mjs";
+import reephamConfirmation from "../src/data/reepham-organiser-confirmation-2026-10-31.json" with { type: "json" };
+import { SEVENTH_FIXTURE_QUALITY_REVIEW } from "./lib/fixture-quality-seventh-2026-10-26-review.mjs";
+import seventhFixtureQuality from "../src/data/fixture-quality-seventh-2026-10-26.json" with { type: "json" };
+import { FIFTH_DUPLICATE_PROGRAMMES_REVIEW } from "./lib/duplicate-programmes-fifth-2026-10-26-review.mjs";
+import fifthDuplicateProgrammeStarts from "../src/data/duplicate-programme-starts-fifth-2026-10-26.json" with { type: "json" };
 import { createServer } from "vite";
 import { publishCheckedFixtures } from "./lib/checked-fixture-publication.mjs";
+import { HADLEIGH_PROGRAMME_REVIEW } from "./lib/hadleigh-programme-2026-10-26-review.mjs";
+import { NOVEMBER_NIGHTMARE_PROGRAMME_REVIEW } from "./lib/november-nightmare-programme-2026-10-26-review.mjs";
+import fourthDuplicateProgrammeStarts from "../src/data/duplicate-programme-starts-fourth-2026-10-26.json" with { type: "json" };
+import thirdDuplicateProgrammeStarts from "../src/data/duplicate-programme-starts-third-2026-10-26.json" with { type: "json" };
 import { START_TIME_REVIEW } from "./lib/official-start-time-review.mjs";
 import { OFFICIAL_START_TIME_DETAILS } from "./lib/official-start-time-details.mjs";
 import { NORFOLK_CLARIFICATION_REVIEW } from "./lib/norfolk-start-clarification-review.mjs";
@@ -62,7 +73,7 @@ try {
     await publishCheckedFixtures(
       await getSql(),
       publishing,
-      { "reepham-cross-country|2027-01-31": FIXTURE_DETAILS["reepham-cross-country|2027-01-31"] },
+      REEPHAM_LAP_STARTS_DETAILS,
       REEPHAM_LAP_STARTS_REVIEW,
     ),
   );
@@ -131,6 +142,51 @@ try {
       publishing,
       thirdUrgentStarts,
       URGENT_STARTS_THIRD_REVIEW,
+    ),
+  );
+  console.log(
+    "[hadleigh-programme]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      thirdDuplicateProgrammeStarts,
+      HADLEIGH_PROGRAMME_REVIEW,
+    ),
+  );
+  console.log(
+    "[november-nightmare-programme]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      fourthDuplicateProgrammeStarts,
+      NOVEMBER_NIGHTMARE_PROGRAMME_REVIEW,
+    ),
+  );
+  console.log(
+    "[duplicate-programmes-fifth]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      fifthDuplicateProgrammeStarts,
+      FIFTH_DUPLICATE_PROGRAMMES_REVIEW,
+    ),
+  );
+  console.log(
+    "[fixture-quality-seventh]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      seventhFixtureQuality,
+      SEVENTH_FIXTURE_QUALITY_REVIEW,
+    ),
+  );
+  console.log(
+    "[reepham-organiser-confirmation]",
+    await publishCheckedFixtures(
+      await getSql(),
+      publishing,
+      reephamConfirmation,
+      REEPHAM_CONFIRMATION_REVIEW,
     ),
   );
 } finally {

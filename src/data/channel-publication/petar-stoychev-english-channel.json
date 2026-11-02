@@ -1,0 +1,919 @@
+{
+  "slug": "petar-stoychev-english-channel",
+  "name": "Petar Stoychev",
+  "country": "Bulgaria",
+  "aliases": [],
+  "highlight": "First Channel crossing under seven hours · 6h 57m 50s",
+  "biography": [
+    "Petar Stoychev is a Bulgarian swimmer whose career spans Olympic pool competition, championship open-water racing and long-distance crossings. Born in Momchilgrad on 24 October 1976, he began swimming as a child in Smolyan and developed into a leading competitor on the international marathon circuit.",
+    "On Friday 24 August 2007 he crossed the English Channel from England to France in 6 hours, 57 minutes and 50 seconds, becoming the first swimmer to break seven hours. Mike Oram piloted the escort boat Gallivant. The performance is presented here as a dated achievement, rather than a claim that the record remains unbeaten.",
+    "Stoychev represented Bulgaria at four Olympic Games, finishing sixth in the Beijing 2008 open-water 10km and ninth in London in 2012. His championship achievements include the 2011 world 25km title and the 2012 European title at the same distance, alongside sustained success on the professional marathon-swimming circuit.",
+    "His Channel record also includes a 7:21:08 solo in August 2006 and a return in September 2024. The latter completed his Oceans Seven campaign. In an account reproduced by Bulgarian National Television, he described starting at 23:34 on 1 September and swimming through strong wind and large waves. CS&PF records 10:12:00 for that third successful Channel swim."
+  ],
+  "flags": [
+    {
+      "code": "BG",
+      "label": "Bulgaria",
+      "abbr": "BUL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Born",
+      "value": "24 October 1976"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Momchilgrad, Bulgaria"
+    },
+    {
+      "label": "Olympic appearances",
+      "value": "2000, 2004, 2008 and 2012"
+    },
+    {
+      "label": "World title",
+      "value": "25km open water · 2011"
+    },
+    {
+      "label": "European title",
+      "value": "25km open water · 2012"
+    },
+    {
+      "label": "Channel milestone",
+      "value": "First swimmer under seven hours"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First English Channel swim under seven hours",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "6h 57m 50s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Friday, 24 August 2007 · 10:11:00 · Published source clock; time zone not specified",
+          "label": "Started"
+        },
+        {
+          "text": "Friday, 24 August 2007 · 18:08:50 · Published source clock; time zone not specified",
+          "label": "Finished"
+        },
+        {
+          "text": "The source prints 10:11:00 and 18:08:50 without identifying their time zones. They differ by 7h 57m 50s on a single clock, while the published elapsed swim time is 6h 57m 50s. The clocks are retained as reported; a one-hour time-zone explanation has not been assumed.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Shakespeare Beach, England",
+          "label": "Departure"
+        },
+        {
+          "text": "Point at Cap Gris-Nez, France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Mike Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Gallivant",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Jennie Hanson and Alison Streeter (as listed by Dover.UK.com)",
+          "label": "Official observers"
+        },
+        {
+          "text": "CS&PF listed as supervising organisation by Dover.UK.com",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The individual Dover entry supplies the exact date, elapsed seconds, direction, locations and support team. The Hall of Fame and World Aquatics corroborate the sub-seven-hour achievement. No original observer report or ratification decision was inspected; the unlabelled clock standards remain unresolved."
+        },
+        {
+          "text": "Dover.UK.com: Petar Stoychev, 24 August 2007",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2007-08-24/petar-stoychev"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "International Swimming Hall of Fame: Petar Stoychev",
+          "url": "https://ishof.org/happy-birthday-petar-stoychev/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "World Aquatics: Stoychev wins 2011 world title",
+          "url": "https://www.worldaquatics.com/news/1913118/petar-stoychev-bul-first-gold-for-last-world-appearance-"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "stoychev-2007"
+    },
+    {
+      "title": "First successful English Channel crossing",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "Successful 7:21:08 solo; escort vessel disputed. The annual list names Aegean Blue and the historical detail names Gallivant."
+        },
+        {
+          "text": "Tuesday, 22 August 2006 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "7h 21m 8s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Historical departure 12:33:00 and arrival 19:54:08 accompany a generic swim date. They are retained as reported clocks without inferred phase dates or time zone.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Alison Streeter",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF’s 2006 annual solo row and historical entry 444061 agree on swimmer, 22 August, duration and pilot. They disagree about the escort vessel: Aegean Blue in the annual row, Gallivant in the historical detail. This support-field conflict remains explicit; no separate committee decision was inspected."
+        },
+        {
+          "text": "CS&PF: 2006 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo row: 22 August, Petar Stoychev, Mike Oram/Aegean Blue, 7:21:08.",
+          "label": "Supports"
+        },
+        {
+          "text": "Select the year identified in the source title. The annual page states that results remain unofficial until ratified by the committee; no separate ratification decision was inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Petar Stoychev, 22 August 2006",
+          "url": "https://cspf.co.uk/swim/444061"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France, 7:21:08, Michael Oram/Gallivant, observer Alison Streeter and clocks. Vessel conflicts with annual list.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Solo Swims of Ontario: Petar Stoychev historical account",
+          "url": "https://soloswims.com/stoychev.htm"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The account explicitly identifies 2006 as Stoychev’s first Channel swim and gives 7:21:08.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical compilation credited to pilot Michael Oram, CS&PF and other sources; not an original observer report.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "stoychev-2006-first"
+    },
+    {
+      "title": "Night Channel swim completing his Oceans Seven campaign",
+      "lines": [
+        {
+          "text": "Sources disagree"
+        },
+        {
+          "text": "In the account reproduced by BNT, Stoychev called this his third Channel crossing and first at night, completing his Oceans Seven campaign. He described strong wind, large waves and jellyfish near France."
+        },
+        {
+          "text": "Departure confirmed as 1 September at 23:34. Published swim-date labels differ: 2 September in the annual list and 1 September in the historical entry; finish-date phase remains unconfirmed."
+        },
+        {
+          "text": "Monday, 2 September 2024 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "10h 12m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Sunday, 1 September 2024 · 23:34 · Athlete’s explicitly dated departure account quoted by Bulgarian National Television; no time zone stated",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Historical entry prints arrival 09:46:00 without a separately dated completion phase. No structured finish clock or finish date is calculated. The annual row’s 2 September date remains recordDate.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Michael Oram",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Gallivant",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Anthony Ball",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF’s annual solo row lists 2 September, Petar Stoychev, Mike Oram/Gallivant and 10:12:00. Historical entry 446091 instead uses 1 September. BNT’s 3 September report reproduces his explicit account of starting at 23:34 on 1 September; this establishes departure, but the federation’s differing generic date labels are preserved without inferring a finish-date phase."
+        },
+        {
+          "text": "CS&PF: 2024 successful swims",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2024"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Nicholas Adams: 14 August, Eddie Spelling/Pegasus, 11:56:00. Petar Stoychev: 2 September, Mike Oram/Gallivant, 10:12:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual page states that results remain unofficial until ratified by the committee; no separate ratification decision was inspected.",
+          "label": "Limitations"
+        },
+        {
+          "text": "CS&PF historical entry: Petar Stoychev, September 2024",
+          "url": "https://cspf.co.uk/swim/446091"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Generic date 1 September, England-to-France, 10:12:00, Michael Oram/Gallivant, observer Anthony Ball and reported clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Bulgarian National Television: Stoychev’s 2024 Channel account",
+          "url": "https://bnt.bg/news/bulgarian-swimmer-petar-stoychev-set-a-world-record-after-swimming-the-seven-open-water-straits-oceans-seven-in-the-shor-331636news.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "3 September 2024 report reproduces the athlete’s account of a 1 September departure at 23:34, a successful 10:12 Channel swim and completion of Oceans Seven.",
+          "label": "Supports"
+        },
+        {
+          "text": "The athlete’s account is quoted by the broadcaster; original Facebook post and ratification paperwork were not inspected. No time zone is stated.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "stoychev-2024"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "World Championships — men’s 10 km",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "2005 · exact day not confirmed"
+        },
+        {
+          "text": "Montreal, Canada"
+        },
+        {
+          "text": "Bronze medal in 1:46:50.4."
+        },
+        {
+          "text": "10 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "3rd · men",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "HistoFINA printed page 13 identifies Stoychev (BUL), third in the 2005 men’s 10km. World Aquatics’ 2011 career interview independently connects this medal to the Channel record-holder. Exact race day was not established in these inspected sources."
+        },
+        {
+          "text": "FINA HistoFINA: Open Water, October 2019",
+          "url": "https://resources.fina.org/fina/document/2021/02/20/c279978d-2784-40bb-b214-df01e815c2e3/histofina_ow_2019_final.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual podium rows: printed pages 13–14 and 53.",
+          "label": "Supports"
+        },
+        {
+          "text": "Official retrospective statistics, not original timing sheets. Fractional seconds are preserved in result text rather than rounded.",
+          "label": "Limitations"
+        },
+        {
+          "text": "World Aquatics: Petar Stoychev wins 2011 world gold",
+          "url": "https://www.worldaquatics.com/news/1913118/petar-stoychev-bul-first-gold-for-last-world-appearance-"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Same-day 23 July 2011 report and swimmer interview; connects Shanghai 25km gold, 2005 medals and 2007 Channel record.",
+          "label": "Supports"
+        }
+      ],
+      "id": "petar-stoychev-event-1-world-championships-mens-10-km"
+    },
+    {
+      "title": "World Championships — men’s 25 km",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 23 July 2011 (event date)"
+        },
+        {
+          "text": "Shanghai, China"
+        },
+        {
+          "text": "Gold medal in 5:10:39.8."
+        },
+        {
+          "text": "25 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "1st · men",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "World Aquatics’ report dated 23 July 2011 describes that day’s win and interviews Stoychev. HistoFINA printed page 14 supplies the exact result with a tenth of a second; no rounding applied."
+        },
+        {
+          "text": "FINA HistoFINA: Open Water, October 2019",
+          "url": "https://resources.fina.org/fina/document/2021/02/20/c279978d-2784-40bb-b214-df01e815c2e3/histofina_ow_2019_final.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual podium rows: printed pages 13–14 and 53.",
+          "label": "Supports"
+        },
+        {
+          "text": "Official retrospective statistics, not original timing sheets. Fractional seconds are preserved in result text rather than rounded.",
+          "label": "Limitations"
+        },
+        {
+          "text": "World Aquatics: Petar Stoychev wins 2011 world gold",
+          "url": "https://www.worldaquatics.com/news/1913118/petar-stoychev-bul-first-gold-for-last-world-appearance-"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Same-day 23 July 2011 report and swimmer interview; connects Shanghai 25km gold, 2005 medals and 2007 Channel record.",
+          "label": "Supports"
+        }
+      ],
+      "id": "petar-stoychev-event-2-world-championships-mens-25-km"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "International breakthrough",
+      "lines": [
+        {
+          "text": "1992"
+        },
+        {
+          "text": "Placed fourth in the European junior 400m freestyle and second at the Ohrid swimming marathon."
+        }
+      ]
+    },
+    {
+      "title": "Marathon circuit success",
+      "lines": [
+        {
+          "text": "2001–2011"
+        },
+        {
+          "text": "Won the international marathon-swimming circuit title in eleven successive seasons."
+        }
+      ]
+    },
+    {
+      "title": "Sub-seven-hour Channel swim",
+      "lines": [
+        {
+          "text": "24 August 2007"
+        },
+        {
+          "text": "Completed England–France in 6h 57m 50s."
+        }
+      ]
+    },
+    {
+      "title": "Beijing Olympic Games",
+      "lines": [
+        {
+          "text": "2008"
+        },
+        {
+          "text": "Finished sixth in the 10km and carried Bulgaria's flag at the opening ceremony."
+        }
+      ]
+    },
+    {
+      "title": "25km championship titles",
+      "lines": [
+        {
+          "text": "2011 / 2012"
+        },
+        {
+          "text": "Won world gold in 2011 and European gold in 2012."
+        }
+      ]
+    },
+    {
+      "title": "First successful Channel crossing",
+      "lines": [
+        {
+          "text": "Tuesday, 22 August 2006"
+        },
+        {
+          "text": "CS&PF records 7:21:08; the conflicting vessel names remain visible on the crossing record."
+        }
+      ]
+    },
+    {
+      "title": "Returned to the Channel to finish Oceans Seven",
+      "lines": [
+        {
+          "text": "September 2024"
+        },
+        {
+          "text": "The 10:12:00 night swim followed an explicitly reported 1 September departure."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Petar Stoychev?",
+      "value": "This profile includes 3 selected solo performances for Petar Stoychev. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Petar Stoychev’s featured English Channel swim?",
+      "value": "The featured swim started on Friday, 24 August 2007 and finished on Friday, 24 August 2007."
+    },
+    {
+      "label": "How long did Petar Stoychev’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 6 hours, 57 minutes and 50 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Swimming Hall of Fame: Petar Stoychev",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/happy-birthday-petar-stoychev/"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Petar Stoychev, 24 August 2007",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2007-08-24/petar-stoychev"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "World Aquatics: Stoychev wins 2011 world title",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.worldaquatics.com/news/1913118/petar-stoychev-bul-first-gold-for-last-world-appearance-"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Same-day 23 July 2011 report and swimmer interview; connects Shanghai 25km gold, 2005 medals and 2007 Channel record.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "FINA HistoFINA: Open Water, October 2019",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://resources.fina.org/fina/document/2021/02/20/c279978d-2784-40bb-b214-df01e815c2e3/histofina_ow_2019_final.pdf"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Selected individual podium rows: printed pages 13–14 and 53.",
+          "label": "Supports"
+        },
+        {
+          "text": "Official retrospective statistics, not original timing sheets. Fractional seconds are preserved in result text rather than rounded.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2006 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Solo row: 22 August, Petar Stoychev, Mike Oram/Aegean Blue, 7:21:08.",
+          "label": "Supports"
+        },
+        {
+          "text": "Select the year identified in the source title. The annual page states that results remain unofficial until ratified by the committee; no separate ratification decision was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Petar Stoychev, 22 August 2006",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/444061"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "England-to-France, 7:21:08, Michael Oram/Gallivant, observer Alison Streeter and clocks. Vessel conflicts with annual list.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2024 successful swims",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims/2024"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Nicholas Adams: 14 August, Eddie Spelling/Pegasus, 11:56:00. Petar Stoychev: 2 September, Mike Oram/Gallivant, 10:12:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual page states that results remain unofficial until ratified by the committee; no separate ratification decision was inspected.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical entry: Petar Stoychev, September 2024",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/446091"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Generic date 1 September, England-to-France, 10:12:00, Michael Oram/Gallivant, observer Anthony Ball and reported clocks.",
+          "label": "Supports"
+        },
+        {
+          "text": "Federation-hosted historical compilation; not the original observer report. Its generic Date field does not identify departure or arrival dates.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Bulgarian National Television: Stoychev’s 2024 Channel account",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://bnt.bg/news/bulgarian-swimmer-petar-stoychev-set-a-world-record-after-swimming-the-seven-open-water-straits-oceans-seven-in-the-shor-331636news.html"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "3 September 2024 report reproduces the athlete’s account of a 1 September departure at 23:34, a successful 10:12 Channel swim and completion of Oceans Seven.",
+          "label": "Supports"
+        },
+        {
+          "text": "The athlete’s account is quoted by the broadcaster; original Facebook post and ratification paperwork were not inspected. No time zone is stated.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Solo Swims of Ontario: Petar Stoychev historical account",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://soloswims.com/stoychev.htm"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The account explicitly identifies 2006 as Stoychev’s first Channel swim and gives 7:21:08.",
+          "label": "Supports"
+        },
+        {
+          "text": "Historical compilation credited to pilot Michael Oram, CS&PF and other sources; not an original observer report.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First English Channel swim under seven hours",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Friday, 24 August 2007"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "6h 57m 50s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "10:11:00 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "18:08:50 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "stoychev-2007"
+    },
+    {
+      "title": "First successful English Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 22 August 2006 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Successful 7:21:08 solo; escort vessel disputed. The annual list names Aegean Blue and the historical detail names Gallivant."
+        },
+        {
+          "text": "7h 21m 8s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "stoychev-2006-first"
+    },
+    {
+      "title": "Night Channel swim completing his Oceans Seven campaign",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 1 September 2024 (start)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Departure confirmed as 1 September at 23:34. Published swim-date labels differ: 2 September in the annual list and 1 September in the historical entry; finish-date phase remains unconfirmed."
+        },
+        {
+          "text": "10h 12m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "23:34 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Sources disagree · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "stoychev-2024"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "World Championships — men’s 10 km",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "2005 · exact day not confirmed"
+        },
+        {
+          "text": "Montreal, Canada"
+        },
+        {
+          "text": "Bronze medal in 1:46:50.4."
+        },
+        {
+          "text": "10 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "3rd · men",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "petar-stoychev-event-1-world-championships-mens-10-km"
+    },
+    {
+      "title": "World Championships — men’s 25 km",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 23 July 2011 (event date)"
+        },
+        {
+          "text": "Shanghai, China"
+        },
+        {
+          "text": "Gold medal in 5:10:39.8."
+        },
+        {
+          "text": "25 km",
+          "label": "Published distance"
+        },
+        {
+          "text": "1st · men",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Published account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "petar-stoychev-event-2-world-championships-mens-25-km"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-b16e643df5923c372fcf"
+}

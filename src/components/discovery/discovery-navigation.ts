@@ -85,7 +85,8 @@ export function discoverySportLinks(sport?: SportPage) {
     { label: "Results", path: `/results?category=${sport.slug}` },
     { label: "Athletes", path: `/athletes?sport=${encodeURIComponent(sport.sport)}` },
     { label: "Clubs & federations", path: `/directory?sport=${sport.slug}` },
-    { label: "News & reports", path: `/news?sport=${sport.slug}` },
+    { label: "News", path: `/news?sport=${sport.slug}` },
+    { label: "Race reports", path: `/race-reports?sport=${sport.slug}` },
   ];
 }
 

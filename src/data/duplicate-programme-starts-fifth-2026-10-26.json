@@ -1,0 +1,99 @@
+{
+  "illuminator-run-2017|2026-10-24": {
+    "summary": "Illuminator: 15 miles at 18:30, 15K at 18:45 and 8K at 19:00.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://illuminatorrun.co.uk/wp-content/uploads/2026/10/illuminator-AG_26_2.pdf",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "8K": {
+        "time": "19:00",
+        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+        "publicNote": "8K night trail race from Aboyne, starting at 19:00 local time."
+      },
+      "15K": {
+        "time": "18:45",
+        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+        "publicNote": "15K night trail race from Aboyne, starting at 18:45 local time."
+      },
+      "15mi": {
+        "time": "18:30",
+        "note": "2026 organiser athlete guide, page 4, confirms the distance-specific start on 24 October. The former 17:30 zero-distance placeholder is retained privately.",
+        "publicNote": "15-mile night trail race from Aboyne, starting at 18:30 local time."
+      }
+    },
+    "displayName": "Illuminator Night Trail Race",
+    "place": {
+      "town": "Aboyne",
+      "county": "Aberdeenshire"
+    }
+  },
+  "run-leicester-half-marathon|2026-10-11": {
+    "summary": "Run Leicester half marathon and 10K both start at 09:15 from Victoria Park.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://loros.co.uk/about-loros/news/2026/10/06/loros-nurses-among-record-5000-running-to-support-loros-at-run-leicester",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "10K": {
+        "time": "09:15",
+        "note": "LOROS organiser news dated 6 October 2026 confirms both distances on Sunday 11 October and the 09:15 festival start from Victoria Park. The current generic event page has rolled to 2027.",
+        "publicNote": "10K from Victoria Park, starting at 09:15 local time."
+      },
+      "Half": {
+        "time": "09:15",
+        "note": "LOROS organiser news dated 6 October 2026 confirms both distances on Sunday 11 October and the 09:15 festival start from Victoria Park. The current generic event page has rolled to 2027.",
+        "publicNote": "Half marathon from Victoria Park, starting at 09:15 local time."
+      }
+    }
+  },
+  "dublin-marathon|2026-10-25": {
+    "summary": "Dublin marathon runner waves: orange 08:45, green 09:05, blue 09:25 and purple 09:45.",
+    "timeZone": "Europe/Dublin",
+    "sourceUrl": "https://irishlifedublinmarathon.ie/wave-allocation/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "08:45",
+        "label": "Waves 08:45 / 09:05 / 09:25 / 09:45",
+        "note": "The 2026 organiser wave-allocation page and its timetable image were inspected. The stored 08:45 is the first runner wave, not every entrant’s start.",
+        "publicNote": "Follow your assigned colour wave: orange 08:45, green 09:05, blue 09:25 or purple 09:45."
+      }
+    }
+  },
+  "milano-city-marathon|2027-04-04": {
+    "summary": "Milano Marathon takes place on 4 April 2027. Its start time is not yet verified.",
+    "timeZone": "Europe/Rome",
+    "sourceUrl": "https://www.milanomarathon.it/en/practical-info/",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": null,
+        "note": "The organiser home page confirms 42.195km; the 2027 practical-information page confirms 4 April. No race-start clock was found in the opened home, regulation or practical-information pages. The separate 3 April 23:00 record is unsupported. Start research remains incomplete; retry 2 November, with full review due when the race enters the three-month window."
+      }
+    }
+  },
+  "generali-prague-half-marathon|2027-04-03": {
+    "summary": "Generali Prague Half Marathon starts at 10:00 on 3 April 2027.",
+    "timeZone": "Europe/Prague",
+    "sourceUrl": "https://www.runczech.com/en/events/generali-prague-half-marathon-2027-2/races/generali-prague-half-marathon",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Half": {
+        "time": "10:00",
+        "note": "The exact 2027 organiser race page confirms the half marathon date and 10:00 start. General capacity is full; registration requires a qualifying partner code.",
+        "publicNote": "General entries are full; follow the organiser’s information for partner-code places."
+      }
+    }
+  },
+  "mobile-marathon|2027-01-10": {
+    "summary": "Mobile Marathon starts at 07:30 local time on 10 January 2027.",
+    "timeZone": "America/Chicago",
+    "sourceUrl": "https://runsignup.com/Race/MobileALMarathon/Page-2",
+    "checkedAt": "2026-10-26",
+    "starts": {
+      "Marathon": {
+        "time": "07:30",
+        "note": "The authorised 2027 organiser programme states Sunday 10 January, 07:30 for Full, Half and Teams at Mardi Gras Park. Packet pickup and the later fun run are separate."
+      }
+    }
+  }
+}

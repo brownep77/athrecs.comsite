@@ -9422,7 +9422,7 @@ export const nationalAgeResults: FeaturedRaceResult[] = [
     "eventSlug": "berlin-marathon",
     "date": "2026-09-27",
     "distance": "Marathon",
-    "place": 830,
+    "place": 869,
     "genderPlace": 830,
     "category": "40",
     "categoryPlace": 112,

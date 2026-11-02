@@ -1,4 +1,5 @@
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
+import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Search, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -93,6 +94,7 @@ function ResultsPage() {
           <p className="text-sm leading-6 text-muted">
             Find a race, explore performances and add your results to your athlete profile.
           </p>
+          <ChatPrompt kind="results" />
         </div>
         <Button asChild variant="secondary">
           <Link to="/athlete-account">

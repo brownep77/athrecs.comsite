@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { PGlite } from "@electric-sql/pglite";
+import { isAthrecsPublicSport } from "../src/lib/athrecs/public-sports.ts";
 import {
   homeRegionLabel,
   PRIORITY_HOME_SPORTS,
@@ -28,10 +30,7 @@ const update = (id, sport, county = "Norfolk") => ({
 
 assert.deepEqual(PRIORITY_HOME_SPORTS, ["Running", "Athletics", "Triathlon", "Cycling"]);
 assert.equal(homeRegionLabel(update("run", "Running")), "Norfolk, England");
-assert.equal(
-  homeRegionLabel({ country: "Ireland", county: "Ireland" }),
-  "Ireland",
-);
+assert.equal(homeRegionLabel({ country: "Ireland", county: "Ireland" }), "Ireland");
 
 const feed = [
   update("run-1", "Running"),
@@ -91,6 +90,85 @@ const updatesSource = api.slice(updatesStart, nextExport === -1 ? undefined : ne
 assert.match(updatesSource, /from edition_result_links/);
 assert.match(updatesSource, /from events event/);
 assert.doesNotMatch(updatesSource, /fetch\(|rss|newsapi/i);
+
+// The production build aliases the shared API to this public-sport wrapper.
+// Exercise that actual wrapper so a legacy Athletics-only gate cannot silently
+// remove Running, Triathlon and Cycling from an otherwise correct base feed.
+const scopedApi = await readFile(resolve(root, "src/athletics/api.ts"), "utf8");
+const wrapper = scopedApi.match(/export const getHomeSportUpdates = ([\s\S]*?\n\}\));/)?.[1];
+assert.ok(wrapper);
+const wrappedFeed = new Function(
+  "createServerFn",
+  "base",
+  "isAthrecsPublicSport",
+  `return ${wrapper}`,
+)(
+  () => ({ handler: (fn) => fn }),
+  { getHomeSportUpdates: async () => [...feed, update("unsupported", "Unpublished sport")] },
+  isAthrecsPublicSport,
+);
+assert.deepEqual(
+  (await wrappedFeed()).map(({ id }) => id),
+  feed.map(({ id }) => id),
+  "Production feed must retain supported public sports and exclude unsupported sports",
+);
+
+// Execute the real feed query against a disposable catalogue. Future, held,
+// unverified and alias result links must never become public results updates.
+const query = updatesSource.match(/const rows = await sql<[\s\S]*?>`([\s\S]*?)`;/)?.[1];
+assert.ok(query, "Feed query must be available for the database regression check");
+const db = new PGlite();
+try {
+  await db.exec(`
+    create table events (id int, slug text, name text, sport text, country text, county text, city text);
+    create table editions (id int, event_id int, event_date date, distance_code text, distance_km numeric, status text);
+    create table edition_result_links (id int, edition_id int, provider_name text, results_url text, checked_at timestamptz, is_verified boolean, status text);
+    insert into events select id, 'event-' || id, 'Event ' || id, 'Running', 'England', 'Norfolk', 'Norwich' from generate_series(1, 7) id;
+    insert into editions values
+      (1, 1, '2026-11-02', '10K', 10, 'Open'),
+      (2, 2, '2026-10-31', '10K', 10, 'Open'),
+      (3, 3, '2026-11-01', 'Other', null, 'Open'),
+      (4, 4, '2026-10-20', '10K', 10, 'Finished'),
+      (5, 5, '2026-10-21', '10K', 10, 'Finished'),
+      (6, 6, '2026-11-01', '10K', 10, 'Open'),
+      (7, 7, '2026-10-22', '10K', 10, 'Finished');
+    insert into edition_result_links values
+      (1, 1, 'Synthetic Timer', 'https://example.org/future', '2026-10-30', true, 'approved'),
+      (2, 4, 'Synthetic Timer', 'https://example.org/verified', '2026-10-29', true, 'approved'),
+      (3, 4, 'Synthetic Timer', 'https://example.org/held', '2026-10-30', true, 'held'),
+      (4, 5, 'Synthetic Timer', 'https://example.org/alias', '2026-10-30', true, 'approved'),
+      (5, 7, 'Synthetic Timer', 'https://example.org/unverified', '2026-10-30', false, 'approved');
+  `);
+  const sql = async (parts, ...values) => {
+    const statement = parts.reduce((text, part, i) => text + (i ? `$${i}` : "") + part, "");
+    return (await db.query(statement, values)).rows;
+  };
+  const rows = await new Function(
+    "sql",
+    "today",
+    "heldDistanceIds",
+    "withheldFixtureDateKeys",
+    "retainedFixtureAliasSlugs",
+    "PLACEHOLDER",
+    "RACE_FORMAT",
+    `return sql\`${query}\`;`,
+  )(sql, "2026-10-30", [3], ["event-6|2026-11-01"], ["event-5"], /other/i, /race/i);
+  assert.deepEqual(
+    rows.filter((row) => row.kind === "fixture").map((row) => row.event_slug),
+    ["event-2", "event-1"],
+    "Only publish eligible fixtures, earliest first",
+  );
+  const results = rows.filter((row) => row.kind === "results");
+  assert.equal(results.length, 1, "Only a past approved, verified, non-alias result may appear");
+  assert.equal(
+    results[0].results_url,
+    "https://example.org/verified",
+    "Retain the original provider link",
+  );
+  assert.equal(results[0].provider_name, "Synthetic Timer");
+} finally {
+  await db.close();
+}
 
 console.log(
   "Compact Running homepage, sport/result shortcuts and copyright-safe regional updates verified",

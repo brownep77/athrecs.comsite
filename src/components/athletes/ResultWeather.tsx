@@ -1,0 +1,150 @@
+import {
+  ChevronDown,
+  Cloud,
+  CloudFog,
+  CloudLightning,
+  CloudRain,
+  CloudSnow,
+  Snowflake,
+  Sun,
+  Thermometer,
+  type LucideIcon,
+} from "lucide-react";
+import {
+  raceDayWeather,
+  raceWeatherSummary,
+  raceWeatherTemperature,
+} from "@/lib/athrecs/race-weather";
+
+const conditionIcons: Record<string, { icon: LucideIcon; colour: string }> = {
+  "Clear / fair reported": { icon: Sun, colour: "text-amber-600 fill-amber-100" },
+  "Cloud at times": { icon: Cloud, colour: "text-sky-600 fill-sky-100" },
+  "Cloud reported · limited data": { icon: Cloud, colour: "text-sky-600 fill-sky-100" },
+  "Rain at times": { icon: CloudRain, colour: "text-blue-600 fill-blue-100" },
+  "Fog at times": { icon: CloudFog, colour: "text-slate-500 fill-slate-100" },
+  "Snow at times": { icon: Snowflake, colour: "text-cyan-600" },
+  "Wintry mix": { icon: CloudSnow, colour: "text-cyan-700 fill-cyan-100" },
+  "Storms at times": { icon: CloudLightning, colour: "text-violet-600 fill-violet-100" },
+};
+const temperatureIcon = { icon: Thermometer, colour: "text-rose-600" };
+
+/** A short disclosure keeps weather inside the existing race-name column. */
+export function ResultWeather({ eventSlug, eventDate }: { eventSlug: string; eventDate: string }) {
+  const weather = raceDayWeather(eventSlug, eventDate);
+  if (!weather) return null;
+  if (weather.status === "unavailable")
+    return <span className="block text-[11px] font-normal text-subtle">Weather unavailable</span>;
+  const condition = raceWeatherSummary(weather);
+  const { icon: WeatherIcon, colour } = conditionIcons[condition] ?? temperatureIcon;
+  return (
+    <details className="result-weather mt-1 min-w-0 text-[11px] font-normal leading-4 text-muted">
+      <summary
+        className="flex min-h-7 cursor-pointer list-none items-start gap-1 rounded focus-visible:outline-2 focus-visible:outline-accent"
+        aria-label={`Race-day weather: ${raceWeatherTemperature(weather)}, ${condition}. Show details`}
+      >
+        <WeatherIcon className={`mt-0.5 size-3.5 shrink-0 ${colour}`} aria-hidden="true" />
+        <span>
+          Day {raceWeatherTemperature(weather)} · {condition}
+        </span>
+        <ChevronDown className="mt-0.5 size-3 shrink-0" aria-hidden="true" />
+      </summary>
+      <div className="mt-1 space-y-2 whitespace-normal rounded border border-border bg-surface p-2 text-xs leading-5">
+        <p>
+          <strong>Race-day weather · {weather.locality}</strong>
+          <br />
+          {weather.date} · {weather.timezone}. Local calendar day, including overnight; race start
+          time has not been used.
+        </p>
+        <p>
+          Hourly temperature range: {weather.minC}–{weather.maxC}°C ({weather.hours}/
+          {weather.expectedHours} hours).
+          <br />
+          Mean wind: {weather.windKph == null ? "Unavailable" : `${weather.windKph} km/h`}.
+          {weather.gustKph != null ? ` Peak gust: ${weather.gustKph} km/h.` : ""}
+          <br />
+          Mean humidity: {weather.humidityPct == null ? "Unavailable" : `${weather.humidityPct}%`}.
+          <br />
+          Day precipitation:{" "}
+          {weather.precipitationMm != null
+            ? `${weather.precipitationMm} mm`
+            : weather.precipitationEstimate
+              ? `${weather.precipitationEstimate.trace ? "<0.1" : weather.precipitationEstimate.mm} mm (regional model estimate)`
+              : "Incomplete data"}.
+        </p>
+        <p>
+          {weather.stationName} station ({weather.stationLatitude}, {weather.stationLongitude}).
+          Nearby-area weather; conditions on the course may differ, especially on coasts and hills.{" "}
+          {weather.modelFilled || weather.precipitationEstimate
+            ? "Includes model estimates."
+            : "Station observations."} Conditions
+          describe reports during the day, not the whole race. Averages use available hours; missing
+          observations are not treated as dry weather.
+        </p>
+        {weather.cloudCover && !weather.conditionCodes?.length && (
+          <p>
+            Cloud cover was reported in {weather.cloudCover.hours} hours. Cloud reports alone do not
+            establish whether rain, fog or other weather occurred; those details remain unavailable.
+          </p>
+        )}
+        {weather.metarSupplement && weather.metarSupplement.fields.length > 0 && (
+          <p>
+            Additional {weather.metarSupplement.fields.join(", ")} from{" "}
+            {weather.metarSupplement.name} ({weather.metarSupplement.station};{" "}
+            {weather.metarSupplement.latitude}, {weather.metarSupplement.longitude}):{" "}
+            {weather.metarSupplement.reports} archived reports within this local day. Source:{" "}
+            <a className="text-accent underline" href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noreferrer">
+              Iowa Environmental Mesonet, Iowa State University
+            </a>{" "}
+            (METAR archive; limited quality control). Retrieved {weather.metarSupplement.retrievedOn}.
+          </p>
+        )}
+        {weather.precipitationEstimate && (
+          <p>
+            Precipitation estimate:{" "}
+            <a className="text-accent underline" href="https://power.larc.nasa.gov/docs/methodology/meteorology/precipitation/" target="_blank" rel="noreferrer">
+              NASA POWER / MERRA-2
+            </a>
+            , summed over {weather.precipitationEstimate.hours} hours of the local day. This model
+            covers a broad 0.5° × 0.625° area around the station; it is not a course rain-gauge
+            measurement and cannot confirm whether it rained during the race. Summed and rounded by
+            AthRecs;{" "}
+            <a className="text-accent underline" href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
+              CC BY 4.0
+            </a>
+            . Retrieved {weather.precipitationEstimate.retrievedOn}.
+          </p>
+        )}
+        <p className="text-[11px]">
+          Weather:{" "}
+          <a
+            className="text-accent underline"
+            href={`https://meteostat.net/en/station/${weather.stationId}?t=${weather.date}/${weather.date}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Meteostat
+          </a>{" "}
+          and its{" "}
+          <a
+            className="text-accent underline"
+            href="https://dev.meteostat.net/providers"
+            target="_blank"
+            rel="noreferrer"
+          >
+            data providers
+          </a>
+          ,{" "}
+          <a
+            className="text-accent underline"
+            href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            CC BY 4.0
+          </a>
+          . Summarised and rounded by AthRecs. Retrieved {weather.retrievedOn}.
+        </p>
+      </div>
+    </details>
+  );
+}

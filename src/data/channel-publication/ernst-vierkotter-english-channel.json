@@ -1,0 +1,402 @@
+{
+  "slug": "ernst-vierkotter-english-channel",
+  "name": "Ernst Vierkötter",
+  "country": "Germany",
+  "aliases": [
+    "Ernst Vierkoetter",
+    "Ernst Karl Vierkoetter",
+    "Ernest Vierkoetter",
+    "Arnst VierKotter"
+  ],
+  "highlight": "A Cologne swimmer who broke the Channel record in 1926 and won Toronto’s inaugural 21-mile marathon swim in 1927.",
+  "biography": [
+    "Ernst Vierkötter of Cologne took up the family bakery after his father died. On 30 August 1926 he became the fastest swimmer to cross the English Channel. His registered time of 12 hours 38 minutes lowered Gertrude Ederle’s mark by 2 hours 1 minute. Georges Michel swam faster the following month.",
+    "The Channel registers list a solo crossing from France to England. Captain Salmon piloted the escort vessel Europe. The historical register gives clocks of 13:32 and 02:10, while contemporary German reporting describes an early-morning departure and an afternoon finish. Exact local clock times remain unresolved.",
+    "The following summer Vierkötter won the Canadian National Exhibition’s 21-mile Lake Ontario swim. The organiser’s historical table gives 11 hours 45 minutes. A race-day report says the announced time was corrected to 11 hours 42 minutes 12 seconds. He settled in Toronto and later taught swimming and officiated at the exhibition.",
+    "Cold water stopped every starter in the 1928 men’s race. Vierkötter covered 12 of the 15 miles in 7:39:37 and shared in the prize money. He completed the 15 miles the next year, finishing second in 8:31:39.3. In 1930 he placed fifth in 8:30:10.4."
+  ],
+  "flags": [
+    {
+      "code": "DE",
+      "label": "Germany",
+      "abbr": "GER"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Channel sporting nationality",
+      "value": "Germany"
+    },
+    {
+      "label": "Years",
+      "value": "1901–1967"
+    },
+    {
+      "label": "Later sporting home",
+      "value": "Toronto, Canada"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo, 30 August 1926",
+      "lines": [
+        {
+          "label": "Registered duration",
+          "text": "12 hours 38 minutes"
+        },
+        {
+          "label": "Direction",
+          "text": "France to England, one-way solo"
+        },
+        {
+          "label": "Route",
+          "text": "Contemporary reports identify Cap Gris-Nez and the Dover coast. The individual registers give country-level endpoints."
+        },
+        {
+          "label": "Pilot and vessel",
+          "text": "Captain Salmon aboard Europe. The German newspaper spells the vessel Europa."
+        },
+        {
+          "label": "Recorded clocks",
+          "text": "13:32 departure and 02:10 arrival in the historical register. The time standard is unspecified."
+        },
+        {
+          "label": "Alternative account",
+          "text": "A contemporary report describes departure around 01:35 and an afternoon finish near Dover. The exact local clocks remain unresolved."
+        },
+        {
+          "label": "Timing discrepancy",
+          "text": "The detailed registers agree on 12h38. The Dover biography gives 12h40 and the German report gives 12h42."
+        },
+        {
+          "label": "Record",
+          "text": "Fastest France-to-England crossing at the time. Georges Michel lowered the mark to 11h05 that September."
+        },
+        {
+          "label": "Recognition",
+          "text": "Listed by the Channel Swimming Association. The historical database identifies the CSA as ratifier."
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual swim 2238",
+          "url": "https://www.channelswimmingassociation.com/swim/2238/arnst-vierkotter"
+        },
+        {
+          "text": "CS&PF historical swim 442809",
+          "url": "https://cspf.co.uk/swim/442809"
+        },
+        {
+          "text": "Channel Swimming Dover athlete biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/vierkotter-ernst"
+        },
+        {
+          "text": "Harburger Tageblatt, 31 August 1926",
+          "url": "https://pdf.sub.uni-hamburg.de/kitodo/PPN876148259_19260831.pdf"
+        },
+        {
+          "text": "WOWSA record progression",
+          "url": "https://www.openwaterswimming.com/world-record-progression-of-english-channel-crossings/"
+        },
+        {
+          "text": "The register spellings differ, but the year, German sporting nationality, one-way direction and duration identify the same crossing."
+        }
+      ],
+      "id": "vierkotter-1926"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Canadian National Exhibition, 31 August 1927",
+      "lines": [
+        {
+          "label": "Event",
+          "text": "21-mile open race on Lake Ontario, Toronto"
+        },
+        {
+          "label": "Result",
+          "text": "First of three finishers"
+        },
+        {
+          "label": "Time",
+          "text": "11 hours 45 minutes in the organiser’s programme. The contemporary race report gives a corrected time of 11:42:12. The exact finish time remains disputed."
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "CNE official catalogue, printed page 63",
+          "url": "https://qspace.library.queensu.ca/bitstream/1974/11944/1/canadiannationa00cana.pdf#page=71"
+        },
+        {
+          "text": "Richmond Record-Herald, 1 September 1927, page 6",
+          "url": "https://www.californiarevealed.org/do/503365/iiif/bfa7bcd1-e550-439b-9306-d39b5cd4d39e/full/full/0/cric_005725_access.pdf"
+        }
+      ]
+    },
+    {
+      "title": "Canadian National Exhibition, 1928 · incomplete swim",
+      "lines": [
+        {
+          "label": "Status",
+          "text": "Did not finish. None of the 199 starters completed the 15-mile course."
+        },
+        {
+          "label": "Recorded effort",
+          "text": "12 miles in 7:39:37"
+        },
+        {
+          "label": "Prize",
+          "text": "One of fourteen swimmers who received an equal share of the purse."
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "CNE official catalogue, 1928 effort table, printed page 63",
+          "url": "https://qspace.library.queensu.ca/bitstream/1974/11944/1/canadiannationa00cana.pdf#page=71"
+        }
+      ]
+    },
+    {
+      "title": "Canadian National Exhibition, 30 August 1929",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "Second over 15 miles in 8:31:39.3"
+        },
+        {
+          "label": "Venue",
+          "text": "Lake Ontario, Toronto"
+        },
+        {
+          "label": "Date evidence",
+          "text": "The 31 August race report places the race on the previous day. A later directory lists 28 August."
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "CNE official catalogue, 1929 result table, printed page 63",
+          "url": "https://qspace.library.queensu.ca/bitstream/1974/11944/1/canadiannationa00cana.pdf#page=71"
+        },
+        {
+          "text": "The Brownsville Herald, 31 August 1929, page 3",
+          "url": "https://texashistory.unt.edu/ark:/67531/metapth1380958/m1/3/"
+        },
+        {
+          "text": "Openwaterpedia, alternative calendar date",
+          "url": "https://openwaterpedia.com/wiki/Canadian_National_Exhibition"
+        }
+      ]
+    },
+    {
+      "title": "Canadian National Exhibition, 27 August 1930",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "Fifth over 15 miles in 8:30:10.4"
+        },
+        {
+          "label": "Venue",
+          "text": "Lake Ontario, Toronto"
+        },
+        {
+          "text": "How the record was checked",
+          "heading": true
+        },
+        {
+          "text": "CNE official catalogue, 1930 result table, printed page 63",
+          "url": "https://qspace.library.queensu.ca/bitstream/1974/11944/1/canadiannationa00cana.pdf#page=71"
+        },
+        {
+          "text": "Prince Albert Daily Herald, 28 August 1930",
+          "url": "https://princealbertlibrary.ca/padh/1930/August/Aug%2028%201930.pdf"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "How fast did Ernst Vierkötter swim the English Channel?",
+      "value": "His registered time on 30 August 1926 was 12 hours 38 minutes, from France to England."
+    },
+    {
+      "label": "Who piloted Ernst Vierkötter’s Channel swim?",
+      "value": "The historical register identifies Captain Salmon and the vessel Europe."
+    },
+    {
+      "label": "Did Ernst Vierkötter finish the 1928 Toronto marathon swim?",
+      "value": "He covered 12 of the 15 miles. None of the 199 starters finished. His second-place finish was in 1929."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swim/2238/arnst-vierkotter"
+        },
+        {
+          "text": "German sporting nationality, year, solo route and registered time."
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/442809"
+        },
+        {
+          "text": "Identity, duration, clock readings, pilot and vessel."
+        }
+      ]
+    },
+    {
+      "title": "Solo Swims of Ontario",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://soloswims.com/vierkoetter.htm"
+        },
+        {
+          "text": "Life in Cologne and Toronto, coaching and later work as a CNE official."
+        }
+      ]
+    },
+    {
+      "title": "Canadian National Exhibition",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://qspace.library.queensu.ca/bitstream/1974/11944/1/canadiannationa00cana.pdf#page=71"
+        },
+        {
+          "text": "Official results table on printed page 63. The 1928 table names prize recipients for incomplete swims."
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo, 30 August 1926",
+      "lines": [
+        {
+          "label": "Registered duration",
+          "text": "12 hours 38 minutes"
+        },
+        {
+          "label": "Direction",
+          "text": "France to England, one-way solo"
+        },
+        {
+          "label": "Route",
+          "text": "Contemporary reports identify Cap Gris-Nez and the Dover coast. The individual registers give country-level endpoints."
+        },
+        {
+          "label": "Pilot and vessel",
+          "text": "Captain Salmon aboard Europe. The German newspaper spells the vessel Europa."
+        },
+        {
+          "label": "Recorded clocks",
+          "text": "13:32 departure and 02:10 arrival in the historical register. The time standard is unspecified."
+        },
+        {
+          "label": "Alternative account",
+          "text": "A contemporary report describes departure around 01:35 and an afternoon finish near Dover. The exact local clocks remain unresolved."
+        },
+        {
+          "label": "Timing discrepancy",
+          "text": "The detailed registers agree on 12h38. The Dover biography gives 12h40 and the German report gives 12h42."
+        },
+        {
+          "label": "Record",
+          "text": "Fastest France-to-England crossing at the time. Georges Michel lowered the mark to 11h05 that September."
+        },
+        {
+          "label": "Recognition",
+          "text": "Listed by the Channel Swimming Association. The historical database identifies the CSA as ratifier."
+        }
+      ],
+      "id": "vierkotter-1926"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Canadian National Exhibition, 31 August 1927",
+      "lines": [
+        {
+          "label": "Event",
+          "text": "21-mile open race on Lake Ontario, Toronto"
+        },
+        {
+          "label": "Result",
+          "text": "First of three finishers"
+        },
+        {
+          "label": "Time",
+          "text": "11 hours 45 minutes in the organiser’s programme. The contemporary race report gives a corrected time of 11:42:12. The exact finish time remains disputed."
+        }
+      ]
+    },
+    {
+      "title": "Canadian National Exhibition, 1928 · incomplete swim",
+      "lines": [
+        {
+          "label": "Status",
+          "text": "Did not finish. None of the 199 starters completed the 15-mile course."
+        },
+        {
+          "label": "Recorded effort",
+          "text": "12 miles in 7:39:37"
+        },
+        {
+          "label": "Prize",
+          "text": "One of fourteen swimmers who received an equal share of the purse."
+        }
+      ]
+    },
+    {
+      "title": "Canadian National Exhibition, 30 August 1929",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "Second over 15 miles in 8:31:39.3"
+        },
+        {
+          "label": "Venue",
+          "text": "Lake Ontario, Toronto"
+        },
+        {
+          "label": "Date evidence",
+          "text": "The 31 August race report places the race on the previous day. A later directory lists 28 August."
+        }
+      ]
+    },
+    {
+      "title": "Canadian National Exhibition, 27 August 1930",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "Fifth over 15 miles in 8:30:10.4"
+        },
+        {
+          "label": "Venue",
+          "text": "Lake Ontario, Toronto"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-375d5410e3b5b4e74a35"
+}

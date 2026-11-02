@@ -90,25 +90,34 @@ try {
     await db.exec(readFileSync(`migrations/${f}`, "utf8"));
   process.env.VERCEL_ENV = "production";
   process.env.ATHRECS_STAFF_EMAILS = "different-staff@example.test";
+  process.env.ATHRECS_CLAIMS_EMAILS = "claim-review@example.test";
+  await sql`update staff_notification_routes set enabled=(recipient='results@athrecs.com') where category='results'`;
   const core = load("src/lib/results-archive/core.ts", { zod: require("zod") });
   const mail = {
     authEmailConfigured: () => true,
     sendAthrecsAuthEmail: async (email, options) => {
-      assert.equal(email.to, "info@athrecs.com");
+      assert.equal(email.to, "results@athrecs.com", "Completed claims use the results route, independently of staff authentication and conflict overrides");
       const [linked] =
         await sql`select count(*)::int n from result_archive_entries where canonical_result_id is not null`;
       assert(linked.n > 0, "Notifications run after archive/profile transaction commits");
       sends.push({ email, options });
     },
   };
+  const notificationRoutes = load("src/lib/auth/staff-notifications.server.ts");
+  const connection = { dbSource: "neon", getSql: async () => sql };
+  const scope = { IS_RUNRECS_SITE: false };
   const emails = load("src/lib/athrecs/result-claim-email.server.ts", {
     "@/lib/auth/email.server": mail,
+    "@/lib/auth/staff-notifications.server": notificationRoutes,
+    "@/lib/db": connection,
+    "@/lib/site-scope": scope,
   });
   const alerts = load("src/lib/athrecs/result-claim-alerts.server.ts", {
     "node:crypto": crypto,
-    "@/lib/db": { dbSource: "neon" },
-    "@/lib/site-scope": { IS_RUNRECS_SITE: false },
+    "@/lib/db": connection,
+    "@/lib/site-scope": scope,
     "@/lib/auth/email.server": mail,
+    "@/lib/auth/staff-notifications.server": notificationRoutes,
     "./result-claim-email.server": emails,
   });
   const claims = load("src/lib/results-archive/claim.server.ts", {
@@ -232,7 +241,7 @@ try {
   );
   assert.equal((await sql`select count(*)::int n from result_archive_decisions`)[0].n, 2);
   console.log(
-    "PASS: archive declaration → existing owned profile → preserved precision/private unverified result → completed claim → info@ notification. Duplicate linking, replay, alias, cross-account, unverified email and flagged/conflicting rows checked.",
+    "PASS: archive declaration → existing owned profile → preserved precision/private unverified result → completed claim → configured results inbox. Duplicate linking, replay, alias, cross-account, unverified email and flagged/conflicting rows checked.",
   );
 } finally {
   Object.keys(process.env)

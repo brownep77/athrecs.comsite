@@ -1,3 +1,4 @@
+import { hasConfirmedFixtureDistance } from "./fixture-distance-policy.ts";
 import type { Sql } from "../db";
 import { withheldFixtureDateKeys } from "../../data/fixture-date-reviews";
 import { ROAD_MARATHONS } from "../../data/road-marathons";
@@ -13,6 +14,7 @@ import type { CalendarRace } from "./event-calendar";
 const site = "https://www.athrecs.com";
 type Edition = {
   id: number;
+  sport: string;
   event_date: string;
   distance_code: string;
   distance_km: number;
@@ -41,7 +43,7 @@ export async function resolveCalendarRaces(
   if (editionIds.length) {
     const rows = await sql.query<Edition>(
       `
-      select ed.id, ed.event_date::text, ed.distance_code, ed.distance_km, ed.status,
+      select e.sport, ed.id, ed.event_date::text, ed.distance_code, ed.distance_km, ed.status,
         ed.start_time, e.slug, e.name, e.country, e.county, e.city, e.website,
         case when ed.end_source_url is not null and ed.end_checked_at is not null then ed.end_date::text end as end_date,
         case when ed.end_source_url is not null and ed.end_checked_at is not null then ed.end_time end as end_time
@@ -50,6 +52,11 @@ export async function resolveCalendarRaces(
       [editionIds],
     );
     for (const row of rows) {
+      if (
+        row.event_date >= new Date().toISOString().slice(0, 10) &&
+        !hasConfirmedFixtureDistance(row.sport, row.distance_code, row.distance_km)
+      )
+        continue;
       if (withheldFixtureDateKeys.includes(`${row.slug}|${row.event_date}`)) continue;
       const shown = twoOceansCalendarPresentation({
         event_slug: row.slug,

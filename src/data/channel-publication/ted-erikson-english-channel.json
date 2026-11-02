@@ -1,0 +1,678 @@
+{
+  "slug": "ted-erikson-english-channel",
+  "name": "Ted Erikson",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "Second swimmer to complete a Channel double · 30 hours 3 minutes",
+  "biography": [
+    "Ted Erikson brought a scientist’s curiosity to marathon swimming. Born in Montana, he served in the United States Navy and joined a swim team while stationed at Key West. At the Illinois Institute of Technology he became an undergraduate swimming captain, earned bachelor’s and master’s degrees, and later worked as a research chemist. He also taught mathematics, physics and chemistry.",
+    "His long-distance career developed through ambitious Lake Michigan swims. In 1961 he travelled from Chicago to Michigan City in 36 hours 37 minutes; further journeys reached Kenosha in 1962 and St Joseph in 1963. He then turned to the English Channel. A successful single crossing in 1964 formed the opening leg of an unfinished double attempt. In 1965 he completed the return journey in 30 hours 3 minutes, becoming the second person to swim a Channel double. His experiments with computer-assisted tidal planning show how closely he connected swimming with practical scientific questions.",
+    "Erikson later swam from the Farallon Islands to the Golden Gate Bridge and encouraged other Channel swimmers, including his son Jon. He was aboard the support boat when Jon completed the first triple crossing in 1981. His own marathon achievements earned Hall of Fame recognition in 1978. He died on 1 December 2021, leaving a legacy shared between swimming, teaching and scientific work."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Birthplace",
+      "value": "Montana, United States"
+    },
+    {
+      "label": "Education",
+      "value": "Bachelor’s and master’s degrees, Illinois Institute of Technology"
+    },
+    {
+      "label": "Work",
+      "value": "Research chemist and mathematics, physics and chemistry teacher"
+    },
+    {
+      "label": "Military service",
+      "value": "United States Navy"
+    },
+    {
+      "label": "First Channel success",
+      "value": "1964, England to France in 12 hours 35 minutes"
+    },
+    {
+      "label": "Channel double",
+      "value": "1965, England–France–England in 30 hours 3 minutes"
+    },
+    {
+      "label": "Family connection",
+      "value": "Father and supporter of Jon Erikson"
+    },
+    {
+      "label": "Died",
+      "value": "1 December 2021"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "Successful first leg of an attempted double",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "Only the successful England-to-France leg is recorded. The planned return was abandoned; the duration of the overall attempt is not treated as a completed double."
+        },
+        {
+          "text": "12h 35m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The year is confirmed, but the inspected primary records do not establish an exact calendar day or either clock time.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Winters and Liddon, as named in the museum caption",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2483 confirms the successful 1964 one-way swim and 12:35 duration. Dover Museum’s caption names pilots Winters and Liddon and explains that worsening weather ended the subsequent return attempt. Its conflicting catalogue year is not used."
+        },
+        {
+          "text": "Channel Swimming Association: Ted Erikson, 1964",
+          "url": "https://www.channelswimmingassociation.com/swim/2483/ted-erikson"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States nationality, England-to-France one-way result of 12:35 in 1964.",
+          "label": "Supports"
+        },
+        {
+          "text": "Dover Museum: Ted Erikson photograph, item d56421",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/ted-erikson-u-s-a"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Caption identifies the 1964 first leg in 12:35, pilots Winters and Liddon, and an abandoned return.",
+          "label": "Supports"
+        },
+        {
+          "text": "Catalogue metadata says 1960 while the detailed caption says 1964. The CSA’s independent 1964 result supports the caption; metadata is not used as the swim date.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "ted-erikson-1964"
+    },
+    {
+      "title": "Successful two-way Channel swim",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "This was one completed two-way performance. The contemporary annual report describes earlier unsuccessful attempts and experiments with computer-generated tidal plans."
+        },
+        {
+          "text": "30h 3m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Only 1965 and the minute-precision elapsed duration are confirmed. No day, start clock or finish clock has been inferred.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 2-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Reg Brickell Senior",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA record 2434 and the contemporary CSA annual report agree on 30:03 for the completed double. The Association’s obituary identifies Reg Brickell Senior as the pilot. Exact calendar dates and independent leg splits are not supplied by the inspected primary sources."
+        },
+        {
+          "text": "Channel Swimming Association: Ted Erikson, 1965 two-way",
+          "url": "https://www.channelswimmingassociation.com/swim/2434/ted-erikson"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1965 England–France–England result of 30:03.",
+          "label": "Supports"
+        },
+        {
+          "text": "CSA 1965 annual report in the BLDSA annual report, PDF page 16",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSA-Annual-Report-1965.pdf#page=16"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account of three double attempts, computer-assisted planning and the successful 30:03 swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Inspected report does not establish an exact day or clock time.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Channel Swimming Association: Ted Erikson obituary, 1 December 2021",
+          "url": "https://www.channelswimmingassociation.com/news/186/ted-erikson-01-12-2021"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Scientific approach, Reg Brickell Senior’s role in the double and death date.",
+          "label": "Supports"
+        }
+      ],
+      "id": "ted-erikson-1965-double"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Lake Michigan — Chicago to Michigan City",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1961 · exact day not confirmed"
+        },
+        {
+          "text": "McCormick Place, Chicago → Michigan City, Indiana, USA"
+        },
+        {
+          "text": "Completed the swim from McCormick Place to Michigan City."
+        },
+        {
+          "text": "36h 37m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "ISHOF obituary’s opening career account gives year, route and 36:37 and connects him to the 1965 Channel double. Estimated track distance is deliberately omitted."
+        },
+        {
+          "text": "International Swimming Hall of Fame: Ted Erikson career obituary",
+          "url": "https://ishof.org/passages-imshof-honoree-ted-erikson/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical account; exact days and original timing sheets not supplied.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "ted-erikson-event-1-lake-michigan-chicago-to-michigan-city"
+    },
+    {
+      "title": "Chicago to Kenosha",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1962 · exact day not confirmed"
+        },
+        {
+          "text": "Chicago, Illinois → Kenosha, Wisconsin, USA"
+        },
+        {
+          "text": "Completed the Lake Michigan swim from Chicago to Kenosha."
+        },
+        {
+          "text": "35h 37m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "50 miles (historical source account)",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "ISHOF obituary, paragraph beginning with subsequent Lake Michigan swims, gives 1962, 50 miles and 35:37. Exact day and original timing sheet are unavailable in this account."
+        },
+        {
+          "text": "International Swimming Hall of Fame: Ted Erikson career obituary",
+          "url": "https://ishof.org/passages-imshof-honoree-ted-erikson/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Historical account; exact days and original timing sheets not supplied.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "ted-erikson-event-2-chicago-to-kenosha"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Lake Michigan breakthrough",
+      "lines": [
+        {
+          "text": "1961"
+        },
+        {
+          "text": "Swam Chicago to Michigan City in 36 hours 37 minutes."
+        }
+      ]
+    },
+    {
+      "title": "First Channel success",
+      "lines": [
+        {
+          "text": "1964"
+        },
+        {
+          "text": "Completed the opening crossing of an attempted double."
+        }
+      ]
+    },
+    {
+      "title": "Successful Channel double",
+      "lines": [
+        {
+          "text": "1965"
+        },
+        {
+          "text": "Completed the return journey in 30 hours 3 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Farallon Islands swim",
+      "lines": [
+        {
+          "text": "1967"
+        },
+        {
+          "text": "Swam from the Farallon Islands to the Golden Gate Bridge."
+        }
+      ]
+    },
+    {
+      "title": "Marathon Hall of Fame",
+      "lines": [
+        {
+          "text": "1978"
+        },
+        {
+          "text": "Inducted into the International Marathon Swimming Hall of Fame."
+        }
+      ]
+    },
+    {
+      "title": "Supported Jon’s triple",
+      "lines": [
+        {
+          "text": "1981"
+        },
+        {
+          "text": "Accompanied his son on the escort vessel during the first completed three-way Channel swim."
+        }
+      ]
+    },
+    {
+      "title": "Illinois Tech sporting honour",
+      "lines": [
+        {
+          "text": "2022"
+        },
+        {
+          "text": "Included in the university’s inaugural Athletics Hall of Fame class."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Ted Erikson?",
+      "value": "This profile includes 2 selected solo performances for Ted Erikson. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Ted Erikson’s featured English Channel swim?",
+      "value": "The featured swim took place in 1964. Its exact day is not confirmed here."
+    },
+    {
+      "label": "How long did Ted Erikson’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 12 hours and 35 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "International Swimming Hall of Fame: Ted Erikson obituary",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://ishof.org/passages-imshof-honoree-ted-erikson/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Ted’s education, occupation, Lake Michigan swims and 1978 honour; Jon’s death in 2014.",
+          "label": "Supports"
+        },
+        {
+          "text": "Not an original observer log; its statement about when Jon first bettered Ted’s double is inconsistent with other records. Historical account; exact days and original timing sheets not supplied.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Illinois Institute of Technology: inaugural Athletics Hall of Fame, 2022",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.iit.edu/news/illinois-tech-inducts-first-class-athletics-hall-fame"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Navy and college swimming, undergraduate captaincy, 1965 double, 2021 death and 2022 institutional honour.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Ted Erikson obituary, 1 December 2021",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/news/186/ted-erikson-01-12-2021"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Scientific approach, Reg Brickell Senior’s role in the double and death date.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Ted Erikson, 1964",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2483/ted-erikson"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "United States nationality, England-to-France one-way result of 12:35 in 1964.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Ted Erikson, 1965 two-way",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2434/ted-erikson"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "1965 England–France–England result of 30:03.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum: Ted Erikson photograph, item d56421",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/ted-erikson-u-s-a"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Caption identifies the 1964 first leg in 12:35, pilots Winters and Liddon, and an abandoned return.",
+          "label": "Supports"
+        },
+        {
+          "text": "Catalogue metadata says 1960 while the detailed caption says 1964. The CSA’s independent 1964 result supports the caption; metadata is not used as the swim date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA 1965 annual report in the BLDSA annual report, PDF page 16",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSA-Annual-Report-1965.pdf#page=16"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary account of three double attempts, computer-assisted planning and the successful 30:03 swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "Inspected report does not establish an exact day or clock time.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Associated Press: Swims Channel Three Times, Daily Reflector, 13 August 1981, page 15",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://digital.lib.ecu.edu/encore/ncgre000/00000095/00094826/00094826.pdf#page=15"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Contemporary report of Tuesday departure, Wednesday completion, Wissant landing, explicit leg times, Accord and observer Tom Watch.",
+          "label": "Supports"
+        },
+        {
+          "text": "Spells Jon as John and misstates his father’s historical two-way duration; those errors are not adopted. The public original PDF was downloaded and visually inspected after the web reader returned 403.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "Successful first leg of an attempted double",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1964 · exact day not recorded here"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "12h 35m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "ted-erikson-1964"
+    },
+    {
+      "title": "Successful two-way Channel swim",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1965 · exact day not recorded here"
+        },
+        {
+          "text": "England → France → England"
+        },
+        {
+          "text": "30h 3m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "ted-erikson-1965-double"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Lake Michigan — Chicago to Michigan City",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1961 · exact day not confirmed"
+        },
+        {
+          "text": "McCormick Place, Chicago → Michigan City, Indiana, USA"
+        },
+        {
+          "text": "Completed the swim from McCormick Place to Michigan City."
+        },
+        {
+          "text": "36h 37m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "ted-erikson-event-1-lake-michigan-chicago-to-michigan-city"
+    },
+    {
+      "title": "Chicago to Kenosha",
+      "lines": [
+        {
+          "text": "Open-water swimming · Solo swim"
+        },
+        {
+          "text": "1962 · exact day not confirmed"
+        },
+        {
+          "text": "Chicago, Illinois → Kenosha, Wisconsin, USA"
+        },
+        {
+          "text": "Completed the Lake Michigan swim from Chicago to Kenosha."
+        },
+        {
+          "text": "35h 37m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "50 miles (historical source account)",
+          "label": "Published distance"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "ted-erikson-event-2-chicago-to-kenosha"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-207bde3f18f5f4f25607"
+}

@@ -1,4 +1,5 @@
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
+import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -72,6 +73,7 @@ function AthleteDirectory({ initial }: { initial: Awaited<ReturnType<typeof list
             </Link>
           </Button>
         </div>
+        <ChatPrompt kind="results" />
         <p className="text-sm text-muted">
           Athlete profiles linked to clubs and source-checked race results.
         </p>

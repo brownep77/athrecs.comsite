@@ -1,3 +1,4 @@
+import { athleteBiographyReviews } from "../../data/athlete-biography-reviews.ts";
 import { profileSportEvidencePredicateSql } from "./profile-sport-evidence";
 import type { Sql } from "../db";
 import type { AthleteDirectory, AthleteDirectorySearch } from "./athlete-directory";
@@ -10,23 +11,23 @@ import { countryNames } from "./country-flags.ts";
 import { readSourceNationality } from "./source-nationality.ts";
 import { withDiscoveryRead } from "./discovery-read.server.ts";
 
-// Keep this expression aligned with the public_athlete_search_trgm index.
+// Keep this expression aligned with public_athlete_search_folded_trgm.
 const countrySql = `case
   when lower(trim(a.country)) in ('england','scotland','wales','northern ireland','united kingdom','uk','gb','gbr','great britain') then 'United Kingdom'
   when lower(trim(a.country)) in ('ireland','republic of ireland','ie','irl') then 'Ireland'
   else trim(coalesce(a.country,'')) end`;
-const documentSql = `lower(coalesce(a.display_name,'')||' '||coalesce(a.city,'')||' '||(${countrySql})||' '||coalesce(a.profile_roles,''))`;
+const documentSql = `athlete_directory_search_fold(coalesce(a.display_name,'')||' '||coalesce(a.city,'')||' '||(${countrySql})||' '||coalesce(a.profile_roles,''))`;
 const citySql = `case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
   where l.athlete_id=a.id and l.status='active' and s.share_location=false) then a.city end`;
 const publicCountrySql = `case when exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
   where l.athlete_id=a.id and l.status='active' and s.share_location=false) then '' else (${countrySql}) end`;
 const clubSql = `case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
   where l.athlete_id=a.id and l.status='active' and s.share_club=false) then nullif(c.name,'Unattached') end`;
-const sourceSportSql = `athlete_source_sport_v4(h.provider,p->>'discipline',p->>'meeting')`;
+const sourceSportSql = `athlete_source_sport_v5(h.provider,p->>'discipline',p->>'meeting')`;
 // Claimed profiles use their existing owner-controlled sport/result paths.
 const publicProfileSportsSql = `case when a.profile_visibility='public'
   and not exists(select 1 from athlete_account_links l where l.athlete_id=a.id)
-  then athlete_profile_sports_v2(a.profile_details) else array[]::text[] end`;
+  then athlete_profile_sports_v3(a.profile_details) else array[]::text[] end`;
 const visibleSourcePerformanceSql = `coalesce(p->>'profileExcluded','false')<>'true'
   and not exists (select 1 from athlete_profile_history_choices choice
     join athlete_account_links owner_link on owner_link.user_id=choice.user_id
@@ -58,7 +59,13 @@ export async function readAthleteDirectoryPage(
   // A literal match of the full query must contain its longest word. This
   // index prefilter preserves substring/cross-field matching; the final match
   // below uses only currently visible fields, so hidden attributes cannot leak.
-  const token = search.q?.split(/\s+/).sort((a, b) => b.length - a.length)[0];
+  // Count characters after the same canonical accent removal as the SQL fold;
+  // a decomposed accent must not turn a one-letter term into a trigram search.
+  const token = search.q
+    ?.normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .split(/\s+/)
+    .sort((a, b) => b.length - a.length)[0];
   const pattern = token && token.length >= 3 ? `%${token.replace(/[\\%_]/g, "\\$&")}%` : null;
   const parsedNumber = parseAthleteId(search.q);
   const athleteNumber =
@@ -77,17 +84,30 @@ export async function readAthleteDirectoryPage(
         union all
         (select h.athlete_id as id from athlete_source_histories h
           where h.published_at is not null
-            and athlete_history_sports_v4(h.provider,h.performances) @> array[$1]::text[] limit $2)
+            and athlete_history_sports_v5(h.provider,h.performances) @> array[$1]::text[] limit $2)
         union all
         (select a.id from athletes a where a.profile_visibility='public'
           and ${profileSportEvidencePredicateSql()}
-          and athlete_profile_sports_v2(a.profile_details) @> array[$1]::text[]
+          and athlete_profile_sports_v3(a.profile_details) @> array[$1]::text[]
           and not exists(select 1 from athlete_account_links l where l.athlete_id=a.id) limit $2)
       ) members limit $2`,
       [search.sport, probeLimit],
     );
     if (probe.length < probeLimit) sportCandidates = [...new Set(probe.map((row) => row.id))];
   }
+  // Search only aliases from the exact biography currently approved for public display.
+  // Raw source aliases can be private and must never become discovery evidence.
+  const fold = (value: string) =>
+    value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  const aliasQuery = fold(search.q?.trim() ?? "");
+  const aliasReviews = aliasQuery
+    ? athleteBiographyReviews
+        .filter((review) => review.alternateName?.some((alias) => fold(alias).includes(aliasQuery)))
+        .map((review) => ({ slug: review.slug, biography: review.paragraphs.join("\n\n") }))
+    : [];
   const values = [
     search.q || null,
     athleteNumber,
@@ -98,6 +118,7 @@ export async function readAthleteDirectoryPage(
     search.sport || null,
     sportCandidates,
     pageSize,
+    JSON.stringify(aliasReviews),
   ];
   const sourcePermission = `(not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
     or exists (select 1 from network_audit_log approval where approval.action='athlete.history_admin_published'
@@ -110,20 +131,33 @@ export async function readAthleteDirectoryPage(
           where l.athlete_id=a.id and hidden.result_id=r.id)
     ) or exists (
       select 1 from athlete_source_histories h where h.athlete_id=a.id and h.published_at is not null
-        and athlete_history_sports_v4(h.provider,h.performances) @> array[$7]::text[]
+        and athlete_history_sports_v5(h.provider,h.performances) @> array[$7]::text[]
         and ${sourcePermission}
         and exists (select 1 from jsonb_array_elements(h.performances) p
           where (${sourceSportSql})=$7 and ${visibleSourcePerformanceSql})
     ) or (${publicProfileSportsSql}) @> array[$7]::text[])`;
   const selectedJoin = `${pattern ? "join search_candidates selected on selected.id=a.id" : ""}
     ${sportCandidates !== null ? "join unnest($8::int[]) sport_member(id) on sport_member.id=a.id" : ""}`;
-  const candidateCte = `search_candidates as materialized (
+  const candidateCte = `published_alias_matches as materialized (
+    select a.id from athletes a
+    join jsonb_to_recordset($10::jsonb) reviewed(slug text, biography text)
+      on reviewed.slug=a.slug and reviewed.biography=a.bio
+    where a.profile_visibility='public' and a.bio<>''
+      and not exists(select 1 from athlete_account_links l where l.athlete_id=a.id)
+      and exists(select 1 from network_audit_log approval
+        where approval.action='athlete.biography_admin_published'
+          and approval.entity_type='athlete' and approval.entity_id=a.id::text
+          and approval.after_value->>'athleteId'=a.id::text
+          and approval.after_value->>'biography'=a.bio)
+  ), search_candidates as materialized (
+    select id from published_alias_matches
+    union
     select a.id from athletes a where $6::text is not null
       and (a.profile_visibility='public' or a.profile_type='Public figure')
-      and ${documentSql} like lower($6)
+      and ${documentSql} like athlete_directory_search_fold($6)
     union
     select a.id from athletes a join clubs c on c.id=a.club_id
-      where $6::text is not null and lower(c.name) like lower($6)
+      where $6::text is not null and athlete_directory_search_fold(c.name) like athlete_directory_search_fold($6)
         and (a.profile_visibility='public' or a.profile_type='Public figure')
     union
     select i.athlete_id from athlete_identifiers i where i.number=($2::text)::bigint and i.athlete_id is not null
@@ -132,7 +166,7 @@ export async function readAthleteDirectoryPage(
       where i.number=($2::text)::bigint and l.status='active'
   )`;
   const matches = `($1::text is null or (
-      (position(lower($1) in lower(concat_ws(' ',a.display_name,${clubSql},${citySql},${publicCountrySql},a.profile_roles)))>0
+      (a.id in (select id from published_alias_matches) or btrim(athlete_directory_search_fold($1))<>'' and position(athlete_directory_search_fold($1) in athlete_directory_search_fold(concat_ws(' ',a.display_name,${clubSql},${citySql},${publicCountrySql},a.profile_roles)))>0
         or ($2::text is not null and exists (select 1 from athlete_resolved_ids i where i.athlete_id=a.id
           and (i.athlete_number::text=$2 or i.source_number::text=$2))))))
     and ($3::text is null or ((${countrySql})=$3 and (${publicCountrySql})=$3))

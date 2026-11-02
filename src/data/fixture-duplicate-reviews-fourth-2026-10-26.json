@@ -1,0 +1,98 @@
+[
+  {
+    "duplicateSlug": "november-nightmare-8-marathons-in-8-days",
+    "canonicalSlug": "november-nightmare",
+    "date": "2026-11-01",
+    "duplicateEventId": 4375834,
+    "canonicalEventId": 3060938,
+    "duplicateDistances": ["Half", "Marathon", "10K"],
+    "retainedDistances": ["8mi", "16mi", "Marathon"],
+    "sourceUrl": "https://www.codrc.co.uk/e/the-november-nightmare-12273",
+    "checkedAt": "2026-10-26",
+    "note": "Same Telford programme. Add the organiser's 8-mile and 16-mile options before withholding the duplicate; its 10K and standard half-marathon labels are unsupported."
+  },
+  {
+    "duplicateSlug": "amica-insurance-seattle-marathon",
+    "canonicalSlug": "seattle-marathon",
+    "date": "2026-11-29",
+    "duplicateEventId": 3061265,
+    "canonicalEventId": 4166992,
+    "duplicateDistances": ["Marathon"],
+    "retainedDistances": ["Marathon"],
+    "sourceUrl": "https://www.seattlemarathon.org/marathon-and-half-marathon",
+    "checkedAt": "2026-10-26",
+    "note": "Retain the official Seattle event; same date and full-marathon course."
+  },
+  {
+    "duplicateSlug": "york-5k-series-august",
+    "canonicalSlug": "ea-runevents-even-splits-york-5k-series-york",
+    "date": "2026-11-13",
+    "duplicateEventId": 3061720,
+    "canonicalEventId": 3147979,
+    "duplicateDistances": ["5K"],
+    "retainedDistances": ["5K"],
+    "sourceUrl": "https://racebest.com/races/r4ag4",
+    "checkedAt": "2026-10-26",
+    "note": "Retain the York series, with the dated entry programme's Open and Super Sprint starts represented explicitly."
+  },
+  {
+    "duplicateSlug": "dead-sea-marathon",
+    "canonicalSlug": "dead-sea-marathon-israel",
+    "date": "2027-02-05",
+    "duplicateEventId": 3066368,
+    "canonicalEventId": 4104287,
+    "duplicateDistances": ["Marathon"],
+    "retainedDistances": ["Marathon"],
+    "sourceUrl": "https://deadsea.run/en/event/42km/",
+    "checkedAt": "2026-10-26",
+    "note": "Same Ein Bokek marathon. Retain the organiser-linked event and its location."
+  },
+  {
+    "duplicateSlug": "vancouver-international-marathon",
+    "canonicalSlug": "bmo-vancouver-marathon",
+    "date": "2027-05-02",
+    "duplicateEventId": 3066379,
+    "canonicalEventId": 3642557,
+    "duplicateDistances": ["Marathon"],
+    "retainedDistances": ["Marathon"],
+    "sourceUrl": "https://bmovanmarathon.ca/marathon",
+    "checkedAt": "2026-10-26",
+    "note": "Same Vancouver marathon; retain the official BMO event."
+  },
+  {
+    "duplicateSlug": "phuket-marathon",
+    "canonicalSlug": "laguna-phuket-marathon",
+    "date": "2027-06-13",
+    "duplicateEventId": 3066387,
+    "canonicalEventId": 3757295,
+    "duplicateDistances": ["Marathon"],
+    "retainedDistances": ["Marathon"],
+    "sourceUrl": "https://phuketmarathon.com/race-information/",
+    "checkedAt": "2026-10-26",
+    "note": "Same Laguna Phuket marathon on Sunday; Saturday races are separate."
+  },
+  {
+    "duplicateSlug": "detroit-marathon",
+    "canonicalSlug": "detroit-free-press-marathon",
+    "date": "2026-10-18",
+    "duplicateEventId": 3060293,
+    "canonicalEventId": 3580912,
+    "duplicateDistances": ["Marathon"],
+    "retainedDistances": ["Marathon"],
+    "sourceUrl": "https://www.freepmarathon.com/marathon/",
+    "checkedAt": "2026-10-26",
+    "note": "Same Detroit full marathon. Retain the official event and its wave schedule."
+  },
+  {
+    "duplicateSlug": "tui-palma-marathon-mallorca",
+    "canonicalSlug": "palma-de-mallorca-marathon-half-10k",
+    "date": "2026-10-18",
+    "duplicateEventId": 4229801,
+    "canonicalEventId": 3060974,
+    "duplicateDistances": ["Marathon"],
+    "retainedDistances": ["Half", "Marathon"],
+    "sourceUrl": "https://www.avaibooksports.com/inscripcion/tui-palma-marathon-mallorca-2026/",
+    "checkedAt": "2026-10-26",
+    "note": "Same Palma event confirmed by the organiser's 2026 entry service. Retain both existing half and full marathon options. Distance-specific clocks remain unverified."
+  }
+]

@@ -1,0 +1,797 @@
+{
+  "slug": "mervyn-sharp-english-channel",
+  "name": "Mervyn Sharp",
+  "country": "England",
+  "aliases": [
+    "Merv Sharp",
+    "Mervin Sharp"
+  ],
+  "highlight": "First swimmer to seven Channel crossings · King of the Channel, 1974–1975",
+  "biography": [
+    "Mervyn Sharp grew up beside the sea at Weymouth and turned a childhood enthusiasm for swimming into a sustained marathon career. He joined his local swimming club at seven and later played water polo as a goalkeeper. A meeting with coach Tom Watch in 1965 helped make the English Channel a practical ambition rather than a distant idea.",
+    "His first successful crossing came in 1967, from France to England, in eighteen hours thirty-four minutes. He returned repeatedly, completing six further crossings in the opposite direction. Two came in 1969, and his sequence culminated in July 1974 with a personal best of thirteen hours forty-two minutes. He became the first swimmer to reach seven successful Channel crossings and held the King of the Channel title in 1974–1975.",
+    "Sharp’s competition programme extended well beyond Dover. He represented England at the 1970 Windermere International, finishing fifth in the men’s championship and second among the English men. In 1971 and 1972 he raced on the Canadian professional circuit, including events at Lake St John and in Quebec. Coastal swims closer to home included routes around Weymouth, Swanage and Torbay.",
+    "His winter conditioning also involved amateur wrestling, in which he earned an Intermediate British Heavyweight silver medal. His enduring contribution to marathon swimming was recognised in the International Marathon Swimming Hall of Fame’s class of 2006."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Home swimming coast",
+      "value": "Weymouth, Dorset"
+    },
+    {
+      "label": "Coach",
+      "value": "Tom Watch"
+    },
+    {
+      "label": "First Channel crossing",
+      "value": "France to England, 1967, 18:34"
+    },
+    {
+      "label": "Lifetime Channel sequence",
+      "value": "Seven successful crossings between 1967 and 1974"
+    },
+    {
+      "label": "Channel title",
+      "value": "King of the Channel, 1974–1975"
+    },
+    {
+      "label": "Fastest Channel swim",
+      "value": "13:42, published swim date 18 July 1974"
+    },
+    {
+      "label": "England representative",
+      "value": "Fifth man at the 1970 Windermere International"
+    },
+    {
+      "label": "Hall of Fame",
+      "value": "Class of 2006; the CSA biography describes a May 2007 ceremony"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Channel crossing, France to England",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Sunday, 27 August 1967 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "18h 34m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "CS&PF publishes departure 01:00:00 and arrival 19:34:00, but gives only the year and no clock-zone basis. Dover.UK.com gives 27 August without identifying its date role. The clocks are retained here without attaching unverified phase dates.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "B. Bacon",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Channel Rover",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "H. Hubbard",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF historical record 442989 attributes ratification to CSA and names the pilot, boat and observer. Its F–E direction agrees with Dover.UK.com and the CSA career list; a sentence elsewhere in the CSA biography incorrectly describes the first swim as Dover to France. No original observer log was inspected."
+        },
+        {
+          "text": "CS&PF historical record: Mervyn Sharp, 1967, record 442989",
+          "url": "https://cspf.co.uk/swim/442989/mervyn-sharp-swim-in-1967"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover.UK.com: Mervyn Sharp, 27 August 1967",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1967-08-27/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel Swimming Association, King of the Channel: Mervyn Sharp",
+          "url": "https://www.kingofthechannel.com/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "sharp-1967"
+    },
+    {
+      "title": "Second of two successful swims in 1969",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "19h 41m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The inspected CSA individual record supplies the year and elapsed time, without a full calendar date or start/finish clocks.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2501 confirms England, 1969, England to France and 19:41. The CSA career biography lists another 1969 swim at 14:29; this entry identifies only the 19:41 swim and does not conflate them. Crew names were not verified."
+        },
+        {
+          "text": "Channel Swimming Association: Mervyn Sharp, 1969, 19:41",
+          "url": "https://www.channelswimmingassociation.com/swim/2501/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel Swimming Association, King of the Channel: Mervyn Sharp",
+          "url": "https://www.kingofthechannel.com/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "sharp-1969-1941"
+    },
+    {
+      "title": "Sixth Channel crossing",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "Sunday, 7 October 1973 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "15h 17m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Dover.UK.com supplies 7 October as the swim date without specifying departure or arrival. No clocks or crew names were verified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "The individual Dover.UK.com entry identifies a solo England-to-France swim, 15:17 and CSA as the organisation. CSA’s King of the Channel biography independently lists the 1973 completion and duration. This review did not locate an individual CSA result page or original observer report for this swim."
+        },
+        {
+          "text": "Dover.UK.com: Mervyn Sharp, 7 October 1973",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1973-10-07/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel Swimming Association, King of the Channel: Mervyn Sharp",
+          "url": "https://www.kingofthechannel.com/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum Channel Swimming archive: Mervyn Sharp biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sharp-mervyn"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "sharp-1973"
+    },
+    {
+      "title": "Seventh Channel crossing and personal best",
+      "lines": [
+        {
+          "text": "Ratification reported by source"
+        },
+        {
+          "text": "The completion took his total to seven, earning the King of the Channel title."
+        },
+        {
+          "text": "Thursday, 18 July 1974 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "13h 42m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The published date is a swim-record date, not an established departure or arrival date. No clocks or crew names were verified.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "Dover.UK.com’s individual record supplies 18 July 1974, 13:42, the solo route and CSA attribution. The CSA title biography confirms his seventh completion, duration and 1974–1975 title. This review did not inspect an original observer report or locate the individual CSA result page."
+        },
+        {
+          "text": "Dover.UK.com: Mervyn Sharp, 18 July 1974",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1974-07-18/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Channel Swimming Association, King of the Channel: Mervyn Sharp",
+          "url": "https://www.kingofthechannel.com/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Dover Museum Channel Swimming archive: Mervyn Sharp biography",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sharp-mervyn"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ],
+      "id": "sharp-1974"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "International Lake Windermere Championship",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 8 August 1970 (event date)"
+        },
+        {
+          "text": "Windermere, England"
+        },
+        {
+          "text": "Represented England and finished fifth in the men’s championship in 10h 7m 58s."
+        },
+        {
+          "text": "5th, men (second English man)",
+          "label": "Placing / category"
+        },
+        {
+          "text": "10h 7m 58s",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "The BLDSA annual report’s men’s results table, page 5, places Sharp fifth in 10:07:58 and second among the English men. Its page 36 season report dates the event to 8 August 1970. The earlier profile wording treated fifth as the overall placing across men and women."
+        },
+        {
+          "text": "Channel Swimming Association / King of the Channel: Mervyn Sharp",
+          "url": "https://www.kingofthechannel.com/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career biography; no exact day, distance or duration for the selected 1970 race.",
+          "label": "Limitations"
+        },
+        {
+          "text": "BLDSA • 1970 Windermere International, men’s results (PDF page 5)",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSA-Annual-Report-1970.pdf#page=5"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Men’s result table places Mervyn Sharp fifth in 10:07:58 and second among English men.",
+          "label": "Supports"
+        },
+        {
+          "text": "The organiser published separate men’s and women’s tables.",
+          "label": "Limitations"
+        },
+        {
+          "text": "BLDSA • Irish association season report (1970, PDF page 36)",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSA-Annual-Report-1970.pdf#page=36"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Irish association’s report dates the Windermere International to 8 August 1970.",
+          "label": "Supports"
+        },
+        {
+          "text": "Used for the event date. Results and placings follow the championship secretary’s own table on PDF page 5.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "mervyn-sharp-event-1-international-lake-windermere-championship"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Met Tom Watch",
+      "lines": [
+        {
+          "text": "1965"
+        },
+        {
+          "text": "The coach encouraged his ambition to swim the English Channel."
+        }
+      ]
+    },
+    {
+      "title": "First Channel success",
+      "lines": [
+        {
+          "text": "27 August 1967"
+        },
+        {
+          "text": "Published record dates his 18:34 France-to-England swim to this day."
+        }
+      ]
+    },
+    {
+      "title": "Two crossings in one year",
+      "lines": [
+        {
+          "text": "1969"
+        },
+        {
+          "text": "Completed England-to-France swims in 14:29 and 19:41."
+        }
+      ]
+    },
+    {
+      "title": "International representation",
+      "lines": [
+        {
+          "text": "1970"
+        },
+        {
+          "text": "Raced for England at Windermere and finished fifth in the men’s championship."
+        }
+      ]
+    },
+    {
+      "title": "Canadian professional circuit",
+      "lines": [
+        {
+          "text": "1971–1972"
+        },
+        {
+          "text": "Competed in marathon races including Lake St John and Quebec events."
+        }
+      ]
+    },
+    {
+      "title": "Seventh Channel crossing",
+      "lines": [
+        {
+          "text": "18 July 1974"
+        },
+        {
+          "text": "Recorded 13:42 and reached the unprecedented total of seven crossings."
+        }
+      ]
+    },
+    {
+      "title": "Hall of Fame class",
+      "lines": [
+        {
+          "text": "2006"
+        },
+        {
+          "text": "Named an International Marathon Swimming Hall of Fame honoree."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Mervyn Sharp?",
+      "value": "This profile includes 4 selected solo performances for Mervyn Sharp. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Mervyn Sharp’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Sunday, 27 August 1967. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Mervyn Sharp’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 18 hours and 34 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association, King of the Channel: Mervyn Sharp",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.kingofthechannel.com/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Career biography; no exact day, distance or duration for the selected 1970 race.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum Channel Swimming archive: Mervyn Sharp biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/sharp-mervyn"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association: Mervyn Sharp, 1969, 19:41",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2501/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record: Mervyn Sharp, 1967, record 442989",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/swim/442989/mervyn-sharp-swim-in-1967"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame: induction classes, 2006",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.imshof.org/honorees-by-induction-year"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Mervyn Sharp, 18 July 1974",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/1974-07-18/mervyn-sharp"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "BLDSA • 1970 Windermere International, men’s results (PDF page 5)",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSA-Annual-Report-1970.pdf#page=5"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Men’s result table places Mervyn Sharp fifth in 10:07:58 and second among English men.",
+          "label": "Supports"
+        },
+        {
+          "text": "The organiser published separate men’s and women’s tables.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "BLDSA • Irish association season report (1970, PDF page 36)",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSA-Annual-Report-1970.pdf#page=36"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Event date, 8 August 1970.",
+          "label": "Supports"
+        },
+        {
+          "text": "Used for the event date. Results and placings follow the championship secretary’s own table on PDF page 5.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Channel crossing, France to England",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 27 August 1967 (recorded swim date)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "18h 34m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "sharp-1967"
+    },
+    {
+      "title": "Second of two successful swims in 1969",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "1969 · exact day not recorded here"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "19h 41m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "sharp-1969-1941"
+    },
+    {
+      "title": "Sixth Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Sunday, 7 October 1973 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "15h 17m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "sharp-1973"
+    },
+    {
+      "title": "Seventh Channel crossing and personal best",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Thursday, 18 July 1974 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "13h 42m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratification reported by source · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "sharp-1974"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "International Lake Windermere Championship",
+      "lines": [
+        {
+          "text": "Open-water swimming · Race"
+        },
+        {
+          "text": "Saturday, 8 August 1970 (event date)"
+        },
+        {
+          "text": "Windermere, England"
+        },
+        {
+          "text": "Represented England and finished fifth in the men’s championship in 10h 7m 58s."
+        },
+        {
+          "text": "5th, men (second English man)",
+          "label": "Placing / category"
+        },
+        {
+          "text": "10h 7m 58s",
+          "label": "Published elapsed time"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "mervyn-sharp-event-1-international-lake-windermere-championship"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-17b1425b5f4eb990b243"
+}

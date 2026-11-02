@@ -14,7 +14,9 @@ export type {
   EntryOptionStatus,
   EntryOptionType,
 } from "./types";
+import { reviewedFixtureCountyRegion } from "./fixture-county-regions";
 import { legacyRaceGeography } from "./legacy-race-geography";
+import { reviewConfirmedDistances } from "./confirmed-distance-editions";
 import { imminentReviewedAdditions, reviewImminentEdition } from "./imminent-starts-2026-10-25";
 import { urgentReviewedAdditions, urgentReviewedSeriesOverrides, reviewUrgentEdition } from "./urgent-starts-followup-2026-10-25";
 import { thirdUrgentAdditions, thirdUrgentSeriesOverrides, reviewThirdUrgentEdition } from "./urgent-starts-third-2026-10-25";
@@ -92,6 +94,7 @@ import {
 import { verifiedUkEditions, verifiedUkSeries } from "./verified-races-uk";
 import { verifiedAllSportEditions, verifiedAllSportSeries } from "./verified-all-sport";
 import { verifiedGlobalEditions, verifiedGlobalSeries } from "./verified-global-fixtures";
+import { colombiaRaceEditions, colombiaRaceSeries, colombiaSeriesOverrides } from "./colombia-races";
 import { afghanistanRaceEditions, afghanistanRaceSeries } from "./afghanistan-races";
 import { albaniaRaceEditions, albaniaRaceSeries } from "./albania-races";
 import { westernBalkansRaceEditions, westernBalkansRaceSeries } from "./western-balkans-races";
@@ -374,6 +377,7 @@ const coreNameKeys = new Set(coreSeries.map((series) => normName(series.name)));
 const usedSlugs = new Set(coreSeries.map((series) => series.slug));
 const extraSeries: Series[] = [];
 for (const series of [
+  ...colombiaRaceSeries,
   ...nextUrgentSeries,
   ...(raceCollectionSeries as Series[]),
   ...(marathonDesSablesSeries as Series[]),
@@ -473,9 +477,11 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
   ...urgentReviewedSeriesOverrides[series.slug],
   ...nextUrgentSeriesOverrides[series.slug],
   ...thirdUrgentSeriesOverrides[series.slug],
-}));
+  ...colombiaSeriesOverrides[series.slug],
+})).map(reviewedFixtureCountyRegion);
 
 const mergedEditions = [
+  ...colombiaRaceEditions,
   ...imminentReviewedAdditions,
   ...urgentReviewedAdditions,
   ...nextUrgentAdditions,
@@ -654,7 +660,7 @@ export const editions: Edition[] = (() => {
     pushEdition(edition);
   }
 
-  return unique.map(reviewParkrunEdition).map(reviewImminentEdition).map(reviewUrgentEdition).map(reviewNextUrgentEdition).map(reviewThirdUrgentEdition);
+  return reviewConfirmedDistances(unique.map(reviewParkrunEdition).map(reviewImminentEdition).map(reviewUrgentEdition).map(reviewNextUrgentEdition).map(reviewThirdUrgentEdition), new Set(seriesList.map((series) => series.slug)));
 })();
 
 export { raceGroupDefinitions, raceGroupMemberships };

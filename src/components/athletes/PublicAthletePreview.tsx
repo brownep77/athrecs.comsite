@@ -1,6 +1,8 @@
+import { ChannelNativeRecord, ChannelFlags } from "../swimming/ChannelArchive";
 import { isParkrunResult, PARKRUN_TIMING_LABEL } from "@/lib/athrecs/parkrun-timing";
 import { SportBadge } from "@/components/races/EventBadges";
 import { Link } from "@tanstack/react-router";
+import { AthleteProfileStatuses } from "./AthleteProfileStatuses";
 import type { PublicAthletePreview as Preview } from "@/lib/athrecs/public-athlete-preview";
 import { CompactResultsTable } from "./CompactResultsTable";
 import { PublicResultLicenceCredits } from "./PublicResultLicenceCredits";
@@ -11,7 +13,7 @@ import { ProfileDetails } from "./ProfileDetails";
 import { Badge } from "@/components/ui/badge";
 import { ShareProfileButton } from "./ShareProfileButton";
 import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
-import { AthleteBusinessLink } from "./AthleteBusinessLink";
+import { AthleteBiography } from "./AthleteBiography";
 import { AchievementSummary } from "./AchievementSummary";
 import { AchievementVerification } from "./AchievementVerification";
 import { AnzChampionshipMedals } from "./AnzChampionshipMedals";
@@ -39,6 +41,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
         className="space-y-4 rounded-xl border border-border bg-surface p-5 sm:p-6"
       >
         <h1 className="font-display text-3xl font-semibold sm:text-4xl">{profile.displayName}</h1>
+        <AthleteProfileStatuses roles={profile.profileStatuses} />
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={profile.athleteNumber} />
           {profile.club ? (
@@ -54,7 +57,14 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
               <span className="text-sm text-muted">{profile.club}</span>
             )
           ) : null}
-          {profile.nationality ? <CountryFlag country={profile.nationality} showName /> : null}
+          {profile.channelArchive ? (
+            <span className="inline-flex items-center gap-2">
+              <ChannelFlags flags={profile.channelArchive.flags} />
+              {profile.nationality}
+            </span>
+          ) : profile.nationality ? (
+            <CountryFlag country={profile.nationality} showName />
+          ) : null}
           <span className="text-xs text-muted">
             {profile.sports.length > 1 ? "Sports:" : "Sport:"}
           </span>
@@ -68,23 +78,18 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             nationality={profile.nationality ?? undefined}
           />
         ) : null}
-        {biography.length ? (
-          <div className="space-y-2">
-            <h2 className="text-sm font-semibold">Biography</h2>
-            {biography.map((paragraph, index) => (
-              <p key={index} className="text-sm leading-relaxed text-muted">
-                {paragraph}
-              </p>
-            ))}
-            <AthleteBusinessLink slug={profile.slug} />
-          </div>
-        ) : null}
+        <AthleteBiography
+          slug={profile.slug}
+          paragraphs={biography}
+          presentation={profile.biographyPresentation}
+        />
         <ShareProfileButton
           path={`/athletes/${encodeURIComponent(profile.slug)}`}
           title={profile.displayName}
           compact
         />
       </section>
+      {profile.channelArchive ? <ChannelNativeRecord record={profile.channelArchive} /> : null}
       <div id="profile-achievements" className="scroll-mt-24">
         <AchievementSummary summary={profile.achievements ?? buildProfileAchievementSummary([])} />
       </div>
@@ -186,7 +191,11 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             />
           </>
         ) : (
-          <p className="text-sm text-muted">No published results yet.</p>
+          <p className="text-sm text-muted">
+            {profile.channelArchive
+              ? "Selected swimming performances appear in the English Channel record above."
+              : "No published results yet."}
+          </p>
         )}
         {pages > 1 ? (
           <nav

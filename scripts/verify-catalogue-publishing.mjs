@@ -122,6 +122,24 @@ const {
   verifyGitHubActionsOidcToken,
 } = await import("../src/lib/athrecs/github-actions-oidc.server.ts");
 
+const { automatedStartTimeError } = await import(
+  "../src/lib/athrecs/catalogue-automation-policy.ts"
+);
+const automaticSource = "athrecs-holding:delta:" + "a".repeat(24);
+for (const proposed of [undefined, "", "09:30", "10:00:01"]) {
+  assert.match(automatedStartTimeError(automaticSource, "10:00:00", proposed), /cannot clear or replace/);
+}
+assert.equal(automatedStartTimeError(automaticSource, "10:00:00", "10:00"), null);
+assert.equal(automatedStartTimeError(automaticSource, "00:00:00", "00:00"), null);
+assert.equal(automatedStartTimeError(automaticSource, null, "10:00"), null);
+assert.equal(automatedStartTimeError(automaticSource, null, undefined), null);
+assert.equal(automatedStartTimeError("staff:reviewed-correction", "10:00:00", "09:30"), null);
+const publishing = await readFile("src/lib/athrecs/catalogue-publishing.server.ts", "utf8");
+assert.match(publishing.slice(publishing.indexOf("export async function validateCatalogueBatch")), /automatedStartTimeError\(/);
+const publication = publishing.slice(publishing.indexOf("export async function publishCatalogueBatch"));
+assert(publication.indexOf("automatedStartTimeError(") > publication.indexOf("beforeEditions.set("));
+assert(publication.indexOf("automatedStartTimeError(") < publication.indexOf("insert into catalogue_revisions"));
+
 const now = 1_787_557_800;
 const { publicKey, privateKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const jwk = publicKey.export({ format: "jwk" });
@@ -180,4 +198,42 @@ await assert.rejects(
   /workflow (?:ref is|and audience are) not trusted/,
 );
 
-console.log("Catalogue publishing verification passed, including review-only GitHub Actions OIDC staging.");
+const weeklyClaims = {
+  workflow: "Weekly UK and Ireland race expansion",
+  workflow_ref:
+    "brownep77/athrecs-holding/.github/workflows/weekly-uk-ireland-races.yml@refs/heads/main",
+};
+for (const event_name of ["schedule", "workflow_dispatch", "push"]) {
+  const weekly = await verifyGitHubActionsOidcToken(
+    tokenFor({ ...weeklyClaims, event_name }),
+    { now, jwks: [jwk] },
+  );
+  assert.equal(weekly.workflow, weeklyClaims.workflow);
+  assert.equal(weekly.aud, ATHRECS_CATALOGUE_OIDC_AUDIENCE);
+}
+for (const overrides of [
+  { aud: "runrecs-catalogue" },
+  { aud: "untrusted-catalogue" },
+  { workflow: "Refresh Athrecs race data" },
+  { workflow_ref: weeklyClaims.workflow_ref.replace("main", "untrusted") },
+  { ref: "refs/heads/untrusted" },
+  { repository: "other/athrecs-holding" },
+  { repository_id: "1" },
+  { repository_owner_id: "1" },
+  { repository_visibility: "public" },
+  { runner_environment: "self-hosted" },
+  { event_name: "pull_request" },
+  { event_name: "pull_request_target" },
+  { exp: now - 1 },
+]) {
+  await assert.rejects(
+    verifyGitHubActionsOidcToken(tokenFor({ ...weeklyClaims, ...overrides }), {
+      now,
+      jwks: [jwk],
+    }),
+    /not trusted|expired/,
+  );
+}
+
+console.log("Catalogue publishing verification passed, including both review-only GitHub Actions OIDC workflows.");
+

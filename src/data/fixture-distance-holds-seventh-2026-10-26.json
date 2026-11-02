@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "anglesey-trail-half-marathon",
+    "date": "2026-11-01",
+    "distance": "5K",
+    "eventId": 3059907,
+    "editionId": 108804359,
+    "sourceUrl": "https://alwaysaimhighevents.com/content/files/Anglesey-Trail-Final-Instructions-2026.pdf",
+    "checkedAt": "2026-10-26",
+    "note": "The dated organiser programme contains only the half marathon and 10K. This 5K is unsupported; preserve the original for review."
+  },
+  {
+    "slug": "attack-of-the-zombie-cows",
+    "date": "2026-10-31",
+    "distance": "3.28mi",
+    "eventId": 3059919,
+    "editionId": 108804545,
+    "sourceUrl": "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    "checkedAt": "2026-10-26",
+    "note": "One eight-hour challenge, not five fixed-distance races. The 3.28 miles is a weather-dependent lap, not the event total. Retain all source editions privately."
+  },
+  {
+    "slug": "attack-of-the-zombie-cows",
+    "date": "2026-10-31",
+    "distance": "10K",
+    "eventId": 3059919,
+    "editionId": 108804543,
+    "sourceUrl": "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    "checkedAt": "2026-10-26",
+    "note": "One eight-hour challenge, not five fixed-distance races. The 3.28 miles is a weather-dependent lap, not the event total. Retain all source editions privately."
+  },
+  {
+    "slug": "attack-of-the-zombie-cows",
+    "date": "2026-10-31",
+    "distance": "10mi",
+    "eventId": 3059919,
+    "editionId": 108804544,
+    "sourceUrl": "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    "checkedAt": "2026-10-26",
+    "note": "One eight-hour challenge, not five fixed-distance races. The 3.28 miles is a weather-dependent lap, not the event total. Retain all source editions privately."
+  },
+  {
+    "slug": "attack-of-the-zombie-cows",
+    "date": "2026-10-31",
+    "distance": "Half",
+    "eventId": 3059919,
+    "editionId": 108804542,
+    "sourceUrl": "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    "checkedAt": "2026-10-26",
+    "note": "One eight-hour challenge, not five fixed-distance races. The 3.28 miles is a weather-dependent lap, not the event total. Retain all source editions privately."
+  },
+  {
+    "slug": "attack-of-the-zombie-cows",
+    "date": "2026-10-31",
+    "distance": "Marathon",
+    "eventId": 3059919,
+    "editionId": 71613796,
+    "sourceUrl": "https://runbelievablechallenges.co.uk/attack-of-the-zombie-cows-1",
+    "checkedAt": "2026-10-26",
+    "note": "One eight-hour challenge, not five fixed-distance races. The 3.28 miles is a weather-dependent lap, not the event total. Retain all source editions privately."
+  },
+  {
+    "slug": "running-gp-croft-motor-circuit-november",
+    "date": "2026-11-01",
+    "distance": "16mi",
+    "eventId": 4375811,
+    "editionId": 108804366,
+    "sourceUrl": "https://www.runninggrandprix.com/event/croft-running-festival-november-2026",
+    "checkedAt": "2026-10-26",
+    "note": "The organiser advertises a 26.2 kilometre metric marathon, not a 16-mile race. Add its exact confirmed distance; preserve the source row."
+  },
+  {
+    "slug": "shepshed-7",
+    "date": "2026-11-01",
+    "distance": "5K",
+    "eventId": 4375838,
+    "editionId": 108804455,
+    "sourceUrl": "https://shepshedrc.org.uk/wp-content/uploads/2026/09/Shepshed_7_2026_Entrant_Information-1.pdf",
+    "checkedAt": "2026-10-26",
+    "note": "The current final instructions advertise seven miles and a one-mile fun run, not a 5K."
+  },
+  {
+    "slug": "brutal-halloween",
+    "date": "2026-10-31",
+    "distance": "5K",
+    "eventId": 4375860,
+    "editionId": 108804547,
+    "sourceUrl": "https://racesignup.co.uk/brutal-halloween-hogmoor",
+    "checkedAt": "2026-10-26",
+    "note": "The dated authorised programme advertises 3.3K junior, 6.6K, 10K and 6.6K canicross; there is no 5K."
+  }
+]

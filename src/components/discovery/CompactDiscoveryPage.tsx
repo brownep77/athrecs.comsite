@@ -1,4 +1,8 @@
 import { useState, type FormEvent } from "react";
+import { HomeUpdatesFeed } from "@/components/editorial/HomeUpdatesFeed";
+import type { HomeSportUpdate } from "@/lib/athrecs/home-updates";
+import type { EditorialArticle } from "@/lib/athrecs/editorial";
+import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -9,6 +13,7 @@ import {
   ChevronDown,
   Handshake,
   MapPin,
+  Newspaper,
   Search,
   Trophy,
   Tv,
@@ -27,6 +32,7 @@ import {
 } from "@/lib/athrecs/sport-pages";
 import type { SportFixture } from "@/lib/athrecs/sport-fixtures.server";
 import type { SportBroadcast } from "@/data/sport-broadcasts";
+import { DiamondLeagueGuide } from "./DiamondLeagueGuide";
 import { CompactFixtureRow } from "./CompactFixtureRow";
 import { DiscoveryCountryList } from "./DiscoveryCountryList";
 import { useSavedFixtures } from "./useSavedFixtures";
@@ -47,6 +53,9 @@ type Props = {
   page: number;
   hasMore: boolean;
   broadcasts?: SportBroadcast[];
+  updates?: HomeSportUpdate[];
+  updatesUnavailable?: boolean;
+  news?: Pick<EditorialArticle, "slug" | "title" | "standfirst" | "date" | "displayDate">[];
 };
 
 const sideLink =
@@ -78,6 +87,9 @@ export function CompactDiscoveryPage({
   page,
   hasMore,
   broadcasts = [],
+  updates,
+  updatesUnavailable = false,
+  news = [],
 }: Props) {
   const theme = useHomepageTheme();
   const currentColours = theme === "colourful";
@@ -90,6 +102,8 @@ export function CompactDiscoveryPage({
   const hasFilters = Boolean(search.q || search.country || search.month || search.distance);
   const resultPath = sport ? `/results?category=${sport.slug}` : "/results?category=all-running";
   const directoryPath = `/clubs?sport=${encodeURIComponent(sportName)}`;
+  const editorialSearch = sport ? { sport: sport.slug } : {};
+  const editorialQuery = sport ? `?sport=${sport.slug}` : "";
   const options = {
     countries:
       search.country && !countries.includes(search.country)
@@ -125,12 +139,14 @@ export function CompactDiscoveryPage({
     >
       <nav
         aria-label={`${sportName} sections`}
-        className={`overflow-x-auto px-2 sm:px-5 lg:px-7 ${currentColours ? "bg-[#075667] text-white" : "bg-primary text-primary-fg"}`}
+        className={`px-2 sm:px-5 lg:px-7 ${currentColours ? "bg-[#075667] text-white" : "bg-primary text-primary-fg"}`}
       >
-        <ul className="flex min-w-max items-stretch gap-1">
+        <ul className="flex flex-wrap items-stretch gap-x-1">
           {[
             { label: "Fixtures", path: "#fixtures", active: true },
             { label: "Results", path: resultPath },
+            { label: "News", path: `/news${editorialQuery}` },
+            { label: "Race Reports", path: `/race-reports${editorialQuery}` },
             { label: "Athletes", path: `/athletes?sport=${encodeURIComponent(sportName)}` },
             { label: "Clubs", path: directoryPath },
             {
@@ -151,6 +167,67 @@ export function CompactDiscoveryPage({
           ))}
         </ul>
       </nav>
+      {!sport && news.length > 0 ? (
+        <section
+          id="homepage-news"
+          aria-labelledby="homepage-news-heading"
+          className="scroll-mt-44 border-b border-border bg-surface px-3 py-5 sm:px-5 lg:px-6 2xl:px-8"
+        >
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <h2
+              id="homepage-news-heading"
+              className="flex items-center gap-2 font-display text-2xl font-semibold"
+            >
+              <Newspaper className="size-6 text-accent" aria-hidden="true" />
+              Latest news
+            </h2>
+            <div className="flex flex-wrap gap-x-5">
+              <Link to="/news" search={{}} className={actionLink}>
+                All news <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+              <Link to="/race-reports" search={{}} className={actionLink}>
+                Race reports
+              </Link>
+              {updates ? (
+                <a href="#sport-updates" className={actionLink}>
+                  Sport & regional updates
+                </a>
+              ) : null}
+            </div>
+          </div>
+          <ul className="grid gap-3 md:grid-cols-3">
+            {news.map((article) => (
+              <li key={article.slug} className="min-w-0">
+                <article className="flex h-full flex-col rounded-lg border border-border bg-accent-soft/30 p-4 sm:p-5">
+                  <time dateTime={article.date} className="text-xs font-semibold text-accent">
+                    {article.displayDate}
+                  </time>
+                  <h3 className="mt-2 font-display text-xl font-semibold leading-snug">
+                    <Link
+                      to="/news/$slug"
+                      params={{ slug: article.slug }}
+                      className="text-fg no-underline hover:text-accent"
+                    >
+                      {article.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">
+                    {article.standfirst}
+                  </p>
+                  <Link
+                    to="/news/$slug"
+                    params={{ slug: article.slug }}
+                    aria-label={`Read ${article.title}`}
+                    className={`${actionLink} mt-auto pt-3`}
+                  >
+                    Read story <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
       <div
         className={`grid items-start gap-5 px-3 py-5 sm:px-5 lg:grid-cols-[190px_minmax(0,1fr)] lg:px-6 xl:grid-cols-[205px_minmax(0,1fr)_245px] xl:gap-6 2xl:px-8 ${currentColours ? "bg-[#f5f8f9]" : "bg-bg"}`}
       >
@@ -284,7 +361,10 @@ export function CompactDiscoveryPage({
                 ? (disciplineIntros[sport.slug] ?? sportGuideText(sport.sport).intro)
                 : "Your next start line, all in one place. Find races, compare dates and save your favourites."}
             </p>
+            <ChatPrompt kind="race" className="mt-3" />
           </header>
+
+          {sport?.slug === "track-and-field" ? <DiamondLeagueGuide /> : null}
 
           <section id="fixtures" className="scroll-mt-44" aria-labelledby="fixtures-heading">
             <h2 id="fixtures-heading" className="sr-only">
@@ -298,7 +378,20 @@ export function CompactDiscoveryPage({
               key={`${pathname}-${JSON.stringify(search)}`}
               className="mb-4 space-y-3"
             >
-              {search.q && <input type="hidden" name="q" value={search.q} />}
+              <label
+                className="block space-y-1.5 text-xs font-semibold"
+                htmlFor="compact-location-search"
+              >
+                <span>Race, town, county or region</span>
+                <input
+                  id="compact-location-search"
+                  name="q"
+                  type="search"
+                  defaultValue={search.q ?? ""}
+                  placeholder="Try Norfolk, Leinster or California"
+                  className={`${field} w-full`}
+                />
+              </label>
               <div className="grid grid-cols-2 items-end gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]">
                 <label
                   className="col-span-2 space-y-1.5 text-xs font-semibold sm:col-span-1"
@@ -441,6 +534,8 @@ export function CompactDiscoveryPage({
             )}
           </section>
 
+          {updates ? <HomeUpdatesFeed updates={updates} unavailable={updatesUnavailable} /> : null}
+
           {running && (
             <section
               className="flex flex-wrap items-center gap-3 rounded-lg border border-accent/20 bg-accent-soft/60 p-4"
@@ -518,7 +613,11 @@ export function CompactDiscoveryPage({
                 <Tv className="size-4 text-accent" aria-hidden="true" />
                 TV & live streams
               </h2>
-              {broadcasts.length ? (
+              {sport.slug === "track-and-field" ? (
+                <a href="#diamond-league" className={actionLink}>
+                  Diamond League fixtures & TV by country
+                </a>
+              ) : broadcasts.length ? (
                 <div className="mt-2 divide-y divide-border">
                   {broadcasts.map((broadcast) => (
                     <article key={broadcast.id} className="py-3">
@@ -556,6 +655,44 @@ export function CompactDiscoveryPage({
         </div>
 
         <aside aria-label="Your AthRecs" className="space-y-4 lg:col-start-2 xl:col-start-auto">
+          <section
+            className="rounded-lg border border-border bg-surface p-4"
+            aria-labelledby="discovery-stories-heading"
+          >
+            <h2
+              id="discovery-stories-heading"
+              className="flex items-center gap-2 text-sm font-bold"
+            >
+              <Newspaper className="size-5 shrink-0 text-accent" aria-hidden="true" />
+              News & race reports
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              Sporting news, event announcements and stories from the finish line.
+            </p>
+            <div className="mt-2 flex flex-col items-start">
+              <Link
+                to="/news/$slug"
+                params={{ slug: "new-york-city-marathon-2026-preview" }}
+                className={actionLink}
+              >
+                New York Marathon 2026 preview
+                <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+              </Link>
+              {updates ? (
+                <a href="#sport-updates" className={actionLink}>
+                  Sport & regional updates
+                </a>
+              ) : null}
+              <Link to="/news" search={editorialSearch} className={actionLink}>
+                Browse news
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+              <Link to="/race-reports" search={editorialSearch} className={actionLink}>
+                Read race reports
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </section>
           <section className="rounded-lg border border-border bg-surface p-4">
             <h2 className="flex items-center gap-2 text-sm font-bold">
               <UserRound className="size-5 text-accent" aria-hidden="true" />

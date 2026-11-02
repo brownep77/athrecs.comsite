@@ -1,0 +1,3595 @@
+[
+  {
+    "path": "/races/utmb-world-series-desertrats",
+    "url": "https://www.athrecs.com/races/utmb-world-series-desertrats",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/utmb-world-series-desertrats",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Desert RATS Trail Running Festival by UTMB",
+        "description": "Desert RATS Trail Running Festival by UTMB is a running event in Fruita, Colorado, United States. Recorded disciplines include 100K, 20K, 50K, Ultra. The listed surface is trail. The next listed date is Saturday, 10 April 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/utmb-world-series-desertrats",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-10",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Fruita, Colorado, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Fruita, Colorado",
+            "addressRegion": "Fruita, Colorado",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/bromley-10k",
+    "url": "https://www.athrecs.com/races/bromley-10k",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/bromley-10k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Bromley 10K",
+        "description": "Bromley 10K is a running event in Kent, South of England, Norman Park Athletics Track, Bromley, England. Recorded disciplines include 10K. The listed surface is road. The next listed date is Sunday, 31 January 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/bromley-10k",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-01-31T10:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Kent, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kent",
+            "addressRegion": "South of England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/dsw-bruggenloop-rotterdam",
+    "url": "https://www.athrecs.com/races/dsw-bruggenloop-rotterdam",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dsw-bruggenloop-rotterdam",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "DSW Bruggenloop Rotterdam",
+        "description": "DSW Bruggenloop Rotterdam is a running event in Rotterdam, South Holland, Rotterdam road courses, Netherlands. Recorded disciplines include 15K. The listed surface is road. The listed organiser is Golazo Sports. The next listed date is Sunday, 13 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/dsw-bruggenloop-rotterdam",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-13",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Rotterdam, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Rotterdam",
+            "addressRegion": "South Holland",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Golazo Sports"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/newcastle-town-moor-half-marathon-march-2027",
+    "url": "https://www.athrecs.com/races/newcastle-town-moor-half-marathon-march-2027",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/newcastle-town-moor-half-marathon-march-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Newcastle Town Moor Half Marathon, 10K & 5K \u2014 March 2027",
+        "description": "Newcastle Town Moor Half Marathon, 10K & 5K \u2014 March 2027 is a running event in Newcastle upon Tyne, Tyne and Wear, Exhibition Park and Town Moor, England. Recorded disciplines include 10K, 5K, half marathon. The listed surface is road. The listed organiser is RunThrough Events. The next listed date is Sunday, 21 March 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/newcastle-town-moor-half-marathon-march-2027",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-03-21T09:30+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Newcastle upon Tyne, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Newcastle upon Tyne",
+            "addressRegion": "Tyne and Wear",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "RunThrough Events"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-march-2027",
+            "price": 35.7,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/new-york-city-marathon",
+    "url": "https://www.athrecs.com/races/new-york-city-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/new-york-city-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "New York City Marathon",
+        "description": "New York City Marathon is a running event in New York, Staten Island, United States. Recorded disciplines include Marathon. The listed surface is road. The next listed date is Sunday, 1 November 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 1991 to 2025. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/new-york-city-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-01",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "New York, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "New York",
+            "addressRegion": "New York",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/wimbledon-parkrun",
+    "url": "https://www.athrecs.com/races/wimbledon-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wimbledon-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Wimbledon Common parkrun",
+        "description": "Wimbledon Common parkrun is a parkrun event in Wimbledon Common, Greater London, England. Recorded disciplines include 5K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/wimbledon-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31T09:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Wimbledon Common, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wimbledon Common",
+            "addressRegion": "Greater London",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/battersea-park-10k-half-marathon-august",
+    "url": "https://www.athrecs.com/races/battersea-park-10k-half-marathon-august",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/battersea-park-10k-half-marathon-august",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Battersea Park 10K & Half Marathon",
+        "description": "Battersea Park 10K & Half Marathon is a running event in London, South of England, Battersea Park, England. Recorded disciplines include 10K, 5K, half marathon. The listed surface is road. The listed organiser is RunThrough. The next listed date is Saturday, 21 November 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/battersea-park-10k-half-marathon-august",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-21T11:11+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "South of England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "RunThrough"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/horspath-parkrun",
+    "url": "https://www.athrecs.com/races/horspath-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/horspath-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Horspath parkrun",
+        "description": "Horspath parkrun is a parkrun event in Horspath, Oxfordshire, Horspath Sports Ground & Athletic Track, England. Recorded disciplines include 5K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/horspath-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31T09:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Horspath, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Horspath",
+            "addressRegion": "Oxfordshire",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/cheadlehulme-parkrun",
+    "url": "https://www.athrecs.com/races/cheadlehulme-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/cheadlehulme-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Cheadle Hulme parkrun",
+        "description": "Cheadle Hulme parkrun is a parkrun event in Cheadle, Greater Manchester, Bruntwood Park, England. Recorded disciplines include 5K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/cheadlehulme-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31T09:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Cheadle, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cheadle",
+            "addressRegion": "Greater Manchester",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/wisbech-juniors-parkrun",
+    "url": "https://www.athrecs.com/races/wisbech-juniors-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wisbech-juniors-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Wisbech junior parkrun",
+        "description": "Wisbech junior parkrun is a parkrun event in Wisbech juniors, Cambridgeshire, Wisbech Park, England. Recorded disciplines include 2K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Sunday, 1 November 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/wisbech-juniors-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-01T09:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Wisbech juniors, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wisbech juniors",
+            "addressRegion": "Cambridgeshire",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/jordanstown-juniors-parkrun",
+    "url": "https://www.athrecs.com/races/jordanstown-juniors-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/jordanstown-juniors-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Jordanstown junior parkrun",
+        "description": "Jordanstown junior parkrun is a parkrun event in Jordanstown Campus, Belfast, Ulster University, Northern Ireland. Recorded disciplines include 2K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Sunday, 1 November 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/jordanstown-juniors-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-01T09:30+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Jordanstown Campus, Northern Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Jordanstown Campus",
+            "addressRegion": "Belfast",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/philipspark-parkrun",
+    "url": "https://www.athrecs.com/races/philipspark-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/philipspark-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Philips Park parkrun",
+        "description": "Philips Park parkrun is a parkrun event in Philips Park, Greater Manchester, England. Recorded disciplines include 5K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/philipspark-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31T09:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Philips Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Philips Park",
+            "addressRegion": "Greater Manchester",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/results/zugspitz-ultra-trail-by-utmb-2026-06-18-107k-109238558",
+    "url": "https://www.athrecs.com/results/zugspitz-ultra-trail-by-utmb-2026-06-18-107k-109238558",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/results/zugspitz-ultra-trail-by-utmb-2026-06-18-107k-109238558",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac",
+    "url": "https://www.athrecs.com/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Wirral Primary Schools Cross Country Series Supported by Wirral AC",
+        "description": "Wirral Primary Schools Cross Country Series Supported by Wirral AC is a running event in Arrowe Park, Various venues, England. Recorded disciplines include Cross Country. The listed surface is cross country. The next listed date is Monday, 8 March 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-03-08",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Arrowe Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Arrowe Park",
+            "addressRegion": "England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/adidas-10k-paris",
+    "url": "https://www.athrecs.com/races/adidas-10k-paris",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/adidas-10k-paris",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "adidas 10K Paris",
+        "description": "adidas 10K Paris is a running event in Paris, \u00cele-de-France, Central Paris, France. Recorded disciplines include 10K. The listed surface is road. The listed organiser is adidas 10K Paris. The next listed date is Sunday, 23 May 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/adidas-10k-paris",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-23",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Paris, France",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Paris",
+            "addressRegion": "\u00cele-de-France",
+            "addressCountry": "FR"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "adidas 10K Paris"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/boston-marathon",
+    "url": "https://www.athrecs.com/races/boston-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/boston-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Boston Marathon",
+        "description": "Boston Marathon is a running event in Boston, Massachusetts, Hopkinton to Boston, United States. Recorded disciplines include Marathon. The listed surface is road. The listed organiser is Boston Athletic Association. The next listed date is Monday, 19 April 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 1992 to 2022. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/boston-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-19T09:00-04:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Boston, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Boston",
+            "addressRegion": "Massachusetts",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Boston Athletic Association"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/dream-finders-homes-mother-s-day-5k",
+    "url": "https://www.athrecs.com/races/dream-finders-homes-mother-s-day-5k",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dream-finders-homes-mother-s-day-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Dream Finders Homes Mother's Day 5K",
+        "description": "Dream Finders Homes Mother's Day 5K is a running event in Clermont, Florida, 1900 Don Wickham Dr, United States. Recorded disciplines include 5K. The listed surface is unspecified. The listed organiser is Florida Running Company. The next listed date is Sunday, 9 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/dream-finders-homes-mother-s-day-5k",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-09",
+        "endDate": "2027-05-09",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Clermont, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Clermont",
+            "addressRegion": "Florida",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Florida Running Company"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/cures-for-the-colors-glow-run",
+    "url": "https://www.athrecs.com/races/cures-for-the-colors-glow-run",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/cures-for-the-colors-glow-run",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Cures for the Colors Glow Run",
+        "description": "Cures for the Colors Glow Run is a running event in Goldsboro, North Carolina, 3000 Wayne Memorial Drive, United States. Recorded disciplines include 1mi, 5K. The listed surface is unspecified. The next listed date is Saturday, 7 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/cures-for-the-colors-glow-run",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-07T17:30-05:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Goldsboro, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Goldsboro",
+            "addressRegion": "North Carolina",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/south-west-coast-50-ultra-challenge",
+    "url": "https://www.athrecs.com/races/south-west-coast-50-ultra-challenge",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/south-west-coast-50-ultra-challenge",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "South West Coast 50 Ultra Challenge",
+        "description": "South West Coast 50 Ultra Challenge is a running event in Dunster, Somerset, England. Recorded disciplines include 10K, 25K, 50K. The listed surface is trail. The listed organiser is Action Challenge. The next listed date is Saturday, 24 July 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/south-west-coast-50-ultra-challenge",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-07-24T06:45+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Dunster, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dunster",
+            "addressRegion": "Somerset",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Action Challenge"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/utmb-world-series-saint-jacques",
+    "url": "https://www.athrecs.com/races/utmb-world-series-saint-jacques",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/utmb-world-series-saint-jacques",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Trail du Saint Jacques by UTMB",
+        "description": "Trail du Saint Jacques by UTMB is a running event in Le Puy en Velay, France. Recorded disciplines include 100K, 100M, 20K, 50K, 88K, Ultra. The listed surface is trail. The next listed date is Friday, 18 June 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/utmb-world-series-saint-jacques",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-06-18",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Le Puy en Velay, France",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Le Puy en Velay",
+            "addressRegion": "Le Puy en Velay",
+            "addressCountry": "FR"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/aldermankneeshaw-juniors-parkrun",
+    "url": "https://www.athrecs.com/races/aldermankneeshaw-juniors-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/aldermankneeshaw-juniors-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Alderman Kneeshaw junior parkrun",
+        "description": "Alderman Kneeshaw junior parkrun is a parkrun event in Alderman Kneeshaw juniors, East Riding of Yorkshire, Alderman Kneeshaw Recreation Ground, England. Recorded disciplines include 2K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Sunday, 1 November 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/aldermankneeshaw-juniors-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-01T09:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Alderman Kneeshaw juniors, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Alderman Kneeshaw juniors",
+            "addressRegion": "East Riding of Yorkshire",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/corre-por-los-bomberos-5k",
+    "url": "https://www.athrecs.com/races/corre-por-los-bomberos-5k",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/corre-por-los-bomberos-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Corr\u00e9 por los Bomberos 5K",
+        "description": "Corr\u00e9 por los Bomberos 5K is a running event in Capiat\u00e1, Central, Aut\u00f3dromo V\u00edctor Rub\u00e9n Dumot, Paraguay. Recorded disciplines include 5K. The listed surface is mixed. The listed organiser is Octava Compa\u00f1\u00eda de Bomberos de Capiat\u00e1 K8. The next listed date is Sunday, 15 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/corre-por-los-bomberos-5k",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-15",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Capiat\u00e1, Paraguay",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Capiat\u00e1",
+            "addressRegion": "Central",
+            "addressCountry": "PY"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Octava Compa\u00f1\u00eda de Bomberos de Capiat\u00e1 K8"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/wa-bilbao-night-half-marathon-7236025",
+    "url": "https://www.athrecs.com/races/wa-bilbao-night-half-marathon-7236025",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-bilbao-night-half-marathon-7236025",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/beacons-trail-marathon-half-marathon-ultra",
+    "url": "https://www.athrecs.com/races/beacons-trail-marathon-half-marathon-ultra",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/beacons-trail-marathon-half-marathon-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Beacons Trail Marathon, Half Marathon & Ultra",
+        "description": "Beacons Trail Marathon, Half Marathon & Ultra is a running event in Talybont-on-Usk, South Wales, Henderson Hall, Wales. Recorded disciplines include half marathon, Marathon. The listed surface is trail. The listed organiser is Andali Events. The next listed date is Saturday, 7 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/beacons-trail-marathon-half-marathon-ultra",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-07T08:30+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Talybont-on-Usk, Wales",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Talybont-on-Usk",
+            "addressRegion": "South Wales",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Andali Events"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://www.sientries.co.uk/event/beacons-ultra-marathon-and-half-2026-2026",
+            "price": 40,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock",
+            "validFrom": "2025-12-01"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/chiang-mai-marathon",
+    "url": "https://www.athrecs.com/races/chiang-mai-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/chiang-mai-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Chiang Mai Marathon",
+        "description": "Chiang Mai Marathon is a running event in Chiang Mai, Tha Phae Gate, Thailand. Recorded disciplines include Marathon. The listed surface is road. The listed organiser is Jog & Joy. The next listed date is Sunday, 20 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/chiang-mai-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-20",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Chiang Mai, Thailand",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Chiang Mai",
+            "addressRegion": "Chiang Mai",
+            "addressCountry": "TH"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Jog & Joy"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/ncfc-ecnl-girls-glow-run-chasing-goals-changing-lives",
+    "url": "https://www.athrecs.com/races/ncfc-ecnl-girls-glow-run-chasing-goals-changing-lives",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ncfc-ecnl-girls-glow-run-chasing-goals-changing-lives",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "NCFC ECNL Girls Glow Run Chasing Goals, Changing Lives",
+        "description": "NCFC ECNL Girls Glow Run Chasing Goals, Changing Lives is a running event in Raleigh, North Carolina, 7700 Perry Creek Road, United States. Recorded disciplines include 5K. The listed surface is unspecified. The next listed date is Sunday, 22 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/ncfc-ecnl-girls-glow-run-chasing-goals-changing-lives",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-22T18:00-05:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Raleigh, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Raleigh",
+            "addressRegion": "North Carolina",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/cork-half-marathon",
+    "url": "https://www.athrecs.com/races/cork-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/cork-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Cork Half Marathon",
+        "description": "Cork Half Marathon is a running event in Cork, Ireland. Recorded disciplines include half marathon. The listed surface is road. The next listed date is Sunday, 7 February 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/cork-half-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-02-07T09:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Cork, Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cork",
+            "addressRegion": "Cork",
+            "addressCountry": "IE"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-bierrun-eindhoven-c78bb9",
+    "url": "https://www.athrecs.com/races/nl-bierrun-eindhoven-c78bb9",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-bierrun-eindhoven-c78bb9",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Bierrun Eindhoven",
+        "description": "Bierrun Eindhoven is a running event in Eindhoven, Eindhoven and surrounding courses, Netherlands. Recorded disciplines include 7.5K. The listed surface is road. The listed organiser is Bierbattle. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-bierrun-eindhoven-c78bb9",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Eindhoven, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Eindhoven",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Bierbattle"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/fredericiavold-parkrun",
+    "url": "https://www.athrecs.com/races/fredericiavold-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/fredericiavold-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Fredericia Vold parkrun",
+        "description": "Fredericia Vold parkrun is a parkrun event in Fredericia Vold, Central Jutland, Denmark. Recorded disciplines include 5K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/fredericiavold-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Fredericia Vold, Denmark",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Fredericia Vold",
+            "addressRegion": "Central Jutland",
+            "addressCountry": "DK"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/santa-dash-5k-1-mile-walk-presented-by-fleet-feet",
+    "url": "https://www.athrecs.com/races/santa-dash-5k-1-mile-walk-presented-by-fleet-feet",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/santa-dash-5k-1-mile-walk-presented-by-fleet-feet",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Santa Dash 5K & 1 Mile Walk Presented By Fleet Feet",
+        "description": "Santa Dash 5K & 1 Mile Walk Presented By Fleet Feet is a running event in Greenville, North Carolina, 2000 Cedar Ln., United States. Recorded disciplines include 5K. The listed surface is unspecified. The next listed date is Saturday, 12 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/santa-dash-5k-1-mile-walk-presented-by-fleet-feet",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-12T09:00-05:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Greenville, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Greenville",
+            "addressRegion": "North Carolina",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/ea-uk-fixtures-lancashire-cross-country-championships",
+    "url": "https://www.athrecs.com/races/ea-uk-fixtures-lancashire-cross-country-championships",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ea-uk-fixtures-lancashire-cross-country-championships",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Lancashire Cross Country Championships",
+        "description": "Lancashire Cross Country Championships is a running event in Towneley Park, Burnley., England. Recorded disciplines include Cross Country. The listed surface is cross country. The next listed date is Saturday, 12 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/ea-uk-fixtures-lancashire-cross-country-championships",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-12",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Towneley Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Towneley Park",
+            "addressRegion": "England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/beer-city-half-fort-worth",
+    "url": "https://www.athrecs.com/races/beer-city-half-fort-worth",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/beer-city-half-fort-worth",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/runthrough-richmond-park-half-marathon",
+    "url": "https://www.athrecs.com/races/runthrough-richmond-park-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/runthrough-richmond-park-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Richmond Park Half Marathon",
+        "description": "Richmond Park Half Marathon is a running event in Richmond Park, South of England, Sheen Gate, England. Recorded disciplines include half marathon. The listed surface is mixed. The listed organiser is RunThrough Events. The next listed date is Sunday, 14 February 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/runthrough-richmond-park-half-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-02-14T09:30+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Richmond Park, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Richmond Park",
+            "addressRegion": "South of England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "RunThrough Events"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://www.runthrough.co.uk/event/richmond-park-half-marathon-february-2027",
+            "price": 38,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-springendalloop-olc-93-ootmarsum-384586",
+    "url": "https://www.athrecs.com/races/nl-springendalloop-olc-93-ootmarsum-384586",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-springendalloop-olc-93-ootmarsum-384586",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Springendalloop OLC'93 Ootmarsum",
+        "description": "Springendalloop OLC'93 Ootmarsum is a running event in Hezingen, Hezingen and surrounding courses, Netherlands. Recorded disciplines include 10K, 15K, 5K. The listed surface is trail. The listed organiser is OLC'93. The next listed date is Saturday, 14 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-springendalloop-olc-93-ootmarsum-384586",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-14",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Hezingen, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hezingen",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "OLC'93"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/legendarios-trail-pozos-azules",
+    "url": "https://www.athrecs.com/races/legendarios-trail-pozos-azules",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/legendarios-trail-pozos-azules",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Legendarios Trail Pozos Azules",
+        "description": "Legendarios Trail Pozos Azules is a running event in Estancia Pozos Azules, Uruguay. Recorded disciplines include 16K, 9K. The listed surface is trail. The listed organiser is Desnivel Eventos Deportivos. The next listed date is Saturday, 12 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/legendarios-trail-pozos-azules",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-12T18:00-03:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Uruguay",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "UY"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Desnivel Eventos Deportivos"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/wa-marathon-m-nchen-by-brooks-7236403",
+    "url": "https://www.athrecs.com/races/wa-marathon-m-nchen-by-brooks-7236403",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-marathon-m-nchen-by-brooks-7236403",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/runuk-windsor-dorney-lakeside-half-marathon",
+    "url": "https://www.athrecs.com/races/runuk-windsor-dorney-lakeside-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/runuk-windsor-dorney-lakeside-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/royal-parks-foundation-half-marathon",
+    "url": "https://www.athrecs.com/races/royal-parks-foundation-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/royal-parks-foundation-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/mountain-range-trail-series-tai-po",
+    "url": "https://www.athrecs.com/races/mountain-range-trail-series-tai-po",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/mountain-range-trail-series-tai-po",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Mountain Range Trail Series Tai Po",
+        "description": "Mountain Range Trail Series Tai Po is a running event in Tai Po Tau Shui Wai Tsuen, Hong Kong. Recorded disciplines include 21K, 31.5K, 43.5K, 7.5K. The listed surface is trail. The listed organiser is Union Hope Limited. The next listed date is Saturday, 7 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/mountain-range-trail-series-tai-po",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-07T09:00+08:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Hong Kong, Hong Kong",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hong Kong",
+            "addressCountry": "HK"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Union Hope Limited"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/bank-jateng-borobudur-marathon",
+    "url": "https://www.athrecs.com/races/bank-jateng-borobudur-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/bank-jateng-borobudur-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Bank Jateng Borobudur Marathon",
+        "description": "Bank Jateng Borobudur Marathon is a running event in Magelang, Central Java, Borobudur, Indonesia. Recorded disciplines include 10K, half marathon, Marathon. The listed surface is road. The listed organiser is Borobudur Marathon. The next listed date is Sunday, 15 November 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2018 to 2025. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/bank-jateng-borobudur-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-15",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Magelang, Indonesia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Magelang",
+            "addressRegion": "Central Java",
+            "addressCountry": "ID"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Borobudur Marathon"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nationwide-columbus-marathon",
+    "url": "https://www.athrecs.com/races/nationwide-columbus-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nationwide-columbus-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/battersea-park-half-marathon-10k-5k-may-2027",
+    "url": "https://www.athrecs.com/races/battersea-park-half-marathon-10k-5k-may-2027",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/battersea-park-half-marathon-10k-5k-may-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Battersea Park Half Marathon, 10K & 5K \u2014 May 2027",
+        "description": "Battersea Park Half Marathon, 10K & 5K \u2014 May 2027 is a running event in London, Greater London, Millennium Arena, Battersea Park, England. Recorded disciplines include 10K, 5K, half marathon. The listed surface is road. The listed organiser is RunThrough Events. The next listed date is Saturday, 8 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/battersea-park-half-marathon-10k-5k-may-2027",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-08T10:30+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "Greater London",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "RunThrough Events"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-may-2027",
+            "price": 40,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-bosloopcompetitie-25-oktober-ccd82b",
+    "url": "https://www.athrecs.com/races/nl-bosloopcompetitie-25-oktober-ccd82b",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-bosloopcompetitie-25-oktober-ccd82b",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/crescent-city-classic",
+    "url": "https://www.athrecs.com/races/crescent-city-classic",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/crescent-city-classic",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Crescent City Classic",
+        "description": "Crescent City Classic is a running event in New Orleans, Louisiana, United States. Recorded disciplines include 10K. The listed surface is road. The listed organiser is CCC10K. The next listed date is Saturday, 27 March 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/crescent-city-classic",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-03-27",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "New Orleans, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "New Orleans",
+            "addressRegion": "Louisiana",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "CCC10K"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/loaves-and-fishes-and-veterans-services-of-the-carolinas-run-for-recovery",
+    "url": "https://www.athrecs.com/races/loaves-and-fishes-and-veterans-services-of-the-carolinas-run-for-recovery",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/loaves-and-fishes-and-veterans-services-of-the-carolinas-run-for-recovery",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Loaves and Fishes and Veterans Services of the Carolinas Run for Recovery",
+        "description": "Loaves and Fishes and Veterans Services of the Carolinas Run for Recovery is a running event in Beaufort, North Carolina, Start and Finish at Front & Craven Streets, United States. Recorded disciplines include 5K. The listed surface is unspecified. The next listed date is Saturday, 14 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/loaves-and-fishes-and-veterans-services-of-the-carolinas-run-for-recovery",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-14T08:00-05:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Beaufort, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beaufort",
+            "addressRegion": "North Carolina",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/goldsboro-family-ymca-turkey-trot-5k-and-1-mile-fun-run-walk",
+    "url": "https://www.athrecs.com/races/goldsboro-family-ymca-turkey-trot-5k-and-1-mile-fun-run-walk",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/goldsboro-family-ymca-turkey-trot-5k-and-1-mile-fun-run-walk",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Goldsboro Family YMCA Turkey Trot 5K and 1 Mile Fun Run/Walk",
+        "description": "Goldsboro Family YMCA Turkey Trot 5K and 1 Mile Fun Run/Walk is a running event in Goldsboro, North Carolina, 1105 Parkway Drive, United States. Recorded disciplines include 1mi, 5K. The listed surface is unspecified. The next listed date is Thursday, 26 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/goldsboro-family-ymca-turkey-trot-5k-and-1-mile-fun-run-walk",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-26T08:00-05:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Goldsboro, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Goldsboro",
+            "addressRegion": "North Carolina",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/monsal-trail-half-marathon-autumn-saturday",
+    "url": "https://www.athrecs.com/races/monsal-trail-half-marathon-autumn-saturday",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/monsal-trail-half-marathon-autumn-saturday",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/nl-winterbosloop-beek-montferland-run-2-4eae8a",
+    "url": "https://www.athrecs.com/races/nl-winterbosloop-beek-montferland-run-2-4eae8a",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-winterbosloop-beek-montferland-run-2-4eae8a",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Winterbosloop Beek Montferland run 2",
+        "description": "Winterbosloop Beek Montferland run 2 is a running event in Beek Montferland, Beek Montferland and surrounding courses, Netherlands. Recorded disciplines include 10K, 1K, 2K, 5K. The listed surface is cross country. The listed organiser is Stichting Omloop Beek. The next listed date is Sunday, 7 February 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-winterbosloop-beek-montferland-run-2-4eae8a",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-02-07",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Beek Montferland, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beek Montferland",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Stichting Omloop Beek"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/excalibur-winter-trail-races-10km-and-17km",
+    "url": "https://www.athrecs.com/races/excalibur-winter-trail-races-10km-and-17km",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/excalibur-winter-trail-races-10km-and-17km",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Excalibur Winter Trail Races",
+        "description": "Excalibur Winter Trail Races is a running event in North Wales, Coed Moel Famau Car Park, near Mold, Wales. Recorded disciplines include 10K. The listed surface is trail. The next listed date is Sunday, 1 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/excalibur-winter-trail-races-10km-and-17km",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-01T10:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "North Wales, Wales",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "North Wales",
+            "addressRegion": "Wales",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/dream-finders-homes-great-turkey-trot-5k",
+    "url": "https://www.athrecs.com/races/dream-finders-homes-great-turkey-trot-5k",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dream-finders-homes-great-turkey-trot-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Dream Finders Homes Great Turkey Trot 5K",
+        "description": "Dream Finders Homes Great Turkey Trot 5K is a running event in Clermont, Florida, Southern Hills Farm, United States. Recorded disciplines include 5K. The listed surface is unspecified. The next listed date is Sunday, 22 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/dream-finders-homes-great-turkey-trot-5k",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-22",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Clermont, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Clermont",
+            "addressRegion": "Florida",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/clearstream-celebration-of-life-5k-2026",
+    "url": "https://www.athrecs.com/races/clearstream-celebration-of-life-5k-2026",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/clearstream-celebration-of-life-5k-2026",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Clearstream/Deutsche B\u00f6rse Celebration of Life 5K 2026",
+        "description": "Clearstream/Deutsche B\u00f6rse Celebration of Life 5K 2026 is a running event in Cork, County Cork, The Marina, Ireland. Recorded disciplines include 5K. The listed surface is road. The listed organiser is Cork BHAA. The next listed date is Sunday, 15 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/clearstream-celebration-of-life-5k-2026",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-15T10:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Cork, Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cork",
+            "addressRegion": "County Cork",
+            "addressCountry": "IE"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Cork BHAA"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/a2z-dynamic-annual-marathon-2026",
+    "url": "https://www.athrecs.com/races/a2z-dynamic-annual-marathon-2026",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/a2z-dynamic-annual-marathon-2026",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "A2Z Dynamic Annual Marathon 2026",
+        "description": "A2Z Dynamic Annual Marathon 2026 is a running event in Polokwane, Limpopo, Peter Mokaba Stadium Rugby Field, South Africa. Recorded disciplines include 10K, 5K, Half Marathon, Marathon. The listed surface is road. The listed organiser is Anchor Dynamic Limpopo Athletics Club. The next listed date is Sunday, 15 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/a2z-dynamic-annual-marathon-2026",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-15T05:30+02:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Polokwane, South Africa",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Polokwane",
+            "addressRegion": "Limpopo",
+            "addressCountry": "ZA"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Anchor Dynamic Limpopo Athletics Club"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/the-meadows-5k-10-october",
+    "url": "https://www.athrecs.com/races/the-meadows-5k-10-october",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/the-meadows-5k-10-october",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/nl-posbank-trail-walk-bf31d7",
+    "url": "https://www.athrecs.com/races/nl-posbank-trail-walk-bf31d7",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-posbank-trail-walk-bf31d7",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/dinotaeng-run-taichung",
+    "url": "https://www.athrecs.com/races/dinotaeng-run-taichung",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dinotaeng-run-taichung",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "DINOTAENG Run Taichung",
+        "description": "DINOTAENG Run Taichung is a running event in Taichung, Metropolitan Park Sunshine Lawn, Taiwan. Recorded disciplines include 3K. The listed surface is park / road. The listed organiser is Norns. The next listed date is Sunday, 10 January 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/dinotaeng-run-taichung",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-01-10T07:30+08:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Taichung, Taiwan",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Taichung",
+            "addressCountry": "TW"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Norns"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-gouda-rent-wandelt-bij-kaarslicht-bdab8b",
+    "url": "https://www.athrecs.com/races/nl-gouda-rent-wandelt-bij-kaarslicht-bdab8b",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-gouda-rent-wandelt-bij-kaarslicht-bdab8b",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Gouda Rent & Wandelt bij KaarsLicht",
+        "description": "Gouda Rent & Wandelt bij KaarsLicht is a running event in Gouda, Gouda and surrounding courses, Netherlands. Recorded disciplines include 5K. The listed surface is road. The listed organiser is GO Sportief in Het Groene Hart. The next listed date is Friday, 18 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-gouda-rent-wandelt-bij-kaarslicht-bdab8b",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-18",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Gouda, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Gouda",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "GO Sportief in Het Groene Hart"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/faster-than-pastor-5k",
+    "url": "https://www.athrecs.com/races/faster-than-pastor-5k",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/faster-than-pastor-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Faster Than Pastor 5k",
+        "description": "Faster Than Pastor 5k is a running event in Clayton, North Carolina, 2686 Covered Bridge Rd, United States. Recorded disciplines include 1K, 5K. The listed surface is unspecified. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/faster-than-pastor-5k",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31T09:00-04:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Clayton, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Clayton",
+            "addressRegion": "North Carolina",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/north-carolina-springs-classic-the-fest",
+    "url": "https://www.athrecs.com/races/north-carolina-springs-classic-the-fest",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/north-carolina-springs-classic-the-fest",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "North Carolina Springs Classic & The Fest",
+        "description": "North Carolina Springs Classic & The Fest is a running event in Holly Springs, North Carolina, 242 S. Main St., United States. Recorded disciplines include 16K, 5K, 8K. The listed surface is unspecified. The next listed date is Saturday, 10 April 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/north-carolina-springs-classic-the-fest",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-10T07:15-04:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Holly Springs, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Holly Springs",
+            "addressRegion": "North Carolina",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/crystal-coast-cancer-rehab-center-5k-run-1-mile-cancer-survivor-walk",
+    "url": "https://www.athrecs.com/races/crystal-coast-cancer-rehab-center-5k-run-1-mile-cancer-survivor-walk",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/crystal-coast-cancer-rehab-center-5k-run-1-mile-cancer-survivor-walk",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Crystal Coast Cancer Rehab Center 5K Run & 1 Mile Cancer Survivor Walk",
+        "description": "Crystal Coast Cancer Rehab Center 5K Run & 1 Mile Cancer Survivor Walk is a running event in Beaufort, North Carolina, John Newton Park, United States. Recorded disciplines include 5K. The listed surface is unspecified. The next listed date is Saturday, 27 March 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/crystal-coast-cancer-rehab-center-5k-run-1-mile-cancer-survivor-walk",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-03-27T08:00-04:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Beaufort, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beaufort",
+            "addressRegion": "North Carolina",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/carrera-canacine",
+    "url": "https://www.athrecs.com/races/carrera-canacine",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/carrera-canacine",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Carrera CANACINE",
+        "description": "Carrera CANACINE is a running event in Puebla, Zocalo de Puebla, Mexico. Recorded disciplines include 5K. The listed surface is road. The listed organiser is CANACINE / Asociacion Poblana de Atletismo. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/carrera-canacine",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Puebla, Mexico",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Puebla",
+            "addressCountry": "MX"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "CANACINE / Asociacion Poblana de Atletismo"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/strathcarron-hospice-10k-road-race-fun-run",
+    "url": "https://www.athrecs.com/races/strathcarron-hospice-10k-road-race-fun-run",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/strathcarron-hospice-10k-road-race-fun-run",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/cork-bhaa-defence-forces-5k-2026",
+    "url": "https://www.athrecs.com/races/cork-bhaa-defence-forces-5k-2026",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/cork-bhaa-defence-forces-5k-2026",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/race-for-life-york-5k-2027",
+    "url": "https://www.athrecs.com/races/race-for-life-york-5k-2027",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/race-for-life-york-5k-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Race for Life York",
+        "description": "Race for Life York is a running event in York, North Yorkshire, The Knavesmire, England. Recorded disciplines include 10K, 5K. The listed surface is mixed. The listed organiser is Cancer Research UK. The next listed date is Sunday, 2 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/race-for-life-york-5k-2027",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-02T10:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "York, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "York",
+            "addressRegion": "North Yorkshire",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Cancer Research UK"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/new-year-s-eve-10k-road-race",
+    "url": "https://www.athrecs.com/races/new-year-s-eve-10k-road-race",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/new-year-s-eve-10k-road-race",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "New Year's Eve 10K Road Race",
+        "description": "New Year's Eve 10K Road Race is a running event in Cork, Ireland. Recorded disciplines include 10K. The listed surface is road. The listed organiser is Grange/Fermoy A.C.. The next listed date is Thursday, 31 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/new-year-s-eve-10k-road-race",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-31T12:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Cork",
+            "addressCountry": "IE"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Grange/Fermoy A.C."
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/rb-virtual-cattle-creep-series",
+    "url": "https://www.athrecs.com/races/rb-virtual-cattle-creep-series",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/rb-virtual-cattle-creep-series",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Virtual Cattle Creep Series 2026",
+        "description": "Virtual Cattle Creep Series 2026 is a running event in England. The listed surface is road. The next listed date is Sunday, 29 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/rb-virtual-cattle-creep-series",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-29",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "United Kingdom, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "United Kingdom",
+            "addressRegion": "England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/blickling-half-marathon-autumn",
+    "url": "https://www.athrecs.com/races/blickling-half-marathon-autumn",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/blickling-half-marathon-autumn",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/ultra-trail-du-fjord-du-saguenay",
+    "url": "https://www.athrecs.com/races/ultra-trail-du-fjord-du-saguenay",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ultra-trail-du-fjord-du-saguenay",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Ultra-Trail du Fjord-du-Saguenay",
+        "description": "Ultra-Trail du Fjord-du-Saguenay is a running event in Qu\u00e9bec, Bas-Saguenay, Canada. Recorded disciplines include 100K, 10K, 135K, 20K, 55K, 90K. The listed surface is trail. The next listed date is Saturday, 7 August 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/ultra-trail-du-fjord-du-saguenay",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-08-07",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Canada",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Qu\u00e9bec",
+            "addressCountry": "CA"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/blair-castle-trail-weekender-sunday",
+    "url": "https://www.athrecs.com/races/blair-castle-trail-weekender-sunday",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/blair-castle-trail-weekender-sunday",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Atholl Trail Half Marathon",
+        "description": "Atholl Trail Half Marathon is a running event in Blair Atholl, Perth and Kinross, Blair Castle Estate, Scotland. Recorded disciplines include half marathon. The listed surface is trail. The listed organiser is Outsider Events. The next listed date is Sunday, 6 June 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/blair-castle-trail-weekender-sunday",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-06-06T10:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Blair Atholl, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Blair Atholl",
+            "addressRegion": "Perth and Kinross",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Outsider Events"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://outsiderevents.eventrac.co.uk/e/blair-castle-trail-weekender-9131",
+            "price": 52,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/edinburgh-marathon-festival-5k",
+    "url": "https://www.athrecs.com/races/edinburgh-marathon-festival-5k",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/edinburgh-marathon-festival-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Edinburgh Marathon Festival 5K",
+        "description": "Edinburgh Marathon Festival 5K is a running event in Edinburgh, Holyrood Park, Scotland. Recorded disciplines include 5K, Marathon. The listed surface is road. The next listed date is Saturday, 29 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/edinburgh-marathon-festival-5k",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-29T10:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Edinburgh, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Edinburgh",
+            "addressRegion": "Scotland",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-wisent-winter-trail-ed8259",
+    "url": "https://www.athrecs.com/races/nl-wisent-winter-trail-ed8259",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-wisent-winter-trail-ed8259",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Wisent Winter Trail",
+        "description": "Wisent Winter Trail is a running event in Apeldoorn, Apeldoorn and surrounding courses, Netherlands. Recorded disciplines include 16K, 23K, 5K, 8.5K. The listed surface is trail. The listed organiser is AV Veluwe. The next listed date is Thursday, 31 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-wisent-winter-trail-ed8259",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-31",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Apeldoorn, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Apeldoorn",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "AV Veluwe"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-graef-castricum-trail-walk-47d605",
+    "url": "https://www.athrecs.com/races/nl-graef-castricum-trail-walk-47d605",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-graef-castricum-trail-walk-47d605",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Graef Castricum Trail & WALK",
+        "description": "Graef Castricum Trail & WALK is a running event in Castricum, Castricum and surrounding courses, Netherlands. Recorded disciplines include 11K, 23K, 35K, 60K, 7K, Ultra. The listed surface is trail. The listed organiser is Cairn Trails en Adventures. The next listed date is Sunday, 22 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-graef-castricum-trail-walk-47d605",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-22",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Castricum, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Castricum",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Cairn Trails en Adventures"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/ea-runevents-chocks-away-5km-exeter",
+    "url": "https://www.athrecs.com/races/ea-runevents-chocks-away-5km-exeter",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ea-runevents-chocks-away-5km-exeter",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Chocks Away 5km",
+        "description": "Chocks Away 5km is a running event in Exeter, Devon, England. Recorded disciplines include 5K. The listed surface is mixed. The next listed date is Saturday, 7 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/ea-runevents-chocks-away-5km-exeter",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-07T14:30+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Exeter, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Exeter",
+            "addressRegion": "Devon",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-pierewaai-ultra-trail-70km-en-100km-380af5",
+    "url": "https://www.athrecs.com/races/nl-pierewaai-ultra-trail-70km-en-100km-380af5",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-pierewaai-ultra-trail-70km-en-100km-380af5",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Pierewaai ULTRA Trail 70km en 100km",
+        "description": "Pierewaai ULTRA Trail 70km en 100km is a running event in Hoek van Holland, Hoek van Holland and surrounding courses, Netherlands. Recorded disciplines include 100K, 70K, Ultra. The listed surface is road. The listed organiser is Ultrarent. The next listed date is Friday, 22 January 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-pierewaai-ultra-trail-70km-en-100km-380af5",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-01-22",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Hoek van Holland, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hoek van Holland",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Ultrarent"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/beirut-international-marathon",
+    "url": "https://www.athrecs.com/races/beirut-international-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/beirut-international-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Beirut International Marathon",
+        "description": "Beirut International Marathon is a running event in Beirut, Lebanon. Recorded disciplines include Marathon. The listed surface is road. The next listed date is Sunday, 29 November 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2013 to 2025. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/beirut-international-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-29",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Beirut, Lebanon",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Beirut",
+            "addressCountry": "LB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-amersfoort-night-run-934c10",
+    "url": "https://www.athrecs.com/races/nl-amersfoort-night-run-934c10",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-amersfoort-night-run-934c10",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Amersfoort Night Run",
+        "description": "Amersfoort Night Run is a running event in Amersfoort, Amersfoort and surrounding courses, Netherlands. Recorded disciplines include 1.5K, 10K, 15K, 5K, 800m. The listed surface is road. The listed organiser is Central Events B.V.. The next listed date is Friday, 13 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-amersfoort-night-run-934c10",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-13",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Amersfoort, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Amersfoort",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Central Events B.V."
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/rb-halloween-twilight-run-scorrier-house",
+    "url": "https://www.athrecs.com/races/rb-halloween-twilight-run-scorrier-house",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/rb-halloween-twilight-run-scorrier-house",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Halloween Twilight Run - Scorrier House 2026",
+        "description": "Halloween Twilight Run - Scorrier House 2026 is a running event in Scorrier, England. The listed surface is trail. The next listed date is Sunday, 1 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/rb-halloween-twilight-run-scorrier-house",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-01",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Scorrier, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Scorrier",
+            "addressRegion": "England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-taxandria-marathon-oisterwijk-48a52c",
+    "url": "https://www.athrecs.com/races/nl-taxandria-marathon-oisterwijk-48a52c",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-taxandria-marathon-oisterwijk-48a52c",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Taxandria Marathon Oisterwijk",
+        "description": "Taxandria Marathon Oisterwijk is a running event in Oisterwijk, Oisterwijk and surrounding courses, Netherlands. Recorded disciplines include half marathon, Marathon. The listed surface is road. The listed organiser is Taxandria Atletiek. The next listed date is Sunday, 23 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-taxandria-marathon-oisterwijk-48a52c",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-23",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Oisterwijk, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Oisterwijk",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Taxandria Atletiek"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-podorun-sonderkamp-wijnands-83f15f",
+    "url": "https://www.athrecs.com/races/nl-podorun-sonderkamp-wijnands-83f15f",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-podorun-sonderkamp-wijnands-83f15f",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/nl-halve-marathon-gouda-287791",
+    "url": "https://www.athrecs.com/races/nl-halve-marathon-gouda-287791",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-halve-marathon-gouda-287791",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Halve Marathon Gouda",
+        "description": "Halve Marathon Gouda is a running event in Gouda, Gouda and surrounding courses, Netherlands. Recorded disciplines include 1.5K, 10K, 400m, half marathon. The listed surface is road. The listed organiser is Stichting Halve Marathon Gouda. The next listed date is Sunday, 8 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-halve-marathon-gouda-287791",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-08",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Gouda, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Gouda",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Stichting Halve Marathon Gouda"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/mandiri-jogja-marathon",
+    "url": "https://www.athrecs.com/races/mandiri-jogja-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/mandiri-jogja-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Mandiri Jogja Marathon",
+        "description": "Mandiri Jogja Marathon is a running event in Yogyakarta, Indonesia. Recorded disciplines include half marathon, Marathon. The listed surface is road. The listed organiser is Mandiri Jogja Marathon. The next listed date is Sunday, 20 June 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/mandiri-jogja-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-06-20",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Yogyakarta, Indonesia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Yogyakarta",
+            "addressRegion": "Yogyakarta",
+            "addressCountry": "ID"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Mandiri Jogja Marathon"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/nl-tt-marathon-3703c6",
+    "url": "https://www.athrecs.com/races/nl-tt-marathon-3703c6",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/nl-tt-marathon-3703c6",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "TT Marathon",
+        "description": "TT Marathon is a running event in Assen, Assen and surrounding courses, Netherlands. Recorded disciplines include half marathon, Marathon. The listed surface is road. The listed organiser is TT City Run. The next listed date is Sunday, 1 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/nl-tt-marathon-3703c6",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-01",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Assen, Netherlands",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Assen",
+            "addressRegion": "Netherlands",
+            "addressCountry": "NL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "TT City Run"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/ce-trcame-prilep",
+    "url": "https://www.athrecs.com/races/ce-trcame-prilep",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ce-trcame-prilep",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/outrun-the-night-ultra",
+    "url": "https://www.athrecs.com/races/outrun-the-night-ultra",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/outrun-the-night-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Outrun The Night",
+        "description": "Outrun The Night is a running event in Dalkeith, Dalkeith Country Park, Scotland. Recorded disciplines include Ultra. The listed surface is trail. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/outrun-the-night-ultra",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31T19:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Dalkeith, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dalkeith",
+            "addressRegion": "Scotland",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/full-moon-desert-marathon",
+    "url": "https://www.athrecs.com/races/full-moon-desert-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/full-moon-desert-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Full Moon Desert Marathon",
+        "description": "Full Moon Desert Marathon is a running event in Wadi Rum, Jordan. Recorded disciplines include Marathon. The listed surface is road. The next listed date is Friday, 21 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/full-moon-desert-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-21",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Wadi Rum, Jordan",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wadi Rum",
+            "addressCountry": "JO"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/way-of-the-dead-dartmoor-traverse",
+    "url": "https://www.athrecs.com/races/way-of-the-dead-dartmoor-traverse",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/way-of-the-dead-dartmoor-traverse",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Way Of The Dead Dartmoor Traverse",
+        "description": "Way Of The Dead Dartmoor Traverse is a running event in Tavistock, South of England, The Printworks, England. Recorded disciplines include Ultra. The listed surface is trail. The next listed date is Saturday, 20 March 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/way-of-the-dead-dartmoor-traverse",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-03-20T08:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Tavistock, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tavistock",
+            "addressRegion": "South of England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/dream-finders-homes-12ks-of-christmas-christmas-5k-kids-races",
+    "url": "https://www.athrecs.com/races/dream-finders-homes-12ks-of-christmas-christmas-5k-kids-races",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/dream-finders-homes-12ks-of-christmas-christmas-5k-kids-races",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Dream Finders Homes 12Ks of Christmas, Christmas 5k & Kids Races",
+        "description": "Dream Finders Homes 12Ks of Christmas, Christmas 5k & Kids Races is a running event in Winter Garden, Florida, 14111 Shoreside Way, United States. Recorded disciplines include 12K, 5K. The listed surface is unspecified. The next listed date is Saturday, 19 December 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/dream-finders-homes-12ks-of-christmas-christmas-5k-kids-races",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-19",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Winter Garden, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Winter Garden",
+            "addressRegion": "Florida",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/rtt-afan-forest-trail-10k-5k",
+    "url": "https://www.athrecs.com/races/rtt-afan-forest-trail-10k-5k",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/rtt-afan-forest-trail-10k-5k",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "RTT Afan Forest Trail 10K & 5K",
+        "description": "RTT Afan Forest Trail 10K & 5K is a running event in Port Talbot, Bryn Bettws Lodge, Wales. Recorded disciplines include 10K, 5K. The listed surface is trail. The next listed date is Sunday, 29 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/rtt-afan-forest-trail-10k-5k",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-29T11:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Port Talbot, Wales",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Port Talbot",
+            "addressRegion": "Wales",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/mugdock-country-park-running-festival-2026",
+    "url": "https://www.athrecs.com/races/mugdock-country-park-running-festival-2026",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/mugdock-country-park-running-festival-2026",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Mugdock Country Park Running Festival 2026",
+        "description": "Mugdock Country Park Running Festival 2026 is a running event in Milngavie, East Dunbartonshire, Mugdock Country Park, Scotland. Recorded disciplines include 10K, 2.5K, 5K, half marathon. The listed surface is trail. The listed organiser is Up and Running Events. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/mugdock-country-park-running-festival-2026",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Milngavie, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Milngavie",
+            "addressRegion": "East Dunbartonshire",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Up and Running Events"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/kent-downs-50-ultra-challenge",
+    "url": "https://www.athrecs.com/races/kent-downs-50-ultra-challenge",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/kent-downs-50-ultra-challenge",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Kent Downs 50 Ultra Challenge",
+        "description": "Kent Downs 50 Ultra Challenge is a running event in Maidstone, Kent, England. Recorded disciplines include 10K, 25K, 50K. The listed surface is trail. The listed organiser is Action Challenge. The next listed date is Saturday, 9 October 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/kent-downs-50-ultra-challenge",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-10-09T07:30+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Maidstone, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Maidstone",
+            "addressRegion": "Kent",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Action Challenge"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/ott-trail-marathon-10-mile-2027",
+    "url": "https://www.athrecs.com/races/ott-trail-marathon-10-mile-2027",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ott-trail-marathon-10-mile-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "OTT Trail Marathon & 10 Mile Trail Race 2027",
+        "description": "OTT Trail Marathon & 10 Mile Trail Race 2027 is a running event in Merthyr Tydfil, Parkwood Outdoors, Dolygaer, Wales. Recorded disciplines include 10mi, Marathon. The listed surface is trail. The listed organiser is Off The Tarmac. The next listed date is Saturday, 15 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/ott-trail-marathon-10-mile-2027",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-15T09:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Merthyr Tydfil, Wales",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Merthyr Tydfil",
+            "addressRegion": "Merthyr Tydfil",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Off The Tarmac"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://www.sientries.co.uk/enter.php?event_id=18393",
+            "price": 23,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/wa-35th-chugoku-high-school-rookie-s-athletics-championships-7245135",
+    "url": "https://www.athrecs.com/races/wa-35th-chugoku-high-school-rookie-s-athletics-championships-7245135",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-35th-chugoku-high-school-rookie-s-athletics-championships-7245135",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/silverbacktrails-goarhland-v-trigs-challenge-ultra",
+    "url": "https://www.athrecs.com/races/silverbacktrails-goarhland-v-trigs-challenge-ultra",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/silverbacktrails-goarhland-v-trigs-challenge-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Goathland V Trigs Challenge Ultra",
+        "description": "Goathland V Trigs Challenge Ultra is a running event in Goathland, North of England, Village Hall, England. Recorded disciplines include Ultra. The listed surface is trail. The next listed date is Saturday, 17 April 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/silverbacktrails-goarhland-v-trigs-challenge-ultra",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-17T07:30+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Goathland, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Goathland",
+            "addressRegion": "North of England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/invesco-qqq-thanksgiving-day-half-marathon",
+    "url": "https://www.athrecs.com/races/invesco-qqq-thanksgiving-day-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/invesco-qqq-thanksgiving-day-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Invesco QQQ Thanksgiving Day Half Marathon, 5K, Mile & Dash",
+        "description": "Invesco QQQ Thanksgiving Day Half Marathon, 5K, Mile & Dash is a running event in Atlanta, Georgia, Center Parc Stadium, Summerhill and Grant Park, United States. Recorded disciplines include 1 Mile, 5K, Dash, half marathon. The listed surface is road. The listed organiser is Atlanta Track Club. The next listed date is Thursday, 26 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/invesco-qqq-thanksgiving-day-half-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-26T07:45-05:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Atlanta, United States",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Atlanta",
+            "addressRegion": "Georgia",
+            "addressCountry": "US"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Atlanta Track Club"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://www.letsdothis.com/us/e/2026-invesco-qqq-thanksgiving-day-half-marathon-5k-mile-dash-234981/race-selection?eventId=234981&occurrenceId=21111168092&preferred=true&utm_organiser_id=102981",
+            "price": 125,
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/monsal-trail-half-marathon-autumn-sunday",
+    "url": "https://www.athrecs.com/races/monsal-trail-half-marathon-autumn-sunday",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/monsal-trail-half-marathon-autumn-sunday",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/ea-uk-fixtures-british-masters-af-cross-country-relays",
+    "url": "https://www.athrecs.com/races/ea-uk-fixtures-british-masters-af-cross-country-relays",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/ea-uk-fixtures-british-masters-af-cross-country-relays",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/invereskprecinct-parkrun",
+    "url": "https://www.athrecs.com/races/invereskprecinct-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/invereskprecinct-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Inveresk Precinct parkrun",
+        "description": "Inveresk Precinct parkrun is a parkrun event in Tasmania, Inveresk Precinct, Launceston, Australia. Recorded disciplines include 5K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/invereskprecinct-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31T08:00+11:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Tasmania, Australia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tasmania",
+            "addressRegion": "Tasmania",
+            "addressCountry": "AU"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/race-across-scotland",
+    "url": "https://www.athrecs.com/races/race-across-scotland",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/race-across-scotland",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Race Across Scotland",
+        "description": "Race Across Scotland is a running event in Dumfries & Galloway, Community Hub, Portpatrick, Borders, Scotland. Recorded disciplines include 215mi, Ultra. The listed surface is trail. The next listed date is Saturday, 7 August 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/race-across-scotland",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-08-07T06:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Dumfries & Galloway, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dumfries & Galloway",
+            "addressRegion": "Scotland",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/monsal-trail-half-marathon-satuday",
+    "url": "https://www.athrecs.com/races/monsal-trail-half-marathon-satuday",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/monsal-trail-half-marathon-satuday",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Monsal Trail April Half Marathon & 10K \u2014 Saturday",
+        "description": "Monsal Trail April Half Marathon & 10K \u2014 Saturday is a running event in Bakewell, Derbyshire, Bakewell Station and the Monsal Trail, England. Recorded disciplines include 10K, half marathon. The listed surface is mixed. The listed organiser is Nice Work. The next listed date is Saturday, 10 April 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/monsal-trail-half-marathon-satuday",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-10T10:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Bakewell, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bakewell",
+            "addressRegion": "Derbyshire",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Nice Work"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/windsor-trail-run-half-marathon-10k-august",
+    "url": "https://www.athrecs.com/races/windsor-trail-run-half-marathon-10k-august",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/windsor-trail-run-half-marathon-10k-august",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Windsor Trail Run Half Marathon & 10K",
+        "description": "Windsor Trail Run Half Marathon & 10K is a running event in Windsor, Midlands, Alexandra Gardens, England. Recorded disciplines include 10K, half marathon. The listed surface is trail. The listed organiser is RunThrough Events. The next listed date is Sunday, 29 August 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/windsor-trail-run-half-marathon-10k-august",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-08-29T09:20+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Windsor, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Windsor",
+            "addressRegion": "Midlands",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "RunThrough Events"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://www.runthrough.co.uk/event/windsor-trail-run-august-2027",
+            "price": 42,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/runthrough-chase-the-moon-battersea-february-2027",
+    "url": "https://www.athrecs.com/races/runthrough-chase-the-moon-battersea-february-2027",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/runthrough-chase-the-moon-battersea-february-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Chase the Moon Battersea Park 5K & 10K \u2014 February 2027",
+        "description": "Chase the Moon Battersea Park 5K & 10K \u2014 February 2027 is a running event in London, Greater London, Battersea Park, England. Recorded disciplines include 10K, 5K. The listed surface is road. The listed organiser is RunThrough. The next listed date is Wednesday, 24 February 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/runthrough-chase-the-moon-battersea-february-2027",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-02-24T19:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "Greater London",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "RunThrough"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/the-one-in-the-park-victoria-park-half-marathon",
+    "url": "https://www.athrecs.com/races/the-one-in-the-park-victoria-park-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/the-one-in-the-park-victoria-park-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "One in the Park \u2014 Victoria Park",
+        "description": "One in the Park \u2014 Victoria Park is a running event in London, Greater London, Victoria Park, Tower Hamlets, England. Recorded disciplines include half marathon. The listed surface is road. The listed organiser is OneRace Events. The next listed date is Sunday, 15 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/the-one-in-the-park-victoria-park-half-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-15T09:30+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "Greater London",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "OneRace Events"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://enter.onerace.events/register/onerace-events/one-in-the-park-victoria-november",
+            "price": 35,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/utmb-world-series-istria",
+    "url": "https://www.athrecs.com/races/utmb-world-series-istria",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/utmb-world-series-istria",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Istria 100 by UTMB",
+        "description": "Istria 100 by UTMB is a running event in Umag, Istria, Croatia. Recorded disciplines include 100K, 100M, 20K, 21.5K, 42.1K, 50K, Ultra. The listed surface is trail. The next listed date is Friday, 2 April 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2023 to 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/utmb-world-series-istria",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-02",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Umag, Istria, Croatia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Umag, Istria",
+            "addressRegion": "Umag, Istria",
+            "addressCountry": "HR"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/rb-milton-keynes-winter-half-marathon",
+    "url": "https://www.athrecs.com/races/rb-milton-keynes-winter-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/rb-milton-keynes-winter-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Milton Keynes Winter Half Marathon 2026",
+        "description": "Milton Keynes Winter Half Marathon 2026 is a running event in Milton Keynes, England. Recorded disciplines include half marathon. The listed surface is road. The next listed date is Sunday, 6 December 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2019. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/rb-milton-keynes-winter-half-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-06T09:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Milton Keynes, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Milton Keynes",
+            "addressRegion": "England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/marshfield-mudlark",
+    "url": "https://www.athrecs.com/races/marshfield-mudlark",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/marshfield-mudlark",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/amsterdam-half-marathon",
+    "url": "https://www.athrecs.com/races/amsterdam-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/amsterdam-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/kingdom-of-northumbria-coastal-ultra",
+    "url": "https://www.athrecs.com/races/kingdom-of-northumbria-coastal-ultra",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/kingdom-of-northumbria-coastal-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Kingdom of Northumbria Coastal Ultra",
+        "description": "Kingdom of Northumbria Coastal Ultra is a running event in Bamburgh, Northumberland, Bamburgh Castle, England. Recorded disciplines include Ultra. The listed surface is trail. The next listed date is Sunday, 14 March 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/kingdom-of-northumbria-coastal-ultra",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-03-14T08:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Bamburgh, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bamburgh",
+            "addressRegion": "Northumberland",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/utmb-world-series-oman",
+    "url": "https://www.athrecs.com/races/utmb-world-series-oman",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/utmb-world-series-oman",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Oman by UTMB\u00ae",
+        "description": "Oman by UTMB\u00ae is a running event in Oman. Recorded disciplines include 100K, 100M, 20K, 50K, 52.7K, Ultra. The listed surface is trail. The next listed date is Thursday, 10 December 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2019. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/utmb-world-series-oman",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-12-10",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Oman, Oman",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Oman",
+            "addressRegion": "Oman",
+            "addressCountry": "OM"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/fife-pilgrim-way-ultra",
+    "url": "https://www.athrecs.com/races/fife-pilgrim-way-ultra",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/fife-pilgrim-way-ultra",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Fife Pilgrim Way Ultra",
+        "description": "Fife Pilgrim Way Ultra is a running event in Fife, North Queensferry, Scotland. Recorded disciplines include Ultra. The listed surface is mixed. The next listed date is Saturday, 1 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/fife-pilgrim-way-ultra",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-01T05:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Fife, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Fife",
+            "addressRegion": "Scotland",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/berat-green-half-marathon",
+    "url": "https://www.athrecs.com/races/berat-green-half-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/berat-green-half-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Berat Green Half Marathon",
+        "description": "Berat Green Half Marathon is a running event in Berat, Berat County, Bulevard Republika and Berat historic district, Albania. Recorded disciplines include 10K, half marathon. The listed surface is road. The listed organiser is Berat Green Half Marathon. The next listed date is Sunday, 4 April 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/berat-green-half-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-04T09:00+02:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Berat, Albania",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Berat",
+            "addressRegion": "Berat County",
+            "addressCountry": "AL"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Berat Green Half Marathon"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/finsbury-park-half-marathon-5k-10k-half-marathon-april",
+    "url": "https://www.athrecs.com/races/finsbury-park-half-marathon-5k-10k-half-marathon-april",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/finsbury-park-half-marathon-5k-10k-half-marathon-april",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Finsbury Park 5K, 10K & Half Marathon",
+        "description": "Finsbury Park 5K, 10K & Half Marathon is a running event in London, South of England, Finsbury Park, England. Recorded disciplines include 10K, 5K, half marathon. The listed surface is road. The next listed date is Sunday, 4 April 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/finsbury-park-half-marathon-5k-10k-half-marathon-april",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-04T08:30+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "London, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "South of England",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/edinburgh-marathon-festival-team-relay",
+    "url": "https://www.athrecs.com/races/edinburgh-marathon-festival-team-relay",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/edinburgh-marathon-festival-team-relay",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Edinburgh Marathon Festival Team Relay",
+        "description": "Edinburgh Marathon Festival Team Relay is a running event in Edinburgh, Holyrood Park Road, Scotland. Recorded disciplines include Marathon. The listed surface is road. The next listed date is Sunday, 30 May 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/edinburgh-marathon-festival-team-relay",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-05-30T09:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Edinburgh, Scotland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Edinburgh",
+            "addressRegion": "Scotland",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/craig-o-barns",
+    "url": "https://www.athrecs.com/races/craig-o-barns",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/craig-o-barns",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": []
+  },
+  {
+    "path": "/races/exeter-half-marathon-2027",
+    "url": "https://www.athrecs.com/races/exeter-half-marathon-2027",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/exeter-half-marathon-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Exeter Half Marathon & Riverside 5 \u2014 2027",
+        "description": "Exeter Half Marathon & Riverside 5 \u2014 2027 is a running event in Exeter, Devon, Piazza Terracina, Exeter Quayside and Riverside Valley Park, England. Recorded disciplines include 5mi, half marathon. The listed surface is mixed. The listed organiser is Exeter City Community Trust. The next listed date is Saturday, 6 February 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/exeter-half-marathon-2027",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-02-06T10:00+00:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Exeter, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Exeter",
+            "addressRegion": "Devon",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Exeter City Community Trust"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://exetercct.org/running-events/exeter-half-marathon/",
+            "price": 36,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/liverpool-half-marathon-10-miler",
+    "url": "https://www.athrecs.com/races/liverpool-half-marathon-10-miler",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/liverpool-half-marathon-10-miler",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Liverpool Half Marathon & 10 Miler",
+        "description": "Liverpool Half Marathon & 10 Miler is a running event in Liverpool, Merseyside, Hill Dickinson Stadium, Sefton Park and Royal Albert Dock, England. Recorded disciplines include 10M, 10mi, half marathon. The listed surface is road. The listed organiser is BTR Liverpool. The next listed date is Sunday, 14 March 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/liverpool-half-marathon-10-miler",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-03-14",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Liverpool, England",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Liverpool",
+            "addressRegion": "Merseyside",
+            "addressCountry": "GB"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "BTR Liverpool"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/park-west-5k-2027",
+    "url": "https://www.athrecs.com/races/park-west-5k-2027",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/park-west-5k-2027",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Life Style Sports Park West 5K & 10K",
+        "description": "Life Style Sports Park West 5K & 10K is a running event in Dublin, County Dublin, Park West, Ireland. Recorded disciplines include 10K, 5K. The listed surface is road. The next listed date is Tuesday, 20 July 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/park-west-5k-2027",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-07-20",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Dublin, Ireland",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dublin",
+            "addressRegion": "County Dublin",
+            "addressCountry": "IE"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/run-jersey-half-marathon-and-road-race-festival",
+    "url": "https://www.athrecs.com/races/run-jersey-half-marathon-and-road-race-festival",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/run-jersey-half-marathon-and-road-race-festival",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Jersey Half Marathon",
+        "description": "Jersey Half Marathon is a running event in St Brelade, Les Quennevais Sports Centre and Jersey's west coast, Jersey. Recorded disciplines include half marathon. The listed surface is road. The listed organiser is Run Jersey Events. The next listed date is Sunday, 13 June 2027. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/run-jersey-half-marathon-and-road-race-festival",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-06-13T08:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "St Brelade, Jersey",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "St Brelade",
+            "addressRegion": "Jersey",
+            "addressCountry": "JE"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Run Jersey Events"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "url": "https://race-nation.co.uk/register/run-jersey-events",
+            "price": 35,
+            "priceCurrency": "GBP",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/races/two-oceans-marathon",
+    "url": "https://www.athrecs.com/races/two-oceans-marathon",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/two-oceans-marathon",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Two Oceans Marathon",
+        "description": "Two Oceans Marathon is a running event in Cape Town, Western Cape, Cape Peninsula, South Africa. Recorded disciplines include half marathon, Ultra. The listed surface is road. The listed organiser is Two Oceans Marathon NPC. The next listed date is Saturday, 3 April 2027. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2022 to 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/two-oceans-marathon",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2027-04-03",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Cape Town, South Africa",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cape Town",
+            "addressRegion": "Western Cape",
+            "addressCountry": "ZA"
+          }
+        },
+        "sport": "Running",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Two Oceans Marathon NPC"
+        },
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/wa-active-oman-half-marthon-7244878",
+    "url": "https://www.athrecs.com/races/wa-active-oman-half-marthon-7244878",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/wa-active-oman-half-marthon-7244878",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "active oman half marthon",
+        "description": "active oman half marthon is a running event in Muscat, Muscat (OMA), Oman. The listed surface is road. The next listed date is Saturday, 14 November 2026. Check the organiser's information for entry and race-day arrangements.",
+        "url": "https://www.athrecs.com/races/wa-active-oman-half-marthon-7244878",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-11-14",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Muscat, Oman",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Muscat",
+            "addressRegion": "Muscat",
+            "addressCountry": "OM"
+          }
+        },
+        "sport": "Running",
+        "offers": []
+      }
+    ]
+  },
+  {
+    "path": "/races/altonabeach-parkrun",
+    "url": "https://www.athrecs.com/races/altonabeach-parkrun",
+    "status": 200,
+    "canonical": "https://www.athrecs.com/races/altonabeach-parkrun",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "events": [
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Altona Beach parkrun",
+        "description": "Altona Beach parkrun is a parkrun event in Altona Beach, Victoria, Apex Park, Australia. Recorded disciplines include 5K. The listed surface is mixed. The listed organiser is parkrun. The next listed date is Saturday, 31 October 2026. Check the organiser's information for entry and race-day arrangements. The ATHRECS archive includes editions from 2026. This describes the editions recorded here, not the event's founding date or complete history.",
+        "url": "https://www.athrecs.com/races/altonabeach-parkrun",
+        "image": "https://www.athrecs.com/athrecs-logo.png",
+        "startDate": "2026-10-31T08:00+11:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Altona Beach, Australia",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Altona Beach",
+            "addressRegion": "Victoria",
+            "addressCountry": "AU"
+          }
+        },
+        "sport": "Parkrun",
+        "organizer": {
+          "@type": "Organization",
+          "name": "parkrun"
+        },
+        "offers": []
+      }
+    ]
+  }
+]

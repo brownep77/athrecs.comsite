@@ -14,6 +14,7 @@ export function catalogueCalendarDetails(
     city?: string | null;
     county?: string | null;
     state?: string | null;
+    region?: string | null;
     country?: string | null;
   },
   date: string,
@@ -28,6 +29,7 @@ export function catalogueCalendarDetails(
     detail?.place?.city ?? event.city,
     detail?.place?.county ?? event.county,
     detail?.place?.state ?? event.state,
+    event.region,
     event.country,
   ];
   const location = [

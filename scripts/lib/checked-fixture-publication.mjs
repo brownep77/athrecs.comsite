@@ -28,20 +28,28 @@ export async function publishCheckedFixtures(sql, publishing, details, review = 
         if (rows.length > 1) throw new Error(`Duplicate reviewed edition: ${key} ${distance}`);
         const row = rows[0];
         const addition = review.additions?.[`${key}|${distance}`];
+        // A reviewed timed challenge has a duration and no fixed total distance.
+        // Require an explicit positive duration that matches the published code;
+        // zero-kilometre fixed/unknown options must still fail the absent baseline.
+        const reviewedTimedProgramme =
+          Number.isFinite(addition?.timedDurationHours) &&
+          addition.timedDurationHours > 0 &&
+          distance === `${addition.timedDurationHours}H`;
         const reviewedAddition =
           review.baseline?.[`${key}|${distance}`] === null &&
           addition?.eventId === events[0].id &&
           Number.isFinite(addition.distanceKm) &&
           (addition.distanceKm > 0 ||
             (addition.distanceKm === 0 &&
-              [
-                "Track & field",
-                "Cyclo-cross U12",
-                "Cyclo-cross U15 - 12 years",
-                "Cyclo-cross U15 - 13 years",
-                "Cyclo-cross U15 - 14 years",
-              ].includes(distance) &&
-              addition.nonDistanceProgramme === true)) &&
+              (reviewedTimedProgramme ||
+                ([
+                  "Track & field",
+                  "Cyclo-cross U12",
+                  "Cyclo-cross U15 - 12 years",
+                  "Cyclo-cross U15 - 13 years",
+                  "Cyclo-cross U15 - 14 years",
+                ].includes(distance) &&
+                  addition.nonDistanceProgramme === true)))) &&
           !!addition.status;
         if (review.baseline) {
           const expected = review.baseline[`${key}|${distance}`];

@@ -1,3 +1,4 @@
+import { verifiedGuideOrganiser } from "../athrecs/race-organiser.ts";
 import { raceSearchTitle } from "../athrecs/race-search-title.ts";
 import type { MarathonCountryGuide, RoadMarathon } from "@/data/road-marathons/types";
 import { halfMarathonCountry } from "@/data/road-half-marathons/countries";
@@ -252,6 +253,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
       sport: "Running",
       description: race.description,
       sameAs: edition.sourceUrl,
+      organizer: verifiedGuideOrganiser(race.slug, race.officialUrl),
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       location: {

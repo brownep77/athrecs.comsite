@@ -1,4 +1,5 @@
 import { isParkrunResult } from "./parkrun-timing.ts";
+import { normalizeDistanceCode } from "./distance.ts";
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory, SourcePerformance } from "./source-performance-history";
 import { countryFlag } from "./country-flags.ts";
@@ -28,6 +29,10 @@ export function isTrailHistoryResult(row: SourcePerformance): boolean {
 
 const crossCountryDiscipline = /\b(?:cross[ -]country|xc)\b/i;
 export function isCrossCountryHistoryResult(row: SourcePerformance): boolean {
+  if (
+    /\b(?:ski(?:ing)?|rollerski(?:ing)?|langrenn)\b/i.test(`${row.discipline} ${row.meeting ?? ""}`)
+  )
+    return false;
   return (
     crossCountryDiscipline.test(row.discipline) ||
     crossCountryDiscipline.test(row.meeting ?? "") ||
@@ -161,7 +166,8 @@ export function profileAchievementResults(
   options: { includeUnreviewedHistory?: boolean } = {},
 ): AchievementResult[] {
   const normal = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
-  const distance = (s: string) => normal(s).replace(/^half marathon$/, "half");
+  const distance = (s: string) =>
+    normal(normalizeDistanceCode(s)).replace(/^half marathon$/, "half");
   const history = additionalHistoryResults(histories, options.includeUnreviewedHistory).filter(
     ({ performance: row }) =>
       !results.some(

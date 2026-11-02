@@ -707,6 +707,18 @@ function SignedInAccount() {
                       affiliation
                       <OptionalLabel />
                     </div>
+                    {account.data.signupLocation ? (
+                      <div className="mt-3 rounded-lg border border-border bg-elevated p-3 text-sm">
+                        <dl>
+                          <dt className="font-medium text-fg">Location supplied at sign-up</dt>
+                          <dd className="mt-1 text-muted">{account.data.signupLocation}</dd>
+                        </dl>
+                        <p className="mt-2 text-xs text-muted">
+                          Private account information. You can add separate town or postcode details
+                          below if you wish.
+                        </p>
+                      </div>
+                    ) : null}
                     <div className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                       <TextField
                         label="Country"

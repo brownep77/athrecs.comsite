@@ -1,0 +1,637 @@
+{
+  "slug": "nathalie-pohl-english-channel",
+  "name": "Nathalie Pohl",
+  "country": "Germany",
+  "aliases": [
+    "Nathalie Luisa Pohl"
+  ],
+  "highlight": "2016 solo crossing · 11 hours 10 minutes · 2026 team relay also documented",
+  "biography": [
+    "Nathalie Pohl is a German open-water swimmer born in Marburg an der Lahn on 13 October 1994. She began swimming lessons at five. At eighteen, rereading a childhood book about a woman who crossed the English Channel helped turn a familiar story into a personal goal. Her first open-water swim came in June 2014, when she crossed the width of Lake Constance.",
+    "The Channel required another stage of preparation. An attempt in 2015 ended when her coach stopped the swim. Pohl’s account of the following year describes more intensive physical and mental training, a departure in darkness and demanding currents during the final hours. The CS&PF records her successful England-to-France crossing on 21 September 2016 in 11 hours 10 minutes, escorted by Eddie Spelling aboard Mighty Mo.",
+    "In July 2026 she returned as part of an international four-woman relay with Mariam Binladen, Mariana Moura Santos and Jasmine Harrison. The project marked the centenary of Gertrude Ederle’s crossing and supported children learning to swim through Swim for Kids. Its published 11-hour-28-minute result belongs to the whole team. The CSA describes this later crossing as a Special Category Swim; it is presented separately from Pohl’s solo achievement."
+  ],
+  "flags": [
+    {
+      "code": "DE",
+      "label": "Germany",
+      "abbr": "GER"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Country",
+      "value": "Germany"
+    },
+    {
+      "label": "Born",
+      "value": "13 October 1994"
+    },
+    {
+      "label": "Birthplace",
+      "value": "Marburg an der Lahn, Germany"
+    },
+    {
+      "label": "First open-water swim",
+      "value": "Lake Constance, June 2014"
+    },
+    {
+      "label": "Selected solo crossing",
+      "value": "21 September 2016 · 11 hours 10 minutes"
+    },
+    {
+      "label": "2026 relay role",
+      "value": "One of four named swimmers; 11:28 is the team time"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "After an unsuccessful attempt the previous year, Pohl returned with increased physical and mental preparation and completed the England-to-France swim."
+        },
+        {
+          "text": "Wednesday, 21 September 2016 · Start or finish date not specified by the source",
+          "label": "Recorded swim date"
+        },
+        {
+          "text": "11h 10m 0s",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Exact finish date not confirmed · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "Her original account reports departure shortly before 02:00, but does not attach a departure date or time zone to that clock. The annual record supplies a swim date only.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Dover, England",
+          "label": "Departure"
+        },
+        {
+          "text": "France",
+          "label": "Arrival"
+        },
+        {
+          "text": "Eddie Spelling",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Mighty Mo",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Channel Swimming & Piloting Federation",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "The athlete describes swimming the opening hours in darkness and strong currents during the final three hours.",
+          "label": "Conditions"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CS&PF annual table, year selector 2016: the 21st September / Nathalie Pohl row records Eddie Spelling / Mighty Mo and 11:10:00. Dover’s individual entry corroborates the route and date. The annual table’s generic pending-ratification wording is retained through documented status; no independent committee decision or original observer log was inspected. The official milestone page’s 5 October label is not substituted for the event row."
+        },
+        {
+          "text": "CS&PF: 2016 swim records — Nathalie Pohl",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "With the year selector set to 2016, the 21st September row names Nathalie Pohl, Eddie Spelling / Mighty Mo and 11:10:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual page carries a generic pending-ratification disclaimer; the selected row alone does not establish a committee decision. Select 2016 to find the named row.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Dover.UK.com: Nathalie Pohl, 21 September 2016",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2016-09-21/nathalie-pohl"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Corroborates the swim date, England-to-France route, CS&PF, Eddie Spelling and Mighty Mo.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; the date is not explicitly labelled departure or arrival.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Nathalie Pohl: original English Channel account",
+          "url": "https://www.nathaliepohl.de/ereignisse/nathalie-pohl-durchquert-mit-deutschem-rekord-den-aermelkanal/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The athlete account describes the unsuccessful preceding attempt, increased preparation, a departure shortly before 02:00, darkness and strong late currents.",
+          "label": "Supports"
+        },
+        {
+          "text": "The narrative clock lacks a departure calendar date; it remains an attributed timing note.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Nathalie Pohl: official career milestones",
+          "url": "https://www.nathaliepohl.de/milestones/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "June 2014 Lake Constance debut, the 2015 unsuccessful Channel attempt, and the 17 July 2026 women’s relay.",
+          "label": "Supports"
+        },
+        {
+          "text": "The solo Channel milestone is labelled 5 October 2016; the CS&PF event row gives 21 September. The timeline label is not adopted as the swim date.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "pohl-2016"
+    },
+    {
+      "title": "Nathalie Pohl Relay — four swimmers",
+      "lines": [
+        {
+          "text": "Published account checked"
+        },
+        {
+          "text": "All four swimmers are individually named in CSA swim 6087. The team commemorated the centenary of Gertrude Ederle’s crossing and supported Swim for Kids. The 11:28 duration is a team result, not a second solo time for Pohl. CSA describes the performance as a Special Category Swim."
+        },
+        {
+          "text": "Special Category Swim · ratification not independently confirmed. The reported clocks do not exactly reconcile with the published elapsed time."
+        },
+        {
+          "text": "Nathalie Pohl · Mariam Binladen · Mariana Moura Santos · Jasmine Harrison",
+          "label": "Nathalie Pohl Relay"
+        },
+        {
+          "text": "11h 28m",
+          "label": "Team elapsed time"
+        },
+        {
+          "text": "Duration of the team’s complete swim"
+        },
+        {
+          "text": "Friday, 17 July 2026 · About 13:30 · Pohl’s original relay account says approximately 13:30 on 17 July; time zone is unstated.",
+          "label": "Started"
+        },
+        {
+          "text": "Saturday, 18 July 2026 · 01:12 · CSA swim 6087 explicitly gives Completed 18th July 2026 1:12am; time zone is unstated.",
+          "label": "Finished"
+        },
+        {
+          "text": "The approximate athlete-reported departure and CSA completion clock are preserved independently. They do not precisely reconcile with the published elapsed time; no clock, time zone or day has been calculated from the duration.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Relay · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "England → France",
+          "label": "Direction"
+        },
+        {
+          "text": "Stuart Gleeson",
+          "label": "Pilot / piloting team"
+        },
+        {
+          "text": "Sea Leopard",
+          "label": "Escort vessel"
+        },
+        {
+          "text": "Jon Miell",
+          "label": "Official observers"
+        },
+        {
+          "text": "Channel Swimming Association",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA swim 6087 explicitly names Nathalie Pohl, Mariam Binladen, Mariana Moura Santos and Jasmine Harrison under Swimmers, identifies Relay (4 Swimmers), and supplies the completion date/clock, team time and crew. The association entry inspected on 31 October 2026 does not state a final ratification verdict. The special-category qualification remains visible. The departure date and approximate clock come from the athlete’s own relay account."
+        },
+        {
+          "text": "CSA: Nathalie Pohl Relay, 2026 — swim 6087",
+          "url": "https://www.channelswimmingassociation.com/swim/6087/nathalie-pohl-relay"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicit four-person roster, 18 July 2026 01:12 completion, 11:28 team time, England-to-France route, Stuart Gleeson / Sea Leopard, observer Jon Miell, and Special Category Swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "The association entry inspected on 31 October 2026 does not state a final ratification verdict; no ratification decision is claimed.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Nathalie Pohl: original women’s Channel relay account",
+          "url": "https://www.nathaliepohl.de/ereignisse/aermelkanal-frauenstaffel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Reports departure on 17 July at approximately 13:30, the Ederle centenary context, team participation and support for Swim for Kids.",
+          "label": "Supports"
+        },
+        {
+          "text": "Approximate departure clock and CSA arrival clock are reported independently; no time zone or arithmetic reconciliation is inferred.",
+          "label": "Limitations"
+        },
+        {
+          "text": "Nathalie Pohl: official career milestones",
+          "url": "https://www.nathaliepohl.de/milestones/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "June 2014 Lake Constance debut, the 2015 unsuccessful Channel attempt, and the 17 July 2026 women’s relay.",
+          "label": "Supports"
+        },
+        {
+          "text": "The solo Channel milestone is labelled 5 October 2016; the CS&PF event row gives 21 September. The timeline label is not adopted as the swim date.",
+          "label": "Limitations"
+        }
+      ],
+      "id": "pohl-relay-2026"
+    }
+  ],
+  "otherEvents": [],
+  "milestones": [
+    {
+      "title": "Born in Marburg",
+      "lines": [
+        {
+          "text": "Thursday, 13 October 1994"
+        },
+        {
+          "text": "Her official biography identifies Marburg an der Lahn as her birthplace."
+        }
+      ]
+    },
+    {
+      "title": "Open-water debut",
+      "lines": [
+        {
+          "text": "June 2014"
+        },
+        {
+          "text": "Crossed the width of Lake Constance, beginning the open-water progression described in her athlete biography."
+        }
+      ]
+    },
+    {
+      "title": "First Channel attempt ends",
+      "lines": [
+        {
+          "text": "2015"
+        },
+        {
+          "text": "Her coach stopped the attempt; this is a preparation milestone, not a completed crossing."
+        }
+      ]
+    },
+    {
+      "title": "Solo Channel success",
+      "lines": [
+        {
+          "text": "Wednesday, 21 September 2016"
+        },
+        {
+          "text": "The CS&PF annual record lists 11:10:00 with Eddie Spelling and Mighty Mo."
+        }
+      ]
+    },
+    {
+      "title": "Four-woman relay completed",
+      "lines": [
+        {
+          "text": "Saturday, 18 July 2026"
+        },
+        {
+          "text": "The Nathalie Pohl Relay finished in 11:28; CSA labels the swim Special Category and ratification has not been independently confirmed."
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "title": "Nathalie Pohl’s Channel crossing account",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.nathaliepohl.de/ereignisse/nathalie-pohl-durchquert-mit-deutschem-rekord-den-aermelkanal/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "The athlete’s written account of her solo crossing and preparation. This link is not represented as a continuous recording or observer log."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Women’s Channel relay: athlete account",
+      "lines": [
+        {
+          "text": "Open media page",
+          "url": "https://www.nathaliepohl.de/ereignisse/aermelkanal-frauenstaffel/"
+        },
+        {
+          "text": "Athlete media"
+        },
+        {
+          "text": "Official account of the 2026 relay and its purpose, with departure details. External athlete page; no recording rights or full-crossing footage claimed."
+        },
+        {
+          "text": "Link checked 2026-10-31"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Nathalie Pohl?",
+      "value": "This profile includes 1 selected solo performance and 1 named relay participation for Nathalie Pohl. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Nathalie Pohl’s featured English Channel swim?",
+      "value": "The featured swim is recorded on Wednesday, 21 September 2016. The source does not establish whether that date means departure or arrival."
+    },
+    {
+      "label": "How long did Nathalie Pohl’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 11 hours, 10 minutes and 0 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Nathalie Pohl: official athlete biography",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nathaliepohl.de/about/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Full name, birth date and birthplace, childhood swimming and transition to open water.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: solo Channel swimmers — Nathalie Pohl",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/solo-channel-swimmers"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The Pohl, Nathalie row explicitly lists Germany, one solo crossing and 2016.",
+          "label": "Supports"
+        },
+        {
+          "text": "Career count is the entry inspected on the check date, not an assertion about all later activity.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF: 2016 swim records — Nathalie Pohl",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://cspf.co.uk/cs-and-pf-swims"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "With the year selector set to 2016, the 21st September row names Nathalie Pohl, Eddie Spelling / Mighty Mo and 11:10:00.",
+          "label": "Supports"
+        },
+        {
+          "text": "The annual page carries a generic pending-ratification disclaimer; the selected row alone does not establish a committee decision. Select 2016 to find the named row.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com: Nathalie Pohl, 21 September 2016",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2016-09-21/nathalie-pohl"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Corroborates the swim date, England-to-France route, CS&PF, Eddie Spelling and Mighty Mo.",
+          "label": "Supports"
+        },
+        {
+          "text": "Secondary historical compilation; the date is not explicitly labelled departure or arrival.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Nathalie Pohl: original English Channel account",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nathaliepohl.de/ereignisse/nathalie-pohl-durchquert-mit-deutschem-rekord-den-aermelkanal/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "The athlete account describes the unsuccessful preceding attempt, increased preparation, a departure shortly before 02:00, darkness and strong late currents.",
+          "label": "Supports"
+        },
+        {
+          "text": "The narrative clock lacks a departure calendar date; it remains an attributed timing note.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Nathalie Pohl: official career milestones",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nathaliepohl.de/milestones/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "June 2014 Lake Constance debut, the 2015 unsuccessful Channel attempt, and the 17 July 2026 women’s relay.",
+          "label": "Supports"
+        },
+        {
+          "text": "The solo Channel milestone is labelled 5 October 2016; the CS&PF event row gives 21 September. The timeline label is not adopted as the swim date.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "CSA: Nathalie Pohl Relay, 2026 — swim 6087",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/6087/nathalie-pohl-relay"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Explicit four-person roster, 18 July 2026 01:12 completion, 11:28 team time, England-to-France route, Stuart Gleeson / Sea Leopard, observer Jon Miell, and Special Category Swim.",
+          "label": "Supports"
+        },
+        {
+          "text": "The association entry inspected on 31 October 2026 does not state a final ratification verdict; no ratification decision is claimed.",
+          "label": "Limitations"
+        }
+      ]
+    },
+    {
+      "title": "Nathalie Pohl: original women’s Channel relay account",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.nathaliepohl.de/ereignisse/aermelkanal-frauenstaffel/"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Reports departure on 17 July at approximately 13:30, the Ederle centenary context, team participation and support for Swim for Kids.",
+          "label": "Supports"
+        },
+        {
+          "text": "Approximate departure clock and CSA arrival clock are reported independently; no time zone or arithmetic reconciliation is inferred.",
+          "label": "Limitations"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "English Channel solo crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Wednesday, 21 September 2016 (recorded swim date)"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "11h 10m 0s",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "pohl-2016"
+    },
+    {
+      "title": "Nathalie Pohl Relay — four swimmers",
+      "lines": [
+        {
+          "text": "Relay · team performance"
+        },
+        {
+          "text": "Friday, 17 July 2026 – Saturday, 18 July 2026"
+        },
+        {
+          "text": "England → France"
+        },
+        {
+          "text": "Special Category Swim · ratification not independently confirmed. The reported clocks do not exactly reconcile with the published elapsed time."
+        },
+        {
+          "text": "Nathalie Pohl · Mariam Binladen · Mariana Moura Santos · Jasmine Harrison",
+          "label": "Nathalie Pohl Relay"
+        },
+        {
+          "text": "11h 28m",
+          "label": "Team elapsed time"
+        },
+        {
+          "text": "About 13:30 · Time zone not specified",
+          "label": "Start clock"
+        },
+        {
+          "text": "01:12 · Time zone not specified",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Published account checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "pohl-relay-2026"
+    }
+  ],
+  "nativeOtherEvents": [],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-0510418486c9d8b3a2ab"
+}

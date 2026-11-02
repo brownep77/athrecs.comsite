@@ -21,7 +21,15 @@ export const Route = createFileRoute("/api/signup-alerts")({
         const { deliverProfileSetupAlerts } =
           await import("@/lib/athrecs/profile-setup-alerts.server");
         const profileSetups = await deliverProfileSetupAlerts(sql);
-        return Response.json({ ...alerts, welcomes, profileSetups }, { headers });
+        const { deliverRaceEditAlerts } = await import("@/lib/athrecs/race-edit-alerts.server");
+        const raceEdits = await deliverRaceEditAlerts(sql);
+        const { deliverStaffSubmissionAlerts } =
+          await import("@/lib/athrecs/staff-submission-alerts.server");
+        const submissions = await deliverStaffSubmissionAlerts(sql);
+        return Response.json(
+          { ...alerts, welcomes, profileSetups, raceEdits, submissions },
+          { headers },
+        );
       },
     },
   },

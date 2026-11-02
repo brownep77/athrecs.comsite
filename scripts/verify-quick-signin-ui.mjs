@@ -1,3 +1,4 @@
+import { signupDetails } from "./fixtures/signup-details.mjs";
 import assert from "node:assert/strict";
 import { generateKeyPairSync } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -90,7 +91,7 @@ try {
   const open = async (mode = "signin", callback = "/athlete-account") => {
     await page.goto(
       `${origin}/athlete-account?auth=1&authMode=${mode}&returnTo=${encodeURIComponent(callback)}`,
-      { waitUntil: "networkidle" },
+      { waitUntil: "networkidle", timeout: 60000 },
     );
     const dialog = page.getByRole("dialog");
     await dialog.getByRole("button", { name: "Continue with Google", exact: true }).waitFor();
@@ -140,7 +141,7 @@ try {
       headers: { "content-type": "application/json", origin },
       body: JSON.stringify({
         email: legacyEmail,
-        name: "Legacy Test Runner",
+        ...signupDetails("Legacy Test Runner"),
         password: "Initial-password-123!",
       }),
     });
@@ -191,13 +192,56 @@ try {
     await dialog.getByRole("button", { name: "Continue with an email code" }).click();
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).waitFor();
 
-    // Both code signup and an explicit signup link start with only an email.
+    // Registration needs four brief details; ordinary sign-in above still needs only email.
     dialog = await open("signup");
-    assert.equal(await dialog.getByRole("textbox").count(), 1);
-    assert.equal(await dialog.getByText("Find my race results", { exact: true }).count(), 1);
+    assert.equal(await dialog.getByRole("textbox").count(), 4);
+    assert.equal(await dialog.getByRole("combobox").count(), 1);
+    assert.equal(await dialog.getByText("Find my race results", { exact: true }).count(), 0);
     await dialog.getByLabel("Email address", { exact: true }).fill("quick-runner@example.test");
+    const beforeSignup = sent.length;
+    const continueWithEmail = dialog.getByRole("button", {
+      name: "Continue with email",
+      exact: true,
+    });
+    await continueWithEmail.click();
+    assert.equal(sent.length, beforeSignup, "Missing registration fields prevent code submission");
+    await dialog.getByLabel("First name", { exact: true }).fill("Quick");
+    await continueWithEmail.click();
+    assert.equal(
+      sent.length,
+      beforeSignup,
+      "A last name is required independently of the first name",
+    );
+    await dialog.getByLabel("Last name", { exact: true }).fill("Signup Runner");
+    await continueWithEmail.click();
+    assert.equal(sent.length, beforeSignup, "Country is required before a code is sent");
+    await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("England");
+    await continueWithEmail.click();
+    assert.equal(sent.length, beforeSignup, "One location value is required before a code is sent");
+    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("   ");
+    await continueWithEmail.click();
+    await dialog
+      .getByRole("alert")
+      .filter({ hasText: "Enter a town, city, postcode or ZIP code" })
+      .waitFor();
+    assert.equal(sent.length, beforeSignup, "Spaces do not satisfy the location requirement");
+    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Norwich");
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await dialog.evaluate((element) => {
+      element.scrollTop = 0;
+    });
+    await page.screenshot({ path: "artifacts/signup-details-desktop.png" });
+    await page.setViewportSize({ width: 390, height: 844 });
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await dialog.evaluate((element) => {
+      element.scrollTop = 0;
+    });
+    await page.screenshot({ path: "artifacts/signup-details-mobile.png" });
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
+    assert.equal(await dialog.getByLabel("First name", { exact: true }).count(), 0);
+    assert.equal(await dialog.getByRole("combobox", { name: "Country", exact: true }).count(), 0);
+    await dialog.getByRole("button", { name: "Edit details or email", exact: true }).waitFor();
     assert(await dialog.getByRole("button", { name: /Resend code in/ }).isDisabled());
     const code = sent
       .findLast((mail) => mail.to.includes("quick-runner@example.test"))
@@ -280,6 +324,10 @@ try {
     await context.clearCookies();
     dialog = await open("signup");
     assert.equal(await dialog.getByRole("checkbox", { name: /Find my race results/ }).count(), 0);
+    await dialog.getByLabel("First name", { exact: true }).fill("Skip");
+    await dialog.getByLabel("Last name", { exact: true }).fill("Results Runner");
+    await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("England");
+    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("NR1 2AB");
     await dialog.getByLabel("Email address", { exact: true }).fill("skip-results@example.test");
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
@@ -294,8 +342,65 @@ try {
     await page.getByRole("link", { name: "Review available results now", exact: true }).click();
     await page.getByRole("button", { name: "Add clubs or profile links", exact: true }).waitFor();
     assert.equal(await page.getByLabel("Full racing name", { exact: false }).count(), 0);
+
+    // A new visitor who starts on Sign in must supply registration details after
+    // proving email ownership, then request a fresh code without creating a partial account.
+    await context.clearCookies();
+    dialog = await open("signin");
+    const freshEmail = "fresh-signin-runner@example.test";
+    await dialog.getByLabel("Email address", { exact: true }).fill(freshEmail);
+    await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
+    await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
+    const firstFreshCode = sent
+      .findLast((mail) => mail.to.includes(freshEmail))
+      .text.match(/\b([0-9]{6})\b/)[1];
+    await dialog.getByLabel("Six-digit code", { exact: true }).fill(firstFreshCode);
+    await dialog.getByRole("button", { name: "Verify code and continue" }).click();
+    await dialog.getByLabel("First name", { exact: true }).waitFor();
+    assert.equal(
+      await dialog.getByLabel("Email address", { exact: true }).inputValue(),
+      freshEmail,
+    );
+    await dialog.getByRole("status").filter({ hasText: "request a new code" }).waitFor();
+    assert.equal(
+      (await database.query('select count(*)::int as n from "user" where email=$1', [freshEmail]))
+        .rows[0].n,
+      0,
+      "The first sign-in attempt must not create an incomplete account",
+    );
+    await dialog.getByLabel("First name", { exact: true }).fill("Fresh");
+    await dialog.getByLabel("Last name", { exact: true }).fill("Signin Runner");
+    await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("France");
+    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Lyon");
+    const emailsBeforeRetry = sent.length;
+    await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
+    await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
+    assert.equal(sent.length, emailsBeforeRetry + 1, "Registration sends a fresh code");
+    const freshCode = sent
+      .findLast((mail) => mail.to.includes(freshEmail))
+      .text.match(/\b([0-9]{6})\b/)[1];
+    await dialog.getByLabel("Six-digit code", { exact: true }).fill(freshCode);
+    await dialog.getByRole("button", { name: "Verify code and continue" }).click();
+    await page.waitForURL(`${origin}/athlete-account?section=potential`);
+    assert.deepEqual(
+      (
+        await database.query(
+          'select name,"firstName","lastName","signupCountry","signupLocation" from "user" where email=$1',
+          [freshEmail],
+        )
+      ).rows,
+      [
+        {
+          name: "Fresh Signin Runner",
+          firstName: "Fresh",
+          lastName: "Signin Runner",
+          signupCountry: "France",
+          signupLocation: "Lyon",
+        },
+      ],
+    );
     console.log(
-      "PASS: email-only signup, wrong/correct codes, mobile layout, default result discovery, optional matching details, name capture, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
+      "PASS: required name/country/location signup, email-only existing login, new sign-in registration recovery with a fresh code, wrong/correct codes, mobile layout, default result discovery, optional matching details, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
     );
   }
   assert.deepEqual(errors, []);

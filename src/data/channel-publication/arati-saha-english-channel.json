@@ -1,0 +1,369 @@
+{
+  "slug": "arati-saha-english-channel",
+  "name": "Arati Saha",
+  "country": "India",
+  "aliases": [
+    "Arati Gupta"
+  ],
+  "highlight": "First Asian woman across the Channel · 29 September 1959",
+  "biography": [
+    "Arati Saha, also known as Arati Gupta after marriage, was an Indian swimmer born in Calcutta on 24 September 1940. She began swimming as a young child and developed into a national competitor before representing India in the 200 metres breaststroke at the 1952 Helsinki Olympics.",
+    "Her ambitions later moved from the pool to the English Channel. She drew encouragement from Brojen Das and the example of Mihir Sen, both successful Channel swimmers. After an unsuccessful earlier attempt, she completed the France-to-England crossing on 29 September 1959. The recorded swim lasted 16 hours and 20 minutes, from Cap Gris-Nez to Sandgate, and made her the first Asian woman to cross the Channel.",
+    "Saha received the Padma Shri in 1960. Her achievement remained part of India’s sporting memory: a commemorative postage stamp followed in 1999, five years after her death."
+  ],
+  "flags": [
+    {
+      "code": "IN",
+      "label": "India",
+      "abbr": "IND"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Also known as",
+      "value": "Arati Gupta (née Saha)"
+    },
+    {
+      "label": "Born",
+      "value": "24 September 1940, Calcutta (now Kolkata), India"
+    },
+    {
+      "label": "Died",
+      "value": "23 August 1994"
+    },
+    {
+      "label": "Olympic appearance",
+      "value": "Helsinki 1952 — women’s 200 metres breaststroke"
+    },
+    {
+      "label": "Channel distinction",
+      "value": "First Asian woman to swim the English Channel"
+    },
+    {
+      "label": "National honour",
+      "value": "Padma Shri, 1960"
+    }
+  ],
+  "crossings": [
+    {
+      "title": "First Asian woman’s English Channel crossing",
+      "lines": [
+        {
+          "text": "Ratifying body's record checked"
+        },
+        {
+          "text": "16h 20m",
+          "label": "Elapsed swim time"
+        },
+        {
+          "text": "Duration of the complete swim"
+        },
+        {
+          "text": "Exact start date not confirmed · Clock time not confirmed",
+          "label": "Started"
+        },
+        {
+          "text": "Tuesday, 29 September 1959 · Clock time not confirmed",
+          "label": "Finished"
+        },
+        {
+          "text": "The museum archive identifies 29 September as the successful crossing date. It supplies no precise departure or arrival clock for that successful swim. Its detailed August clock times concern an earlier unsuccessful attempt.",
+          "label": "Timing note"
+        },
+        {
+          "text": "Solo · 1-way",
+          "label": "Format"
+        },
+        {
+          "text": "France → England",
+          "label": "Direction"
+        },
+        {
+          "text": "Cap Gris-Nez, France",
+          "label": "Departure"
+        },
+        {
+          "text": "Sandgate, England",
+          "label": "Arrival"
+        },
+        {
+          "text": "Channel Swimming Association — public record inspected",
+          "label": "Ratification / historical recognition"
+        },
+        {
+          "text": "How this record was checked",
+          "heading": true
+        },
+        {
+          "text": "CSA individual record 2296 confirms India, France-to-England, 1959 and 16:20. Dover Museum supplies the successful date and endpoints; Olympedia supports the athlete’s identity and sporting biography. Original observation paperwork was not inspected."
+        },
+        {
+          "text": "Channel Swimming Association: Arati Saha, 1959",
+          "url": "https://www.channelswimmingassociation.com/swim/2296/arati-saha"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Dover Museum Channel Swimming archive: Arati Saha",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/saha-arati"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        },
+        {
+          "text": "Olympedia: Arati Saha",
+          "url": "https://www.olympedia.org/athletes/48275"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ],
+      "id": "arati-saha-1959"
+    }
+  ],
+  "otherEvents": [
+    {
+      "title": "Helsinki Olympics — women’s 200 m breaststroke",
+      "lines": [
+        {
+          "text": "Pool swimming · Race"
+        },
+        {
+          "text": "Saturday, 26 July 1952 (event date)"
+        },
+        {
+          "text": "Helsinki, Finland"
+        },
+        {
+          "text": "Completed heat 3 in 3:40.8, sixth in that heat and 33rd overall; did not advance."
+        },
+        {
+          "text": "200 m",
+          "label": "Published distance"
+        },
+        {
+          "text": "33rd overall; 6th in heat 3",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Historical account checked"
+        },
+        {
+          "text": "How this event was checked",
+          "heading": true
+        },
+        {
+          "text": "Olympedia’s 26 July round-one table lists Arati Saha, bib 188, and the 3:40.8 result. Its athlete biography explicitly connects her Olympic participation with the 1959 Channel crossing. Her 400 m freestyle non-start is excluded."
+        },
+        {
+          "text": "Olympedia — Helsinki 1952 women’s 200 m breaststroke",
+          "url": "https://www.olympedia.org/results/5354"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Round-one date, heat result and overall placing.",
+          "label": "Supports"
+        },
+        {
+          "text": "Olympedia — Arati Saha",
+          "url": "https://www.olympedia.org/athletes/48275"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Olympic-to-Channel career bridge; distinguishes the non-start in 400 m freestyle.",
+          "label": "Supports"
+        }
+      ],
+      "id": "arati-saha-event-1-helsinki-olympics-womens-200-m-breaststroke"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "Helsinki Olympics",
+      "lines": [
+        {
+          "text": "1952"
+        },
+        {
+          "text": "Represented India in the women’s 200 metres breaststroke."
+        }
+      ]
+    },
+    {
+      "title": "English Channel success",
+      "lines": [
+        {
+          "text": "29 September 1959"
+        },
+        {
+          "text": "Completed a France-to-England solo in 16 hours 20 minutes."
+        }
+      ]
+    },
+    {
+      "title": "Padma Shri",
+      "lines": [
+        {
+          "text": "1960"
+        },
+        {
+          "text": "Received India’s Padma Shri honour."
+        }
+      ]
+    },
+    {
+      "title": "Commemorative stamp",
+      "lines": [
+        {
+          "text": "1999"
+        },
+        {
+          "text": "India’s Department of Posts commemorated her on a postage stamp."
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "questions": [
+    {
+      "label": "Which English Channel swims are included for Arati Saha?",
+      "value": "This profile includes 1 selected solo performance for Arati Saha. It is a selected history, not a complete career total. A continuous multi-way swim counts as one performance."
+    },
+    {
+      "label": "When was Arati Saha’s featured English Channel swim?",
+      "value": "The featured swim finished on Tuesday, 29 September 1959. Its exact start date is not confirmed here."
+    },
+    {
+      "label": "How long did Arati Saha’s featured Channel swim take?",
+      "value": "The featured solo crossing has a published elapsed time of 16 hours and 20 minutes."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Channel Swimming Association: Arati Saha, 1959",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingassociation.com/swim/2296/arati-saha"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Dover Museum Channel Swimming archive: Arati Saha",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/saha-arati"
+        },
+        {
+          "text": "Checked 2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Olympedia: Arati Saha",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.olympedia.org/athletes/48275"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Olympic-to-Channel career bridge; distinguishes the non-start in 400 m freestyle.",
+          "label": "Supports"
+        }
+      ]
+    },
+    {
+      "title": "Olympedia — Helsinki 1952 women’s 200 m breaststroke",
+      "lines": [
+        {
+          "text": "Open source",
+          "url": "https://www.olympedia.org/results/5354"
+        },
+        {
+          "text": "Checked 2026-10-31"
+        },
+        {
+          "text": "Round-one date, heat result and overall placing.",
+          "label": "Supports"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "title": "First Asian woman’s English Channel crossing",
+      "lines": [
+        {
+          "text": "Solo swim"
+        },
+        {
+          "text": "Tuesday, 29 September 1959 (completion)"
+        },
+        {
+          "text": "France → England"
+        },
+        {
+          "text": "16h 20m",
+          "label": "Elapsed time"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Start clock"
+        },
+        {
+          "text": "Clock time not confirmed",
+          "label": "Finish clock"
+        },
+        {
+          "text": "Ratifying body's record checked · See the crossing record for qualifications and supporting evidence."
+        }
+      ],
+      "id": "arati-saha-1959"
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "title": "Helsinki Olympics — women’s 200 m breaststroke",
+      "lines": [
+        {
+          "text": "Pool swimming · Race"
+        },
+        {
+          "text": "Saturday, 26 July 1952 (event date)"
+        },
+        {
+          "text": "Helsinki, Finland"
+        },
+        {
+          "text": "Completed heat 3 in 3:40.8, sixth in that heat and 33rd overall; did not advance."
+        },
+        {
+          "text": "200 m",
+          "label": "Published distance"
+        },
+        {
+          "text": "33rd overall; 6th in heat 3",
+          "label": "Placing / category"
+        },
+        {
+          "text": "Historical account checked · Details and qualifications are in the career evidence."
+        }
+      ],
+      "id": "arati-saha-event-1-helsinki-olympics-womens-200-m-breaststroke"
+    }
+  ],
+  "checkedAt": "2026-10-31",
+  "revision": "channel-06372498f186b39aabab"
+}

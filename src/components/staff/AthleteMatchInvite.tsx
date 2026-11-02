@@ -77,8 +77,8 @@ export function AthleteMatchInvite({
       } else
         setMessage(
           saved.reused
-            ? "Existing invitation ready to copy. No additional email was sent."
-            : "Private link created. Copy it or open WhatsApp, Viber or Telegram to send it.",
+            ? "Existing invitation ready to send in Intercom or another app. No additional email was sent."
+            : "Private link created. Send the invitation in Intercom or another messaging app.",
         );
       await refresh();
     } catch (error) {
@@ -300,6 +300,15 @@ export function AthleteMatchInvite({
                   <div className="flex flex-wrap gap-2">
                     <Button
                       type="button"
+                      className="h-auto max-w-full whitespace-normal py-3"
+                      disabled={busy || !reviewed || note.trim().length < 12}
+                      onClick={() => void create(false)}
+                    >
+                      Create invitation for Intercom or another app
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="secondary"
                       disabled={
                         busy || !reviewed || note.trim().length < 12 || !matches.data.emailAvailable
                       }
@@ -307,16 +316,11 @@ export function AthleteMatchInvite({
                     >
                       Email claim invitation
                     </Button>
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      className="h-auto max-w-full whitespace-normal py-3"
-                      disabled={busy || !reviewed || note.trim().length < 12}
-                      onClick={() => void create(false)}
-                    >
-                      Create WhatsApp / Viber / Telegram invitation
-                    </Button>
                   </div>
+                  <p className="text-xs text-muted">
+                    Email claim invitation sends directly through AthRecs’ email provider. To send
+                    through Intercom, create the invitation first and choose an Intercom option.
+                  </p>
                   {!matches.data.emailAvailable ? (
                     <p className="text-xs text-muted">
                       Email sending is available on the live ATHRECS dashboard when delivery is
@@ -330,6 +334,7 @@ export function AthleteMatchInvite({
                   key={link.id}
                   url={link.url}
                   email={account.email}
+                  userId={account.userId}
                   contact={account.contact}
                 />
               ) : null}

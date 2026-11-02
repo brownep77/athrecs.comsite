@@ -1,0 +1,210 @@
+[
+  {
+    "duplicateSlug": "run-yorkshire-roundhay-october",
+    "canonicalSlug": "run-yorkshire-half-marathon-10k-5k",
+    "date": "2026-10-04",
+    "duplicateEventId": 4372635,
+    "canonicalEventId": 3061206,
+    "duplicateDistances": [
+      "Half"
+    ],
+    "retainedDistances": [
+      "10K",
+      "5K",
+      "Half"
+    ],
+    "sourceUrl": "https://runnation.co.uk/r/Roundhay-HalfMarathon-october-2026",
+    "checkedAt": "2026-10-26",
+    "note": "Same Roundhay programme. Separate organiser pages confirm the retained 5K, 10K and half marathon."
+  },
+  {
+    "duplicateSlug": "wimbledon-common-5k-10k-christmas-run",
+    "canonicalSlug": "ea-runevents-wimbledon-common-series-wimbledon",
+    "date": "2026-12-20",
+    "duplicateEventId": 4375900,
+    "canonicalEventId": 3147973,
+    "duplicateDistances": [
+      "5K",
+      "10K"
+    ],
+    "retainedDistances": [
+      "5K",
+      "10K"
+    ],
+    "sourceUrl": "https://www.letsdothis.com/gb/e/runthrough-wimbledon-common-5k-10k-christmas-run-december-2026-257167",
+    "checkedAt": "2026-10-26",
+    "note": "Same Christmas 5K/10K programme; preserve the separate November half marathon/10K date."
+  },
+  {
+    "duplicateSlug": "ea-runevents-templenewsam-10-leeds",
+    "canonicalSlug": "temple-newsam-10-2027",
+    "date": "2027-01-10",
+    "duplicateEventId": 3148047,
+    "canonicalEventId": 4384742,
+    "duplicateDistances": [
+      "10mi"
+    ],
+    "retainedDistances": [
+      "10mi"
+    ],
+    "sourceUrl": "https://racebest.com/races/qq342",
+    "checkedAt": "2026-10-26",
+    "note": "Same St Theresa's AC ten-mile race. Retain the dated authorised entry listing; 16.09/16.0934 km is rounding."
+  },
+  {
+    "duplicateSlug": "san-sebastian-marathon",
+    "canonicalSlug": "zurich-san-sebastian-marathon",
+    "date": "2026-11-22",
+    "duplicateEventId": 3061235,
+    "canonicalEventId": 4104290,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://zurichmaratonsansebastian.com/en/i-am-a-runner/regulation/",
+    "checkedAt": "2026-10-26",
+    "note": "Same 2026 marathon; 42.2/42.195 km is rounding. Preserve separate 10K and other-date races."
+  },
+  {
+    "duplicateSlug": "wa-generali-k-ln-marathon-7236087",
+    "canonicalSlug": "cologne-marathon",
+    "date": "2026-10-04",
+    "duplicateEventId": 3065358,
+    "canonicalEventId": 3066269,
+    "duplicateDistances": [
+      "Other",
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon",
+      "Half",
+      "Marathon Relay"
+    ],
+    "sourceUrl": "https://generali-koeln-marathon.de/wp-content/uploads/2026/09/20260831_FAQ-vor-der-Veranstaltung.pdf",
+    "checkedAt": "2026-10-26",
+    "note": "Same marathon programme; retain the half marathon and marathon relay too. Other/0 is an import placeholder, not another race."
+  },
+  {
+    "duplicateSlug": "wa-generali-k-ln-half-marathon-7236088",
+    "canonicalSlug": "cologne-marathon",
+    "date": "2026-10-04",
+    "duplicateEventId": 3065362,
+    "canonicalEventId": 3066269,
+    "duplicateDistances": [
+      "Other",
+      "Half"
+    ],
+    "retainedDistances": [
+      "Marathon",
+      "Half",
+      "Marathon Relay"
+    ],
+    "sourceUrl": "https://generali-koeln-marathon.de/wp-content/uploads/2026/09/20260831_FAQ-vor-der-Veranstaltung.pdf",
+    "checkedAt": "2026-10-26",
+    "note": "Same half marathon within the retained marathon/half/relay programme. Other/0 is an import placeholder."
+  },
+  {
+    "duplicateSlug": "wa-marathon-beneva-de-qu-bec-7237449",
+    "canonicalSlug": "beneva-quebec-city-marathon",
+    "date": "2026-10-04",
+    "duplicateEventId": 3065352,
+    "canonicalEventId": 3899155,
+    "duplicateDistances": [
+      "Other",
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://www.jecoursqc.com/en/beneva-quebec-city-marathon-presented-by-montellier/schedule/",
+    "checkedAt": "2026-10-26",
+    "note": "Same marathon and date; preserve the organiser's wave qualification. Other/0 is an import placeholder."
+  },
+  {
+    "duplicateSlug": "quebec-city-marathon-marathon-des-deux-rives",
+    "canonicalSlug": "beneva-quebec-city-marathon",
+    "date": "2026-10-04",
+    "duplicateEventId": 3066343,
+    "canonicalEventId": 3899155,
+    "duplicateDistances": [
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://www.jecoursqc.com/en/beneva-quebec-city-marathon-presented-by-montellier/schedule/",
+    "checkedAt": "2026-10-26",
+    "note": "Old directory name for the same Quebec City marathon; retain the organiser-linked listing."
+  },
+  {
+    "duplicateSlug": "wa-bank-of-america-chicago-marathon-7235563",
+    "canonicalSlug": "chicago-marathon",
+    "date": "2026-10-11",
+    "duplicateEventId": 3065295,
+    "canonicalEventId": 3060157,
+    "duplicateDistances": [
+      "Other",
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://cdn.chicagomarathon.com/app/uploads/2026/10/05135337/2026-Bank-of-America-Chicago-Marathon-Particicpant-Guide_FR.pdf",
+    "checkedAt": "2026-10-26",
+    "note": "Same marathon programme; preserve professional, high-performance and general-wave timing distinctions. Original results stay attached to their records."
+  },
+  {
+    "duplicateSlug": "wa-top-flight-by-runthrough-mbna-chester-marathon-7244978",
+    "canonicalSlug": "mbna-chester-marathon",
+    "date": "2026-10-11",
+    "duplicateEventId": 3065311,
+    "canonicalEventId": 3060821,
+    "duplicateDistances": [
+      "Other",
+      "Marathon"
+    ],
+    "retainedDistances": [
+      "Marathon"
+    ],
+    "sourceUrl": "https://www.topflightraces.com/chester-marathon/",
+    "checkedAt": "2026-10-26",
+    "note": "The organiser identifies Top Flight as a wave of the same MBNA Chester Marathon. Retain its wave information and all original results; do not alter the separate metric marathon."
+  },
+  {
+    "duplicateSlug": "tc-10k",
+    "canonicalSlug": "wa-tc-10k-7245303",
+    "date": "2026-10-03",
+    "duplicateEventId": 4356588,
+    "canonicalEventId": 3065380,
+    "duplicateDistances": [
+      "10K"
+    ],
+    "retainedDistances": [
+      "10K"
+    ],
+    "sourceUrl": "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/tc10k",
+    "checkedAt": "2026-10-26",
+    "note": "Both imports identify the same TC 10K. Retain the specific governing-body record and display the professional 07:15 and general 07:30 starts separately; correct venue presentation to St Paul."
+  },
+  {
+    "duplicateSlug": "hadleigh-5-10-mile",
+    "canonicalSlug": "ea-runevents-hadleigh-10-5-2-hadleigh",
+    "date": "2026-11-22",
+    "duplicateEventId": 4375881,
+    "canonicalEventId": 3148026,
+    "duplicateDistances": [
+      "10mi",
+      "5mi"
+    ],
+    "retainedDistances": [
+      "2K",
+      "5mi",
+      "10mi"
+    ],
+    "sourceUrl": "https://www.hadleigh-hares.co.uk/hadleigh-10-and-5-mile-races2026",
+    "checkedAt": "2026-10-26",
+    "note": "Same adult five- and ten-mile races. Retain the larger programme and add the source-confirmed junior 2K without deleting the original Fun Run/0 record."
+  }
+]

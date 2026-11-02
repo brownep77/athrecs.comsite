@@ -132,6 +132,8 @@ export const SPORTS = [
   "Indoor Rowing",
   "Orienteering",
   "Walking",
+  "Cross-country Skiing",
+  "Roller Skiing",
 ] as const;
 
 export const DEFAULT_SPORT = "All" as const;

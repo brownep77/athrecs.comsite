@@ -86,6 +86,7 @@ export function reportedResultYear(record: ReportedRaceRecord): string {
 }
 
 export function reportedResultSport(record: ReportedRaceRecord): string {
+  if (record.sport) return record.sport;
   if (isParkrunResult({ event: record.event, distanceCode: record.distance })) return "Parkrun";
   return /triathlon/i.test(record.distance)
     ? "Triathlon"
@@ -96,7 +97,7 @@ export function reportedResultSport(record: ReportedRaceRecord): string {
 
 export function hasReportedFinish(record: ReportedRaceRecord): boolean {
   return (
-    record.entryKind !== "grouped" &&
+    (!record.entryKind || record.entryKind === "race" || record.entryKind === "stage") &&
     hasPastYear(record.reportedDate) &&
     hasFinishMark(record.reportedTime)
   );
