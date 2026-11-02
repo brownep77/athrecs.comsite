@@ -478,7 +478,8 @@ function AthleteContent() {
                 id="profile-claim-message"
                 className="text-lg font-bold leading-snug text-fg sm:text-xl"
               >
-                Record all of your sporting achievements here forever.
+                Record all your sporting achievements in one place.{" "}
+                <span className="mt-2 block text-[#c2410c]">Free forever.</span>
               </p>
             </div>
           ) : null}
