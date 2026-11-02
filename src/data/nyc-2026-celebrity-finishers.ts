@@ -1,9 +1,5 @@
 import type { EditorialArticle } from "../lib/athrecs/editorial";
 
-const nyrrResults = "https://results.nyrr.org/event/M2026/finishers";
-const nyrrReport =
-  "https://prod.nyrr.org/media-center/news/2026/11/01/andreas-almgren-sheila-chepkirui-marcel-hug-and-catherine-debrunner-win-2026-tcs-new-york-city-marathon";
-
 // Confirmed NYRR net times and canonical public athlete profiles, sorted by display name.
 const finishers = [
   ["Aaron Webb", "aaron-webb-crusaders", "3:39:10"],
@@ -112,7 +108,7 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
     src: "/images/editorial/nyc-2026-celebrity-finishers.jpg",
     alt: "Archive portraits of James Milner in Liverpool red, Jennifer Connelly at a film festival and Tiki Barber signing autographs.",
     caption:
-      "Archive portraits, cropped. James Milner © Eric The Fish and Jennifer Connelly © Karon Liu, both CC BY 2.0. Tiki Barber by Paul D. Honnick, U.S. Navy, public domain in the U.S. Original photographs and licence linked below.",
+      "Archive portraits, cropped. “LFC Parade 2019 01 James Milner” © Eric The Fish; “Jennifer Connelly 2010 TIFF” © Karon Liu. Both licensed under Creative Commons Attribution 2.0 (CC BY 2.0): https://creativecommons.org/licenses/by/2.0/. Tiki Barber portrait by Paul D. Honnick, U.S. Navy; public domain in the U.S.",
     width: 1080,
     height: 1350,
   },
@@ -126,13 +122,6 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
         "Tiki Barber built a second sporting life on these streets after his years as a New York Giants running back. He already had more than 15 marathons to his name when he lined up on Sunday. His 5:11:49 gave his hometown crowd another chance to cheer him home.",
         "Jennifer Connelly finished in 3:40:09 running for Fred’s Team, which raises money for cancer research at Memorial Sloan Kettering. Queer Eye’s Antoni Porowski ran for a cause rooted in the city itself. His 4:22:15 was for City Harvest, which gets food to New Yorkers facing hunger.",
       ],
-      sources: [
-        { label: "NYRR race-day report", url: nyrrReport },
-        { label: "NYRR’s announced runners and their causes", url: "https://prod.nyrr.org/news/2026/10/13/new-york-road-runners-announces-a-listers-taking-on-2026-tcs-new-york-city-marathon" },
-        { label: "Premier League: James Milner’s retirement", url: "https://www.premierleague.com/en/news/4672466/milner-retires-after-setting-record-for-premier-league-appearances/" },
-        { label: "James Milner on his marathon debut and foundation", url: "https://www.letsrun.com/news/2026/10/james-milner-on-his-nyc-marathon-debut-and-liverpools-brutal-workouts/" },
-        { label: "EFE’s finish-line interview with Martín Fiz", url: "https://efe.com/deportes/2026-11-01/martin-fiz-despedida-maraton-nueva-york/" },
-      ],
     },
     {
       id: "first-marathons",
@@ -142,11 +131,6 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
         "Comedian Zarna Garg had spent years watching her children’s swimming meets and skating competitions. This time she asked her two older children to walk a marathon with her. On Sunday she completed her first marathon in 9:21:51.",
         "For ABC7’s Liz Cho, one of the best moments came at mile eight in Brooklyn, where she spotted her mother and her daughter Lulu. She finished her first marathon in 4:15:07. Her colleague Mike Marza completed his second in 3:50:39. Both ran for the Alzheimer’s Association in honour of fellow anchor Bill Ritter, who was there to welcome them at the finish.",
       ],
-      sources: [
-        { label: "NYRR on Mildred Baker", url: nyrrReport },
-        { label: "Zarna Garg on walking with her children", url: "https://www.instagram.com/p/DdUJct9Ed1s/" },
-        { label: "ABC7’s finish-line interviews", url: "https://abc7ny.com/post/liz-cho-mike-marza-complete-2026-tcs-nyc-marathon-honor-bill-ritter/20006442/" },
-      ],
     },
     {
       id: "five-seconds",
@@ -155,21 +139,13 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
         "Before his fourth marathon, Summer House’s Carl Radke told Decider what he wanted from New York. He had finished London in 4:02, New York in 4:04 and Berlin in 4:24. This time he wanted to break four hours. His official net time on Sunday was 3:59:55, a marathon personal best.",
         "Radke ran to raise money for the Release Recovery Foundation, which helps people access addiction treatment.",
       ],
-      sources: [
-        { label: "Carl Radke on his three marathons and his goal for New York", url: "https://decider.com/2026/10/26/carl-radke-nyc-marathon-summer-house-season-11-dwts-interview/" },
-        { label: "NYRR official finish time", url: nyrrResults },
-      ],
     },
     {
       id: "christchurch",
       heading: "Five New York medals for a team from Canterbury",
       paragraphs: [
         "A group from New Zealand set out to help Te Tahi Youth fit out its centre at Eastgate in Christchurch. All five made it home. Former All Blacks Kieran Read, Ryan Crotty and Colin Slade earned their medals alongside Crusaders team manager Aaron Webb and endurance athlete Shane Thrower. Read crossed in 5:56:47 and Crotty in 4:13:27. Slade recorded 3:27:52, Webb 3:39:10 and Thrower 3:39:40.",
-        "The reason those five entries belonged together was back in Canterbury. The Eastgate centre will give young people a place to get free health care, counselling and help finding work. Te Tahi Youth’s Our 42 fundraising campaign is linked below for those who cheered them on from either side of the world.",
-      ],
-      sources: [
-        { label: "Te Tahi Youth’s Our 42 fundraiser", url: "https://givealittle.co.nz/cause/our-42" },
-        { label: "New York Road Runners official results", url: nyrrResults },
+        "The reason those five entries belonged together was back in Canterbury. The Eastgate centre will give young people a place to get free health care, counselling and help finding work.",
       ],
     },
     {
@@ -183,15 +159,10 @@ export const NYC_2026_CELEBRITY_FINISHERS: EditorialArticle = {
         headings: ["Runner", "Net finish time"],
         rows: finishers.map(([name, , time]) => [name, time]),
       },
-      sources: [{ label: "Search NYRR’s 2026 results", url: nyrrResults }],
     },
   ],
   links: [
     { label: "Before the race — our original roster", url: "/news/new-york-marathon-2026-famous-runners-global-roster" },
     { label: "Professional race results and podium stories", url: "/news/new-york-city-marathon-2026-results" },
-    { label: "LFC Parade 2019 01 James Milner — Eric The Fish", url: "https://commons.wikimedia.org/wiki/File:LFC_Parade_2019_01_James_Milner.jpg" },
-    { label: "Jennifer Connelly 2010 TIFF — Karon Liu", url: "https://commons.wikimedia.org/wiki/File:Jennifer_Connelly_2010_TIFF.jpg" },
-    { label: "Creative Commons Attribution 2.0 licence", url: "https://creativecommons.org/licenses/by/2.0/" },
-    { label: "Tiki Barber portrait by Paul D. Honnick, U.S. Navy", url: "https://commons.wikimedia.org/wiki/File:Tiki_Barber_070204-N-6674H-105_0V0GR_crop.jpg" },
   ],
 };
