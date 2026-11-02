@@ -1,0 +1,324 @@
+{
+  "slug": "simon-olliver-english-channel",
+  "name": "Simon Olliver",
+  "country": "New Zealand",
+  "aliases": [],
+  "highlight": "Simon Olliver crossed the English Channel from England to France in 11 hours 8 minutes on 9 July 2015.",
+  "biography": [
+    "Olliver also completed New Zealand’s own Triple Crown, made up of Cook Strait, Foveaux Strait and Lake Taupō. The national association lists him fourth in completion order on 19 February 2017, with a combined time of 32 hours 19 minutes.",
+    "The English Channel swim on 9 July 2015 took 11 hours 8 minutes. The Catalina federation records 10 hours 45 minutes 31 seconds on 30 August 2016. In New York the 14 July 2018 Manhattan circuit took 7 hours 51 minutes 39 seconds."
+  ],
+  "flags": [
+    {
+      "code": "NZ",
+      "label": "New Zealand",
+      "abbr": "NZL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "New Zealand"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444880",
+      "title": "English Channel solo, 9 July 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:08:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "05:17:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "16:25:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Reg Brickell Jr"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Viking Princess"
+        },
+        {
+          "label": "Observer",
+          "text": "Reg Brickell"
+        },
+        {
+          "label": "Trainer",
+          "text": "David Prattley; Phil Rush"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "New Zealand"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444880",
+          "url": "https://cspf.co.uk/swim/444880"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2016-08-30",
+      "title": "Catalina Channel solo, 30 August 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:45:31 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "New Zealand"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 389 · Simon Olliver, New Zealand",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-994",
+      "title": "Manhattan Island swim, 14 July 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:51:39 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "NZL"
+        },
+        {
+          "label": "Published place",
+          "text": "7"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 994 · Simon Olliver",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Simon Olliver swim the English Channel?",
+      "value": "Simon Olliver swam from England to France on 9 July 2015 in 11 hours 8 minutes."
+    },
+    {
+      "label": "Who piloted Simon Olliver’s Channel crossing?",
+      "value": "Reg Brickell Jr piloted Viking Princess on 9 July 2015."
+    },
+    {
+      "label": "How long did Simon Olliver take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 30 August 2016 took 10 hours 45 minutes 31 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444880",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444880"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 389 · Simon Olliver, New Zealand",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 994 · Simon Olliver",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "New Zealand Open Water Swimming Association, national Triple Crown",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nzowsa.nz/new-zealand-triple-crown"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444880",
+      "title": "English Channel solo, 9 July 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:08:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "05:17:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "16:25:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Reg Brickell Jr"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Viking Princess"
+        },
+        {
+          "label": "Observer",
+          "text": "Reg Brickell"
+        },
+        {
+          "label": "Trainer",
+          "text": "David Prattley; Phil Rush"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "New Zealand"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2016-08-30",
+      "title": "Catalina Channel solo, 30 August 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:45:31 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "New Zealand"
+        }
+      ]
+    },
+    {
+      "id": "nyow-994",
+      "title": "Manhattan Island swim, 14 July 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:51:39 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "NZL"
+        },
+        {
+          "label": "Published place",
+          "text": "7"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-5c8a1b0e17fc8d28a042"
+}

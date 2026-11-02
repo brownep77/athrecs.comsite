@@ -1,0 +1,447 @@
+{
+  "slug": "ragip-vural-tandogan-english-channel",
+  "name": "Ragip Vural Tandoğan",
+  "country": "Turkey",
+  "aliases": [
+    "Ragip Vural Tandogan"
+  ],
+  "highlight": "Ragip Vural Tandoğan crossed the English Channel from England to France in 14 hours 50 minutes on 30 August 2016.",
+  "biography": [
+    "Tandoğan began his 2016 English Channel crossing at 22:05 and reached France at 12:55 the following day. The Catalina federation lists him and Kamil Resa Alsaran individually on the same date in 2017. New York Open Water also gives them separate rows and placings in 2018. Both were members of the six-person Brave Turks relay that crossed the English Channel and returned in 27 hours 2 minutes in 2017.",
+    "The English Channel swim on 30 August 2016 took 14 hours 50 minutes. The Catalina federation records 13 hours 1 minutes 38 seconds on 28 July 2017. In New York the 30 June 2018 Manhattan circuit took 10 hours 15 minutes 45 seconds."
+  ],
+  "flags": [
+    {
+      "code": "TR",
+      "label": "Turkey",
+      "abbr": "TUR"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Turkey"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-445065",
+      "title": "English Channel solo, 30 August 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "14:50:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "22:05:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "12:55:00 on 31 August 2016"
+        },
+        {
+          "label": "Pilot",
+          "text": "Reg Brickell Jr"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Viking Princess"
+        },
+        {
+          "label": "Observer",
+          "text": "Phil Collins"
+        },
+        {
+          "label": "Trainer",
+          "text": "Kamil Resa Alsaran"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        },
+        {
+          "label": "Record note",
+          "text": "The federation lists 30 August. Dover.UK.com lists 31 August under R Vural Tando Yan, with the same elapsed time, boat and observer. The overnight clocks reconcile the dates."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 445065",
+          "url": "https://cspf.co.uk/swim/445065"
+        },
+        {
+          "text": "Dover.UK.com crossing listed under R Vural Tando Yan",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2016-08-31/r-vural-tando-yan"
+        }
+      ]
+    },
+    {
+      "id": "brave-turks-2017",
+      "title": "English Channel two-way relay, 31 August 2017",
+      "lines": [
+        {
+          "label": "Team result",
+          "text": "27:02:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France and back to England"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "09:02 on 1 September 2017"
+        },
+        {
+          "label": "Pilot",
+          "text": "Stuart Gleeson"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Sea Leopard"
+        },
+        {
+          "label": "Observer",
+          "text": "Dan Earthquake"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Team members",
+          "text": "Gurkan Gulyuz, Hakan Alsaran, Emre Seven, Kamil Resa Alsaran, Ragip Vural Tandogan and Ayse Yasemin Yildirim."
+        },
+        {
+          "label": "Record note",
+          "text": "The six-person team clocked 11h25 outward and 15h37 back. The CSA records the finish as 09:02 on 1 September. Subtracting the team duration gives an estimated 06:00 start on 31 August on the same clock basis. The CSA awarded the relay its 2017 Special Award."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Channel Swimming Association, Brave Turks team result 4727",
+          "url": "https://www.channelswimmingassociation.com/swim/4727/brave-turks"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2017-07-28",
+      "title": "Catalina Channel solo, 28 July 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:01:38 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 427 · Ragip Vural Tandogan, Turkey",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-985",
+      "title": "Manhattan Island swim, 30 June 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:15:45 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "TUR"
+        },
+        {
+          "label": "Published place",
+          "text": "12"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 985 · Ragip Vural Tandogan",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Ragip Vural Tandoğan swim the English Channel?",
+      "value": "Ragip Vural Tandoğan swam from England to France on 30 August 2016 in 14 hours 50 minutes."
+    },
+    {
+      "label": "Who piloted Ragip Vural Tandoğan’s Channel crossing?",
+      "value": "Reg Brickell Jr piloted Viking Princess on 30 August 2016."
+    },
+    {
+      "label": "How long did Ragip Vural Tandoğan take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 28 July 2017 took 13 hours 1 minutes 38 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 445065",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/445065"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com crossing listed under R Vural Tando Yan",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2016-08-31/r-vural-tando-yan"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 427 · Ragip Vural Tandogan, Turkey",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 985 · Ragip Vural Tandogan",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association, Brave Turks team result 4727",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swim/4727/brave-turks"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-445065",
+      "title": "English Channel solo, 30 August 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "14:50:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "22:05:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "12:55:00 on 31 August 2016"
+        },
+        {
+          "label": "Pilot",
+          "text": "Reg Brickell Jr"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Viking Princess"
+        },
+        {
+          "label": "Observer",
+          "text": "Phil Collins"
+        },
+        {
+          "label": "Trainer",
+          "text": "Kamil Resa Alsaran"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        },
+        {
+          "label": "Record note",
+          "text": "The federation lists 30 August. Dover.UK.com lists 31 August under R Vural Tando Yan, with the same elapsed time, boat and observer. The overnight clocks reconcile the dates."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    },
+    {
+      "id": "brave-turks-2017",
+      "title": "English Channel two-way relay, 31 August 2017",
+      "lines": [
+        {
+          "label": "Team result",
+          "text": "27:02:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France and back to England"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "09:02 on 1 September 2017"
+        },
+        {
+          "label": "Pilot",
+          "text": "Stuart Gleeson"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Sea Leopard"
+        },
+        {
+          "label": "Observer",
+          "text": "Dan Earthquake"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Team members",
+          "text": "Gurkan Gulyuz, Hakan Alsaran, Emre Seven, Kamil Resa Alsaran, Ragip Vural Tandogan and Ayse Yasemin Yildirim."
+        },
+        {
+          "label": "Record note",
+          "text": "The six-person team clocked 11h25 outward and 15h37 back. The CSA records the finish as 09:02 on 1 September. Subtracting the team duration gives an estimated 06:00 start on 31 August on the same clock basis. The CSA awarded the relay its 2017 Special Award."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2017-07-28",
+      "title": "Catalina Channel solo, 28 July 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:01:38 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        }
+      ]
+    },
+    {
+      "id": "nyow-985",
+      "title": "Manhattan Island swim, 30 June 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:15:45 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "TUR"
+        },
+        {
+          "label": "Published place",
+          "text": "12"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-06df66e3e79117785fc9"
+}

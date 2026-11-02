@@ -1,0 +1,2257 @@
+{
+  "slug": "kristian-rutford-english-channel",
+  "name": "Kristian Rutford",
+  "country": "United States",
+  "aliases": [
+    "Kris Rutford"
+  ],
+  "highlight": "Kristian Rutford crossed the English Channel from England to France in 10 hours 44 minutes on 5 August 1988.",
+  "biography": [
+    "Rutford swam the English Channel and circled Manhattan less than a month apart in 1988. His Channel trainer, Robert Mizelle, was the college friend whose own crossing had encouraged him to try. His Manhattan career included a clockwise swim in 1995 that took 17 hours 48 minutes 30 seconds.",
+    "Guinness counted 23 Manhattan circuits from 1988 through 2019. The New York register also lists later circuits under Kris Rutford, including 6 August 2026. His Catalina crossing in 2016 took 11 hours 41 minutes 5 seconds."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "USA"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-443413",
+      "title": "English Channel solo, 5 August 1988",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:44:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "05:59:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "16:43:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Ray Dixon"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Channel Express"
+        },
+        {
+          "label": "Observer",
+          "text": "I. Muir"
+        },
+        {
+          "label": "Trainer",
+          "text": "Robert Mizelle"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 443413",
+          "url": "https://cspf.co.uk/swim/443413"
+        },
+        {
+          "text": "CSA solo crossing, result 2800",
+          "url": "https://www.channelswimmingassociation.com/swim/2800/kristian-rutford"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2016-09-22",
+      "title": "Catalina Channel solo, 22 September 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:41:05 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 404 · Kristian Rutford",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-163",
+      "title": "Manhattan Island swim, 27 August 1988",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:48:56 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "5"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 163 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-197",
+      "title": "Manhattan Island swim, 19 August 1989",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:56:39 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "6"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 197 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-242",
+      "title": "Manhattan Island swim, 19 August 1990",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:10:04 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 242 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-279",
+      "title": "Manhattan Island swim, 10 August 1991",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:06:44 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "2"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 279 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-317",
+      "title": "Manhattan Island swim, 29 August 1992",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:53:57 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Mill Rock"
+        },
+        {
+          "label": "Landing",
+          "text": "Mill Rock"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 317 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-324",
+      "title": "Manhattan Island swim, 21 August 1993",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:26:30 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 324 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-350",
+      "title": "Manhattan Island swim, 12 August 1995",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "17:48:30 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Clockwise around Manhattan"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Record note",
+          "text": "The 8 Bridges race history identifies this as the first reverse circuit of Manhattan."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 350 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        },
+        {
+          "text": "8 Bridges history of the reverse Manhattan swim",
+          "url": "https://8bridges.org/reverse-manhattan-20-bridges-swim/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-375",
+      "title": "Manhattan Island swim, 3 August 1996",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:33:13 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 375 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-394",
+      "title": "Manhattan Island swim, 19 July 1997",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:26:26 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 394 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-411",
+      "title": "Manhattan Island swim, 11 July 1998",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:47:31 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "5"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 411 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-431",
+      "title": "Manhattan Island swim, 12 June 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:10:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 431 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-543",
+      "title": "Manhattan Island swim, 27 September 2003",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:36:15 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 543 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-551",
+      "title": "Manhattan Island swim, 23 June 2004",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:51:18 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "8"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 551 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-600",
+      "title": "Manhattan Island swim, 16 June 2007",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:51:03 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "13"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 600 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-621",
+      "title": "Manhattan Island swim, 5 July 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:55:17 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "8"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 621 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-671",
+      "title": "Manhattan Island swim, 12 June 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:21:15 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "11"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 671 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-703",
+      "title": "Manhattan Island swim, 18 June 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:18:45 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "16"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 703 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-736",
+      "title": "Manhattan Island swim, 23 June 2012",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:10:29 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "12"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 736 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-774",
+      "title": "Manhattan Island swim, 24 August 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:22:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 774 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-800",
+      "title": "Manhattan Island swim, 28 June 2014",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:42:53 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 800 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-852",
+      "title": "Manhattan Island swim, 1 August 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:50:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "10"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 852 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-993",
+      "title": "Manhattan Island swim, 14 July 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:49:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "6"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 993 · Kristian Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1087",
+      "title": "Manhattan Island swim, 13 August 2019",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:57:23 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1087 · Kris Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1159",
+      "title": "Manhattan Island swim, 26 July 2021",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:50:36 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1159 · Kris Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1213",
+      "title": "Manhattan Island swim, 14 July 2022",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:26:38 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1213 · Kris Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1295",
+      "title": "Manhattan Island swim, 4 August 2023",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:08:42 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1295 · Kris Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1373",
+      "title": "Manhattan Island swim, 26 July 2024",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:13:06 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1373 · Kris Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1468",
+      "title": "Manhattan Island swim, 10 August 2025",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:17:55 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1468 · Kris Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1557",
+      "title": "Manhattan Island swim, 6 August 2026",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:25:07 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1557 · Kris Rutford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Kristian Rutford swim the English Channel?",
+      "value": "Kristian Rutford swam from England to France on 5 August 1988 in 10 hours 44 minutes."
+    },
+    {
+      "label": "Who piloted Kristian Rutford’s Channel crossing?",
+      "value": "Ray Dixon piloted Channel Express on 5 August 1988."
+    },
+    {
+      "label": "How long did Kristian Rutford take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 22 September 2016 took 11 hours 41 minutes 5 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 443413",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/443413"
+        }
+      ]
+    },
+    {
+      "title": "CSA solo crossing, result 2800",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swim/2800/kristian-rutford"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 404 · Kristian Rutford",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 1557 · Kris Rutford",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "8 Bridges history of the reverse Manhattan swim",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://8bridges.org/reverse-manhattan-20-bridges-swim/"
+        }
+      ]
+    },
+    {
+      "title": "U.S. Masters Swimming on Kris Rutford’s English Channel and Manhattan swims",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.usms.org/fitness-and-training/articles-and-videos/articles/two-open-water-swims-in-two-days?Oldid=554"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records account of the 1988–2019 Manhattan total",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.guinnessworldrecords.com/world-records/677260-most-circumnavigation-swims-around-manhattan-island"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-443413",
+      "title": "English Channel solo, 5 August 1988",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:44:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "05:59:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "16:43:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Ray Dixon"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Channel Express"
+        },
+        {
+          "label": "Observer",
+          "text": "I. Muir"
+        },
+        {
+          "label": "Trainer",
+          "text": "Robert Mizelle"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2016-09-22",
+      "title": "Catalina Channel solo, 22 September 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:41:05 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        }
+      ]
+    },
+    {
+      "id": "nyow-163",
+      "title": "Manhattan Island swim, 27 August 1988",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:48:56 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "5"
+        }
+      ]
+    },
+    {
+      "id": "nyow-197",
+      "title": "Manhattan Island swim, 19 August 1989",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:56:39 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "id": "nyow-242",
+      "title": "Manhattan Island swim, 19 August 1990",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:10:04 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "id": "nyow-279",
+      "title": "Manhattan Island swim, 10 August 1991",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:06:44 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "2"
+        }
+      ]
+    },
+    {
+      "id": "nyow-317",
+      "title": "Manhattan Island swim, 29 August 1992",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:53:57 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Mill Rock"
+        },
+        {
+          "label": "Landing",
+          "text": "Mill Rock"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        }
+      ]
+    },
+    {
+      "id": "nyow-324",
+      "title": "Manhattan Island swim, 21 August 1993",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:26:30 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-350",
+      "title": "Manhattan Island swim, 12 August 1995",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "17:48:30 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Clockwise around Manhattan"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Record note",
+          "text": "The 8 Bridges race history identifies this as the first reverse circuit of Manhattan."
+        }
+      ]
+    },
+    {
+      "id": "nyow-375",
+      "title": "Manhattan Island swim, 3 August 1996",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:33:13 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "id": "nyow-394",
+      "title": "Manhattan Island swim, 19 July 1997",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:26:26 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "id": "nyow-411",
+      "title": "Manhattan Island swim, 11 July 1998",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:47:31 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "5"
+        }
+      ]
+    },
+    {
+      "id": "nyow-431",
+      "title": "Manhattan Island swim, 12 June 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:10:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "id": "nyow-543",
+      "title": "Manhattan Island swim, 27 September 2003",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:36:15 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        }
+      ]
+    },
+    {
+      "id": "nyow-551",
+      "title": "Manhattan Island swim, 23 June 2004",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:51:18 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "id": "nyow-600",
+      "title": "Manhattan Island swim, 16 June 2007",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:51:03 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "13"
+        }
+      ]
+    },
+    {
+      "id": "nyow-621",
+      "title": "Manhattan Island swim, 5 July 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:55:17 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "id": "nyow-671",
+      "title": "Manhattan Island swim, 12 June 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:21:15 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "11"
+        }
+      ]
+    },
+    {
+      "id": "nyow-703",
+      "title": "Manhattan Island swim, 18 June 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:18:45 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "16"
+        }
+      ]
+    },
+    {
+      "id": "nyow-736",
+      "title": "Manhattan Island swim, 23 June 2012",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:10:29 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "12"
+        }
+      ]
+    },
+    {
+      "id": "nyow-774",
+      "title": "Manhattan Island swim, 24 August 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:22:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-800",
+      "title": "Manhattan Island swim, 28 June 2014",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:42:53 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-852",
+      "title": "Manhattan Island swim, 1 August 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:50:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "10"
+        }
+      ]
+    },
+    {
+      "id": "nyow-993",
+      "title": "Manhattan Island swim, 14 July 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:49:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1087",
+      "title": "Manhattan Island swim, 13 August 2019",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:57:23 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1159",
+      "title": "Manhattan Island swim, 26 July 2021",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:50:36 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1213",
+      "title": "Manhattan Island swim, 14 July 2022",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:26:38 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1295",
+      "title": "Manhattan Island swim, 4 August 2023",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:08:42 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1373",
+      "title": "Manhattan Island swim, 26 July 2024",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:13:06 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1468",
+      "title": "Manhattan Island swim, 10 August 2025",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:17:55 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1557",
+      "title": "Manhattan Island swim, 6 August 2026",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:25:07 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-14156d9b6d2818502afc"
+}

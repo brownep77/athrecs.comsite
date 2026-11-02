@@ -1,0 +1,336 @@
+{
+  "slug": "shane-moraghan-english-channel",
+  "name": "Shane Moraghan",
+  "country": "Ireland",
+  "aliases": [],
+  "highlight": "Shane Moraghan crossed the English Channel from England to France in 10 hours 23 minutes on 7 August 1999.",
+  "biography": [
+    "Moraghan landed on a beach between Wissant and Cap Gris-Nez in 1999. Seventeen years later he finished first in his Manhattan swim in 6 hours 52 minutes 50 seconds. In August 2017 he completed the Catalina leg in 9:14:41, reported to the nearest minute as 9 hours 15 minutes.",
+    "The Catalina federation records 9 hours 14 minutes 41 seconds on 21 August 2017. In New York the 15 August 2016 Manhattan circuit took 6 hours 52 minutes 50 seconds."
+  ],
+  "flags": [
+    {
+      "code": "IE",
+      "label": "Ireland",
+      "abbr": "IRL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Ireland"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-443730",
+      "title": "English Channel solo, 7 August 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:23:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Landing",
+          "text": "a beach between Wissant and Cap Gris-Nez"
+        },
+        {
+          "label": "Departure clock",
+          "text": "08:40:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "19:03:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Michael Oram"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Aegean Blue"
+        },
+        {
+          "label": "Observer",
+          "text": "B. Harbottle"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Ireland"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 443730",
+          "url": "https://cspf.co.uk/swim/443730"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2017-08-21",
+      "title": "Catalina Channel solo, 21 August 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:14:41 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Ireland"
+        },
+        {
+          "label": "Record note",
+          "text": "The federation gives 9:14:41. The career account rounds the swim to 9 hours 15 minutes."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 439 · Shane Moraghan, Ireland",
+          "url": "https://swimcatalina.org/swim-successes/"
+        },
+        {
+          "text": "World Open Water Swimming Association profile of Shane Moraghan",
+          "url": "https://www.openwaterswimming.com/the-legacy-of-irelands-shane-moraghan/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-865",
+      "title": "Manhattan Island swim, 15 August 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:52:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Mill Rock"
+        },
+        {
+          "label": "Landing",
+          "text": "Mill Rock"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "IRL"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 865 · Shane Moraghan",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Shane Moraghan swim the English Channel?",
+      "value": "Shane Moraghan swam from England to France on 7 August 1999 in 10 hours 23 minutes."
+    },
+    {
+      "label": "Who piloted Shane Moraghan’s Channel crossing?",
+      "value": "Michael Oram piloted Aegean Blue on 7 August 1999."
+    },
+    {
+      "label": "How long did Shane Moraghan take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 21 August 2017 took 9 hours 14 minutes 41 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 443730",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/443730"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 439 · Shane Moraghan, Ireland",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "World Open Water Swimming Association profile of Shane Moraghan",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.openwaterswimming.com/the-legacy-of-irelands-shane-moraghan/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 865 · Shane Moraghan",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-443730",
+      "title": "English Channel solo, 7 August 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:23:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Landing",
+          "text": "a beach between Wissant and Cap Gris-Nez"
+        },
+        {
+          "label": "Departure clock",
+          "text": "08:40:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "19:03:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Michael Oram"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Aegean Blue"
+        },
+        {
+          "label": "Observer",
+          "text": "B. Harbottle"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Ireland"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2017-08-21",
+      "title": "Catalina Channel solo, 21 August 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:14:41 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Ireland"
+        },
+        {
+          "label": "Record note",
+          "text": "The federation gives 9:14:41. The career account rounds the swim to 9 hours 15 minutes."
+        }
+      ]
+    },
+    {
+      "id": "nyow-865",
+      "title": "Manhattan Island swim, 15 August 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:52:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Mill Rock"
+        },
+        {
+          "label": "Landing",
+          "text": "Mill Rock"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "IRL"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-99ed0c0a2ba670047db1"
+}
