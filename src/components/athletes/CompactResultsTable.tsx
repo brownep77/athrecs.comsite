@@ -14,7 +14,8 @@ import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { type ProfileResult, findPersonalBests } from "@/lib/athrecs/profile-records";
 import { ResultTiming } from "./ResultTiming";
-import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { formatRaceDateShort } from "@/lib/athrecs/format";
+import { recordedMark } from "@/lib/athrecs/profile-personal-best-summary";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
 import {
@@ -211,7 +212,7 @@ export function CompactResultsTable({
                   result.status === "finished" ||
                   result.status === "FIN" ||
                   !result.status
-                    ? formatDuration(result.finishTimeSeconds)
+                    ? recordedMark(result)
                     : result.status}
                   {isDisqualified(result) ? <span aria-label="Disqualified result">*</span> : null}
                   {!isDisqualified(result) && bestIds.has(result.resultId) ? (
