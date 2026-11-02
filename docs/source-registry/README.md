@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1625 unique sources as of 2 November 2026. Only 41 are enabled; the other 1584 remain
+The registry contains 1630 unique sources as of 2 November 2026. Only 41 are enabled; the other 1589 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -85,9 +85,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1625 sources create exactly one source job;
+- all 1630 sources create exactly one source job;
 - the 41 enabled and rights-approved sources are queued;
-- the other 1584 sources are retained as blocked jobs with their reason;
+- the other 1589 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -497,4 +497,26 @@ in the source notes. Athlete-specific captures, matching decisions and publicati
 receipts remain private. All additions use enabled=0 and follow_history_links=0.
 Registration does not authorise automated collection or verify participant results.
 
-The current registry contains 1625 sources: 41 enabled and 1584 disabled.
+That batch brought the registry to 1625 sources: 41 enabled and 1584 disabled.
+
+## Palencia organiser and Galician federation result documents — 2 November 2026
+
+Registered two disabled manual research sources after checking the canonical
+registry, managed sources and wider repository event inventory for duplicates.
+San Silvestre Palentina provides an organiser classifications index and the
+inspected 31 December 2023 result PDF. The municipal edition notice describes
+an approximately six-kilometre course; the result sheet does not establish
+certified exact-distance personal-best eligibility or chip/gun timing.
+
+The Federación Galega de Atletismo hosts an inspected copy of the 2024 Getafe
+Spanish cross-country championship result book. RFEA remains the original
+publisher and Conersys retains its timing credit. Individual finishing positions,
+team-scoring points and regional-team standings remain distinct. A hosted copy
+does not create a second event or establish complete archive coverage.
+
+Existing result-provider registrations are retained. The new sources use
+`enabled=0` and `follow_history_links=0`; registration neither enables automated
+collection nor verifies participant results. Individual source captures and
+identity-review evidence remain outside source control.
+
+The registry now contains 1630 sources: 41 enabled and 1589 disabled.
