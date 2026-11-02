@@ -24,6 +24,8 @@ export async function saveAthleteLink({data}){window.saves.push(data);if(window.
 const workspace = file(
   "workspace-api.js",
   `const profile={id:9,slug:'avery-test-athlete',profile_visibility:'private',display_name:'Avery Test Athlete',given_name:'',family_name:'',gender:'U',source_club_name:'',city:'',county:'',country:'',bio:''};
+export async function listMyOwnerRaceReviews(){return [];}
+export async function answerMyOwnerRaceReview(){throw Error('No owner reviews in this staff fixture');}
 export async function getStaffWorkspace({data}){return {profile:data.athleteId?profile:null,profileVersion:'version',editable:true,linked:[],results:[],batches:[],email:'staff@example.test'};}
 export async function searchStaffAthletes(){return [{id:9,name:'Avery Test Athlete',club:'',visibility:'private',slug:'avery-test-athlete'}];}
 export async function getStaffResultBatch(){throw Error('No batch in this synthetic fixture');}
