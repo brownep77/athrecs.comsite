@@ -12,7 +12,9 @@ function page(body: string, status = 200, nonce = "") {
       headers: {
         "Content-Type": "text/html; charset=utf-8",
         "Cache-Control": "private, no-store",
-        "Referrer-Policy": "no-referrer",
+        // Browsers can send Origin: null on a form POST under no-referrer.
+        // Keep the same-origin POST identifiable. Fragments never enter referrers.
+        "Referrer-Policy": "same-origin",
         "X-Robots-Tag": "noindex, nofollow, noarchive",
         "Content-Security-Policy": `default-src 'none'; style-src 'unsafe-inline'; script-src ${nonce ? "'nonce-" + nonce + "'" : "'none'"}; base-uri 'none'; frame-ancestors 'none'; form-action 'self'`,
       },
