@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { countryAbbreviation, countryFlag } from "@/lib/athrecs/country-flags";
+import {
+  countryAbbreviation,
+  countryFlag,
+  countryFlagImageCode,
+} from "@/lib/athrecs/country-flags";
 
 export function CountryFlag({
   country,
@@ -12,8 +16,7 @@ export function CountryFlag({
 }) {
   const [failedCode, setFailedCode] = useState("");
   const flag = countryFlag(country);
-  // Northern Ireland has no separate flag emoji; use the sporting flag asset.
-  const imageCode = flag.name === "Northern Ireland" ? "GB-NIR" : flag.code;
+  const imageCode = countryFlagImageCode(country);
   const abbreviation = countryAbbreviation(country);
   if (!flag.name) return <span aria-label="Country not specified">—</span>;
   if (!flag.code) return <span>{flag.name}</span>;
@@ -27,7 +30,7 @@ export function CountryFlag({
         className="inline-flex h-4 w-6 shrink-0 items-center justify-center overflow-hidden rounded-sm border border-slate-200 bg-white align-middle text-[8px] text-slate-700"
       >
         {failedCode === imageCode ? (
-          <span aria-hidden="true">{abbreviation}</span>
+          <span aria-hidden="true">{flag.emoji || abbreviation}</span>
         ) : (
           <img
             src={`https://flagcdn.com/${imageCode.toLowerCase()}.svg`}

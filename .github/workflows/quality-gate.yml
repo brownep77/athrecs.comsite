@@ -96,6 +96,9 @@ jobs:
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 
+      - name: Verify consistent UK flags
+        run: node scripts/verify-uk-flag-presentation.mjs
+
       - name: Verify search URLs and sitemap privacy
         run: npm run verify:search-discovery
 
