@@ -1,0 +1,318 @@
+{
+  "slug": "michael-renford-english-channel",
+  "name": "Michael Renford",
+  "country": "Australia",
+  "aliases": [
+    "Murph Renford"
+  ],
+  "highlight": "Michael Renford crossed the English Channel from England to France in 12 hours 10 minutes on 1 August 2007.",
+  "biography": [
+    "Renford followed his father Des into long-distance swimming. In January 2025 Michael swam 34 kilometres down Tasmania’s Derwent River from New Norfolk to Hobart, fifty years after Des completed the route. His own Channel swim in 2007 was escorted by Dave Whyte on Ocean Breeze.",
+    "The English Channel swim on 1 August 2007 took 12 hours 10 minutes. The Catalina federation records 9 hours 13 minutes 22 seconds on 5 September 2011. In New York the 6 June 2009 Manhattan circuit took 7 hours 29 minutes 4 seconds."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Australia"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444108",
+      "title": "English Channel solo, 1 August 2007",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "12:10:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "09:23:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "21:33:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Dave Whyte"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Ocean Breeze"
+        },
+        {
+          "label": "Observer",
+          "text": "Brian Harbottle"
+        },
+        {
+          "label": "Trainer",
+          "text": "Tony Johnston, Errol Goldberg & Baden Green"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444108",
+          "url": "https://cspf.co.uk/swim/444108"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2011-09-05",
+      "title": "Catalina Channel solo, 5 September 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:13:22 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 218 · Michael Renford, Australia",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-639",
+      "title": "Manhattan Island swim, 6 June 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:29:04 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "AUS"
+        },
+        {
+          "label": "Published place",
+          "text": "3"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 639 · Michael Renford",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Michael Renford swim the English Channel?",
+      "value": "Michael Renford swam from England to France on 1 August 2007 in 12 hours 10 minutes."
+    },
+    {
+      "label": "Who piloted Michael Renford’s Channel crossing?",
+      "value": "Dave Whyte piloted Ocean Breeze on 1 August 2007."
+    },
+    {
+      "label": "How long did Michael Renford take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 5 September 2011 took 9 hours 13 minutes 22 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444108",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444108"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 218 · Michael Renford, Australia",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 639 · Michael Renford",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "ABC News on Michael and Des Renford’s Derwent swims",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.abc.net.au/news/2025-01-25/michael-murph-renford-completes-derwent-river-swim/104859098"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444108",
+      "title": "English Channel solo, 1 August 2007",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "12:10:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "09:23:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "21:33:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Dave Whyte"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Ocean Breeze"
+        },
+        {
+          "label": "Observer",
+          "text": "Brian Harbottle"
+        },
+        {
+          "label": "Trainer",
+          "text": "Tony Johnston, Errol Goldberg & Baden Green"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2011-09-05",
+      "title": "Catalina Channel solo, 5 September 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:13:22 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        }
+      ]
+    },
+    {
+      "id": "nyow-639",
+      "title": "Manhattan Island swim, 6 June 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:29:04 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "AUS"
+        },
+        {
+          "label": "Published place",
+          "text": "3"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-37212f270f59d36fadbe"
+}

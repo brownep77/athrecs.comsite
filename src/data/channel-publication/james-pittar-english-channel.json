@@ -1,0 +1,541 @@
+{
+  "slug": "james-pittar-english-channel",
+  "name": "James Pittar",
+  "country": "Australia",
+  "aliases": [],
+  "highlight": "James Pittar crossed the English Channel from England to France in 13 hours 50 minutes on 19 July 1998.",
+  "biography": [
+    "Pittar was 28 when he swam from England to France. He went on to become the first blind swimmer to complete the English Channel, Catalina and Manhattan combination, according to the International Marathon Swimming Hall of Fame, which inducted him in 2009.",
+    "The English Channel swim on 19 July 1998 took 13 hours 50 minutes. The Catalina federation records 11 hours 36 minutes 50 seconds on 15 September 2006. In New York the 12 June 1999 Manhattan circuit took 7 hours 58 minutes 55 seconds."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Australia"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-443700",
+      "title": "English Channel solo, 19 July 1998",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:50:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "08:00:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "21:50:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "G. Pique"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Gallivant"
+        },
+        {
+          "label": "Observer",
+          "text": "Norman Trusty"
+        },
+        {
+          "label": "Trainer",
+          "text": "Narelle Simpson"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 443700",
+          "url": "https://cspf.co.uk/swim/443700"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2006-09-15",
+      "title": "Catalina Channel solo, 15 September 2006",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:36:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 136 · James Pittar, Australia",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-452",
+      "title": "Manhattan Island swim, 12 June 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:58:55 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "AUS"
+        },
+        {
+          "label": "Published place",
+          "text": "25"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 452 · James Pittar",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-298",
+      "title": "Rottnest Channel solo, 21 February 1998",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:51:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 298",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-354",
+      "title": "Rottnest Channel solo, 20 February 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:59:13 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 354",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-454",
+      "title": "Rottnest Channel solo, 26 February 2000",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:42:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 454",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-570",
+      "title": "Rottnest Channel solo, 24 February 2001",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:44:59 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 570",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-679",
+      "title": "Rottnest Channel solo, 23 February 2002",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:03:44 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 679",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-768",
+      "title": "Rottnest Channel solo, 22 February 2003",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:01:27 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 768",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did James Pittar swim the English Channel?",
+      "value": "James Pittar swam from England to France on 19 July 1998 in 13 hours 50 minutes."
+    },
+    {
+      "label": "Who piloted James Pittar’s Channel crossing?",
+      "value": "G. Pique piloted Gallivant on 19 July 1998."
+    },
+    {
+      "label": "How long did James Pittar take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 15 September 2006 took 11 hours 36 minutes 50 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 443700",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/443700"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 136 · James Pittar, Australia",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 452 · James Pittar",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Rottnest Channel Swim Association, April 2024 register, swim 768",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "title": "International Marathon Swimming Hall of Fame, James Pittar",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.imshof.org/_files/ugd/bd1926_953a0ca55a514033a90ee07b68794bd0.pdf"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-443700",
+      "title": "English Channel solo, 19 July 1998",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:50:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "08:00:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "21:50:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "G. Pique"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Gallivant"
+        },
+        {
+          "label": "Observer",
+          "text": "Norman Trusty"
+        },
+        {
+          "label": "Trainer",
+          "text": "Narelle Simpson"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2006-09-15",
+      "title": "Catalina Channel solo, 15 September 2006",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:36:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        }
+      ]
+    },
+    {
+      "id": "nyow-452",
+      "title": "Manhattan Island swim, 12 June 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:58:55 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "AUS"
+        },
+        {
+          "label": "Published place",
+          "text": "25"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-298",
+      "title": "Rottnest Channel solo, 21 February 1998",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:51:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-354",
+      "title": "Rottnest Channel solo, 20 February 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:59:13 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-454",
+      "title": "Rottnest Channel solo, 26 February 2000",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:42:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-570",
+      "title": "Rottnest Channel solo, 24 February 2001",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:44:59 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-679",
+      "title": "Rottnest Channel solo, 23 February 2002",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:03:44 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-768",
+      "title": "Rottnest Channel solo, 22 February 2003",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:01:27 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-212576b7a5562276d0c8"
+}

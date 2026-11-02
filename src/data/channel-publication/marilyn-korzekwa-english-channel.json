@@ -1,0 +1,292 @@
+{
+  "slug": "marilyn-korzekwa-english-channel",
+  "name": "Marilyn Korzekwa",
+  "country": "Canada",
+  "aliases": [],
+  "highlight": "Marilyn Korzekwa crossed the English Channel from England to France in 16 hours 40 minutes on 21 August 2011.",
+  "biography": [
+    "Korzekwa was 54 when she crossed the English Channel. Solo Swims of Ontario credits her as the first Canadian to complete the English Channel, Catalina and Manhattan Triple Crown. The organisation also records her separate California Triple Crown, which includes Lake Tahoe and the Santa Barbara Channel.",
+    "The English Channel swim on 21 August 2011 took 16 hours 40 minutes. The Catalina federation records 14 hours 24 minutes 24 seconds on 30 August 2013. In New York the 12 July 2014 Manhattan circuit took 10 hours 2 minutes 21 seconds."
+  ],
+  "flags": [
+    {
+      "code": "CA",
+      "label": "Canada",
+      "abbr": "CAN"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Canada"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444503",
+      "title": "English Channel solo, 21 August 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "16:40:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "04:24:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "21:04:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Fred Mardle"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Masterpiece"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Canada"
+        },
+        {
+          "label": "Record note",
+          "text": "The historical register describes her as the oldest Canadian woman to have completed the crossing at the time, aged 54."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444503",
+          "url": "https://cspf.co.uk/swim/444503"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2013-08-30",
+      "title": "Catalina Channel solo, 30 August 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "14:24:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Canada"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 274 · Marilyn Korzekwa, Canada",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-826",
+      "title": "Manhattan Island swim, 12 July 2014",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:02:21 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "CAN"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 826 · Marilyn Korzekwa",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Marilyn Korzekwa swim the English Channel?",
+      "value": "Marilyn Korzekwa swam from England to France on 21 August 2011 in 16 hours 40 minutes."
+    },
+    {
+      "label": "Who piloted Marilyn Korzekwa’s Channel crossing?",
+      "value": "Fred Mardle piloted Masterpiece on 21 August 2011."
+    },
+    {
+      "label": "How long did Marilyn Korzekwa take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 30 August 2013 took 14 hours 24 minutes 24 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444503",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444503"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 274 · Marilyn Korzekwa, Canada",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 826 · Marilyn Korzekwa",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Solo Swims of Ontario profile of Marilyn Korzekwa",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.soloswims.org/marilyn-korzekwa"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444503",
+      "title": "English Channel solo, 21 August 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "16:40:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "04:24:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "21:04:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Fred Mardle"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Masterpiece"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Canada"
+        },
+        {
+          "label": "Record note",
+          "text": "The historical register describes her as the oldest Canadian woman to have completed the crossing at the time, aged 54."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2013-08-30",
+      "title": "Catalina Channel solo, 30 August 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "14:24:24 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Canada"
+        }
+      ]
+    },
+    {
+      "id": "nyow-826",
+      "title": "Manhattan Island swim, 12 July 2014",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:02:21 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "CAN"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-ac0cac808840e051808e"
+}

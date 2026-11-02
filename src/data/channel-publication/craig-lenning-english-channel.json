@@ -1,0 +1,360 @@
+{
+  "slug": "craig-lenning-english-channel",
+  "name": "Craig Lenning",
+  "country": "United States",
+  "aliases": [],
+  "highlight": "Craig Lenning crossed the English Channel from England to France in 11 hours 25 minutes 22 seconds on 3 August 2010.",
+  "biography": [
+    "Lenning reached the sand dunes near Cap Gris-Nez on his English Channel swim in 2010. The following summer he crossed the North Channel from Northern Ireland to Scotland. Brian Meharg piloted Blue Aquarius on that 14-hour-44-minute-50-second crossing.",
+    "The English Channel swim on 3 August 2010 took 11 hours 25 minutes 22 seconds. The Catalina federation records 9 hours 9 minutes 51 seconds on 10 August 2009. In New York the 12 June 2010 Manhattan circuit took 8 hours 24 minutes 33 seconds."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "USA"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444386",
+      "title": "English Channel solo, 3 August 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:25:22 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Landing",
+          "text": "sand dunes near Cap Gris-Nez"
+        },
+        {
+          "label": "Departure clock",
+          "text": "03:25:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "14:50:22"
+        },
+        {
+          "label": "Pilot",
+          "text": "Michael Oram"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Gallivant"
+        },
+        {
+          "label": "Observer",
+          "text": "Stephen Payne"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444386",
+          "url": "https://cspf.co.uk/swim/444386"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2009-08-10",
+      "title": "Catalina Channel solo, 10 August 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:09:51 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 168 · Craig Lenning",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-674",
+      "title": "Manhattan Island swim, 12 June 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:24:33 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "14"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 674 · Craig Lenning",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "north-2011",
+      "title": "North Channel solo, 27 July 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "14:44:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Northern Ireland to Scotland"
+        },
+        {
+          "label": "Pilot",
+          "text": "Brian Meharg"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Blue Aquarius"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Infinity Channel Swimming, swim 12",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Craig Lenning swim the English Channel?",
+      "value": "Craig Lenning swam from England to France on 3 August 2010 in 11 hours 25 minutes 22 seconds."
+    },
+    {
+      "label": "Who piloted Craig Lenning’s Channel crossing?",
+      "value": "Michael Oram piloted Gallivant on 3 August 2010."
+    },
+    {
+      "label": "How long did Craig Lenning take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 10 August 2009 took 9 hours 9 minutes 51 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444386",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444386"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 168 · Craig Lenning",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 674 · Craig Lenning",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Infinity Channel Swimming, North Channel solo register",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444386",
+      "title": "English Channel solo, 3 August 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:25:22 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Landing",
+          "text": "sand dunes near Cap Gris-Nez"
+        },
+        {
+          "label": "Departure clock",
+          "text": "03:25:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "14:50:22"
+        },
+        {
+          "label": "Pilot",
+          "text": "Michael Oram"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Gallivant"
+        },
+        {
+          "label": "Observer",
+          "text": "Stephen Payne"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2009-08-10",
+      "title": "Catalina Channel solo, 10 August 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:09:51 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        }
+      ]
+    },
+    {
+      "id": "nyow-674",
+      "title": "Manhattan Island swim, 12 June 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:24:33 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "14"
+        }
+      ]
+    },
+    {
+      "id": "north-2011",
+      "title": "North Channel solo, 27 July 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "14:44:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Northern Ireland to Scotland"
+        },
+        {
+          "label": "Pilot",
+          "text": "Brian Meharg"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Blue Aquarius"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-08fa5ccabb703a1747c3"
+}

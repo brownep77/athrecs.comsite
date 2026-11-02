@@ -1,0 +1,1359 @@
+{
+  "slug": "barbara-pellick-english-channel",
+  "name": "Barbara Pellick",
+  "country": "Australia",
+  "aliases": [],
+  "highlight": "Barbara Pellick crossed the English Channel from England to France in 12 hours 23 minutes on 4 July 1995.",
+  "biography": [
+    "Pellick began crossing Western Australia’s Rottnest Channel before her English Channel solo. In 1994 she swam from the mainland to Rottnest and back in 12 hours 6 minutes 12 seconds. The Rottnest Channel Swim Association inducted her into its Hall of Fame in 2015.",
+    "The English Channel swim on 4 July 1995 took 12 hours 23 minutes. The Catalina federation records 11 hours 19 minutes 30 seconds on 11 August 2013. In New York the 17 June 2000 Manhattan circuit took 8 hours 15 minutes 50 seconds."
+  ],
+  "flags": [
+    {
+      "code": "AU",
+      "label": "Australia",
+      "abbr": "AUS"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Australia"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-443610",
+      "title": "English Channel solo, 4 July 1995",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "12:23:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Pilot",
+          "text": "Michael Oram"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Aegean Blue"
+        },
+        {
+          "label": "Observer",
+          "text": "E. Ruston"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 443610",
+          "url": "https://cspf.co.uk/swim/443610"
+        },
+        {
+          "text": "CSA solo crossing, result 2957",
+          "url": "https://www.channelswimmingassociation.com/swim/2957/barbara-pellick"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2013-08-11",
+      "title": "Catalina Channel solo, 11 August 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:19:30 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 266 · Barbara Pellick, Australia",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-462",
+      "title": "Manhattan Island swim, 17 June 2000",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:15:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "AUS"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 462 · Barbara Pellick",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-85",
+      "title": "Rottnest Channel solo, 20 February 1993",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:33:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 85",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-126",
+      "title": "Rottnest Channel double, 19 February 1994",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "12:06:12 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Mainland to Rottnest Island and back"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 126",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-141",
+      "title": "Rottnest Channel solo, 18 February 1995",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:45:57 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 141",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-174",
+      "title": "Rottnest Channel solo, 17 February 1996",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:23:58 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 174",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-221",
+      "title": "Rottnest Channel solo, 22 February 1997",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:18:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 221",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-273",
+      "title": "Rottnest Channel solo, 21 February 1998",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:40:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 273",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-322",
+      "title": "Rottnest Channel solo, 20 February 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:47:05 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 322",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-364",
+      "title": "Rottnest Channel solo, 18 December 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:20:04 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 364",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-378",
+      "title": "Rottnest Channel solo, 26 February 2000",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:05:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 378",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-480",
+      "title": "Rottnest Channel solo, 24 February 2001",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:08:44 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 480",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-594",
+      "title": "Rottnest Channel solo, 23 February 2002",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:30:17 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 594",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-709",
+      "title": "Rottnest Channel solo, 22 February 2003",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:18:57 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 709",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-813",
+      "title": "Rottnest Channel solo, 21 February 2004",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:49:32 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 813",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-966",
+      "title": "Rottnest Channel solo, 19 February 2005",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:38:49 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 966",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1091",
+      "title": "Rottnest Channel solo, 18 February 2006",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:50:02 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 1091",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1174",
+      "title": "Rottnest Channel solo, 25 March 2006",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:27:21 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 1174",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1185",
+      "title": "Rottnest Channel solo, 17 March 2007",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:29:22 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 1185",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1231",
+      "title": "Rottnest Channel solo, 6 January 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:33:22 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 1231",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1276",
+      "title": "Rottnest Channel solo, 16 February 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:22:18 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 1276",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1378",
+      "title": "Rottnest Channel solo, 15 March 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:49:02 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 1378",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1464",
+      "title": "Rottnest Channel solo, 21 February 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:14:39 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 1464",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1636",
+      "title": "Rottnest Channel solo, 20 February 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:57:12 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 1636",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-2173",
+      "title": "Rottnest Channel solo, 23 February 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:39:06 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 2173",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-2416",
+      "title": "Rottnest Channel solo, 22 February 2014",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:06:33 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 2416",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-2709",
+      "title": "Rottnest Channel solo, 21 February 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:59:59 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 2709",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-2845",
+      "title": "Rottnest Channel solo, 21 March 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:35:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Rottnest Island to the mainland"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 2845",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-3313",
+      "title": "Rottnest Channel solo, 25 February 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:24:55 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 3313",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-3838",
+      "title": "Rottnest Channel solo, 30 March 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:17:34 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 3838",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-4061",
+      "title": "Rottnest Channel solo, 23 February 2019",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:33:15 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Rottnest Channel Swim Association, April 2024 register, swim 4061",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Barbara Pellick swim the English Channel?",
+      "value": "Barbara Pellick swam from England to France on 4 July 1995 in 12 hours 23 minutes."
+    },
+    {
+      "label": "Who piloted Barbara Pellick’s Channel crossing?",
+      "value": "Michael Oram piloted Aegean Blue on 4 July 1995."
+    },
+    {
+      "label": "How long did Barbara Pellick take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 11 August 2013 took 11 hours 19 minutes 30 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 443610",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/443610"
+        }
+      ]
+    },
+    {
+      "title": "CSA solo crossing, result 2957",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swim/2957/barbara-pellick"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 266 · Barbara Pellick, Australia",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 462 · Barbara Pellick",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Rottnest Channel Swim Association, April 2024 register, swim 4061",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://rottnestchannelswimassociation.com.au/wp-content/uploads/2024/06/Official-Solo-Crossing-Record-April-2024.pdf"
+        }
+      ]
+    },
+    {
+      "title": "Barbara Pellick’s account of the three marathon swims",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.openwaterswimming.com/barbara-pellick-looks-back-and-looks/"
+        }
+      ]
+    },
+    {
+      "title": "Rottnest Channel Swim Association Hall of Fame",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://rottnestchannelswimassociation.com.au/hall-of-fame/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-443610",
+      "title": "English Channel solo, 4 July 1995",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "12:23:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Pilot",
+          "text": "Michael Oram"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Aegean Blue"
+        },
+        {
+          "label": "Observer",
+          "text": "E. Ruston"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2013-08-11",
+      "title": "Catalina Channel solo, 11 August 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:19:30 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Australia"
+        }
+      ]
+    },
+    {
+      "id": "nyow-462",
+      "title": "Manhattan Island swim, 17 June 2000",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:15:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "AUS"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-85",
+      "title": "Rottnest Channel solo, 20 February 1993",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:33:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-126",
+      "title": "Rottnest Channel double, 19 February 1994",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "12:06:12 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Mainland to Rottnest Island and back"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-141",
+      "title": "Rottnest Channel solo, 18 February 1995",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:45:57 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-174",
+      "title": "Rottnest Channel solo, 17 February 1996",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:23:58 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-221",
+      "title": "Rottnest Channel solo, 22 February 1997",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:18:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-273",
+      "title": "Rottnest Channel solo, 21 February 1998",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:40:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-322",
+      "title": "Rottnest Channel solo, 20 February 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:47:05 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-364",
+      "title": "Rottnest Channel solo, 18 December 1999",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:20:04 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-378",
+      "title": "Rottnest Channel solo, 26 February 2000",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:05:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-480",
+      "title": "Rottnest Channel solo, 24 February 2001",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:08:44 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-594",
+      "title": "Rottnest Channel solo, 23 February 2002",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:30:17 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-709",
+      "title": "Rottnest Channel solo, 22 February 2003",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:18:57 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-813",
+      "title": "Rottnest Channel solo, 21 February 2004",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:49:32 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-966",
+      "title": "Rottnest Channel solo, 19 February 2005",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:38:49 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1091",
+      "title": "Rottnest Channel solo, 18 February 2006",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:50:02 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1174",
+      "title": "Rottnest Channel solo, 25 March 2006",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:27:21 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1185",
+      "title": "Rottnest Channel solo, 17 March 2007",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:29:22 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1231",
+      "title": "Rottnest Channel solo, 6 January 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:33:22 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1276",
+      "title": "Rottnest Channel solo, 16 February 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:22:18 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1378",
+      "title": "Rottnest Channel solo, 15 March 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:49:02 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1464",
+      "title": "Rottnest Channel solo, 21 February 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:14:39 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-1636",
+      "title": "Rottnest Channel solo, 20 February 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:57:12 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-2173",
+      "title": "Rottnest Channel solo, 23 February 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:39:06 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-2416",
+      "title": "Rottnest Channel solo, 22 February 2014",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:06:33 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-2709",
+      "title": "Rottnest Channel solo, 21 February 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:59:59 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-2845",
+      "title": "Rottnest Channel solo, 21 March 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "5:35:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Rottnest Island to the mainland"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-3313",
+      "title": "Rottnest Channel solo, 25 February 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:24:55 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-3838",
+      "title": "Rottnest Channel solo, 30 March 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "6:17:34 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    },
+    {
+      "id": "rottnest-4061",
+      "title": "Rottnest Channel solo, 23 February 2019",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:33:15 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Western Australian mainland to Rottnest Island"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-74ea6447426c3f82a1a3"
+}

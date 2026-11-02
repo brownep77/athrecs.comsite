@@ -1,0 +1,531 @@
+{
+  "slug": "milko-van-gool-english-channel",
+  "name": "Milko van Gool",
+  "country": "Netherlands",
+  "aliases": [],
+  "highlight": "Milko van Gool crossed the English Channel from England to France in 10 hours 29 minutes 5 seconds on 27 July 2011.",
+  "biography": [
+    "Van Gool completed the English, North and Bristol Channels between 2011 and 2024. Guinness recognised a men’s aggregate of 29 hours 23 minutes 33 seconds. Its Bristol time is ten seconds shorter than the time in the observer’s report. The two figures are recorded separately below.",
+    "The English Channel swim on 27 July 2011 took 10 hours 29 minutes 5 seconds. The Catalina federation records 9 hours 26 minutes 1 seconds on 28 June 2018. In New York the 2 June 2023 Manhattan circuit took 7 hours 51 minutes 49 seconds."
+  ],
+  "flags": [
+    {
+      "code": "NL",
+      "label": "Netherlands",
+      "abbr": "NED"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Netherlands"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444470",
+      "title": "English Channel solo, 27 July 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:29:05 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "07:02:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "17:31:05"
+        },
+        {
+          "label": "Pilot",
+          "text": "Paul Foreman"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Pace Arrow"
+        },
+        {
+          "label": "Observer",
+          "text": "Martin Fielding"
+        },
+        {
+          "label": "Trainer",
+          "text": "Marcel van der Togt"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Netherlands"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444470",
+          "url": "https://cspf.co.uk/swim/444470"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2018-06-28",
+      "title": "Catalina Channel solo, 28 June 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:26:01 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Netherlands"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 467 · Milko Van Gool, Netherlands",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1265",
+      "title": "Manhattan Island swim, 2 June 2023",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:51:49 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "NLD"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1265 · Milko van Gool",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "id": "north-2013",
+      "title": "North Channel solo, 30 July 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:34:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Northern Ireland to Scotland"
+        },
+        {
+          "label": "Pilot",
+          "text": "Quinton Nelson"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Guy & Clare Hunter"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Infinity Channel Swimming, swim 17",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Guinness World Records, Original Triple Crown aggregate",
+          "url": "https://www.guinnessworldrecords.com/world-records/667677-fastest-person-to-complete-the-original-triple-crown-open-water-swimming-aggreg"
+        }
+      ]
+    },
+    {
+      "id": "bristol-2024",
+      "title": "Bristol Channel solo, 13 September 2024",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:20:38 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Glenthorne to Newton Beach, Porthcawl"
+        },
+        {
+          "label": "Start location",
+          "text": "Glenthorne"
+        },
+        {
+          "label": "Landing",
+          "text": "Newton Beach, near the Ogmore River"
+        },
+        {
+          "label": "Departure clock",
+          "text": "08:04:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "16:24:38"
+        },
+        {
+          "label": "Pilot",
+          "text": "Meuryn Hughes"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Scorpio"
+        },
+        {
+          "label": "Observer",
+          "text": "Steve Butler"
+        },
+        {
+          "label": "Ratification",
+          "text": "Bristol Channel Swimming Association"
+        },
+        {
+          "label": "Record note",
+          "text": "The observer’s clocks give 8:20:38, matching both BCSA records. Guinness uses 8:20:28 for its 29:23:33 men’s aggregate. With the BCSA time the three swims total 29:23:43. The route register’s passing reference to July conflicts with the dated September entry and swimmer’s account."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "BCSA individual swim and observer’s account",
+          "url": "https://www.bcswimmers.com/milkovangool"
+        },
+        {
+          "text": "BCSA route register",
+          "url": "https://www.bcswimmers.com/glenthorne-porthcawl"
+        },
+        {
+          "text": "Guinness World Records, Original Triple Crown aggregate",
+          "url": "https://www.guinnessworldrecords.com/world-records/667677-fastest-person-to-complete-the-original-triple-crown-open-water-swimming-aggreg"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Milko van Gool swim the English Channel?",
+      "value": "Milko van Gool swam from England to France on 27 July 2011 in 10 hours 29 minutes 5 seconds."
+    },
+    {
+      "label": "Who piloted Milko van Gool’s Channel crossing?",
+      "value": "Paul Foreman piloted Pace Arrow on 27 July 2011."
+    },
+    {
+      "label": "How long did Milko van Gool take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 28 June 2018 took 9 hours 26 minutes 1 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444470",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444470"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 467 · Milko Van Gool, Netherlands",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 1265 · Milko van Gool",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Infinity Channel Swimming, swim 17",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        }
+      ]
+    },
+    {
+      "title": "Guinness World Records, Original Triple Crown aggregate",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.guinnessworldrecords.com/world-records/667677-fastest-person-to-complete-the-original-triple-crown-open-water-swimming-aggreg"
+        }
+      ]
+    },
+    {
+      "title": "BCSA individual swim and observer’s account",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.bcswimmers.com/milkovangool"
+        }
+      ]
+    },
+    {
+      "title": "BCSA route register",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.bcswimmers.com/glenthorne-porthcawl"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444470",
+      "title": "English Channel solo, 27 July 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:29:05 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "07:02:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "17:31:05"
+        },
+        {
+          "label": "Pilot",
+          "text": "Paul Foreman"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Pace Arrow"
+        },
+        {
+          "label": "Observer",
+          "text": "Martin Fielding"
+        },
+        {
+          "label": "Trainer",
+          "text": "Marcel van der Togt"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Netherlands"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2018-06-28",
+      "title": "Catalina Channel solo, 28 June 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:26:01 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Netherlands"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1265",
+      "title": "Manhattan Island swim, 2 June 2023",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:51:49 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "NLD"
+        },
+        {
+          "label": "Published place",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "id": "north-2013",
+      "title": "North Channel solo, 30 July 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:34:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Northern Ireland to Scotland"
+        },
+        {
+          "label": "Pilot",
+          "text": "Quinton Nelson"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Guy & Clare Hunter"
+        }
+      ]
+    },
+    {
+      "id": "bristol-2024",
+      "title": "Bristol Channel solo, 13 September 2024",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:20:38 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Glenthorne to Newton Beach, Porthcawl"
+        },
+        {
+          "label": "Start location",
+          "text": "Glenthorne"
+        },
+        {
+          "label": "Landing",
+          "text": "Newton Beach, near the Ogmore River"
+        },
+        {
+          "label": "Departure clock",
+          "text": "08:04:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "16:24:38"
+        },
+        {
+          "label": "Pilot",
+          "text": "Meuryn Hughes"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Scorpio"
+        },
+        {
+          "label": "Observer",
+          "text": "Steve Butler"
+        },
+        {
+          "label": "Ratification",
+          "text": "Bristol Channel Swimming Association"
+        },
+        {
+          "label": "Record note",
+          "text": "The observer’s clocks give 8:20:38, matching both BCSA records. Guinness uses 8:20:28 for its 29:23:33 men’s aggregate. With the BCSA time the three swims total 29:23:43. The route register’s passing reference to July conflicts with the dated September entry and swimmer’s account."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-9cd64616f8ec37c588ef"
+}

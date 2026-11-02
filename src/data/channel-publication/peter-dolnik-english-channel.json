@@ -1,0 +1,324 @@
+{
+  "slug": "peter-dolnik-english-channel",
+  "name": "Peter Dolnik",
+  "country": "Slovakia",
+  "aliases": [],
+  "highlight": "Peter Dolnik crossed the English Channel from England to France in 11 hours 43 minutes on 5 July 2013.",
+  "biography": [
+    "Dolnik’s 2013 Channel swim began a series of three marathon swims. The VladSwim coaching programme also records his 2016 Catalina crossing and his 2018 Manhattan finish under the same name. He swam the Manhattan circuit in 9 hours 17 minutes 49 seconds.",
+    "The English Channel swim on 5 July 2013 took 11 hours 43 minutes. The Catalina federation records 10 hours 6 minutes 15 seconds on 7 September 2016. In New York the 30 June 2018 Manhattan circuit took 9 hours 17 minutes 49 seconds."
+  ],
+  "flags": [
+    {
+      "code": "SK",
+      "label": "Slovakia",
+      "abbr": "SVK"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Slovakia"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444647",
+      "title": "English Channel solo, 5 July 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:43:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "07:00:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "18:43:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Reg Brickell Jr"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Viking Princess"
+        },
+        {
+          "label": "Observer",
+          "text": "Mikee Phillips"
+        },
+        {
+          "label": "Trainer",
+          "text": "Vlad Mravec"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Slovakia"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444647",
+          "url": "https://cspf.co.uk/swim/444647"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2016-09-07",
+      "title": "Catalina Channel solo, 7 September 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:06:15 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Slovakia"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 395 · Peter Dolnik, Slovakia",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-980",
+      "title": "Manhattan Island swim, 30 June 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:17:49 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "SVK"
+        },
+        {
+          "label": "Published place",
+          "text": "7"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 980 · Peter Dolnik",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Peter Dolnik swim the English Channel?",
+      "value": "Peter Dolnik swam from England to France on 5 July 2013 in 11 hours 43 minutes."
+    },
+    {
+      "label": "Who piloted Peter Dolnik’s Channel crossing?",
+      "value": "Reg Brickell Jr piloted Viking Princess on 5 July 2013."
+    },
+    {
+      "label": "How long did Peter Dolnik take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 7 September 2016 took 10 hours 6 minutes 15 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444647",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444647"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 395 · Peter Dolnik, Slovakia",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 980 · Peter Dolnik",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "VladSwim coaching programme’s athlete results",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://vladswim.com.au/achievements/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444647",
+      "title": "English Channel solo, 5 July 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "11:43:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "07:00:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "18:43:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Reg Brickell Jr"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Viking Princess"
+        },
+        {
+          "label": "Observer",
+          "text": "Mikee Phillips"
+        },
+        {
+          "label": "Trainer",
+          "text": "Vlad Mravec"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Slovakia"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2016-09-07",
+      "title": "Catalina Channel solo, 7 September 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:06:15 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Slovakia"
+        }
+      ]
+    },
+    {
+      "id": "nyow-980",
+      "title": "Manhattan Island swim, 30 June 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:17:49 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "SVK"
+        },
+        {
+          "label": "Published place",
+          "text": "7"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-19cdd01472e7f3afe92c"
+}

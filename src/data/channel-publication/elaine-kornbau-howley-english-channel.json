@@ -1,0 +1,310 @@
+{
+  "slug": "elaine-kornbau-howley-english-channel",
+  "name": "Elaine Kornbau Howley",
+  "country": "United States",
+  "aliases": [
+    "Elaine Howley"
+  ],
+  "highlight": "Elaine Kornbau Howley crossed the English Channel from England to France in 13 hours 55 minutes on 3 August 2009.",
+  "biography": [
+    "Howley crossed Catalina in 2008, circled Manhattan in June 2009 and finished the English Channel that August. Alongside her swimming she became a writer on the sport and helped found the Massachusetts Open Water Swimming Association.",
+    "The English Channel swim on 3 August 2009 took 13 hours 55 minutes. The Catalina federation records 10 hours 57 minutes 44 seconds on 22 September 2008. In New York the 6 June 2009 Manhattan circuit took 8 hours 39 minutes 50 seconds."
+  ],
+  "flags": [
+    {
+      "code": "US",
+      "label": "United States",
+      "abbr": "USA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "USA"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444284",
+      "title": "English Channel solo, 3 August 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:55:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "09:13:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "23:08:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Fred Mardle"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Samallen P40"
+        },
+        {
+          "label": "Observer",
+          "text": "Andy"
+        },
+        {
+          "label": "Trainer",
+          "text": "Mark Howley & Khrista Trerotola"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444284",
+          "url": "https://cspf.co.uk/swim/444284"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2008-09-22",
+      "title": "Catalina Channel solo, 22 September 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:57:44 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 162 · Elaine Kornbau Howley",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-653",
+      "title": "Manhattan Island swim, 6 June 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:39:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "17"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 653 · Elaine Kornbau Howley",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Elaine Kornbau Howley swim the English Channel?",
+      "value": "Elaine Kornbau Howley swam from England to France on 3 August 2009 in 13 hours 55 minutes."
+    },
+    {
+      "label": "Who piloted Elaine Kornbau Howley’s Channel crossing?",
+      "value": "Fred Mardle piloted Samallen P40 on 3 August 2009."
+    },
+    {
+      "label": "How long did Elaine Kornbau Howley take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 22 September 2008 took 10 hours 57 minutes 44 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444284",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444284"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 162 · Elaine Kornbau Howley",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 653 · Elaine Kornbau Howley",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Beyond the Breakers interview with Elaine Howley",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.swimbeyondthebreakers.com/going-long/elaine-howley"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444284",
+      "title": "English Channel solo, 3 August 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:55:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "09:13:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "23:08:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Fred Mardle"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Samallen P40"
+        },
+        {
+          "label": "Observer",
+          "text": "Andy"
+        },
+        {
+          "label": "Trainer",
+          "text": "Mark Howley & Khrista Trerotola"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2008-09-22",
+      "title": "Catalina Channel solo, 22 September 2008",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:57:44 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        }
+      ]
+    },
+    {
+      "id": "nyow-653",
+      "title": "Manhattan Island swim, 6 June 2009",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:39:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "USA"
+        },
+        {
+          "label": "Published place",
+          "text": "17"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-2c4617d295abccde5027"
+}
