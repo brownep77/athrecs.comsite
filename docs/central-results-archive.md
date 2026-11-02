@@ -133,19 +133,10 @@ https://api.athlinks.com/results and https://api.athlinks.com/races (checked
 
 ## Bulk matching to existing athletes
 
-Staff can select archived race datasets under **Bulk match to existing athletes** on
-the private result archive page, preview the outcome, and then link matches. The tool
-works in chunks of 500 rows and can be stopped and re-run safely: linked rows are
-skipped on the next run.
+On the staff **Collected results** page (`/admin/result-archive`), select one dataset under **Bulk match to existing athletes**. Choose a row limit (default 25, maximum 500) and click **Preview this batch**. Preview is read-only. Compare every proposed source row, bib, finish, target athlete and reason with the source and staff evidence. If any proposal is uncertain, leave the batch unapplied and use individual review. Confirm the checkbox and click **Approve private links** only after reviewing every proposal. **Select next batch** requires another preview and approval.
 
-| Tier | Rule |
-| --- | --- |
-| Same bib already on the profile | Exactly one profile's source history already holds this edition's performance with the same bib and the same normalised name. |
-| Unique name + same club | Owner override (1 November 2026): the normalised name is unique in the directory and in the race, and the club agrees. |
-| Unique name + same nationality | Owner override: as above, with nationality agreeing instead of club. |
+Approval is bound to the staff identity, dataset, cursor, limit, source revisions, targets and evidence. The server recomputes the proposal inside a serializable transaction. A changed proposal, lock conflict or concurrent approval requires a fresh preview. Each accepted row gets a private archive association and an audit decision. In **Source results**, filter by **held** to see the athlete ID and reviewed revision. **Reopen** releases the association with an audit record.
 
-Rows are left for manual review when several profiles share the name or hold the
-result, the name repeats within the race, the profile is athlete-managed, the profile
-already has a result for the edition, or the recorded gender conflicts. Linked results
-are private, carry `bulk_archive_match:<tier>` as their verification method and are
-audited per entry. Regression coverage: `npm run verify:results-archive-bulk-match`.
+The history rule requires an exact event, date, discipline, bib and finish time. The fallback requires a unique normalized name with the same club or an explicitly labelled source nationality and recorded profile nationality. A general country or residence field cannot support that tier. Competing names, aliases, source IDs, bibs, existing edition results, claims, recorded gender conflicts and unsupported source formats stay for staff review.
+
+A private archive association never inserts a canonical result, changes an athlete or grants account ownership. Public-figure feeds cannot read it. Source verification and a publication decision are separate. The bulk selector uses central archive datasets. Rows available only in the capture browser need an edition-specific, deduplicated staging step before they appear here.

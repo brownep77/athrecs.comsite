@@ -1,3 +1,4 @@
+import { createHmac, randomBytes } from "node:crypto";
 import type { Sql } from "../db";
 import { archiveRowSchema, type ArchiveRow } from "./core";
 import type { ArchiveActor } from "./service.server";
@@ -7,8 +8,7 @@ import type { ArchiveActor } from "./service.server";
  *
  * Links unmatched archive rows of one dataset to EXISTING athletes only. It never
  * creates or merges profiles, never touches athlete-managed accounts and never
- * overwrites an existing result. Linked results are inserted with the same private
- * visibility and audit trail as a single staff review.
+ * overwrites an existing result. Reviewed associations stay inside the private archive.
  *
  * Tiers:
  * - "bridge": exactly one profile already holds this edition's performance in a
@@ -29,23 +29,36 @@ export type BulkSkip =
   | "existing_result"
   | "gender_conflict"
   | "athlete_matched_twice"
-  | "not_linkable";
+  | "not_linkable"
+  | "identity_conflict"
+  | "bib_conflict";
 export type BulkDecision =
   | { entryId: number; revision: number; athleteId: number; tier: BulkTier; name: string }
   | { entryId: number; revision: number; skip: BulkSkip; name: string };
-export type BulkInput = { datasetId: string; after?: number; limit?: number; apply: boolean };
+type Match = Extract<BulkDecision, { athleteId: number }> & {
+  bib: string;
+  finishSeconds: number;
+  athleteName: string;
+  evidence: string;
+};
+export type BulkInput = {
+  datasetId: string;
+  after?: number;
+  limit?: number;
+  apply: boolean;
+  previewToken?: string;
+};
 export type BulkReceipt = {
   scanned: number;
   next: number | null;
-  linked: Record<BulkTier, number>;
-  wouldLink: Record<BulkTier, number>;
+  linked: number;
   skipped: Partial<Record<BulkSkip, number>>;
-  sample: { name: string; tier: BulkTier; athleteId: number }[];
+  matches: Match[];
+  previewToken: string;
 };
-
 export const BULK_NOTE: Record<BulkTier, string> = {
   bridge:
-    "Bulk match: the athlete's existing source history already holds this edition's performance with the same bib and name. Official results row compared.",
+    "Bulk match: the athlete's existing source history already holds this edition's performance with the same bib and name.",
   name_club:
     "Bulk match (owner override, 1 Nov 2026): the only directory athlete with this exact name, unique in this race, with the same club.",
   name_country:
@@ -148,7 +161,8 @@ export function countryName(v: string): string {
   const raw = v.trim();
   if (/^[A-Z]{3}$/.test(raw)) return IOC[raw] ?? "";
   const f = folded(raw);
-  return COUNTRY_ALIASES[f] ?? f;
+  const name = COUNTRY_ALIASES[f] ?? f;
+  return Object.values(IOC).includes(name) ? name : "";
 }
 const NO_CLUB = new Set([
   "",
@@ -159,18 +173,21 @@ const NO_CLUB = new Set([
   "no club",
   "independent",
   "private",
+  "unknown",
+  "not specified",
+  "not provided",
+  "unaffiliated",
 ]);
 export function clubKey(v: string): string {
-  const f = folded(v)
-    .replace(/\b(the|and)\b/g, " ")
-    .replace(/\s+/g, "");
-  return NO_CLUB.has(folded(v)) || f.length < 3 ? "" : f;
+  const key = v.normalize("NFC").toLowerCase().trim().replace(/\s+/g, " ");
+  return NO_CLUB.has(folded(v)) || !/\p{L}{2}/u.test(key) || key.length < 3 ? "" : key;
 }
-function genderCode(v: string): "M" | "F" | "" {
+function genderCode(v: string): string {
   const f = v.trim().toLowerCase();
   if (["m", "male", "men", "man"].includes(f)) return "M";
   if (["f", "w", "female", "women", "woman"].includes(f)) return "F";
-  return "";
+  if (["x", "nonbinary", "non-binary", "non binary", "nb"].includes(f)) return "X";
+  return ["", "unknown", "u", "unspecified"].includes(f) ? "" : f;
 }
 
 type CandidateRow = {
@@ -181,7 +198,11 @@ type CandidateRow = {
   aid: number | null;
   gender: string | null;
   club: string | null;
-  country: string | null;
+  athlete_name: string;
+  source_nationality: string;
+  identity_conflict: boolean;
+  bib_conflict: boolean;
+  invalid: boolean;
   nationality: string | null;
   managed: boolean | null;
   has_result: boolean | null;
@@ -189,12 +210,16 @@ type CandidateRow = {
 };
 
 const NAME_KEY = (col: string) =>
-  `regexp_replace(normalize(lower(${col}), NFKD),'[^a-z0-9]','','g')`;
+  `regexp_replace(athlete_directory_search_fold(${col}), '[[:space:][:punct:]]+', '', 'g')`;
 
 /** Pure decision step, exported for regression tests. */
 export function decide(rows: CandidateRow[]): BulkDecision[] {
   const byEntry = new Map<number, CandidateRow[]>();
-  for (const r of rows) byEntry.set(r.eid, [...(byEntry.get(r.eid) ?? []), r]);
+  for (const r of rows) {
+    const group = byEntry.get(r.eid);
+    if (group) group.push(r);
+    else byEntry.set(r.eid, [r]);
+  }
   const decisions: BulkDecision[] = [];
   for (const [entryId, group] of byEntry) {
     const first = group[0];
@@ -206,8 +231,12 @@ export function decide(rows: CandidateRow[]): BulkDecision[] {
       Boolean(p.finishSeconds && p.finishSeconds > 0) &&
       !p.team &&
       !p.leg;
-    if (!linkable) {
+    if (!linkable || first.invalid) {
       decisions.push({ ...base, skip: "not_linkable" });
+      continue;
+    }
+    if (first.bib_conflict) {
+      decisions.push({ ...base, skip: "bib_conflict" });
       continue;
     }
     if (!cands.length) {
@@ -234,18 +263,24 @@ export function decide(rows: CandidateRow[]): BulkDecision[] {
     } else {
       const c = cands[0];
       const sourceClub = clubKey(p.club);
-      const sourceCountry = countryName(p.country);
+      const sourceCountry = countryName(c.source_nationality);
       if (sourceClub && clubKey(c.club ?? "") === sourceClub) tier = "name_club";
-      else if (
-        sourceCountry &&
-        [c.country ?? "", c.nationality ?? ""].some((x) => x && countryName(x) === sourceCountry)
-      )
+      else if (sourceCountry && countryName(c.nationality ?? "") === sourceCountry)
         tier = "name_country";
       if (!tier) {
         decisions.push({ ...base, skip: "no_club_or_country_agreement" });
         continue;
       }
       chosen = c;
+    }
+    const sourceNationality = countryName(chosen!.source_nationality);
+    const athleteNationality = countryName(chosen!.nationality ?? "");
+    if (
+      chosen!.identity_conflict ||
+      (sourceNationality && athleteNationality && sourceNationality !== athleteNationality)
+    ) {
+      decisions.push({ ...base, skip: "identity_conflict" });
+      continue;
     }
     if (chosen!.managed) {
       decisions.push({ ...base, skip: "managed_account" });
@@ -284,188 +319,191 @@ async function plan(sql: Sql, datasetId: string, after: number, limit: number) {
     edition_id: number;
     source_url: string;
     provider: string;
-    yr: number;
+    day: string;
     slug: string;
     event: string;
+    distance: string;
+    past: boolean;
   }>`
-    select d.edition_id, d.source_url, d.provider, extract(year from ed.event_date)::int as yr, ev.slug, ev.name as event
-    from result_archive_datasets d join editions ed on ed.id=d.edition_id join events ev on ev.id=ed.event_id where d.id=${datasetId}`;
+    select d.edition_id,d.source_url,d.provider,ed.event_date::text as day,ed.event_date<=current_date as past,
+      ev.slug,ev.name as event,ed.distance_code as distance from result_archive_datasets d
+      join editions ed on ed.id=d.edition_id join events ev on ev.id=ed.event_id where d.id=${datasetId}`;
   if (!ds) throw new Error("Archive dataset not found");
-  const rows = await sql.query<CandidateRow & { last: number }>(
-    `with e as (
-       select a.id, a.revision, a.payload, ${NAME_KEY("a.payload->>'name'")} as k
-       from result_archive_entries a
-       where a.dataset_id=$1 and a.id>$2 and a.canonical_result_id is null and a.review_state='unmatched'
-       order by a.id limit $3),
-     dup as (
-       select ${NAME_KEY("x.payload->>'name'")} as k, count(*)::int as c
-       from result_archive_entries x where x.dataset_id=$1 group by 1)
-     select e.id as eid, e.revision, e.payload, coalesce(dup.c,1) as dup, at.id as aid, at.gender,
-       coalesce(c.name, at.source_club_name, '') as club, coalesce(at.country,'') as country,
-       coalesce(at.profile_details->>'nationality','') as nationality,
-       exists(select 1 from athlete_account_links l where l.athlete_id=at.id and l.status='active') as managed,
-       exists(select 1 from results r where r.athlete_id=at.id and r.edition_id=$4) as has_result,
-       (coalesce(e.payload->>'bib','') ~ '^[A-Za-z0-9]+$' and exists(
-         select 1 from athlete_source_histories h
-         cross join lateral jsonb_array_elements(case when jsonb_typeof(h.performances)='array' then h.performances else '[]'::jsonb end) p
-         where h.athlete_id=at.id and p->>'year'=$5::text
-           and (p->>'eventSlug'=$6 or lower(coalesce(p->>'meeting','')) like lower($7)||'%')
-           and (p->>'bib'=e.payload->>'bib' or coalesce(p->>'notes','') ~ ('bib '||(e.payload->>'bib')||'[.;,)]')))) as bridge,
-       (select max(id) from e) as last
-     from e left join dup on dup.k=e.k
-     left join athletes at on ${NAME_KEY("at.display_name")}=e.k and e.k<>''
-     left join clubs c on c.id=at.club_id
-     order by e.id, at.id`,
-    [datasetId, after, limit, ds.edition_id, ds.yr, ds.slug, ds.event],
+  const rows = await sql.query<CandidateRow>(
+    `
+    with e as materialized (
+      select a.id,a.revision,a.payload,${NAME_KEY("a.payload->>'name'")} as k from result_archive_entries a
+      where a.dataset_id=$1 and a.id>$2 and a.canonical_result_id is null and a.review_state='unmatched'
+      order by a.id limit $3
+    ), edition_rows as materialized (
+      select x.id,${NAME_KEY("x.payload->>'name'")} as k, nullif(upper(trim(x.payload->>'bib')),'') as bib
+      from result_archive_entries x join result_archive_datasets d on d.id=x.dataset_id where d.edition_id=$4
+    ), directory as (
+      select at.id, ${NAME_KEY("at.display_name")} as k, false as alias from athletes at
+      union all
+      select at.id, ${NAME_KEY("n.name")} as k, true as alias from athletes at
+      cross join lateral jsonb_array_elements_text(case when jsonb_typeof(at.profile_details->'aliases')='array'
+        then at.profile_details->'aliases' else '[]'::jsonb end) n(name)
+    ), candidates as (
+      select e.id,d.id as aid,bool_and(d.alias) as alias_only from e join directory d on d.k=e.k and e.k<>''
+      group by e.id,d.id
+    ), names as (select k, count(*)::int as n from edition_rows group by k),
+    bibs as (select bib,count(*)::int as n from edition_rows where bib is not null group by bib)
+    select e.id as eid,e.revision,e.payload,names.n as dup,at.id as aid,at.display_name as athlete_name,at.gender,
+      coalesce(c.name,at.source_club_name,'') as club,coalesce(at.profile_details->>'nationality','') as nationality,
+      coalesce(e.payload->'original'->>'Nationality',e.payload->'original'->>'nationality','') as source_nationality,
+      (coalesce(bibs.n,0)>1 or exists(select 1 from results r where r.edition_id=$4 and upper(trim(r.bib))=nullif(upper(trim(e.payload->>'bib')),''))
+        or exists(select 1 from result_archive_private_matches m where m.edition_id=$4 and m.bib=nullif(upper(trim(e.payload->>'bib')),''))) as bib_conflict,
+      exists(select 1 from athlete_account_links l where l.athlete_id=at.id and l.status='active') as managed,
+      (exists(select 1 from results r where r.athlete_id=at.id and r.edition_id=$4) or
+       exists(select 1 from result_archive_private_matches m where m.athlete_id=at.id and m.edition_id=$4)) as has_result,
+      (cand.alias_only or trim(athlete_directory_search_fold(at.display_name))<>trim(athlete_directory_search_fold(e.payload->>'name'))
+       or at.parent_athlete_id is not null or at.profile_details->>'syntheticTest'='true' or
+       exists(select 1 from result_archive_match_requests q where q.entry_id=e.id) or
+       (coalesce(e.payload->>'sourceAthleteId','')<>'' and not (
+        select count(distinct m.athlete_id)=1 and coalesce(bool_and(m.athlete_id=at.id),false)
+        from (select provider,external_id,athlete_id from athlete_source_identities union all
+              select provider,external_id,athlete_id from result_archive_athlete_identifiers) m
+        where m.provider=e.payload->>'sourceAthleteProvider' and m.external_id=e.payload->>'sourceAthleteId'))
+        or coalesce(h.conflict,false)) as identity_conflict,coalesce(h.bridge,false) as bridge
+    from e left join names on names.k=e.k left join bibs on bibs.bib=upper(trim(e.payload->>'bib'))
+    left join candidates cand on cand.id=e.id left join athletes at on at.id=cand.aid left join clubs c on c.id=at.club_id
+    left join lateral (
+      select bool_or(v.ok) as bridge,bool_or(not v.ok) as conflict
+      from athlete_source_histories h cross join lateral jsonb_array_elements(
+        case when jsonb_typeof(h.performances)='array' then h.performances else '[]'::jsonb end) p
+      cross join lateral (select coalesce(
+        p->>'bib'=e.payload->>'bib' and nullif(trim(p->>'bib'),'') is not null
+        and p->>'profileExcluded' is distinct from 'true' and p->>'syntheticTest' is distinct from 'true'
+        and p->'disqualification' is null and p->>'performance' ~ '^[0-9]{1,3}:[0-5][0-9]:[0-5][0-9]([.][0-9]+)?$'
+        and case when p->>'performance' ~ '^[0-9]{1,3}:[0-5][0-9]:[0-5][0-9]([.][0-9]+)?$'
+          and jsonb_typeof(e.payload->'finishSeconds')='number'
+          then extract(epoch from (p->>'performance')::interval)=(e.payload->>'finishSeconds')::numeric else false end,
+        false) as ok) v
+      where h.athlete_id=at.id and p->>'date'=$5 and lower(p->>'discipline')=lower($8)
+        and (p->>'eventSlug'=$6 or (nullif(p->>'eventSlug','') is null and lower(p->>'meeting')=lower($7)))
+    ) h on true order by e.id,at.id`,
+    [datasetId, after, limit, ds.edition_id, ds.day, ds.slug, ds.event, ds.distance],
   );
-  const parsed = rows.map((r) => ({ ...r, payload: archiveRowSchema.parse(r.payload) }));
-  return { ds, decisions: decide(parsed), last: rows.length ? Number(rows[0].last) : null };
-}
-
-/** Set-based commit of planned links. Every guard is rechecked under locks. */
-async function commit(
-  sql: Sql,
-  datasetId: string,
-  ds: { edition_id: number; source_url: string; provider: string },
-  links: Extract<BulkDecision, { athleteId: number }>[],
-  actor: ArchiveActor,
-) {
-  if (!links.length) return [] as number[];
-  return sql.transaction(async (tx) => {
-    await tx.query("SET LOCAL lock_timeout = '10s'");
-    await tx`select id from result_archive_datasets where id=${datasetId} for update`;
-    const ids = links.map((l) => l.entryId);
-    const entries = await tx<{ id: number; revision: number; payload: ArchiveRow }>`
-      select id, revision, payload from result_archive_entries
-      where id=any(${ids}::bigint[]) and dataset_id=${datasetId} and canonical_result_id is null and review_state='unmatched'
-      order by id for update`;
-    const athleteIds = [...new Set(links.map((l) => l.athleteId))].sort((a, b) => a - b);
-    const okAthletes = new Set(
-      (
-        await tx<{ id: number }>`
-          select a.id from athletes a where a.id=any(${athleteIds}::integer[])
-            and not exists(select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
-            and not exists(select 1 from results r where r.athlete_id=a.id and r.edition_id=${ds.edition_id})
-          order by a.id for update of a`
-      ).map((a) => Number(a.id)),
-    );
-    const takenBibs = new Set(
-      (
-        await tx<{
-          bib: string;
-        }>`select bib from results where edition_id=${ds.edition_id} and source_url=${ds.source_url} and bib is not null`
-      ).map((r) => r.bib),
-    );
-    const byId = new Map(entries.map((e) => [Number(e.id), e]));
-    const checkedAt = new Date().toISOString();
-    const payload = links.flatMap((l) => {
-      const e = byId.get(l.entryId);
-      if (!e || e.revision !== l.revision || !okAthletes.has(l.athleteId)) return [];
-      const p = archiveRowSchema.parse(e.payload);
-      if (p.bib && takenBibs.has(p.bib)) return [];
-      const round = (n: number | null) => (n === null ? null : Math.round(n));
-      return [
-        {
-          entry_id: l.entryId,
-          revision: l.revision,
-          athlete_id: l.athleteId,
-          status: p.status,
-          finish: round(p.finishSeconds),
-          chip: round(p.chipSeconds),
-          gun: round(p.gunSeconds),
-          bib: p.bib || null,
-          op: p.overallPlace,
-          gp: p.genderPlace,
-          cp: p.categoryPlace,
-          category: p.category || null,
-          note: BULK_NOTE[l.tier],
-          details: {
-            timing: {
-              finishSeconds: p.finishSeconds,
-              chipSeconds: p.chipSeconds,
-              gunSeconds: p.gunSeconds,
-            },
-            archive: { entryId: l.entryId, revision: l.revision, sourceKey: p.sourceKey },
-            sourceRow: { url: ds.source_url, name: p.name, bib: p.bib, provider: ds.provider },
-            splits: p.splits.map((s) => ({ label: s.label, time: s.value })),
-            verification: {
-              status: "source_checked",
-              method: `bulk_archive_match:${l.tier}`,
-              checkedAt,
-              identityNote: BULK_NOTE[l.tier],
-            },
-          },
-        },
-      ];
+  // Historical/off-schema or flagged rows stay in the queue without poisoning the batch.
+  for (const r of rows) {
+    const parsed = archiveRowSchema.safeParse(r.payload);
+    r.invalid = !ds.past || !parsed.success;
+    if (!parsed.success) {
+      r.payload = { name: String(r.payload?.name ?? ""), status: "unknown" } as ArchiveRow;
+    } else {
+      r.payload = parsed.data;
+    }
+  }
+  const decisions = decide(rows);
+  const evidenceByEntry = new Map(
+    rows.filter((r) => r.aid !== null).map((r) => [`${r.eid}/${r.aid}`, r]),
+  );
+  const matches: Match[] = [];
+  const skipped: BulkReceipt["skipped"] = {};
+  for (const d of decisions) {
+    if ("skip" in d) {
+      skipped[d.skip] = (skipped[d.skip] ?? 0) + 1;
+      continue;
+    }
+    const r = evidenceByEntry.get(`${d.entryId}/${d.athleteId}`)!;
+    const evidence =
+      d.tier === "bridge"
+        ? `${ds.day} · ${ds.distance} · bib ${r.payload.bib} · same finish time`
+        : d.tier === "name_club"
+          ? `${r.payload.club} / ${r.club}`
+          : `${r.source_nationality} / ${r.nationality}`;
+    matches.push({
+      ...d,
+      bib: r.payload.bib,
+      finishSeconds: r.payload.finishSeconds!,
+      athleteName: r.athlete_name,
+      evidence,
     });
-    if (!payload.length) return [] as number[];
-    await tx`select set_config('athrecs.archive_actor',${actor.userId},true),set_config('athrecs.archive_note','Bulk archive match',true)`;
-    const inserted = await tx<{ id: number; athlete_id: number }>`
-      insert into results(edition_id,athlete_id,status,finish_time_seconds,chip_time_seconds,gun_time_seconds,bib,overall_place,gender_place,category_place,category,result_source,source_url,result_visibility,result_details)
-      select ${ds.edition_id},r.athlete_id,r.status,r.finish,r.chip,r.gun,r.bib,r.op,r.gp,r.cp,r.category,${ds.provider},${ds.source_url},'private',r.details
-      from jsonb_to_recordset(${JSON.stringify(payload)}::jsonb)
-        as r(athlete_id integer,status text,finish integer,chip integer,gun integer,bib text,op integer,gp integer,cp integer,category text,details jsonb)
-      returning id, athlete_id`;
-    if (inserted.length !== payload.length)
-      throw new Error("Not every bulk link was inserted; nothing was saved.");
-    const resultFor = new Map(inserted.map((r) => [Number(r.athlete_id), Number(r.id)]));
-    const applied = payload.map((p) => ({ ...p, result_id: resultFor.get(p.athlete_id)! }));
-    await tx`insert into result_source_references(result_id,source_url,source_name)
-      select unnest(${applied.map((a) => a.result_id)}::bigint[]),${ds.source_url},${ds.provider} on conflict do nothing`;
-    const rows = JSON.stringify(
-      applied.map(({ entry_id, revision, result_id, note }) => ({
-        entry_id,
-        revision,
-        result_id,
-        note,
-      })),
-    );
-    await tx`update result_archive_entries a set canonical_result_id=r.result_id, applied_revision=r.revision,
-        applied_history_id=(select coalesce(max(h.id),0) from result_change_history h where h.result_id=r.result_id),
-        review_state='linked', review_note=r.note, reviewed_by=${actor.userId}, reviewed_at=now(), updated_at=now()
-      from jsonb_to_recordset(${rows}::jsonb) as r(entry_id bigint,revision integer,result_id bigint,note text)
-      where a.id=r.entry_id`;
-    await tx`insert into result_archive_decisions(entry_id,revision,action,actor_id,note,before_value,after_value)
-      select r.entry_id,r.revision,'link',${actor.userId},r.note,
-        jsonb_build_object('resultId',null,'appliedRevision',null,'state','unmatched'),
-        jsonb_build_object('resultId',r.result_id,'bulk',true)
-      from jsonb_to_recordset(${rows}::jsonb) as r(entry_id bigint,revision integer,result_id bigint,note text)`;
-    return applied.map((a) => a.entry_id);
-  });
+  }
+  return { ds, decisions, matches, skipped };
 }
 
-const emptyTiers = (): Record<BulkTier, number> => ({ bridge: 0, name_club: 0, name_country: 0 });
-
-/** One bounded chunk. The caller pages with `next` until it is null. */
+// Production workers share the auth secret. A local restart invalidates outstanding previews.
+const tokenSecret = process.env.BETTER_AUTH_SECRET || randomBytes(32);
 export async function bulkMatchArchiveDataset(
   sql: Sql,
   input: BulkInput,
   actor: ArchiveActor,
 ): Promise<BulkReceipt> {
   if (!actor.userId || !actor.staffEmail) throw new Error("Authenticated staff required");
-  const limit = Math.min(Math.max(input.limit ?? 500, 1), 1000);
-  const { ds, decisions, last } = await plan(sql, input.datasetId, input.after ?? 0, limit);
-  const links = decisions.filter(
-    (d): d is Extract<BulkDecision, { athleteId: number }> => "athleteId" in d,
-  );
-  const receipt: BulkReceipt = {
-    scanned: decisions.length,
-    next: decisions.length < limit ? null : last,
-    linked: emptyTiers(),
-    wouldLink: emptyTiers(),
-    skipped: {},
-    sample: [],
-  };
-  for (const d of decisions) {
-    if ("athleteId" in d) receipt.wouldLink[d.tier]++;
-    else receipt.skipped[d.skip] = (receipt.skipped[d.skip] ?? 0) + 1;
-  }
-  receipt.sample = links
-    .slice(0, 15)
-    .map((l) => ({ name: l.name, tier: l.tier, athleteId: l.athleteId }));
-  if (input.apply) {
-    const done = new Set(await commit(sql, input.datasetId, ds, links, actor));
-    for (const l of links) if (done.has(l.entryId)) receipt.linked[l.tier]++;
-  }
-  return receipt;
+  const limit = input.limit ?? 25,
+    after = input.after ?? 0;
+  if (
+    !Number.isInteger(limit) ||
+    limit < 1 ||
+    limit > 500 ||
+    !Number.isSafeInteger(after) ||
+    after < 0
+  )
+    throw new Error("Choose 1–500 rows and a valid cursor.");
+  if (input.apply && !input.previewToken) throw new Error("Preview this batch before approval.");
+  return sql.transaction(async (tx) => {
+    await tx.query(
+      input.apply ? "SET TRANSACTION ISOLATION LEVEL SERIALIZABLE" : "SET TRANSACTION READ ONLY",
+    );
+    await tx.query("SET LOCAL statement_timeout = '25s'");
+    await tx.query("SET LOCAL lock_timeout = '3s'");
+    if (input.apply) {
+      await tx`select d.id from result_archive_datasets d join editions ed on ed.id=d.edition_id
+        where d.id=${input.datasetId} for update of ed,d`;
+    }
+    const { ds, decisions, matches, skipped } = await plan(tx, input.datasetId, after, limit);
+    const previewToken = createHmac("sha256", tokenSecret)
+      .update(
+        JSON.stringify([
+          "archive-private-match-v1",
+          actor.userId,
+          input.datasetId,
+          after,
+          limit,
+          ds,
+          decisions,
+          matches,
+        ]),
+      )
+      .digest("hex");
+    if (input.apply && input.previewToken !== previewToken)
+      throw new Error("This batch changed. Preview it again before approval.");
+    if (input.apply && matches.length) {
+      const rows = JSON.stringify(
+        matches.map((m) => ({
+          entry_id: m.entryId,
+          revision: m.revision,
+          athlete_id: m.athleteId,
+          tier: m.tier,
+          bib: m.bib,
+          note: BULK_NOTE[m.tier],
+          evidence: m.evidence,
+        })),
+      );
+      const applied = await tx<{ id: number }>`
+        with proposed as (select * from jsonb_to_recordset(${rows}::jsonb)
+          as m(entry_id bigint,revision int,athlete_id int,tier text,bib text,note text,evidence text)),
+        claimed as (update result_archive_entries a set review_state='held',review_note=m.note,
+          reviewed_by=${actor.userId},reviewed_at=now(),updated_at=now() from proposed m
+          where a.id=m.entry_id and a.revision=m.revision and a.canonical_result_id is null and a.review_state='unmatched'
+          returning a.id), saved as (insert into result_archive_private_matches(entry_id,revision,edition_id,athlete_id,tier,bib,reviewed_by)
+          select m.entry_id,m.revision,${ds.edition_id},m.athlete_id,m.tier,nullif(upper(trim(m.bib)),''),${actor.userId}
+          from proposed m join claimed on claimed.id=m.entry_id returning entry_id)
+        insert into result_archive_decisions(entry_id,revision,action,actor_id,note,before_value,after_value)
+          select m.entry_id,m.revision,'link',${actor.userId},m.note,'{"state":"unmatched"}'::jsonb,
+            jsonb_build_object('state','held','privateAthleteId',m.athlete_id,'method','bulk_archive_match:'||m.tier,'evidence',m.evidence)
+          from proposed m join saved using(entry_id) returning entry_id as id`;
+      if (applied.length !== matches.length) throw new Error("Batch changed. Preview again.");
+    }
+    return {
+      scanned: decisions.length,
+      next: decisions.length === limit ? decisions[decisions.length - 1].entryId : null,
+      matches,
+      skipped,
+      linked: input.apply ? matches.length : 0,
+      previewToken,
+    };
+  });
 }

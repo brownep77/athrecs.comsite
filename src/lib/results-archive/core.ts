@@ -114,6 +114,8 @@ export type ArchiveEntry = {
   sourceKey: string;
   revision: number;
   appliedRevision: number | null;
+  privateAthleteId?: number | null;
+  privateRevision?: number | null;
   canonicalChanged: boolean;
   state: string;
   resultId: number | null;

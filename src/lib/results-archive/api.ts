@@ -83,7 +83,11 @@ const bulkMatchSchema = z
   .object({
     datasetId: z.string().uuid(),
     after: z.number().int().nonnegative().optional(),
-    limit: z.number().int().min(1).max(1000).optional(),
+    limit: z.number().int().min(1).max(500).optional(),
+    previewToken: z
+      .string()
+      .regex(/^[a-f0-9]{64}$/)
+      .optional(),
     apply: z.boolean(),
   })
   .strict();
