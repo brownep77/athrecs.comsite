@@ -1,7 +1,12 @@
 import { readReviewedChannelRows } from "./channel-publication-query";
 import type { Sql } from "../db";
 import { getSql } from "../db";
-import { channelListing, channelNative, type ChannelProfile } from "./english-channel";
+import {
+  channelListing,
+  channelNative,
+  channelQuestions,
+  type ChannelProfile,
+} from "./english-channel";
 import { IS_RUNRECS_SITE } from "../site-scope";
 
 import edition from "../../data/channel-editions/2026-11-02-endurance.json";
@@ -32,7 +37,7 @@ export async function listPublishedChannel() {
 }
 export async function publishedChannel(slug: string) {
   const [p] = await readChannelProfiles(await getSql(), slug);
-  return p || null;
+  return p ? { ...p, questions: channelQuestions(p) } : null;
 }
 export async function nativeChannel(slug: string) {
   const p = await publishedChannel(slug);
