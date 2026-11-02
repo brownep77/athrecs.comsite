@@ -8,7 +8,8 @@ import { normalizeResultsSearch } from "@/lib/athrecs/public-results-search";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
-import { resultSlug } from "@/lib/athrecs/result-slug";
+import { directoryStructuredData } from "@/lib/athrecs/directory-structured-data";
+import { resultEditionLabel, resultSlug } from "@/lib/athrecs/result-slug";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 
 export const Route = createFileRoute("/results/")({
@@ -53,7 +54,7 @@ export const Route = createFileRoute("/results/")({
       meta: siteGraphMeta({
         title: `Race results${search.page > 1 ? ` — Page ${search.page}` : ""} | ATHRECS.com`,
         description:
-          "Explore race results on AthRecs. Find a race, view performances and connect results to your athlete profile.",
+          "Search race results by event, town, distance or year. Open an edition to find athlete performances, finishing positions and recorded times.",
         url,
       }).map((tag) =>
         (filtered || !loaderData?.editions.length) && "name" in tag && tag.name === "robots"
@@ -61,6 +62,10 @@ export const Route = createFileRoute("/results/")({
           : tag,
       ),
       links: [{ rel: "canonical", href: url }],
+      scripts: filtered ? [] : directoryStructuredData(url, "Race results archive",
+        (loaderData?.editions ?? []).map((edition) => ({
+          name: resultEditionLabel(edition), path: "/results/" + resultSlug(edition),
+        }))),
     };
   },
   pendingComponent: () => (
@@ -90,9 +95,9 @@ function ResultsPage() {
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="max-w-2xl space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">ATHRECS</p>
-          <h1 className="font-display text-3xl font-semibold sm:text-4xl">Results</h1>
+          <h1 className="font-display text-3xl font-semibold sm:text-4xl">Race results</h1>
           <p className="text-sm leading-6 text-muted">
-            Find a race, explore performances and add your results to your athlete profile.
+            Find a race by name, place, distance or year. Open its results to look up an athlete, check a finish time or explore the recorded placings.
           </p>
           <ChatPrompt kind="results" />
         </div>
@@ -242,7 +247,7 @@ function ResultsPage() {
                     <DistanceBadge distance={edition.distance_code} />
                   </div>
                   <h3 className="font-semibold leading-snug text-fg group-hover:text-accent">
-                    {edition.event_name}
+                    {resultEditionLabel(edition)}
                   </h3>
                   <p className="text-sm text-muted">{formatRaceDateShort(edition.event_date)}</p>
                   <p className="text-xs text-muted">

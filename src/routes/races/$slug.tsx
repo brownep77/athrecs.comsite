@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
 import { getEventAthleteLinks } from "@/lib/athrecs/event-athlete-discovery-api";
-import { resultSlug } from "@/lib/athrecs/result-slug";
+import { resultEditionLabel, resultSlug } from "@/lib/athrecs/result-slug";
 import { resultCredit } from "@/lib/athrecs/result-credit";
 import { getEditionResults, getEventBySlug } from "@/lib/athrecs/api";
 import {
@@ -335,7 +335,7 @@ export function RacePageContent({
 
   const nextStatus = next ? effectiveStatus(next.event_date, next.status as EntryStatus) : null;
   const nextEntry = next ? editionEntry(next) : null;
-  const nextDayEditions = upcoming.filter((edition) => edition.event_date === next?.event_date);
+  const nextDayEditions = upcoming.filter((edition) => edition.event_date === next?.event_date && edition.status !== "Cancelled");
   const primaryEntry =
     next?.entry_options.find((option) => option.is_primary) ??
     next?.entry_options.find((option) => option.entry_type === "official") ??
@@ -421,18 +421,18 @@ export function RacePageContent({
             {next ? (
               <div className="rounded-xl border border-border bg-elevated px-4 py-3 text-left lg:min-w-44 lg:text-right">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-subtle">
-                  Next race day
+                  When is the next {event.name}?
                   {nextFixtureDetail?.eventPageName && nextDayEditions.length === 1
                     ? ` · ${distanceDisplayLabel(next.distance_code, next.distance_km)}`
                     : ""}
                 </p>
                 <p className="font-display text-xl font-semibold text-fg">
-                  {formatRaceDateShort(next.event_date)}
+                  <time dateTime={next.event_date}>{formatRaceDateShort(next.event_date)}</time>
                 </p>
                 <p className="text-sm font-medium text-muted">
                   {nextDayEditions.length > 1
                     ? `${nextDayEditions.length} ${isRunningEvent ? "distances" : "races"} · see start times below`
-                    : (nextStart ??
+                    : (nextStart ? `Start time · ${nextStart}` :
                       (zoneAbbr ? `Time not yet verified · ${zoneAbbr}` : "Time not yet verified"))}
                 </p>
               </div>
@@ -1281,8 +1281,7 @@ function EditionResultsLinks({
                           }}
                           className="inline-flex min-h-11 items-center rounded-md border border-accent/40 px-3 text-xs font-medium text-accent"
                         >
-                          Full AthRecs results ·{" "}
-                          {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
+                          {resultEditionLabel({ event_name: eventName, event_date: edition.event_date, distance_code: edition.distance_code })}
                         </Link>
                       ))}
                   {editions

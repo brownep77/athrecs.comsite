@@ -171,7 +171,6 @@ try {
   for (const [path, count, indexable, canonical] of [
     ['/races', 40, true, '/races'],
     ['/races?page=2', 1, true, '/races?page=2'],
-    ['/races?page=3', 0, false, '/races?page=3'],
     ['/races?q=Synthetic%20Indexing', 40, false, '/races'],
     ['/races?q=missing-synthetic-fixture', 0, false, '/races'],
   ]) {
@@ -180,7 +179,15 @@ try {
     assert.equal(/noindex/.test(page.$('meta[name=robots]').attr('content')), !indexable, path);
     assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${canonical}`, path);
   }
-  console.log('PASS: populated race directory pages stay indexable; empty and filtered pages remain noindex with unchanged canonicals.');
+  const firstFixtures = await get('/races');
+  const secondFixtures = await get('/races?page=2');
+  assert.equal(firstFixtures.$('nav a[rel=next]').attr('href'), '/races?page=2');
+  assert.equal(secondFixtures.$('nav a[rel=prev]').attr('href'), '/races');
+  assert.equal(secondFixtures.$('nav a[rel=next]').length, 0);
+  for (const path of ['/races?page=3', '/en/montenegro/races?page=250']) {
+    assert.equal((await fetch(origin + path, { headers: { connection: 'close' } })).status, 404, path);
+  }
+  console.log('PASS: crawlable fixture pagination, empty later pages return 404 and filtered pages stay noindex.');
 
   // These browse pages contain distinct records, not search refinements.
   // Exercise their final HTTP status and SSR metadata, not only head helpers.

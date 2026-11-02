@@ -14,14 +14,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
           const runningPaths: string[] = [];
           const modified = new Map<string, string>();
           if (!IS_RUNRECS_SITE) {
-            const { listPublishedChannel } = await import("@/lib/athrecs/english-channel.server");
-            const channel = await listPublishedChannel();
             runningPaths.push("/swimming/english-channel");
-            for (const p of channel) {
-              const path = "/swimming/english-channel/" + p.slug;
-              runningPaths.push(path);
-              modified.set(path, p.checkedAt);
-            }
             const { EDITORIAL_ARTICLES } = await import("@/data/athrecs-editorial");
             const { editorialPath } = await import("@/lib/athrecs/editorial");
             for (const article of EDITORIAL_ARTICLES)
@@ -91,6 +84,18 @@ export const Route = createFileRoute("/sitemaps/$file")({
               )
                 .filter((path, index, paths) => paths.indexOf(path) === index)
                 .map((path) => ({ url: `${SITE_URL}${path}`, lastmod: modified.get(path) })),
+            ),
+          );
+        }
+        if (!IS_RUNRECS_SITE && params.file === "channel.xml") {
+          const { listPublishedChannel } = await import("@/lib/athrecs/english-channel.server");
+          const published = await listPublishedChannel();
+          return sitemapResponse(
+            sitemapXml(
+              published.map((profile) => ({
+                url: SITE_URL + "/swimming/english-channel/" + encodeURIComponent(profile.slug),
+                lastmod: profile.checkedAt,
+              })),
             ),
           );
         }

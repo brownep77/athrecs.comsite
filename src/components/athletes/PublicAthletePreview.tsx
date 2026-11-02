@@ -12,6 +12,7 @@ import { CountryFlag } from "./CountryFlag";
 import { ProfileDetails } from "./ProfileDetails";
 import { Badge } from "@/components/ui/badge";
 import { ShareProfileButton } from "./ShareProfileButton";
+import { publicRoadBestAnswer } from "@/lib/athrecs/public-athlete-search-content";
 import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
 import { AthleteBiography } from "./AthleteBiography";
 import { AchievementSummary } from "./AchievementSummary";
@@ -98,7 +99,13 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
       ) : null}
       {profile.personalBests?.length ? (
         <section aria-label="PBs" className="space-y-3">
-          <h2 className="font-display text-lg font-semibold">PBs & best performances</h2>
+          <h2 className="font-display text-lg font-semibold">
+            Personal bests (PBs) &amp; best performances
+          </h2>
+          <p className="text-sm text-muted">
+            {publicRoadBestAnswer(profile) ??
+              "These are the best marks in this athlete’s results recorded on AthRecs."}
+          </p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {profile.personalBests.map((best) => (
               <div

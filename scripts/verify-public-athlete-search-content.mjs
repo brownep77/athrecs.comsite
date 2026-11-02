@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   publicAthleteSearchContent,
+  publicRoadBestAnswer,
   searchSnippet,
 } from "../src/lib/athrecs/public-athlete-search-content.ts";
 
@@ -52,3 +53,10 @@ assert(!empty.description.includes("Example 10K"));
 console.log(
   "PASS: public-only name/event metadata, concise sport titles, readable snippets and unchanged verification qualifications.",
 );
+
+const pb = { label: "PB", sport: "Running", surface: "Road", distance: "10K", mark: "37:01", event: "Example Road Race", date: "2025-04-12", verified: false };
+assert.match(publicRoadBestAnswer({ ...preview, personalBests: [pb] }), /37:01 \(awaiting verification\), at Example Road Race/);
+assert.equal(publicRoadBestAnswer({ ...preview, personalBests: [{ ...pb, sport: "Parkrun" }] }), null);
+assert.equal(publicRoadBestAnswer({ ...preview, personalBests: [{ ...pb, label: "Aided-course best · Reported" }] }), null);
+assert.match(publicAthleteSearchContent({ ...preview, club: "Example Harriers", personalBests: [pb] }).title, /personal bests · Example Harriers/);
+assert.match(publicAthleteSearchContent({ ...preview, resultPage: 2 }).title, /recorded results, page 2/);
