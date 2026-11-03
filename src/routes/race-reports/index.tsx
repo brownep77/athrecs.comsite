@@ -11,13 +11,14 @@ export const Route = createFileRoute("/race-reports/")({
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
-  head: () => ({
+  head: ({ match }) => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/race-reports` }],
     meta: siteGraphMeta({
       title: "World, Continental, National & Local Race Reports | AthRecs",
       description:
         "Read AthRecs race reports from world championships to local clubs. Browse by sport, continent, country, state, province, county and local area.",
       url: `${SITE_URL}/race-reports`,
+      indexable: !Object.values(match.search).some(Boolean),
     }),
   }),
   component: RaceReportsPage,

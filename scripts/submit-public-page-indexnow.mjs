@@ -4,7 +4,10 @@ import { readFile, writeFile, mkdir, rename, appendFile } from "node:fs/promises
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { load } from "cheerio";
-import { assertAthleteSearchReady as assertPublicPageReady } from "./lib/athlete-search-readiness.mjs";
+import {
+  assertAthleteSearchReady as assertPublicPageReady,
+  isMerseaEditionUrl,
+} from "./lib/athlete-search-readiness.mjs";
 
 export const origin = "https://www.athrecs.com";
 const endpoint = "https://api.indexnow.org/indexnow";
@@ -12,13 +15,16 @@ const namespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
 const privatePath =
   /^\/(?:admin|api|athlete-account|my-athlete-profile|claim-results|athlete-results|review-results|account|login|logout|auth)(?:\/|$)|^\/brands\/(?:manage|register)(?:\/|$)/i;
 const sitemapPattern =
-  /^\/sitemaps\/(?:pages|countries|race-places|(?:races|clubs|results)-[1-9]\d*)\.xml$/;
+  /^\/sitemaps\/(?:pages|countries|race-places|channel|mersea|(?:races|clubs|results)-[1-9]\d*)\.xml$/;
 const day = 24 * 60 * 60 * 1000;
 
 export function publicUrl(value) {
   const url = new URL(value);
   assert.equal(url.origin, origin, "Only production AthRecs URLs are allowed");
-  assert(!url.username && !url.password && !url.search && !url.hash, "Unexpected URL attributes");
+  assert(
+    !url.username && !url.password && (!url.search || isMerseaEditionUrl(url)) && !url.hash,
+    "Unexpected URL attributes",
+  );
   assert.equal(url.href, value, "Use exact canonical URLs");
   const path = decodeURIComponent(url.pathname);
   assert(
@@ -70,6 +76,15 @@ function assertFamily(entry, sitemap) {
   const path = decodeURIComponent(publicUrl(entry.url).pathname);
   assert(!/^\/athletes\//.test(path), "Athlete profiles use their existing dedicated worker");
   const family = new URL(sitemap).pathname.split("/").at(-1);
+  if (new URL(entry.url).search)
+    assert.equal(family, "mersea.xml", "Unexpected edition query in sitemap family");
+  if (family === "mersea.xml")
+    assert(isMerseaEditionUrl(new URL(entry.url)), "Unexpected Mersea edition URL");
+  if (family === "channel.xml")
+    assert(
+      /^\/swimming\/english-channel\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path),
+      "Unexpected Channel archive URL",
+    );
   const numbered = /^(races|clubs|results)-/.exec(family);
   if (numbered) assert(new RegExp(`^/${numbered[1]}/[^/]+$`).test(path), "Sitemap family mismatch");
   if (family === "race-places.xml")

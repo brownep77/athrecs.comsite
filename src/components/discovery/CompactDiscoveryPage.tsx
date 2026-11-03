@@ -34,10 +34,12 @@ import type { SportFixture } from "@/lib/athrecs/sport-fixtures.server";
 import type { SportBroadcast } from "@/data/sport-broadcasts";
 import { DiamondLeagueGuide } from "./DiamondLeagueGuide";
 import { CompactFixtureRow } from "./CompactFixtureRow";
+import { DiscoverySectionNav } from "./DiscoverySectionNav";
 import { DiscoveryCountryList } from "./DiscoveryCountryList";
 import { useSavedFixtures } from "./useSavedFixtures";
 import {
   DISCOVERY_COUNTRIES,
+  discoveryResultsPath,
   discoverySportLinks,
   fixtureFilterLabel,
   fixturePageTitle,
@@ -100,10 +102,7 @@ export function CompactDiscoveryPage({
   const pathname = sport ? `/sports/${sport.slug}` : "/";
   const sportName = sport?.sport ?? "Running";
   const hasFilters = Boolean(search.q || search.country || search.month || search.distance);
-  const resultPath = sport ? `/results?category=${sport.slug}` : "/results?category=all-running";
-  const directoryPath = `/clubs?sport=${encodeURIComponent(sportName)}`;
   const editorialSearch = sport ? { sport: sport.slug } : {};
-  const editorialQuery = sport ? `?sport=${sport.slug}` : "";
   const options = {
     countries:
       search.country && !countries.includes(search.country)
@@ -126,6 +125,14 @@ export function CompactDiscoveryPage({
       });
     else void navigate({ to: "/", search: next, hash: "fixtures" });
   }
+  function fixturePageHref(nextPage: number) {
+    const query = new URLSearchParams();
+    for (const [key, value] of Object.entries(search)) {
+      if (key !== "page" && value) query.set(key, String(value));
+    }
+    if (nextPage > 1) query.set("page", String(nextPage));
+    return `${pathname}${query.size ? "?" + query : ""}#fixtures`;
+  }
   function filter(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     changeSearch(parseSportFixtureSearch(Object.fromEntries(new FormData(event.currentTarget))));
@@ -137,36 +144,7 @@ export function CompactDiscoveryPage({
       data-homepage-theme={theme}
       style={homepageThemeStyle(theme)}
     >
-      <nav
-        aria-label={`${sportName} sections`}
-        className={`px-2 sm:px-5 lg:px-7 ${currentColours ? "bg-[#075667] text-white" : "bg-primary text-primary-fg"}`}
-      >
-        <ul className="flex flex-wrap items-stretch gap-x-1">
-          {[
-            { label: "Fixtures", path: "#fixtures", active: true },
-            { label: "Results", path: resultPath },
-            { label: "News", path: `/news${editorialQuery}` },
-            { label: "Race Reports", path: `/race-reports${editorialQuery}` },
-            { label: "Athletes", path: `/athletes?sport=${encodeURIComponent(sportName)}` },
-            { label: "Clubs", path: directoryPath },
-            {
-              label: running ? "Guides & series" : "Sport information",
-              path: running ? "/running/guides" : "#sport-information",
-            },
-            { label: "Offers & opportunities", path: "/opportunities" },
-          ].map((item) => (
-            <li key={item.label}>
-              <a
-                href={item.path}
-                aria-current={item.active ? "page" : undefined}
-                className={`inline-flex min-h-12 items-center border-b-3 px-3 text-sm font-medium no-underline hover:bg-primary-fg/10 focus-visible:outline-2 focus-visible:outline-primary-fg sm:px-4 ${item.active ? (currentColours ? "border-[#55eadb]" : "border-primary-fg") : "border-transparent"}`}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {sport && <DiscoverySectionNav sport={sport} />}
       {!sport && news.length > 0 ? (
         <section
           id="homepage-news"
@@ -512,24 +490,21 @@ export function CompactDiscoveryPage({
                 aria-label="Fixture pages"
                 className="mt-3 flex items-center justify-between gap-3"
               >
-                <button
-                  type="button"
-                  disabled={page <= 1}
-                  onClick={() => changeSearch({ ...search, page: page - 1 })}
-                  className={`${actionLink} disabled:invisible`}
-                >
-                  ← Previous
-                </button>
+                {page > 1 ? (
+                  <a className={actionLink} rel="prev" href={fixturePageHref(page - 1)}>
+                    ← Previous
+                  </a>
+                ) : (
+                  <span />
+                )}
                 <span className="text-xs text-muted">Page {page}</span>
-                <button
-                  type="button"
-                  disabled={!hasMore || page >= 400}
-                  onClick={() => changeSearch({ ...search, page: page + 1 })}
-                  className={`${actionLink} disabled:invisible`}
-                >
-                  Next
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </button>
+                {hasMore && page < 400 ? (
+                  <a className={actionLink} rel="next" href={fixturePageHref(page + 1)}>
+                    Next <ArrowRight className="size-4" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <span />
+                )}
               </nav>
             )}
           </section>
@@ -589,7 +564,7 @@ export function CompactDiscoveryPage({
               </a>
             )}
             <div className="mt-2 flex flex-wrap gap-x-5">
-              <a href={resultPath} className={actionLink}>
+              <a href={discoveryResultsPath(sport)} className={actionLink}>
                 <Trophy className="size-4" aria-hidden="true" />
                 Browse results
               </a>

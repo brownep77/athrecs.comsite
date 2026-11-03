@@ -25,20 +25,21 @@ export const Route = createFileRoute("/results/mersea-10")({
     if (deps.year && !data.editions.some((edition) => edition.year === deps.year)) throw notFound();
     return data;
   },
-  head: ({ match }) => {
+  head: ({ match, loaderData }) => {
     const year = match.search.year;
     const canonical = year ? `${url}?year=${year}` : url;
+    const edition = loaderData?.editions.find((item) => item.year === year);
     return {
       meta: siteGraphMeta({
         title: `Mersea Island 10 Mile results${year ? ` · ${year}` : " archive"} | AthRecs`,
-        description:
-          "Find historical Mersea Island Lions 10 Mile road race results from West Mersea, Essex. Browse by edition or search by runner, club or race number.",
+        description: edition
+          ? merseaEditionSummary(edition)
+          : "Find historical Mersea Island Lions 10 Mile road race results from West Mersea, Essex. Browse by edition or search by runner, club or race number.",
+        indexable:
+          !match.search.q &&
+          (!edition || (edition.count > 0 && edition.coverage !== "unavailable")),
         url: canonical,
-      }).map((tag) =>
-        match.search.q && "name" in tag && tag.name === "robots"
-          ? { name: "robots", content: "noindex, follow" }
-          : tag,
-      ),
+      }),
       links: [{ rel: "canonical", href: canonical }],
     };
   },
@@ -56,6 +57,15 @@ const detailFields: { field: keyof MerseaResult; label: string }[] = [
   { field: "category", label: "Category" },
   { field: "categoryPosition", label: "Category place" },
 ];
+function merseaEditionSummary(edition: {
+  year: number;
+  count: number;
+  coverage: MerseaEdition["coverage"];
+}) {
+  if (!edition.count || edition.coverage === "unavailable")
+    return `The ${edition.year} edition of the Mersea Island Lions 10 Mile road race in West Mersea, Essex. The finishing list is unavailable.`;
+  return `The ${edition.year} Mersea Island Lions 10 Mile in West Mersea, Essex. The ${edition.coverage === "full" ? "full" : "partial"} results list contains ${edition.count.toLocaleString("en-GB")} recorded ${edition.count === 1 ? "finish" : "finishes"}.`;
+}
 function coverageLabel(edition: { coverage: MerseaEdition["coverage"]; count: number }) {
   const count = edition.count.toLocaleString("en-GB");
   if (edition.coverage === "full") return `Full results · ${count} records`;
@@ -165,10 +175,12 @@ function MerseaArchive() {
           West Mersea, Essex · 10 miles · Road running
         </p>
         <h1 className="font-display text-3xl font-semibold sm:text-4xl">
-          Mersea Island Lions 10 Mile results
+          Mersea Island Lions 10 Mile results{year ? ` · ${year}` : ""}
         </h1>
         <p className="text-sm leading-6 text-white/80">
-          Choose a year to see its recorded results, or search across the archive.
+          {year && results[0]
+            ? merseaEditionSummary(results[0])
+            : "Choose a year to see its recorded results, or search across the archive."}
         </p>
       </header>
       <form

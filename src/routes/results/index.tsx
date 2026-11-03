@@ -105,8 +105,9 @@ const fieldClass =
   "h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg focus:outline-none focus:ring-2 focus:ring-accent/40";
 
 function ResultsPage() {
+  const pageSearch = Route.useSearch();
   const data = Route.useLoaderData();
-  const search = normalizeResultsSearch(Route.useSearch());
+  const search = normalizeResultsSearch(pageSearch);
   return (
     <div className="space-y-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
@@ -114,7 +115,8 @@ function ResultsPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">ATHRECS</p>
           <h1 className="font-display text-3xl font-semibold sm:text-4xl">Race results</h1>
           <p className="text-sm leading-6 text-muted">
-            Find a race by name, place, distance or year. Open its results to look up an athlete, check a finish time or explore the recorded placings.
+            Find a race by name, place, distance or year. Open its results to look up an athlete,
+            check a finish time or explore the recorded placings.
           </p>
           <ChatPrompt kind="results" />
         </div>
@@ -308,7 +310,11 @@ function ResultsPage() {
       <nav aria-label="Results archive pages" className="flex items-center justify-between gap-3">
         {search.page > 1 ? (
           <Button asChild variant="secondary">
-            <Link to="/results" search={{ ...search, page: search.page - 1 }}>
+            <Link
+              to="/results"
+              rel="prev"
+              search={{ ...pageSearch, page: search.page === 2 ? undefined : search.page - 1 }}
+            >
               Previous
             </Link>
           </Button>
@@ -318,7 +324,7 @@ function ResultsPage() {
         <span className="text-xs text-muted">Page {search.page}</span>
         {data.hasMore && search.page < 1000 ? (
           <Button asChild variant="secondary">
-            <Link to="/results" search={{ ...search, page: search.page + 1 }}>
+            <Link to="/results" rel="next" search={{ ...pageSearch, page: search.page + 1 }}>
               Next
             </Link>
           </Button>

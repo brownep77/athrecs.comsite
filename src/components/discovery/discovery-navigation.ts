@@ -60,6 +60,10 @@ export function activeDiscoverySport(pathname: string) {
   return pathname === "/" ? "Running" : getSportPage(pathname.split("/")[2])?.sport;
 }
 
+export function discoveryResultsPath(sport?: SportPage) {
+  return sport ? `/results?category=${sport.slug}` : "/results?category=all-running";
+}
+
 export function discoverySportLinks(sport?: SportPage) {
   if (!sport || sport.sport === "Running")
     return [
@@ -82,7 +86,7 @@ export function discoverySportLinks(sport?: SportPage) {
       label: `${sport.sport === "Athletics" ? "Track & field" : sport.label} fixtures`,
       path: `/sports/${sport.slug}`,
     },
-    { label: "Results", path: `/results?category=${sport.slug}` },
+    { label: "Results", path: discoveryResultsPath(sport) },
     { label: "Athletes", path: `/athletes?sport=${encodeURIComponent(sport.sport)}` },
     { label: "Clubs & federations", path: `/directory?sport=${sport.slug}` },
     { label: "News", path: `/news?sport=${sport.slug}` },

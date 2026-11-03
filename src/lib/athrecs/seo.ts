@@ -1,3 +1,5 @@
+import { eventImageJsonLd } from "./event-images.ts";
+
 /** Shared SEO helpers — titles, Open Graph, JSON-LD for traditional + voice search. */
 
 export const SITE_URL = "https://www.athrecs.com";
@@ -18,6 +20,7 @@ export function siteGraphMeta(opts?: {
   url?: string;
   image?: string;
   type?: string;
+  indexable?: boolean;
 }) {
   const title = opts?.title ?? `${SITE_NAME} — Athlete profiles for every sport`;
   const description = opts?.description ?? DEFAULT_DESCRIPTION;
@@ -30,7 +33,10 @@ export function siteGraphMeta(opts?: {
     { name: "description", content: description },
     {
       name: "robots",
-      content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      content:
+        opts?.indexable === false
+          ? "noindex, follow"
+          : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
     },
     { property: "og:type", content: type },
     { property: "og:site_name", content: SITE_NAME },
@@ -205,7 +211,7 @@ export function sportsEventJsonLd(
     name: input.name,
     description,
     url,
-    image: DEFAULT_OG_IMAGE,
+    ...eventImageJsonLd(input.slug, date),
     startDate: start,
     endDate:
       input.endDate &&

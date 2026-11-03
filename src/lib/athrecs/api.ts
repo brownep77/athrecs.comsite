@@ -1,6 +1,11 @@
 import { isResultDocument } from "./result-document";
 import { resultCredit } from "./result-credit";
 import { withoutProfileEvidence } from "./profile-evidence";
+import {
+  CLUB_PAGE_SIZE,
+  parseClubDirectorySearch,
+  type ClubDirectorySearch,
+} from "../clubs/directory-search";
 import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import {
   fixtureDistanceLabel,
@@ -1446,38 +1451,55 @@ export const getPrivateAthleteBySlug = createServerFn({ method: "GET" })
     } satisfies PrivateAthleteStub;
   });
 
+const readClubCards = createServerOnlyFn(async (search: ClubDirectorySearch, paginate: boolean) => {
+  const sql = await ready();
+  const { clubProfiles } = await import("@/data/club-profiles");
+  const q = search.q?.trim() ? `%${search.q.trim().toLowerCase()}%` : null;
+  const rows = await sql<ClubListItem & { sports_csv: string; total_count: number }>`
+    select c.id, c.slug, c.name, c.city, c.county, c.country, c.sports as sports_csv,
+      c.website, c.official_source, c.summary, c.total_count,
+      exists(select 1 from club_representatives r where r.club_id=c.id and r.status='active') as managed,
+      (select count(*)::int from athletes a where a.club_id=c.id
+        and (a.profile_type='Public figure' or a.profile_visibility='public')) as member_count
+    from (
+      select c.*, count(*) over()::int as total_count from clubs c
+      where (${q}::text is null or lower(c.name) like ${q} or lower(c.city) like ${q}
+        or lower(c.county) like ${q} or lower(c.country) like ${q} or lower(c.sports) like ${q})
+        and (${search.country ?? null}::text is null or c.country=${search.country ?? null})
+        and (${search.sport ?? null}::text is null or ${search.sport ?? null}=any(string_to_array(c.sports, ',')))
+      order by c.name,c.id limit ${paginate ? CLUB_PAGE_SIZE : null}::int
+      offset ${paginate ? ((search.page ?? 1) - 1) * CLUB_PAGE_SIZE : 0}
+    ) c order by c.name,c.id
+  `;
+  return {
+    total: rows[0]?.total_count ?? 0,
+    clubs: rows.map(({ total_count: _count, ...club }) => ({
+      ...club,
+      scope: clubProfiles[club.slug]?.scope,
+      sports: club.sports_csv ? club.sports_csv.split(",").filter(Boolean) : [],
+    })),
+  };
+});
+
 export const listClubs = createServerFn({ method: "GET" })
   .validator((input: { q?: string } | undefined) => input ?? {})
+  .handler(async ({ data }) => (await readClubCards({ q: data.q }, false)).clubs);
+
+export const getClubDirectoryPage = createServerFn({ method: "GET" })
+  .validator(parseClubDirectorySearch)
   .handler(async ({ data }) => {
     const sql = await ready();
-    const { clubProfiles } = await import("@/data/club-profiles");
-    const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
-    const rows = await sql<ClubListItem & { sports_csv: string }>`
-      select
-        c.id, c.slug, c.name, c.city, c.county, c.country,
-        c.sports as sports_csv,
-        c.website, c.official_source, c.summary,
-        exists(select 1 from club_representatives r where r.club_id=c.id and r.status='active') as managed,
-        (
-          select count(*)::int from athletes a
-          where a.club_id = c.id
-            and (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
-        ) as member_count
-      from clubs c
-      where
-        ${q}::text is null
-        or lower(c.name) like ${q}
-        or lower(c.city) like ${q}
-        or lower(c.county) like ${q}
-        or lower(c.country) like ${q}
-        or lower(c.sports) like ${q}
-      order by c.name
-    `;
-    return rows.map((r) => ({
-      ...r,
-      scope: clubProfiles[r.slug]?.scope,
-      sports: r.sports_csv ? r.sports_csv.split(",").filter(Boolean) : [],
-    }));
+    const [page, facets] = await Promise.all([
+      readClubCards(data, true),
+      sql<{ country: string; sports: string }>`select distinct country, sports from clubs`,
+    ]);
+    return {
+      ...page,
+      countries: [...new Set(facets.map((row) => row.country).filter(Boolean))].sort(),
+      sports: [
+        ...new Set(facets.flatMap((row) => (row.sports ?? "").split(",")).filter(Boolean)),
+      ].sort(),
+    };
   });
 
 export const getClubBySlug = createServerFn({ method: "GET" })

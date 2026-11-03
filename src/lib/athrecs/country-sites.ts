@@ -117,7 +117,18 @@ export function countrySiteFromName(country: string): CountrySite | undefined {
 }
 
 export function displayCountryForLanguage(site: CountrySite, language: SiteLanguage): string {
-  return language === site.defaultLanguage ? site.localName : site.country;
+  if (language === site.defaultLanguage) return site.localName;
+  if (
+    language === "en" ||
+    !/^[A-Z]{2}$/.test(site.iso) ||
+    site.iso === "UN" ||
+    (site.iso === "GB" && site.country !== "United Kingdom")
+  )
+    return site.country;
+  return (
+    new Intl.DisplayNames([language], { type: "region", fallback: "none" }).of(site.iso) ??
+    site.country
+  );
 }
 
 export function countryHomePath(site: CountrySite, language = site.defaultLanguage): string {
@@ -161,6 +172,8 @@ export type CountryCopy = {
   allRaces: string;
   racesIn: string;
   racesIntro: string;
+  runningCalendar: string;
+  nextListedRace: string;
   noRaces: string;
   backToCountry: string;
 };
@@ -199,7 +212,9 @@ const COPY: Record<SiteLanguage, CountryCopy> = {
     upcomingBody: "Upcoming events in {country}.",
     allRaces: "All races",
     racesIn: "Races in {country}",
-    racesIntro: "Every event shown below is filtered to {country}.",
+    racesIntro: "Find running races by date, distance and location. Choose another sport to see its fixtures.",
+    runningCalendar: "Running race calendar for {country}",
+    nextListedRace: "Next listed race",
     noRaces: "No upcoming races are listed for these filters yet.",
     backToCountry: "Back to {country}",
   },
@@ -236,7 +251,9 @@ const COPY: Record<SiteLanguage, CountryCopy> = {
     upcomingBody: "Prochaines épreuves en {country}.",
     allRaces: "Toutes les épreuves",
     racesIn: "Épreuves en {country}",
-    racesIntro: "Toutes les épreuves ci-dessous sont filtrées pour la {country}.",
+    racesIntro: "Retrouvez les courses à pied par date, distance ou lieu. Choisissez un autre sport pour consulter son calendrier.",
+    runningCalendar: "{country} · calendrier des courses à pied",
+    nextListedRace: "Prochaine course au calendrier",
     noRaces: "Aucune épreuve à venir ne correspond encore à ces filtres.",
     backToCountry: "Retour à la page {country}",
   },
@@ -273,7 +290,9 @@ const COPY: Record<SiteLanguage, CountryCopy> = {
     upcomingBody: "Kommende Veranstaltungen in {country}.",
     allRaces: "Alle Wettkämpfe",
     racesIn: "Wettkämpfe in {country}",
-    racesIntro: "Alle unten aufgeführten Veranstaltungen sind nach {country} gefiltert.",
+    racesIntro: "Laufveranstaltungen nach Datum, Distanz und Ort durchsuchen. Weitere Wettkämpfe finden Sie über die Sportauswahl.",
+    runningCalendar: "{country} · Laufkalender",
+    nextListedRace: "Nächster gelisteter Lauf",
     noRaces: "Für diese Filter sind noch keine kommenden Wettkämpfe eingetragen.",
     backToCountry: "Zurück zu {country}",
   },
@@ -310,7 +329,9 @@ const COPY: Record<SiteLanguage, CountryCopy> = {
     upcomingBody: "Próximas pruebas en {country}.",
     allRaces: "Todas las carreras",
     racesIn: "Carreras en {country}",
-    racesIntro: "Todas las pruebas que aparecen están filtradas para {country}.",
+    racesIntro: "Busca carreras por fecha, distancia y localidad. Selecciona otro deporte para ver sus pruebas.",
+    runningCalendar: "{country} · calendario de carreras",
+    nextListedRace: "Próxima carrera del calendario",
     noRaces: "Todavía no hay próximas carreras para estos filtros.",
     backToCountry: "Volver a {country}",
   },
@@ -347,7 +368,9 @@ const COPY: Record<SiteLanguage, CountryCopy> = {
     upcomingBody: "Prossimi eventi in {country}.",
     allRaces: "Tutte le gare",
     racesIn: "Gare in {country}",
-    racesIntro: "Tutti gli eventi mostrati sono filtrati per {country}.",
+    racesIntro: "Cerca le gare di corsa per data, distanza e località. Seleziona un altro sport per consultarne il calendario.",
+    runningCalendar: "{country} · calendario delle gare di corsa",
+    nextListedRace: "Prossima gara in calendario",
     noRaces: "Non ci sono ancora gare future per questi filtri.",
     backToCountry: "Torna a {country}",
   },
@@ -384,7 +407,9 @@ const COPY: Record<SiteLanguage, CountryCopy> = {
     upcomingBody: "Aankomende evenementen in {country}.",
     allRaces: "Alle wedstrijden",
     racesIn: "Wedstrijden in {country}",
-    racesIntro: "Alle onderstaande evenementen zijn gefilterd op {country}.",
+    racesIntro: "Zoek hardloopwedstrijden op datum, afstand en plaats. Kies een andere sport om de bijbehorende wedstrijden te bekijken.",
+    runningCalendar: "{country} · hardloopkalender",
+    nextListedRace: "Eerstvolgende wedstrijd op de kalender",
     noRaces: "Voor deze filters zijn nog geen komende wedstrijden opgenomen.",
     backToCountry: "Terug naar {country}",
   },
@@ -421,7 +446,9 @@ const COPY: Record<SiteLanguage, CountryCopy> = {
     upcomingBody: "Nadchodzące wydarzenia w kraju: {country}.",
     allRaces: "Wszystkie zawody",
     racesIn: "Zawody w kraju: {country}",
-    racesIntro: "Wszystkie wydarzenia poniżej są filtrowane dla kraju: {country}.",
+    racesIntro: "Wyszukaj biegi według daty, dystansu i miejscowości. Wybierz inną dyscyplinę, aby zobaczyć jej zawody.",
+    runningCalendar: "{country} · kalendarz biegów",
+    nextListedRace: "Najbliższy bieg w kalendarzu",
     noRaces: "Dla tych filtrów nie ma jeszcze nadchodzących zawodów.",
     backToCountry: "Powrót: {country}",
   },
@@ -458,7 +485,9 @@ const COPY: Record<SiteLanguage, CountryCopy> = {
     upcomingBody: "Próximos eventos em {country}.",
     allRaces: "Todas as provas",
     racesIn: "Provas em {country}",
-    racesIntro: "Todos os eventos apresentados estão filtrados para {country}.",
+    racesIntro: "Pesquise corridas por data, distância e localidade. Selecione outra modalidade para consultar as respetivas provas.",
+    runningCalendar: "{country} · calendário de corridas",
+    nextListedRace: "Próxima corrida do calendário",
     noRaces: "Ainda não existem provas futuras para estes filtros.",
     backToCountry: "Voltar a {country}",
   },

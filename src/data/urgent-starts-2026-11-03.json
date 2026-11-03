@@ -1,0 +1,61 @@
+{
+  "athens-classic-marathon|2026-11-08": {
+    "summary": "The 2026 Athens Authentic Marathon from Marathon to the Panathenaic Stadium.",
+    "timeZone": "Europe/Athens",
+    "sourceUrl": "https://www.athensauthenticmarathon.gr/en/c/agones-26",
+    "checkedAt": "2026-11-03",
+    "starts": {
+      "Marathon": {
+        "time": "08:30",
+        "note": "The organiser's 2026 race page lists the Sunday 8 November marathon start at 08:30.",
+        "publicNote": "The marathon starts at 08:30 local time."
+      }
+    }
+  },
+  "dorney-lake-half-marathon-10k-5k-november|2026-11-08": {
+    "summary": "RunThrough's November road races at Dorney Lake.",
+    "timeZone": "Europe/London",
+    "sourceUrl": "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+    "checkedAt": "2026-11-03",
+    "starts": {
+      "5K": {
+        "time": "09:10",
+        "note": "The organiser's 2026 event page lists all distances at 09:10.",
+        "publicNote": "The 5K starts at 09:10 local time."
+      },
+      "10K": {
+        "time": "09:10",
+        "note": "The organiser's 2026 event page lists all distances at 09:10.",
+        "publicNote": "The 10K starts at 09:10 local time."
+      },
+      "Half": {
+        "time": "09:10",
+        "note": "The organiser's 2026 event page lists all distances at 09:10.",
+        "publicNote": "The half marathon starts at 09:10 local time."
+      }
+    }
+  },
+  "wa-maratona-di-ravenna-citt-d-arte-7237514|2026-11-08": {
+    "summary": "The Ravenna marathon programme from Pala De André.",
+    "timeZone": "Europe/Rome",
+    "sourceUrl": "https://maratonadiravenna.com/faq/",
+    "checkedAt": "2026-11-03",
+    "starts": {
+      "10K": {
+        "time": "10:15",
+        "note": "The organiser's current 2026 race-day timetable lists the 10K at 10:15.",
+        "publicNote": "The 10K starts at 10:15 local time."
+      },
+      "Half": {
+        "time": "09:15",
+        "note": "The organiser's current 2026 race-day timetable lists the half marathon at 09:15.",
+        "publicNote": "The half marathon starts at 09:15 local time."
+      },
+      "Marathon": {
+        "time": "09:15",
+        "note": "The organiser's current 2026 race-day timetable lists the marathon at 09:15.",
+        "publicNote": "The marathon starts at 09:15 local time."
+      }
+    }
+  }
+}

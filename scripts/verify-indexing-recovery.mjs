@@ -70,11 +70,16 @@ try {
   assert.match(country.$('main').text(), /Running/);
   assert(country.$('a[href*="/races/"]').length > 1, 'Default country directory shows running fixtures');
   assert(!country.$('meta[name=robots]').attr('content').includes('noindex'));
+  const alternates = country.$('link[rel=alternate][hreflang]').map((_, el) => country.$(el).attr('hreflang')).get().sort();
+  assert.deepEqual(alternates, ['de', 'en', 'es', 'fr', 'it', 'nl', 'pl', 'pt', 'x-default']);
+  const french = await get('/fr/montenegro/races');
+  assert.equal(french.$('link[hreflang=de]').attr('href'), 'https://www.athrecs.com/de/montenegro/races');
   const empty = await get('/de/montenegro/races?sport=Athletics');
   assert.match(empty.$('meta[name=robots]').attr('content'), /noindex/);
+  assert.equal(empty.$('link[hreflang]').length, 0);
   const sitemap = await get('/sitemaps/countries.xml');
   assert(sitemap.html.includes('https://www.athrecs.com/de/montenegro/races'));
-  await sql`update editions set event_date='2000-01-01' where event_id in (select id from events where country='Montenegro' and sport='Running')`;
+  await sql`update editions set status='Cancelled' where event_id in (select id from events where country='Montenegro' and sport='Running')`;
   const nowEmpty = await get('/de/montenegro/races');
   assert.match(nowEmpty.$('meta[name=robots]').attr('content'), /noindex/);
   const updatedSitemap = await get('/sitemaps/countries.xml');
@@ -201,6 +206,15 @@ try {
   // Exercise their final HTTP status and SSR metadata, not only head helpers.
   await sql`update editions set event_date=event_date-36525
     where event_id not in (select id from events where slug like 'test-indexing-directory-%')`;
+  const calendar = await get('/calendar');
+  assert.equal(calendar.$('nav a[rel=next]').attr('href'), '/calendar?page=2');
+  const laterCalendar = await get('/calendar?page=2');
+  assert.equal(laterCalendar.$('link[rel=canonical]').attr('href'), 'https://www.athrecs.com/calendar?page=2');
+  assert.equal(laterCalendar.$('nav a[rel=prev]').attr('href'), '/calendar');
+  assert.equal(laterCalendar.$('main article').length, 1);
+  assert.match((await get('/calendar?q=missing-synthetic-fixture')).$('meta[name=robots]').attr('content'), /noindex/);
+  const firstSport = await get('/sports/track-and-field');
+  assert.equal(firstSport.$('#fixtures a[rel=next]').attr('href'), '/sports/track-and-field?page=2#fixtures');
   for (const path of ['/sports/track-and-field?page=2']) {
     const page = await get(path);
     assert(!/noindex/.test(page.$('meta[name=robots]').attr('content')), path);
@@ -226,10 +240,12 @@ try {
   assert(!/noindex/.test(resultsDirectory.$('meta[name=robots]').attr('content')));
   assert.match(resultsDirectory.$('title').text(), /Page 2/);
   assert(resultsDirectory.$('main a[href^="/results/"]').length > 0);
+  assert.equal(resultsDirectory.$('a[rel=prev]').attr('href'), '/results');
+  assert.equal((await get('/results')).$('a[rel=next]').attr('href'), '/results?page=2');
   const filteredResults = await get('/results?q=absent-synthetic');
   assert.match(filteredResults.$('meta[name=robots]').attr('content'), /noindex/);
   assert.equal(filteredResults.$('link[rel=canonical]').attr('href'), 'https://www.athrecs.com/results');
-  for (const path of ['/results?page=1000', '/running/events?page=250', '/sports/track-and-field?page=400']) {
+  for (const path of ['/calendar?page=3000', '/clubs?page=100000', '/results?page=1000', '/running/events?page=250', '/sports/track-and-field?page=400']) {
     const response = await fetch(`${origin}${path}`, {headers: {connection: 'close'}});
     await response.text();
     assert.equal(response.status, 404, path);
@@ -251,6 +267,35 @@ try {
       assert((await get(`/sitemaps/${kind}-${shard}.xml`)).html.includes(`https://www.athrecs.com${path}</loc>`));
     }
   }
+  await sql`insert into clubs(slug, name, country, sports)
+    select 'test-directory-club-'||n, 'Directory Test Club '||lpad(n::text,2,'0'), 'Synthetic Country', 'Swimming,Running'
+    from generate_series(1,50) n`;
+  const firstClubs = await get('/clubs?country=Synthetic%20Country');
+  assert.match(firstClubs.$('meta[name=robots]').attr('content'), /noindex/);
+  const clubNext = new URL(firstClubs.$('nav a[rel=next]').attr('href'), origin);
+  assert.equal(clubNext.searchParams.get('country'), 'Synthetic Country');
+  assert.equal(clubNext.searchParams.get('page'), '2');
+  const lastClubs = await get(clubNext.pathname + clubNext.search);
+  assert.equal(lastClubs.$('main a[href^="/clubs/test-directory-club-"]').length, 2);
+  assert.equal(lastClubs.$('nav a[rel=next]').length, 0);
+  assert.equal((await get('/clubs?page=2')).$('link[rel=canonical]').attr('href'), 'https://www.athrecs.com/clubs?page=2');
+  const londonGuide = await get('/running/races/london-marathon');
+  assert(londonGuide.$('a[href="/races/london-marathon"]').length);
+  const londonFixture = await get('/races/london-marathon');
+  assert(londonFixture.$('a[href="/running/races/london-marathon"]').length);
+  const archiveMap = await get('/sitemaps/mersea.xml');
+  assert(archiveMap.html.includes('https://www.athrecs.com/results/mersea-10?year=2007</loc>'));
+  assert.equal((archiveMap.html.match(/<loc>/g) || []).length, 24);
+  const annual = await get('/results/mersea-10?year=2007');
+  assert.match(annual.$('h1').text(), /2007/);
+  assert.match(annual.$('meta[name=description]').attr('content'), /recorded finish/);
+  assert.match((await get('/news?country=Canada')).$('meta[name=robots]').attr('content'), /noindex/);
+  const siteMap = await get('/site-map');
+  const sectionLink = siteMap.$('nav[aria-label="On this page"] a');
+  assert(sectionLink.length >= 10);
+  for (const link of sectionLink.toArray()) assert(siteMap.$(siteMap.$(link).attr('href')).length, 'Jump target exists');
+  assert(siteMap.$('main a[href="/swimming/english-channel"]').length);
+  console.log('PASS: club and calendar pagination, localized alternate pages, published annual archives and categorized navigation.');
   console.log('PASS: results/sport/running browse pagination is indexable and self-canonical; empty later pages return 404; searches stay noindex; multisport sitemap inclusion preserves member privacy.');
 
   console.log('PASS: data-only collections SSR, bounded homepage and directory, A–Z crawlability, robots headers, factual biography/Person schema, locale consolidation and immediate withdrawal.');
