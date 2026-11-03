@@ -346,7 +346,7 @@ try {
       ["Recovery", "Recovery"],
       ["Buying preferences", "Buying preferences"],
       ["Privacy & consent", "Privacy and consent centre"],
-      ["Profile sharing", "Public or private profile"],
+      ["Profile sharing", "Account profile sharing"],
       ["Partnerships", "Partnerships"],
     ]) {
       await go(label);
@@ -364,7 +364,7 @@ try {
       "Unsaved upcoming race",
     );
     await page.goto(`${origin}/athlete-account#profile-visibility`, { waitUntil: "networkidle" });
-    await page.getByRole("heading", { name: "Public or private profile", exact: true }).waitFor();
+    await page.getByRole("heading", { name: "Account profile sharing", exact: true }).waitFor();
     await page.goto(`${origin}/athlete-account?section=unknown`, { waitUntil: "networkidle" });
     await page.getByRole("heading", { name: "My races", exact: true }).waitFor();
     await page.setViewportSize({ width: 390, height: 844 });
