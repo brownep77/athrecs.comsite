@@ -4,7 +4,7 @@ import { ShareRaceButton } from "./ShareRaceButton";
 
 export function RaceActions({ race }: { race: CalendarRace }) {
   return (
-    <div className="flex min-w-0 flex-wrap items-start gap-2">
+    <div data-nosnippet="" className="flex min-w-0 flex-wrap items-start gap-2">
       <AddToCalendar race={race} />
       <ShareRaceButton key={race.id} race={race} />
     </div>

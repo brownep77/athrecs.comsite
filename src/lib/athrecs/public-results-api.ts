@@ -1,3 +1,4 @@
+import { isAthrecsPublicSport } from "./public-sports.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
@@ -10,6 +11,7 @@ import { ATHLETICS_RUNNING_SURFACES, getSportPage, RUNNING_FIXTURE_SCOPE } from 
 export type PublicResultEdition = {
   edition_id: number;
   event_name: string;
+  event_slug?: string | null;
   event_date: string;
   sport: string;
   distance_code: string;
@@ -121,7 +123,7 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     await ensureAthrecsSeeded();
     const sql = await getSql();
     const editions = await sql<PublicResultEdition>`
-      select ed.id as edition_id, e.name as event_name,
+      select ed.id as edition_id, e.name as event_name, e.slug as event_slug,
         ed.event_date::text as event_date, e.sport, ed.distance_code,
         e.city, e.country, count(r.id)::int as result_count
       from results r
@@ -202,7 +204,7 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     // This edition credits its timer once. Keep the original row URLs in staff evidence.
     const timingCredit = edition.edition_id === 71609612 ? "Total Race Timing" : null;
     return {
-      edition,
+      edition: publicCatalogueContent({ ...edition, event_slug: isAthrecsPublicSport(edition.sport) ? edition.event_slug : null }),
       timingCredit,
       results: rows.slice(0, RESULT_PAGE_SIZE).map((row) =>
         publicCatalogueContent(timingCredit ? { ...row, source_url: null, result_source: null } : row),

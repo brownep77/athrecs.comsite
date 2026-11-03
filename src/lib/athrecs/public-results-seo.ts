@@ -2,7 +2,7 @@ import { isParkrunResult, PARKRUN_TIMING_LABEL } from "./parkrun-timing.ts";
 import type { PublicResultEdition, PublicRaceResult } from "./public-results-api";
 import type { ResultsSearch } from "./public-results-search";
 import { formatDuration, formatRaceDateShort } from "./format";
-import { resultSlug } from "./result-slug";
+import { resultEditionLabel, resultSlug } from "./result-slug";
 import { SITE_URL, siteGraphMeta } from "./seo";
 
 /** Describe only the public rows already rendered on this results page. */
@@ -15,7 +15,7 @@ export function publicResultsHead(
   const baseUrl = `${SITE_URL}/results/${resultSlug(edition)}`;
   const filtered = Boolean(search.q);
   const url = !filtered && search.page > 1 ? `${baseUrl}?page=${search.page}` : baseUrl;
-  const title = `${edition.event_name} ${edition.distance_code} results — ${edition.event_date.slice(0, 10)}${search.page > 1 ? ` — Page ${search.page}` : ""} | ATHRECS.com`;
+  const title = `${resultEditionLabel(edition)} — ${formatRaceDateShort(edition.event_date)}${search.page > 1 ? ` — Page ${search.page}` : ""} | ATHRECS.com`;
   const description = `${edition.result_count.toLocaleString("en-GB")} recorded ${edition.distance_code} performance${edition.result_count === 1 ? "" : "s"} from ${edition.event_name}, ${formatRaceDateShort(edition.event_date)}${edition.city ? `, ${edition.city}` : ""}. Search athlete times and source results; coverage may be partial.`;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -31,7 +31,8 @@ export function publicResultsHead(
     about: {
       "@type": "Thing",
       "@id": `${baseUrl}#event`,
-      name: `${edition.event_name} ${edition.distance_code}`,
+      name: edition.event_name,
+      ...(edition.event_slug ? { url: `${SITE_URL}/races/${encodeURIComponent(edition.event_slug)}` } : {}),
       description: `${edition.sport} race held on ${edition.event_date.slice(0, 10)}${edition.city || edition.country ? ` in ${[edition.city, edition.country].filter(Boolean).join(", ")}` : ""}.`,
     },
     mainEntity: {

@@ -77,6 +77,7 @@ const createServerFn = ({ method }) => {
 const scope = { IS_RUNRECS_SITE: false };
 const api = loadTypeScript("src/lib/athrecs/public-results-api.ts", {
   "./public-catalogue-content.ts": catalogueContent,
+  "./public-sports.ts": loadTypeScript("src/lib/athrecs/public-sports.ts"),
   "@tanstack/react-start": { createServerFn },
   "@/lib/db": { getSql: async () => sql },
   "@/lib/site-scope": scope,
@@ -88,7 +89,7 @@ const api = loadTypeScript("src/lib/athrecs/public-results-api.ts", {
 
 try {
   await db.exec(`
-    create table events (id integer primary key, name text, sport text, city text, country text, surface text default 'Road');
+    create table events (id integer primary key, name text, sport text, city text, country text, slug text, surface text default 'Road');
     create table editions (id integer primary key, event_id integer, event_date date, distance_code text);
     create table clubs (id integer primary key, name text);
     create table athletes (id integer primary key, display_name text, slug text, club_id integer,
@@ -313,6 +314,17 @@ try {
   route.useSearch = () => ({});
   route.useLoaderData = () => resultPage1;
   const roadTable = load(renderToStaticMarkup(route.component()));
+  assert.equal(roadTable('h1').text(), 'Synthetic 10K 2026 results');
+  assert(head1.meta.find(tag => tag.title).title.startsWith('Synthetic 10K 2026 results'));
+  const { resultEditionLabel } = loadTypeScript('src/lib/athrecs/result-slug.ts');
+  for (const [name, code, label] of [
+    ['East Coast 10K', '10K', 'East Coast 10K 2026 results'],
+    ['London Marathon', 'Marathon', 'London Marathon 2026 results'],
+    ['City 2026', 'Half', 'City 2026 · Half marathon results'],
+    ['Spring Half Marathon', 'Marathon', 'Spring Half Marathon · Marathon 2026 results'],
+    ['Track 10K and 5K', '5K', 'Track 10K and 5K · 5K 2026 results'],
+  ]) assert.equal(resultEditionLabel({ event_name: name, distance_code: code, event_date: '2026-11-01' }), label);
+
   assert(roadTable("th").toArray().some((cell) => roadTable(cell).text() === "Chip"));
   await db.exec(`
     insert into editions values (71609612, 10, '2026-09-20', '10K');

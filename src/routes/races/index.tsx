@@ -1,6 +1,7 @@
+import { directoryStructuredData } from "@/lib/athrecs/directory-structured-data";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { useState } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { listEvents } from "@/lib/athrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
 import { SPORTS as PUBLIC_SPORTS } from "@/lib/athrecs/filters";
@@ -108,11 +109,11 @@ export const Route = createFileRoute("/races/")({
     };
   },
   loaderDeps: ({ search }): RaceSearchParams => search,
-  loader: ({ deps }) => {
+  loader: async ({ deps }) => {
     const filters = filtersFromSearch(deps);
     const api = searchToApi(filters);
     const page = deps.page ?? 1;
-    return listEvents({
+    const events = await listEvents({
       data: {
         ...api,
         sport: api.sport as Sport | undefined,
@@ -121,16 +122,21 @@ export const Route = createFileRoute("/races/")({
         offset: (page - 1) * PAGE_SIZE,
       },
     });
+    const filtered = Object.entries(deps).some(([key, value]) => key !== "page" && Boolean(value));
+    if (!IS_RUNRECS_SITE && !filtered && page > 1 && !events.length) throw notFound();
+    return events;
   },
   head: ({ loaderData, match }) => {
     if (IS_RUNRECS_SITE) return { links: [{ rel: "canonical", href: `${SITE_URL}/races` }] };
     const page = match.search.page ?? 1;
     const url = `${SITE_URL}/races${page > 1 ? `?page=${page}` : ""}`;
     const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
-    const noindex = filtered || (page > 1 && !loaderData?.length);
+    const noindex = filtered || !loaderData?.length;
     return {
-      meta: siteGraphMeta({ title: `Races and athletics events${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find athletics events, race dates, locations, distances and official entry links. Browse track, field, cross-country and road fixtures on AthRecs.", url }).map((tag) => noindex && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
+      meta: siteGraphMeta({ title: `Race fixtures and athletics events${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find track and field fixtures or choose a sport to browse running races, triathlons, cycling and swimming events by date, distance and location.", url }).map((tag) => noindex && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
       links: [{ rel: "canonical", href: url }],
+      scripts: filtered ? [] : directoryStructuredData(url, "Race fixtures and athletics events",
+        (loaderData ?? []).slice(0, PAGE_SIZE).map((race) => ({ name: race.name, path: `/races/${encodeURIComponent(race.slug)}` }))),
     };
   },
   component: EventsPage,
@@ -159,23 +165,11 @@ function EventsPage() {
     });
   };
 
-  const changePage = (nextPage: number) => {
-    const safePage = Math.min(Math.max(nextPage, 1), MAX_PAGE);
-    void navigate({
-      to: "/races",
-      search: {
-        ...routeSearch,
-        page: safePage > 1 ? safePage : undefined,
-      },
-      resetScroll: true,
-    });
-  };
-
   return (
     <div className="space-y-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Events</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">{IS_RUNRECS_SITE ? "Events" : "Race fixtures and athletics events"}</h1>
           <p className="max-w-2xl text-sm text-muted">
             Search events by country, area or region, distance, surface, city or date. Every
             selection remains shareable in the page address.
@@ -251,23 +245,21 @@ function EventsPage() {
               aria-label="Event pages"
               className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3 shadow-card"
             >
-              <button
-                type="button"
-                onClick={() => changePage(page - 1)}
-                disabled={page === 1}
-                className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Previous
-              </button>
+              {page > 1 ? (
+                <Link from={Route.fullPath} to="." rel="prev" aria-label="Previous page"
+                  search={{ ...routeSearch, page: page > 2 ? page - 1 : undefined }}
+                  className="inline-flex min-h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg">
+                  Previous
+                </Link>
+              ) : <span />}
               <span className="text-sm text-subtle">Page {page}</span>
-              <button
-                type="button"
-                onClick={() => changePage(page + 1)}
-                disabled={!hasNextPage || page >= MAX_PAGE}
-                className="inline-flex h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Next
-              </button>
+              {hasNextPage && page < MAX_PAGE ? (
+                <Link from={Route.fullPath} to="." rel="next" aria-label="Next page"
+                  search={{ ...routeSearch, page: page + 1 }}
+                  className="inline-flex min-h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg">
+                  Next
+                </Link>
+              ) : <span />}
             </nav>
           ) : null}
         </div>

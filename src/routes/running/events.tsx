@@ -1,3 +1,4 @@
+import { directoryStructuredData } from "@/lib/athrecs/directory-structured-data";
 import { useState } from "react";
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { listEvents } from "@/runrecs/api";
@@ -131,8 +132,10 @@ export const Route = createFileRoute("/running/events")({
     const url = `${SITE_URL}/running/events${page > 1 ? `?page=${page}` : ""}`;
     const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
     return {
-      meta: siteGraphMeta({ title: `Running races${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find running races and parkruns by date, country, distance and surface, with official entry links on AthRecs.", url }).map((tag) => (filtered || !loaderData?.length) && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
+      meta: siteGraphMeta({ title: `Running race calendar${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find running races and parkruns by date, country, distance and surface, with official entry links on AthRecs.", url }).map((tag) => (filtered || !loaderData?.length) && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
       links: [{ rel: "canonical", href: url }],
+      scripts: filtered ? [] : directoryStructuredData(url, "Running race calendar",
+        (loaderData ?? []).slice(0, PAGE_SIZE).map((race) => ({ name: race.name, path: `/races/${encodeURIComponent(race.slug)}` }))),
     };
   },
   component: EventsPage,
@@ -161,26 +164,13 @@ function EventsPage() {
     });
   };
 
-  const changePage = (nextPage: number) => {
-    const safePage = Math.min(Math.max(nextPage, 1), MAX_PAGE);
-    void navigate({
-      to: "/running/events",
-      search: {
-        ...routeSearch,
-        page: safePage > 1 ? safePage : undefined,
-      },
-      resetScroll: true,
-    });
-  };
-
   return (
     <div className="space-y-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Running races</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Running race calendar</h1>
           <p className="max-w-2xl text-sm text-muted">
-            Search events by country, area or region, distance, surface, city or date. Every
-            selection remains shareable in the page address.
+            Find a 5K, 10K, half marathon or marathon by date and location. Compare road and trail races or look up a local parkrun.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -254,23 +244,21 @@ function EventsPage() {
               aria-label="Event pages"
               className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3 shadow-card"
             >
-              <button
-                type="button"
-                onClick={() => changePage(page - 1)}
-                disabled={page === 1}
-                className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Previous
-              </button>
+              {page > 1 ? (
+                <Link from={Route.fullPath} to="." rel="prev" aria-label="Previous page"
+                  search={{ ...routeSearch, page: page > 2 ? page - 1 : undefined }}
+                  className="inline-flex min-h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg">
+                  Previous
+                </Link>
+              ) : <span />}
               <span className="text-sm text-subtle">Page {page}</span>
-              <button
-                type="button"
-                onClick={() => changePage(page + 1)}
-                disabled={!hasNextPage || page >= MAX_PAGE}
-                className="inline-flex h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Next
-              </button>
+              {hasNextPage && page < MAX_PAGE ? (
+                <Link from={Route.fullPath} to="." rel="next" aria-label="Next page"
+                  search={{ ...routeSearch, page: page + 1 }}
+                  className="inline-flex min-h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg">
+                  Next
+                </Link>
+              ) : <span />}
             </nav>
           ) : null}
         </div>

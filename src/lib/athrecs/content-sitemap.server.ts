@@ -40,7 +40,10 @@ function selection(kind: ContentSitemapKind): { query: string; values: unknown[]
         select 1 from results r join athletes a on a.id = r.athlete_id
         where r.edition_id = ed.id
           and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
-          and (a.profile_visibility = 'public' or a.profile_type = 'Public figure')
+          and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
+            or (a.profile_visibility = 'private' and a.parent_athlete_id is null
+              and a.profile_details#>>'{nameReview,mode}' = 'results_only'
+              and not exists (select 1 from athlete_account_links owner where owner.athlete_id = a.id)))
           and not exists (select 1 from athlete_account_links l
             join athlete_public_shares s on s.user_id = l.user_id
             where l.athlete_id = a.id and l.status = 'active'

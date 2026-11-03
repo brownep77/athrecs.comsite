@@ -50,6 +50,7 @@ try {
     create table editions (id int primary key, event_id int, event_date date, distance_code text);
     create table clubs (id int primary key, slug text unique, sports text);
     create table athletes (id int primary key, club_id int, profile_visibility text, profile_type text);
+    alter table athletes add column parent_athlete_id int, add column profile_details jsonb;
     create table results (id int primary key, edition_id int, athlete_id int, result_visibility text);
     create table athlete_account_links (athlete_id int, user_id text, status text);
     create table athlete_public_shares (user_id text, enabled bool, share_results bool);
@@ -118,6 +119,10 @@ try {
     "/results/synthetic-triathlon-2026-09-20-sprint-12",
   ]);
   assert.equal(await contentSitemapPageCount(sql, "results"), 1);
+  await db.exec(`update athletes set profile_details='{"nameReview":{"mode":"results_only"}}' where id=2`);
+  assert((await contentSitemapPaths(sql, "results", 1)).some((url) => url.endsWith("-8")));
+  await db.exec("insert into athlete_account_links values (2,'previous-owner','revoked')");
+  assert(!(await contentSitemapPaths(sql, "results", 1)).some((url) => url.endsWith("-8")));
   await db.exec("update athlete_public_shares set enabled=true where user_id='disabled'");
   assert((await contentSitemapPaths(sql, "results", 1)).some((url) => url.endsWith("-9")));
   await db.exec("update results set result_visibility='private' where id=1");
