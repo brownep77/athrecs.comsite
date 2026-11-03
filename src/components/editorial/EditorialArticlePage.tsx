@@ -221,11 +221,15 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
             <p className="text-sm leading-6 text-muted">
               Sources:{" "}
               {section.sources.map((source, index) => (
-                <span key={source.url}>
+                <span key={source.url || source.label}>
                   {index ? " · " : ""}
-                  <a href={source.url} className="text-accent underline underline-offset-2">
-                    {source.label}
-                  </a>
+                  {source.url ? (
+                    <a href={source.url} className="text-accent underline underline-offset-2">
+                      {source.label}
+                    </a>
+                  ) : (
+                    source.label
+                  )}
                 </span>
               ))}
             </p>
@@ -272,11 +276,21 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
           aria-label="Related pages and sources"
           className="flex flex-col gap-3 border-t border-border pt-5"
         >
-          {article.links.map((link) => (
-            <a key={link.url} href={link.url} className="text-accent underline underline-offset-2">
-              {link.label}
-            </a>
-          ))}
+          {article.links.map((link) =>
+            link.url ? (
+              <a
+                key={link.url}
+                href={link.url}
+                className="text-accent underline underline-offset-2"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <span key={link.label} className="text-muted">
+                {link.label}
+              </span>
+            ),
+          )}
         </nav>
       ) : null}
     </article>

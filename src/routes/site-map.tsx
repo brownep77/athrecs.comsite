@@ -8,8 +8,10 @@ import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 const loadGuideLinks = createServerFn({ method: "GET" }).handler(async () => {
   const { getRunningGuideDirectory } = await import("@/lib/running/guide-directory.server");
+  const { PUBLIC_PAGES } = await import("@/lib/athrecs/public-pages");
   const directory = await getRunningGuideDirectory();
   return {
+    pages: PUBLIC_PAGES,
     countries: directory.countries.flatMap((country) =>
       country.links.map((link) => ({ name: link.name, path: link.path, country: country.name })),
     ),

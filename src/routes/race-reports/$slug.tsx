@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { EditorialArticlePage } from "@/components/editorial/EditorialArticlePage";
-import { EDITORIAL_ARTICLES } from "@/data/athrecs-editorial";
+import { getEditorialArticle } from "@/lib/athrecs/public-editorial-api";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { editorialJsonLd } from "@/lib/athrecs/editorial";
@@ -8,10 +8,8 @@ import { getPublicEditorialAthleteLinks } from "@/lib/athrecs/editorial-athletes
 
 export const Route = createFileRoute("/race-reports/$slug")({
   loader: async ({ params }) => {
-    const article = EDITORIAL_ARTICLES.find(
-      (item) => item.slug === params.slug && item.kind === "race-reports",
-    );
-    if (IS_RUNRECS_SITE || !article) throw notFound();
+    const article = await getEditorialArticle({ data: params.slug });
+    if (IS_RUNRECS_SITE || article?.kind !== "race-reports") throw notFound();
     return {
       article: {
         ...article,

@@ -5,6 +5,7 @@ import {
   channelListing,
   channelNative,
   channelQuestions,
+  publicChannelProfile,
   type ChannelProfile,
 } from "./english-channel";
 import { IS_RUNRECS_SITE } from "../site-scope";
@@ -37,7 +38,7 @@ export async function listPublishedChannel() {
 }
 export async function publishedChannel(slug: string) {
   const [p] = await readChannelProfiles(await getSql(), slug);
-  return p ? { ...p, questions: channelQuestions(p) } : null;
+  return p ? { ...publicChannelProfile(p), questions: channelQuestions(p) } : null;
 }
 export async function nativeChannel(slug: string) {
   const p = await publishedChannel(slug);

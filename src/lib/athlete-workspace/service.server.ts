@@ -22,7 +22,7 @@ async function audit(sql: Sql, actor: Actor, action: string, id: string, before:
     values(${actor.userId},${action},'athlete_workspace',${id},${JSON.stringify(before)}::jsonb,${JSON.stringify(after)}::jsonb,${note})`;
 }
 function memberEntry(row: CandidateResult): CandidateResult {
-  return {index:row.index,race:row.race,date:row.date,distance:row.distance,time:row.time,timingBasis:row.timingBasis,sourceUrl:row.sourceUrl,bib:row.bib,place:row.place,state:row.state,response:row.response,responseAt:row.responseAt,responseNote:row.responseNote,resultId:row.resultId};
+  return {index:row.index,race:row.race,date:row.date,distance:row.distance,time:row.time,timingBasis:row.timingBasis,sourceUrl:"",bib:row.bib,place:row.place,state:row.state,response:row.response,responseAt:row.responseAt,responseNote:row.responseNote,resultId:row.resultId};
 }
 async function owners(sql: Sql, athleteId: number) {
   return sql<{ user_id: string; email: string }>`select l.user_id,u.email from athlete_account_links l join "user" u on u.id=l.user_id where l.athlete_id=${athleteId} and l.status='active'`;
@@ -127,7 +127,7 @@ async function batch(sql:Sql,id:string,actor:Actor,lock=false):Promise<Batch> {
   const rows=await sql.query<Batch>(`select *,id::text,updated_at::text from athlete_result_proposals where id=$1::uuid ${lock?'for update':''}`,[id]);
   const b=rows[0];if(!b||(!actor.staff&&b.submitted_by!==actor.userId))throw new Error("This result draft is not available to your account.");return b;
 }
-export async function getBatch(id:string,actor:Actor){const sql=await ready();await user(sql,actor);const b=await batch(sql,id,actor);return actor.staff?b:{...b,evidence_for:'',evidence_against:'',entries:b.entries.map(memberEntry)};}
+export async function getBatch(id:string,actor:Actor){const sql=await ready();await user(sql,actor);const b=await batch(sql,id,actor);return actor.staff?b:{...b,source_url:'',original_text:'',evidence_for:'',evidence_against:'',entries:b.entries.map(memberEntry)};}
 export async function issueInvitation(data:{batchId:string;revision:number;email:string},actor:Actor) {
   if(!actor.staff)throw new Error("Staff access required.");
   const sql=await ready();await user(sql,actor);
@@ -163,7 +163,7 @@ export async function reviewInvitation(token:string,actor:Actor){
   const [b]=await sql<Batch>`select *,id::text,updated_at::text from athlete_result_proposals where id=${i.batch_id}::uuid`;
   if(!b||b.revision!==i.issued_revision)throw new Error("This draft changed. Ask the sender for a new review link.");
   const p=b.athlete_id?await profile(sql,b.athlete_id):null;
-  return {athleteName:p?.display_name??'Your results',rows:b.entries.filter(r=>r.state==='pending').map(r=>({index:r.index,race:r.race,date:r.date,distance:r.distance,time:r.time,timingBasis:r.timingBasis,sourceUrl:r.sourceUrl,bib:r.bib,place:r.place}))};
+  return {athleteName:p?.display_name??'Your results',rows:b.entries.filter(r=>r.state==='pending').map(r=>({index:r.index,race:r.race,date:r.date,distance:r.distance,time:r.time,timingBasis:r.timingBasis,bib:r.bib,place:r.place}))};
 }
 export async function respondInvitation(data:{token:string;responses:{index:number;response:'yes'|'no'|'unsure';note:string}[];declaration:true},actor:Actor){
   const sql=await ready();await user(sql,actor);

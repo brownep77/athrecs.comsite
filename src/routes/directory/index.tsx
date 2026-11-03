@@ -5,15 +5,9 @@ import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { OrganisationSports } from "@/components/directory/OrganisationSports";
 import { SportCollections } from "@/components/directory/SportCollections";
 import { Button } from "@/components/ui/button";
-import { ORGANISATION_TYPES, SPORTS_ORGANISATIONS } from "@/data/sports-organisations";
-import {
-  DIRECTORY_COUNTRIES,
-  DIRECTORY_NATIONAL_COUNTRIES,
-  DIRECTORY_QUESTIONS,
-  filterSportsOrganisations,
-  parseDirectorySearch,
-  type DirectorySearch,
-} from "@/lib/athrecs/sports-directory";
+import { ORGANISATION_TYPES } from "@/data/sports-organisation-types";
+import { parsePublicDirectorySearch, type DirectorySearch } from "@/lib/athrecs/directory-search";
+import { getDirectoryPage } from "@/lib/athrecs/public-directory-api";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
@@ -27,8 +21,10 @@ export const Route = createFileRoute("/directory/")({
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
-  validateSearch: parseDirectorySearch,
-  head: ({ match }) => {
+  validateSearch: (raw) => parsePublicDirectorySearch(raw),
+  loaderDeps: ({ search }) => search,
+  loader: ({ deps }) => getDirectoryPage({ data: deps }),
+  head: ({ match, loaderData }) => {
     const filtered = Object.values(match.search).some(Boolean);
     return {
       meta: siteGraphMeta({ title, description, url: `${SITE_URL}/directory` }).map((meta) =>
@@ -48,7 +44,7 @@ export const Route = createFileRoute("/directory/")({
             url: `${SITE_URL}/directory`,
             mainEntity: {
               "@type": "ItemList",
-              itemListElement: filterSportsOrganisations(match.search).map((body, index) => ({
+              itemListElement: (loaderData?.bodies ?? []).map((body, index) => ({
                 "@type": "ListItem",
                 position: index + 1,
                 name: body.name,
@@ -70,7 +66,7 @@ function DirectoryPage() {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
   const [draftQuery, setDraftQuery] = useState<string | null>(null);
-  const bodies = filterSportsOrganisations(search);
+  const { bodies, countries, nationalCount, questions, total } = Route.useLoaderData();
   const update = (patch: Partial<DirectorySearch>) => {
     void navigate({ search: (previous) => ({ ...previous, ...patch }), resetScroll: false });
   };
@@ -185,7 +181,7 @@ function DirectoryPage() {
               onChange={(event) => update({ country: event.target.value || undefined })}
             >
               <option value="">All countries, territories & international</option>
-              {DIRECTORY_COUNTRIES.map((country) => (
+              {countries.map((country) => (
                 <option key={country}>{country}</option>
               ))}
             </select>
@@ -229,7 +225,7 @@ function DirectoryPage() {
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-muted" role="status">
-            {bodies.length} of {SPORTS_ORGANISATIONS.length} organisations
+            {bodies.length} of {total} organisations
           </p>
           {filtered ? (
             <Button
@@ -314,14 +310,14 @@ function DirectoryPage() {
         <h2 id="directory-help" className="font-display text-2xl font-semibold">
           Understanding sports organisations
         </h2>
-        {DIRECTORY_QUESTIONS.map((item) => (
+        {questions.map((item) => (
           <details key={item.question} className="rounded-lg border border-border p-4">
             <summary className="cursor-pointer font-semibold">{item.question}</summary>
             <p className="mt-3 max-w-4xl text-sm leading-7 text-muted">{item.answer}</p>
           </details>
         ))}
         <p className="text-xs leading-5 text-muted">
-          National federations in {DIRECTORY_NATIONAL_COUNTRIES.length} countries and territories,
+          National federations in {nationalCount} countries and territories,
           alongside home-nation, regional, specialist and international organisations. Coverage is
           growing and is not exhaustive. Official references and review dates appear on each
           organisation’s page.

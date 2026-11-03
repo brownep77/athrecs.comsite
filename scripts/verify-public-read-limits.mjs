@@ -1,3 +1,4 @@
+import { withoutProfileEvidence } from "../src/lib/athrecs/profile-evidence.ts";
 import { publicCatalogueContent } from "../src/lib/athrecs/public-catalogue-content.ts";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -69,6 +70,7 @@ function handlers(runrecs) {
     ...limits,
     ready: async () => sql,
     publicCatalogueContent,
+    withoutProfileEvidence,
     readResultDetails: (value) => value,
     getReportedRaceHistory: () => null,
     countPublishedSourceResults,

@@ -11,11 +11,10 @@ import {
   SUPERHALFS_OFFICIAL,
   SUPERHALFS_PACE_TARGETS,
   SUPERHALFS_QUESTIONS,
-  SUPERHALFS_RACES,
   SUPERHALFS_RULES,
   SUPERHALFS_TIME_LIMIT_NEWS,
   type SuperHalfsRace,
-} from "@/data/superhalfs";
+} from "@/data/superhalfs-guide";
 
 const linkStyle =
   "font-semibold text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
@@ -108,7 +107,9 @@ function RaceCard({ race, index }: { race: SuperHalfsRace; index: number }) {
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-3 border-t border-border pt-4 text-sm">
           <OfficialLink href={race.entryUrl}>Official entry</OfficialLink>
-          <OfficialLink href={race.resultsUrl}>{race.resultsLabel}</OfficialLink>
+          <a href={`/results?q=${encodeURIComponent(race.name)}`} className={linkStyle}>
+            Search AthRecs results
+          </a>
           <OfficialLink href={race.eliteUrl}>
             {race.id === "cardiff" || race.id === "copenhagen"
               ? "Elite information"
@@ -142,7 +143,7 @@ function RaceCard({ race, index }: { race: SuperHalfsRace; index: number }) {
   );
 }
 
-export function SuperHalfsPage() {
+export function SuperHalfsPage({ races }: { races: SuperHalfsRace[] }) {
   return (
     <article className="space-y-10 pb-12 md:space-y-14">
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-muted">
@@ -236,7 +237,7 @@ export function SuperHalfsPage() {
               </OfficialLink>
             </p>
             <div className="flex flex-wrap gap-2">
-              {SUPERHALFS_RACES.map((race) => (
+              {races.map((race) => (
                 <a
                   key={race.id}
                   href={`#${race.id}`}
@@ -291,8 +292,8 @@ export function SuperHalfsPage() {
         </div>
         <div className="grid gap-5 md:grid-cols-2">
           {[
-            { name: "Spring 2027", months: "March–April", races: SUPERHALFS_RACES.slice(0, 3) },
-            { name: "Autumn 2027", months: "September–October", races: SUPERHALFS_RACES.slice(3) },
+            { name: "Spring 2027", months: "March–April", races: races.slice(0, 3) },
+            { name: "Autumn 2027", months: "September–October", races: races.slice(3) },
           ].map((season) => (
             <div
               key={season.name}
@@ -381,7 +382,7 @@ export function SuperHalfsPage() {
               </tr>
             </thead>
             <tbody>
-              {SUPERHALFS_RACES.map((race) => (
+              {races.map((race) => (
                 <tr key={race.id} className="border-b border-border last:border-0">
                   <th scope="row" className="px-5 py-4">
                     <a className={linkStyle} href={`#${race.id}`}>
@@ -569,7 +570,7 @@ export function SuperHalfsPage() {
           </p>
         </div>
         <div className="grid items-start gap-5 lg:grid-cols-2">
-          {SUPERHALFS_RACES.map((race, index) => (
+          {races.map((race, index) => (
             <RaceCard key={race.id} race={race} index={index} />
           ))}
         </div>
@@ -608,7 +609,7 @@ export function SuperHalfsPage() {
               </tr>
             </thead>
             <tbody>
-              {SUPERHALFS_RACES.map((race) => (
+              {races.map((race) => (
                 <tr key={race.id} className="border-b border-border last:border-0">
                   <th scope="row" className="px-5 py-4 text-fg">
                     <a href={race.rulesUrl} className={linkStyle}>
@@ -886,8 +887,7 @@ export function SuperHalfsPage() {
           </h2>
           <p className="text-sm leading-relaxed text-muted">
             Find your athlete profile on AthRecs, explore your recorded performances and keep your
-            half-marathon goals in view. The official race archives above are the starting point for
-            checking an individual result.
+            half-marathon goals in view.
           </p>
         </div>
         <div className="flex flex-wrap gap-3 lg:justify-end">

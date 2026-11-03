@@ -1,16 +1,6 @@
-import {
-  ORGANISATION_TYPES,
-  SPORTS_ORGANISATIONS,
-  type DirectorySport,
-} from "../../data/sports-organisations.ts";
+import { parsePublicDirectorySearch, type DirectorySearch } from "./directory-search.ts";
+import { ORGANISATION_TYPES, SPORTS_ORGANISATIONS } from "../../data/sports-organisations.ts";
 import { SPORT_PAGES } from "./sport-pages.ts";
-
-export type DirectorySearch = {
-  q?: string;
-  country?: string;
-  sport?: DirectorySport;
-  type?: keyof typeof ORGANISATION_TYPES;
-};
 
 export const DIRECTORY_COUNTRIES = [
   ...new Set(SPORTS_ORGANISATIONS.flatMap((body) => body.territories)),
@@ -30,20 +20,8 @@ const normalise = (value: string) =>
     .replace(/æ/g, "ae")
     .replace(/ß/g, "ss");
 
-export function parseDirectorySearch(raw: Record<string, unknown>): DirectorySearch {
-  return {
-    q: typeof raw.q === "string" ? raw.q.trim().slice(0, 120) || undefined : undefined,
-    country:
-      typeof raw.country === "string" && DIRECTORY_COUNTRIES.includes(raw.country)
-        ? raw.country
-        : undefined,
-    sport: SPORT_PAGES.find((sport) => sport.slug === raw.sport)?.slug,
-    type:
-      typeof raw.type === "string" && Object.hasOwn(ORGANISATION_TYPES, raw.type)
-        ? (raw.type as DirectorySearch["type"])
-        : undefined,
-  };
-}
+export const parseDirectorySearch = (raw: Record<string, unknown>) =>
+  parsePublicDirectorySearch(raw, DIRECTORY_COUNTRIES);
 
 export function filterSportsOrganisations(search: DirectorySearch) {
   const words = normalise(search.q ?? "")

@@ -1,12 +1,16 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import {
-  berlinSnapshotSchema,
   berlinSearch,
   berlinSelection,
   berlinPlace,
   berlinShareUrl,
 } from "../src/lib/athrecs/berlin-results.ts";
+
+import {
+  berlinSnapshotSchema,
+  publicBerlinSnapshot,
+} from "../src/lib/athrecs/berlin-snapshot.server.ts";
 
 const snapshot = berlinSnapshotSchema.parse(
   JSON.parse(
@@ -43,6 +47,12 @@ const fixture = {
   results: [synthetic],
 };
 assert(berlinSnapshotSchema.safeParse(fixture).success);
+const published = publicBerlinSnapshot(fixture).results[0];
+assert.equal(published.chipTime, synthetic.chipTime);
+assert.equal(published.genderPlace, synthetic.genderPlace);
+for (const key of ["sourceUrl", "sourceLocator", "checkedAt", "publicationApproved", "verified"])
+  assert.equal(Object.hasOwn(published, key), false, `Private evidence in public snapshot: ${key}`);
+assert(!JSON.stringify(publicBerlinSnapshot(fixture)).includes(synthetic.sourceUrl));
 assert(
   !berlinSnapshotSchema.safeParse({ ...fixture, results: [{ ...synthetic, verified: false }] })
     .success,
@@ -71,7 +81,7 @@ assert.equal(
 );
 assert.equal(berlinSelection(fixture, berlinSearch({ view: "age" })).length, 0);
 assert.equal(berlinSelection(fixture, berlinSearch({ view: "all", q: "TEST-1" })).length, 1);
-assert.equal(berlinSearch({ view: "bad", page: -2 }).view, "men");
+assert.equal(berlinSearch({ view: "bad", page: -2 }).view, "all");
 assert(
   berlinShareUrl(berlinSearch({ view: "age", category: "TEST-W45" })).includes("category=TEST-W45"),
 );

@@ -84,3 +84,36 @@ export function channelNative(p: ChannelProfile) {
   };
 }
 export type ChannelNative = ReturnType<typeof channelNative>;
+
+/** Keep reviewed swim evidence on the server, including links repeated in the bibliography. */
+export function publicChannelProfile(profile: ChannelProfile): ChannelProfile {
+  const swims = [
+    ...profile.crossings,
+    ...profile.otherEvents,
+    ...profile.nativeCrossings,
+    ...profile.nativeOtherEvents,
+  ];
+  const evidence = new Set(
+    swims.flatMap((card) => card.lines.flatMap((line) => (line.url ? [line.url] : []))),
+  );
+  const publicCards = (cards: ChannelCard[]) =>
+    cards.map((card) => ({
+      ...card,
+      lines: card.lines.flatMap((line) => {
+        if (!line.url || !evidence.has(line.url)) return [line];
+        const { url, ...rest } = line;
+        if (line.text === "Open source" || line.text === url) return [];
+        return [rest];
+      }),
+    }));
+  return {
+    ...profile,
+    crossings: publicCards(profile.crossings),
+    otherEvents: publicCards(profile.otherEvents),
+    nativeCrossings: publicCards(profile.nativeCrossings),
+    nativeOtherEvents: publicCards(profile.nativeOtherEvents),
+    sources: publicCards(profile.sources),
+    media: publicCards(profile.media),
+    milestones: publicCards(profile.milestones),
+  };
+}

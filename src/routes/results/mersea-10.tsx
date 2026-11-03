@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
+import { ArchiveResultPanels } from "@/components/races/ArchiveResultPanels";
 import { Button } from "@/components/ui/button";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import {
@@ -46,12 +47,10 @@ export const Route = createFileRoute("/results/mersea-10")({
 });
 
 const field = "mt-1.5 h-11 w-full rounded-lg border border-border bg-bg px-3 text-base text-fg";
-const resultCell = "whitespace-nowrap px-3 py-2";
-const optionalColumns: { field: keyof MerseaResult; label: string }[] = [
+const detailFields: { field: keyof MerseaResult; label: string }[] = [
   { field: "sourceAward", label: "Award" },
   { field: "sourcePosition", label: "Race place on source sheet" },
   { field: "bib", label: "Race number" },
-  { field: "club", label: "Club or team" },
   { field: "sex", label: "Sex" },
   { field: "genderPosition", label: "Gender place" },
   { field: "age", label: "Age" },
@@ -76,13 +75,6 @@ function coverageLabel(edition: { coverage: MerseaEdition["coverage"]; count: nu
 
 function EditionResults({ edition }: { edition: MerseaEdition & { count: number } }) {
   const rows = edition.rows;
-  const columns = optionalColumns.filter(({ field }) =>
-    field === "sourcePosition"
-      ? edition.rows.some(
-          (row) => row.sourcePosition != null && row.sourcePosition !== row.position,
-        )
-      : edition.rows.some((row) => row[field] != null),
-  );
   return (
     <section className="space-y-3 rounded-xl border border-border bg-surface p-4 sm:p-5">
       <header>
@@ -94,57 +86,72 @@ function EditionResults({ edition }: { edition: MerseaEdition & { count: number 
         <p className="mt-1 text-sm font-semibold text-accent">{coverageLabel(edition)}</p>
       </header>
       {edition.note && <p className="text-sm leading-6 text-muted">{edition.note}</p>}
-      {edition.sources.length > 0 && (
-        <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm text-muted">
-          <span>Sources</span>
-          {edition.sources.map((source) => (
-            <a
-              key={source.url}
-              href={source.url}
-              rel="noreferrer"
-              className="text-accent underline"
-            >
-              {source.name}
-            </a>
-          ))}
-        </p>
+      {edition.providers.length > 0 && (
+        <p className="text-sm text-muted">Sources · {edition.providers.join(" · ")}</p>
       )}
       {rows.length > 0 && (
-        <div
-          className="overflow-x-auto"
-          tabIndex={0}
-          role="region"
-          aria-label={`${edition.year} finishers, scroll horizontally for all fields`}
+        <ArchiveResultPanels
+          rows={rows}
+          division={(row) => (row.sex === "M" ? "men" : row.sex === "F" ? "women" : "other")}
         >
-          <table className="w-full text-left text-sm">
-            <caption className="sr-only">Mersea 10-mile results, {edition.year}</caption>
-            <thead className="bg-elevated text-xs text-muted">
-              <tr>
-                {["Place", "Runner", "Finish time", ...columns.map((column) => column.label)].map(
-                  (label) => (
-                    <th key={label} scope="col" className={resultCell}>
-                      {label}
-                    </th>
-                  ),
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, i) => (
-                <tr key={i} className="border-t border-border tabular-nums">
-                  <td className={resultCell}>{row.position ?? "—"}</td>
-                  <td className="px-3 py-2 font-semibold">{row.name ?? "Name not published"}</td>
-                  <td className={resultCell}>{row.finishTime ?? "—"}</td>
-                  {columns.map(({ field }) => (
-                    <td key={field} className={resultCell}>
-                      {row[field] ?? "—"}
-                    </td>
-                  ))}
+          {(finishers, division) => (
+            <table className="w-full border-collapse text-left text-sm">
+              <caption className="sr-only">
+                {division} · Mersea 10-mile results, {edition.year}
+              </caption>
+              <thead className="border-y border-border bg-elevated/45 text-xs text-muted">
+                <tr>
+                  <th scope="col" className="px-2 py-2">
+                    Race place
+                  </th>
+                  <th scope="col" className="px-2 py-2">
+                    Runner
+                  </th>
+                  <th scope="col" className="px-2 py-2 text-right">
+                    Finish time
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {finishers.map((row, i) => {
+                  const fields = detailFields.filter(
+                    ({ field }) =>
+                      row[field] != null &&
+                      (field !== "sourcePosition" || row.sourcePosition !== row.position),
+                  );
+                  return (
+                    <tr key={i} className="border-b border-border/70 align-top last:border-0">
+                      <td className="px-2 py-2 font-mono tabular-nums">{row.position ?? "—"}</td>
+                      <th
+                        scope="row"
+                        className="px-2 py-2 text-left font-normal [overflow-wrap:anywhere]"
+                      >
+                        <span className="font-semibold">{row.name ?? "Name not published"}</span>
+                        {row.club && <span className="block text-xs text-muted">{row.club}</span>}
+                        {fields.length > 0 && (
+                          <details className="mt-1 text-xs text-muted">
+                            <summary className="cursor-pointer text-accent">
+                              Details
+                              <span className="sr-only"> for {row.name ?? "unnamed runner"}</span>
+                            </summary>
+                            {fields.map(({ field, label }) => (
+                              <p key={field}>
+                                {label} · {row[field]}
+                              </p>
+                            ))}
+                          </details>
+                        )}
+                      </th>
+                      <td className="whitespace-nowrap px-2 py-2 text-right font-mono font-semibold tabular-nums">
+                        {row.finishTime ?? "—"}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </ArchiveResultPanels>
       )}
     </section>
   );
@@ -163,17 +170,17 @@ function MerseaArchive() {
       >
         <ArrowLeft className="size-4" aria-hidden="true" /> All race results
       </Link>
-      <header className="space-y-2 rounded-xl border border-accent/30 bg-accent-soft p-5 sm:p-7">
-        <p className="text-sm font-semibold text-accent">
+      <header className="space-y-2 rounded-md border-l-8 border-[#a4eee1] bg-[#102e38] p-5 text-white sm:p-7">
+        <p className="text-sm font-semibold text-[#a4eee1]">
           West Mersea, Essex · 10 miles · Road running
         </p>
         <h1 className="font-display text-3xl font-semibold sm:text-4xl">
           Mersea Island Lions 10 Mile results{year ? ` · ${year}` : ""}
         </h1>
-        <p className="text-sm leading-6 text-muted">
+        <p className="text-sm leading-6 text-white/80">
           {year && results[0]
             ? merseaEditionSummary(results[0])
-            : "Choose a year to see the finishing list and its sources, or search across the archive."}
+            : "Choose a year to see its recorded results, or search across the archive."}
         </p>
       </header>
       <form

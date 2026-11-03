@@ -3,7 +3,7 @@ import { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } from "../running/road-ultras
 import { EDITORIAL_ARTICLES } from "../../data/athrecs-editorial";
 import { editorialPath } from "./editorial";
 import { SPORTS_ORGANISATIONS } from "../../data/sports-organisations";
-import { SUPERHALFS_PATH } from "../../data/superhalfs";
+import { SUPERHALFS_PATH } from "../../data/superhalfs-guide";
 import { RUNNING_GUIDES_PATH } from "../running/guide-directory";
 
 /** One list for the HTML directory and the XML sitemap. Account tools stay private. */

@@ -1,10 +1,12 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import { getEditorialSummaries } from "@/lib/athrecs/public-editorial-api";
 import { EditorialBrowse } from "@/components/editorial/EditorialBrowse";
 import { parseEditorialSearch } from "@/lib/athrecs/editorial";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/race-reports/")({
+  loader: () => (IS_RUNRECS_SITE ? [] : getEditorialSummaries()),
   validateSearch: parseEditorialSearch,
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
@@ -27,6 +29,7 @@ function RaceReportsPage() {
   const navigate = Route.useNavigate();
   return (
     <EditorialBrowse
+      catalogue={Route.useLoaderData()}
       kind="race-reports"
       search={search}
       onChange={(next) => {

@@ -98,7 +98,7 @@ export function countryMarathonQuestions(
     {
       question: "Where can I find past race and category results?",
       answer:
-        "Each race guide links to the organiser or timing provider’s published records. Choose the correct distance and edition, and read the coverage notes: some archives contain winners only, provisional classifications or results that need further searching.",
+        "Open the race guide for its published edition summaries and category information, or search the AthRecs results archive.",
     },
   ];
 }
@@ -158,7 +158,7 @@ export function countryMarathonHead(
           "@type": "Thing",
           name: `${race.name}: ${roadMarathonDate(edition.date, edition.endDate)}`,
           url: `${SITE_URL}${roadRacePath(race)}#dates`,
-          sameAs: edition.sourceUrl,
+          sameAs: edition.sourceUrl || undefined,
         })),
       ),
     },
@@ -213,7 +213,7 @@ export function roadRaceQuestions(race: RoadMarathon, now: string) {
     {
       question: `Where can I find past ${race.name} results?`,
       answer:
-        "The past races and results section links to the organiser or timing provider’s published records. Check the distance and edition, and read this guide’s coverage notes: some sources show winners only, provisional classifications or a results portal that needs further searching.",
+        "See this guide’s published edition summaries and category information, or search the AthRecs results archive.",
     },
   ];
 }
@@ -254,7 +254,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
       endDate: edition.endDate ?? edition.date,
       sport: "Running",
       description: race.description,
-      sameAs: edition.sourceUrl,
+      sameAs: edition.sourceUrl || undefined,
       organizer: verifiedGuideOrganiser(race.slug, race.officialUrl),
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
