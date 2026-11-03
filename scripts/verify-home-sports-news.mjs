@@ -65,7 +65,7 @@ const navigation = await readFile(
 assert.match(homepage, /getRunningFixtures\(\{\s*data:\s*deps\s*\}\)/);
 assert.match(homepage, /parseSportFixtureSearch\(raw\)/);
 assert.match(homepage, /<CompactDiscoveryPage\b/);
-assert.match(discovery, /\/results\?category=all-running/);
+assert.match(navigation, /\/results\?category=all-running/);
 assert.match(header, /QUICK_SPORTS\.map/);
 for (const path of [
   "/sports/track-and-field",

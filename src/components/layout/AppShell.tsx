@@ -1,3 +1,4 @@
+import { DiscoverySectionNav } from "@/components/discovery/DiscoverySectionNav";
 import { CompactDiscoveryHeader } from "@/components/discovery/CompactDiscoveryHeader";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
@@ -154,11 +155,14 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       )}
     >
       {compact ? (
-        <CompactDiscoveryHeader
-          pathname={pathname}
-          showHomepageColours={showHomepageColours}
-          showLanguagePicker={showLanguagePicker}
-        />
+        <>
+          <CompactDiscoveryHeader
+            pathname={pathname}
+            showHomepageColours={showHomepageColours}
+            showLanguagePicker={showLanguagePicker}
+          />
+          {pathname === "/" && <DiscoverySectionNav />}
+        </>
       ) : (
         <>
           <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">
