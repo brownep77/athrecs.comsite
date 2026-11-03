@@ -25,6 +25,10 @@ export const AUCKLAND_MARATHON_2026_RESULTS: EditorialArticle = {
     },
   ],
   athleteNames: [
+    "Sarah Gardner",
+    "Katherine Camp",
+    "Tom Moulai",
+    "Julian Oakley",
     "Toby Gualter",
     "Brigid Dennehy",
     "Daniel Balchin",
@@ -44,13 +48,24 @@ export const AUCKLAND_MARATHON_2026_RESULTS: EditorialArticle = {
       paragraphs: [
         "Toby Gualter led the men’s results in 2:15:29, followed by Daniel Balchin and Eric Speakman. Brigid Dennehy headed the women’s field in 2:42:49, with Charlotte Burgess second and Madeleine Hamer third. The SportSplits leaderboard labels these performances as net times.",
       ],
-      table: {
-        caption: "Marathon podiums — published net times, 1 November 2026",
-        headings: ["Place", "Men", "Net time", "Women", "Net time"],
+      standings: {
+        race: "Auckland",
+        distance: "Marathon",
+        timing: "Net time",
+        credit: "SportSplits · Leading three in each division · Net times",
         rows: [
-          ["1", "Toby Gualter", "2:15:29", "Brigid Dennehy", "2:42:49"],
-          ["2", "Daniel Balchin", "2:23:01", "Charlotte Burgess", "2:45:30"],
-          ["3", "Eric Speakman", "2:24:46", "Madeleine Hamer", "2:51:27"],
+          { division: "Men", place: 1, name: "Toby Gualter", country: "NZL", time: "2:15:29" },
+          { division: "Women", place: 1, name: "Brigid Dennehy", country: "IRL", time: "2:42:49" },
+          { division: "Men", place: 2, name: "Daniel Balchin", country: "NZL", time: "2:23:01" },
+          {
+            division: "Women",
+            place: 2,
+            name: "Charlotte Burgess",
+            country: "NZL",
+            time: "2:45:30",
+          },
+          { division: "Men", place: 3, name: "Eric Speakman", country: "NZL", time: "2:24:46" },
+          { division: "Women", place: 3, name: "Madeleine Hamer", country: "NZL", time: "2:51:27" },
         ],
       },
       sources: [
@@ -99,6 +114,20 @@ export const AUCKLAND_MARATHON_2026_RESULTS: EditorialArticle = {
         "William Sinclair led the men’s half marathon in 1:04:10, while Eva Pringle topped the women’s results in 1:13:37. Each took first place in a separate competition within the wider Auckland programme.",
         "The wheelchair marathon produced victories for Matthew Sullivan, who headed the men’s classification in 1:52:07, and Sally Barkman, who led the women’s in 1:57:02. SportSplits also labels the half-marathon and wheelchair performances above as net times.",
       ],
+      standings: {
+        race: "Auckland",
+        distance: "Half marathon",
+        timing: "Net time",
+        credit: "SportSplits · Leading three in each division · Net times",
+        rows: [
+          { division: "Men", place: 1, name: "William Sinclair", country: "NZL", time: "1:04:10" },
+          { division: "Men", place: 2, name: "Julian Oakley", country: "NZL", time: "1:07:27" },
+          { division: "Men", place: 3, name: "Tom Moulai", country: "NZL", time: "1:07:31" },
+          { division: "Women", place: 1, name: "Eva Pringle", country: "NZL", time: "1:13:37" },
+          { division: "Women", place: 2, name: "Katherine Camp", country: "NZL", time: "1:18:39" },
+          { division: "Women", place: 3, name: "Sarah Gardner", country: "NZL", time: "1:19:28" },
+        ],
+      },
       sources: [
         {
           label: "SportSplits: half-marathon and wheelchair results",

@@ -1,3 +1,4 @@
+import { resultCredit } from "./result-credit.ts";
 import { isAthrecsPublicSport } from "./public-sports.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import { createServerFn } from "@tanstack/react-start";
@@ -5,7 +6,7 @@ import { getSql } from "@/lib/db";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
-import { normalizeResultsSearch, parseResultsEditionId } from "./public-results-search";
+import { normalizeResultsSearch, parseResultsEditionId, usesRoadStandings } from "./public-results-search";
 import { ATHLETICS_RUNNING_SURFACES, getSportPage, RUNNING_FIXTURE_SCOPE } from "./sport-pages";
 
 export type PublicResultEdition = {
@@ -25,6 +26,9 @@ export type PublicRaceResult = {
   athlete_name: string;
   athlete_slug: string | null;
   nationality: string | null;
+  division?: string | null;
+  race_club?: string | null;
+  footwear?: string | null;
   profile_club: string | null;
   source_url: string | null;
   result_source: string | null;
@@ -153,7 +157,16 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     if (!edition) return null;
     const q = like(data.q);
     const offset = (data.page - 1) * RESULT_PAGE_SIZE;
-    const rows = await sql<PublicRaceResult>`
+    const perDivision = usesRoadStandings(edition);
+    const rows = await sql<PublicRaceResult & { page_row: number }>`
+      select * from (
+        select visible.*, (row_number() over (
+          partition by case when ${perDivision} then division end
+          order by disqualified asc, (lower(trim(status)) in ('finished','fin')) desc,
+            case when ${perDivision} then coalesce(gender_place, overall_place) else overall_place end asc nulls last, gun_time_seconds asc nulls last,
+            case when reported_place ~ '^[0-9]{1,8}$' then reported_place::integer end asc nulls last,
+            finish_time_seconds asc nulls last, id
+        ))::int as page_row from (
       select r.id, a.display_name as athlete_name, case when a.profile_details#>>'{nameReview,mode}'='results_only' then null else a.slug end as athlete_slug,
         case when r.result_details->>'verificationStatus' = 'source_verified'
           and jsonb_typeof(r.result_details->'sourceNationality') = 'string'
@@ -164,6 +177,18 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
             where l.athlete_id = a.id and l.status = 'active'
           )
           then trim(r.result_details->>'sourceNationality') else null end as nationality,
+        case
+          when lower(trim(r.result_details->>'sourceGender')) in ('m','male','men') then 'Men'
+          when lower(trim(r.result_details->>'sourceGender')) in ('w','f','female','women') then 'Women'
+          when lower(trim(r.result_details->>'sourceGender')) in ('x','nb','nonbinary','non-binary') then 'Nonbinary'
+          when nullif(trim(r.result_details->>'sourceGender'),'') is null then case
+            when r.category ~* '^(M|Men)[ -]?[0-9]' then 'Men'
+            when r.category ~* '^(W|F|Women)[ -]?[0-9]' then 'Women'
+            when r.category ~* '^(NB|Nonbinary)[ -]?[0-9]' then 'Nonbinary' end
+        end as division,
+        nullif(trim(r.result_details->>'sourceClub'),'') as race_club,
+        case when r.result_details->>'verificationStatus' in ('source_verified','verified_by_administrator')
+          then coalesce(nullif(trim(r.result_details->>'sourceFootwear'),''),nullif(trim(r.result_details->>'shoeModel'),'')) end as footwear,
         c.name as profile_club, r.source_url, r.result_source,
         r.overall_place, r.gender_place, r.category_place,
         r.category, r.status, r.finish_time_seconds, r.chip_time_seconds, r.gun_time_seconds,
@@ -192,23 +217,24 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
           join athlete_account_links l on l.user_id = h.user_id and l.status = 'active'
           where l.athlete_id = a.id and h.result_id = r.id
         )
-        and (${q}::text is null or a.display_name ilike ${q} or c.name ilike ${q} or r.category ilike ${q})
-      order by disqualified asc,
-        (lower(trim(r.status)) in ('finished', 'fin')) desc,
-        r.overall_place asc nulls last, r.gun_time_seconds asc nulls last,
-        case when r.result_details->>'reportedPlace' ~ '^[0-9]{1,8}$'
-          then (r.result_details->>'reportedPlace')::integer end asc nulls last,
-        r.finish_time_seconds asc nulls last, r.id asc
-      limit ${RESULT_PAGE_SIZE + 1} offset ${offset}
+        and (${q}::text is null or a.display_name ilike ${q} or c.name ilike ${q} or r.category ilike ${q} or r.bib = ${data.q || null} or r.result_details->>'sourceClub' ilike ${q})
+        ) visible
+      ) ranked
+      where page_row between ${offset + 1} and ${offset + RESULT_PAGE_SIZE + 1}
+      order by page_row, id
     `;
     // This edition credits its timer once. Keep the original row URLs in staff evidence.
-    const timingCredit = edition.edition_id === 71609612 ? "Total Race Timing" : null;
+    const providerNames = new Set(perDivision ? rows.flatMap(row => {
+      const credit = resultCredit(row.source_url, row.result_source);
+      return credit ? [credit.name] : [];
+    }) : []);
+    const timingCredit = edition.edition_id === 71609612 ? "Total Race Timing" : [...providerNames].join(" · ") || null;
     return {
       edition: publicCatalogueContent({ ...edition, event_slug: isAthrecsPublicSport(edition.sport) ? edition.event_slug : null }),
       timingCredit,
-      results: rows.slice(0, RESULT_PAGE_SIZE).map((row) =>
-        publicCatalogueContent(timingCredit ? { ...row, source_url: null, result_source: null } : row),
+      results: rows.filter(row => row.page_row <= offset + RESULT_PAGE_SIZE).map(({ page_row: _pageRow, ...row }) =>
+        publicCatalogueContent(perDivision || timingCredit ? { ...row, source_url: null, result_source: null } : row),
       ),
-      hasMore: rows.length > RESULT_PAGE_SIZE,
+      hasMore: rows.some(row => row.page_row > offset + RESULT_PAGE_SIZE),
     };
   });
