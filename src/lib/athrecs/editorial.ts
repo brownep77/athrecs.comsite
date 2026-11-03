@@ -48,6 +48,28 @@ export type EditorialSearch = {
   county?: string;
 };
 
+export type RoadStanding = {
+  division: string;
+  name: string;
+  place?: string | number | null;
+  time: string;
+  country?: string | null;
+  club?: string | null;
+  clubLabel?: string;
+  shoes?: string | null;
+};
+
+export type EditorialStandings = {
+  race: string;
+  distance: "Marathon" | "Half marathon";
+  credit: string;
+  timing: string;
+  rows: RoadStanding[];
+  artwork?: string;
+  editionSlug?: string;
+  anchors?: Record<string, string>;
+};
+
 export type EditorialArticle = {
   slug: string;
   kind: EditorialKind;
@@ -80,6 +102,7 @@ export type EditorialArticle = {
     id: string;
     heading: string;
     paragraphs: string[];
+    standings?: EditorialStandings;
     table?: { caption: string; headings: string[]; rows: string[][] };
     sources?: { label: string; url: string }[];
   }[];

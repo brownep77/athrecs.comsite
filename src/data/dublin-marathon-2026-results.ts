@@ -49,16 +49,50 @@ export const DUBLIN_MARATHON_2026_RESULTS: EditorialArticle = {
         "Abay Alemu Lesa won the men’s race in 2:10:28, eight seconds ahead of Ebba Chala, with Sahlesilassie Nigussie third. Zenebu Fikdau Jebesa led an Ethiopian sweep of the women’s podium in 2:24:26. The organiser described her performance as a personal best, improving her previous mark by 17 seconds.",
         "Tenebeb Nega Aynalem and Sechele Dalasa Adunga completed the women’s top three. The organiser’s published podiums capture both the narrow men’s winning margin and the depth of the Ethiopian women’s performances.",
       ],
-      table: {
-        caption: "Overall podiums — times published by the organiser",
-        headings: ["Place", "Men", "Time", "Women", "Time"],
+      standings: {
+        race: "Dublin",
+        distance: "Marathon",
+        timing: "Time",
+        credit:
+          "Irish Life Dublin Marathon · Leading three in each division · Organiser’s finish times",
         rows: [
-          ["1", "Abay Alemu Lesa", "2:10:28", "Zenebu Fikdau Jebesa", "2:24:26"],
-          ["2", "Ebba Chala", "2:10:36", "Tenebeb Nega Aynalem", "2:25:50"],
-          ["3", "Sahlesilassie Nigussie", "2:11:25", "Sechele Dalasa Adunga", "2:27:22"],
+          { division: "Men", place: 1, name: "Abay Alemu Lesa", time: "2:10:28", country: "ETH" },
+          {
+            division: "Women",
+            place: 1,
+            name: "Zenebu Fikdau Jebesa",
+            time: "2:24:26",
+            country: "ETH",
+          },
+          { division: "Men", place: 2, name: "Ebba Chala", time: "2:10:36", country: "SWE" },
+          {
+            division: "Women",
+            place: 2,
+            name: "Tenebeb Nega Aynalem",
+            time: "2:25:50",
+            country: "ETH",
+          },
+          {
+            division: "Men",
+            place: 3,
+            name: "Sahlesilassie Nigussie",
+            time: "2:11:25",
+            country: "ETH",
+          },
+          {
+            division: "Women",
+            place: 3,
+            name: "Sechele Dalasa Adunga",
+            time: "2:27:22",
+            country: "ETH",
+          },
         ],
       },
       sources: [
+        {
+          label: "World Athletics: Dublin results and countries",
+          url: "https://worldathletics.org/competition/calendar-results/results/7238744",
+        },
         {
           label: "Irish Life Dublin Marathon: official race report and podiums",
           url: "https://irishlifedublinmarathon.ie/ethiopian-athletes-lesa-and-jebesa-victorious-in-45th-irish-life-dublin-marathon-as-armstrong-and-storm-and-claim-national-titles/",

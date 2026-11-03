@@ -76,6 +76,7 @@ const createServerFn = ({ method }) => {
 };
 const scope = { IS_RUNRECS_SITE: false };
 const api = loadTypeScript("src/lib/athrecs/public-results-api.ts", {
+  "./result-credit.ts": { resultCredit },
   "./public-catalogue-content.ts": catalogueContent,
   "./public-sports.ts": loadTypeScript("src/lib/athrecs/public-sports.ts"),
   "@tanstack/react-start": { createServerFn },
@@ -96,7 +97,7 @@ try {
       profile_type text, profile_visibility text, parent_athlete_id integer, profile_details jsonb default '{}');
     create table results (id integer primary key, athlete_id integer, edition_id integer,
       status text, result_details jsonb default '{}', result_visibility text,
-      source_url text, result_source text,
+      source_url text, result_source text, bib text,
       overall_place integer, gender_place integer, category_place integer, category text,
       finish_time_seconds integer, chip_time_seconds integer, gun_time_seconds integer);
     create table athlete_account_links (user_id text, athlete_id integer, status text);
@@ -134,6 +135,9 @@ try {
   `);
 
   const snapshot = async () => JSON.stringify((await db.query("select * from results order by id")).rows);
+  await db.exec("update results set bib='1202', category='W40-44' where id=1");
+  const bibResults = await api.getPublicRaceResults({data:{editionId:10,q:"1202"}});
+  assert.deepEqual(bibResults.results.map(r => [r.id, r.division]), [[1, "Women"]]);
   const before = await snapshot();
   const index = await api.listPublicResultEditions({ data: {} });
   assert.equal(index.editions.length, 1, "Future races must not appear");
@@ -296,12 +300,23 @@ try {
   assert.equal(JSON.parse(injection.scripts[0].children).mainEntity.itemListElement[0].item.name, "</script><script>alert(1)</script>");
 
   // Exercise the real route loader and head contract, including empty-page handling.
+  const testRouter = { Link: ({ children, to }) => createElement("a", { href: to }, children) };
+  const roadBoard = loadTypeScript("src/components/races/RoadResultsBoard.tsx", {
+    "react/jsx-runtime": jsxRuntime, "@tanstack/react-router": testRouter,
+    "@/components/athletes/CountryFlag": { CountryFlag: ({country}) => country },
+    "@/lib/athrecs/country-flags": loadTypeScript("src/lib/athrecs/country-flags.ts"),
+  });
+  const recordedBoard = loadTypeScript("src/components/races/RecordedRoadResults.tsx", {
+    "react/jsx-runtime": jsxRuntime, "@tanstack/react-router": testRouter,
+    "./RoadResultsBoard": roadBoard, "@/lib/athrecs/format": format,
+  });
   const route = loadTypeScript("src/routes/results/$editionId.tsx", {
     "react/jsx-runtime": jsxRuntime,
     "@/lib/athrecs/parkrun-timing": parkrun,
     "@tanstack/react-router": { Link: ({children,to}) => createElement("a",{href:to},children), createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) },
     "lucide-react": { ArrowLeft: () => null, SearchCheck: () => null }, "@/components/ui/badge": {}, "@/components/ui/button": { Button: ({children}) => createElement("button",null,children) },
     "@/components/athletes/CountryFlag": { CountryFlag: () => null },
+    "@/components/races/RecordedRoadResults": recordedBoard,
     "@/components/races/EventBadges": { SportBadge: () => null, DistanceBadge: () => null },
     "@/lib/athrecs/public-results-api": api,
     "@/lib/athrecs/public-results-search": search,
@@ -341,6 +356,15 @@ try {
   assert.match((await db.query("select source_url from results where id=910001")).rows[0].source_url, /raceresults/);
   await db.exec("delete from results where id=910001; delete from editions where id=71609612");
   const parkrunEdition = { ...resultPage1.edition, sport: "Parkrun", event_name: "Synthetic parkrun", distance_code: "5K" };
+  route.useLoaderData = () => ({ ...resultPage1, edition: parkrunEdition });
+  for (const distance_code of ["Half", "Marathon"]) {
+    route.useLoaderData = () => ({
+      ...resultPage1, edition: { ...resultPage1.edition, distance_code },
+      results: [{ ...resultPage1.results[0], division: "Women" }, { ...resultPage1.results[1], division: "Men" }, { ...resultPage1.results[2], division: "Nonbinary" }],
+    });
+    const panels = load(renderToStaticMarkup(route.component()))("details[open] > summary");
+    assert.deepEqual(panels.map((_, element) => element.children[0].data).get(), ["Men", "Women", "Nonbinary"]);
+  }
   route.useLoaderData = () => ({ ...resultPage1, edition: parkrunEdition });
   const parkrunTable = load(renderToStaticMarkup(route.component()));
   const labels = parkrunTable("th").toArray().map((cell) => parkrunTable(cell).text());

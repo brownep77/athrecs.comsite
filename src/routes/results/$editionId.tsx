@@ -1,11 +1,12 @@
 import { isParkrunResult, PARKRUN_TIMING_EXPLANATION } from "@/lib/athrecs/parkrun-timing";
+import { RecordedRoadResults } from "@/components/races/RecordedRoadResults";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, SearchCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
-import { normalizeResultsSearch, parseResultsEditionId } from "@/lib/athrecs/public-results-search";
+import { normalizeResultsSearch, parseResultsEditionId, usesRoadStandings } from "@/lib/athrecs/public-results-search";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { publicResultsHead } from "@/lib/athrecs/public-results-seo";
 import { resultEditionLabel, resultSlug } from "@/lib/athrecs/result-slug";
@@ -54,6 +55,7 @@ export const Route = createFileRoute("/results/$editionId")({
 function RaceResultsPage() {
   const { edition, results, hasMore, timingCredit } = Route.useLoaderData();
   const parkrun = isParkrunResult({ sport: edition.sport, eventName: edition.event_name });
+  const roadStandings = usesRoadStandings(edition);
   const columns = ["Pos", "Athlete", "Nationality", "Profile club", "Category", ...(parkrun ? ["Finish time"] : ["Performance", "Chip", "Gun"]), ""];
   const search = normalizeResultsSearch(Route.useSearch());
   const params = { editionId: resultSlug(edition) };
@@ -90,14 +92,14 @@ function RaceResultsPage() {
       </header>
 
       <form action={`/results/${resultSlug(edition)}`} method="get" className="flex flex-wrap items-end gap-3 rounded-xl border border-border bg-surface p-4">
-        <label className="min-w-0 flex-1 basis-64 space-y-1.5 text-xs font-medium text-muted">Athlete, profile club or category
+        <label className="min-w-0 flex-1 basis-64 space-y-1.5 text-xs font-medium text-muted">Athlete, bib, club or category
           <input name="q" defaultValue={search.q} maxLength={120} placeholder="Search these results" className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg focus:outline-none focus:ring-2 focus:ring-accent/40" />
         </label>
         <Button type="submit" className="h-11">Search</Button>
         {search.q ? <a href={`/results/${resultSlug(edition)}`} className="py-3 text-sm text-accent underline">Clear</a> : null}
       </form>
 
-      <section aria-label="Recorded race results" className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
+      {roadStandings ? <section aria-label="Recorded race results" className="space-y-3"><h2 className="font-display text-xl font-semibold">Recorded performances</h2><RecordedRoadResults results={results} caption={edition.event_name}/></section> : <section aria-label="Recorded race results" className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
         <h2 className="px-3 py-3 font-display text-lg font-semibold">Recorded performances</h2>
         <div className="overflow-x-auto" role="region" aria-label="Race results table; scroll horizontally on small screens" tabIndex={0}>
           <table className="w-full min-w-[58rem] text-left text-sm">
@@ -134,7 +136,7 @@ function RaceResultsPage() {
             </tbody>
           </table>
         </div>
-      </section>
+      </section>}
       <nav aria-label="Race result pages" className="flex items-center justify-between gap-3">
         {search.page > 1 ? <Button asChild variant="secondary"><Link to="/results/$editionId" params={params} search={{ q: search.q || undefined, page: search.page > 2 ? search.page - 1 : undefined }}>Previous</Link></Button> : <span />}
         <span className="text-xs text-muted">Page {search.page}</span>

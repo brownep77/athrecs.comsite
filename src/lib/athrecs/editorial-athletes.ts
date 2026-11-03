@@ -4,6 +4,7 @@ import type { EditorialArticle } from "./editorial";
 export function editorialAthleteNames(article: EditorialArticle): string[] {
   const tableNames =
     article.sections?.flatMap((section) => {
+      if (section.standings) return section.standings.rows.map((row) => row.name);
       if (!section.table) return [];
       const columns = section.table.headings.flatMap((heading, index) =>
         /^(athlete|runner|name|men|women)$/i.test(heading.trim()) ? [index] : [],
