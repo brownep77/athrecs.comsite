@@ -22,5 +22,10 @@ export const Route = createFileRoute("/running/superhalfs")({
   },
   loader: () => getSuperHalfsRaces(),
   head: ({ loaderData }) => superhalfsHead(loaderData ?? []),
-  component: () => <SuperHalfsPage races={Route.useLoaderData()} />,
+  component: SuperHalfsRoute,
 });
+
+function SuperHalfsRoute() {
+  const races = Route.useLoaderData();
+  return <SuperHalfsPage races={races} />;
+}
