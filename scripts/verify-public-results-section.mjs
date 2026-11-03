@@ -40,7 +40,9 @@ const { publicResultsHead } = loadTypeScript("src/lib/athrecs/public-results-seo
   "./parkrun-timing.ts": parkrun,
   "./format": format,
   "./result-slug": loadTypeScript("src/lib/athrecs/result-slug.ts"),
-  "./seo": loadTypeScript("src/lib/athrecs/seo.ts"),
+  "./seo": loadTypeScript("src/lib/athrecs/seo.ts", {
+    "./event-images.ts": loadTypeScript("src/lib/athrecs/event-images.ts"),
+  }),
 });
 assert.equal(search.normalizeResultsSearch({ category: "trail-running" }).category, "trail-running");
 assert.equal(search.normalizeResultsSearch({ category: "all-running" }).category, "all-running");
