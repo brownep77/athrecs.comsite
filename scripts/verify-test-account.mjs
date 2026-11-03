@@ -5,18 +5,24 @@ import { randomUUID, generateKeyPairSync } from "node:crypto";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
+import {
+  approveSyntheticClaim,
+  createAthleteRpc,
+  createSyntheticStaffSession,
+} from "./fixtures/ownership-review.mjs";
 
 // Real auth endpoints and profile RPCs; only email delivery is intercepted.
 // Never send a test email or use a configured external database.
 const delivery = true;
 process.env.DATABASE_URL = "";
 process.env.DATABASE_URL_UNPOOLED = "";
+process.env.POSTGRES_URL = "";
 process.env.POSTGRES_URL_NON_POOLING = "";
 process.env.VITE_AUTH_ENABLED = "true";
 process.env.RESEND_API_KEY = delivery ? "test-resend-key" : "";
 process.env.AUTH_EMAIL_FROM = "ATHRECS Test <accounts@example.test>";
 process.env.ATHRECS_CLAIMS_EMAILS = "";
-process.env.ATHRECS_STAFF_EMAILS = "";
+process.env.ATHRECS_STAFF_EMAILS = "fictional-reviewer@example.test";
 const origin = "http://127.0.0.1:18471";
 process.env.BETTER_AUTH_URL = origin;
 process.env.BETTER_AUTH_SECRET = "test-only-authentication-secret-at-least-32-characters";
@@ -161,7 +167,29 @@ try {
     declarationAccepted: true,
     review,
   });
-  assert.equal(claim.status, "approved");
+  assert.equal(claim.status, "pending");
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=${aid}`).length,
+    0,
+    "A fictional test declaration still requires independent ownership review",
+  );
+  assert.equal(
+    (await sql`select athlete_management_reviewed(${aid},${user.user.id}) as reviewed`)[0].reviewed,
+    false,
+  );
+  const reviewer = await createSyntheticStaffSession(
+    origin,
+    sql,
+    "fictional-reviewer@example.test",
+  );
+  // The reviewer represents pre-existing staff, outside this month's signup-statistics fixture.
+  await sql`update "user" set "createdAt"='2000-01-01' where id=${reviewer.user.id}`;
+  await approveSyntheticClaim(
+    createAthleteRpc(origin, reviewer.token),
+    claim.claimId,
+    reviewer.user.id,
+    sql,
+  );
   await call("result-claims-api", "submitResultClaim", {
     resultId: candidate.resultId,
     declarationAccepted: true,

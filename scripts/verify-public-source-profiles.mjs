@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { seedReviewedLink } from "./fixtures/reviewed-link.mjs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
@@ -493,6 +494,30 @@ try {
     values(${a.id},'Abbott World Marathon Majors',${wmmId},'https://example.test/private-evidence',now(),false,array[]::integer[],array[]::integer[],${JSON.stringify(sharedPerformances)}::jsonb,now())`;
   await sql`insert into network_audit_log(action,entity_type,entity_id,after_value)
     values('athlete.history_admin_published','athlete',${"Abbott World Marathon Majors:" + wmmId},${JSON.stringify({ athleteId: a.id })}::jsonb)`;
+  const unreviewedShare = await read();
+  assert.equal(
+    unreviewedShare.displayName,
+    "Synthetic DUV Public",
+    "An unreviewed account link cannot replace independently published source identity",
+  );
+  assert(!JSON.stringify(unreviewedShare).includes("Owner-approved shared biography"));
+  assert.equal(
+    await rpc("athrecs/athlete-profile-share-api", "getPublicSharedProfilePreview", {
+      slug: "synthetic-owner-share",
+    }),
+    null,
+    "A historical enabled share remains unavailable until ownership review",
+  );
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
+    values('synthetic-duv-reviewer','Synthetic Independent Reviewer',
+      'duv-reviewer@example.test',true,now(),now())`;
+  await seedReviewedLink(sql, {
+    athleteId: a.id,
+    userId: "synthetic-duv-owner",
+    email: "duv-owner@example.test",
+    reviewerId: "synthetic-duv-reviewer",
+    reviewerEmail: "duv-reviewer@example.test",
+  });
   const queries = [];
   const originalQuery = db.query.bind(db);
   db.query = (text, ...args) => {

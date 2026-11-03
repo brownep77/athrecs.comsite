@@ -3,18 +3,29 @@ import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { createServer } from "vite";
+import { signupDetails } from "./fixtures/signup-details.mjs";
+import {
+  approveSyntheticClaim,
+  createAthleteRpc,
+  createSyntheticStaffSession,
+} from "./fixtures/ownership-review.mjs";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 
 process.env.DATABASE_URL = "";
 process.env.DATABASE_URL_UNPOOLED = "";
+process.env.POSTGRES_URL = "";
 process.env.POSTGRES_URL_NON_POOLING = "";
 process.env.RESEND_API_KEY = "";
-process.env.VITE_AUTH_ENABLED = "false";
+process.env.VITE_AUTH_ENABLED = "true";
+process.env.ATHRECS_STAFF_EMAILS = "account-panel-reviewer@example.test";
+process.env.ATHRECS_CLAIMS_EMAILS = "";
+process.env.BETTER_AUTH_SECRET = "account-panel-test-only-secret-at-least-32-characters";
 const runrecs = process.argv.includes("--runrecs");
 process.env.VITE_SITE_BRAND = runrecs ? "runrecs" : "athrecs";
 const origin = "http://127.0.0.1:18227";
 process.env.BETTER_AUTH_URL = origin;
+process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
 const server = await createServer({ server: { host: "127.0.0.1", port: 18227, strictPort: true } });
 let browser;
 let database;
@@ -22,7 +33,9 @@ let page;
 await mkdir("artifacts", { recursive: true });
 try {
   await server.listen();
-  database = await (await server.ssrLoadModule("/src/lib/db.ts")).getPglite();
+  const db = await server.ssrLoadModule("/src/lib/db.ts");
+  database = await db.getPglite();
+  const sql = await db.getSql();
   browser = await chromium.launch({
     executablePath: process.env.ATHRECS_CHROMIUM_EXECUTABLE || undefined,
     headless: true,
@@ -31,6 +44,22 @@ try {
   page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  const email = "account-panel-runner@example.test";
+  const password = "Synthetic-account-panel-password-123!";
+  const registered = await page.request.post(`${origin}/api/auth/sign-up/email`, {
+    headers: { origin },
+    data: { ...signupDetails("Sidebar Test Runner"), email, password },
+  });
+  assert.equal(registered.status(), 200, await registered.text());
+  const { user } = await registered.json();
+  // This account-panel fixture starts after mailbox verification. Sign-in and
+  // every subsequent account/claim operation use the real session middleware.
+  await sql`update "user" set "emailVerified"=true where id=${user.id}`;
+  const signedIn = await page.request.post(`${origin}/api/auth/sign-in/email`, {
+    headers: { origin },
+    data: { email, password },
+  });
+  assert.equal(signedIn.status(), 200, await signedIn.text());
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle", timeout: 120000 });
   if (runrecs) {
     await page.getByRole("heading", { name: "Identity and Entry Passport", exact: true }).waitFor();
@@ -68,7 +97,10 @@ try {
     assert.deepEqual(labels.slice(0, 2), ["Find and claim results", "My races"]);
     assert.equal(labels.length, 22);
     assert.equal(labels.at(-1), "My race calendar");
-    assert.equal(await nav.getByRole("link", { name: "My race calendar", exact: true }).getAttribute("href"), "/my-race-calendar");
+    assert.equal(
+      await nav.getByRole("link", { name: "My race calendar", exact: true }).getAttribute("href"),
+      "/my-race-calendar",
+    );
     await go("Personal details");
     await page.getByLabel("Full name", { exact: false }).fill("Sidebar Test Runner");
     await page.getByLabel("Display name", { exact: false }).fill("Sidebar Test Runner");
@@ -84,11 +116,15 @@ try {
       await page.getByLabel("Full name", { exact: false }).inputValue(),
       "Sidebar Test Runner",
     );
+    await go("Privacy & consent");
+    await page.getByLabel("Required privacy acknowledgement", { exact: false }).check();
+    await go("Personal details");
     await page.getByRole("button", { name: "Save Athlete Account", exact: true }).click();
     await page.getByText("Your Athlete Account has been saved.", { exact: true }).waitFor();
     const saved = (
       await database.query(
-        "select full_name, city from athlete_private_profiles where user_id = 'dev-user'",
+        "select full_name, city from athlete_private_profiles where user_id = $1",
+        [user.id],
       )
     ).rows[0];
     assert.deepEqual(saved, { full_name: "Sidebar Test Runner", city: "Test City" });
@@ -115,7 +151,6 @@ try {
       insert into athletes (id, slug, display_name, profile_visibility) values (990001, 'sidebar-synthetic-runner', 'Sidebar Test Runner', 'private');
       insert into results (id, edition_id, athlete_id, finish_time_seconds) values (990001, 990001, 990001, 2400);
     `);
-    const sql = await (await server.ssrLoadModule("/src/lib/db.ts")).getSql();
     const sourceUrl = "https://example.test/private-combined-evidence";
     await sql`update results set source_url=${sourceUrl} where id=990001`;
     const history = [
@@ -185,7 +220,7 @@ try {
       .waitFor();
     assert.equal(
       (
-        await sql`select count(*)::int as n from result_archive_match_requests where user_id='dev-user'`
+        await sql`select count(*)::int as n from result_archive_match_requests where user_id=${user.id}`
       )[0].n,
       0,
     );
@@ -212,15 +247,19 @@ try {
     const dialog = page.getByRole("dialog");
     await dialog.getByText("History Synthetic 5K", { exact: true }).waitFor();
     await dialog.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
-    await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
-    assert.deepEqual(
-      (await database.query("select status from result_claims where result_id=990001")).rows,
-      [{ status: "approved" }],
-    );
+    await page
+      .getByRole("heading", { name: "Profile and results confirmation saved", exact: true })
+      .waitFor();
+    const [claim] = await sql`select id,status from result_claims where result_id=990001`;
+    assert.equal(claim.status, "pending");
     assert.equal(
       (await database.query("select athlete_id from athlete_account_links where athlete_id=990001"))
         .rows.length,
-      1,
+      0,
+    );
+    assert.equal(
+      (await sql`select athlete_management_reviewed(990001,${user.id}) as reviewed`)[0].reviewed,
+      false,
     );
     await dialog.getByRole("button", { name: "Close", exact: true }).click();
     await go("Personal details");
@@ -228,7 +267,26 @@ try {
       await page.getByLabel("Display name", { exact: false }).inputValue(),
       "Unsaved sidebar draft",
     );
-    // Use the ownership created by the real batch confirmation for downstream controls.
+    const reviewer = await createSyntheticStaffSession(
+      origin,
+      sql,
+      "account-panel-reviewer@example.test",
+    );
+    await approveSyntheticClaim(
+      createAthleteRpc(origin, reviewer.token),
+      claim.id,
+      reviewer.user.id,
+      sql,
+    );
+    assert.equal(
+      (await sql`select athlete_management_reviewed(990001,${user.id}) as reviewed`)[0].reviewed,
+      true,
+    );
+    assert.equal(
+      (await sql`select athlete_id from athlete_account_links where athlete_id=990001`).length,
+      1,
+    );
+    // Downstream controls use ownership created by the separate staff review.
     await page.reload({ waitUntil: "networkidle" });
     await go("My races");
     await page.getByRole("searchbox", { name: "Search your results" }).fill("Sidebar Synthetic");

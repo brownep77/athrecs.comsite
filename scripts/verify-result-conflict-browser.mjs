@@ -23,8 +23,8 @@ export function Link({to,search,params,children,...props}){const query=new URLSe
 );
 const claims = file(
   "claims.js",
-  `const base={athleteId:1,athleteName:'Avery Test Athlete',athleteSlug:'synthetic-avery',eventName:'Synthetic Race',eventSlug:'synthetic-race',sport:'Running',eventDate:'2025-05-04',distanceCode:'10K',finishTimeSeconds:2400,overallPlace:null,bib:'42',category:null,sourceUrl:null,evidenceText:'',evidenceUrl:null,evidenceUrl2:null,evidenceUrl3:null,verificationMethod:'other',staffNote:null,submittedAt:'2026-10-05T08:00:00Z',reviewedAt:null};
-const rows=[{...base,claimId:1,resultId:1,status:'approved',claimantEmail:'one@example.test',existingOwnerEmail:'one@example.test',competingClaimCount:1,conflictReason:null},{...base,claimId:2,resultId:2,status:'pending',claimantEmail:'two@example.test',existingOwnerEmail:'one@example.test',competingClaimCount:1,conflictReason:'This athlete profile is already linked to another account. Staff identity checks are required.'},{...base,claimId:3,resultId:3,athleteName:'Jordan Test Athlete',status:'pending',claimantEmail:'three@example.test',existingOwnerEmail:null,competingClaimCount:0,conflictReason:'This claim was previously reviewed by staff.'}];
+  `const base={athleteId:1,athleteName:'Avery Test Athlete',athleteSlug:'synthetic-avery',eventName:'Synthetic Race',eventSlug:'synthetic-race',sport:'Running',eventDate:'2025-05-04',distanceCode:'10K',finishTimeSeconds:2400,overallPlace:null,bib:'42',category:null,sourceUrl:null,evidenceText:'',evidenceUrl:null,evidenceUrl2:null,evidenceUrl3:null,verificationMethod:'other',staffNote:null,submittedAt:'2026-10-05T08:00:00Z',reviewedAt:null,managementReviewed:false};
+const rows=[{...base,claimId:1,resultId:1,status:'approved',managementReviewed:true,confirmationMethod:'staff',confirmedAt:'2026-10-05T09:00:00Z',reviewedAt:'2026-10-05T09:00:00Z',claimantEmail:'one@example.test',existingOwnerEmail:'one@example.test',competingClaimCount:1,conflictReason:null},{...base,claimId:2,resultId:2,status:'pending',claimantEmail:'two@example.test',existingOwnerEmail:'one@example.test',competingClaimCount:1,conflictReason:'This athlete profile is already linked to another account. Staff identity checks are required.'},{...base,claimId:3,resultId:3,athleteName:'Jordan Test Athlete',status:'pending',claimantEmail:'three@example.test',existingOwnerEmail:null,competingClaimCount:0,conflictReason:'This claim was previously reviewed by staff.'}];
 export async function listStaffResultClaims({data}){return rows.filter(r=>data.status==='all'||r.status===data.status)}
 export async function reviewResultClaim(){throw Error('No ownership changes in this synthetic fixture')}
 export async function revokeAthleteOwnership(){throw Error('No ownership changes in this synthetic fixture')}`,
@@ -85,7 +85,7 @@ try {
   await uncontested.getByLabel("Staff note").fill("Synthetic independent identity check recorded.");
   assert(await uncontested.getByRole("button", { name: "Approve", exact: true }).isEnabled());
   await page
-    .getByText("record the evidence resolving the issue before approval", { exact: false })
+    .getByText("record the evidence before approval", { exact: false })
     .first()
     .waitFor();
   await page

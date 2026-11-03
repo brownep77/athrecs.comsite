@@ -4,23 +4,39 @@ import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "vite";
 import { createRequire } from "node:module";
+import {
+  approveSyntheticClaim,
+  createAthleteRpc,
+  createSyntheticStaffSession,
+} from "./fixtures/ownership-review.mjs";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 
-for (const key of ["DATABASE_URL", "DATABASE_URL_UNPOOLED", "POSTGRES_URL_NON_POOLING"])
+for (const key of [
+  "DATABASE_URL",
+  "DATABASE_URL_UNPOOLED",
+  "POSTGRES_URL",
+  "POSTGRES_URL_NON_POOLING",
+])
   process.env[key] = "";
 process.env.VITE_AUTH_ENABLED = "true";
 process.env.RESEND_API_KEY = "test-key-not-used-for-delivery";
 process.env.BETTER_AUTH_SECRET = "recruitment-test-only-secret-at-least-32-characters";
+process.env.ATHRECS_STAFF_EMAILS = "invitation-reviewer@example.test";
+process.env.ATHRECS_CLAIMS_EMAILS = "invitation-reviewer@example.test";
 const origin = "http://127.0.0.1:18243";
 process.env.BETTER_AUTH_URL = origin;
+process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
 const sent = [];
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
   const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
   if (url === "https://api.resend.com/emails") {
     const email = JSON.parse(init.body);
-    assert(email.to.every((address) => address === "onboarding-runner@example.test"));
+    assert(
+      email.to.every((address) => address.endsWith("@example.test")),
+      "Only synthetic recipients",
+    );
     sent.push(email);
     return Response.json({ id: `fixture-mail-${sent.length}` });
   }
@@ -184,21 +200,44 @@ try {
     0,
   );
   await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
-  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
+  await page
+    .getByRole("heading", { name: "Profile and results confirmation saved", exact: true })
+    .waitFor();
   const claims =
-    await sql`select status,claimant_user_id from result_claims where result_id=993401`;
-  assert.deepEqual(claims, [{ status: "approved", claimant_user_id: user.id }]);
+    await sql`select id,status,claimant_user_id from result_claims where result_id=993401`;
+  assert.equal(claims.length, 1);
+  assert.equal(claims[0].status, "pending");
+  assert.equal(claims[0].claimant_user_id, user.id);
   assert.equal(
     (await sql`select user_id from athlete_claim_invitations where id=${invitation.id}`)[0].user_id,
     user.id,
   );
   assert.equal(
     (await sql`select athlete_id from athlete_account_links where athlete_id=993401`).length,
-    1,
-    "Matching invitation recipient self-confirms the existing profile",
+    0,
+    "An invitation and verified mailbox cannot grant athlete ownership",
+  );
+  assert.equal(
+    (await sql`select athlete_management_reviewed(993401,${user.id}) as reviewed`)[0].reviewed,
+    false,
+  );
+  const reviewer = await createSyntheticStaffSession(
+    origin,
+    sql,
+    "invitation-reviewer@example.test",
+  );
+  await approveSyntheticClaim(
+    createAthleteRpc(origin, reviewer.token),
+    claims[0].id,
+    reviewer.user.id,
+    sql,
+  );
+  assert.equal(
+    (await sql`select athlete_management_reviewed(993401,${user.id}) as reviewed`)[0].reviewed,
+    true,
   );
   await page.reload({ waitUntil: "networkidle" });
-  await page.getByText(/Claim complete — your profile is linked/).waitFor();
+  await page.getByText(/Claim complete — ownership reviewed/).waitFor();
   assert.equal((await sql`select id from result_claims where result_id=993401`).length, 1);
   assert.equal(
     (await sql`select user_id from athlete_account_links where athlete_id=993401`).length,
@@ -218,7 +257,7 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: real browser private invitation → required-details email-code signup → existing-account login → exact selected profile → explicit self-confirmed claim without duplicates or publication, with mobile/desktop layout. Synthetic data only.",
+    "PASS: real browser private invitation → required-details email-code signup → existing-account login → pending claim without ownership → independent staff review, without duplicates or publication, with mobile/desktop layout. Synthetic data only.",
   );
 } catch (error) {
   await mkdir("artifacts", { recursive: true });
