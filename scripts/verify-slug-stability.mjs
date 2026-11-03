@@ -49,12 +49,20 @@ const checks = [
     patterns: ['.slice(0, 80)\n    .replace(/-+$/g, "");'],
   },
   {
-    path: "src/routes/races/index.tsx",
+    path: "src/components/races/fixture-directory-search.ts",
     patterns: [
       "county?: string",
       "postcode?: string",
       "dateFrom?: string",
       "page?: number",
+      "export function parseFixtureDirectorySearch",
+      "export function searchFromFilters",
+    ],
+  },
+  {
+    path: "src/routes/races/index.tsx",
+    patterns: [
+      "parseFixtureDirectorySearch(search)",
       "searchFromFilters",
       'to: "/races"',
       'rel: "canonical"',

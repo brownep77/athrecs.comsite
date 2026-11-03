@@ -57,14 +57,16 @@ assert(
 );
 assert(filters.includes('sport === "Walking"'), "Walking needs shared filters");
 
-const [raceRoute, countryRaceRoute, athleticsFilters, runRecsFilters] = await Promise.all([
+const [raceRoute, fixtureSearch, countryRaceRoute, athleticsFilters, runRecsFilters] = await Promise.all([
   readFile("src/routes/races/index.tsx", "utf8"),
+  readFile("src/components/races/fixture-directory-search.ts", "utf8"),
   readFile("src/routes/$language/$country/races/index.tsx", "utf8"),
   readFile("src/athletics/filters.ts", "utf8"),
   readFile("src/runrecs/filters.ts", "utf8"),
 ]);
 
-for (const routeSource of [raceRoute, countryRaceRoute]) {
+assert(raceRoute.includes("parseFixtureDirectorySearch(search)"), "The race directory must validate with the specialist-aware shared filter");
+for (const routeSource of [fixtureSearch, countryRaceRoute]) {
   assert(
     routeSource.includes("SPORTS as PUBLIC_SPORTS") && routeSource.includes("PUBLIC_SPORTS.filter"),
     "Public race routes must derive their sport allow-list from the active specialist facade",
