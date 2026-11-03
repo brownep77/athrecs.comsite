@@ -28,7 +28,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
     coverageLevels: ["national", "local"],
     athleteNames: ["Ciara Mageean"],
     athleteLinks: {},
-    seoTitle: "Remembering Ciara Mageean: European Champion and Irish Athletics Legacy | AthRecs",
+    seoTitle: "Ciara Mageean: European champion, records and legacy",
     description:
       "Celebrating Ciara Mageean’s European 1500m gold, championship medals, Irish records and inspiration to young athletes, with sympathy for her family and friends.",
     author: "AthRecs Editorial",
@@ -147,7 +147,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
     coverageLevels: ["world", "continent", "national"],
     athleteNames: [],
     athleteLinks: {},
-    seoTitle: "Sydney ballot day: the email that could start your 2027 marathon story | AthRecs",
+    seoTitle: "Sydney Marathon 2027 ballot results and next steps",
     description:
       "Sydney Marathon applicants find out today whether their next big finish line will be the Opera House. Here is what the organiser says to expect.",
     author: "AthRecs Editorial",
@@ -228,7 +228,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
       "Matthew Clark",
     ],
     athleteLinks: {},
-    seoTitle: "Jo Andrews and James Preston win East Coast 10K 2026 | AthRecs",
+    seoTitle: "Jo Andrews and James Preston win East Coast 10K 2026",
     description:
       "Jo Andrews led an all-masters women's podium in Great Yarmouth, while James Preston won the men's race and four tenths separated second from third.",
     author: "AthRecs Editorial",
@@ -311,7 +311,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
       "Hellen Obiri",
     ],
     athleteLinks: {},
-    seoTitle: "One name, two champions: meet the Sheila Chepkiruis winning on the roads | AthRecs",
+    seoTitle: "Two Sheila Chepkiruis: Valencia and New York wins in 2026",
     description:
       "Valencia and New York had winners with the same name seven days apart. Their achievements belong to two different Kenyan athletes.",
     author: "AthRecs Editorial",
@@ -415,7 +415,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
       "Juliet Hodder",
     ],
     athleteLinks: {},
-    seoTitle: "Three runners, one first: Herne Hill women claim national relay gold | AthRecs",
+    seoTitle: "Herne Hill women win National Cross Country Relays 2026",
     description:
       "Lucy Jones, Sophie Tooley and Katie Snowden combined for Herne Hill Harriers' first senior women's English National Cross Country Relay title in Mansfield.",
     author: "AthRecs Editorial",
@@ -509,8 +509,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
       "Stefanie Oswald",
     ],
     athleteLinks: {},
-    seoTitle:
-      "Two seconds in Hamburg: Noble and Wietrzyk start HYROX Elite Series with gold | AthRecs",
+    seoTitle: "HYROX Hamburg 2026: Sean Noble and Joanna Wietrzyk win",
     description:
       "Sean Noble edged Luke Greer in the men's race, while Joanna Wietrzyk led the women's podium as the new Elite Series began in Hamburg.",
     author: "AthRecs Editorial",
@@ -613,7 +612,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
       "Sullivan Middaugh",
     ],
     athleteLinks: {},
-    seoTitle: "First gold, fresh podiums: Pintanel and Pearson shine in Chile | AthRecs",
+    seoTitle: "San Pedro de la Paz 2026: Pintanel and Pearson win",
     description:
       "Marta Pintanel earned her first World Cup win, Morgan Pearson returned to the top step, and San Pedro de la Paz gave three athletes their first World Cup podiums.",
     author: "AthRecs Editorial",
@@ -716,7 +715,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
       "Dylan McCullough",
     ],
     athleteLinks: {},
-    seoTitle: "Dakar 2026 Youth Olympic triathlon preview: Senegal's home hopes | AthRecs",
+    seoTitle: "Dakar 2026 Youth Olympic triathlon: Saly preview",
     description:
       "Meet Senegal's Ousmane Thiaw and Coura Sall and the continental champions preparing for the Dakar 2026 Youth Olympic triathlons in Saly on 5–6 November.",
     author: "AthRecs Editorial",
