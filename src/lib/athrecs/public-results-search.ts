@@ -42,3 +42,12 @@ export function normalizeResultEditionSearch(input: unknown): ResultsSearch {
 
 // Accept legacy numeric URLs as well as descriptive result slugs.
 export { resultEditionId as parseResultsEditionId } from "./result-slug.ts";
+
+export function usesRoadStandings(edition: { sport: string; distance_code: string }): boolean {
+  return (
+    ["Running", "Athletics"].includes(edition.sport) &&
+    /^(marathon|half|half[ -]marathon|42\.195\s?km|21\.0975\s?km)$/i.test(
+      edition.distance_code.trim(),
+    )
+  );
+}

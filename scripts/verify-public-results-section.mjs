@@ -289,6 +289,24 @@ try {
   assert(resultPage1.results.some((row) => row.id === 1100 && row.division === "women"),
     "The first results page includes women even when men occupy the first 100 overall placings");
 
+  // The report field and road archive paginate each published division independently.
+  await db.exec("begin; update editions set distance_code='Half' where id=10");
+  try {
+    await db.exec("update results set result_details=result_details || '{\"sourceGender\":\"M\"}' where id=1");
+    await db.exec("update results set result_details='{}', bib='4002', category='W40-44' where id=1103");
+    await db.exec("update results set result_details='{}', bib='4003', category='NB40' where id=1104");
+    const road = await api.getPublicRaceResults({ data: { editionId: 10 } });
+    const roadNext = await api.getPublicRaceResults({ data: { editionId: 10, page: 2 } });
+    assert(road.results.length > 100 && road.hasMore);
+    assert.equal(new Set([...road.results, ...roadNext.results].map((row) => row.id)).size, 108);
+    for (const [bib, division] of [["4002", "women"], ["4003", "nonbinary"]]) {
+      const match = await api.getPublicRaceResults({ data: { editionId: 10, q: bib } });
+      assert.deepEqual(match.results.map((row) => row.division), [division]);
+    }
+  } finally {
+    await db.exec("rollback");
+  }
+
   const head1 = publicResultsHead(resultPage1.edition, resultPage1.results, { q: "", page: 1 });
   const head2 = publicResultsHead(resultPage2.edition, resultPage2.results, { q: "", page: 2 });
   assert.equal(head2.links[0].href, head1.links[0].href + "?page=2", "Later result pages must have their own canonical URL");

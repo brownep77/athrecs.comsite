@@ -7,6 +7,8 @@ import {
   type EditorialArticle,
 } from "@/lib/athrecs/editorial";
 
+import { ReportStandings } from "./ReportStandings";
+
 function ArticleText({ text, links }: { text: string; links?: Record<string, string> }) {
   if (!links) return text;
   const profiles = new Map(Object.entries(links).filter(([name, slug]) => name.trim() && slug));
@@ -39,7 +41,13 @@ function ArticleText({ text, links }: { text: string; links?: Record<string, str
 
 export function EditorialArticlePage({ article }: { article: EditorialArticle }) {
   return (
-    <article className="mx-auto max-w-3xl space-y-6">
+    <article
+      className={
+        article.sections?.some((section) => section.standings)
+          ? "mx-auto max-w-6xl space-y-6 [&>:not([data-standings])]:mx-auto [&>:not([data-standings])]:max-w-3xl"
+          : "mx-auto max-w-3xl space-y-6"
+      }
+    >
       <Link
         to={article.kind === "race-reports" ? "/race-reports" : "/news"}
         search={{}}
@@ -146,6 +154,7 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
       {article.sections?.map((section) => (
         <section
           key={section.id}
+          data-standings={section.standings ? "" : undefined}
           id={section.id}
           className="scroll-mt-24 space-y-4 text-base leading-8"
           aria-labelledby={`${section.id}-heading`}
@@ -161,6 +170,13 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
               <ArticleText text={paragraph} links={article.athleteLinks} />
             </p>
           ))}
+          {section.standings && (
+            <ReportStandings
+              key={article.slug}
+              standings={section.standings}
+              links={article.athleteLinks}
+            />
+          )}
           {section.table ? (
             <div
               className="overflow-x-auto rounded-xl border border-border focus-visible:outline-2 focus-visible:outline-accent"

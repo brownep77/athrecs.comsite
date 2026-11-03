@@ -6,7 +6,7 @@ import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
 import { publicResultLabel, resultCredit } from "./result-credit";
-import { normalizeResultEditionSearch, normalizeResultsSearch, parseResultsEditionId } from "./public-results-search";
+import { normalizeResultEditionSearch, normalizeResultsSearch, parseResultsEditionId, usesRoadStandings } from "./public-results-search";
 import { ATHLETICS_RUNNING_SURFACES, getSportPage, RUNNING_FIXTURE_SCOPE } from "./sport-pages";
 
 export type PublicResultEdition = {
@@ -27,7 +27,7 @@ export type PublicRaceResult = {
   athlete_slug: string | null;
   nationality: string | null;
   profile_club: string | null;
-  division: "men" | "women" | "other";
+  division: "men" | "women" | "nonbinary" | "other";
   race_club: string | null;
   footwear: string | null;
   overall_place: number | null;
@@ -155,11 +155,12 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     if (!edition) return null;
     const q = like(data.q);
     const offset = (data.page - 1) * RESULT_PAGE_SIZE;
+    const perDivision = usesRoadStandings(edition);
     const rows = await sql<PublicRaceResult & { source_url: string | null; result_source: string | null; division_row: number }>`
       select ranked.* from (
         select visible.*, row_number() over (
           partition by division order by disqualified asc, (lower(trim(status)) in ('finished', 'fin')) desc,
-          coalesce(overall_place, gender_place) asc nulls last, gun_time_seconds asc nulls last,
+          coalesce(gender_place, overall_place) asc nulls last, gun_time_seconds asc nulls last,
           case when reported_place ~ '^[0-9]{1,8}$' then reported_place::integer end asc nulls last,
           finish_time_seconds asc nulls last, id
         ) as division_row
@@ -177,6 +178,12 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
             case
               when lower(trim(r.result_details->>'sourceGender')) in ('m','male','men') then 'men'
               when lower(trim(r.result_details->>'sourceGender')) in ('f','w','female','women') then 'women'
+              when lower(trim(r.result_details->>'sourceGender')) in ('x','nb','nonbinary','non-binary') then 'nonbinary'
+              when nullif(trim(r.result_details->>'sourceGender'),'') is null then case
+                when r.category ~* '^(M|Men)[ -]?[0-9]' then 'men'
+                when r.category ~* '^(W|F|Women)[ -]?[0-9]' then 'women'
+                when r.category ~* '^(NB|Nonbinary)[ -]?[0-9]' then 'nonbinary'
+                else 'other' end
               else 'other' end as division,
             r.result_details->>'sourceClub' as race_club,
             case when r.result_details->>'verificationStatus' in ('source_verified','verified_by_administrator')
@@ -215,12 +222,13 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
               or r.result_details->>'sourceClub' ilike ${q} or r.bib ilike ${q})
         ) visible
       ) ranked
+      where not ${perDivision}::boolean or division_row between ${offset + 1} and ${offset + RESULT_PAGE_SIZE + 1}
       order by division_row, division, id
-      limit ${RESULT_PAGE_SIZE + 1} offset ${offset}
+      limit ${perDivision ? null : RESULT_PAGE_SIZE + 1} offset ${perDivision ? 0 : offset}
     `;
     // This edition credits its timer once. Keep the original row URLs in staff evidence.
     const timingCredit = edition.edition_id === 71609612 ? "Total Race Timing" : null;
-    const pageRows = rows.slice(0, RESULT_PAGE_SIZE);
+    const pageRows = perDivision ? rows.filter((row) => row.division_row <= offset + RESULT_PAGE_SIZE) : rows.slice(0, RESULT_PAGE_SIZE);
     const providerCredits = timingCredit ? [] : [...new Set(pageRows.map((row) => resultCredit(row.source_url, row.result_source))
       .filter((label): label is string => label !== null))];
     return {
@@ -231,6 +239,6 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
         return publicCatalogueContent({ ...row, race_club: publicResultLabel(row.race_club),
           footwear: publicResultLabel(row.footwear) });
       }),
-      hasMore: rows.length > RESULT_PAGE_SIZE,
+      hasMore: rows.length > pageRows.length,
     };
   });
