@@ -162,6 +162,7 @@ export function CompactResultsTable({
                     <ResultMedal result={result} />
                     <ProfileEventLink
                       result={result}
+                      hasPublicEdition={Boolean(editionLink)}
                       className="text-fg no-underline hover:text-accent hover:underline"
                     >
                       {result.eventName}

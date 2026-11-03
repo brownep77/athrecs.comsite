@@ -5,11 +5,13 @@ import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 
 export function ProfileEventLink({
   result,
+  hasPublicEdition = false,
   children,
   className,
   style,
 }: {
   result: { sport: string; eventSlug: string; sourceUrls?: string[]; history?: { key: string } };
+  hasPublicEdition?: boolean;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -20,7 +22,10 @@ export function ProfileEventLink({
         {children}
       </span>
     );
-  if (sportIsInPublicSiteScope(result.sport))
+  const linkToRace = hasPublicEdition
+    ? sportIsInPublicSiteScope(result.sport)
+    : ["Athletics", "Running", "Parkrun"].includes(result.sport);
+  if (linkToRace)
     return (
       <Link
         to="/races/$slug"
