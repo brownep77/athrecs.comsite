@@ -160,7 +160,9 @@ const server = {
     return chain;
   },
 };
+const management = load("src/lib/athrecs/athlete-management.server.ts");
 const shared = {
+  "./athlete-management.server": management,
   "@tanstack/react-start": server,
   "@/lib/auth/middleware": auth,
   "@/lib/auth/staff-middleware": staff,
@@ -207,7 +209,10 @@ const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
   "./profile-connections": shared["./profile-connections"],
   "./claim-invitation": invitationCore,
 });
-const reviewCore = load("src/lib/athlete-workspace/core.ts", { zod: require("zod"), "../athrecs/parkrun-timing.ts": load("src/lib/athrecs/parkrun-timing.ts") });
+const reviewCore = load("src/lib/athlete-workspace/core.ts", {
+  zod: require("zod"),
+  "../athrecs/parkrun-timing.ts": load("src/lib/athrecs/parkrun-timing.ts"),
+});
 const resultReview = load("src/lib/athrecs/profile-result-review.server.ts", {
   "./result-candidate-groups": resultCandidateGroups,
   "node:crypto": crypto,
@@ -274,12 +279,24 @@ try {
   process.env.ATHRECS_STAFF_EMAILS = "auth-only@example.test";
   delete process.env.ATHRECS_CLAIMS_EMAILS;
   await sql`update staff_notification_routes set enabled=(recipient='results@athrecs.com') where category='results'`;
-  assert.deepEqual(await emails.claimNotificationRecipients(sql), ["results@athrecs.com"], "Staff authentication addresses do not determine mail routing");
+  assert.deepEqual(
+    await emails.claimNotificationRecipients(sql),
+    ["results@athrecs.com"],
+    "Staff authentication addresses do not determine mail routing",
+  );
   process.env.ATHRECS_CLAIMS_EMAILS = "invalid, header\r\ninjection@example.test";
-  assert.deepEqual(await emails.claimNotificationRecipients(sql), ["results@athrecs.com"], "An invalid override cannot inject email headers");
+  assert.deepEqual(
+    await emails.claimNotificationRecipients(sql),
+    ["results@athrecs.com"],
+    "An invalid override cannot inject email headers",
+  );
   process.env.ATHRECS_CLAIMS_EMAILS = "staff@example.test,STAFF@example.test,invalid";
   assert.deepEqual(await emails.claimNotificationRecipients(sql), ["staff@example.test"]);
-  assert.deepEqual(await emails.claimNotificationRecipients(sql, true), ["paul@athrecs.com"], "Synthetic alerts ignore configured recipients");
+  assert.deepEqual(
+    await emails.claimNotificationRecipients(sql, true),
+    ["paul@athrecs.com"],
+    "Synthetic alerts ignore configured recipients",
+  );
   process.env.CRON_SECRET = "synthetic-worker-key";
   await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values
     ('one','Avery Test Athlete','one@example.test',true,now(),now()),
@@ -859,7 +876,8 @@ try {
   console.log(
     "Invitation contention passed: concurrent creation, email reservation and claim submission.",
   );
-  // New self-confirmation policy: completion is distinct from verified evidence.
+  // Every new claim requires staff review. Explicit historical fixtures below
+  // retain the legacy completion-outbox retry coverage without a production bypass.
   configured = false;
   const beforeAthletes = await count("athletes");
   await sql`insert into "user"(id,name,email,"emailVerified") values
@@ -880,19 +898,53 @@ try {
   const beforeSources = JSON.stringify(
     await sql`select * from results where athlete_id=100 order by id`,
   );
+  const self = await claim("self", 100);
+  assert.equal(self.status, "pending");
+  assert.equal(self.managementReviewed, false);
+  assert.equal((await sql`select * from athlete_account_links where athlete_id=100`).length, 0);
+  assert.equal(
+    (await sql`select * from result_claim_alerts where claim_id=${self.claimId}`).length,
+    0,
+    "A pending declaration never emits a completed-ownership alert",
+  );
+  await assert.rejects(
+    () =>
+      reviewWithIdentity(
+        {
+          claimId: self.claimId,
+          action: "approve",
+          staffNote: "Synthetic claimant tries staff self-approval.",
+        },
+        { userId: "self", staffEmail: "self@example.test" },
+      ),
+    /Another authorised staff member/,
+  );
+  const legacyFixture = () =>
+    sql.transaction(async (tx) => {
+      await tx`update result_claims set status='approved',confirmation_method='athlete',confirmed_at=now(),conflict_reason=null
+      where athlete_id=100 and claimant_user_id='self'`;
+      await tx`insert into athlete_account_links(athlete_id,user_id,user_email,source_claim_id,confirmation_method)
+      values(100,'self','self@example.test',${self.claimId},'athlete')`;
+      await alerts.queueCompletedClaim(tx, self.claimId);
+    });
   failOutbox = true;
-  await assert.rejects(() => claim("self", 100), /Synthetic outbox failure/);
+  await assert.rejects(legacyFixture, /Synthetic outbox failure/);
   assert.equal(
     (await sql`select * from athlete_account_links where athlete_id=100`).length,
     0,
-    "Claim and durable staff notification commit atomically",
+    "A historical completion and durable notification still commit atomically",
   );
   failOutbox = false;
   configured = true;
   failEmail = true;
   const beforeCompletionSend = sends.length;
-  const self = await claim("self", 100);
-  assert.equal(self.status, "approved");
+  await legacyFixture();
+  assert.equal(
+    await management.hasReviewedAthleteManagement(sql, "self", 100),
+    false,
+    "Historical self-confirmation is preserved without gaining reviewed management",
+  );
+  await alerts.deliverClaimAlerts(sql, self.claimId);
   const [completedAlert] =
     await sql`select * from result_claim_alerts where claim_id=${self.claimId}`;
   assert.equal(completedAlert.event_kind, "claim_completed");
@@ -909,7 +961,11 @@ try {
   const completionSend = sends.at(-1);
   assert.equal(sends.length, beforeCompletionSend + 1);
   assert.match(completionSend.email.subject, /result claimed/);
-  assert.equal(completionSend.email.to, "results@athrecs.com", "Completed claims use the results route even when a conflict override is set");
+  assert.equal(
+    completionSend.email.to,
+    "results@athrecs.com",
+    "Completed claims use the results route even when a conflict override is set",
+  );
   assert.match(completionSend.email.message, /without waiting for staff approval/);
   assert.match(completionSend.email.actionUrl, new RegExp(`claimId=${self.claimId}$`));
   assert.doesNotMatch(completionSend.email.heading, /needs review/);
@@ -917,17 +973,15 @@ try {
   await sql`update staff_notification_routes set enabled=(recipient='paul@athrecs.com') where category='results'`;
   failEmail = false;
   assert.equal((await alerts.deliverClaimAlerts(sql, self.claimId)).sent, 1);
-  assert.deepEqual(sends.at(-1), completionSend, "Completed-claim retries retain recipient, payload and key despite a routing change");
+  assert.deepEqual(
+    sends.at(-1),
+    completionSend,
+    "Completed-claim retries retain recipient, payload and key despite a routing change",
+  );
   await sql`update staff_notification_routes set enabled=(recipient='results@athrecs.com') where category='results'`;
   await alerts.deliverClaimAlerts(sql, self.claimId);
   assert.equal(sends.length, beforeCompletionSend + 2, "A successful completion alert sends once");
   configured = false;
-  assert.equal(receipts.at(-1).selfConfirmed, true);
-  assert.equal(
-    receipts.at(-1).notifyStaff,
-    false,
-    "Straightforward completion does not create a staff review email",
-  );
   const selfClaims = await claims.listMyResultClaims(undefined, user("self"));
   assert.equal(selfClaims.length, 2);
   assert(
@@ -1009,7 +1063,22 @@ try {
     "pending",
     "An existing submission does not bypass current name discrepancy checks",
   );
-  // Self-confirmed ownership can be revoked, and all sibling claims reflect it.
+  // Staff can upgrade a historical self-confirmed link after an independent
+  // review; the previous basis is retained in the audit and source data untouched.
+  await reviewWithIdentity(
+    {
+      claimId: self.claimId,
+      action: "approve",
+      staffNote: "Synthetic independent club-officer response confirms account ownership.",
+    },
+    { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
+  );
+  assert.equal(await management.hasReviewedAthleteManagement(sql, "self", 100), true);
+  const [legacyAudit] = await sql`select before_value,after_value from network_audit_log
+    where action='athlete.ownership_reviewed' and entity_id=${String(self.claimId)} order by created_at desc limit 1`;
+  assert.equal(legacyAudit.before_value.confirmation_method, "athlete");
+  assert.equal(legacyAudit.after_value.confirmationMethod, "staff");
+  // Reviewed ownership can be revoked, and all sibling claims reflect it.
   await claims.revokeAthleteOwnership(
     { claimId: self.claimId, staffNote: "Synthetic dispute requires review" },
     { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
@@ -1033,15 +1102,56 @@ try {
   const concurrentSelf = await Promise.all(
     Array.from({ length: 6 }, (_, i) => claim("self-race-" + i, 104)),
   );
-  assert.equal(concurrentSelf.filter((c) => c.status === "approved").length, 1);
-  assert.equal(concurrentSelf.filter((c) => c.status === "pending").length, 5);
+  assert.equal(concurrentSelf.filter((c) => c.status === "approved").length, 0);
+  assert.equal(concurrentSelf.filter((c) => c.status === "pending").length, 6);
   assert.equal(
     (await sql`select * from athlete_account_links where athlete_id=104 and status='active'`)
       .length,
-    1,
+    0,
+  );
+  // Older private links without a source claim must have a way to request
+  // ownership review. Submitting the request never rewrites that old link.
+  await sql`insert into "user"(id,name,email,"emailVerified") values('legacy-no-source','Legacy Review Test','legacy-no-source@example.test',true)`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(105,'synthetic-legacy-no-source','Legacy Review Test','private')`;
+  await sql`insert into results(id,edition_id,athlete_id,status) values(105,1,105,'finished')`;
+  await sql`insert into athlete_account_links(athlete_id,user_id,user_email) values(105,'legacy-no-source','legacy-no-source@example.test')`;
+  const oldLink = await sql`select * from athlete_account_links where athlete_id=105`;
+  const oldResult = await sql`select * from results where id=105`;
+  const legacyPending = await claim("legacy-no-source", 105);
+  assert.equal(legacyPending.status, "pending");
+  assert.equal(legacyPending.managementReviewed, false);
+  assert(legacyPending.claimId);
+  assert.deepEqual(await sql`select * from athlete_account_links where athlete_id=105`, oldLink);
+  assert.equal(
+    (await claim("legacy-no-source", 105)).claimId,
+    legacyPending.claimId,
+    "Repeating an old-link review request keeps one pending claim",
+  );
+  assert.equal(
+    (
+      await claims.listStaffResultClaims(
+        { status: "pending" },
+        { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
+      )
+    ).some((c) => c.claimId === legacyPending.claimId),
+    true,
+  );
+  await reviewWithIdentity(
+    {
+      claimId: legacyPending.claimId,
+      action: "approve",
+      staffNote: "Synthetic independent club officer confirms the legacy account.",
+    },
+    { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
+  );
+  assert.equal(await management.hasReviewedAthleteManagement(sql, "legacy-no-source", 105), true);
+  assert.deepEqual(
+    await sql`select * from results where id=105`,
+    oldResult,
+    "Legacy review never changes the athlete performance",
   );
   console.log(
-    "Self-confirmed claims passed: immediate completion, sibling claims, child/guardian review, revocation, concurrency and source preservation.",
+    "Ownership review passed: no first-claim control, independent staff approval, historical outbox preservation, child/guardian review, revocation and concurrency.",
   );
   // Source-only Run Norwich profiles use stable foreign-keyed claims, with no
   // fabricated canonical edition/date and no duplicate public performance.
@@ -1106,7 +1216,15 @@ try {
   assert.equal(await claims.getClaimableResult({ resultId: sourceId }, user("unrelated")), null);
   await assert.rejects(claim("unrelated", sourceId), /not available/);
   const sourceClaim = await claim("source-claim", sourceId);
-  assert.equal(sourceClaim.status, "approved");
+  assert.equal(sourceClaim.status, "pending");
+  await reviewWithIdentity(
+    {
+      claimId: sourceClaim.claimId,
+      action: "approve",
+      staffNote: "Synthetic independent official contact confirms this source athlete account.",
+    },
+    { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
+  );
   assert.equal((await claim("source-claim", sourceId)).claimId, sourceClaim.claimId);
   const [savedSourceClaim] =
     await sql`select result_id,source_result_id,source_evidence from result_claims where id=${sourceClaim.claimId}`;
@@ -1298,21 +1416,16 @@ try {
   const submitted = await submitWithIdentity(batchInput, user("batch-user"));
   assert.equal(
     submitted.status,
-    "approved",
-    "An eligible batch claim completes with the same ownership safeguards",
+    "pending",
+    "A batch declaration needs the same independent ownership review",
   );
   assert.deepEqual(submitted.confirmation, { included: 2, excluded: 2, added: 1, reused: false });
+  assert.equal(sends.length, staffBefore, "Pending batch claims do not send completion alerts");
   assert.equal(
-    sends.length,
-    staffBefore + 1,
-    "Whole-profile claims notify staff once after completion",
+    (await sql`select * from result_claim_alerts where claim_id=${submitted.claimId}`).length,
+    0,
   );
-  assert.match(sends.at(-1).email.subject, /result claimed/);
-  assert.equal(
-    (await sql`select event_kind from result_claim_alerts where claim_id=${submitted.claimId}`)[0]
-      .event_kind,
-    "claim_completed",
-  );
+  assert.equal((await sql`select * from athlete_account_links where athlete_id=8200`).length, 0);
   assert.equal(
     (await sql`select * from result_claims where claimant_user_id='batch-user'`).length,
     1,
@@ -1325,13 +1438,13 @@ try {
   assert.equal(summarySends.at(-1).resultId, 8201);
   assert.equal(
     summarySends.at(-1).status,
-    "approved",
-    "Frozen receipt reflects completed ownership",
+    "pending",
+    "Frozen receipt accurately records pending ownership",
   );
   assert.equal(
     receipts.length,
-    genericBefore,
-    "No generic athlete or staff email is generated for immediate batch completion",
+    genericBefore + 1,
+    "The staff review notice is separate from the single consolidated athlete receipt",
   );
   assert.equal(
     (
@@ -1353,7 +1466,7 @@ try {
   const replay = await submitWithIdentity(batchInput, user("batch-user"));
   assert.equal(replay.confirmation.reused, true);
   assert.equal(summarySends.length, receiptBefore + 1, "Retry sends no extra athlete email");
-  assert.equal(sends.length, staffBefore + 1, "Retry sends no extra staff completion notification");
+  assert.equal(sends.length, staffBefore, "Retry sends no staff completion notification");
   const replayNewId = await submitWithIdentity(
     { ...batchInput, review: { ...batchInput.review, requestId: crypto.randomUUID() } },
     user("batch-user"),
@@ -1405,6 +1518,14 @@ try {
     /results have changed/,
   );
   await sql`update results set gun_time_seconds=null where id=8201`;
+  await reviewWithIdentity(
+    {
+      claimId: submitted.claimId,
+      action: "approve",
+      staffNote: "Synthetic independent identity check before enabling profile management.",
+    },
+    { userId: "batch-staff", staffEmail: "batch-reviewer@example.test" },
+  );
   const owned = await claims.getClaimableResult(
     { resultId: 8201, includeReview: true },
     user("batch-user"),
@@ -1566,7 +1687,8 @@ try {
   );
   const legacyReceiptBefore = summarySends.length;
   const resumed = await submitWithIdentity(resumedInput, user("legacy-batch"));
-  assert.equal(resumed.status, "approved");
+  assert.equal(resumed.status, "pending");
+  assert.equal((await sql`select * from athlete_account_links where athlete_id=8400`).length, 0);
   assert.equal(resumed.claimId, legacyClaim.id, "Reuse the earlier claim");
   assert.deepEqual(
     (
@@ -1575,7 +1697,7 @@ try {
     oldPayload,
   );
   assert.equal(summarySends.length, legacyReceiptBefore + 1);
-  assert.equal(summarySends.at(-1).status, "approved");
+  assert.equal(summarySends.at(-1).status, "pending");
   await submitWithIdentity(resumedInput, user("legacy-batch"));
   assert.equal(
     summarySends.length,
@@ -1640,7 +1762,11 @@ try {
   scope.IS_RUNRECS_SITE = true;
   await emails.notifyResultClaimSubmitted(pendingEmail, { notifyAthlete: false });
   scope.IS_RUNRECS_SITE = false;
-  assert.equal(sends.length, beforePending, "Preview, local and sibling-site pending claims cannot notify staff");
+  assert.equal(
+    sends.length,
+    beforePending,
+    "Preview, local and sibling-site pending claims cannot notify staff",
+  );
   await emails.notifyResultClaimSubmitted(pendingEmail, { notifyAthlete: false });
   assert.equal(sends.length, beforePending + 1);
   assert.equal(sends.at(-1).email.to, "results@athrecs.com");
@@ -1651,7 +1777,11 @@ try {
   await sql`insert into result_claim_alert_deliveries(claim_id,recipient,email_payload)
     values(${conflict.claimId},'info@athrecs.com',${JSON.stringify(frozenLegacy)}::jsonb)`;
   assert.equal((await alerts.deliverClaimAlerts(sql, conflict.claimId)).sent, 1);
-  assert.deepEqual(sends.at(-1).email, frozenLegacy, "Legacy frozen recipients are not rewritten when category routing changes");
+  assert.deepEqual(
+    sends.at(-1).email,
+    frozenLegacy,
+    "Legacy frozen recipients are not rewritten when category routing changes",
+  );
 
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");

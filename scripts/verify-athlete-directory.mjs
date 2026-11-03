@@ -5,7 +5,11 @@ import { load } from "cheerio";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
+import { seedReviewedLink } from "./fixtures/reviewed-link.mjs";
 process.env.DATABASE_URL = "";
+process.env.DATABASE_URL_UNPOOLED = "";
+process.env.POSTGRES_URL = "";
+process.env.POSTGRES_URL_NON_POOLING = "";
 process.env.RESEND_API_KEY = "";
 process.env.VITE_AUTH_ENABLED = "false";
 const origin = "http://127.0.0.1:18190";
@@ -276,7 +280,8 @@ try {
   );
   assert.equal(await rpc("api", "getAthleteBySlug", reference(secret.athlete_number)), null);
   await sql`insert into "user" ("id", "name", "email", "emailVerified", "createdAt", "updatedAt")
-    values ('directory-owner', 'Private Account', 'directory@example.test', true, now(), now())`;
+    values ('directory-owner', 'Private Account', 'directory@example.test', true, now(), now()),
+      ('directory-reviewer', 'Independent Fixture Reviewer', 'directory-reviewer@example.test', true, now(), now())`;
   const [owner] =
     await sql`select number::text from athlete_identifiers where user_id='directory-owner'`;
   await sql`insert into athlete_account_links(athlete_id, user_id, user_email)
@@ -287,8 +292,17 @@ try {
     0,
     "An account linked only to private identities stays undiscoverable by ID",
   );
-  await sql`insert into athlete_account_links(athlete_id, user_id, user_email)
-    values(${alpha.id}, 'directory-owner', 'directory@example.test')`;
+  // Publication assertions below start after independent review. The raw private-link
+  // negative check above remains unreviewed and cannot grant publication authority.
+  for (const athleteId of [secret.id, alpha.id]) {
+    await seedReviewedLink(sql, {
+      athleteId,
+      userId: "directory-owner",
+      email: "directory@example.test",
+      reviewerId: "directory-reviewer",
+      reviewerEmail: "directory-reviewer@example.test",
+    });
+  }
   for (const number of [owner.number, alpha.athlete_number]) {
     const canonical = await rpc("athlete-directory-api", "getAthleteDirectory", {
       q: reference(number),

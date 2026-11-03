@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Globe, Link2, Loader2, LockKeyhole, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -57,7 +58,7 @@ export function ShareProfileCard() {
       setMessage(
         data.enabled
           ? "Sharing is on. Signed-in members with the link can see the fields you selected."
-          : "Sharing is off. The shared link now returns not found.",
+          : "Sharing is off. The account sharing link is unavailable. Separate public sporting records are unchanged.",
       );
     },
     onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
@@ -113,21 +114,41 @@ export function ShareProfileCard() {
             </div>
           </div>
           <Badge variant={data.enabled ? "accent" : "outline"}>
-            {data.enabled ? "Link active" : "Private"}
+            {data.enabled ? "Link active" : "Account sharing off"}
           </Badge>
         </div>
 
         <p className="max-w-3xl text-sm leading-6 text-muted">
-          Your ordinary Athlete Profile stays private until you turn sharing on. An unlisted link
-          requires viewers to sign in and is not indexed by search engines. It never includes your
-          email, postcode, photograph or product preferences. Your birthday is hidden unless you
-          choose to display it in your account.
+          Sharing is off until you enable it and save. The separate unlisted account link requires
+          viewers to sign in and is excluded from search indexing. It never includes your email,
+          postcode, photograph or product preferences. Your birthday is hidden unless you choose to
+          display it in your account.
         </p>
+        <p className="max-w-3xl text-sm leading-6 text-muted">
+          Reviewed race results and approved sporting-record previews can be public independently of
+          this link. To request a correction or review of a public record, see the{" "}
+          <Link to="/privacy" hash="account-rights" className="text-accent underline">
+            privacy and contact information
+          </Link>
+          .
+        </p>
+        {data.ownershipReviewRequired ? (
+          <p className="rounded-xl border border-amber-400 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+            <strong>Ownership review required.</strong> Sharing linked sporting records is
+            unavailable until staff checks ownership. You can still access your private account and
+            turn sharing off.{" "}
+            <Link to="/privacy" hash="ownership-review" className="underline">
+              Request ownership review
+            </Link>
+            .
+          </p>
+        ) : null}
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-elevated p-4">
           <input
             type="checkbox"
             checked={enabled}
+            disabled={data.ownershipReviewRequired && !enabled}
             onChange={(event) => {
               setEnabled(event.target.checked);
               if (!event.target.checked) setAcknowledged(false);
@@ -138,7 +159,7 @@ export function ShareProfileCard() {
             <strong className="block text-sm text-fg">Create a shareable profile link</strong>
             <span className="mt-1 block text-xs leading-5 text-muted">
               Signed-in members with the URL can view the name, club, location, bio and claimed
-              results you choose below. You can switch this off at any time.
+              results you choose below. Turn this off and save to withdraw the account sharing link.
             </span>
           </span>
         </label>
@@ -178,11 +199,14 @@ export function ShareProfileCard() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="flex items-center gap-2 text-xs text-subtle">
             <ShieldCheck className="size-4 text-accent" aria-hidden="true" />
-            Profile withdrawal is immediate. Search engines may take time to remove old listings.
+            Saving with sharing off withdraws this link. Older search listings may take time to
+            disappear.
           </p>
           <Button
             type="button"
-            disabled={save.isPending || (enabled && !acknowledged)}
+            disabled={
+              save.isPending || (enabled && (!acknowledged || data.ownershipReviewRequired))
+            }
             onClick={() => {
               setMessage(null);
               save.mutate();

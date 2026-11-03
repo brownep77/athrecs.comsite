@@ -40,7 +40,10 @@ function download(body: BodyInit, row: Certificate) {
 }
 
 export async function handleResultCertificates(request: Request): Promise<Response> {
-  const session = await auth.api.getSession({ headers: request.headers });
+  const session = await auth.api.getSession({
+    headers: request.headers,
+    query: { disableCookieCache: true },
+  });
   const userId = session?.user?.id;
   if (!userId) return json({ error: "Sign in to manage certificates" }, 401);
   const url = new URL(request.url);

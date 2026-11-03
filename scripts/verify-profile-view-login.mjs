@@ -1,4 +1,5 @@
 import { signupDetails } from "./fixtures/signup-details.mjs";
+import { seedReviewedLink } from "./fixtures/reviewed-link.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { get as httpGet } from "node:http";
@@ -922,6 +923,25 @@ try {
   await sql`delete from network_audit_log where action='athlete.bulk_publish' and entity_id=${String(publishedAthlete.id)}`;
   await expectSearch("published-history-fixture", false, {}, 404);
   await sql`update athlete_account_links set status='active' where athlete_id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", false, {}, 404);
+  await expectSitemap(false);
+  assert.equal(
+    await rpc("athrecs/athlete-profile-share-api", "getPublicSharedProfilePreview", {
+      slug: "published-history-sharing",
+    }),
+    null,
+    "An existing enabled share cannot publish an unreviewed legacy link",
+  );
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
+    values('profile-view-independent-reviewer','Synthetic Independent Reviewer',
+      'profile-view-independent-reviewer@example.test',true,now(),now())`;
+  await seedReviewedLink(sql, {
+    athleteId: publishedAthlete.id,
+    userId: user.id,
+    email: user.email,
+    reviewerId: "profile-view-independent-reviewer",
+    reviewerEmail: "profile-view-independent-reviewer@example.test",
+  });
   await expectSearch("published-history-fixture", true);
   await expectSitemap(true);
   await sql`update athletes set profile_type='Public figure' where id=${publishedAthlete.id}`;

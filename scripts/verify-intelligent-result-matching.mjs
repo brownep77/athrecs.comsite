@@ -1,5 +1,10 @@
 // Real authenticated RPCs, migrations and SQL; disposable synthetic data only.
 import { signupDetails } from "./fixtures/signup-details.mjs";
+import {
+  approveSyntheticClaim,
+  createAthleteRpc,
+  createSyntheticStaffSession,
+} from "./fixtures/ownership-review.mjs";
 import assert from "node:assert/strict";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
@@ -21,6 +26,7 @@ Object.assign(process.env, {
   POSTGRES_URL_NON_POOLING: "",
   RESEND_API_KEY: "",
   ATHRECS_CLAIMS_EMAILS: "",
+  ATHRECS_STAFF_EMAILS: "matching-reviewer@example.test",
   VITE_AUTH_ENABLED: "true",
   BETTER_AUTH_URL: origin,
   BETTER_AUTH_SECRET: "synthetic-matching-secret-at-least-32-characters",
@@ -482,11 +488,25 @@ try {
     matches.matches.some((match) => match.resultId === 992491),
     "Stored suggestions work without birth date and nationality",
   );
-  const approved = await claim();
+  const pending = await claim();
   assert.equal(
-    approved.status,
-    "approved",
-    "Saved surname may explicitly confirm an uncontested profile without birth date or nationality",
+    pending.status,
+    "pending",
+    "A saved surname permits a claim without birth date or nationality, but cannot approve ownership",
+  );
+  assert.equal(
+    (
+      await sql`select count(*)::int n from athlete_account_links where user_id=${a.user.id} and status='active'`
+    )[0].n,
+    0,
+    "A matching name and verified email cannot create an ownership link",
+  );
+  const reviewer = await createSyntheticStaffSession(origin, sql, "matching-reviewer@example.test");
+  await approveSyntheticClaim(
+    createAthleteRpc(origin, reviewer.token),
+    pending.claimId,
+    reviewer.user.id,
+    sql,
   );
   assert.equal(
     (

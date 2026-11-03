@@ -97,14 +97,14 @@ assert.match(dialog, /Resend verification email/);
 assert.doesNotMatch(header, /AthleteAuthDialog/);
 assert.match(rootRoute, /AthleteAuthDialog/);
 assert.match(email, /https:\/\/api\.resend\.com\/emails/);
-assert.match(email, /<img\s+src="https:\/\/www\.athrecs\.com\/athrecs-logo\.png"\s+alt="AthRecs\.com"/);
-assert.match(deploymentGuard, /Email\/password sign-in will remain available/);
-assert.doesNotMatch(
-  deploymentGuard,
-  /Production email\/password authentication is enabled but missing/,
+assert.match(
+  email,
+  /<img\s+src="https:\/\/www\.athrecs\.com\/athrecs-logo\.png"\s+alt="AthRecs\.com"/,
 );
+assert.match(deploymentGuard, /assertProductionAuthConfiguration\(process.env/);
+assert.match(server, /assertProductionAuthConfiguration\(process.env/);
 assert.match(docs, /Strava, Garmin Connect, COROS, Instagram and TikTok/);
 
 console.log(
-  "Authentication verification passed: email credentials remain available without Resend, recovery is delivery-gated, and one global multi-social chooser is present.",
+  "Authentication verification passed: isolated preview credentials remain available without Resend, production configuration fails closed, recovery is delivery-gated, and one global multi-social chooser is present.",
 );

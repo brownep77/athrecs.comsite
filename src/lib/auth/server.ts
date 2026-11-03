@@ -9,6 +9,8 @@ import { ensureDbReady, getPglite } from "../db";
 import { postgresConnectionConfig } from "../postgres-connection.js";
 import { authEmailConfigured, sendAthrecsAuthEmail } from "./email.server";
 import { emailAndPasswordEnabled } from "./email-password";
+import { assertProductionAuthConfiguration } from "./production-config";
+import { discardUndeliveredOtp, recordOtpDeliveryFailure } from "./otp-delivery.server";
 import { GROK_PROVIDERS } from "./providers";
 import { pgliteDialect } from "./pglite-dialect";
 import { captureCreatedSession } from "./access-diagnostics.server";
@@ -19,6 +21,10 @@ import {
   PREVIEW_CLIENT_ID,
   PREVIEW_CLIENT_SECRET,
 } from "./preview";
+
+// Never fall back to preview secrets, embedded storage or unverified email
+// authentication in production, even when the build guard was not run.
+assertProductionAuthConfiguration(process.env, emailAndPasswordEnabled);
 
 // Kick (and share) PGLite bootstrap as soon as the auth server module loads.
 void ensureDbReady();
@@ -403,7 +409,9 @@ export const auth = betterAuth({
       allowDifferentEmails: false,
     },
   },
-  session: { cookieCache: { enabled: true, maxAge: 300 } },
+  // Revocation must take effect on the next request, including get-session.
+  // A signed cached snapshot can outlive a deleted server-side session.
+  session: { cookieCache: { enabled: false } },
   advanced: {
     useSecureCookies: false,
     defaultCookieAttributes: { secure: true, sameSite: "lax", path: "/" },
@@ -431,14 +439,27 @@ export const auth = betterAuth({
                   : type === "forget-password"
                     ? "Reset your password"
                     : "Verify your email";
-              await sendAthrecsAuthEmail({
-                to: email,
-                subject: `Your ATHRECS ${type === "sign-in" ? "sign-in" : "verification"} code`,
-                heading: `${action} with this code`,
-                message:
-                  "Enter this one-time code in ATHRECS. It expires in five minutes. Never share it with anyone.",
-                code: otp,
-              });
+              try {
+                await sendAthrecsAuthEmail({
+                  to: email,
+                  subject: `Your ATHRECS ${type === "sign-in" ? "sign-in" : "verification"} code`,
+                  heading: `${action} with this code`,
+                  message:
+                    "Enter this one-time code in ATHRECS. It expires in five minutes. Never share it with anyone.",
+                  code: otp,
+                });
+              } catch {
+                recordOtpDeliveryFailure(type);
+                try {
+                  const { getSql } = await import("../db");
+                  await discardUndeliveredOtp(await getSql(), { email, otp, type });
+                } catch {
+                  console.error("[auth-email] Could not invalidate an undelivered code");
+                }
+                // The API adapter reports this request's failure after Better
+                // Auth's background-task handler consumes this exception.
+                throw new Error("ATHRECS could not send the account code");
+              }
             },
           }),
         ]

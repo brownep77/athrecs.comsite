@@ -1,14 +1,10 @@
 #!/usr/bin/env node
 
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { emailAndPasswordEnabled } from "../src/lib/auth/email-password.ts";
+import { assertProductionAuthConfiguration } from "../src/lib/auth/production-config.ts";
 
 const present = (value) => Boolean(value?.trim());
-const featureFile = fileURLToPath(
-  new URL("../src/lib/auth/email-password.ts", import.meta.url),
-);
-const featureSource = readFileSync(featureFile, "utf8");
-const emailPasswordFeatureEnabled = /emailAndPasswordEnabled\s*=\s*true/.test(featureSource);
+const emailPasswordFeatureEnabled = emailAndPasswordEnabled;
 const vercelProduction = process.env.VERCEL_ENV === "production";
 const authEnabled = process.env.VITE_AUTH_ENABLED !== "false";
 const resendApiKeyPresent = present(process.env.RESEND_API_KEY);
@@ -16,6 +12,10 @@ const authEmailFromCustom = present(process.env.AUTH_EMAIL_FROM);
 const emailPasswordAvailable = authEnabled && emailPasswordFeatureEnabled;
 // email.server.ts supplies ATHRECS Accounts <accounts@athrecs.com> by default.
 const emailDeliveryAvailable = emailPasswordAvailable && resendApiKeyPresent;
+
+// Reject before migrations/build, using the same checks as the runtime server.
+// Local development and isolated CI keep their deliberate no-email mode.
+assertProductionAuthConfiguration(process.env, emailPasswordFeatureEnabled);
 
 console.log(
   "[auth-env-check]",
@@ -30,9 +30,3 @@ console.log(
     emailDeliveryAvailable,
   }),
 );
-
-if (vercelProduction && emailPasswordAvailable && !emailDeliveryAvailable) {
-  console.warn(
-    "[auth-env-check] Email/password sign-in will remain available, but email verification and password recovery are disabled until RESEND_API_KEY is present.",
-  );
-}

@@ -39,13 +39,13 @@ function AthletePrivacyPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <PrivacyPrinciple
           icon={LockKeyhole}
-          title="Private by default"
-          text="Account details, product choices and claim evidence are restricted to you and authorised ATHRECS staff."
+          title="Private account details"
+          text="Your email, contact details and claim evidence stay off public pages. Authorised staff and service providers process account data as explained below."
         />
         <PrivacyPrinciple
           icon={EyeOff}
-          title="Not your public profile"
-          text="Private account data is not published on athlete or result pages automatically."
+          title="Public sporting records"
+          text="Reviewed race results and approved athlete previews can be public, including before an athlete joins. Account sharing is a separate choice."
         />
         <PrivacyPrinciple
           icon={RefreshCw}
@@ -53,6 +53,19 @@ function AthletePrivacyPage() {
           text="You can update optional answers or withdraw analytics, research and marketing consent at any time."
         />
       </div>
+
+      <p className="rounded-xl border border-border bg-surface p-5 text-sm leading-6 text-muted">
+        For privacy questions, account deletion, a correction or a request to review a public
+        sporting record, email{" "}
+        <a href="mailto:paul@athrecs.com" className="text-accent underline">
+          paul@athrecs.com
+        </a>
+        . See{" "}
+        <a href="#account-rights" className="text-accent underline">
+          access, correction and deletion
+        </a>{" "}
+        below for the information we may need to handle your request.
+      </p>
 
       <section className="space-y-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-8">
         <div id="assistant-chat">
@@ -177,7 +190,7 @@ function AthletePrivacyPage() {
             route child claims for staff review. Nationality helps distinguish similar records only
             when the source explicitly reports it; we never infer it from your address, club or
             name. You can enter multiple nationalities or Stateless. These details are supporting
-            clues, not proof of identity. Uncertain or conflicting claims receive human review.
+            clues, not proof of identity. Profile ownership requires a separate staff review.
           </p>
           <p className="mt-3">
             Birth date is hidden unless you explicitly choose to share it in profile settings. Email
@@ -185,6 +198,23 @@ function AthletePrivacyPage() {
             a missing name or unverified email prevents a claim for incomplete account details.
             Existing ownership is not automatically removed when you correct a field. Contact us to
             dispute ownership or request deletion.
+          </p>
+        </NoticeSection>
+
+        <NoticeSection id="ownership-review" title="Email verification and profile ownership">
+          <p>
+            A verified email confirms access to that mailbox. Confirming that a sporting profile is
+            yours submits an ownership claim; new claims require staff approval based on independent
+            evidence before the profile is linked. A name match, invitation or result confirmation
+            alone does not verify athlete identity. Result-source checks are separate from account
+            ownership.
+          </p>
+          <p className="mt-3">
+            Earlier self-confirmed links can remain in your private account. They do not establish
+            reviewed ownership. Staff ownership approval is required to manage public profile
+            information, represent the athlete in partnerships or share those linked records.
+            Contact paul@athrecs.com to request review or dispute a link. Keep identity evidence in
+            the private review process; do not post identity documents in public profile links.
           </p>
         </NoticeSection>
 
@@ -204,7 +234,7 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <NoticeSection title="Optional external result searches">
+        <NoticeSection id="external-searches" title="Optional external result searches">
           <p>
             A separate choice, off by default, allows adults to request a public-results search
             using xAI (the provider of Grok). On your request we send saved racing names, public
@@ -356,7 +386,10 @@ function AthletePrivacyPage() {
           </NoticeSection>
         </div>
 
-        <NoticeSection title="Public sporting records, private archive and claims">
+        <NoticeSection
+          id="public-records"
+          title="Public sporting records, private archive and claims"
+        >
           <p className="mb-3">
             The optional “Find my race results” choice at sign-up opens suggestions from the AthRecs
             results database. You can add your racing name after signing in. The choice does not
@@ -386,16 +419,16 @@ function AthletePrivacyPage() {
           <p>
             You can optionally create an unlisted shareable profile from My Athlete Profile. That
             page is off unless you turn sharing on, is not added to the Athletes directory, and can
-            be withdrawn immediately. A published share includes only the display name plus the
-            club, location, bio and claimed results you select. Email, postcode, photograph,
-            previous names, external IDs and product preferences stay private. Your AthRecs ID
-            identifies the profile across sports. Nationality, country of birth, age category,
-            coach, manager and contact preference can appear on the shared profile. Your birthday
-            stays hidden unless you choose to display its day and month or full date in your
-            account. Viewers must log in to open an unlisted shared account profile. These unlisted
-            pages are excluded from our search-engine sitemaps and marked not to be indexed. This is
-            separate from approved public sporting-record previews. Search engines may take time to
-            remove older listings.
+            be withdrawn by turning sharing off and saving. A shared account page includes the
+            display name plus the club, location, bio and claimed results you select. Email,
+            postcode, photograph, previous names, external IDs and product preferences stay private.
+            Your AthRecs ID identifies the profile across sports. Nationality, country of birth, age
+            category, coach, manager and contact preference can appear on the shared profile. Your
+            birthday stays hidden unless you choose to display its day and month or full date in
+            your account. Viewers must log in to open an unlisted shared account profile. These
+            unlisted pages are excluded from our search-engine sitemaps and marked not to be
+            indexed. This is separate from approved public sporting-record previews. Search engines
+            may take time to remove older listings.
           </p>
         </NoticeSection>
 
@@ -447,7 +480,7 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <NoticeSection title="Access, correction and withdrawal">
+        <NoticeSection id="account-rights" title="Access, correction and deletion">
           <p>
             Use My Athlete Account to review and correct your details or change consent choices.
             ATHRECS records consent changes so its systems can respect a withdrawal. Account access,
@@ -468,12 +501,20 @@ function AthletePrivacyPage() {
             or your local data protection authority. You can ask for human review of a disputed
             match; nationality and name similarity do not prove ownership.
           </p>
+          <p className="mt-3">
+            To request account deletion, email us from your account address where possible. Include
+            the page link if you also want a public sporting record corrected or its publication
+            reviewed. Turning off an account sharing link does not remove a separate public race
+            result or sporting-record preview. We will explain any information that must be retained
+            when responding to your request; do not send passwords or sign-in codes.
+          </p>
         </NoticeSection>
 
         <p className="text-xs text-subtle">
           Athlete Account notice: 23 August 2026. Partnerships addition: 16 September 2026. Sign-in
           and optional identity details clarified: 2 October 2026. Claim identity, matching and
-          external-search notice: 13 October 2026.
+          external-search notice: 13 October 2026. Account privacy and public-record explanation
+          updated: 3 November 2026.
         </p>
       </section>
 
@@ -504,9 +545,17 @@ function PrivacyPrinciple({
   );
 }
 
-function NoticeSection({ title, children }: { title: string; children: React.ReactNode }) {
+function NoticeSection({
+  id,
+  title,
+  children,
+}: {
+  id?: string;
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="text-sm leading-6 text-muted">
+    <div id={id} className="text-sm leading-6 text-muted">
       <h2 className="font-display text-lg font-semibold text-fg">{title}</h2>
       <div className="mt-2">{children}</div>
     </div>

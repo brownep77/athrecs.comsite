@@ -86,8 +86,8 @@ assert.match(
 );
 assert.match(
   submitDefinition,
-  /const nextStatus = conflictReason/,
-  "A flagged claim remains pending",
+  /const nextStatus = "pending"/,
+  "Every new claim remains pending independent review",
 );
 assert.match(
   submitDefinition,
@@ -130,11 +130,11 @@ assert.match(api, /evidence_url_3/);
 assert.match(evidenceLinksMigration, /add column if not exists evidence_url_2/);
 assert.match(evidenceLinksMigration, /add column if not exists evidence_url_3/);
 assert.match(claimRoute, /Signing in is the first step/);
-assert.match(claimRoute, /Straightforward claims complete immediately/);
+assert.match(claimRoute, /Every new profile claim needs an independent staff ownership check/);
 assert.match(claimRoute, /Not required · add up to three/);
 assert.doesNotMatch(claimRoute, /Supporting detail/);
 assert.doesNotMatch(claimRoute, /Supporting information type/);
-assert.match(claimRoute, /Yes, this is me — complete my claim/);
+assert.match(claimRoute, /Yes, this is me — submit my claim/);
 assert.match(claimRoute, /Tick the confirmation box to confirm this is your result/);
 assert.match(claimRoute, /disabled=\{submitClaim\.isPending\}/);
 assert.doesNotMatch(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declaration\}/);

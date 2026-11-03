@@ -46,7 +46,7 @@ export async function completeOwnArchiveRequests(sql: Sql, userId: string, entry
   const links = await sql<{
     id: number;
     display_name: string;
-  }>`select a.id,a.display_name from athletes a join athlete_account_links l on l.athlete_id=a.id
+  }>`select a.id,a.display_name from athletes a join athlete_reviewed_account_links l on l.athlete_id=a.id
     where l.user_id=${userId} and l.status='active' order by a.id for update of a,l`;
   const names = matchingNames(
     identity.full_name,
@@ -66,7 +66,7 @@ export async function completeOwnArchiveRequests(sql: Sql, userId: string, entry
     }
     if (links.length !== 1) {
       hold(
-        "Claim your athlete profile first, or ask staff to select between your linked profiles.",
+        "Staff must review your athlete ownership first, or select between your reviewed profiles.",
       );
       continue;
     }

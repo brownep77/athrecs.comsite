@@ -26,7 +26,7 @@ const accountApi = await readFile(resolve(root, "src/lib/athrecs/athlete-account
 const vercelConfig = JSON.parse(await readFile(resolve(root, "vercel.json"), "utf8"));
 
 assert.match(claimRoute, /Finish claiming your athlete profile/);
-assert.match(claimRoute, /Yes, this is me — complete my claim/);
+assert.match(claimRoute, /Yes, this is me — submit my claim/);
 assert.match(claimRoute, /Optional evidence links/);
 assert.match(claimRoute, /Not required · add up to three/);
 assert.match(claimRoute, /View my private profile/);
@@ -42,7 +42,7 @@ assert.doesNotMatch(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declara
 assert.match(privateProfileRoute, /createFileRoute\("\/my-athlete-profile"\)/);
 assert.match(privateProfileRoute, /getMyAthleteAccount/);
 assert.match(privateProfileRoute, /enabled: Boolean\(user\)/);
-assert.match(privateProfileRoute, /Private profile/);
+assert.match(privateProfileRoute, /Private account view/);
 assert.match(privateProfileRoute, /<ProfileRecordHighlights/);
 assert.match(profileHighlights, /<PersonalBestStrip\s+results=\{results\}/);
 assert.match(profileHighlights, /PBs/);
@@ -59,7 +59,7 @@ assert.match(routeTree, /preLoaderRoute: typeof MyAthleteProfileRouteImport/);
 assert.match(routeTree, /MyAthleteProfileRoute: MyAthleteProfileRoute/);
 
 assert.match(resultClaimVerifier, /Signing in is the first step/);
-assert.match(resultClaimVerifier, /Yes, this is me — complete my claim/);
+assert.match(resultClaimVerifier, /Yes, this is me — submit my claim/);
 assert.doesNotMatch(
   resultClaimVerifier,
   /Matched claims are linked to your Athlete Account immediately/,
