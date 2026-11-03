@@ -1,4 +1,4 @@
-import { publicFixtureUrl, fixtureReferenceText } from "./public-fixture-reference";
+import { publicFixtureUrl, fixtureReferenceText } from "./public-fixture-reference.ts";
 import { fixtureDistanceLabel } from "./fixture-distance-policy.ts";
 import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
