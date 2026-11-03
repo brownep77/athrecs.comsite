@@ -112,7 +112,7 @@ export const AUCKLAND_MARATHON_2026_RESULTS: EditorialArticle = {
       heading: "Half-marathon and wheelchair achievements",
       paragraphs: [
         "William Sinclair led the men’s half marathon in 1:04:10, while Eva Pringle topped the women’s results in 1:13:37. Each took first place in a separate competition within the wider Auckland programme.",
-        "The wheelchair marathon produced victories for Matthew Sullivan, who headed the men’s classification in 1:52:07, and Sally Barkman, who led the women’s in 1:57:02. SportSplits also labels the half-marathon and wheelchair performances above as net times.",
+        "In the event’s mixed wheelchair division, Matthew Sullivan led the men’s classification in 1:52:07 in the power-assisted handcycle category. Sally Barkman led the women’s classification in 1:57:02. SportSplits labels these performances, and the half-marathon performances above, as net times.",
       ],
       standings: {
         race: "Auckland",
