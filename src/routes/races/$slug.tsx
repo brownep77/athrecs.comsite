@@ -1,3 +1,4 @@
+import { ReviewedEventImage } from "@/components/races/ReviewedEventImage";
 import { RaceActions } from "@/components/races/RaceActions";
 import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
@@ -408,6 +409,7 @@ export function RacePageContent({
               <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-fg md:text-4xl">
                 {event.name}
               </h1>
+              <ReviewedEventImage slug={event.slug} date={next?.event_date} />
               {nextFixtureDetail?.eventPageName ? (
                 <p className="text-sm leading-relaxed text-muted">{nextFixtureDetail.summary}</p>
               ) : null}
