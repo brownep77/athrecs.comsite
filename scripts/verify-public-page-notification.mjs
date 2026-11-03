@@ -52,6 +52,26 @@ function fixture(overrides = {}) {
   };
 }
 let checks = 0;
+const channelMap = origin + "/sitemaps/channel.xml";
+const merseaMap = origin + "/sitemaps/mersea.xml";
+const swimmer = origin + "/swimming/english-channel/synthetic-swimmer";
+const merseaYear = origin + "/results/mersea-10?year=2007";
+const fixtures = {
+  [origin + "/sitemap.xml"]: () => response(xml([channelMap, merseaMap], true), "application/xml"),
+  [channelMap]: () => response(xml([swimmer]), "application/xml"),
+  [merseaMap]: () => response(xml([merseaYear]), "application/xml"),
+};
+const expanded = await collectInventory(fixture(fixtures).fetchImpl);
+assert.deepEqual(expanded.entries.map(item => item.url), [swimmer, merseaYear]);
+for (const [map, invalid] of [[channelMap, page], [channelMap, merseaYear], [merseaMap, page]]) {
+  await assert.rejects(() => collectInventory(fixture({...fixtures,
+    [map]: () => response(xml([invalid]), "application/xml"),
+  }).fetchImpl));
+}
+for (const bad of ["?q=runner", "?year=2007&q=runner", "?year=2007&year=2008"]) {
+  assert.throws(() => publicUrl(origin + "/results/mersea-10" + bad));
+}
+checks += 7;
 assert.equal(publicUrl(`${origin}/clubs/caf%C3%A9-ac`).pathname, "/clubs/caf%C3%A9-ac");
 checks++;
 const dry = fixture();

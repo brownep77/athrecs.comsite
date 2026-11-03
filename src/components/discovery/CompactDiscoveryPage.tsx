@@ -126,6 +126,14 @@ export function CompactDiscoveryPage({
       });
     else void navigate({ to: "/", search: next, hash: "fixtures" });
   }
+  function fixturePageHref(nextPage: number) {
+    const query = new URLSearchParams();
+    for (const [key, value] of Object.entries(search)) {
+      if (key !== "page" && value) query.set(key, String(value));
+    }
+    if (nextPage > 1) query.set("page", String(nextPage));
+    return `${pathname}${query.size ? "?" + query : ""}#fixtures`;
+  }
   function filter(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     changeSearch(parseSportFixtureSearch(Object.fromEntries(new FormData(event.currentTarget))));
@@ -512,24 +520,21 @@ export function CompactDiscoveryPage({
                 aria-label="Fixture pages"
                 className="mt-3 flex items-center justify-between gap-3"
               >
-                <button
-                  type="button"
-                  disabled={page <= 1}
-                  onClick={() => changeSearch({ ...search, page: page - 1 })}
-                  className={`${actionLink} disabled:invisible`}
-                >
-                  ← Previous
-                </button>
+                {page > 1 ? (
+                  <a className={actionLink} rel="prev" href={fixturePageHref(page - 1)}>
+                    ← Previous
+                  </a>
+                ) : (
+                  <span />
+                )}
                 <span className="text-xs text-muted">Page {page}</span>
-                <button
-                  type="button"
-                  disabled={!hasMore || page >= 400}
-                  onClick={() => changeSearch({ ...search, page: page + 1 })}
-                  className={`${actionLink} disabled:invisible`}
-                >
-                  Next
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </button>
+                {hasMore && page < 400 ? (
+                  <a className={actionLink} rel="next" href={fixturePageHref(page + 1)}>
+                    Next <ArrowRight className="size-4" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <span />
+                )}
               </nav>
             )}
           </section>

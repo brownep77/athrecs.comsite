@@ -7,7 +7,7 @@ import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/news/")({
   validateSearch: parseEditorialSearch,
-  head: () =>
+  head: ({ match }) =>
     IS_RUNRECS_SITE
       ? {
           links: [{ rel: "canonical", href: "https://www.runrecs.com/news" }],
@@ -24,8 +24,9 @@ export const Route = createFileRoute("/news/")({
           meta: siteGraphMeta({
             title: "World, Continental, National & Local Sports News | AthRecs",
             description:
-              "Explore world, continental, national and local sports news, results and athlete stories. Follow the UK, Ireland, USA, New Zealand, Australia, Canada and more.",
+              "Find sports news, race results and athlete stories published by AthRecs. Browse the latest articles by sport and location.",
             url: `${SITE_URL}/news`,
+            indexable: !Object.values(match.search).some(Boolean),
           }),
         },
   component: IS_RUNRECS_SITE ? NewsIndexPage : AthRecsNewsPage,

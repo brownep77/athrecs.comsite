@@ -1,3 +1,4 @@
+import { CLUB_PAGE_SIZE, parseClubDirectorySearch } from "../lib/clubs/directory-search";
 import { queryRunningEvents, queryRunningRegions, type EventRegionInput, type ListEventsInput } from "../lib/running/catalogue.server";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
@@ -211,6 +212,22 @@ export const listClubs = createServerFn({ method: "GET" })
       ...row,
       sports: row.sports_csv ? row.sports_csv.split(",").filter(Boolean) : [],
     }));
+  });
+
+// Use this build's existing running-club scope for cards, totals and filter choices.
+export const getClubDirectoryPage = createServerFn({ method: "GET" })
+  .validator(parseClubDirectorySearch)
+  .handler(async ({ data }) => {
+    const all = await listClubs({ data: {} });
+    const matches = data.q ? await listClubs({ data: { q: data.q } }) : all;
+    const clubs = matches.filter(club => (!data.country || club.country === data.country)
+      && (!data.sport || club.sports.includes(data.sport)));
+    const offset = ((data.page ?? 1)-1)*CLUB_PAGE_SIZE;
+    return {
+      total: clubs.length, clubs: clubs.slice(offset,offset+CLUB_PAGE_SIZE),
+      countries: [...new Set(all.map(club => club.country).filter(Boolean))].sort(),
+      sports: [...new Set(all.flatMap(club => club.sports))].sort(),
+    };
   });
 
 export const getClubBySlug = createServerFn({ method: "GET" })
