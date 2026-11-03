@@ -19,12 +19,13 @@ const getHomeNews = createServerFn({ method: "GET" }).handler(async () => {
         a.slug.localeCompare(b.slug),
     )
     .slice(0, 3)
-    .map(({ slug, title, standfirst, date, displayDate }) => ({
+    .map(({ slug, title, standfirst, date, displayDate, locations }) => ({
       slug,
       title,
       standfirst,
       date,
       displayDate,
+      locations,
     }));
 });
 
