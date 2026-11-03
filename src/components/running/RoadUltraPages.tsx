@@ -1,3 +1,4 @@
+import { ReviewedEventImage } from "@/components/races/ReviewedEventImage";
 import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
 import { RaceActions } from "@/components/races/RaceActions";
 import { useState } from "react";
@@ -367,6 +368,10 @@ export function RoadUltraDetail({ race, today }: { race: RoadUltra; today: strin
         <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
           {race.name}
         </h1>
+        <ReviewedEventImage
+          slug={race.slug}
+          date={editions.find((edition) => !edition.provisional)?.date}
+        />
         <p className="text-base text-muted">{race.location}</p>
         <p className="text-lg leading-8">{race.summary}</p>
       </header>

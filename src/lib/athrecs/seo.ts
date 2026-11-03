@@ -1,3 +1,5 @@
+import { eventImageJsonLd } from "./event-images.ts";
+
 /** Shared SEO helpers — titles, Open Graph, JSON-LD for traditional + voice search. */
 
 export const SITE_URL = "https://www.athrecs.com";
@@ -209,7 +211,7 @@ export function sportsEventJsonLd(
     name: input.name,
     description,
     url,
-    image: DEFAULT_OG_IMAGE,
+    ...eventImageJsonLd(input.slug, date),
     startDate: start,
     endDate:
       input.endDate &&
