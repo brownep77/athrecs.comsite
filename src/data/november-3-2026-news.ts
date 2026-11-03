@@ -304,7 +304,8 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
     ],
     coverageLevels: ["world", "continent", "national"],
     athleteNames: [
-      "Sheila Chepkirui",
+      "Sheila Chepkirui (born 1997)",
+      "Sheila Chepkirui (born 1990)",
       "Diana Wanza",
       "Daisilah Jerono",
       "Jess McClain",
@@ -320,7 +321,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
         id: "part-1",
         heading: "Valencia: one second makes the difference",
         paragraphs: [
-          "In Valencia on 25 October, the Sheila Chepkirui born on 12 April 1997 won the half marathon in 1:03:51. Diana Wanza followed one second later, with Daisilah Jerono third in 1:04:11. For all the attention the winning time commands, that one-second margin shows how little room there was to relax at the end.",
+          "In Valencia on 25 October, Sheila Chepkirui (born 1997) won the half marathon in 1:03:51. Diana Wanza followed one second later, with Daisilah Jerono third in 1:04:11. For all the attention the winning time commands, that one-second margin shows how little room there was to relax at the end.",
           "Her athlete record lists the Valencia performance as her half-marathon personal best. It also includes a 30:41 road 10K in April and 51:21 for 10 miles in September. Read together, those results give the half-marathon victory a place in a wider season rather than leaving it as an isolated headline.",
           "The Valencia race had demanded sustained speed well before the finish. Chepkirui, Wanza and Jerono reached 15 kilometres together in 45:31, with a 24-second gap to the next runners. By 20 kilometres, Chepkirui and Wanza were still together in 1:00:30 and Jerono was seven seconds behind. Chepkirui then had to turn that position into victory with Wanza still close enough to challenge.",
           "The winning time was also the fastest women’s half-marathon performance of 2026 at the time of the race, according to the governing body’s report. Wanza left Valencia with a personal best too. The finish therefore offers more than the name at the top: it records two athletes taking their half-marathon running to a new level in the same contest. Jerono completed a Kenyan sweep of the podium, making the women’s race a particularly successful day for the country.",
@@ -330,8 +331,8 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
         id: "part-2",
         heading: "New York: a champion returns",
         paragraphs: [
-          "Seven days later, New York's title went to Sheila Chepkirui, born on 27 December 1990. Her 2:24:36 restored the crown she first won in 2024. Behind her, Jess McClain and Hellen Obiri contested the remaining podium places, with McClain taking second. It was Chepkirui's second New York victory in three years.",
-          "New York's champion had already won the Nagoya Women's Marathon in March in 2:21:54, following her 2025 victory there. Her record also holds a connection with Valencia: her marathon debut in the Spanish city in 2022 brought second place and a personal best of 2:17:29.",
+          "Seven days later, New York's title went to Sheila Chepkirui (born 1990). Her 2:24:36 restored the crown she first won in 2024. Behind her, Jess McClain and Hellen Obiri contested the remaining podium places, with McClain taking second. It was Chepkirui's second New York victory in three years.",
+          "New York's champion had already won the Nagoya Women's Marathon in March in 2:21:54, following her 2025 victory there. Her record also holds a connection with Valencia: her marathon debut in the Spanish city in 2022 brought third place and a personal best of 2:17:29.",
         ],
       },
       {
@@ -361,8 +362,12 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
           },
           {
             label:
-              "1990 athlete birth date, Nagoya performances, 2022 Valencia PB and 2024 NYC title",
+              "1990 athlete birth date, Nagoya performances and 2024 NYC title",
             url: "https://prod.nyrr.org/athletes/sheila-chepkirui",
+          },
+          {
+            label: "Valencia 2022 official results: third place and marathon personal best",
+            url: "https://worldathletics.org/competition/calendar-results/results/7176623?eventId=10229534",
           },
           {
             label:
@@ -581,13 +586,13 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
       "Marta Pintanel earned her first World Cup win, Morgan Pearson returned to the top step, and San Pedro de la Paz gave three athletes their first World Cup podiums.",
     body: [
       "A year after finishing fourth in San Pedro de la Paz, Marta Pintanel Raymundo returned to the same Chilean venue and claimed the medal she had been chasing. The Spaniard won her first World Triathlon Cup gold on Sunday 1 November in 2:02:49, leading a Spanish one-two ahead of Ana Carballo Gómez.",
-      "For Pintanel, the decisive work came on the run. With the leading athletes still close after the bike, she created the separation that mattered, recording 39:29 for the closing 10km. It was the only women's run split below 40 minutes and gave her a 22-second winning margin.",
+      "For Pintanel, the decisive work came on the run. With the leading athletes still close after the bike, she created the separation that mattered, recording 39:29 for the closing run. It was the fastest women's run split, ahead of Carballo's 39:56, and helped secure a 22-second winning margin.",
       "Pintanel's result had been building through the season. She had finished sixth at the Rome World Cup and seventh at WTCS Karlovy Vary, the latter her best finish in that series. Returning to Chile offered a chance to turn those performances into a World Cup win, and she took it.",
       "Carballo finished in 2:03:11, while Luxembourg's Eva Daniels took bronze in 2:03:21. Both earned their first individual World Cup podiums. Their medals made the women's finish more than a winner's moment: three athletes reached a new level in the same race, with Pintanel taking her first gold and her nearest challengers making their own breakthroughs.",
       "The men's event brought a different kind of celebration. Morgan Pearson arrived after a crash had ended his Beijing World Cup race two weeks earlier. In Chile, the American put himself in the decisive move and won in 1:45:03, finishing 33 seconds ahead of France's Louis Vitiello.",
       "Pearson was part of an eight-man bike breakaway that reached the second transition with a substantial advantage over the chase. Once the running began, he moved clear and covered the final 10km in 30:27. That was the quickest run among the leaders; Antonio Serrat Seoane recorded the fastest run of the entire men's field in 30:23 on his way to sixth.",
       "Vitiello's 1:45:36 brought him a first World Cup podium. Hungary's Márton Kropkó followed in 1:45:39 for bronze, leaving just three seconds between silver and third. Pearson, a mixed-relay Olympic silver medallist in both Tokyo and Paris, had turned his experience into a convincing individual win.",
-      "Both races used the standard-distance format of a 1.5km swim, 40km bike and 10km run. The same course produced different routes to gold: Pintanel emerged from a tightly grouped women's contest, while Pearson made the bike breakaway count before using his run to settle the men's race.",
+      "Both races were classified as standard-distance triathlons. The contests produced different routes to gold: Pintanel emerged from a tightly grouped women's race, while Pearson made the bike breakaway count before using his run to settle the men's race.",
       "There was encouragement further down the results, too. Annie Fuller finished tenth in 2:05:02 on her World Cup debut, using a 40:46 run to move forward from the chase group. In the men's race, Porter Middaugh placed ninth in 1:46:29, while Sullivan Middaugh was fifteenth in 1:46:46 after producing the day's quickest bike split, 56:02.",
       "For the athletes on the podium, the importance will last longer than the result sheet. A first gold, a return to winning, and first medals for Carballo, Daniels and Vitiello gave San Pedro de la Paz several achievements to celebrate.",
     ],
