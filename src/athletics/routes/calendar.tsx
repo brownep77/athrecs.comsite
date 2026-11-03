@@ -1,7 +1,18 @@
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import {
+  createFileRoute,
+  Link,
+  notFound,
+  useNavigate,
+  useRouterState,
+} from "@tanstack/react-router";
+import {
+  filtersFromSearch,
+  parseFixtureDirectorySearch,
+  searchFromFilters,
+} from "@/components/races/fixture-directory-search";
+import { directoryStructuredData } from "@/lib/athrecs/directory-structured-data";
 import { CalendarDays, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import {
   listAthleticsCalendarPage,
@@ -20,62 +31,88 @@ import { sportDisplayLabel } from "@/lib/athrecs/event-colours";
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import {
-  EMPTY_SEARCH,
   EventSearch,
   isEmptySearch,
   searchToApi,
   type EventSearchValues,
 } from "@/components/races/EventSearch";
 
+const PAGE_SIZE = 40;
+const MAX_CALENDAR_PAGE = 2501;
+
 export const Route = createFileRoute("/calendar")({
-  loader: () =>
-    listAthleticsCalendarPage({
-      data: { upcomingOnly: true, limit: 40, offset: 0 },
-    }),
-  head: () => ({
-    meta: siteGraphMeta({
-      title: "Athletics calendar | Track, field and cross-country fixtures",
-      description:
-        "Browse athletics fixtures by date, location and discipline. Find track and field meetings, cross-country championships and road athletics events.",
-      url: `${SITE_URL}/calendar`,
-    }),
-    links: [{ rel: "canonical", href: `${SITE_URL}/calendar` }],
-  }),
+  validateSearch: (search: Record<string, unknown>) =>
+    parseFixtureDirectorySearch(search, MAX_CALENDAR_PAGE + 1),
+  loaderDeps: ({ search }) => search,
+  loader: async ({ deps }) => {
+    const page = deps.page ?? 1;
+    if (page > MAX_CALENDAR_PAGE) throw notFound();
+    const filters = filtersFromSearch(deps);
+    const data = await listAthleticsCalendarPage({
+      data: {
+        ...searchToApi(filters),
+        upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
+        limit: PAGE_SIZE,
+        offset: (page - 1) * PAGE_SIZE,
+      },
+    });
+    if (page > 1 && !data.items.length) throw notFound();
+    return data;
+  },
+  head: ({ match, loaderData }) => {
+    const data = loaderData as unknown as AthleticsCalendarPage | undefined;
+    const page = match.search.page ?? 1;
+    const filtered = !isEmptySearch(filtersFromSearch(match.search));
+    const url = SITE_URL + "/calendar" + (!filtered && page > 1 ? `?page=${page}` : "");
+    const title =
+      "Athletics calendar | Track, field and cross-country fixtures" +
+      (page > 1 ? ` · Page ${page}` : "");
+    return {
+      meta: siteGraphMeta({
+        title,
+        description:
+          "Browse athletics fixtures by date, location and discipline. Find track and field meetings, cross-country championships and road athletics events.",
+        url,
+        indexable: !filtered && Boolean(data?.items.length),
+      }),
+      links: [{ rel: "canonical", href: url }],
+      scripts: filtered
+        ? []
+        : directoryStructuredData(
+            url,
+            "Athletics fixtures calendar",
+            (data?.items ?? []).map((item) => ({
+              name: item.event_name,
+              path: "/races/" + encodeURIComponent(item.event_slug),
+            })),
+          ),
+    };
+  },
   component: AthleticsCalendarPage,
 });
 
-const PAGE_SIZE = 40;
-
 function AthleticsCalendarPage() {
-  const initial = Route.useLoaderData() as unknown as AthleticsCalendarPage;
-  const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
-  const [page, setPage] = useState(0);
+  const data = Route.useLoaderData() as unknown as AthleticsCalendarPage;
+  const search = Route.useSearch();
+  const page = search.page ?? 1;
+  const navigate = useNavigate({ from: Route.fullPath });
+  const filters = filtersFromSearch(search);
   const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
   const sportLabel = sportDisplayLabel(filters.sport);
-  const { data = initial, isFetching } = useQuery<AthleticsCalendarPage>({
-    queryKey: ["athletics-calendar", filters, page],
-    queryFn: async () =>
-      (await listAthleticsCalendarPage({
-        data: {
-          ...searchToApi(filters),
-          upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
-          limit: PAGE_SIZE,
-          offset: page * PAGE_SIZE,
-        },
-      })) as AthleticsCalendarPage,
-    initialData: empty && page === 0 ? initial : undefined,
-    staleTime: 30_000,
-    refetchOnMount: false,
-  });
+  const isFetching = useRouterState({ select: (state) => state.isLoading });
   const firstShown = data.total ? data.offset + 1 : 0;
   const lastShown = Math.min(data.offset + data.items.length, data.total);
   const hasPrevious = data.offset > 0;
   const hasNext = data.offset + data.items.length < data.total;
 
   const updateFilters = (next: EventSearchValues) => {
-    setFilters(next);
-    setPage(0);
+    void navigate({
+      to: "/calendar",
+      search: searchFromFilters(next),
+      replace: true,
+      resetScroll: false,
+    });
   };
 
   return (
@@ -108,7 +145,10 @@ function AthleticsCalendarPage() {
         </button>
       </header>
 
-      <a href="/sports/track-and-field#diamond-league" className="block rounded-xl border border-accent/25 bg-accent-soft p-4 text-sm font-semibold text-accent no-underline hover:underline">
+      <a
+        href="/sports/track-and-field#diamond-league"
+        className="block rounded-xl border border-accent/25 bg-accent-soft p-4 text-sm font-semibold text-accent no-underline hover:underline"
+      >
         Diamond League 2027 · All 15 meetings and TV coverage by country →
       </a>
 
@@ -169,28 +209,32 @@ function AthleticsCalendarPage() {
               className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3"
               aria-label={`${sportLabel} calendar pages`}
             >
-              <button
-                type="button"
-                disabled={!hasPrevious || isFetching}
-                onClick={() => setPage((current) => Math.max(0, current - 1))}
-                className="inline-flex h-10 items-center gap-1 rounded-lg border border-border px-3 text-sm font-medium text-fg disabled:cursor-not-allowed disabled:opacity-45"
-              >
-                <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                Previous
-              </button>
+              {hasPrevious && (
+                <Link
+                  to="/calendar"
+                  rel="prev"
+                  search={{ ...search, page: page === 2 ? undefined : page - 1 }}
+                  className="inline-flex h-10 items-center gap-1 rounded-lg border border-border px-3 text-sm font-medium"
+                >
+                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                  Previous
+                </Link>
+              )}
               <p className="text-sm text-muted">
                 Page {(data.offset / data.limit + 1).toLocaleString()} of{" "}
                 {Math.ceil(data.total / data.limit).toLocaleString()}
               </p>
-              <button
-                type="button"
-                disabled={!hasNext || isFetching}
-                onClick={() => setPage((current) => current + 1)}
-                className="inline-flex h-10 items-center gap-1 rounded-lg border border-border px-3 text-sm font-medium text-fg disabled:cursor-not-allowed disabled:opacity-45"
-              >
-                Next
-                <ChevronRight className="h-4 w-4" aria-hidden="true" />
-              </button>
+              {hasNext && page < MAX_CALENDAR_PAGE && (
+                <Link
+                  to="/calendar"
+                  rel="next"
+                  search={{ ...search, page: page + 1 }}
+                  className="inline-flex h-10 items-center gap-1 rounded-lg border border-border px-3 text-sm font-medium"
+                >
+                  Next
+                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              )}
             </nav>
           ) : null}
         </section>

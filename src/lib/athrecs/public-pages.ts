@@ -7,42 +7,97 @@ import { SUPERHALFS_PATH } from "../../data/superhalfs";
 import { RUNNING_GUIDES_PATH } from "../running/guide-directory";
 
 /** One list for the HTML directory and the XML sitemap. Account tools stay private. */
-export const PUBLIC_PAGES = [
-  { path: "/", name: "AthRecs home" },
-  { path: "/about-us", name: "About AthRecs" },
-  { path: "/athletes", name: "Athlete profiles" },
-  { path: "/results", name: "Race results" },
-  { path: "/race-reports", name: "Race Reports" },
-  { path: "/news", name: "News" },
-  ...EDITORIAL_ARTICLES.map((article) => ({ path: editorialPath(article), name: article.title })),
-  { path: "/results/berlin-marathon-2026", name: "Berlin Marathon 2026 results" },
-  { path: "/results/bure-valley-10-2026", name: "Bure Valley 10 2026 winners summary" },
-  { path: "/races", name: "Races and events" },
-  { path: "/races/places", name: "Major races by continent, country and county" },
-  { path: "/running/events", name: "Running race search" },
-  { path: "/running/calendar", name: "Running calendar" },
-  { path: RUNNING_GUIDES_PATH, name: "Running guides by country and race series" },
-  { path: "/running/race-series", name: "Running race series" },
-  { path: SUPERHALFS_PATH, name: "SuperHalfs series: races, dates and entry" },
-  { path: "/calendar", name: "Athletics calendar" },
-  { path: "/race-series", name: "Athletics disciplines and championships" },
-  { path: "/clubs", name: "Running and athletics clubs" },
-  { path: "/directory", name: "Sports federations and governing bodies" },
-  ...SPORTS_ORGANISATIONS.map((body) => ({
-    path: `/directory/${body.slug}`,
-    name: `${body.name} — sports organisation`,
-  })),
-  { path: "/find-events", name: "Find sporting events" },
-  { path: "/join", name: "Create an athlete profile" },
-  { path: "/brands", name: "Sports brands and partners" },
-  { path: "/opportunities", name: "Athlete and club opportunities" },
-  { path: "/sponsorship", name: "Athlete sponsorship" },
-  { path: "/privacy", name: "Athlete privacy" },
-  { path: "/site-map", name: "Browse AthRecs" },
-  { path: ULTRA_GUIDE_PATH, name: "UK road ultramarathons" },
-  ...ROAD_ULTRAS.map((race) => ({
-    path: ultraPath(race.slug),
-    name: `${race.name} — road ultra guide`,
-  })),
-  ...SPORT_PAGES.map((sport) => ({ path: `/sports/${sport.slug}`, name: sport.label })),
+export const PUBLIC_PAGE_SECTIONS = [
+  {
+    id: "race-fixtures-and-calendars",
+    name: "Race fixtures and calendars",
+    pages: [
+      { path: "/races", name: "Races and events" },
+      { path: "/races/places", name: "Major races by continent, country and county" },
+      { path: "/running/events", name: "Running race search" },
+      { path: "/running/calendar", name: "Running calendar" },
+      { path: "/calendar", name: "Athletics calendar" },
+      { path: "/find-events", name: "Find sporting events" },
+    ],
+  },
+  {
+    id: "race-results-and-swimming-records",
+    name: "Race results and swimming records",
+    pages: [
+      { path: "/results", name: "Race results" },
+      { path: "/results/mersea-10", name: "Mersea Island Lions 10 Mile results by year" },
+      { path: "/results/berlin-marathon-2026", name: "Berlin Marathon 2026 results" },
+      { path: "/results/bure-valley-10-2026", name: "Bure Valley 10 2026 winners summary" },
+      { path: "/swimming/english-channel", name: "English Channel swimming records" },
+    ],
+  },
+  {
+    id: "athlete-profiles-and-clubs",
+    name: "Athlete profiles and clubs",
+    pages: [
+      { path: "/athletes", name: "Athlete profiles" },
+      { path: "/clubs", name: "Running and athletics clubs" },
+      { path: "/join", name: "Create an athlete profile" },
+    ],
+  },
+  {
+    id: "sports-and-disciplines",
+    name: "Sports and disciplines",
+    pages: [
+      { path: "/race-series", name: "Athletics disciplines and championships" },
+      ...SPORT_PAGES.map((sport) => ({ path: `/sports/${sport.slug}`, name: sport.label })),
+    ],
+  },
+  {
+    id: "running-guides-and-race-series",
+    name: "Running guides and race series",
+    pages: [
+      { path: RUNNING_GUIDES_PATH, name: "Running guides by country and race series" },
+      { path: "/running/race-series", name: "Running race series" },
+      { path: SUPERHALFS_PATH, name: "SuperHalfs series: races, dates and entry" },
+      { path: ULTRA_GUIDE_PATH, name: "UK road ultramarathons" },
+      ...ROAD_ULTRAS.map((race) => ({
+        path: ultraPath(race.slug),
+        name: `${race.name} — road ultra guide`,
+      })),
+    ],
+  },
+  {
+    id: "news-and-race-reports",
+    name: "News and race reports",
+    pages: [
+      { path: "/race-reports", name: "Race Reports" },
+      { path: "/news", name: "News" },
+      ...EDITORIAL_ARTICLES.map((article) => ({
+        path: editorialPath(article),
+        name: article.title,
+      })),
+    ],
+  },
+  {
+    id: "sports-federations-and-governing-bodies",
+    name: "Sports federations and governing bodies",
+    pages: [
+      { path: "/directory", name: "Sports federations and governing bodies" },
+      ...SPORTS_ORGANISATIONS.map((body) => ({
+        path: `/directory/${body.slug}`,
+        name: `${body.name} — sports organisation`,
+      })),
+    ],
+  },
+  {
+    id: "about-athrecs-and-athlete-services",
+    name: "About AthRecs and athlete services",
+    pages: [
+      { path: "/", name: "AthRecs home" },
+      { path: "/about-us", name: "About AthRecs" },
+      { path: "/brands", name: "Sports brands and partners" },
+      { path: "/opportunities", name: "Athlete and club opportunities" },
+      { path: "/sponsorship", name: "Athlete sponsorship" },
+      { path: "/privacy", name: "Athlete privacy" },
+      { path: "/site-map", name: "Browse AthRecs" },
+    ],
+  },
 ];
+
+export const PUBLIC_PAGES = PUBLIC_PAGE_SECTIONS.flatMap((section) => section.pages);

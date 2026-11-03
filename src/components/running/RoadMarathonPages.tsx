@@ -1,3 +1,4 @@
+import { fixtureSlugForGuide } from "@/data/race-guide-links";
 import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
 import { RaceActions } from "@/components/races/RaceActions";
 import { Link } from "@tanstack/react-router";
@@ -415,6 +416,7 @@ export function RoadMarathonPage({
   useRaceDateRefresh([race.timeZone, ...related.map((item) => item.timeZone)], now);
   const half = race.distanceKm === 21.0975;
   const country = (half ? halfMarathonCountry(race.country) : countryGuide(race.country))!;
+  const fixture = fixtureSlugForGuide.get(race.slug);
   const upcoming = upcomingRoadEditions(race, now);
   const questions = roadRaceQuestions(race, now);
   return (
@@ -445,6 +447,9 @@ export function RoadMarathonPage({
           >
             Official race website <ArrowUpRight className="size-4" aria-hidden="true" />
           </a>
+          {fixture && <Link to="/races/$slug" params={{slug: fixture}} className={linkClass}>
+            {race.name} fixtures and race history
+          </Link>}
           <a href="#entry" className={linkClass}>
             How to enter
           </a>

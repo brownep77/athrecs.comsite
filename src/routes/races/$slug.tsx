@@ -56,6 +56,7 @@ import { distanceDisplayLabel, formatDistanceWithUnits } from "@/lib/athrecs/dis
 import { resolveCountry, filterCountryName } from "@/lib/athrecs/countries";
 import { timeZoneAbbr, timeZoneForPlace } from "@/lib/athrecs/timezone";
 import { buildRaceBriefing, sportLabel } from "@/lib/athrecs/race-briefing";
+import { guideSlugForFixture } from "@/data/race-guide-links";
 import { raceFormatGuideFor } from "@/data/race-format-guides";
 import { raceQualifications, type RaceQualification } from "@/data/race-qualifications";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
@@ -274,6 +275,7 @@ export function RacePageContent({
   const raceBiography = raceSearchContent(data).biography;
   const isRunningEvent = event.sport === "Running" || event.sport === "Parkrun";
   const qualification = raceQualifications[event.slug];
+  const courseGuide = !IS_RUNRECS_SITE && isRunningEvent ? guideSlugForFixture.get(event.slug) : undefined;
   const shownDistances = sanitizeDistances(
     event.name,
     distances.length ? distances : [...new Set(past.map((edition) => edition.distance_code))],
@@ -500,6 +502,9 @@ export function RacePageContent({
             About {event.name}
           </h2>
           <p className="text-sm leading-relaxed text-muted">{raceBiography.join(" ")}</p>
+          {courseGuide && <Link to="/running/races/$slug" params={{slug: courseGuide}} className="text-sm font-semibold text-accent underline">
+            {event.name} course and entry guide
+          </Link>}
         </section>
       ) : null}
 

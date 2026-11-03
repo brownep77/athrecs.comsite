@@ -1,3 +1,4 @@
+import { parseFixtureDirectorySearch } from "@/components/races/fixture-directory-search";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -101,6 +102,7 @@ const FLAG_EXAMPLES: CardModel[] = [
 const HIGHLIGHTED_RACE_QUERIES = ["Comrades", "Two Oceans", "Boston Marathon"] as const;
 
 export const Route = createFileRoute("/calendar")({
+  validateSearch: (search: Record<string, unknown>) => parseFixtureDirectorySearch(search, 2502),
   loader: async () => {
     const [initial, ...highlightSets] = await Promise.all([
       listCalendarEditions({ data: { upcomingOnly: true, limit: 24 } }),

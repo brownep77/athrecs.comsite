@@ -1,5 +1,6 @@
 import { directoryStructuredData } from "@/lib/athrecs/directory-structured-data";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { useState } from "react";
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
@@ -7,6 +8,7 @@ import { listEvents } from "@/lib/athrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
 import { SPORTS as PUBLIC_SPORTS } from "@/lib/athrecs/filters";
 import {
+  SITE_LANGUAGES,
   copyForLanguage,
   countrySiteFromSlug,
   displayCountryForLanguage,
@@ -22,9 +24,7 @@ import {
   type EventSearchValues,
 } from "@/components/races/EventSearch";
 
-const SPORTS = new Set<Sport>(
-  PUBLIC_SPORTS.filter((sport): sport is Sport => sport !== "All"),
-);
+const SPORTS = new Set<Sport>(PUBLIC_SPORTS.filter((sport): sport is Sport => sport !== "All"));
 
 const PAGE_SIZE = 40;
 const MAX_PAGE = 250;
@@ -79,7 +79,7 @@ function searchFromFilters(filters: EventSearchValues): CountryRaceSearch {
   const api = searchToApi(filters);
   return {
     q: api.q,
-    sport: filters.sport === "Running" ? undefined : filters.sport as Sport,
+    sport: filters.sport === "Running" ? undefined : (filters.sport as Sport),
     county: api.county,
     city: api.city,
     postcode: api.postcode,
@@ -139,12 +139,50 @@ export const Route = createFileRoute("/$language/$country/races/")({
     const country = displayCountryForLanguage(site, language);
     const page = match.search.page ?? 1;
     const url = `${SITE_URL}/${language}/${site.slug}/races${page > 1 ? `?page=${page}` : ""}`;
-    const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
+    const filtered = Object.entries(match.search).some(
+      ([key, value]) => key !== "page" && Boolean(value),
+    );
+    const title = translateCountryText(
+      !match.search.sport || match.search.sport === "Running" ? copy.runningCalendar : copy.racesIn,
+      country,
+    );
     return {
-      meta: siteGraphMeta({ title: `${translateCountryText(copy.racesIn, country)}${page > 1 ? ` — ${page}` : ""} | ATHRECS`, description: translateCountryText(copy.racesIntro, country), url }).map((tag) => (filtered || loaderData.races.length === 0) && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
-      links: [{ rel: "canonical", href: url }],
-      scripts: filtered ? [] : directoryStructuredData(url, translateCountryText(copy.racesIn, country),
-        loaderData.races.slice(0, PAGE_SIZE).map((race) => ({ name: race.name, path: `/${language}/${site.slug}/races/${encodeURIComponent(race.slug)}` })), language),
+      meta: siteGraphMeta({
+        title: `${title}${page > 1 ? ` — ${page}` : ""} | ATHRECS`,
+        description: `${title}. ${copy.racesIntro}`,
+        url,
+        indexable: !filtered && loaderData.races.length > 0,
+      }),
+      links: [
+        { rel: "canonical", href: url },
+        ...(!filtered && page === 1 && loaderData.races.length
+          ? [
+              ...SITE_LANGUAGES.map((locale) => ({
+                rel: "alternate",
+                hrefLang: locale,
+                href: `${SITE_URL}/${locale}/${site.slug}/races`,
+              })),
+              {
+                rel: "alternate",
+                hrefLang: "x-default",
+                href: `${SITE_URL}/en/${site.slug}/races`,
+              },
+            ]
+          : []),
+      ],
+      scripts: filtered
+        ? []
+        : directoryStructuredData(
+            url,
+            title,
+            loaderData.races.slice(0, PAGE_SIZE).map((race) => ({
+              name: race.name,
+              path: IS_RUNRECS_SITE
+                ? `/${language}/${site.slug}/races/${encodeURIComponent(race.slug)}`
+                : `/races/${encodeURIComponent(race.slug)}`,
+            })),
+            language,
+          ),
     };
   },
   component: CountryRacesPage,
@@ -161,6 +199,8 @@ function CountryRacesPage() {
   const activeFilterCount = countActiveSearchFilters(filters, { ignoreCountry: true });
   const page = routeSearch.page ?? 1;
   const visibleRaces = races.slice(0, PAGE_SIZE);
+  const nextRace =
+    page === 1 && !Object.values(routeSearch).some(Boolean) ? visibleRaces[0] : undefined;
   const hasNextPage = races.length > PAGE_SIZE;
   const firstEventNumber = visibleRaces.length ? (page - 1) * PAGE_SIZE + 1 : 0;
   const lastEventNumber = (page - 1) * PAGE_SIZE + visibleRaces.length;
@@ -193,11 +233,31 @@ function CountryRacesPage() {
             {site.flag} {country}
           </p>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
-            {translateCountryText(copy.racesIn, country)}
+            {translateCountryText(
+              filters.sport === "Running" ? copy.runningCalendar : copy.racesIn,
+              country,
+            )}
           </h1>
-          <p className="max-w-2xl text-sm text-muted">
-            {translateCountryText(copy.racesIntro, country)}
-          </p>
+          <p className="max-w-2xl text-sm text-muted">{copy.racesIntro}</p>
+          {nextRace?.next_date && (
+            <p className="text-sm">
+              <strong>{copy.nextListedRace}</strong>
+              {" · "}
+              <a
+                className="text-accent underline"
+                href={`/races/${encodeURIComponent(nextRace.slug)}`}
+              >
+                {nextRace.name}
+              </a>
+              {" · "}
+              <time dateTime={nextRace.next_date}>
+                {new Intl.DateTimeFormat(language, { dateStyle: "long", timeZone: "UTC" }).format(
+                  new Date(nextRace.next_date + "T12:00:00Z"),
+                )}
+              </time>
+              {nextRace.city ? ` · ${nextRace.city}` : ""}
+            </p>
+          )}
         </div>
         <button
           type="button"
@@ -247,7 +307,11 @@ function CountryRacesPage() {
           <div className="grid gap-2">
             {visibleRaces.length ? (
               visibleRaces.map((race) => (
-                <RaceCard key={race.id} race={race} localized={{ language, country: site.slug }} />
+                <RaceCard
+                  key={race.id}
+                  race={race}
+                  localized={IS_RUNRECS_SITE ? { language, country: site.slug } : undefined}
+                />
               ))
             ) : (
               <p className="rounded-xl border border-dashed border-border px-4 py-10 text-center text-sm text-muted">
@@ -262,20 +326,34 @@ function CountryRacesPage() {
               className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3 shadow-card"
             >
               {page > 1 ? (
-                <Link from={Route.fullPath} to="." rel="prev" aria-label="Previous page"
+                <Link
+                  from={Route.fullPath}
+                  to="."
+                  rel="prev"
+                  aria-label="Previous page"
                   search={{ ...routeSearch, page: page > 2 ? page - 1 : undefined }}
-                  className="inline-flex min-h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg">
+                  className="inline-flex min-h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg"
+                >
                   ←
                 </Link>
-              ) : <span />}
+              ) : (
+                <span />
+              )}
               <span className="text-sm text-subtle">{page}</span>
               {hasNextPage && page < MAX_PAGE ? (
-                <Link from={Route.fullPath} to="." rel="next" aria-label="Next page"
+                <Link
+                  from={Route.fullPath}
+                  to="."
+                  rel="next"
+                  aria-label="Next page"
                   search={{ ...routeSearch, page: page + 1 }}
-                  className="inline-flex min-h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg">
+                  className="inline-flex min-h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg"
+                >
                   →
                 </Link>
-              ) : <span />}
+              ) : (
+                <span />
+              )}
             </nav>
           ) : null}
         </div>
