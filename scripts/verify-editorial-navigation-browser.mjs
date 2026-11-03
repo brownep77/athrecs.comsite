@@ -32,21 +32,24 @@ try {
     const article = page.locator("main article").first();
     const bounds = await article.boundingBox();
     assert.ok(bounds && bounds.x >= 0 && bounds.x + bounds.width <= width + 1, `Article exceeds ${width}px`);
-    const table = article.getByRole("table").first().locator("..");
-    assert.equal(await table.getAttribute("role"), "region");
-    assert.equal(await table.getAttribute("tabindex"), "0");
-    await table.focus();
-    const sizes = await table.evaluate((element) => {
-      element.scrollLeft = element.scrollWidth;
-      return [element.clientWidth, element.scrollWidth, element.scrollLeft];
-    });
-    assert.ok(sizes[0] <= width);
-    if (width < 512) {
-      assert.ok(
-        sizes[1] > sizes[0] && sizes[2] > 0,
-        `Table must scroll at ${width}px (client, content, scroll offset: ${sizes.join(", ")})`,
-      );
+    const board = article.locator("section[data-standings]").first();
+    const panels = board.locator("details");
+    assert.deepEqual(await panels.locator("summary").allTextContents(), ["Men", "Women"]);
+    const [men, women] = await Promise.all([panels.nth(0).boundingBox(), panels.nth(1).boundingBox()]);
+    assert.ok(men && women);
+    if (width >= 768) assert.ok(women.x >= men.x + men.width, "Men on the left and women on the right");
+    else assert.ok(women.y >= men.y + men.height, "Stack divisions on phones");
+    for (const panel of await panels.all()) {
+      assert.ok(await panel.getByRole("table").isVisible());
+      assert.ok(await panel.evaluate(el => el.scrollWidth <= el.clientWidth + 1), "Panel fits the viewport");
     }
+    const summary = panels.first().locator("summary");
+    await summary.focus();
+    await summary.press("Enter");
+    assert.equal(await panels.first().getByRole("table").isVisible(), false);
+    assert.ok(await panels.nth(1).getByRole("table").isVisible());
+    await summary.press("Enter");
+    assert.ok(await panels.first().getByRole("table").isVisible());
     await page.close();
     console.log(`${country}: same canonical from both desks; article and table checked at ${width}px`);
   }
