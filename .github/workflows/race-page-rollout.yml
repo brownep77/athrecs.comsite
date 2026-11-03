@@ -8,6 +8,8 @@ on:
       - "src/lib/athrecs/race-*"
       - "src/lib/auth/signup-alerts.server.ts"
       - "src/routes/api/signup-alerts.ts"
+      - "src/lib/athrecs/event-images.ts"
+      - "scripts/verify-event-images.mjs"
       - "src/lib/athrecs/seo.ts"
       - "src/runrecs/seo.ts"
       - "src/data/runrecs-race-guides.ts"
@@ -40,6 +42,7 @@ jobs:
       - run: npx tsc --noEmit
       - run: node scripts/verify-race-page-rollout.mjs
       - run: node scripts/verify-race-page-schema.mjs
+      - run: node scripts/verify-event-images.mjs
       - run: node scripts/verify-race-organiser-urls.mjs
       - run: node scripts/verify-page-biographies.mjs
       - run: node scripts/verify-hamburg-race-example.mjs

@@ -87,7 +87,6 @@ export function sportsEventJsonLd(
   return {
     ...schema,
     url: absoluteUrl(`/races/${input.slug}`),
-    ...(schema["@type"] === "SportsEvent" ? { image: DEFAULT_OG_IMAGE } : {}),
   };
 }
 

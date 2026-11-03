@@ -1,3 +1,4 @@
+import { eventImageJsonLd } from "../athrecs/event-images.ts";
 import { verifiedGuideOrganiser } from "../athrecs/race-organiser.ts";
 import { roadGuideTitle } from "../athrecs/race-search-title.ts";
 import type { MarathonCountryGuide, RoadMarathon } from "@/data/road-marathons/types";
@@ -245,6 +246,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
     },
     ...upcomingRoadEditions(race, now).map((edition) => ({
       "@type": "SportsEvent",
+      ...eventImageJsonLd(race.slug, edition.date),
       "@id": `${url}#edition-${edition.date}`,
       name: `${race.name} ${edition.date.slice(0, 4)}`,
       url: `${url}#edition-${edition.date}`,

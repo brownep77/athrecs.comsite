@@ -1,3 +1,4 @@
+import { ReviewedEventImage } from "@/components/races/ReviewedEventImage";
 import { fixtureSlugForGuide } from "@/data/race-guide-links";
 import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
 import { RaceActions } from "@/components/races/RaceActions";
@@ -438,6 +439,7 @@ export function RoadMarathonPage({
         <h1 className="mt-4 max-w-4xl font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
           {race.name} course and entry guide
         </h1>
+        <ReviewedEventImage slug={race.slug} date={upcoming[0]?.date} />
         <p className="mt-4 text-base text-muted">{roadRaceLocation(race, country.name)}</p>
         <p className="mt-5 max-w-3xl text-base leading-7">{race.description}</p>
         <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
