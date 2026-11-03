@@ -1,3 +1,4 @@
+import { WANDA_PANFIL_NEW_YORK_1990 } from "./wanda-panfil-new-york-1990";
 import { NOVEMBER_3_NEWS } from "./november-3-2026-news";
 import { NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS } from "./new-york-marathon-2026-famous-runners";
 import { NYC_2026_CELEBRITY_FINISHERS } from "./nyc-2026-celebrity-finishers";
@@ -17,6 +18,7 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  WANDA_PANFIL_NEW_YORK_1990,
   ...NOVEMBER_3_NEWS,
   AUCKLAND_MARATHON_2026_RESULTS,
   DUBLIN_MARATHON_2026_RESULTS,
@@ -45,3 +47,4 @@ export const EDITORIAL_ARTICLES: EditorialArticle[] = [
       ]
     : []),
 ];
+
