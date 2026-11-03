@@ -72,6 +72,28 @@ assert.equal(
   ]),
   row,
 );
+const derry = data({
+  event: {
+    name: "Walled City 10 Mile Road Race",
+    slug: "walled-city-10-mile-road-race",
+    sport: "Running",
+    city: "Derry",
+    country: "Northern Ireland",
+  },
+  upcoming: [{ event_date: "2027-03-13", distance_code: "10mi", status: "TBC" }],
+  distances: ["10mi"],
+});
+const derryResult = raceSearchContent(derry);
+assert.equal(derryResult.title, "Derry 10 Miler 2027 | Walled City 10 Mile Road Race | AthRecs");
+assert.match(derryResult.description, /Derry 10 Miler.*13 March 2027/);
+assert.match(derryResult.biography[0], /also known as the Derry 10 Miler/);
+for (const change of [{ event_date: "2028-03-11" }, { status: "Cancelled" }]) {
+  const changed = raceSearchContent({ ...derry, upcoming: [{ ...derry.upcoming[0], ...change }] });
+  assert.doesNotMatch(
+    changed.title + changed.description + changed.biography.join(" "),
+    /Derry 10 Miler/,
+  );
+}
 const pairs = [
   ["2027-01-10", "09:30", "Europe/London", "+00:00"],
   ["2027-07-10", "09:30", "Europe/London", "+01:00"],
