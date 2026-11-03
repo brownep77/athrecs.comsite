@@ -1,14 +1,17 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
+import { sportIsInPublicSiteScope } from "@/lib/site-scope";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 
 export function ProfileEventLink({
   result,
+  hasPublicEdition = false,
   children,
   className,
   style,
 }: {
   result: { sport: string; eventSlug: string; sourceUrls?: string[]; history?: { key: string } };
+  hasPublicEdition?: boolean;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -19,8 +22,10 @@ export function ProfileEventLink({
         {children}
       </span>
     );
-  const running = ["Running", "Parkrun"].includes(result.sport);
-  if (result.sport === "Athletics" || running)
+  const linkToRace = hasPublicEdition
+    ? sportIsInPublicSiteScope(result.sport)
+    : ["Athletics", "Running", "Parkrun"].includes(result.sport);
+  if (linkToRace)
     return (
       <Link
         to="/races/$slug"

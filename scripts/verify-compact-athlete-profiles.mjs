@@ -92,6 +92,24 @@ try {
     overallPlace: null,
     category: null,
   };
+  const publicSwimRouter = createRouter({
+    routeTree: createRootRoute({
+      component: () => createElement(CompactResultsTable, {
+        results: [sourceRow],
+        editionLinks: {
+          [sourceRow.resultId]: { slug: "public-swim-17", label: "Pool swim results" },
+        },
+      }),
+    }),
+    history: createMemoryHistory({ initialEntries: ["/"] }),
+  });
+  await publicSwimRouter.load();
+  const publicSwim = load(
+    renderToStaticMarkup(createElement(RouterProvider, { router: publicSwimRouter })),
+  );
+  const publicRaceLinks = publicSwim('td[data-label="Race name"] a')
+    .map((_, link) => publicSwim(link).attr("href")).get();
+  assert.deepEqual(publicRaceLinks, ["/races/synthetic-source-credit", "/results/public-swim-17"]);
   const renderSourceLinks = (resultSource, sourceUrls = [originalResultUrl]) => {
     const html = renderToStaticMarkup(
       createElement(CompactResultsTable, {

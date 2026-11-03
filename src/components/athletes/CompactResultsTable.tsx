@@ -10,6 +10,7 @@ import {
   type HistoryResult,
   type ResultsHistoryEntry,
 } from "@/lib/athrecs/profile-history-results";
+import type { PublicAthletePreview } from "@/lib/athrecs/public-athlete-preview";
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { type ProfileResult, findPersonalBests } from "@/lib/athrecs/profile-records";
@@ -49,6 +50,7 @@ type Row = Omit<ProfileResult, "athleteName">;
 export function CompactResultsTable({
   results,
   entries,
+  editionLinks,
   hasHistory = false,
   action,
   claimable = false,
@@ -59,6 +61,7 @@ export function CompactResultsTable({
 }: {
   results: Row[];
   entries?: ResultsHistoryEntry[];
+  editionLinks?: PublicAthletePreview["editionLinks"];
   hasHistory?: boolean;
   showEvidence?: boolean;
   reportedRecords?: readonly ReportedRaceRecord[];
@@ -139,6 +142,7 @@ export function CompactResultsTable({
                 />
               );
             const result = entry.result;
+            const editionLink = editionLinks?.[result.resultId];
             return (
               <tr
                 role="row"
@@ -158,11 +162,21 @@ export function CompactResultsTable({
                     <ResultMedal result={result} />
                     <ProfileEventLink
                       result={result}
+                      hasPublicEdition={Boolean(editionLink)}
                       className="text-fg no-underline hover:text-accent hover:underline"
                     >
                       {result.eventName}
                     </ProfileEventLink>
                   </span>
+                  {editionLink && (
+                    <Link
+                      to="/results/$editionId"
+                      params={{ editionId: editionLink.slug }}
+                      className="block py-1 text-xs text-accent underline"
+                    >
+                      {editionLink.label}
+                    </Link>
+                  )}
                   <CompetitionTierBadge context={recordedCompetition(result)} />
                   <ResultWeather eventSlug={result.eventSlug} eventDate={result.eventDate} />
                   <ResultDisqualification
