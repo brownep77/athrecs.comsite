@@ -1,11 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS_ARTICLES } from "@/data/runrecs-news";
+import { getEditorialSummaries } from "@/lib/athrecs/public-editorial-api";
 import { EditorialBrowse } from "@/components/editorial/EditorialBrowse";
 import { parseEditorialSearch } from "@/lib/athrecs/editorial";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/news/")({
+  loader: () => IS_RUNRECS_SITE ? [] : getEditorialSummaries(),
   validateSearch: parseEditorialSearch,
   head: () =>
     IS_RUNRECS_SITE
@@ -36,6 +38,7 @@ function AthRecsNewsPage() {
   const navigate = Route.useNavigate();
   return (
     <EditorialBrowse
+      catalogue={Route.useLoaderData()}
       kind="news"
       search={search}
       onChange={(next) => {

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { getNewsArticle } from "@/data/runrecs-news";
-import { EDITORIAL_ARTICLES } from "@/data/athrecs-editorial";
+import { getEditorialArticle } from "@/lib/athrecs/public-editorial-api";
 import { EditorialArticlePage } from "@/components/editorial/EditorialArticlePage";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
@@ -10,7 +10,7 @@ import { getPublicEditorialAthleteLinks } from "@/lib/athrecs/editorial-athletes
 export const Route = createFileRoute("/news/$slug")({
   loader: async ({ params }) => {
     if (!IS_RUNRECS_SITE) {
-      const editorial = EDITORIAL_ARTICLES.find((item) => item.slug === params.slug);
+      const editorial = await getEditorialArticle({ data: params.slug });
       if (!editorial) throw notFound();
       if (editorial.kind === "race-reports")
         throw redirect({

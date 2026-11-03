@@ -1,35 +1,5 @@
-import type { SportPage } from "../lib/athrecs/sport-pages";
-
-export type DirectorySport = SportPage["slug"];
-export const ORGANISATION_TYPES = {
-  national: "National federation",
-  home: "Home-nation governing body",
-  international: "International federation / association",
-  continental: "Continental federation",
-  regional: "Regional governing body",
-  specialist: "Specialist sports association",
-  funding: "Funding and development",
-  olympic: "Olympic / Paralympic body",
-  organiser: "Event organiser",
-} as const;
-
-export type SportsOrganisation = {
-  slug: string;
-  name: string;
-  aliases?: string[];
-  type: keyof typeof ORGANISATION_TYPES;
-  country: string;
-  jurisdiction: string;
-  territories: string[];
-  sports: DirectorySport[];
-  summary: string;
-  detail?: string;
-  website: string;
-  websiteKind?: "member-directory";
-  sources: string[];
-  related?: string[];
-  checkedAt: string;
-};
+import type { SportsOrganisation, DirectorySport } from "./sports-organisation-types.ts";
+export * from "./sports-organisation-types.ts";
 
 const athletics: DirectorySport[] = ["road-running", "trail-running", "track-and-field"];
 const cycling: DirectorySport[] = ["road-cycling", "mountain-biking", "track-cycling", "bmx"];
@@ -44,6 +14,7 @@ const record = (
   reviewedAt: string = checkedAt,
 ): SportsOrganisation => ({
   ...entry,
+  sources: [...entry.sources, ...(entry.resultReferences ?? [])],
   checkedAt: reviewedAt,
 });
 const federation = (
@@ -799,6 +770,8 @@ export const SPORTS_ORGANISATIONS: SportsOrganisation[] = [
       sources: [
         "https://www.aquaticsgb.com/about-us/",
         "https://www.scottishswimming.com/",
+      ],
+      resultReferences: [
         "https://www.scottishswimming.com/our-sports/swimming/results",
         "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/04/10082050/SNAGS-2026-Results.pdf",
         "https://ocs-sport.ams3.digitaloceanspaces.com/scotswim-full/2026/06/30143358/Friday-Results-1.pdf",

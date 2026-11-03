@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { DIRECTORY_COUNTRIES } from "@/lib/athrecs/sports-directory";
+import { hasDirectoryCountry } from "@/lib/athrecs/public-directory-api";
 import { SportsDiscovery } from "@/components/running/SportsDiscovery";
 import {
   COUNTRY_SITES,
@@ -11,10 +11,10 @@ import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { discoveryJsonLd, runningHubPath } from "@/lib/running/discovery";
 
 export const Route = createFileRoute("/$language/$country/")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const site = countrySiteFromSlug(params.country);
     if (!site || !isSiteLanguage(params.language)) throw notFound();
-    return { site };
+    return { site, inDirectory: await hasDirectoryCountry({ data: site.country }) };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
@@ -45,7 +45,7 @@ export const Route = createFileRoute("/$language/$country/")({
 });
 function CountrySportsPage() {
   // Vite replaces the base country route; the generated tree retains its loader type.
-  const { site } = Route.useLoaderData() as unknown as { site: CountrySite };
+  const { site, inDirectory } = Route.useLoaderData() as unknown as { site: CountrySite; inDirectory: boolean };
   return (
     <div className="space-y-6 pb-8">
       <nav aria-label="Breadcrumb" className="flex min-h-11 items-center gap-2 text-sm">
@@ -84,11 +84,11 @@ function CountrySportsPage() {
       <Link
         to="/directory"
         search={{
-          country: DIRECTORY_COUNTRIES.includes(site.country) ? site.country : "International",
+          country: inDirectory ? site.country : "International",
         }}
         className="inline-flex min-h-11 items-center rounded-lg border border-border px-4 text-sm font-semibold"
       >
-        {DIRECTORY_COUNTRIES.includes(site.country)
+        {inDirectory
           ? `Sports federations and governing bodies in ${site.country}`
           : "International sports federations"}{" "}
         →

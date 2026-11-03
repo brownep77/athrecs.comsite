@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { EDITORIAL_ARTICLES } from "@/data/athrecs-editorial";
+import type { EditorialArticle } from "@/lib/athrecs/editorial";
 import { COUNTRY_SITES } from "@/lib/athrecs/country-sites";
 import {
   EDITORIAL_CONTINENTS,
@@ -9,7 +9,7 @@ import {
   editorialLevels,
   editorialLocationOptions,
   editorialPath,
-  editorialReadingMinutes,
+
   filterEditorialArticles,
   type EditorialKind,
   type EditorialLevel,
@@ -36,9 +36,11 @@ function levelSearch(search: EditorialSearch, level?: EditorialLevel): Editorial
 
 export function EditorialBrowse({
   kind,
+  catalogue,
   search,
   onChange,
 }: {
+  catalogue: (EditorialArticle & { minutes: number })[];
   kind: EditorialKind;
   search: EditorialSearch;
   onChange: (search: EditorialSearch) => void;
@@ -47,8 +49,8 @@ export function EditorialBrowse({
   const route = kind === "race-reports" ? "/race-reports" : "/news";
   const sport = getSportPage(search.sport);
   const activeLevel = EDITORIAL_LEVELS.find((item) => item.value === search.level);
-  const articles = filterEditorialArticles(EDITORIAL_ARTICLES, kind, search);
-  const locations = editorialLocationOptions(EDITORIAL_ARTICLES, kind, search);
+  const articles = filterEditorialArticles(catalogue, kind, search);
+  const locations = editorialLocationOptions(catalogue, kind, search);
   const countries = [
     ...new Set([
       ...EDITORIAL_PRIORITY_COUNTRIES,
@@ -258,7 +260,7 @@ export function EditorialBrowse({
                   <time dateTime={article.date} className="font-semibold text-accent">
                     {article.displayDate}
                   </time>
-                  <span className="text-muted">{editorialReadingMinutes(article)} min read</span>
+                  <span className="text-muted">{article.minutes} min read</span>
                   {editorialLevels(article).map((level) => (
                     <span
                       key={level}

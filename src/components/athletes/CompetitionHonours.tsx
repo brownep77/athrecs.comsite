@@ -62,7 +62,7 @@ export function CompetitionHonours({
                         rel="noopener noreferrer"
                         className="ml-2 text-accent underline"
                       >
-                        {resultCredit(url, provider)?.name ?? "Source"}
+                        {resultCredit(url, provider) ?? "Source"}
                       </a>
                     ))}
                 </li>

@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound, stripSearchParams } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight, Download, Copy, Clock3 } from "lucide-react";
+import { ArrowLeft, Download, Copy, Clock3 } from "lucide-react";
+import { ArchiveResultPanels } from "@/components/races/ArchiveResultPanels";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
+import { createServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { siteGraphMeta } from "@/lib/athrecs/seo";
-import snapshot from "@/data/berlin-marathon-2026.json";
 import {
   BERLIN_PATH,
   BERLIN_URL,
-  BERLIN_OFFICIAL,
-  berlinSnapshotSchema,
   berlinSearch,
   berlinSelection,
   berlinPlace,
@@ -20,13 +20,18 @@ import {
   type BerlinView,
 } from "@/lib/athrecs/berlin-results";
 
-const data = berlinSnapshotSchema.parse(snapshot);
+const getBerlinSnapshot = createServerFn({ method: "GET" }).handler(async () => {
+  const { publicBerlinSnapshot } = await import("@/lib/athrecs/berlin-snapshot.server");
+  const { default: snapshot } = await import("@/data/berlin-marathon-2026.json");
+  return publicBerlinSnapshot(snapshot);
+});
 const description =
-  "Berlin Marathon 2026 results hub: men, women and age categories, with official results links and AthRecs cards to share on Instagram and X.";
+  "Berlin Marathon 2026 results for men, women and age categories. Find published placings, gun and chip times, and shareable AthRecs result cards.";
 export const Route = createFileRoute("/results/berlin-marathon-2026")({
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
+  loader: () => getBerlinSnapshot(),
   validateSearch: berlinSearch,
   search: { middlewares: [stripSearchParams(berlinSearch({}))] },
   head: () => ({
@@ -43,13 +48,14 @@ export const Route = createFileRoute("/results/berlin-marathon-2026")({
 const field =
   "h-11 w-full rounded-lg border border-border bg-bg px-3 text-base text-fg focus:outline-none focus:ring-2 focus:ring-accent";
 const views: { value: BerlinView; label: string }[] = [
+  { value: "all", label: "All results" },
   { value: "men", label: "Men" },
   { value: "women", label: "Women" },
   { value: "age", label: "Age categories" },
-  { value: "all", label: "Find a runner" },
 ];
 
 function BerlinResultsPage() {
+  const data = Route.useLoaderData();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
   const [message, setMessage] = useState("");
@@ -133,15 +139,6 @@ function BerlinResultsPage() {
               {data.results.length.toLocaleString("en-GB")} results published on AthRecs
             </span>
           </div>
-          <a
-            href={BERLIN_OFFICIAL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#47ded0] px-4 py-2 font-semibold text-[#082d32] no-underline hover:bg-white"
-          >
-            Open official results & tracking
-            <ArrowUpRight className="size-4" aria-hidden="true" />
-          </a>
         </div>
       </header>
 
@@ -249,71 +246,92 @@ function BerlinResultsPage() {
                   : `${data.coverage === "highlights" ? "Selected highlights" : "Partial results"} — this is not the full field.`}{" "}
                 Placings are the organiser’s published positions.
               </p>
-              <div
-                className="overflow-x-auto"
-                tabIndex={0}
-                role="region"
-                aria-label="Berlin results table, scroll horizontally on small screens"
-              >
-                <table className="w-full min-w-[720px] text-left text-sm">
-                  <caption className="sr-only">
-                    {berlinTitle(search)}. Gun and chip times are shown separately.
-                  </caption>
-                  <thead className="bg-accent-soft text-accent">
-                    <tr>
-                      {[rankLabel, "Athlete / club", "Category", "Gun", "Chip", "Share"].map(
-                        (label) => (
-                          <th key={label} scope="col" className="px-3 py-3">
-                            {label}
-                          </th>
-                        ),
-                      )}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {visible.map((row) => (
-                      <tr key={row.id} className="border-b border-border last:border-0">
-                        <td className="px-3 py-4 font-bold tabular-nums">
-                          {berlinPlace(row, search.view) ?? "—"}
-                        </td>
-                        <td className="max-w-64 px-3 py-4">
-                          <p className="font-semibold">{row.name}</p>
-                          <p className="mt-1 text-muted">
-                            {[row.country, row.club].filter(Boolean).join(" · ")}
-                          </p>
-                          <p className="mt-1 text-xs text-muted">Bib {row.bib}</p>
-                        </td>
-                        <td className="px-3 py-4">
-                          {row.category ?? "—"}
-                          <p className="text-xs text-muted">
-                            {row.categoryPlace ? `Position ${row.categoryPlace}` : ""}
-                          </p>
-                        </td>
-                        <td className="px-3 py-4 tabular-nums">{row.gunTime ?? "—"}</td>
-                        <td className="px-3 py-4 tabular-nums">{row.chipTime ?? "—"}</td>
-                        <td className="px-3 py-4">
-                          <button
-                            disabled={busy}
-                            onClick={() => void download("instagram", row)}
-                            className="min-h-11 font-semibold text-accent underline disabled:opacity-50"
-                            aria-label={`Download ${row.name}'s Instagram result card`}
-                          >
-                            Instagram
-                          </button>
-                          <button
-                            disabled={busy}
-                            onClick={() => void download("x", row)}
-                            className="block min-h-11 font-semibold text-accent underline disabled:opacity-50"
-                            aria-label={`Download ${row.name}'s X result card`}
-                          >
-                            X card
-                          </button>
-                        </td>
+              <ArchiveResultPanels rows={visible} division={(row) => row.gender}>
+                {(finishers, division) => (
+                  <table className="w-full border-collapse text-left text-sm">
+                    <caption className="sr-only">
+                      {division} · {berlinTitle(search)}. Times retain their published precision.
+                    </caption>
+                    <thead className="border-y border-border bg-elevated/45 text-xs text-muted">
+                      <tr>
+                        <th scope="col" className="px-2 py-2">
+                          {rankLabel}
+                        </th>
+                        <th scope="col" className="px-2 py-2">
+                          Athlete
+                        </th>
+                        <th scope="col" className="px-2 py-2">
+                          Country
+                        </th>
+                        <th scope="col" className="px-2 py-2 text-right">
+                          Time
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody>
+                      {finishers.map((row) => (
+                        <tr
+                          key={row.id}
+                          className="border-b border-border/70 align-top last:border-0"
+                        >
+                          <td className="px-2 py-2 font-mono tabular-nums">
+                            {berlinPlace(row, search.view) ?? "—"}
+                          </td>
+                          <th
+                            scope="row"
+                            className="px-2 py-2 text-left font-normal [overflow-wrap:anywhere]"
+                          >
+                            <span className="font-semibold">{row.name}</span>
+                            {row.club && (
+                              <span className="block text-xs text-muted">{row.club}</span>
+                            )}
+                            <details className="mt-1 text-xs text-muted">
+                              <summary className="cursor-pointer text-accent">
+                                Details<span className="sr-only"> for {row.name}</span>
+                              </summary>
+                              <p>Bib {row.bib}</p>
+                              {row.category && <p>Category · {row.category}</p>}
+                              {row.categoryPlace && <p>Category position {row.categoryPlace}</p>}
+                              {row.overallPlace && <p>Overall position {row.overallPlace}</p>}
+                              {row.genderPlace && <p>Division position {row.genderPlace}</p>}
+                              <div className="flex flex-wrap gap-2">
+                                {(["instagram", "x"] as const).map((format) => (
+                                  <button
+                                    key={format}
+                                    disabled={busy}
+                                    onClick={() => void download(format, row)}
+                                    className="min-h-11 text-accent underline disabled:opacity-50"
+                                    aria-label={`Download ${row.name}'s ${format === "x" ? "X" : "Instagram"} result card`}
+                                  >
+                                    {format === "x" ? "X card" : "Instagram card"}
+                                  </button>
+                                ))}
+                              </div>
+                            </details>
+                          </th>
+                          <td className="px-2 py-2 text-xs">
+                            <CountryFlag country={row.country} showCode />
+                          </td>
+                          <td className="whitespace-nowrap px-2 py-2 text-right font-mono text-xs font-semibold tabular-nums">
+                            {row.gunTime && (
+                              <p>
+                                <span className="font-sans font-normal text-muted">Gun </span>
+                                {row.gunTime}
+                              </p>
+                            )}
+                            {row.chipTime && (
+                              <p>
+                                <span className="font-sans font-normal text-muted">Chip </span>
+                                {row.chipTime}
+                              </p>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </ArchiveResultPanels>
               {pageCount > 1 && (
                 <nav aria-label="Result pages" className="flex items-center justify-between gap-2">
                   <Button
@@ -347,18 +365,9 @@ function BerlinResultsPage() {
               </h3>
               <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-muted">
                 {data.results.length
-                  ? "You can also search the organiser’s results for the full field."
-                  : "Verified finish times and placings have not been added here yet. The official results service covers the full field, including age groups."}
+                  ? "Try another category or search all published results."
+                  : "Verified finish times and placings will appear here after review."}
               </p>
-              <a
-                href={BERLIN_OFFICIAL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex min-h-11 items-center gap-1 font-semibold text-accent underline"
-              >
-                Find a runner in the official results
-                <ArrowUpRight className="size-4" aria-hidden="true" />
-              </a>
             </div>
           )}
         </div>
@@ -395,17 +404,9 @@ function BerlinResultsPage() {
               Copy page link
             </Button>
           </div>
-          <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex min-h-11 items-center gap-1 font-semibold text-accent underline"
-          >
-            Open post in X<ArrowUpRight className="size-4" aria-hidden="true" />
-          </a>
+
           <p className="mt-1 text-sm text-muted">
-            Attach the downloaded image before posting. Instagram: upload the image and paste the
-            caption.
+            Attach the downloaded image and paste the caption into your post.
           </p>
           <p role="status" aria-live="polite" className="mt-3 text-sm font-medium text-accent">
             {busy ? "Preparing image…" : message}
@@ -426,15 +427,7 @@ function BerlinResultsPage() {
         </div>
       </section>
       <p className="text-sm leading-6 text-muted">
-        AthRecs results coverage. Independent of the race organiser.{" "}
-        <a
-          href="https://www.bmw-berlin-marathon.com/en/your-race/results"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-accent underline"
-        >
-          Official results: SCC EVENTS / Mika Timing.
-        </a>
+        Race organiser · SCC EVENTS. Timing provider · Mika Timing.
       </p>
     </div>
   );

@@ -1,3 +1,5 @@
+import { isParkrunResult } from "@/lib/athrecs/parkrun-timing";
+import { RaceResultsBoard } from "@/components/races/RaceResultsBoard";
 import { RaceActions } from "@/components/races/RaceActions";
 import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
@@ -27,7 +29,6 @@ import {
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
 import { getEventAthleteLinks } from "@/lib/athrecs/event-athlete-discovery-api";
 import { resultEditionLabel, resultSlug } from "@/lib/athrecs/result-slug";
-import { resultCredit } from "@/lib/athrecs/result-credit";
 import { getEditionResults, getEventBySlug } from "@/lib/athrecs/api";
 import {
   effectiveStatus,
@@ -38,7 +39,6 @@ import {
 } from "@/lib/athrecs/format";
 import type {
   EditionEntryOption,
-  EditionResultLink,
   EditionSpectatorAccess,
   EntryStatus,
   EventListItem,
@@ -62,7 +62,6 @@ import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { SITE_NAME, SITE_URL, siteGraphMeta, sportsEventJsonLd } from "@/lib/athrecs/seo";
 import { breadcrumbJsonLd } from "@/lib/athrecs/breadcrumbs";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
-import { PUBLIC_EDITION_PREVIEW_LIMIT } from "@/lib/athrecs/public-read-limits";
 import { RacePracticalInformation } from "@/components/races/RacePracticalInformation";
 import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
@@ -75,6 +74,8 @@ import { reviewedRacePage } from "@/data/race-page-reviews";
 import { diamondLeagueMeetingForSlug } from "@/data/diamond-league";
 import { DiamondLeagueTv } from "@/components/discovery/DiamondLeagueGuide";
 
+type ArchivePreview = Pick<NonNullable<Awaited<ReturnType<typeof getPublicRaceResults>>>, "edition" | "results" | "providerCredits">;
+
 type EditionRow = {
   id: number;
   event_date: string;
@@ -82,9 +83,7 @@ type EditionRow = {
   distance_km: number;
   status: string;
   entry_url: string | null;
-  source_url: string | null;
-  results_official_url: string | null;
-  result_links: EditionResultLink[];
+  result_provider_names: string[];
   entry_options: EditionEntryOption[];
   spectator_access: EditionSpectatorAccess | null;
   start_time: string | null;
@@ -122,7 +121,7 @@ export const Route = createFileRoute("/races/$slug")({
         ...data,
         athleteLinks,
         archiveResults: archiveResults
-          ? { ...archiveResults, results: archiveResults.results.slice(0, 5) }
+          ? { edition: archiveResults.edition, results: archiveResults.results.slice(0, 5), providerCredits: archiveResults.providerCredits }
           : null,
       };
     }
@@ -151,7 +150,7 @@ export const Route = createFileRoute("/races/$slug")({
       ? `Recorded ${archiveResults.edition.distance_code} performances at ${event.name}, ${archiveResults.edition.event_date}, ${[event.city, event.country].filter(Boolean).join(", ")}. ${archiveResults.results
           .slice(0, 3)
           .map((result) => result.athlete_name)
-          .join(", ")}. View recorded results and original provider links.`
+          .join(", ")}. Browse the published race results.`
       : IS_RUNRECS_SITE
         ? event.summary ||
           `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`
@@ -266,7 +265,7 @@ export function RacePageContent({
 }: {
   data: NonNullable<Awaited<ReturnType<typeof getEventBySlug>>>;
   localized?: { language: string; country: string };
-  archiveResults?: Awaited<ReturnType<typeof getPublicRaceResults>>;
+  archiveResults?: ArchivePreview | null;
   athleteLinks?: Awaited<ReturnType<typeof getEventAthleteLinks>>;
 }) {
   const { event, groups, distances, upcoming, past, related } = data;
@@ -324,9 +323,12 @@ export function RacePageContent({
   );
   const formatGuide = raceFormatGuideFor(event.slug);
   const [resultsEditionId, setResultsEditionId] = useState<number | null>(null);
-  const selectedResultsEdition = [...upcoming, ...past].find(
-    (edition) => edition.id === resultsEditionId,
-  );
+  function showEditionResults(id: number) {
+    setResultsEditionId(id);
+    requestAnimationFrame(() => {
+      document.getElementById("edition-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
   const { data: results = [], isFetching } = useQuery({
     queryKey: ["edition-results", resultsEditionId],
     queryFn: () => getEditionResults({ data: resultsEditionId! }),
@@ -344,7 +346,7 @@ export function RacePageContent({
   const spectatorLabel = spectatorAccessLabel(spectatorAccess);
   const pastWithResults = past.filter(
     (ed) =>
-      ed.result_count > 0 || ed.result_links.length > 0 || Boolean(ed.results_official_url?.trim()),
+      ed.result_count > 0 || ed.result_provider_names.length > 0,
   );
   const pastPreview = past.slice(0, 12);
   const pastHidden = past.length - pastPreview.length;
@@ -509,48 +511,20 @@ export function RacePageContent({
           className="space-y-3 rounded-xl border border-border bg-surface p-5"
         >
           <h2 id="archive-results-heading" className="font-display text-xl font-semibold">
-            {archiveResults.edition.distance_code} results ·{" "}
+            Selected {archiveResults.edition.distance_code} performances ·{" "}
             {formatRaceDateShort(archiveResults.edition.event_date)}
           </h2>
           <p className="text-sm text-muted">
-            Recorded performances from {event.name} in{" "}
-            {[event.city, event.country].filter(Boolean).join(", ")}. This is a partial results
-            archive; it does not represent the full field.
+            From the published results for {event.name}.
           </p>
-          <ul className="space-y-2">
-            {archiveResults.results.slice(0, 5).map((result) => {
-              const credit = resultCredit(result.source_url, result.result_source);
-              const finished =
-                ["finished", "fin"].includes(result.status.trim().toLowerCase()) &&
-                !result.disqualified;
-              return (
-                <li key={result.id} className="text-sm">
-                  <span className="font-semibold">{result.athlete_name}</span>
-                  {" · "}
-                  {result.reported_performance ||
-                    (finished
-                      ? formatDuration(result.finish_time_seconds)
-                      : result.disqualified
-                        ? "Disqualified"
-                        : result.status)}
-                  {credit ? (
-                    <>
-                      {" "}
-                      ·{" "}
-                      <a
-                        href={credit.url}
-                        className="text-accent underline"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        Results: {credit.name}
-                      </a>
-                    </>
-                  ) : null}
-                </li>
-              );
-            })}
-          </ul>
+          <RaceResultsBoard
+            results={archiveResults.results}
+            parkrun={isParkrunResult({ sport: event.sport, eventName: event.name })}
+            editionName={resultEditionLabel(archiveResults.edition)}
+          />
+          {archiveResults.providerCredits.length ? (
+            <p className="text-xs text-muted">Results supplied by {archiveResults.providerCredits.join(", ")}</p>
+          ) : null}
           <Link
             to="/results/$editionId"
             params={{ editionId: resultSlug(archiveResults.edition) }}
@@ -860,16 +834,9 @@ export function RacePageContent({
 
       <EditionResultsLinks
         items={pastWithResults}
-        eventName={event.name}
+        eventName={event.result_event_name}
         timingCredit={event.slug === "east-coast-10k" ? "Total Race Timing" : undefined}
-        onAthrecsResults={(id) => {
-          setResultsEditionId(id);
-          requestAnimationFrame(() => {
-            document
-              .getElementById("edition-results")
-              ?.scrollIntoView({ behavior: "smooth", block: "start" });
-          });
-        }}
+        onAthrecsResults={showEditionResults}
       />
 
       {resultsEditionId != null && (
@@ -897,28 +864,6 @@ export function RacePageContent({
                 Public-figure and athlete-approved results only. Other archived participant rows
                 remain private and are available through the signed-in claim flow.
               </p>
-              {!IS_RUNRECS_SITE &&
-              selectedResultsEdition &&
-              results.length >= PUBLIC_EDITION_PREVIEW_LIMIT ? (
-                <p className="text-sm text-muted">
-                  Showing the first {PUBLIC_EDITION_PREVIEW_LIMIT} results.{" "}
-                  <Link
-                    to="/results/$editionId"
-                    params={{
-                      editionId: resultSlug({
-                        edition_id: selectedResultsEdition.id,
-                        event_name: event.name,
-                        event_date: selectedResultsEdition.event_date,
-                        distance_code: selectedResultsEdition.distance_code,
-                      }),
-                    }}
-                    search={{ q: "", page: 1 }}
-                    className="font-medium text-accent underline"
-                  >
-                    Browse all published results
-                  </Link>
-                </p>
-              ) : null}
               <div className="overflow-x-auto rounded-xl border border-border bg-surface shadow-card">
                 <table className="w-full min-w-[28rem] text-left text-sm">
                   <thead className="border-b border-border bg-elevated/60 text-[11px] uppercase tracking-wider text-subtle">
@@ -984,14 +929,8 @@ export function RacePageContent({
         eventSlug={event.slug}
         items={pastPreview}
         hidden={pastHidden}
-        onResults={(id) => {
-          setResultsEditionId(id);
-          requestAnimationFrame(() => {
-            document
-              .getElementById("edition-results")
-              ?.scrollIntoView({ behavior: "smooth", block: "start" });
-          });
-        }}
+        eventName={event.result_event_name}
+        onResults={showEditionResults}
         country={event.country}
         county={event.county}
       />
@@ -1141,34 +1080,22 @@ function QualificationDetails({ qualification }: { qualification: RaceQualificat
   );
 }
 
-function resultProvider(url: string): string {
-  try {
-    const host = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
-    const labels: Record<string, string> = {
-      "chiptiming.co.uk": "Chip Timing UK",
-      "results.frsys.uk": "FR Systems",
-      "totalracetiming.co.uk": "Total Race Timing",
-      "results.sporthive.com": "Sporthive",
-      "sportmaniacs.com": "Sportmaniacs",
-      "my.raceresult.com": "Race Result",
-      "parkrun.org.uk": "parkrun",
-    };
-    return labels[host] ?? host;
-  } catch {
-    return "Official provider";
-  }
-}
-
-function canonicalResultUrl(url: string): string {
-  try {
-    const parsed = new URL(url);
-    parsed.hash = "";
-    parsed.hostname = parsed.hostname.toLowerCase();
-    parsed.pathname = parsed.pathname.replace(/\/+$/, "") || "/";
-    return parsed.toString();
-  } catch {
-    return url.trim();
-  }
+function EditionResultsLink({ eventName, edition }: { eventName: string; edition: EditionRow }) {
+  const result = {
+    edition_id: edition.id,
+    event_name: eventName,
+    event_date: edition.event_date,
+    distance_code: edition.distance_code,
+  };
+  return (
+    <Link
+      to="/results/$editionId"
+      params={{ editionId: resultSlug(result) }}
+      className="inline-flex min-h-11 items-center rounded-md border border-accent/40 px-3 text-xs font-medium text-accent"
+    >
+      {resultEditionLabel(result)}
+    </Link>
+  );
 }
 
 function EditionResultsLinks({
@@ -1182,7 +1109,6 @@ function EditionResultsLinks({
   timingCredit?: string;
   onAthrecsResults: (id: number) => void;
 }) {
-  const [showAll, setShowAll] = useState(false);
   const grouped = useMemo(() => {
     const byDate = new Map<string, EditionRow[]>();
     for (const item of items) {
@@ -1190,11 +1116,49 @@ function EditionResultsLinks({
       group.push(item);
       byDate.set(item.event_date, group);
     }
-    return [...byDate.entries()]
-      .sort(([left], [right]) => right.localeCompare(left))
-      .map(([date, editions]) => ({ date, editions }));
+    return [...byDate.entries()].sort(([left], [right]) => right.localeCompare(left));
   }, [items]);
-  const shown = showAll ? grouped : grouped.slice(0, 12);
+
+  const cards = grouped.map(([date, editions]) => {
+    const providers = [...new Set(editions.flatMap((edition) => edition.result_provider_names))];
+    return (
+      <div
+        key={date}
+        className="flex flex-col gap-3 rounded-xl border border-border bg-surface px-3.5 py-3 shadow-card sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div className="space-y-1.5">
+          <p className="text-sm font-semibold text-fg">{formatRaceDateShort(date)}</p>
+          <div className="flex flex-wrap gap-1.5">
+            {editions.map((edition) => (
+              <DistanceBadge key={edition.id} distance={edition.distance_code} distanceKm={edition.distance_km} />
+            ))}
+          </div>
+          {!timingCredit && providers.length > 0 && (
+            <p className="text-xs text-muted">Results supplied by {providers.join(", ")}</p>
+          )}
+          {editions.every((edition) => edition.result_count === 0) && (
+            <p className="text-xs text-muted">AthRecs has yet to publish performances from this edition.</p>
+          )}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {editions.filter((edition) => edition.result_count > 0).map((edition) => (
+            IS_RUNRECS_SITE ? (
+              <button
+                key={edition.id}
+                type="button"
+                onClick={() => onAthrecsResults(edition.id)}
+                className="inline-flex h-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium"
+              >
+                ATHRECS public · {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
+              </button>
+            ) : (
+              <EditionResultsLink key={edition.id} edition={edition} eventName={eventName} />
+            )
+          ))}
+        </div>
+      </div>
+    );
+  });
 
   return (
     <section aria-labelledby="results-heading" className="space-y-3">
@@ -1206,121 +1170,29 @@ function EditionResultsLinks({
               Results
             </h2>
           </div>
-          <p className="mt-1 text-xs text-subtle">
-            {timingCredit ? `Timing by ${timingCredit}` : "Public-figure or athlete-approved ATHRECS results, plus verified organiser links."}
-          </p>
+          {timingCredit && <p className="mt-1 text-xs text-subtle">Timing by {timingCredit}</p>}
         </div>
-        {grouped.length > 0 ? (
-          <Badge variant="outline">
-            {grouped.length} edition{grouped.length === 1 ? "" : "s"}
-          </Badge>
-        ) : null}
+        {grouped.length > 0 && (
+          <Badge variant="outline">{grouped.length} edition{grouped.length === 1 ? "" : "s"}</Badge>
+        )}
       </div>
-
-      {shown.length === 0 ? (
-        <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
-          No verified results links have been added yet.
-        </p>
-      ) : (
+      {cards.length ? (
         <div className="grid gap-2">
-          {shown.map(({ date, editions }) => {
-            const externalLinks = new Map<string, { label: string; url: string }>();
-            for (const edition of editions) {
-              for (const resultLink of edition.result_links) {
-                const canonical = canonicalResultUrl(resultLink.results_url);
-                if (!externalLinks.has(canonical)) {
-                  externalLinks.set(canonical, {
-                    label: `Results · ${resultLink.provider_name}`,
-                    url: resultLink.results_url,
-                  });
-                }
-              }
-              const officialUrl = edition.results_official_url?.trim();
-              if (officialUrl) {
-                const canonical = canonicalResultUrl(officialUrl);
-                if (!externalLinks.has(canonical)) {
-                  externalLinks.set(canonical, {
-                    label: `Results · ${resultProvider(officialUrl)}`,
-                    url: officialUrl,
-                  });
-                }
-              }
-            }
-            return (
-              <div
-                key={date}
-                className="flex flex-col gap-3 rounded-xl border border-border bg-surface px-3.5 py-3 shadow-card sm:flex-row sm:items-center sm:justify-between"
-              >
-                <div className="space-y-1.5">
-                  <p className="text-sm font-semibold text-fg">{formatRaceDateShort(date)}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {editions.map((edition) => (
-                      <DistanceBadge
-                        key={edition.id}
-                        distance={edition.distance_code}
-                        distanceKm={edition.distance_km}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {!IS_RUNRECS_SITE &&
-                    editions
-                      .filter((edition) => edition.result_count > 0)
-                      .map((edition) => (
-                        <Link
-                          key={edition.id}
-                          to="/results/$editionId"
-                          params={{
-                            editionId: resultSlug({
-                              edition_id: edition.id,
-                              event_name: eventName,
-                              event_date: edition.event_date,
-                              distance_code: edition.distance_code,
-                            }),
-                          }}
-                          className="inline-flex min-h-11 items-center rounded-md border border-accent/40 px-3 text-xs font-medium text-accent"
-                        >
-                          {resultEditionLabel({ event_name: eventName, event_date: edition.event_date, distance_code: edition.distance_code })}
-                        </Link>
-                      ))}
-                  {editions
-                    .filter((edition) => edition.result_count > 0)
-                    .map((edition) => (
-                      <button
-                        key={`athrecs-${edition.id}`}
-                        type="button"
-                        onClick={() => onAthrecsResults(edition.id)}
-                        className="inline-flex h-11 min-w-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium"
-                      >
-                        ATHRECS public ·{" "}
-                        {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
-                      </button>
-                    ))}
-                  {[...externalLinks.values()].map((link) => (
-                    <a
-                      key={canonicalResultUrl(link.url)}
-                      href={link.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex h-11 items-center gap-1.5 rounded-md border border-border bg-elevated px-3 text-xs font-medium text-fg no-underline hover:border-accent hover:text-accent"
-                    >
-                      {link.label}
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+          {cards.slice(0, 12)}
+          {cards.length > 12 && (
+            <details>
+              <summary className="cursor-pointer py-3 text-sm font-medium text-accent">
+                Earlier editions ({cards.length - 12})
+              </summary>
+              <div className="grid gap-2">{cards.slice(12)}</div>
+            </details>
+          )}
         </div>
+      ) : (
+        <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
+          Results have yet to be added for this race.
+        </p>
       )}
-
-      {grouped.length > 12 ? (
-        <Button variant="secondary" size="sm" onClick={() => setShowAll((value) => !value)}>
-          {showAll ? "Show latest 12" : `Show all ${grouped.length} editions`}
-        </Button>
-      ) : null}
     </section>
   );
 }
@@ -1340,6 +1212,7 @@ function EditionList({
   items,
   calendarEvent,
   eventSlug = calendarEvent?.slug,
+  eventName,
   hidden = 0,
   onResults,
   country,
@@ -1349,6 +1222,7 @@ function EditionList({
   items: EditionRow[];
   calendarEvent?: Parameters<typeof catalogueCalendarRace>[0];
   eventSlug?: string;
+  eventName?: string;
   hidden?: number;
   onResults?: (id: number) => void;
   country?: string;
@@ -1386,9 +1260,7 @@ function EditionList({
                     <Badge variant={st === "Finished" ? "default" : "solid"}>
                       {statusLabel(st)}
                     </Badge>
-                    {(ed.result_count > 0 ||
-                      ed.result_links.length > 0 ||
-                      ed.results_official_url) && <Badge variant="outline">Results</Badge>}
+                    {(ed.result_count > 0 || ed.result_provider_names.length > 0) && <Badge variant="outline">Results</Badge>}
                   </div>
                   <p className="text-sm font-semibold text-fg">
                     {formatRaceDateShort(ed.event_date)}
@@ -1411,7 +1283,10 @@ function EditionList({
                   {calendarEvent ? (
                     <RaceActions race={catalogueCalendarRace(calendarEvent, ed, SITE_URL)} />
                   ) : null}
-                  {ed.result_count > 0 && onResults && (
+                  {ed.result_count > 0 && !IS_RUNRECS_SITE && eventName && (
+                    <EditionResultsLink edition={ed} eventName={eventName} />
+                  )}
+                  {ed.result_count > 0 && IS_RUNRECS_SITE && onResults && (
                     <button
                       type="button"
                       onClick={() => onResults(ed.id)}
@@ -1444,8 +1319,7 @@ function EditionList({
           ) : null}
           {hidden > 0 ? (
             <p className="px-1 text-xs text-subtle">
-              {hidden} more date{hidden === 1 ? "" : "s"} on the listing — open the official page
-              for the full timetable.
+              {hidden} earlier date{hidden === 1 ? "" : "s"} in the race history.
             </p>
           ) : null}
         </div>

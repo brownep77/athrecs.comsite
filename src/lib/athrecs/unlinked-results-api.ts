@@ -3,6 +3,7 @@ import { getSql } from "@/lib/db";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { normalizeResultsSearch } from "./public-results-search";
+import { resultCredit } from "./result-credit";
 import { todayIso } from "./format";
 
 export type UnlinkedResult = {
@@ -17,7 +18,6 @@ export type UnlinkedResult = {
   verification_status: string | null;
   finish_time_seconds: number | null;
   provider: string | null;
-  source_url: string | null;
 };
 
 /** Results-only publication is explicit, reversible and independent of identity verification.
@@ -32,7 +32,7 @@ export const listUnlinkedResults = createServerFn({ method: "GET" })
     const sql = await getSql();
     const query = data.q ? `%${data.q.replace(/[\\%_]/g, "\\$&")}%` : null;
     const today = todayIso();
-    const rows = await sql<UnlinkedResult>`
+    const rows = await sql<UnlinkedResult & { source_url: string | null }>`
       with held as materialized (
         select a.id, a.display_name from athletes a
         where a.profile_details#>>'{nameReview,mode}'='results_only'
@@ -71,5 +71,10 @@ export const listUnlinkedResults = createServerFn({ method: "GET" })
       order by year desc, date desc, meeting, source_name, key
       limit 101 offset ${(data.page - 1) * 100}
     `;
-    return { results: rows.slice(0, 100), hasMore: rows.length > 100 };
+    return {
+      results: rows.slice(0, 100).map(({ source_url, provider, ...row }) => ({
+        ...row, provider: resultCredit(source_url, provider),
+      })),
+      hasMore: rows.length > 100,
+    };
   });

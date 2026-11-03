@@ -148,8 +148,9 @@ publication and personal-best calculations in this repository.
   identities. Keep unresolved matches held and preserve publication controls.
 - Keep private athlete audits and database exports out of source-control changes
   intended for external publication. Use synthetic examples in regression tests.
-- Always credit the chip-timing/results provider by name when publishing results
-  on AthRecs, with a link to the original result page. Preserve provider credit in
+- Owner instruction, 3 November 2026: credit the timing or results provider in
+  plain text on public race archives and link to the native edition. Keep external
+  results links in staff tools. Retain required reuse licence credits. Preserve provider credit in
   imports, athlete histories, club results and editorial coverage. Record the
   organiser separately; a timer is not automatically the race organiser.
   Owner exception, 10 October 2026: public athlete profiles omit World Marathon

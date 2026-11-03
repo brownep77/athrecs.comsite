@@ -178,8 +178,8 @@ export function matchesEditorialLocation(location: EditorialLocation, search: Ed
   );
 }
 
-export function filterEditorialArticles(
-  articles: readonly EditorialArticle[],
+export function filterEditorialArticles<T extends EditorialArticle>(
+  articles: readonly T[],
   kind: EditorialKind,
   search: EditorialSearch,
 ) {
@@ -299,7 +299,7 @@ export function editorialJsonLd(article: EditorialArticle, origin: string) {
         citation: [
           ...new Set(
             article.sections?.flatMap(
-              (section) => section.sources?.map((source) => source.url) ?? [],
+              (section) => section.sources?.flatMap((source) => source.url ? [source.url] : []) ?? [],
             ) ?? [],
           ),
         ],

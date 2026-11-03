@@ -5,7 +5,8 @@ import { getSql } from "@/lib/db";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
-import { normalizeResultsSearch, parseResultsEditionId } from "./public-results-search";
+import { publicResultLabel, resultCredit } from "./result-credit";
+import { normalizeResultEditionSearch, normalizeResultsSearch, parseResultsEditionId } from "./public-results-search";
 import { ATHLETICS_RUNNING_SURFACES, getSportPage, RUNNING_FIXTURE_SCOPE } from "./sport-pages";
 
 export type PublicResultEdition = {
@@ -26,8 +27,9 @@ export type PublicRaceResult = {
   athlete_slug: string | null;
   nationality: string | null;
   profile_club: string | null;
-  source_url: string | null;
-  result_source: string | null;
+  division: "men" | "women" | "other";
+  race_club: string | null;
+  footwear: string | null;
   overall_place: number | null;
   gender_place: number | null;
   category_place: number | null;
@@ -54,7 +56,7 @@ const like = (value: string) => (value ? `%${value.replace(/[\\%_]/g, "\\$&")}%`
  * specialist event catalogue API aliases. AthRecs athlete results span sports.
  */
 export const listPublicResultEditions = createServerFn({ method: "GET" })
-  .validator(normalizeResultsSearch)
+  .validator(normalizeResultEditionSearch)
   .handler(async ({ data }) => {
     if (IS_RUNRECS_SITE) return { editions: [] as PublicResultEdition[], hasMore: false };
     await ensureAthrecsSeeded();
@@ -153,62 +155,82 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     if (!edition) return null;
     const q = like(data.q);
     const offset = (data.page - 1) * RESULT_PAGE_SIZE;
-    const rows = await sql<PublicRaceResult>`
-      select r.id, a.display_name as athlete_name, case when a.profile_details#>>'{nameReview,mode}'='results_only' then null else a.slug end as athlete_slug,
-        case when r.result_details->>'verificationStatus' = 'source_verified'
-          and jsonb_typeof(r.result_details->'sourceNationality') = 'string'
-          and length(trim(r.result_details->>'sourceNationality')) between 1 and 100
-          and trim(r.result_details->>'sourceNationality') !~* '^(unknown|unspecified|n/?a|none|null|[-?]+)$'
-          and not exists (
-            select 1 from athlete_account_links l
-            where l.athlete_id = a.id and l.status = 'active'
-          )
-          then trim(r.result_details->>'sourceNationality') else null end as nationality,
-        c.name as profile_club, r.source_url, r.result_source,
-        r.overall_place, r.gender_place, r.category_place,
-        r.category, r.status, r.finish_time_seconds, r.chip_time_seconds, r.gun_time_seconds,
-        left(r.result_details->>'reportedPerformance',100) as reported_performance,
-        left(r.result_details->>'reportedPlace',40) as reported_place,
-        r.result_details->>'verificationStatus' as verification_status,
-        (lower(trim(r.status)) in ('dq', 'dsq', 'disqualified')
-          or coalesce(r.result_details->'disqualification', 'null'::jsonb) <> 'null'::jsonb) as disqualified
-      from results r
-      join athletes a on a.id = r.athlete_id
-      left join clubs c on c.id = a.club_id
-      where r.edition_id = ${data.editionId}
-        and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
-        and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
-          or (a.profile_visibility='private' and a.parent_athlete_id is null
-            and a.profile_details#>>'{nameReview,mode}'='results_only'
-            and not exists (select 1 from athlete_account_links owner where owner.athlete_id=a.id)))
-        and not exists (
-          select 1 from athlete_account_links l
-          join athlete_public_shares s on s.user_id = l.user_id
-          where l.athlete_id = a.id and l.status = 'active'
-            and (s.enabled = false or s.share_results = false)
-        )
-        and not exists (
-          select 1 from athlete_profile_hidden_results h
-          join athlete_account_links l on l.user_id = h.user_id and l.status = 'active'
-          where l.athlete_id = a.id and h.result_id = r.id
-        )
-        and (${q}::text is null or a.display_name ilike ${q} or c.name ilike ${q} or r.category ilike ${q})
-      order by disqualified asc,
-        (lower(trim(r.status)) in ('finished', 'fin')) desc,
-        r.overall_place asc nulls last, r.gun_time_seconds asc nulls last,
-        case when r.result_details->>'reportedPlace' ~ '^[0-9]{1,8}$'
-          then (r.result_details->>'reportedPlace')::integer end asc nulls last,
-        r.finish_time_seconds asc nulls last, r.id asc
+    const rows = await sql<PublicRaceResult & { source_url: string | null; result_source: string | null; division_row: number }>`
+      select ranked.* from (
+        select visible.*, row_number() over (
+          partition by division order by disqualified asc, (lower(trim(status)) in ('finished', 'fin')) desc,
+          coalesce(overall_place, gender_place) asc nulls last, gun_time_seconds asc nulls last,
+          case when reported_place ~ '^[0-9]{1,8}$' then reported_place::integer end asc nulls last,
+          finish_time_seconds asc nulls last, id
+        ) as division_row
+        from (
+          select r.id, a.display_name as athlete_name, case when a.profile_details#>>'{nameReview,mode}'='results_only' then null else a.slug end as athlete_slug,
+            case when r.result_details->>'verificationStatus' = 'source_verified'
+              and jsonb_typeof(r.result_details->'sourceNationality') = 'string'
+              and length(trim(r.result_details->>'sourceNationality')) between 1 and 100
+              and trim(r.result_details->>'sourceNationality') !~* '^(unknown|unspecified|n/?a|none|null|[-?]+)$'
+              and not exists (
+                select 1 from athlete_account_links l
+                where l.athlete_id = a.id and l.status = 'active'
+              )
+              then trim(r.result_details->>'sourceNationality') else null end as nationality,
+            case
+              when lower(trim(r.result_details->>'sourceGender')) in ('m','male','men') then 'men'
+              when lower(trim(r.result_details->>'sourceGender')) in ('f','w','female','women') then 'women'
+              else 'other' end as division,
+            r.result_details->>'sourceClub' as race_club,
+            case when r.result_details->>'verificationStatus' in ('source_verified','verified_by_administrator')
+              then coalesce(r.result_details->>'sourceFootwear',r.result_details->>'shoeModel') end as footwear,
+            c.name as profile_club, r.source_url, r.result_source,
+            r.overall_place, r.gender_place, r.category_place,
+            r.category, r.status, r.finish_time_seconds, r.chip_time_seconds, r.gun_time_seconds,
+            left(r.result_details->>'reportedPerformance',100) as reported_performance,
+            left(r.result_details->>'reportedPlace',40) as reported_place,
+            r.result_details->>'verificationStatus' as verification_status,
+            (lower(trim(r.status)) in ('dq', 'dsq', 'disqualified')
+              or coalesce(r.result_details->'disqualification', 'null'::jsonb) <> 'null'::jsonb) as disqualified
+          from results r
+          join athletes a on a.id = r.athlete_id
+          left join clubs c on c.id = a.club_id
+          where r.edition_id = ${data.editionId}
+            and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
+            and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
+              or (a.profile_visibility='private' and a.parent_athlete_id is null
+                and a.profile_details#>>'{nameReview,mode}'='results_only'
+                and not exists (select 1 from athlete_account_links owner where owner.athlete_id=a.id)))
+            and not exists (
+              select 1 from athlete_account_links l
+              join athlete_public_shares s on s.user_id = l.user_id
+              where l.athlete_id = a.id and l.status = 'active'
+                and (s.enabled = false or s.share_results = false)
+            )
+            and not exists (
+              select 1 from athlete_profile_hidden_results h
+              join athlete_account_links l on l.user_id = h.user_id and l.status = 'active'
+              where l.athlete_id = a.id and h.result_id = r.id
+            )
+            and (${q}::text is null or a.display_name ilike ${q} or c.name ilike ${q} or r.category ilike ${q}
+              or r.result_details->>'sourceAthleteName' ilike ${q}
+              or r.result_details#>>'{fullFieldArchive,publishedName}' ilike ${q}
+              or r.result_details->>'sourceClub' ilike ${q} or r.bib ilike ${q})
+        ) visible
+      ) ranked
+      order by division_row, division, id
       limit ${RESULT_PAGE_SIZE + 1} offset ${offset}
     `;
     // This edition credits its timer once. Keep the original row URLs in staff evidence.
     const timingCredit = edition.edition_id === 71609612 ? "Total Race Timing" : null;
+    const pageRows = rows.slice(0, RESULT_PAGE_SIZE);
+    const providerCredits = timingCredit ? [] : [...new Set(pageRows.map((row) => resultCredit(row.source_url, row.result_source))
+      .filter((label): label is string => label !== null))];
     return {
       edition: publicCatalogueContent({ ...edition, event_slug: isAthrecsPublicSport(edition.sport) ? edition.event_slug : null }),
       timingCredit,
-      results: rows.slice(0, RESULT_PAGE_SIZE).map((row) =>
-        publicCatalogueContent(timingCredit ? { ...row, source_url: null, result_source: null } : row),
-      ),
+      providerCredits,
+      results: pageRows.map(({ source_url: _sourceUrl, result_source: _source, division_row: _rowNumber, ...row }) => {
+        return publicCatalogueContent({ ...row, race_club: publicResultLabel(row.race_club),
+          footwear: publicResultLabel(row.footwear) });
+      }),
       hasMore: rows.length > RESULT_PAGE_SIZE,
     };
   });

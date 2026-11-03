@@ -31,5 +31,14 @@ export function normalizeResultsSearch(input: unknown): ResultsSearch {
   };
 }
 
+/** Let the race name and edition year be typed together in either search box. */
+export function normalizeResultEditionSearch(input: unknown): ResultsSearch {
+  const filters = normalizeResultsSearch(input);
+  const match = filters.q.match(/\b(?:18|19|20)\d{2}\b/);
+  if (!match || (filters.year && filters.year !== match[0])) return filters;
+  const name = filters.q.replace(match[0], " ").replace(/\bresults?\b/ig, " ").replace(/\s+/g, " ").trim();
+  return { ...filters, q: name, year: match[0] };
+}
+
 // Accept legacy numeric URLs as well as descriptive result slugs.
 export { resultEditionId as parseResultsEditionId } from "./result-slug.ts";

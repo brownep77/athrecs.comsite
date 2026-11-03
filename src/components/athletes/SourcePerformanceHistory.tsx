@@ -35,6 +35,7 @@ export function SourcePerformanceHistory({
               row.sourceUrls,
             ),
         key: `${history.provider}:${history.externalId}:${index}`,
+        creditUrl: row.sourceUrls[0] || (row.verificationStatus ? null : history.sourceUrl),
         credit: resultCredit(
           row.sourceUrls[0] || (row.verificationStatus ? null : history.sourceUrl),
           row.providerName || history.provider,
@@ -231,15 +232,15 @@ export function SourcePerformanceHistory({
                       showEvidence={showEvidence}
                       decision={row.disqualification}
                     />
-                    {showEvidence && row.credit ? (
+                    {showEvidence && row.credit && row.creditUrl ? (
                       <a
-                        href={row.credit.url}
+                        href={row.creditUrl}
                         target="_blank"
                         rel="noreferrer"
-                        aria-label={`${row.credit.name}: original result for ${row.meeting}`}
+                        aria-label={`${row.credit}: original result for ${row.meeting}`}
                         className="block text-xs font-normal text-accent hover:underline"
                       >
-                        Results: {row.credit.name} ↗
+                        Results: {row.credit} ↗
                       </a>
                     ) : null}
                     {showEvidence && row.labels.length ? (

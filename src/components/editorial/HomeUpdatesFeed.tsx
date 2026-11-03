@@ -124,7 +124,7 @@ export function HomeUpdatesFeed({
             {selected.map((update) => (
               <li key={update.id} className="py-4">
                 <p className="text-xs font-semibold text-accent">
-                  {update.kind === "results" ? "Results link" : "Upcoming fixture"} · {update.sport}
+                  {update.kind === "results" ? "Race results" : "Upcoming fixture"} · {update.sport}
                 </p>
                 <h3 className="mt-1 text-base font-semibold">
                   <Link
@@ -142,12 +142,12 @@ export function HomeUpdatesFeed({
                   {" · "}
                   {homeRegionLabel(update)}
                 </p>
-                {update.kind === "results" && update.resultsUrl && update.providerName ? (
+                {update.kind === "results" && update.resultsUrl ? (
                   <a
                     href={update.resultsUrl}
                     className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold text-accent underline"
                   >
-                    Results from {update.providerName}
+                    View race results
                   </a>
                 ) : null}
               </li>

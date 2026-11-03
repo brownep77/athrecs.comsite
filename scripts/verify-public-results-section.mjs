@@ -1,5 +1,5 @@
 import * as jsxRuntime from "react/jsx-runtime";
-import { createElement } from "react";
+import { createElement, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { load } from "cheerio";
 import assert from "node:assert/strict";
@@ -26,12 +26,13 @@ function loadTypeScript(path, dependencies = {}) {
 const parkrun = loadTypeScript("src/lib/athrecs/parkrun-timing.ts");
 const catalogueContent = loadTypeScript("src/lib/athrecs/public-catalogue-content.ts");
 const sportPages = loadTypeScript("src/lib/athrecs/sport-pages.ts", { "./public-sports.ts": loadTypeScript("src/lib/athrecs/public-sports.ts") });
-const { resultCredit } = loadTypeScript("src/lib/athrecs/result-credit.ts", { "./public-catalogue-content.ts": catalogueContent });
-assert.deepEqual(resultCredit("https://totalracetiming.co.uk/raceresults/123", "import"), { name: "Total Race Timing", url: "https://totalracetiming.co.uk/raceresults/123" });
-assert.equal(resultCredit("https://example.com/result", "Example Timing").name, "Example Timing");
-assert.equal(resultCredit("javascript:alert(1)", "Unsafe"), null);
-assert.equal(resultCredit(null, "No source"), null);
-assert.equal(resultCredit("https://totalracetiming.co.uk.example.org/results", "import").name, "totalracetiming.co.uk.example.org");
+const credits = loadTypeScript("src/lib/athrecs/result-credit.ts", { "./public-catalogue-content.ts": catalogueContent });
+assert.equal(credits.resultCredit("https://totalracetiming.co.uk/raceresults/123", "import"), "Total Race Timing");
+assert.equal(credits.resultCredit("https://example.com/result", "Example Timing"), "Example Timing");
+assert.equal(credits.resultCredit("javascript:alert(1)", "Unsafe"), null);
+assert.equal(credits.resultCredit(null, "manual"), null);
+assert.equal(credits.resultCredit("https://totalracetiming.co.uk.example.org/results", "import"), null);
+assert.equal(credits.resultCredit(null, "https://archive.example/race/123"), null);
 const search = loadTypeScript("src/lib/athrecs/public-results-search.ts", { "./sport-pages": sportPages, "./result-slug.ts": loadTypeScript("src/lib/athrecs/result-slug.ts") });
 const format = loadTypeScript("src/lib/athrecs/format.ts", {
   "./timezone.ts": loadTypeScript("src/lib/athrecs/timezone.ts"),
@@ -77,6 +78,7 @@ const createServerFn = ({ method }) => {
 const scope = { IS_RUNRECS_SITE: false };
 const api = loadTypeScript("src/lib/athrecs/public-results-api.ts", {
   "./public-catalogue-content.ts": catalogueContent,
+  "./result-credit": credits,
   "./public-sports.ts": loadTypeScript("src/lib/athrecs/public-sports.ts"),
   "@tanstack/react-start": { createServerFn },
   "@/lib/db": { getSql: async () => sql },
@@ -93,12 +95,12 @@ try {
     create table editions (id integer primary key, event_id integer, event_date date, distance_code text);
     create table clubs (id integer primary key, name text);
     create table athletes (id integer primary key, display_name text, slug text, club_id integer,
-      profile_type text, profile_visibility text, parent_athlete_id integer, profile_details jsonb default '{}');
+      profile_type text, profile_visibility text, parent_athlete_id integer, profile_details jsonb default '{}', gender text);
     create table results (id integer primary key, athlete_id integer, edition_id integer,
       status text, result_details jsonb default '{}', result_visibility text,
       source_url text, result_source text,
       overall_place integer, gender_place integer, category_place integer, category text,
-      finish_time_seconds integer, chip_time_seconds integer, gun_time_seconds integer);
+      finish_time_seconds integer, chip_time_seconds integer, gun_time_seconds integer, bib text);
     create table athlete_account_links (user_id text, athlete_id integer, status text);
     create table athlete_public_shares (user_id text, enabled boolean, share_results boolean);
     create table athlete_profile_hidden_results (user_id text, result_id integer);
@@ -123,7 +125,8 @@ try {
         id + 6, id, id, 'V40', 1900 + id, 1890 + id, 1900 + id from athletes;
     update results set result_details = '{"disqualification":{"reason":"other"}}' where id = 7;
     update results set source_url = 'https://totalracetiming.co.uk/raceresults/123', result_source = 'Total Race Timing' where id = 1;
-    update results set result_details = '{"verificationStatus":"source_verified","sourceNationality":"KEN"}' where id = 1;
+    update results set result_details = '{"verificationStatus":"source_verified","sourceNationality":"KEN","sourceGender":"M","sourceClub":"Archive Runners","sourceFootwear":"Test Racer"}', bib='6113' where id = 1;
+    update results set result_details = '{"sourceGender":"F","sourceFootwear":"Unconfirmed Shoe"}' where id = 6;
     insert into results (id, athlete_id, edition_id, status, result_visibility) values
       (90, 1, 11, 'Finished', 'public');
     insert into athlete_account_links values ('u3', 3, 'active'), ('u4', 4, 'active'),
@@ -139,18 +142,24 @@ try {
   assert.equal(index.editions.length, 1, "Future races must not appear");
   assert.equal(index.editions[0].result_count, 3, "Counts must use the same privacy filters as rows");
   const detail = await api.getPublicRaceResults({ data: { editionId: 10 } });
-  assert.deepEqual(detail.results.map((row) => row.id), [1, 6, 7]);
-  assert.equal(detail.results[2].disqualified, true);
-  assert.equal(detail.results[0].overall_place, 7, "Do not renumber official placings");
-  assert.equal(detail.results[0].chip_time_seconds, 1891);
-  assert.equal(detail.results[0].source_url, "https://totalracetiming.co.uk/raceresults/123");
-  assert.equal(detail.results[0].result_source, "Total Race Timing");
-  assert.equal(detail.results[0].gun_time_seconds, 1901);
-  assert.equal(detail.results[0].nationality, "KEN", "Use the explicitly recorded result nationality, not the UK event location");
-  assert.equal(detail.results[1].nationality, null, "Absent nationality must stay unknown");
-  assert.notEqual(detail.results[0].athlete_slug, detail.results[1].athlete_slug,
-    "Same-name identities must remain distinct");
-  assert.equal(detail.results[0].athlete_name, detail.results[1].athlete_name);
+  const first = detail.results.find((row) => row.id === 1);
+  const second = detail.results.find((row) => row.id === 6);
+  assert.deepEqual(detail.results.map((row) => row.id).sort((a, b) => a - b), [1, 6, 7]);
+  assert.equal(detail.results.find((row) => row.id === 7).disqualified, true);
+  assert.equal(first.overall_place, 7, "Do not renumber official placings");
+  assert.equal(first.chip_time_seconds, 1891);
+  assert.equal(first.gun_time_seconds, 1901);
+  assert.equal(first.nationality, "KEN", "Use the explicitly recorded result nationality, not the UK event location");
+  assert.equal(first.division, "men");
+  assert.equal(second.division, "women");
+  assert.equal(first.race_club, "Archive Runners");
+  assert.equal(first.footwear, "Test Racer");
+  assert.equal(second.footwear, null, "A source must support shoe information");
+  assert.equal(second.nationality, null, "Absent nationality must stay unknown");
+  assert.notEqual(first.athlete_slug, second.athlete_slug, "Same-name identities must remain distinct");
+  assert.equal(first.athlete_name, second.athlete_name);
+  assert.deepEqual(detail.providerCredits, ["Total Race Timing"]);
+  assert.doesNotMatch(JSON.stringify(detail), /source_url|result_source|division_row|totalracetiming\.co\.uk|raceresults\/123/);
   assert.equal(await api.getPublicRaceResults({ data: { editionId: 999 } }), null);
   assert.equal(await api.getPublicRaceResults({ data: { editionId: 11 } }), null);
   for (const q of ["%", "_", "' OR 1=1 --"]) {
@@ -159,18 +168,25 @@ try {
   assert.equal((await api.listPublicResultEditions({ data: { year: "2025" } })).editions.length, 0);
   assert.equal((await api.listPublicResultEditions({ data: { sport: "Cycling" } })).editions.length, 0);
   assert.equal((await api.getPublicRaceResults({ data: { editionId: 10, q: "Alex Example" } })).results.length, 2);
+  for (const q of ["6113", "Archive Runners"]) {
+    assert.deepEqual((await api.getPublicRaceResults({ data: { editionId: 10, q } })).results.map((row) => row.id), [1]);
+  }
+  for (const q of ["Synthetic 10K 2026 results", "2026 Synthetic 10K"]) {
+    assert.deepEqual((await api.listPublicResultEditions({ data: { q } })).editions.map((row) => row.edition_id), [10]);
+  }
+  assert.equal((await api.listPublicResultEditions({ data: { q: "Synthetic 10K 2006" } })).editions.length, 0);
   assert.equal(await snapshot(), before, "Reading must not mutate canonical results");
 
   // Source nationality must not override claimed-profile controls or expose raw evidence.
   await db.exec("insert into athlete_account_links values ('u1', 1, 'active')");
-  assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results[0].nationality, null);
+  assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results.find((row) => row.id === 1).nationality, null);
   await db.exec("delete from athlete_account_links where user_id = 'u1'");
   for (const sourceNationality of [null, {}, 42, "", "unknown", "N/A", "?", "x".repeat(101)]) {
     await db.query("update results set result_details = $1 where id = 1", [JSON.stringify({ verificationStatus: "source_verified", sourceNationality })]);
-    assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results[0].nationality, null);
+    assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results.find((row) => row.id === 1).nationality, null);
   }
   await db.query("update results set result_details = $1 where id = 1", [JSON.stringify({ sourceNationality: "RUS" })]);
-  assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results[0].nationality, null, "Unverified source rows are not published as nationality evidence");
+  assert.equal((await api.getPublicRaceResults({ data: { editionId: 10 } })).results.find((row) => row.id === 1).nationality, null, "Unverified source rows are not published as nationality evidence");
   await db.query("update results set result_details = $1 where id = 1", [JSON.stringify({ verificationStatus: "source_verified", sourceNationality: "KEN", privateEvidence: "staff-only" })]);
   assert(!JSON.stringify(await api.getPublicRaceResults({ data: { editionId: 10 } })).includes("staff-only"));
 
@@ -180,7 +196,7 @@ try {
       verificationStatus: "unverified", reportedPerformance, reportedPlace: "2",
       archiveReference: { sourceRow: "private-locator" },
     })]);
-    const source = (await api.getPublicRaceResults({ data: { editionId: 10 } })).results[0];
+    const source = (await api.getPublicRaceResults({ data: { editionId: 10 } })).results.find((row) => row.id === 1);
     assert.equal(source.reported_performance, reportedPerformance);
     assert.equal(source.reported_place, "2");
     assert.equal(source.verification_status, "unverified");
@@ -252,6 +268,8 @@ try {
       from generate_series(1000, 1104) n;
     insert into results (id, athlete_id, edition_id, status, result_visibility, overall_place)
       select n, n, 10, 'Finished', 'public', n from generate_series(1000, 1104) n;
+    update results set result_details=jsonb_build_object('sourceGender', case when id < 1100 then 'M' else 'F' end)
+      where id between 1000 and 1104;
   `);
   const page1 = await api.listPublicResultEditions({ data: { page: 1 } });
   const page2 = await api.listPublicResultEditions({ data: { page: 2 } });
@@ -268,6 +286,9 @@ try {
   assert.equal(resultPage2.hasMore, false);
   assert.equal(new Set([...resultPage1.results, ...resultPage2.results].map((row) => row.id)).size, 108);
 
+  assert(resultPage1.results.some((row) => row.id === 1100 && row.division === "women"),
+    "The first results page includes women even when men occupy the first 100 overall placings");
+
   const head1 = publicResultsHead(resultPage1.edition, resultPage1.results, { q: "", page: 1 });
   const head2 = publicResultsHead(resultPage2.edition, resultPage2.results, { q: "", page: 2 });
   assert.equal(head2.links[0].href, head1.links[0].href + "?page=2", "Later result pages must have their own canonical URL");
@@ -282,9 +303,11 @@ try {
   assert.doesNotMatch(JSON.stringify([structured1, structured2]), /"@type":"(?:SportsEvent|Event)"/,
     "Results archives must not advertise attendance/ticket Event rich results");
   assert.match(structured1.description, /coverage may be partial/);
-  assert.match(structured1.mainEntity.itemListElement[0].description, /source position 7/);
-  assert.match(structured1.mainEntity.itemListElement[0].description, /chip time 31:31; gun time 31:41/);
-  assert.equal(structured2.mainEntity.itemListElement.at(-1).description, "Disqualified", "Do not publish a DQ time as a finish in structured data");
+  const structuredItems = [...structured1.mainEntity.itemListElement, ...structured2.mainEntity.itemListElement];
+  const firstPerformance = structuredItems.find((item) => item.url.endsWith("#result-1"));
+  assert.match(firstPerformance.description, /source position 7/);
+  assert.match(firstPerformance.description, /chip time 31:31; gun time 31:41/);
+  assert.equal(structuredItems.find((item) => item.url.endsWith("#result-7")).description, "Disqualified", "Do not publish a DQ time as a finish in structured data");
   assert(structured2.mainEntity.itemListElement.every((row) => !('position' in row)), "Page order must not be presented as official placing");
   assert.doesNotMatch(JSON.stringify([structured1, structured2]), /Private Athlete|Hidden Result|Disabled Profile|No Results Share|Private Performance|raceresults\/123/);
   const filtered = publicResultsHead(resultPage2.edition, resultPage2.results, { q: "Alex", page: 2 });
@@ -296,12 +319,27 @@ try {
   assert.equal(JSON.parse(injection.scripts[0].children).mainEntity.itemListElement[0].item.name, "</script><script>alert(1)</script>");
 
   // Exercise the real route loader and head contract, including empty-page handling.
+  const Link = ({ children, to, params, search }) => {
+    const href = to.replace(/\$(\w+)/g, (_, key) => params[key]);
+    const query = new URLSearchParams(Object.entries(search ?? {}).filter(([, value]) => value !== undefined));
+    return createElement("a", { href: query.size ? href + "?" + query : href }, children);
+  };
+  const router = { Link, createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) };
+  const panels = loadTypeScript("src/components/races/ArchiveResultPanels.tsx", { "react/jsx-runtime": jsxRuntime });
+  const countryFlag = loadTypeScript("src/components/athletes/CountryFlag.tsx", {
+    react: { useState }, "react/jsx-runtime": jsxRuntime, "@/lib/athrecs/country-flags": loadTypeScript("src/lib/athrecs/country-flags.ts"),
+  });
+  const board = loadTypeScript("src/components/races/RaceResultsBoard.tsx", {
+    "react/jsx-runtime": jsxRuntime, "@tanstack/react-router": router, "@/components/athletes/CountryFlag": countryFlag,
+    "@/components/races/ArchiveResultPanels": panels, "@/lib/athrecs/format": format,
+  });
   const route = loadTypeScript("src/routes/results/$editionId.tsx", {
     "react/jsx-runtime": jsxRuntime,
     "@/lib/athrecs/parkrun-timing": parkrun,
-    "@tanstack/react-router": { Link: ({children,to}) => createElement("a",{href:to},children), createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) },
-    "lucide-react": { ArrowLeft: () => null, SearchCheck: () => null }, "@/components/ui/badge": {}, "@/components/ui/button": { Button: ({children}) => createElement("button",null,children) },
-    "@/components/athletes/CountryFlag": { CountryFlag: () => null },
+    "@tanstack/react-router": router,
+    "lucide-react": { ArrowLeft: () => null },
+    "@/components/ui/button": { Button: ({children, asChild}) => asChild ? children : createElement("button",null,children) },
+    "@/components/races/RaceResultsBoard": board,
     "@/components/races/EventBadges": { SportBadge: () => null, DistanceBadge: () => null },
     "@/lib/athrecs/public-results-api": api,
     "@/lib/athrecs/public-results-search": search,
@@ -309,10 +347,9 @@ try {
     "@/lib/athrecs/public-results-seo": { publicResultsHead },
     "@/lib/athrecs/result-slug": loadTypeScript("src/lib/athrecs/result-slug.ts"),
     "@/lib/site-scope": scope,
-    "@/lib/athrecs/result-credit": { resultCredit },
   }).Route;
   route.useSearch = () => ({});
-  route.useLoaderData = () => resultPage1;
+  route.useLoaderData = () => detail;
   const roadTable = load(renderToStaticMarkup(route.component()));
   assert.equal(roadTable('h1').text(), 'Synthetic 10K 2026 results');
   assert(head1.meta.find(tag => tag.title).title.startsWith('Synthetic 10K 2026 results'));
@@ -325,7 +362,19 @@ try {
     ['Track 10K and 5K', '5K', 'Track 10K and 5K · 5K 2026 results'],
   ]) assert.equal(resultEditionLabel({ event_name: name, distance_code: code, event_date: '2026-11-01' }), label);
 
-  assert(roadTable("th").toArray().some((cell) => roadTable(cell).text() === "Chip"));
+  assert.deepEqual(roadTable("details[open] > summary").map((_, el) => roadTable(el).text()).get(),
+    ["Men", "Women", "Other or unrecorded division"]);
+  assert.equal(roadTable("tbody tr").length, 3);
+  assert.equal(roadTable("#result-1 td").first().text(), "1Division");
+  assert.equal(roadTable("#result-1 abbr").text(), "KEN");
+  assert.equal(roadTable('#result-1 [role="img"]').attr("aria-label"), "Kenya");
+  for (const fact of ["Overall position 7", "Category position 1", "Archive Runners", "Profile club · Synthetic Club",
+    "Shoes · Test Racer", "Chip time · 31:31", "Gun time · 31:41"]) assert(roadTable("#result-1").text().includes(fact), fact);
+  assert.match(roadTable("#result-7").text(), /Disqualified/);
+  assert.equal(roadTable('#result-1 a[href="/athletes/alex-example-one"]').length, 1);
+  assert.equal(roadTable('#result-1 a[href="/claim-results?resultId=1"]').length, 1);
+  assert.equal(roadTable("a[href^='http']").length, 0);
+  assert.doesNotMatch(roadTable.html(), /totalracetiming\.co\.uk|raceresults\/123/);
   await db.exec(`
     insert into editions values (71609612, 10, '2026-09-20', '10K');
     insert into results (id, athlete_id, edition_id, status, result_visibility, source_url, result_source)
@@ -336,18 +385,18 @@ try {
   const eastCoastTable = load(renderToStaticMarkup(route.component()));
   assert.equal((eastCoastTable.text().match(/Total Race Timing/g) || []).length, 1);
   assert.equal(eastCoastTable('a[href*="totalracetiming"]').length, 0);
-  assert.equal(eastCoastTable('tbody a[href="/athletes/$slug"]').length, 1);
-  assert.equal(eastCoast.results[0].source_url, null);
+  assert.equal(eastCoastTable('tbody a[href="/athletes/alex-example-one"]').length, 1);
+  assert(!("source_url" in eastCoast.results[0]));
   assert.match((await db.query("select source_url from results where id=910001")).rows[0].source_url, /raceresults/);
   await db.exec("delete from results where id=910001; delete from editions where id=71609612");
   const parkrunEdition = { ...resultPage1.edition, sport: "Parkrun", event_name: "Synthetic parkrun", distance_code: "5K" };
   route.useLoaderData = () => ({ ...resultPage1, edition: parkrunEdition });
   const parkrunTable = load(renderToStaticMarkup(route.component()));
-  const labels = parkrunTable("th").toArray().map((cell) => parkrunTable(cell).text());
+  const labels = parkrunTable("table").first().find("thead th").toArray().map((cell) => parkrunTable(cell).text());
   assert(labels.includes("Finish time"));
-  assert(!labels.includes("Chip") && !labels.includes("Gun"));
+  assert.doesNotMatch(parkrunTable("tbody").text(), /Chip time|Gun time/);
   assert(parkrunTable.text().includes("parkrun does not use chip timing"));
-  assert.equal(parkrunTable("tbody tr").first().find("td").length, labels.length);
+  assert.equal(parkrunTable("tbody tr").first().children("th,td").length, labels.length);
   const parkrunHead = publicResultsHead(parkrunEdition, resultPage1.results, { q: "", page: 1 });
   const parkrunDetails = JSON.parse(parkrunHead.scripts[0].children).mainEntity.itemListElement[0].description;
   assert(parkrunDetails.includes(parkrun.PARKRUN_TIMING_LABEL));
@@ -371,7 +420,10 @@ try {
   const loaded = await route.loader({ params, deps: search.normalizeResultsSearch({ page: 2 }) });
   assert.equal(route.head({ loaderData: loaded, match: { search: { page: 2 } } }).links[0].href, head2.links[0].href);
   await assert.rejects(route.loader({ params, deps: search.normalizeResultsSearch({ page: 3 }) }), /notFound/);
-  assert.equal((await route.loader({ params, deps: search.normalizeResultsSearch({ q: "no-match" }) })).results.length, 0);
+  const noMatch = await route.loader({ params, deps: search.normalizeResultsSearch({ q: "no-match" }) });
+  assert.equal(noMatch.results.length, 0);
+  route.useLoaderData = () => noMatch;
+  assert.match(load(renderToStaticMarkup(route.component()))('[role="status"]').text(), /No recorded results match/);
 
   // Explicit results-only holds keep already-public performances available,
   // without inventing a profile or exposing accounts, private histories or evidence.
@@ -387,6 +439,7 @@ try {
       (900002,900002,10,'finished','public',2223),
       (900003,900001,10,'finished','private',2224),
       (900004,900001,11,'finished','public',2225);
+    update results set result_details='{"verificationStatus":"unverified","reportedPlace":"54"}' where id=900001;
     insert into athlete_source_histories values
       (900001,'Example Timer','source-1','https://example.test/results',
        '[{"year":2025,"meeting":"Year-only marathon","discipline":"Marathon","performance":"3:11:22","notes":"PRIVATE EVIDENCE","archiveReference":{"private":"SECRET"}},
@@ -395,7 +448,15 @@ try {
       (900001,'Example Timer','source-2','https://example.test/results','[{"year":2025,"meeting":"Private history"}]',null),
       (900002,'Example Timer','source-3','https://example.test/results','[{"year":2025,"meeting":"Owned history"}]',now());
   `);
-  const heldResult = (await api.getPublicRaceResults({ data: {editionId:10,q:'Jo?'} })).results;
+  const heldEdition = await api.getPublicRaceResults({ data: {editionId:10,q:'Jo?'} });
+  const heldResult = heldEdition.results;
+  route.useLoaderData = () => heldEdition;
+  const heldTable = load(renderToStaticMarkup(route.component()));
+  assert.equal(heldTable("#result-900001 td").first().text(), "54Reported");
+  assert.equal(heldTable('#result-900001 a[href^="/athletes/"]').length, 0);
+  assert.equal(heldTable('#result-900001 a[href="/claim-results?resultId=900001"]').length, 1);
+  assert.match(heldTable("#result-900001").text(), /Name under review/);
+  assert.match(heldTable("#result-900001").text(), /Unverified result/);
   assert.equal(heldResult.length,1);
   assert.equal(heldResult[0].athlete_slug,null);
   const heldHead=publicResultsHead(resultPage1.edition,heldResult,{q:'',page:1});
@@ -403,14 +464,14 @@ try {
   const unlinked=loadTypeScript('src/lib/athrecs/unlinked-results-api.ts',{
     '@tanstack/react-start':{createServerFn},'@/lib/db':{getSql:async()=>sql},
     '@/lib/site-scope':scope,'./seed.server':{ensureAthrecsSeeded:async()=>{}},
-    './format':{todayIso:()=> '2026-09-23'},'./public-results-search':search,
+    './format':{todayIso:()=> '2026-09-23'},'./public-results-search':search,'./result-credit':credits,
   });
   const heldPage=await unlinked.listUnlinkedResults({data:{}});
   assert.equal(heldPage.results.length,2);
   assert.equal(heldPage.results.find(row=>row.meeting==='Year-only marathon').date,'');
   assert.equal((await unlinked.listUnlinkedResults({data:{year:'2025'}})).results.length,1);
   assert.equal((await unlinked.listUnlinkedResults({data:{q:'no-match'}})).results.length,0);
-  assert.doesNotMatch(JSON.stringify(heldPage),/PRIVATE|SECRET|candidateIds|Owned|Excluded|Future|Private history|damaged-name/);
+  assert.doesNotMatch(JSON.stringify(heldPage),/PRIVATE|SECRET|source_url|example\.test|candidateIds|Owned|Excluded|Future|Private history|damaged-name/);
   await db.exec("update results set source_url='https://runabc.co.uk/synthetic',result_source='runABC' where id=900001");
   const withheldProvider = (await api.getPublicRaceResults({ data: { editionId: 10, q: 'Jo?' } })).results;
   assert.equal(withheldProvider.length, 1, 'Source suppression must retain the published performance');
@@ -428,10 +489,8 @@ try {
   assert.equal(queryCount, previousQueryCount, "RunRecs must not query the AthRecs archive");
 
   const pageSource = readFileSync("src/routes/results/$editionId.tsx", "utf8");
-  assert.match(pageSource, /to="\/claim-results" search=\{\{ resultId: result.id \}\}/);
-  assert.match(pageSource, /slug: result.athlete_slug/);
   assert.doesNotMatch(pageSource, /submitResultClaim|applyResultsImport|applyImportBundle/);
-  console.log("PASS: all-running category scope, legacy category/sport compatibility, public results privacy, page-specific canonicals, indexable pagination, filtered/empty pages, qualified structured data, script escaping, recorded placings, distinct chip/gun times and RunRecs isolation.");
+  console.log("PASS: all-running category scope, legacy category/sport compatibility, public results privacy, page-specific canonicals, indexable pagination, filtered/empty pages, qualified structured data, script escaping, recorded placings, division boards, athlete and bib searches, backend-only source links, distinct chip/gun times and RunRecs isolation.");
 } finally {
   await db.close();
 }

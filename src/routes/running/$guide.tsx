@@ -1,3 +1,4 @@
+import { getRoadGuideCountry } from "@/lib/running/public-road-guides";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { halfMarathonCountryFromPath } from "@/data/road-half-marathons/countries";
@@ -23,9 +24,7 @@ export const Route = createFileRoute("/running/$guide")({
     const halfCountry = halfMarathonCountryFromPath(params.guide);
     const country = halfCountry ?? countryGuideFromPath(params.guide);
     if (!country) throw notFound();
-    const races = halfCountry
-      ? (await import("@/data/road-half-marathons")).roadHalfMarathonsForCountry(country.id)
-      : (await import("@/data/road-marathons")).roadMarathonsForCountry(country.id);
+    const races = await getRoadGuideCountry({ data: { country: country.id, half: Boolean(halfCountry) } });
     return {
       kind: "guide" as const,
       country,

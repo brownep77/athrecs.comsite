@@ -11,7 +11,7 @@ import {
 import type { PlaceTerrain } from "@/lib/athrecs/race-place-facets";
 import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
 import { HALF_MARATHON_COUNTRIES } from "@/data/road-half-marathons/countries";
-import { SUPERHALFS_PATH } from "@/data/superhalfs";
+import { SUPERHALFS_PATH } from "@/data/superhalfs-guide";
 import { RUNNING_GUIDES_PATH } from "@/lib/running/guide-directory";
 
 const cardClass =

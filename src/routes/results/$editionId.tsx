@@ -1,16 +1,15 @@
 import { isParkrunResult, PARKRUN_TIMING_EXPLANATION } from "@/lib/athrecs/parkrun-timing";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
-import { ArrowLeft, SearchCheck } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CountryFlag } from "@/components/athletes/CountryFlag";
+import { RaceResultsBoard } from "@/components/races/RaceResultsBoard";
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
 import { normalizeResultsSearch, parseResultsEditionId } from "@/lib/athrecs/public-results-search";
-import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { publicResultsHead } from "@/lib/athrecs/public-results-seo";
 import { resultEditionLabel, resultSlug } from "@/lib/athrecs/result-slug";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
-import { resultCredit } from "@/lib/athrecs/result-credit";
 
 export const Route = createFileRoute("/results/$editionId")({
   validateSearch: (raw: Record<string, unknown>): { q?: string; page?: number } => {
@@ -52,89 +51,47 @@ export const Route = createFileRoute("/results/$editionId")({
 });
 
 function RaceResultsPage() {
-  const { edition, results, hasMore, timingCredit } = Route.useLoaderData();
+  const { edition, results, hasMore, timingCredit, providerCredits } = Route.useLoaderData();
   const parkrun = isParkrunResult({ sport: edition.sport, eventName: edition.event_name });
-  const columns = ["Pos", "Athlete", "Nationality", "Profile club", "Category", ...(parkrun ? ["Finish time"] : ["Performance", "Chip", "Gun"]), ""];
   const search = normalizeResultsSearch(Route.useSearch());
   const params = { editionId: resultSlug(edition) };
-  const credits = [...new Map(results.flatMap((result) => {
-    const credit = resultCredit(result.source_url, result.result_source);
-    return credit ? [[credit.url, credit] as const] : [];
-  })).values()];
   return (
     <div className="space-y-5">
       <Link to="/results" className="inline-flex items-center gap-1.5 text-sm text-accent no-underline hover:underline"><ArrowLeft className="size-4" aria-hidden="true" />All results</Link>
-      <header className="space-y-3">
-        <div className="flex flex-wrap gap-2"><SportBadge sport={edition.sport} /><DistanceBadge distance={edition.distance_code} /></div>
-        <h1 className="font-display text-3xl font-semibold leading-tight">{resultEditionLabel(edition)}</h1>
-        {edition.event_slug ? (
-          <Link to="/races/$slug" params={{ slug: edition.event_slug }} className="text-sm text-accent underline">
-            {edition.event_name} race details and past editions
-          </Link>
-        ) : null}
-        <p className="text-sm text-muted">{formatRaceDateShort(edition.event_date)}{edition.city ? ` · ${edition.city}` : ""}{edition.country ? ` · ${edition.country}` : ""}</p>
-        <p className="text-sm font-medium text-accent">{edition.result_count.toLocaleString("en-GB")} {edition.result_count === 1 ? "performance" : "performances"} recorded on AthRecs</p>
-        <p className="max-w-3xl text-sm text-muted">
-          This archive contains {edition.distance_code} performances from {edition.event_name}, held on {formatRaceDateShort(edition.event_date)}
-          {edition.city ? ` in ${edition.city}` : ""}{edition.country ? `, ${edition.country}` : ""}.
-          It contains the public records currently held by AthRecs, which may cover only part of the field.
-          {!timingCredit && "Follow the credited provider links for the original results. "}Placings are retained from the source.
-          Nationalities, where available, are as recorded for the race.
-        </p>
-        {parkrun ? <p className="max-w-3xl text-sm text-muted">{PARKRUN_TIMING_EXPLANATION}</p> : null}
-        {timingCredit && <p className="text-sm text-muted" aria-label="Results provider credit">Timing by {timingCredit}</p>}
-        {credits.length ? <div className="space-y-1 text-sm text-muted" aria-label="Results provider credits">
-          <p>Results credited to:</p>
-          <ul className="flex flex-wrap gap-x-4 gap-y-2">{credits.map((credit) => <li key={credit.url}><a href={credit.url} target="_blank" rel="noreferrer" className="text-accent underline">{credit.name}</a></li>)}</ul>
-        </div> : null}
+      <header className="overflow-hidden rounded-md border border-border bg-surface">
+        <div className="space-y-2 border-t-4 border-[#1daaa5] bg-[#102e38] px-4 py-5 sm:px-6 sm:py-6">
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-[#a4eee1]">AthRecs results archive</p>
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">{resultEditionLabel(edition)}</h1>
+          <p className="text-sm text-[#d4e4e3]">
+            <time dateTime={edition.event_date}>{formatRaceDateShort(edition.event_date)}</time>
+            {edition.city && ` · ${edition.city}`}{edition.country && ` · ${edition.country}`}
+          </p>
+        </div>
+        <div className="space-y-2 px-4 py-4 text-sm text-muted sm:px-6">
+          <div className="flex flex-wrap items-center gap-2">
+            <SportBadge sport={edition.sport} /><DistanceBadge distance={edition.distance_code} />
+            <span className="font-medium text-fg">{edition.result_count.toLocaleString("en-GB")} {edition.result_count === 1 ? "performance" : "performances"} in the archive</span>
+          </div>
+          <p>This archive may cover only part of the field. Placings and nationalities are shown as recorded for the race.</p>
+          {parkrun && <p>{PARKRUN_TIMING_EXPLANATION}</p>}
+          {timingCredit ? <p>Timing by {timingCredit}</p> : providerCredits.length > 0 && <p>Results credited to {providerCredits.join(", ")}</p>}
+          {edition.event_slug && (
+            <Link to="/races/$slug" params={{ slug: edition.event_slug }} className="inline-block text-accent underline">
+              {edition.event_name} race details and past editions
+            </Link>
+          )}
+        </div>
       </header>
 
       <form action={`/results/${resultSlug(edition)}`} method="get" className="flex flex-wrap items-end gap-3 rounded-xl border border-border bg-surface p-4">
-        <label className="min-w-0 flex-1 basis-64 space-y-1.5 text-xs font-medium text-muted">Athlete, profile club or category
+        <label className="min-w-0 flex-1 basis-64 space-y-1.5 text-xs font-medium text-muted">Athlete, bib, club or category
           <input name="q" defaultValue={search.q} maxLength={120} placeholder="Search these results" className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg focus:outline-none focus:ring-2 focus:ring-accent/40" />
         </label>
         <Button type="submit" className="h-11">Search</Button>
         {search.q ? <a href={`/results/${resultSlug(edition)}`} className="py-3 text-sm text-accent underline">Clear</a> : null}
       </form>
 
-      <section aria-label="Recorded race results" className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
-        <h2 className="px-3 py-3 font-display text-lg font-semibold">Recorded performances</h2>
-        <div className="overflow-x-auto" role="region" aria-label="Race results table; scroll horizontally on small screens" tabIndex={0}>
-          <table className="w-full min-w-[58rem] text-left text-sm">
-            <caption className="sr-only">Recorded results for {edition.event_name}. Placings are as recorded, not recalculated for this list.</caption>
-            <thead className="border-b border-border bg-accent-soft/40 text-[11px] uppercase tracking-wide text-muted">
-              <tr>{columns.map((label, index) => <th key={index} scope="col" className="px-3 py-3">{label || <span className="sr-only">Claim result</span>}</th>)}</tr>
-            </thead>
-            <tbody>
-              {results.map((result) => {
-                const finished = ["finished", "fin"].includes(result.status.trim().toLowerCase()) && !result.disqualified;
-                const credit = resultCredit(result.source_url, result.result_source);
-                return (
-                  <tr id={`result-${result.id}`} key={result.id} className="border-b border-border/70 last:border-0 hover:bg-elevated/40">
-                    <td className="px-3 py-4 align-top font-semibold tabular-nums">{result.disqualified ? "—" : result.overall_place ?? result.reported_place ?? "—"}</td>
-                    <td className="px-3 py-4 align-top">
-                      {result.athlete_slug ? <Link to="/athletes/$slug" params={{ slug: result.athlete_slug }} className="font-semibold text-fg no-underline hover:text-accent">{result.athlete_name}</Link> : <span className="font-semibold">{result.athlete_name}</span>}
-                      {!result.athlete_slug ? <p className="mt-1 text-xs text-muted">Name under review · profile not linked</p> : null}
-                      {result.verification_status === "unverified" ? <p className="mt-1 text-xs text-muted">Unverified result</p> : null}
-                      {!finished ? <p className="mt-1 text-xs text-muted">{result.disqualified ? "Disqualified" : result.status}</p> : null}
-                      {finished && result.gender_place !== null ? <p className="mt-1 text-xs text-muted">Gender position {result.gender_place}</p> : null}
-                      {credit ? <a href={credit.url} target="_blank" rel="noreferrer" className="mt-1 block text-xs text-accent underline">Results: {credit.name}</a> : null}
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 align-top text-muted">{result.nationality ? <CountryFlag country={result.nationality} showCode /> : "—"}</td>
-                    <td className="max-w-44 px-3 py-4 align-top text-muted">{result.profile_club || "—"}</td>
-                    <td className="px-3 py-4 align-top text-muted">{result.category || "—"}{finished && result.category_place !== null ? <p className="mt-1 text-xs">Position {result.category_place}</p> : null}</td>
-                    <td className="whitespace-nowrap px-3 py-4 align-top font-semibold tabular-nums">{result.reported_performance || (finished ? formatDuration(result.finish_time_seconds) : "—")}</td>
-                    {!parkrun ? <td className="whitespace-nowrap px-3 py-4 align-top tabular-nums text-muted">{finished ? formatDuration(result.chip_time_seconds) : "—"}</td> : null}
-                    {!parkrun ? <td className="whitespace-nowrap px-3 py-4 align-top tabular-nums text-muted">{finished ? formatDuration(result.gun_time_seconds) : "—"}</td> : null}
-                    <td className="px-3 py-4 align-top"><Link to="/claim-results" search={{ resultId: result.id }} className="inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-border px-3 text-xs font-medium text-accent no-underline hover:bg-accent-soft"><SearchCheck className="size-4 shrink-0" aria-hidden="true" />Claim this result</Link></td>
-                  </tr>
-                );
-              })}
-              {!results.length ? <tr><td colSpan={columns.length} className="p-8 text-center text-muted">No recorded results match this search.</td></tr> : null}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <RaceResultsBoard results={results} parkrun={parkrun} editionName={edition.event_name} />
       <nav aria-label="Race result pages" className="flex items-center justify-between gap-3">
         {search.page > 1 ? <Button asChild variant="secondary"><Link to="/results/$editionId" params={params} search={{ q: search.q || undefined, page: search.page > 2 ? search.page - 1 : undefined }}>Previous</Link></Button> : <span />}
         <span className="text-xs text-muted">Page {search.page}</span>

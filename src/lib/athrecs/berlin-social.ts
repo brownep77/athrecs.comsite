@@ -85,7 +85,7 @@ export async function berlinCard(
       w - pad * 2 - 64,
     );
     text(
-      "Official results linked at athrecs.com",
+      "Results coverage on AthRecs",
       pad + 32,
       portrait ? 718 : 607,
       26,

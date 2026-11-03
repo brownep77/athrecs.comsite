@@ -1,3 +1,4 @@
+import { getRoadGuideCountry } from "@/lib/running/public-road-guides";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { countryGuide } from "@/data/road-marathons/countries";
@@ -10,7 +11,7 @@ export const Route = createFileRoute("/running/uk-marathons")({
   },
   loader: async () => ({
     country: countryGuide("uk")!,
-    races: (await import("@/data/road-marathons")).roadMarathonsForCountry("uk"),
+    races: await getRoadGuideCountry({ data: { country: "uk", half: false } }),
     now: new Date().toISOString(),
   }),
   staleTime: 0,

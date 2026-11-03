@@ -1,15 +1,16 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
-import { PUBLIC_PAGES } from "@/lib/athrecs/public-pages";
 import { COUNTRY_SITES } from "@/lib/athrecs/country-sites";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 const loadGuideLinks = createServerFn({ method: "GET" }).handler(async () => {
   const { getRunningGuideDirectory } = await import("@/lib/running/guide-directory.server");
+  const { PUBLIC_PAGES } = await import("@/lib/athrecs/public-pages");
   const directory = await getRunningGuideDirectory();
   return {
+    pages: PUBLIC_PAGES,
     countries: directory.countries.flatMap((country) =>
       country.links.map((link) => ({ name: link.name, path: link.path, country: country.name })),
     ),
@@ -47,7 +48,7 @@ function SiteMapPage() {
       <section>
         <h2 className="font-display text-2xl font-semibold">Pages and sports</h2>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {PUBLIC_PAGES.filter((page) => page.path !== "/site-map").map((page) => (
+          {guides.pages.filter((page) => page.path !== "/site-map").map((page) => (
             <li key={page.path}>
               <a
                 href={page.path}

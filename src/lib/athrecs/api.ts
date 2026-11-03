@@ -1,3 +1,6 @@
+import { isResultDocument } from "./result-document";
+import { resultCredit } from "./result-credit";
+import { withoutProfileEvidence } from "./profile-evidence";
 import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import {
   fixtureDistanceLabel,
@@ -671,17 +674,46 @@ export const getEventBySlug = createServerFn({ method: "GET" })
     `;
     const { checkedFixtureStartLabel } = await import("../../data/fixture-details");
     const { isReviewedFixturePlaceholder } = await import("../../data/fixture-details");
+    // A historic importer may also have put the results page in a fixture URL or notes.
+    const evidenceUrls = new Set<string>();
+    for (const row of editionRows) {
+      if (row.results_official_url) evidenceUrls.add(row.results_official_url);
+      for (const link of parseResultLinks(row.result_links_json)) {
+        evidenceUrls.add(link.results_url);
+        if (link.source_url) evidenceUrls.add(link.source_url);
+      }
+    }
+    const privateResultUrl = (url: string) => evidenceUrls.has(url) || isResultDocument(url);
+    const publicFixtureText = (value: string) => value.replace(/https?:\/\/[^\s<>"']+/gi,
+      (url) => privateResultUrl(url.replace(/[.,;)]+$/, "")) ? "" : url).trim();
     const editions = editionRows
       .filter(
         (edition) => !isReviewedFixturePlaceholder(slug, edition.event_date, edition.distance_code),
       )
-      .map(({ entry_options_json, result_links_json, spectator_access_json, ...edition }) => ({
-        ...edition,
-        start_label: checkedFixtureStartLabel(slug, edition.event_date, edition.distance_code),
-        entry_options: parseEntryOptions(entry_options_json),
-        result_links: parseResultLinks(result_links_json),
-        spectator_access: parseSpectatorAccess(spectator_access_json),
-      }));
+      .map(({ entry_options_json, result_links_json, results_official_url, spectator_access_json, ...edition }) => {
+        const links = parseResultLinks(result_links_json);
+        const providers = [...links.map((link) => resultCredit(link.results_url, link.provider_name)),
+          resultCredit(results_official_url, null)];
+        const spectator = parseSpectatorAccess(spectator_access_json);
+        const isPast = edition.event_date < today || edition.status === "Finished";
+        return {
+          ...edition,
+          source_url: isPast || (edition.source_url && privateResultUrl(edition.source_url)) ? null : edition.source_url,
+          entry_url: edition.entry_url && privateResultUrl(edition.entry_url) ? null : edition.entry_url,
+          notes: edition.notes && (isPast ? edition.notes.replace(/https?:\/\/[^\s<>"']+/gi, "").trim() : publicFixtureText(edition.notes)),
+          start_label: checkedFixtureStartLabel(slug, edition.event_date, edition.distance_code),
+          entry_options: parseEntryOptions(entry_options_json).filter((option) => !privateResultUrl(option.entry_url))
+            .map((option) => ({ ...option, source_url: option.source_url && !privateResultUrl(option.source_url) ? option.source_url : null,
+              notes: option.notes ? publicFixtureText(option.notes) : null })),
+          result_provider_names: [...new Set(providers.filter((name): name is string => Boolean(name)))],
+          spectator_access: spectator && {
+            ...spectator,
+            ticket_url: spectator.ticket_url && privateResultUrl(spectator.ticket_url) ? null : spectator.ticket_url,
+            source_url: spectator.source_url && privateResultUrl(spectator.source_url) ? "" : spectator.source_url,
+            notes: spectator.notes ? publicFixtureText(spectator.notes) : null,
+          },
+        };
+      });
 
     // Stored editions include official holiday dates and cancellations. Never
     // fabricate a missing weekly occurrence or replace its venue start time.
@@ -795,13 +827,21 @@ export const getEventBySlug = createServerFn({ method: "GET" })
     const eastCoast = event.slug === "east-coast-10k";
     const isTimingLink = (url: string | null) =>
       Boolean(url && /^https?:\/\/(?:www\.)?totalracetiming\.co\.uk(?:\/|$)/i.test(url));
+    const publicEvent = {
+      ...event,
+      result_event_name: event.name,
+      website: eastCoast && isTimingLink(event.website) ? "https://www.gyrr.co.uk/" :
+        privateResultUrl(event.website) ? "" : event.website,
+      source_url: event.source_url && !privateResultUrl(event.source_url) ? event.source_url : null,
+      description: publicFixtureText(event.description || ""),
+      summary: publicFixtureText(event.summary || ""),
+    };
     return publicCatalogueContent(
       twoOceansRacePresentation(
         {
-          event: eastCoast && isTimingLink(event.website)
-            ? { ...event, website: "https://www.gyrr.co.uk/" }
-            : event,
-          groups,
+          event: publicEvent,
+          groups: groups.map((group) => ({ ...group, source_url:
+            group.source_url && privateResultUrl(group.source_url) ? "" : group.source_url })),
           distances: fixtureDistanceBadges(
             event.sport,
             distances.map((distance) => distance.distance_code),
@@ -810,8 +850,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
           upcoming,
           past: eastCoast ? past.map((edition) => ({
             ...edition,
-            results_official_url: isTimingLink(edition.results_official_url) ? null : edition.results_official_url,
-            result_links: edition.result_links.filter((link) => !isTimingLink(link.results_url)),
+            result_provider_names: edition.result_provider_names.filter((name) => name !== "Total Race Timing"),
             notes: edition.notes?.split(/(?<=[.!?])\s+|\n+/)
               .filter((note) => !/total\s*race\s*timing|\bTRT (timed event|verified finish list)/i.test(note))
               .join(" ").trim() || null,
@@ -878,7 +917,7 @@ export const getEditionResults = createServerFn({ method: "GET" })
     return rows
       .map(({ result_details, ...row }) => ({
         ...row,
-        details: readResultDetails(result_details),
+        details: withoutProfileEvidence(readResultDetails(result_details)),
       }))
       .map(publicCatalogueContent);
   });
@@ -1492,7 +1531,7 @@ export const getClubBySlug = createServerFn({ method: "GET" })
           location_note: editorial.location_note,
           contact_note: editorial.contact_note,
           notable_members: editorial.notable_members ?? [],
-          sources: editorial.sources,
+          sources: editorial.sources.filter((source) => !isResultDocument(source.url, source.title)),
           reviewed_at: editorial.reviewed_at,
         }
       : null;
@@ -1528,6 +1567,7 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     return {
       club: {
         ...club,
+        source_url: isResultDocument(club.source_url) ? null : club.source_url,
         clubUpdate: clubUpdate ?? null,
         profile,
         address_kind:
@@ -1603,7 +1643,6 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
     distance: string;
     status: string;
     provider_name: string | null;
-    results_url: string | null;
     published_at: string;
   }>`
     with upcoming_editions as (
@@ -1645,7 +1684,6 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
         distance_code,
         status,
         null::text as provider_name,
-        null::text as results_url,
         event_date::timestamptz as published_at,
         row_number() over (
           partition by sport
@@ -1658,7 +1696,6 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       select
         link.id,
         link.provider_name,
-        link.results_url,
         link.checked_at,
         event.slug as event_slug,
         event.name as event_name,
@@ -1695,7 +1732,6 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
         distance_code,
         'Finished'::text as status,
         provider_name,
-        results_url,
         checked_at as published_at,
         row_number() over (
           partition by sport
@@ -1717,7 +1753,6 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       distance_code as distance,
       status,
       provider_name,
-      results_url,
       published_at::text as published_at
     from (
       select * from fixture_updates where sport_rank <= 8
@@ -1750,8 +1785,8 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       eventDate: row.event_date,
       distance: row.distance,
       status: row.status,
-      providerName: row.provider_name,
-      resultsUrl: row.results_url,
+      providerName: resultCredit(null, row.provider_name),
+      resultsUrl: row.kind === "results" ? `/races/${encodeURIComponent(row.event_slug)}#results-heading` : null,
       publishedAt: row.published_at,
     }))
     .map(publicCatalogueContent);

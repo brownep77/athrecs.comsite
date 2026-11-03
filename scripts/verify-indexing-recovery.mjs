@@ -46,10 +46,12 @@ try {
   assert.match(archive.$('main').text(), /Example Timing/);
   const resultsPath = archive.$('a').filter((i, e) => archive.$(e).text() === 'View recorded results').attr('href');
   assert(resultsPath);
+  assert(!archive.html.includes('https://example.org/results'), 'Race hub HTML and hydration omit source URLs');
   const results = await get(resultsPath);
-  assert.match(results.$('main').text(), /1 performance recorded/);
+  assert.match(results.$('main').text(), /1 performance in the archive/);
   assert.match(results.$('main').text(), /may cover only part of the field/);
   assert(!results.html.includes('Synthetic Private Runner'));
+  assert(!results.html.includes('https://example.org/results'), 'Results HTML and hydration omit source URLs');
   await sql`update events set slug='synthetic-readable-archive' where id=${eventId}`;
   const oldArchive = await fetch(`${origin}/races/test-indexing-archive`, { redirect: 'manual' });
   assert.equal(oldArchive.status, 301);
@@ -252,7 +254,7 @@ try {
   console.log('PASS: results/sport/running browse pagination is indexable and self-canonical; empty later pages return 404; searches stay noindex; multisport sitemap inclusion preserves member privacy.');
 
   console.log('PASS: data-only collections SSR, bounded homepage and directory, A–Z crawlability, robots headers, factual biography/Person schema, locale consolidation and immediate withdrawal.');
-  console.log('PASS: SSR archive distinction, safe result preview, credits, original result links, country running default, explicit sport selection, empty-directory noindex and live sitemap exclusion.');
+  console.log('PASS: SSR archive distinction, safe result preview, plain-text credits, internal edition links, country running default, explicit sport selection, empty-directory noindex and live sitemap exclusion.');
 } finally {
   await server.close();
   await database?.close();

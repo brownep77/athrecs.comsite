@@ -1,59 +1,8 @@
-import { z } from "zod";
+import type { BerlinResult, BerlinSnapshot } from "./berlin-snapshot.server";
+export type { BerlinResult, BerlinSnapshot } from "./berlin-snapshot.server";
 
 export const BERLIN_PATH = "/results/berlin-marathon-2026";
 export const BERLIN_URL = `https://www.athrecs.com${BERLIN_PATH}`;
-export const BERLIN_OFFICIAL = "https://berlin.r.mikatiming.com/2026/?lang=EN_CAP";
-const time = z.string().regex(/^\d{1,2}:[0-5]\d:[0-5]\d(?:\.\d{1,3})?$/);
-const position = z.number().int().positive().nullable();
-export const berlinResultSchema = z
-  .object({
-    id: z.string().min(1),
-    bib: z.string().min(1),
-    name: z.string().min(1).max(150),
-    gender: z.enum(["men", "women", "other"]),
-    country: z.string().max(80).nullable(),
-    club: z.string().max(160).nullable(),
-    category: z.string().min(1).max(50).nullable(),
-    overallPlace: position,
-    genderPlace: position,
-    categoryPlace: position,
-    gunTime: time.nullable(),
-    chipTime: time.nullable(),
-    status: z.literal("finished"),
-    verified: z.literal(true),
-    publicationApproved: z.literal(true),
-    sourceUrl: z.url(),
-    sourceLocator: z.string().min(1),
-    checkedAt: z.iso.datetime({ offset: true }),
-  })
-  .refine((row) => row.gunTime || row.chipTime, "A finish time is required")
-  .refine((row) => row.category || row.categoryPlace === null, "Category rank needs a category");
-export type BerlinResult = z.infer<typeof berlinResultSchema>;
-export const berlinSnapshotSchema = z
-  .object({
-    event: z.literal("Berlin Marathon"),
-    eventDate: z.literal("2026-09-27"),
-    distanceKm: z.literal(42.195),
-    status: z.enum(["awaiting", "provisional", "official"]),
-    coverage: z.enum(["none", "highlights", "partial", "complete"]),
-    updatedAt: z.iso.datetime({ offset: true }).nullable(),
-    results: z.array(berlinResultSchema),
-  })
-  .superRefine((data, ctx) => {
-    const bibs = new Set<string>();
-    const ids = new Set<string>();
-    for (const row of data.results) {
-      if (bibs.has(row.bib) || ids.has(row.id))
-        ctx.addIssue({ code: "custom", message: "Duplicate result identity" });
-      bibs.add(row.bib);
-      ids.add(row.id);
-    }
-    if ((data.status === "awaiting" || data.coverage === "none") && data.results.length)
-      ctx.addIssue({ code: "custom", message: "Awaiting/none must not contain results" });
-    if (data.results.length && !data.updatedAt)
-      ctx.addIssue({ code: "custom", message: "Published results need an update timestamp" });
-  });
-export type BerlinSnapshot = z.infer<typeof berlinSnapshotSchema>;
 export type BerlinView = "men" | "women" | "age" | "all";
 export type BerlinSearch = {
   view: BerlinView;
@@ -66,7 +15,7 @@ export function berlinSearch(raw: Record<string, unknown>): BerlinSearch {
   return {
     view: ["men", "women", "age", "all"].includes(String(raw.view))
       ? (raw.view as BerlinView)
-      : "men",
+      : "all",
     category: typeof raw.category === "string" ? raw.category.slice(0, 50) : "",
     ageGender: raw.ageGender === "women" || raw.ageGender === "other" ? raw.ageGender : "men",
     q: typeof raw.q === "string" ? raw.q.trim().slice(0, 120) : "",
