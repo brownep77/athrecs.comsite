@@ -271,6 +271,16 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
           </a>
         </aside>
       ) : null}
+      {article.hashtags?.length ? (
+        <p
+          aria-label="Article hashtags"
+          className="flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted"
+        >
+          {article.hashtags.map((hashtag) => (
+            <span key={hashtag}>{hashtag}</span>
+          ))}
+        </p>
+      ) : null}
       {article.links?.length ? (
         <nav
           aria-label="Related pages and sources"

@@ -1,3 +1,4 @@
+import { NOVEMBER_3_NEWS } from "./november-3-2026-news";
 import { NEW_YORK_MARATHON_2026_FAMOUS_RUNNERS } from "./new-york-marathon-2026-famous-runners";
 import { NYC_2026_CELEBRITY_FINISHERS } from "./nyc-2026-celebrity-finishers";
 import { NEW_YORK_MARATHON_2026_RESULTS } from "./new-york-marathon-2026-results";
@@ -16,6 +17,7 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  ...NOVEMBER_3_NEWS,
   AUCKLAND_MARATHON_2026_RESULTS,
   DUBLIN_MARATHON_2026_RESULTS,
   ...[
