@@ -24,6 +24,7 @@ import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as ReviewResultsRouteImport } from './routes/review-results'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as SiteMapRouteImport } from './routes/site-map'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
@@ -62,6 +63,7 @@ import { Route as ApiAthleteInboxSyncRouteImport } from './routes/api/athlete-in
 import { Route as ApiAthletePhotosRouteImport } from './routes/api/athlete-photos'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
+import { Route as ApiClubConfirmationRouteImport } from './routes/api/club-confirmation'
 import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scanner-worker'
 import { Route as ApiCollectionStatsWorkerRouteImport } from './routes/api/collection-stats-worker'
 import { Route as ApiDiagnosticsRouteImport } from './routes/api/diagnostics'
@@ -91,6 +93,7 @@ import { Route as ResultsIndexRouteImport } from './routes/results/index'
 import { Route as ResultsEditionIdRouteImport } from './routes/results/$editionId'
 import { Route as ResultsBerlinMarathon2026RouteImport } from './routes/results/berlin-marathon-2026'
 import { Route as ResultsBureValley102026RouteImport } from './routes/results/bure-valley-10-2026'
+import { Route as ResultsMersea10RouteImport } from './routes/results/mersea-10'
 import { Route as ResultsUnlinkedRouteImport } from './routes/results/unlinked'
 import { Route as RunningIndexRouteImport } from './routes/running/index'
 import { Route as RunningGuideRouteImport } from './routes/running/$guide'
@@ -191,6 +194,11 @@ const RaceSeriesRoute = RaceSeriesRouteImport.update({
 const ReviewResultsRoute = ReviewResultsRouteImport.update({
   id: '/review-results',
   path: '/review-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteMapRoute = SiteMapRouteImport.update({
@@ -386,6 +394,11 @@ const ApiCatalogueAutomationRoute = ApiCatalogueAutomationRouteImport.update({
   path: '/api/catalogue-automation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiClubConfirmationRoute = ApiClubConfirmationRouteImport.update({
+  id: '/api/club-confirmation',
+  path: '/api/club-confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiClubScannerWorkerRoute = ApiClubScannerWorkerRouteImport.update({
   id: '/api/club-scanner-worker',
   path: '/api/club-scanner-worker',
@@ -531,6 +544,11 @@ const ResultsBerlinMarathon2026Route =
 const ResultsBureValley102026Route = ResultsBureValley102026RouteImport.update({
   id: '/results/bure-valley-10-2026',
   path: '/results/bure-valley-10-2026',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultsMersea10Route = ResultsMersea10RouteImport.update({
+  id: '/results/mersea-10',
+  path: '/results/mersea-10',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResultsUnlinkedRoute = ResultsUnlinkedRouteImport.update({
@@ -687,6 +705,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/search': typeof SearchRoute
   '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
@@ -724,6 +743,7 @@ export interface FileRoutesByFullPath {
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-confirmation': typeof ApiClubConfirmationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
@@ -745,6 +765,7 @@ export interface FileRoutesByFullPath {
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
+  '/results/mersea-10': typeof ResultsMersea10Route
   '/results/unlinked': typeof ResultsUnlinkedRoute
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
@@ -797,6 +818,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/search': typeof SearchRoute
   '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
@@ -834,6 +856,7 @@ export interface FileRoutesByTo {
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-confirmation': typeof ApiClubConfirmationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
@@ -855,6 +878,7 @@ export interface FileRoutesByTo {
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
+  '/results/mersea-10': typeof ResultsMersea10Route
   '/results/unlinked': typeof ResultsUnlinkedRoute
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
@@ -908,6 +932,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/search': typeof SearchRoute
   '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
@@ -945,6 +970,7 @@ export interface FileRoutesById {
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-confirmation': typeof ApiClubConfirmationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
@@ -966,6 +992,7 @@ export interface FileRoutesById {
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
+  '/results/mersea-10': typeof ResultsMersea10Route
   '/results/unlinked': typeof ResultsUnlinkedRoute
   '/running/$guide': typeof RunningGuideRoute
   '/running/calendar': typeof RunningCalendarRoute
@@ -1020,6 +1047,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/search'
     | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
@@ -1057,6 +1085,7 @@ export interface FileRouteTypes {
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-confirmation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
@@ -1078,6 +1107,7 @@ export interface FileRouteTypes {
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
+    | '/results/mersea-10'
     | '/results/unlinked'
     | '/running/$guide'
     | '/running/calendar'
@@ -1130,6 +1160,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/search'
     | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
@@ -1167,6 +1198,7 @@ export interface FileRouteTypes {
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-confirmation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
@@ -1188,6 +1220,7 @@ export interface FileRouteTypes {
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
+    | '/results/mersea-10'
     | '/results/unlinked'
     | '/running/$guide'
     | '/running/calendar'
@@ -1240,6 +1273,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/search'
     | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
@@ -1277,6 +1311,7 @@ export interface FileRouteTypes {
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-confirmation'
     | '/api/club-scanner-worker'
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
@@ -1298,6 +1333,7 @@ export interface FileRouteTypes {
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
+    | '/results/mersea-10'
     | '/results/unlinked'
     | '/running/$guide'
     | '/running/calendar'
@@ -1351,6 +1387,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
   ReviewResultsRoute: typeof ReviewResultsRoute
+  SearchRoute: typeof SearchRoute
   SiteMapRoute: typeof SiteMapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SponsorshipRoute: typeof SponsorshipRoute
@@ -1388,6 +1425,7 @@ export interface RootRouteChildren {
   ApiAthletePhotosRoute: typeof ApiAthletePhotosRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
+  ApiClubConfirmationRoute: typeof ApiClubConfirmationRoute
   ApiClubScannerWorkerRoute: typeof ApiClubScannerWorkerRoute
   ApiCollectionStatsWorkerRoute: typeof ApiCollectionStatsWorkerRoute
   ApiDiagnosticsRoute: typeof ApiDiagnosticsRoute
@@ -1409,6 +1447,7 @@ export interface RootRouteChildren {
   ResultsEditionIdRoute: typeof ResultsEditionIdRoute
   ResultsBerlinMarathon2026Route: typeof ResultsBerlinMarathon2026Route
   ResultsBureValley102026Route: typeof ResultsBureValley102026Route
+  ResultsMersea10Route: typeof ResultsMersea10Route
   ResultsUnlinkedRoute: typeof ResultsUnlinkedRoute
   RunningGuideRoute: typeof RunningGuideRoute
   RunningCalendarRoute: typeof RunningCalendarRoute
@@ -1551,6 +1590,13 @@ declare module '@tanstack/react-router' {
       path: '/review-results'
       fullPath: '/review-results'
       preLoaderRoute: typeof ReviewResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/site-map': {
@@ -1819,6 +1865,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCatalogueAutomationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/club-confirmation': {
+      id: '/api/club-confirmation'
+      path: '/api/club-confirmation'
+      fullPath: '/api/club-confirmation'
+      preLoaderRoute: typeof ApiClubConfirmationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/club-scanner-worker': {
       id: '/api/club-scanner-worker'
       path: '/api/club-scanner-worker'
@@ -2022,6 +2075,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResultsBureValley102026RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/results/mersea-10': {
+      id: '/results/mersea-10'
+      path: '/results/mersea-10'
+      fullPath: '/results/mersea-10'
+      preLoaderRoute: typeof ResultsMersea10RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/results/unlinked': {
       id: '/results/unlinked'
       path: '/results/unlinked'
@@ -2223,6 +2283,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
   ReviewResultsRoute: ReviewResultsRoute,
+  SearchRoute: SearchRoute,
   SiteMapRoute: SiteMapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SponsorshipRoute: SponsorshipRoute,
@@ -2260,6 +2321,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAthletePhotosRoute: ApiAthletePhotosRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
+  ApiClubConfirmationRoute: ApiClubConfirmationRoute,
   ApiClubScannerWorkerRoute: ApiClubScannerWorkerRoute,
   ApiCollectionStatsWorkerRoute: ApiCollectionStatsWorkerRoute,
   ApiDiagnosticsRoute: ApiDiagnosticsRoute,
@@ -2281,6 +2343,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResultsEditionIdRoute: ResultsEditionIdRoute,
   ResultsBerlinMarathon2026Route: ResultsBerlinMarathon2026Route,
   ResultsBureValley102026Route: ResultsBureValley102026Route,
+  ResultsMersea10Route: ResultsMersea10Route,
   ResultsUnlinkedRoute: ResultsUnlinkedRoute,
   RunningGuideRoute: RunningGuideRoute,
   RunningCalendarRoute: RunningCalendarRoute,

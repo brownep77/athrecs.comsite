@@ -1,0 +1,325 @@
+{
+  "slug": "karen-throsby-english-channel",
+  "name": "Karen Throsby",
+  "country": "England",
+  "aliases": [],
+  "highlight": "Karen Throsby crossed the English Channel from England to France in 16 hours 9 minutes on 2 September 2010.",
+  "biography": [
+    "Throsby reached Pointe du Riden, south of Cap Gris-Nez, in September 2010. A sociologist as well as a marathon swimmer, she later wrote Immersion: Marathon Swimming, Embodiment and Identity, published by Manchester University Press in 2016.",
+    "The English Channel swim on 2 September 2010 took 16 hours 9 minutes. The Catalina federation records 14 hours 11 minutes 52 seconds on 20 July 2011. In New York the 24 August 2013 Manhattan circuit took 8 hours 41 minutes 1 seconds."
+  ],
+  "flags": [
+    {
+      "code": "GB-ENG",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "UK [England]"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444416",
+      "title": "English Channel solo, 2 September 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "16:09:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Landing",
+          "text": "Pointe du Riden"
+        },
+        {
+          "label": "Departure clock",
+          "text": "02:57:20"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "19:06:20"
+        },
+        {
+          "label": "Pilot",
+          "text": "Paul Foreman"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Pace Arrow"
+        },
+        {
+          "label": "Observer",
+          "text": "Jordan Vass"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "UK [England]"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444416",
+          "url": "https://cspf.co.uk/swim/444416"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2011-07-20",
+      "title": "Catalina Channel solo, 20 July 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "14:11:52 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "United Kingdom"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 205 · Karen Throsby, United Kingdom",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-777",
+      "title": "Manhattan Island swim, 24 August 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:41:01 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "GBR"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 777 · Karen Throsby",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Karen Throsby swim the English Channel?",
+      "value": "Karen Throsby swam from England to France on 2 September 2010 in 16 hours 9 minutes."
+    },
+    {
+      "label": "Who piloted Karen Throsby’s Channel crossing?",
+      "value": "Paul Foreman piloted Pace Arrow on 2 September 2010."
+    },
+    {
+      "label": "How long did Karen Throsby take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 20 July 2011 took 14 hours 11 minutes 52 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444416",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444416"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 205 · Karen Throsby, United Kingdom",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 777 · Karen Throsby",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "University of Leeds biography and publications",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://essl.leeds.ac.uk/sociology/staff/53/dr-karen-throsby"
+        }
+      ]
+    },
+    {
+      "title": "Karen Throsby on Channel swimming",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://loneswimmer.com/2013/02/05/guest-article-dr-karen-throsby-on-the-complicated-issue-of-fat-amongst-channel-swimmers/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444416",
+      "title": "English Channel solo, 2 September 2010",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "16:09:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Landing",
+          "text": "Pointe du Riden"
+        },
+        {
+          "label": "Departure clock",
+          "text": "02:57:20"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "19:06:20"
+        },
+        {
+          "label": "Pilot",
+          "text": "Paul Foreman"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Pace Arrow"
+        },
+        {
+          "label": "Observer",
+          "text": "Jordan Vass"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "UK [England]"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2011-07-20",
+      "title": "Catalina Channel solo, 20 July 2011",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "14:11:52 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "United Kingdom"
+        }
+      ]
+    },
+    {
+      "id": "nyow-777",
+      "title": "Manhattan Island swim, 24 August 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:41:01 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "GBR"
+        },
+        {
+          "label": "Published place",
+          "text": "4"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-4e13ccffbb648c3d6337"
+}

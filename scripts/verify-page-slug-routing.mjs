@@ -161,15 +161,18 @@ for (const slug of ["example-athlete", "legacy--athlete-", "ATH-000123", "ath-00
   assert.doesNotThrow(() => athleteRoute.beforeLoad({ params: { slug } }));
   assert.equal(athleteInput.parsePublicAthletePreviewInput({ slug }).slug, slug);
 }
-const directory = route("src/athletics/routes/athletes/index.tsx");
+const directory = route("src/athletics/routes/athletes/index.tsx", {
+  "@/lib/athrecs/directory-structured-data": await import("../src/lib/athrecs/directory-structured-data.ts"),
+});
 for (const search of [{}, { letter: "B", page: 2 }, { q: "Example" }]) {
-  const head = directory.head({ loaderData: { indexable: !search.q }, matches: [{ search }] });
+  const head = directory.head({ loaderData: { indexable: !search.q, athletes: [{ display_name: "Alex Example", slug: "alex-example" }] }, matches: [{ search }] });
   const canonical = head.links.find((link) => link.rel === "canonical").href;
   assert.equal(head.meta.find((meta) => meta.property === "og:url").content, canonical);
   assert.equal(
     head.meta.findLast((meta) => meta.name === "robots").content,
     search.q ? "noindex, follow" : "index, follow",
   );
+  assert.equal(head.scripts.length, search.q ? 0 : 1);
   if (search.page) assert.equal(canonical, `${seo.SITE_URL}/athletes?letter=B&page=2`);
 }
 for (const [file, slug] of [

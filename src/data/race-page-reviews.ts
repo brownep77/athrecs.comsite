@@ -2,6 +2,13 @@ import { raceGuideFor, type RaceGuide } from "./runrecs-race-guides.ts";
 import { FIXTURE_DETAILS } from "./fixture-details.ts";
 import { reviewedUrgentRacePage } from "./urgent-starts-next-2026-10-25-pages.ts";
 
+// MyRunResults uses both names for the Walled City event:
+// https://myrunresults.com/events/derry_10_mile_road_race/6024/details
+// The 2027 edition and organiser announcement are recorded in catalogue batch PR 447.
+export const reviewedRaceSearchAliases: Readonly<Record<string, string | undefined>> = {
+  "walled-city-10-mile-road-race|2027-03-13": "Derry 10 Miler",
+};
+
 /** A single, edition-scoped search/page example. Source review: 25 October 2026. */
 const hamburg = {
   slug: "wa-32-hella-hamburg-half-marathon-7238156",

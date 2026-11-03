@@ -46,6 +46,7 @@ const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
 const CURRENT_LIMERICK_PERMIT_SCAN_CHECKED_AT = "2026-10-29";
 const CURRENT_FERRIBY_SCAN_CHECKED_AT = "2026-10-31";
 const CURRENT_NOVEMBER_ENTRY_SCAN_CHECKED_AT = "2026-11-01";
+const CURRENT_VICTORIA_PARK_REFRESH_CHECKED_AT = "2026-11-03";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -76,6 +77,25 @@ type RaceSeed = {
 };
 
 const seeds: RaceSeed[] = [
+  {
+    slug: "clowne-half-marathon",
+    name: "Clowne Half Marathon",
+    date: "2026-11-22",
+    distance: "Half",
+    startTime: "09:00",
+    country: "England",
+    county: "Derbyshire",
+    city: "Clowne",
+    area: "The Arc Leisure Centre, Clowne and surrounding villages",
+    surface: "Road",
+    organiser: "Clowne Road Runners / RaceBest",
+    url: "https://racebest.com/races/2s98u",
+    entryUrl: "https://racebest.com/races/2s98u/enter",
+    priceAmount: 32,
+    checkedAt: CURRENT_VICTORIA_PARK_REFRESH_CHECKED_AT,
+    notes:
+      "The organiser-authorised RaceBest event and direct entry pages consistently confirm the 22 November 2026 road half marathon, 09:00 start, open entry from £32 and UKA race licence 31922. The established canonical Clowne identity is reused and its former TBC-licence hold is cleared.",
+  },
   {
     slug: "darwen-roller-coaster-half-marathon-2027",
     name: "Darwen 'Roller Coaster' Half Marathon 2027",
@@ -2613,6 +2633,20 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The official organiser page consistently confirms the 8 August 2027 half marathon, 10K and 5K, the 10:30 half-marathon start and open entry. Its half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified event page is retained as the safe entry destination and the established August card is reused.",
   },
+  {
+    seriesSlug: "victoria-park-5k-10k-half-marathon-january",
+    date: "2027-01-10",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_VICTORIA_PARK_REFRESH_CHECKED_AT,
+    notes:
+      "The corrected official organiser page consistently confirms the 10 January 2027 half marathon, 10K and 5K programme, the 09:30 half-marathon start and open £36 half entry. Its half-marathon checkout currently redirects to an unrelated Blackburn 10K, so the exact event page remains the safe entry destination and the established Victoria Park card is enriched instead of duplicated.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -2715,14 +2749,6 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://racebest.com/races/r7499",
   },
   {
-    slug: "clowne-half-marathon-2026",
-    date: "2026-11-22",
-    country: "England",
-    reason:
-      "The organiser and direct entry pages agree on the event details, but the race licence is still marked TBC.",
-    sourceUrl: "https://racebest.com/races/2s98u",
-  },
-  {
     slug: "fastlane-summer-edition-2027",
     date: "2027-05-16",
     country: "Ireland",
@@ -2816,14 +2842,6 @@ export const dailyHalfTenMileResearchQueue = [
       "The official page title and structured date say 1 August 2027, but its opening race-day sentence still says 2 August 2026, so the existing Derby card is not updated until RunThrough corrects the conflict.",
     sourceUrl:
       "https://www.runthrough.co.uk/event/derby-running-festival-5k-10k-half-marathon-august-2027",
-  },
-  {
-    slug: "victoria-park-half-marathon-10k-5k-january-2027",
-    date: "2027-01-10",
-    country: "England",
-    reason:
-      "The official page title and structured date say 10 January 2027, but its opening race-day sentence still says 3 October 2026, so its existing catalogue edition retains prior provenance until the conflict is corrected.",
-    sourceUrl: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
   },
   {
     slug: "brixton-5k-10k-half-marathon-july-2027",
@@ -3689,6 +3707,14 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     website: "https://www.runthrough.co.uk/event/warwick-half-marathon-january-2027",
     source_url: "https://www.runthrough.co.uk/event/warwick-half-marathon-january-2027",
     defaultStartTime: "09:00",
+  },
+  "victoria-park-5k-10k-half-marathon-january": {
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
+    defaultStartTime: "09:30",
   },
   "wimbledon-common-half-marathon-10k-september": {
     organiser: "RunThrough Events",

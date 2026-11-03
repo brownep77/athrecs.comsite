@@ -1,0 +1,559 @@
+{
+  "slug": "kamil-resa-alsaran-english-channel",
+  "name": "Kamil Resa Alsaran",
+  "country": "Turkey",
+  "aliases": [],
+  "highlight": "Kamil Resa Alsaran crossed the English Channel from England to France in 13 hours 19 minutes on 4 September 2012.",
+  "biography": [
+    "Alsaran swam the English Channel twice, with Stuart Gleeson on Sea Leopard in 2012 and Fred Mardle on Masterpiece in 2015. At Catalina in 2017 he and Ragip Vural Tandoğan appear in separate solo entries with the same elapsed time. They also have separate finish rows in New York in 2018. Both were members of the six-person Brave Turks relay that crossed the English Channel and returned in 27 hours 2 minutes in 2017.",
+    "The English Channel swim on 4 September 2012 took 13 hours 19 minutes. The Catalina federation records 13 hours 1 minutes 38 seconds on 28 July 2017. In New York the 30 June 2018 Manhattan circuit took 10 hours 15 minutes 45 seconds."
+  ],
+  "flags": [
+    {
+      "code": "TR",
+      "label": "Turkey",
+      "abbr": "TUR"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "Turkey"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444612",
+      "title": "English Channel solo, 4 September 2012",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:19:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "03:15:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "16:34:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Stuart Gleeson"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Sea Leopard"
+        },
+        {
+          "label": "Observer",
+          "text": "Sam Jones"
+        },
+        {
+          "label": "Trainer",
+          "text": "Self"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444612",
+          "url": "https://cspf.co.uk/swim/444612"
+        },
+        {
+          "text": "Dover.UK.com individual swim on 4 September 2012",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2012-09-04/kamil-resa-alsaran"
+        }
+      ]
+    },
+    {
+      "id": "cspf-444933",
+      "title": "English Channel solo, 21 August 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "18:01:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "01:07:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "19:08:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Fred Mardle"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Masterpiece"
+        },
+        {
+          "label": "Observer",
+          "text": "Barry Wire"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444933",
+          "url": "https://cspf.co.uk/swim/444933"
+        },
+        {
+          "text": "Dover.UK.com individual swim on 21 August 2015",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2015-08-21/kamil-resa-alsaran"
+        }
+      ]
+    },
+    {
+      "id": "brave-turks-2017",
+      "title": "English Channel two-way relay, 31 August 2017",
+      "lines": [
+        {
+          "label": "Team result",
+          "text": "27:02:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France and back to England"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "09:02 on 1 September 2017"
+        },
+        {
+          "label": "Pilot",
+          "text": "Stuart Gleeson"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Sea Leopard"
+        },
+        {
+          "label": "Observer",
+          "text": "Dan Earthquake"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Team members",
+          "text": "Gurkan Gulyuz, Hakan Alsaran, Emre Seven, Kamil Resa Alsaran, Ragip Vural Tandogan and Ayse Yasemin Yildirim."
+        },
+        {
+          "label": "Record note",
+          "text": "The six-person team clocked 11h25 outward and 15h37 back. The CSA records the finish as 09:02 on 1 September. Subtracting the team duration gives an estimated 06:00 start on 31 August on the same clock basis. The CSA awarded the relay its 2017 Special Award."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Channel Swimming Association, Brave Turks team result 4727",
+          "url": "https://www.channelswimmingassociation.com/swim/4727/brave-turks"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2017-07-28",
+      "title": "Catalina Channel solo, 28 July 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:01:38 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 428 · Kamil Resa Alsaran, Turkey",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-984",
+      "title": "Manhattan Island swim, 30 June 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:15:45 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "TUR"
+        },
+        {
+          "label": "Published place",
+          "text": "11"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 984 · Kamil Resa Alsaran",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Kamil Resa Alsaran swim the English Channel?",
+      "value": "Kamil Resa Alsaran swam from England to France on 4 September 2012 in 13 hours 19 minutes. A second solo followed on 21 August 2015."
+    },
+    {
+      "label": "Who piloted Kamil Resa Alsaran’s Channel crossing?",
+      "value": "Stuart Gleeson piloted Sea Leopard on 4 September 2012."
+    },
+    {
+      "label": "How long did Kamil Resa Alsaran take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 28 July 2017 took 13 hours 1 minutes 38 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444612",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444612"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com individual swim on 4 September 2012",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2012-09-04/kamil-resa-alsaran"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical crossing register, swim 444933",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444933"
+        }
+      ]
+    },
+    {
+      "title": "Dover.UK.com individual swim on 21 August 2015",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.dover.uk.com/channel-swimming/swims/2015-08-21/kamil-resa-alsaran"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 428 · Kamil Resa Alsaran, Turkey",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 984 · Kamil Resa Alsaran",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association, Brave Turks team result 4727",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swim/4727/brave-turks"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444612",
+      "title": "English Channel solo, 4 September 2012",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:19:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "03:15:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "16:34:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Stuart Gleeson"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Sea Leopard"
+        },
+        {
+          "label": "Observer",
+          "text": "Sam Jones"
+        },
+        {
+          "label": "Trainer",
+          "text": "Self"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    },
+    {
+      "id": "cspf-444933",
+      "title": "English Channel solo, 21 August 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "18:01:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "01:07:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "19:08:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Fred Mardle"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Masterpiece"
+        },
+        {
+          "label": "Observer",
+          "text": "Barry Wire"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    },
+    {
+      "id": "brave-turks-2017",
+      "title": "English Channel two-way relay, 31 August 2017",
+      "lines": [
+        {
+          "label": "Team result",
+          "text": "27:02:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France and back to England"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "09:02 on 1 September 2017"
+        },
+        {
+          "label": "Pilot",
+          "text": "Stuart Gleeson"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Sea Leopard"
+        },
+        {
+          "label": "Observer",
+          "text": "Dan Earthquake"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming Association"
+        },
+        {
+          "label": "Team members",
+          "text": "Gurkan Gulyuz, Hakan Alsaran, Emre Seven, Kamil Resa Alsaran, Ragip Vural Tandogan and Ayse Yasemin Yildirim."
+        },
+        {
+          "label": "Record note",
+          "text": "The six-person team clocked 11h25 outward and 15h37 back. The CSA records the finish as 09:02 on 1 September. Subtracting the team duration gives an estimated 06:00 start on 31 August on the same clock basis. The CSA awarded the relay its 2017 Special Award."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2017-07-28",
+      "title": "Catalina Channel solo, 28 July 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:01:38 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Turkey"
+        }
+      ]
+    },
+    {
+      "id": "nyow-984",
+      "title": "Manhattan Island swim, 30 June 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "10:15:45 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "TUR"
+        },
+        {
+          "label": "Published place",
+          "text": "11"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-b1a49ba666c7abb6dcb8"
+}

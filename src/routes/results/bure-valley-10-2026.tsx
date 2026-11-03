@@ -1,10 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import {
   BURE_ORGANISER_URL,
-  BURE_PROFILE_SLUGS,
   BURE_RESULTS_URL,
   BURE_WINNERS,
 } from "@/data/bure-valley-2026";
+import { getPublicEditorialAthleteLinks } from "@/lib/athrecs/editorial-athletes-api";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 
@@ -13,6 +13,7 @@ export const Route = createFileRoute("/results/bure-valley-10-2026")({
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
+  loader: () => getPublicEditorialAthleteLinks({ data: { slug: "bure-valley-10-2026" } }),
   head: () => ({
     meta: siteGraphMeta({
       title: "Bure Valley 10 2026 results — winners & age categories | AthRecs",
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/results/bure-valley-10-2026")({
 });
 
 function BureResultsPage() {
+  const links = Route.useLoaderData();
   return (
     <article className="mx-auto max-w-4xl space-y-6">
       <a href="/results" className="inline-flex min-h-11 items-center text-accent">
@@ -75,10 +77,10 @@ function BureResultsPage() {
               <tr key={row.category} className="border-t border-border">
                 <td className="p-3">{row.category}</td>
                 <td className="p-3 font-medium">
-                  {BURE_PROFILE_SLUGS[row.name] ? (
+                  {links[row.name] ? (
                     <Link
                       to="/athletes/$slug"
-                      params={{ slug: BURE_PROFILE_SLUGS[row.name] }}
+                      params={{ slug: links[row.name] }}
                       className="text-accent underline underline-offset-2"
                     >
                       {row.name}

@@ -455,7 +455,7 @@ function AthleteContent() {
               ? "Public figure athlete profile"
               : "Athlete profile"}
         </p>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0 space-y-4">
             <h1 className="font-display text-3xl font-semibold text-fg sm:text-4xl">
               {athlete.display_name}
@@ -463,16 +463,24 @@ function AthleteContent() {
             <AthleteProfileStatuses roles={profileStatuses} />
           </div>
           {!athlete.is_claimed ? (
-            <div className="space-y-2 sm:shrink-0">
-              <p className="text-sm font-medium text-muted">Is this you?</p>
+            <div className="w-full min-w-0 space-y-4 rounded-xl border border-orange-200/80 bg-orange-50/60 p-5 lg:w-[22rem] lg:shrink-0">
+              <p className="text-sm font-semibold text-fg">Is this you?</p>
               <Link
                 to="/claim-results"
                 search={{ resultId: profileResults[0]?.resultId }}
-                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#c2410c] px-5 py-3 text-base font-semibold text-white no-underline shadow-sm transition-colors hover:bg-[#9a3412] focus-visible:ring-2 focus-visible:ring-[#c2410c] focus-visible:ring-offset-2 sm:w-auto"
+                aria-describedby="profile-claim-message"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#c2410c] px-5 py-3 text-base font-semibold text-white no-underline shadow-sm transition-colors hover:bg-[#9a3412] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c2410c] focus-visible:ring-offset-2"
               >
                 Claim your profile
                 <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
               </Link>
+              <p
+                id="profile-claim-message"
+                className="text-lg font-bold leading-snug text-fg sm:text-xl"
+              >
+                Record all your sporting achievements in one place.{" "}
+                <span className="mt-2 block text-[#c2410c]">Free forever.</span>
+              </p>
             </div>
           ) : null}
         </div>

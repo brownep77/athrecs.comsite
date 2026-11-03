@@ -6,6 +6,10 @@ import {
   clubReviewSchema,
   clubDetailsSchema,
 } from "../src/lib/clubs/registration.ts";
+import {
+  startClubConfirmation,
+  answerClubConfirmation,
+} from "../src/lib/clubs/confirmation.server.ts";
 import * as service from "../src/lib/clubs/registration.server.ts";
 
 const pg = new PGlite();
@@ -30,6 +34,7 @@ try {
     "0013_result_claims.sql",
     "0014_athlete_accounts.sql",
     "20261013_club_registration.sql",
+    "20261102_club_officer_confirmations.sql",
   ])
     await pg.exec(await readFile(new URL(`../migrations/${name}`, import.meta.url), "utf8"));
   await pg.exec(
@@ -38,7 +43,7 @@ try {
       "utf8",
     ),
   );
-  for (const id of ["officer", "other", "staff", "unverified", "junior"])
+  for (const id of ["officer", "other", "staff", "unverified", "junior", "second-officer"])
     await sql`insert into "user" (id,name,email,"emailVerified") values (${id}, ${id}, ${`${id}@example.test`}, ${id !== "unverified"})`;
   await sql`insert into athlete_private_profiles (user_id, verified_email, full_name, date_of_birth, privacy_notice_version, privacy_acknowledged_at)
     values ('junior','junior@example.test','Synthetic Junior',(current_date - interval '16 years')::date,'test',now())`;
@@ -185,6 +190,67 @@ try {
     id: app.id,
     revision: returned.revision,
   });
+  const req = {
+    id: app.id,
+    revision: resubmitted.revision,
+    targetClubId: club.id,
+    method: "email",
+    sourceUrl: "https://club.example.test/committee",
+    contact: "chair@example.test",
+    replyNote: "",
+  };
+  let mail;
+  const capture = async (m) => {
+    mail = m;
+  };
+  const token = () => new URL(mail.actionUrl).hash.slice(1);
+  await assert.rejects(
+    () =>
+      service.reviewClubApplication(sql, "staff", { ...decision, revision: resubmitted.revision }),
+    /Independent club confirmation/,
+  );
+  await assert.rejects(
+    () => startClubConfirmation(sql, "officer", req, capture),
+    /independent reviewer/,
+  );
+  await assert.rejects(
+    () => startClubConfirmation(sql, "staff", { ...req, contact: "officer@example.test" }, capture),
+    /distinct/,
+  );
+  await assert.rejects(
+    () => startClubConfirmation(sql, "staff", { ...req, targetClubId: club2.id }, capture),
+    /directory club/,
+  );
+  await assert.rejects(
+    () =>
+      startClubConfirmation(sql, "staff", req, async () => {
+        throw Error("test failure");
+      }),
+    /Delivery/,
+  );
+  await startClubConfirmation(sql, "staff", req, capture);
+  assert.match(mail.message, /Synthetic Officer/);
+  assert.match(mail.message, /officer@example.test/);
+  assert.match(mail.message, /Synthetic Test Club/);
+  assert.equal(await answerClubConfirmation(sql, "x".repeat(43), "confirmed"), false);
+  assert.equal(
+    (
+      await sql`select expires_at - updated_at = interval '48 hours' as exact
+      from club_officer_confirmations where application_id=${app.id}`
+    )[0].exact,
+    true,
+  );
+  const expired = token();
+  await sql`update club_officer_confirmations set updated_at=now()-interval '2 days',expires_at=now()-interval '1 hour' where application_id=${app.id}`;
+  assert.equal(await answerClubConfirmation(sql, expired, "confirmed"), false);
+  await startClubConfirmation(sql, "staff", req, capture);
+  assert.equal(await answerClubConfirmation(sql, expired, "confirmed"), false);
+  assert.equal(await answerClubConfirmation(sql, token(), "confirmed"), true);
+  assert.equal(await answerClubConfirmation(sql, token(), "disputed"), false);
+  await assert.rejects(
+    () => service.requireClubRepresentative(sql, "officer", club.id),
+    /required/,
+  );
   await service.reviewClubApplication(sql, "staff", {
     ...decision,
     revision: resubmitted.revision,
@@ -204,6 +270,137 @@ try {
     (await sql`select name from clubs where id = ${club.id}`)[0].name,
     "Synthetic Test Club",
     "Existing listing is not overwritten by registration",
+  );
+  const edit = {
+    clubId: club.id,
+    revision: 0,
+    biography: "Synthetic club biography",
+    training: "Wednesdays",
+    contactUrl: "https://club.example.test/join",
+  };
+  await assert.rejects(() => service.saveClubContent(sql, "other", edit), /required/);
+  await assert.rejects(
+    () => service.saveClubContent(sql, "officer", { ...edit, clubId: club2.id }),
+    /required/,
+  );
+  await service.saveClubContent(sql, "officer", edit);
+  await assert.rejects(() => service.saveClubContent(sql, "officer", edit), /changed/);
+  // Staff can correct the proposed directory match for a missing-club request.
+  const secondOfficer = await service.saveClubApplication(sql, "second-officer", {
+    ...input,
+    clubId: club2.id,
+  });
+  await startClubConfirmation(
+    sql,
+    "staff",
+    {
+      ...req,
+      id: secondOfficer.id,
+      revision: secondOfficer.revision,
+      targetClubId: club2.id,
+    },
+    capture,
+  );
+  assert.equal(await answerClubConfirmation(sql, token(), "confirmed"), true);
+  await service.reviewClubApplication(sql, "staff", {
+    ...decision,
+    id: secondOfficer.id,
+    revision: secondOfficer.revision,
+  });
+  const unmatched = await service.saveClubApplication(sql, "other", {
+    ...input,
+    clubId: null,
+    details: { ...details, clubName: "Synthetic directory correction" },
+  });
+  const firstTarget = { ...req, id: unmatched.id, revision: unmatched.revision };
+  await startClubConfirmation(sql, "staff", firstTarget, capture);
+  assert(
+    (await service.myClubApplications(sql, "officer")).notices.some((n) => n.id === unmatched.id),
+  );
+  // The replacement cooldown has elapsed, but the application revision is unchanged.
+  await sql`update club_officer_confirmations set updated_at=now()-interval '2 minutes' where application_id=${unmatched.id}`;
+  await startClubConfirmation(sql, "staff", { ...firstTarget, targetClubId: club2.id }, capture);
+  assert(
+    !(await service.myClubApplications(sql, "officer")).notices.some((n) => n.id === unmatched.id),
+    "A representative of the former target must not see the corrected request",
+  );
+  await assert.rejects(
+    () => service.disputeClubNotice(sql, "officer", unmatched.id, unmatched.revision, club.id),
+    /unavailable/,
+  );
+  assert(
+    (await service.myClubApplications(sql, "second-officer")).notices.some(
+      (n) => n.id === unmatched.id,
+    ),
+  );
+  await service.disputeClubNotice(
+    sql,
+    "second-officer",
+    unmatched.id,
+    unmatched.revision,
+    club2.id,
+  );
+  await assert.rejects(() => startClubConfirmation(sql, "staff", firstTarget, capture), /disputed/);
+
+  const extra = await service.saveClubApplication(sql, "other", input);
+  assert.equal((await service.myClubApplications(sql, "officer")).notices[0].id, extra.id);
+  await startClubConfirmation(
+    sql,
+    "staff",
+    { ...req, id: extra.id, revision: extra.revision },
+    capture,
+  );
+  assert.equal(await answerClubConfirmation(sql, token(), "disputed"), true);
+  await assert.rejects(
+    () =>
+      service.reviewClubApplication(sql, "staff", {
+        ...decision,
+        id: extra.id,
+        revision: extra.revision,
+      }),
+    /Independent club confirmation/,
+  );
+  await assert.rejects(
+    () =>
+      service.saveClubApplication(sql, "other", {
+        ...input,
+        id: extra.id,
+        revision: extra.revision,
+      }),
+    /staff review/,
+  );
+  await assert.rejects(
+    () => service.disputeClubNotice(sql, "other", extra.id, extra.revision, club.id),
+    /required/,
+  );
+  await service.disputeClubNotice(sql, "officer", extra.id, extra.revision, club.id);
+  await service.reviewClubApplication(sql, "staff", {
+    ...decision,
+    id: extra.id,
+    revision: extra.revision,
+    action: "needs_changes",
+  });
+  const revised = await service.saveClubApplication(sql, "other", {
+    ...input,
+    id: extra.id,
+    revision: extra.revision + 1,
+  });
+  await startClubConfirmation(
+    sql,
+    "staff",
+    { ...req, id: extra.id, revision: revised.revision },
+    capture,
+  );
+  assert.equal(await answerClubConfirmation(sql, token(), "confirmed"), true);
+  await service.disputeClubNotice(sql, "officer", extra.id, revised.revision, club.id);
+  await assert.rejects(
+    () =>
+      service.reviewClubApplication(sql, "staff", {
+        ...decision,
+        id: extra.id,
+        revision: revised.revision,
+      }),
+    /Independent club confirmation/,
   );
   const approved = (await service.myClubApplications(sql, "officer")).applications[0];
   await assert.rejects(
@@ -235,6 +432,10 @@ try {
     () => service.reviewClubApplication(sql, "staff", { ...decision, revision: approved.revision }),
     /changed/,
   );
+  await assert.rejects(
+    () => service.saveClubContent(sql, "officer", { ...edit, revision: 1 }),
+    /required/,
+  );
   const newInput = {
     ...input,
     clubId: null,
@@ -249,6 +450,30 @@ try {
   await assert.rejects(
     () => service.reviewClubApplication(sql, "staff", { ...decision, id: missing.id, revision: 1 }),
     /Select the existing club/,
+  );
+  await startClubConfirmation(
+    sql,
+    "staff",
+    {
+      ...req,
+      id: missing.id,
+      revision: 1,
+      targetClubId: null,
+      method: "manual",
+      contact: "Synthetic Chair via governing body",
+      replyNote: "The current chair confirmed the named account by telephone on 2 November.",
+    },
+    capture,
+  );
+  await assert.rejects(
+    () =>
+      service.reviewClubApplication(sql, "staff", {
+        ...decision,
+        id: missing.id,
+        revision: 1,
+        resolvedClubId: club.id,
+      }),
+    /Independent club confirmation/,
   );
   await service.reviewClubApplication(sql, "staff", {
     ...decision,

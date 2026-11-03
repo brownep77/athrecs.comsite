@@ -25,3 +25,35 @@ export function resultEditionId(value: unknown): number {
     throw new Error("Invalid race edition");
   return id;
 }
+
+/** The event's name is kept intact. Qualify multi-distance meetings by edition. */
+export function resultEditionLabel(edition: {
+  event_name: string;
+  event_date: string;
+  distance_code: string;
+}) {
+  const { event_name: name, distance_code: code } = edition;
+  const distance = code.trim() === "Half" ? "Half marathon" : code.trim();
+  const normalise = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/(\d+)\s*(?:km|kilometres?|kilometers?)\b/g, "$1k")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .trim();
+  const words = " " + normalise(name) + " ";
+  const discipline = normalise(distance);
+  // A half marathon is a separate discipline from the full marathon.
+  const alreadyNamed = (
+    discipline === "marathon" ? words.replaceAll("half marathon", "half") : words
+  ).includes(" " + discipline + " ");
+  const multiple = new Set(words.match(/\b(?:half marathon|marathon|\d+(?:k|mi|m))\b/g)).size > 1;
+  const qualifier =
+    discipline &&
+    !/^(?:other|unknown|tbc|tbd|unspecified|n a)$/.test(discipline) &&
+    (!alreadyNamed || multiple)
+      ? " · " + distance
+      : "";
+  const year = edition.event_date.slice(0, 4);
+  const yearLabel = /^\d{4}$/.test(year) && !words.includes(" " + year + " ") ? " " + year : "";
+  return name + qualifier + yearLabel + " results";
+}

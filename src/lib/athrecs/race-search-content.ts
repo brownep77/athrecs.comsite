@@ -4,7 +4,7 @@ import { publicOrganiserName } from "./seo.ts";
 import { raceSearchTitle } from "./race-search-title.ts";
 import { searchSnippet } from "./search-text.ts";
 import { raceGuideFor } from "../../data/runrecs-race-guides.ts";
-import { racePageReviewFor } from "../../data/race-page-reviews.ts";
+import { racePageReviewFor, reviewedRaceSearchAliases } from "../../data/race-page-reviews.ts";
 
 type Edition = { event_date: string; distance_code: string; status: string; result_count?: number };
 type Race = {
@@ -78,6 +78,8 @@ export function raceSearchContent(data: Race) {
   ];
   const next = nextRaceEdition(upcoming);
   const review = racePageReviewFor(event.slug, next?.event_date);
+  const alias = reviewedRaceSearchAliases[`${event.slug}|${next?.event_date}`];
+  const publicName = alias ? `${event.name}, also known as the ${alias},` : event.name;
   const years = [
     ...new Set(
       past
@@ -85,7 +87,7 @@ export function raceSearchContent(data: Race) {
         .map((row) => row.event_date.slice(0, 4)),
     ),
   ].sort();
-  const lead = `${event.name} is ${/^[aeiou]/i.test(sport) ? "an" : "a"} ${sport ? `${sport} ` : ""}event${place ? ` in ${place}` : ""}.`;
+  const lead = `${publicName} is ${/^[aeiou]/i.test(sport) ? "an" : "a"} ${sport ? `${sport} ` : ""}event${place ? ` in ${place}` : ""}.`;
   const facts = [lead];
   if (distances.length)
     facts.push(
@@ -109,16 +111,20 @@ export function raceSearchContent(data: Race) {
     : years.length
       ? `Recorded editions: ${years[0]}${years.length > 1 ? `–${years.at(-1)}` : ""}.`
       : "Race details and recorded editions.";
+  const snippetName = alias ? `${alias} (${event.name})` : event.name;
   return {
     biography: review
       ? [...review.biography, ...facts.filter((fact) => fact.startsWith("The ATHRECS archive"))]
       : facts,
     title:
-      review?.title ?? raceSearchTitle(event.name, next?.event_date.slice(0, 4), years.length > 0),
+      review?.title ??
+      (alias && next
+        ? `${alias} ${next.event_date.slice(0, 4)} | ${event.name} | AthRecs`
+        : raceSearchTitle(event.name, next?.event_date.slice(0, 4), years.length > 0)),
     description:
       review?.description ??
       searchSnippet(
-        `${event.name}. ${timing}${place ? ` ${place}.` : ""}${distances.length ? ` ${distances.slice(0, 3).join(", ")}.` : ""}`,
+        `${snippetName}. ${timing}${place ? ` ${place}.` : ""}${distances.length ? ` ${distances.slice(0, 3).join(", ")}.` : ""}`,
       ),
     next,
   };

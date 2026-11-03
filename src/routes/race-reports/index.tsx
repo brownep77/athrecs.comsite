@@ -12,9 +12,9 @@ export const Route = createFileRoute("/race-reports/")({
   head: () => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/race-reports` }],
     meta: siteGraphMeta({
-      title: "Race Reports by country, area and county | ATHRECS.com",
+      title: "World, Continental, National & Local Race Reports | AthRecs",
       description:
-        "Read race reports on AthRecs. Browse by sport, country, area and county, from local races to international events.",
+        "Read AthRecs race reports from world championships to local clubs. Browse by sport, continent, country, state, province, county and local area.",
       url: `${SITE_URL}/race-reports`,
     }),
   }),

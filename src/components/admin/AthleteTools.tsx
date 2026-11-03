@@ -15,8 +15,16 @@ const Workspace = lazy(() =>
 const ClubScanner = lazy(() =>
   import("./club-athlete-scanner").then((m) => ({ default: m.ClubScanner })),
 );
+const ArticleAthletes = lazy(() =>
+  import("./EditorialAthleteQueue").then((m) => ({ default: m.EditorialAthleteQueue })),
+);
 import type { AthleteToolSection } from "@/lib/athlete-link/navigation";
 const sections: { id: AthleteToolSection; label: string; description: string }[] = [
+  {
+    id: "articles",
+    label: "Article athletes",
+    description: "Link named athletes and flag profiles that need to be researched or built.",
+  },
   {
     id: "link",
     label: "Single athlete",
@@ -89,7 +97,7 @@ export function AthleteTools({
           matches. Start with a link for one athlete, or a file for a whole race.
         </p>
       </header>
-      <nav aria-label="Athlete tools" className="grid grid-cols-2 gap-2 lg:grid-cols-5">
+      <nav aria-label="Athlete tools" className="grid grid-cols-2 gap-2 lg:grid-cols-3">
         {sections.map((s) => (
           <button
             key={s.id}
@@ -122,6 +130,7 @@ export function AthleteTools({
                 <Workspace key={athleteId ?? "all"} staff initialAthleteId={athleteId} />
               ) : null}
               {s.id === "clubs" ? <ClubScanner /> : null}
+              {s.id === "articles" ? <ArticleAthletes /> : null}
             </Suspense>
           ) : null}
         </section>

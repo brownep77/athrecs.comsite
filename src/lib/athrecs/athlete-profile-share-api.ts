@@ -520,8 +520,8 @@ export const getPublicSharedProfilePreview = createServerFn({ method: "GET" })
     setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     const profile = await readPublishedSharedProfile(data.slug, true);
     if (!profile) return null;
-    const { buildPublicAthletePreview } = await import("./public-athlete-preview");
-    return buildPublicAthletePreview({
+    const { buildLinkedPublicAthletePreview } = await import("./public-athlete-edition-links.server");
+    return buildLinkedPublicAthletePreview(await getSql(), {
       slug: profile.slug,
       displayName: profile.displayName,
       athleteNumber: profile.athleteNumber,

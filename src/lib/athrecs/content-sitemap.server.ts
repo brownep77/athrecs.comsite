@@ -1,3 +1,4 @@
+import { publicResultVisibilitySql } from "./public-result-visibility.server.ts";
 import { ATHRECS_PUBLIC_SPORTS } from "./public-sports.ts";
 import type { Sql } from "../db";
 import { resultSlug } from "./result-slug.ts";
@@ -39,15 +40,7 @@ function selection(kind: ContentSitemapKind): { query: string; values: unknown[]
       where ed.event_date <= (now() at time zone 'Europe/London')::date and exists (
         select 1 from results r join athletes a on a.id = r.athlete_id
         where r.edition_id = ed.id
-          and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
-          and (a.profile_visibility = 'public' or a.profile_type = 'Public figure')
-          and not exists (select 1 from athlete_account_links l
-            join athlete_public_shares s on s.user_id = l.user_id
-            where l.athlete_id = a.id and l.status = 'active'
-              and (s.enabled = false or s.share_results = false))
-          and not exists (select 1 from athlete_profile_hidden_results h
-            join athlete_account_links l on l.user_id = h.user_id and l.status = 'active'
-            where l.athlete_id = a.id and h.result_id = r.id)
+          and ${publicResultVisibilitySql}
       )`,
     values: [],
   };

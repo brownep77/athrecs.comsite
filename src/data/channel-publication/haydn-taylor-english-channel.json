@@ -1,0 +1,184 @@
+{
+  "slug": "haydn-taylor-english-channel",
+  "name": "Haydn Taylor",
+  "country": "England",
+  "aliases": [],
+  "highlight": "A Cleethorpes dentist crossed on his first attempt in 1935. The registers and Dover’s swim log disagree by ten minutes.",
+  "biography": [
+    "Haydn Taylor (1897–1962) was a dentist from Cleethorpes, Lincolnshire. He swam the Humber in 1932. A newspaper cutting in the Dover archive shows him with teammate Eddie Stockwood and coach Mr McNally.",
+    "On 22 August 1935 Taylor set out from Cap Gris-Nez at 01:35. Swimming crawl, he crossed to the cliffs west of Dover on his first attempt. Stockwood accompanied him over the final stretch. The Channel Swimming Association lists 14 hours 38 minutes. Dover’s account places his landing ten minutes later than the federation register does."
+  ],
+  "flags": [
+    {
+      "code": "gb-eng",
+      "label": "England",
+      "abbr": "ENG"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Home town",
+      "value": "Cleethorpes, Lincolnshire"
+    },
+    {
+      "label": "Sporting nationality",
+      "value": "England"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "taylor-1935",
+      "title": "Cap Gris-Nez to the Dover coast, 22 August 1935",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "France to England, solo. The dated archive log names Lydden Spout. Its reproduced newspaper report describes the landing as Abbot’s Cliff."
+        },
+        {
+          "label": "Registered time",
+          "text": "14 hours 38 minutes. The CS&PF historical record attributes ratification to the CSA."
+        },
+        {
+          "label": "Clocks",
+          "text": "Both accounts give 01:35 for departure. The CS&PF record gives 16:13 at the finish. The Dover log gives 16:23 and 14 hours 48 minutes. Neither source specifies a time standard."
+        },
+        {
+          "label": "Escort",
+          "text": "Dover’s swim log names E. Stone as pilot of Ocean King and J. Brockman as observer. It lists G. Obree, V. M. Whorlow and T. Brockman as crew."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CSA individual record 2246",
+          "url": "https://www.channelswimmingassociation.com/swim/2246/haydn-taylor"
+        },
+        {
+          "text": "CS&PF historical record 442822",
+          "url": "https://cspf.co.uk/swim/442822"
+        },
+        {
+          "text": "Channel Swimming Dover biography and dated swim log",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/taylor-haydn"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "taylor-humber-1932",
+      "title": "Humber swim, 1932",
+      "lines": [
+        {
+          "label": "Archival account",
+          "text": "Channel Swimming Dover credits Taylor with the first crossing by a man. A cutting catalogued on 16 August shows Taylor with Stockwood and McNally. The precise swim date, course and elapsed time remain unconfirmed."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Channel Swimming Dover biography and dated swim log",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/taylor-haydn"
+        },
+        {
+          "text": "Dover archive, Humber newspaper cutting 2019-125",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/humber-swim-haydn-and-team-mate-eddie-stockwood-with-coach-mr-mcnally-1932"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "How long did Haydn Taylor take to swim the English Channel?",
+      "value": "The CSA lists 14 hours 38 minutes. The Dover log gives 14 hours 48 minutes."
+    },
+    {
+      "label": "Where did Haydn Taylor land?",
+      "value": "The Dover log names Lydden Spout, on the English coast between Dover and Folkestone."
+    },
+    {
+      "label": "Who piloted Taylor’s Channel swim?",
+      "value": "The Dover archive names E. Stone on Ocean King."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CSA individual record 2246",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swim/2246/haydn-taylor"
+        }
+      ]
+    },
+    {
+      "title": "CS&PF historical record 442822",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/442822"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Dover biography and dated swim log",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingdover.org.uk/content/swimmer/taylor-haydn"
+        }
+      ]
+    },
+    {
+      "title": "Dover archive, Humber newspaper cutting 2019-125",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingdover.org.uk/content/photo/humber-swim-haydn-and-team-mate-eddie-stockwood-with-coach-mr-mcnally-1932"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "taylor-1935",
+      "title": "Cap Gris-Nez to the Dover coast, 22 August 1935",
+      "lines": [
+        {
+          "label": "Route",
+          "text": "France to England, solo. The dated archive log names Lydden Spout. Its reproduced newspaper report describes the landing as Abbot’s Cliff."
+        },
+        {
+          "label": "Registered time",
+          "text": "14 hours 38 minutes. The CS&PF historical record attributes ratification to the CSA."
+        },
+        {
+          "label": "Clocks",
+          "text": "Both accounts give 01:35 for departure. The CS&PF record gives 16:13 at the finish. The Dover log gives 16:23 and 14 hours 48 minutes. Neither source specifies a time standard."
+        },
+        {
+          "label": "Escort",
+          "text": "Dover’s swim log names E. Stone as pilot of Ocean King and J. Brockman as observer. It lists G. Obree, V. M. Whorlow and T. Brockman as crew."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "taylor-humber-1932",
+      "title": "Humber swim, 1932",
+      "lines": [
+        {
+          "label": "Archival account",
+          "text": "Channel Swimming Dover credits Taylor with the first crossing by a man. A cutting catalogued on 16 August shows Taylor with Stockwood and McNally. The precise swim date, course and elapsed time remain unconfirmed."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-f944db9fda4b15b69d94"
+}

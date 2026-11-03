@@ -106,6 +106,8 @@ try {
   const publicProfile = await get('/athletes/synthetic-public');
   assert.match(publicProfile.$('title').text(), /Synthetic Public Runner.*Athletics results/);
   assert.match(publicProfile.$('main').text(), /4 minutes and 26 seconds/);
+  const editionLink = publicProfile.$('#results-history a').filter((_, el) => publicProfile.$(el).attr('href') === resultsPath);
+  assert.equal(editionLink.text(), 'Synthetic Archive Meeting · 1500m 2014 results');
   const entities = publicProfile.$('script[type="application/ld+json"]').toArray().map((e)=>JSON.parse(publicProfile.$(e).text()));
   assert(entities.some((item)=>item.mainEntity?.['@type']==='Person' && item.mainEntity.name==='Synthetic Public Runner'));
   const languageHome = await get('/nl/czechia');
@@ -119,6 +121,10 @@ try {
   for (const visibility of ['public', 'private', 'public']) {
     await sql`update results set result_visibility=${visibility} where athlete_id=${publicId}`;
     const resultSitemap = await get('/sitemaps/results-1.xml');
+    const athleteResponse = await fetch(origin + '/athletes/synthetic-public', {headers: {connection: 'close'}});
+    const athleteHtml = cheerio.load(await athleteResponse.text());
+    const linksToEdition = athleteHtml('#results-history a').filter((_, el) => athleteHtml(el).attr('href') === resultsPath);
+    assert.equal(linksToEdition.length, visibility === 'public' ? 1 : 0, 'Edition links follow live withdrawal/restoration');
     assert.equal(resultSitemap.headers.get('cache-control'), 'no-store');
     assert.equal(resultSitemap.html.includes(`https://www.athrecs.com${resultsPath}</loc>`), visibility === 'public');
     const response = await fetch(`${origin}${resultsPath}`, {
@@ -171,7 +177,6 @@ try {
   for (const [path, count, indexable, canonical] of [
     ['/races', 40, true, '/races'],
     ['/races?page=2', 1, true, '/races?page=2'],
-    ['/races?page=3', 0, false, '/races?page=3'],
     ['/races?q=Synthetic%20Indexing', 40, false, '/races'],
     ['/races?q=missing-synthetic-fixture', 0, false, '/races'],
   ]) {
@@ -180,7 +185,15 @@ try {
     assert.equal(/noindex/.test(page.$('meta[name=robots]').attr('content')), !indexable, path);
     assert.equal(page.$('link[rel=canonical]').attr('href'), `https://www.athrecs.com${canonical}`, path);
   }
-  console.log('PASS: populated race directory pages stay indexable; empty and filtered pages remain noindex with unchanged canonicals.');
+  const firstFixtures = await get('/races');
+  const secondFixtures = await get('/races?page=2');
+  assert.equal(firstFixtures.$('nav a[rel=next]').attr('href'), '/races?page=2');
+  assert.equal(secondFixtures.$('nav a[rel=prev]').attr('href'), '/races');
+  assert.equal(secondFixtures.$('nav a[rel=next]').length, 0);
+  for (const path of ['/races?page=3', '/en/montenegro/races?page=250']) {
+    assert.equal((await fetch(origin + path, { headers: { connection: 'close' } })).status, 404, path);
+  }
+  console.log('PASS: crawlable fixture pagination, empty later pages return 404 and filtered pages stay noindex.');
 
   // These browse pages contain distinct records, not search refinements.
   // Exercise their final HTTP status and SSR metadata, not only head helpers.

@@ -1,3 +1,4 @@
+import { DiscoverySectionNav } from "@/components/discovery/DiscoverySectionNav";
 import { CompactDiscoveryHeader } from "@/components/discovery/CompactDiscoveryHeader";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
@@ -128,7 +129,9 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       VITE_FLAG_LANGUAGE_PICKER: import.meta.env.VITE_FLAG_LANGUAGE_PICKER,
     }),
   );
-  const compact = IS_ATHRECS_SITE && (pathname === "/" || pathname.startsWith("/sports/"));
+  const compact =
+    IS_ATHRECS_SITE &&
+    (pathname === "/" || pathname === "/search" || pathname.startsWith("/sports/"));
   const mobileNav = compact
     ? [
         nav[0],
@@ -152,11 +155,14 @@ function PublicAppShell({ children, pathname }: { children: React.ReactNode; pat
       )}
     >
       {compact ? (
-        <CompactDiscoveryHeader
-          pathname={pathname}
-          showHomepageColours={showHomepageColours}
-          showLanguagePicker={showLanguagePicker}
-        />
+        <>
+          <CompactDiscoveryHeader
+            pathname={pathname}
+            showHomepageColours={showHomepageColours}
+            showLanguagePicker={showLanguagePicker}
+          />
+          {pathname === "/" && <DiscoverySectionNav />}
+        </>
       ) : (
         <>
           <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">

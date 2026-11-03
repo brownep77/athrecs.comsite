@@ -11,6 +11,7 @@ import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard
 import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { getAthleteDirectory } from "@/lib/athrecs/athlete-directory-api";
 import { ATHLETE_INDEXING_HEADER } from "@/lib/athrecs/athlete-search-policy";
+import { directoryStructuredData } from "@/lib/athrecs/directory-structured-data";
 import { absoluteUrl, siteGraphMeta } from "@/lib/athrecs/seo";
 import { SPORTS } from "@/lib/athrecs/filters";
 import {
@@ -49,16 +50,30 @@ export const Route = createFileRoute("/athletes/")({
     if (search?.letter) query.set("letter", search.letter);
     if (search?.page) query.set("page", String(search.page));
     const canonical = absoluteUrl(`/athletes${query.size ? `?${query}` : ""}`);
+    const directory = loaderData as AthleteDirectory | undefined;
     return {
+      scripts:
+        indexable && directory
+          ? directoryStructuredData(
+              canonical,
+              "Athlete profiles",
+              directory.athletes.map((athlete) => ({
+                name: athlete.display_name,
+                path: "/athletes/" + encodeURIComponent(athlete.slug),
+              })),
+            )
+          : [],
       links: [{ rel: "canonical", href: canonical }],
-      meta: [
-        ...siteGraphMeta({
-          title: `Athlete profiles, sports and results${search?.letter ? ` — ${search.letter}` : ""}${search?.page ? ` — page ${search.page}` : ""} | ATHRECS`,
-          description: "Explore public athlete profiles and published results.",
-          url: canonical,
-        }),
-        { name: "robots", content: indexable ? "index, follow" : "noindex, follow" },
-      ],
+      meta: siteGraphMeta({
+        title: `Athlete profiles, sports and results${search?.letter ? ` — ${search.letter}` : ""}${search?.page ? ` — page ${search.page}` : ""} | ATHRECS`,
+        description:
+          "Find an athlete by name, club or sport. Browse public athlete profiles, race results and personal bests recorded on AthRecs.",
+        url: canonical,
+      }).map((tag) =>
+        "name" in tag && tag.name === "robots"
+          ? { name: "robots", content: indexable ? "index, follow" : "noindex, follow" }
+          : tag,
+      ),
     };
   },
   component: AthleteDirectoryPage,
@@ -95,8 +110,8 @@ function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
             Explore athlete profiles
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            Discover the people behind the performances. Search published profiles and explore their
-            sporting records.
+            Find an athlete by name, club or sport. Open a profile to see their recorded race
+            results and personal bests where available.
           </p>
           <ChatPrompt kind="results" className="mt-3" />
         </div>

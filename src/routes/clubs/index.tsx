@@ -83,8 +83,8 @@ function ClubsPage() {
           </Link>
         </div>
         <p className="text-sm text-muted">
-          Find a club by name, location or sport. Browse its public listing before registering as an
-          authorised club representative. Affiliated and unaffiliated clubs can register.
+          Find your club by name, location or sport. Open its profile to claim it or request access
+          as a club representative. Affiliated and unaffiliated clubs can apply.
         </p>
         {!IS_RUNRECS_SITE && (
           <div className="flex flex-wrap gap-3">

@@ -1,0 +1,328 @@
+{
+  "slug": "catherine-stefanutti-english-channel",
+  "name": "Catherine Stefanutti",
+  "country": "South Africa",
+  "aliases": [],
+  "highlight": "Catherine Stefanutti crossed the English Channel from England to France in 16 hours 7 minutes 50 seconds on 3 August 2018.",
+  "biography": [
+    "Stefanutti completed the English Channel in 2018, Manhattan in 2023 and Catalina in 2025. South Africa’s foreign affairs department identified her as the first South African woman to complete the three swims. The Channel register lists South Africa and notes dual South African and UK nationality.",
+    "The English Channel swim on 3 August 2018 took 16 hours 7 minutes 50 seconds. The Catalina federation records 13 hours 13 minutes 43 seconds on 18 June 2025. In New York the 2 August 2023 Manhattan circuit took 8 hours 35 minutes 50 seconds."
+  ],
+  "flags": [
+    {
+      "code": "ZA",
+      "label": "South Africa",
+      "abbr": "RSA"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "South Africa"
+    },
+    {
+      "label": "Additional nationality recorded",
+      "value": "The swimmer’s register comment reports South African and UK nationality."
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-445298",
+      "title": "English Channel solo, 3 August 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "16:07:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "03:17:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "19:24:50"
+        },
+        {
+          "label": "Pilot",
+          "text": "Neil Streeter"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Suva"
+        },
+        {
+          "label": "Observer",
+          "text": "Colin Palmer"
+        },
+        {
+          "label": "Trainer",
+          "text": "Tracey Baumann"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "South Africa"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 445298",
+          "url": "https://cspf.co.uk/swim/445298"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2025-06-18",
+      "title": "Catalina Channel solo, 18 June 2025",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:13:43 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "South Africa"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 769 · Catherine Stefanutti, South Africa",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1292",
+      "title": "Manhattan Island swim, 2 August 2023",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:35:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "ZAF"
+        },
+        {
+          "label": "Published place",
+          "text": "2"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 1292 · Catherine Stefanutti",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Catherine Stefanutti swim the English Channel?",
+      "value": "Catherine Stefanutti swam from England to France on 3 August 2018 in 16 hours 7 minutes 50 seconds."
+    },
+    {
+      "label": "Who piloted Catherine Stefanutti’s Channel crossing?",
+      "value": "Neil Streeter piloted Suva on 3 August 2018."
+    },
+    {
+      "label": "How long did Catherine Stefanutti take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 18 June 2025 took 13 hours 13 minutes 43 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 445298",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/445298"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 769 · Catherine Stefanutti, South Africa",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 1292 · Catherine Stefanutti",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "South African Department of International Relations and Cooperation, July 2025",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://dirco1.azurewebsites.net/dircoenewsletter/newsflash674-03-07-2025.html"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-445298",
+      "title": "English Channel solo, 3 August 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "16:07:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "03:17:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "19:24:50"
+        },
+        {
+          "label": "Pilot",
+          "text": "Neil Streeter"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Suva"
+        },
+        {
+          "label": "Observer",
+          "text": "Colin Palmer"
+        },
+        {
+          "label": "Trainer",
+          "text": "Tracey Baumann"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "South Africa"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2025-06-18",
+      "title": "Catalina Channel solo, 18 June 2025",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:13:43 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "South Africa"
+        }
+      ]
+    },
+    {
+      "id": "nyow-1292",
+      "title": "Manhattan Island swim, 2 August 2023",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "8:35:50 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "ZAF"
+        },
+        {
+          "label": "Published place",
+          "text": "2"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-3ffff6e630b6444e50c6"
+}

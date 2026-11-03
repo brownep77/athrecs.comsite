@@ -401,6 +401,55 @@ try {
   await sql`update athlete_public_shares set enabled=true, share_results=true
     where user_id='directory-owner'`;
   await assert.rejects(rpc("athlete-directory-api", "getAthleteDirectory", { pageSize: 10000 }));
+  // The header search must join the existing public directory and fixture reads,
+  // without carrying fixture-only filters into athlete discovery.
+  const [searchEvent] =
+    await sql`insert into events (slug, name, sport, surface, city, county, country)
+    values ('directory-fixture-search-run', 'Directory Fixture Search Run', 'Running', 'Road',
+      'Directory Fixture Town', 'Norfolk', 'England') returning id`;
+  await sql`insert into editions (event_id, event_date, distance_code, distance_km, status, start_time)
+    values (${searchEvent.id}, current_date + 10, '10K', 10, 'Open', '10:00')`;
+  const searchResponse = await fetch(`${origin}/search?q=Directory+Fixture`);
+  assert.equal(searchResponse.status, 200);
+  assert.match(searchResponse.headers.get("cache-control"), /no-store/);
+  assert.match(searchResponse.headers.get("x-robots-tag"), /noindex/);
+  const searchHtml = await searchResponse.text();
+  const unified = load(searchHtml);
+  assert.equal(unified('form[role="search"][action="/search"]').length, 1);
+  for (const category of ["athletes", "fixtures", "places"])
+    assert.equal(unified(`#search-${category}`).length, 1);
+  assert(unified("#search-athletes").text().includes("Directory Fixture Alpha"));
+  assert(
+    !searchHtml.includes("Directory Fixture Secret"),
+    "Private athlete identities must not leak in HTML or loader data",
+  );
+  assert(unified("#search-fixtures").text().includes("Directory Fixture Search Run"));
+  assert(unified("#search-places").text().includes("Directory Fixture Town"));
+  const scoped = load(
+    await (
+      await fetch(`${origin}/search?q=Directory+Fixture&sport=swimming&distance=Marathon`)
+    ).text(),
+  );
+  assert(
+    scoped("#search-athletes").text().includes("Directory Fixture Alpha"),
+    "Fixture filters must not hide matching athletes",
+  );
+  assert(
+    !scoped("#search-fixtures").text().includes("Directory Fixture Search Run"),
+    "Fixture results retain sport and distance scope",
+  );
+  assert.equal(scoped('form[role="search"] input[name="sport"]').val(), "swimming");
+  assert.equal(scoped('form[role="search"] input[name="distance"]').val(), "Marathon");
+  const emptySearch = load(await (await fetch(`${origin}/search?q=+++`)).text());
+  assert(
+    !emptySearch("#search-athletes").length,
+    "Blank searches must not list the athlete catalogue",
+  );
+  const missingSearch = load(
+    await (await fetch(`${origin}/search?q=NoSuchAthleteOrPlacezzzz`)).text(),
+  );
+  assert(missingSearch("#search-athletes").text().includes("No public athlete profiles"));
+  assert(missingSearch("#search-fixtures").text().includes("No upcoming fixtures"));
   for (const path of ["/", "/athletes?country=Ireland", "/find-events"]) {
     const response = await fetch(`${origin}${path}`);
     assert.equal(response.status, 200, `${path} must render`);
@@ -408,8 +457,19 @@ try {
     assert(!html.includes("Directory Fixture Secret"));
     if (path === "/") {
       const home = load(html);
+      assert.equal(home('form[role="search"]').attr("action"), "/search");
+      assert.match(
+        home("#discovery-header-search").attr("placeholder"),
+        /athletes.*fixtures and places/,
+      );
       assert.equal(home("main h1").text().trim(), "Find your next running race");
-      assert(home('main a[href="#fixtures"]').length, "Homepage must link to its fixture list");
+      const sectionMenu = home('nav[aria-label="Running sections"]');
+      assert.equal(sectionMenu.length, 1, "Homepage must have one running section menu");
+      assert(
+        home('nav[aria-label="Switch sport"]').parent().next().is(sectionMenu),
+        "Running sections must appear directly beneath the sports header",
+      );
+      assert.equal(sectionMenu.find('a[href="#fixtures"]').text().trim(), "Fixtures");
       const filters = home('main #fixtures form[method="get"][action="/"]');
       assert.equal(filters.length, 1, "Homepage filters must submit to the Running homepage");
       for (const name of ["country", "month", "distance"]) {

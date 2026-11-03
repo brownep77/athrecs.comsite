@@ -24,6 +24,8 @@ export async function saveAthleteLink({data}){window.saves.push(data);if(window.
 const workspace = file(
   "workspace-api.js",
   `const profile={id:9,slug:'avery-test-athlete',profile_visibility:'private',display_name:'Avery Test Athlete',given_name:'',family_name:'',gender:'U',source_club_name:'',city:'',county:'',country:'',bio:''};
+export async function listMyOwnerRaceReviews(){return [];}
+export async function answerMyOwnerRaceReview(){throw Error('No owner reviews in this staff fixture');}
 export async function getStaffWorkspace({data}){return {profile:data.athleteId?profile:null,profileVersion:'version',editable:true,linked:[],results:[],batches:[],email:'staff@example.test'};}
 export async function searchStaffAthletes(){return [{id:9,name:'Avery Test Athlete',club:'',visibility:'private',slug:'avery-test-athlete'}];}
 export async function getStaffResultBatch(){throw Error('No batch in this synthetic fixture');}
@@ -43,6 +45,14 @@ const suggestions = file(
   "suggestions-api.js",
   "export async function getProfileEdits(){return [];}export async function reviewProfileEdit(){return {saved:true};}",
 );
+const editorial = file(
+  "editorial-api.js",
+  `window.editorialReviews=[];
+const article={slug:'synthetic-results-report',title:'Synthetic results report',kind:'news',namedAthletes:2,sourceUrl:'https://results.example.test/synthetic-report'};
+const candidate={athleteId:99,athleteNumber:'9900',name:'Morgan Article Runner',slug:'morgan-article-runner',club:'Synthetic Editorial Club',country:'Canada',public:true};
+export async function getEditorialAthleteQueue({data}){const last=window.editorialReviews.at(-1);const linked=last&&!last.remove;return {articles:[article],review:data.slug?{checkedAt:'2026-11-02T12:00:00Z',rows:[{name:'Morgan Article Runner',status:linked?'linked':'review',linkedSlug:linked?'morgan-article-runner':null,candidates:[candidate],totalCandidates:1},{name:'Taylor Missing Runner',status:'not-found',linkedSlug:null,candidates:[],totalCandidates:0}]}:null};}
+export async function approveEditorialAthleteLink({data}){window.editorialReviews.push(data);return {saved:true};}`,
+);
 const upcoming = file(
   "upcoming-api.js",
   "export async function getMyUpcoming(){return [];}export async function getStaffUpcoming(){return [];}export async function saveMyUpcoming(){}export async function saveStaffUpcoming(){}export async function deleteMyUpcoming(){}export async function deleteStaffUpcoming(){}",
@@ -53,7 +63,7 @@ const clubs = file(
 );
 const router = file(
   "router.tsx",
-  'import React from "react";export function Link({to,children,...props}){return <a href={to} {...props}>{children}</a>}',
+  'import React from "react";export function Link({to,children,reloadDocument:_reloadDocument,...props}){return <a href={to} {...props}>{children}</a>}',
 );
 const invitation = file(
   "invitation-api.js",
@@ -95,6 +105,7 @@ const aliases = {
   "@/lib/staff-results-upload/api": upload,
   "@/lib/athrecs/staff-athlete-directory-api": directory,
   "@/lib/athrecs/profile-edit-suggestions-api": suggestions,
+  "@/lib/athrecs/editorial-athletes-api": editorial,
   "@/lib/athrecs/athlete-upcoming-api": upcoming,
   "@/lib/athrecs/athlete-account-api": file("sports.js", "export const ATHLETE_SPORTS=[];"),
   "@/lib/athrecs/claim-invitations-api": invitation,
@@ -130,7 +141,10 @@ if (process.env.ATHRECS_HUB_PREVIEW === "1") {
   console.log("Synthetic athlete tools preview: http://127.0.0.1:8112");
   await new Promise(() => {});
 }
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  executablePath: process.env.ATHRECS_TEST_CHROMIUM_EXECUTABLE,
+});
 let page;
 try {
   page = await browser.newPage({ viewport: { width: 1365, height: 1000 } });
@@ -455,9 +469,46 @@ try {
     await page.getByRole("button", { name: "Create private athlete profile" }).count(),
     0,
   );
+  await nav.getByRole("button", { name: "Article athletes", exact: true }).click();
+  await page.getByRole("heading", { name: "Athletes mentioned in articles" }).waitFor();
+  await page.getByText("No name match — profile research needed", { exact: true }).waitFor();
+  const articleCard = page.getByRole("region", { name: "Morgan Article Runner", exact: true });
+  await articleCard.getByRole("button", { name: "Review article link" }).click();
+  const articleSave = articleCard.getByRole("button", { name: "Save reviewed profile link" });
+  assert(await articleSave.isDisabled(), "A candidate does not bypass the identity review");
+  const profileInput = articleCard.getByLabel("Different existing profile", { exact: true });
+  await profileInput.fill("https://unrelated.example.test/athletes/morgan-article-runner");
+  await articleCard.getByRole("alert").waitFor();
+  assert(await articleSave.isDisabled(), "An unrelated URL cannot select a profile");
+  await profileInput.fill("https://www.athrecs.com/athletes/morgan-article-runner");
+  await articleCard
+    .getByLabel("Identity evidence or reason for removing the link")
+    .fill("Synthetic identity review against the correct official sporting history.");
+  await articleCard
+    .getByLabel("I checked the source and athlete identity, beyond a matching name.")
+    .check();
+  await articleSave.click();
+  await page.getByLabel("Show athletes already linked").check();
+  await articleCard.getByText("Profile linked", { exact: true }).waitFor();
+  const reviewSave = (await page.evaluate(() => window.editorialReviews))[0];
+  assert.equal(reviewSave.athleteSlug, "morgan-article-runner");
+  assert.equal(reviewSave.athleteId, undefined);
+  assert.equal(reviewSave.identityChecked, true);
+  await articleCard.getByRole("button", { name: "Review article link" }).click();
+  assert(await articleCard.getByRole("button", { name: "Remove article link" }).isDisabled());
+  await articleCard
+    .getByLabel("Identity evidence or reason for removing the link")
+    .fill("Synthetic review removes an incorrectly selected profile link.");
+  await articleCard
+    .getByLabel("I checked the source and athlete identity, beyond a matching name.")
+    .check();
+  await articleCard.getByRole("button", { name: "Remove article link" }).click();
+  await articleCard.getByText("Check existing profiles", { exact: true }).waitFor();
+  assert.equal((await page.evaluate(() => window.editorialReviews)).at(-1).remove, true);
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: actual combined React screen, directory profile-to-signup matching, email and three social invitation links, contact refresh, private-save gates/retry, profile handoff, empty upload defaults and tab/file retention; desktop/mobile. API responses are synthetic.",
+    "PASS: actual combined React screen, directory profile-to-signup matching, email and three social invitation links, contact refresh, private-save gates/retry, profile handoff, empty upload defaults, tab/file retention, and editorial missing-name/alias-review/removal workflow; desktop/mobile. API responses are synthetic.",
   );
 } catch (e) {
   if (page) await page.screenshot({ path: "artifacts/athlete-tools-failure.png", fullPage: true });

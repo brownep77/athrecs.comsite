@@ -1,30 +1,53 @@
 import { Link } from "@tanstack/react-router";
-import type { EditorialArticle } from "@/lib/athrecs/editorial";
+import {
+  EDITORIAL_LEVELS,
+  editorialContinents,
+  editorialLevels,
+  editorialReadingMinutes,
+  type EditorialArticle,
+} from "@/lib/athrecs/editorial";
+
+import { ReportStandings } from "./ReportStandings";
 
 function ArticleText({ text, links }: { text: string; links?: Record<string, string> }) {
-  if (!links || !Object.keys(links).length) return text;
-  const names = Object.keys(links)
+  if (!links) return text;
+  const profiles = new Map(Object.entries(links).filter(([name, slug]) => name.trim() && slug));
+  if (!profiles.size) return text;
+  const names = [...profiles.keys()]
     .sort((a, b) => b.length - a.length)
     .map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-  return text.split(new RegExp(`(${names.join("|")})`, "g")).map((part, index) =>
-    links[part] ? (
+  // Full-name boundaries protect names with accents and avoid linking a shorter
+  // name inside a different surname. Apostrophes after a name allow possessives.
+  const pattern = new RegExp(
+    `(?<![\\p{L}\\p{N}\\p{M}_-])(${names.join("|")})(?![\\p{L}\\p{N}\\p{M}_-])`,
+    "gu",
+  );
+  return text.split(pattern).map((part, index) => {
+    const slug = profiles.get(part);
+    return slug ? (
       <Link
         key={`${part}-${index}`}
         to="/athletes/$slug"
-        params={{ slug: links[part] }}
+        params={{ slug }}
         className="text-accent underline underline-offset-2"
       >
         {part}
       </Link>
     ) : (
       part
-    ),
-  );
+    );
+  });
 }
 
 export function EditorialArticlePage({ article }: { article: EditorialArticle }) {
   return (
-    <article className="mx-auto max-w-3xl space-y-6">
+    <article
+      className={
+        article.sections?.some((section) => section.standings)
+          ? "mx-auto max-w-6xl space-y-6 [&>:not([data-standings])]:mx-auto [&>:not([data-standings])]:max-w-3xl"
+          : "mx-auto max-w-3xl space-y-6"
+      }
+    >
       <Link
         to={article.kind === "race-reports" ? "/race-reports" : "/news"}
         search={{}}
@@ -39,11 +62,32 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
         <h1 className="font-display text-3xl font-semibold leading-tight sm:text-4xl">
           {article.title}
         </h1>
-        {article.author ? (
-          <p className="text-sm text-muted">
-            By {article.author} · Checked {article.displayDate}
-          </p>
-        ) : null}
+        <p className="text-sm text-muted">
+          {article.author ? `By ${article.author} · ` : ""}
+          {editorialReadingMinutes(article)} min read
+        </p>
+        <nav aria-label="Article coverage" className="flex flex-wrap gap-2">
+          {editorialLevels(article).map((level) => (
+            <Link
+              key={level}
+              to={article.kind === "race-reports" ? "/race-reports" : "/news"}
+              search={{ level }}
+              className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 text-sm font-semibold text-accent"
+            >
+              {EDITORIAL_LEVELS.find((item) => item.value === level)?.label}
+            </Link>
+          ))}
+          {editorialContinents(article).map((continent) => (
+            <Link
+              key={continent}
+              to={article.kind === "race-reports" ? "/race-reports" : "/news"}
+              search={{ continent }}
+              className="inline-flex min-h-11 items-center rounded-lg bg-elevated px-3 text-sm text-accent"
+            >
+              {continent}
+            </Link>
+          ))}
+        </nav>
         <p className="text-lg leading-8 text-muted">
           <ArticleText text={article.standfirst} links={article.athleteLinks} />
         </p>
@@ -71,7 +115,9 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
             fetchPriority="high"
             className="mx-auto h-auto max-h-[38rem] w-full rounded-xl object-contain"
           />
-          <figcaption className="text-sm text-muted">{article.image.caption}</figcaption>
+          <figcaption className="text-sm text-muted">
+            <ArticleText text={article.image.caption} links={article.athleteLinks} />
+          </figcaption>
         </figure>
       ) : null}
       {article.sections?.length ? (
@@ -108,6 +154,7 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
       {article.sections?.map((section) => (
         <section
           key={section.id}
+          data-standings={section.standings ? "" : undefined}
           id={section.id}
           className="scroll-mt-24 space-y-4 text-base leading-8"
           aria-labelledby={`${section.id}-heading`}
@@ -116,21 +163,35 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
             id={`${section.id}-heading`}
             className="pt-4 font-display text-2xl font-semibold leading-tight"
           >
-            {section.heading}
+            <ArticleText text={section.heading} links={article.athleteLinks} />
           </h2>
           {section.paragraphs.map((paragraph) => (
             <p key={paragraph}>
               <ArticleText text={paragraph} links={article.athleteLinks} />
             </p>
           ))}
+          {section.standings && (
+            <ReportStandings
+              key={article.slug}
+              standings={section.standings}
+              links={article.athleteLinks}
+            />
+          )}
           {section.table ? (
-            <div className="overflow-x-auto rounded-xl border border-border">
+            <div
+              className="overflow-x-auto rounded-xl border border-border focus-visible:outline-2 focus-visible:outline-accent"
+              role="region"
+              aria-label={section.table.caption}
+              tabIndex={0}
+            >
               <table className="w-full min-w-[32rem] text-left text-sm leading-6">
-                <caption className="p-3 text-left font-semibold">{section.table.caption}</caption>
+                <caption className="p-3 text-left font-semibold">
+                  <ArticleText text={section.table.caption} links={article.athleteLinks} />
+                </caption>
                 <thead className="bg-elevated">
                   <tr>
-                    {section.table.headings.map((heading) => (
-                      <th key={heading} scope="col" className="p-3">
+                    {section.table.headings.map((heading, index) => (
+                      <th key={`${heading}-${index}`} scope="col" className="p-3">
                         {heading}
                       </th>
                     ))}
@@ -178,12 +239,16 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
           aria-labelledby="questions-heading"
         >
           <h2 id="questions-heading" className="font-display text-2xl font-semibold">
-            New York City Marathon 2026: quick answers
+            Quick answers
           </h2>
           {article.faqs.map((faq) => (
             <div key={faq.question} className="space-y-2">
-              <h3 className="text-lg font-semibold">{faq.question}</h3>
-              <p className="leading-8">{faq.answer}</p>
+              <h3 className="text-lg font-semibold">
+                <ArticleText text={faq.question} links={article.athleteLinks} />
+              </h3>
+              <p className="leading-8">
+                <ArticleText text={faq.answer} links={article.athleteLinks} />
+              </p>
             </div>
           ))}
         </section>
@@ -191,7 +256,9 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
       {article.callToAction ? (
         <aside className="space-y-3 rounded-xl border border-border bg-elevated p-6">
           <h2 className="font-display text-2xl font-semibold">{article.callToAction.heading}</h2>
-          <p className="leading-7">{article.callToAction.text}</p>
+          <p className="leading-7">
+            <ArticleText text={article.callToAction.text} links={article.athleteLinks} />
+          </p>
           <a
             href={article.callToAction.url}
             className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 py-2 font-semibold text-primary-fg"

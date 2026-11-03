@@ -5,6 +5,7 @@ export async function readReviewedChannelRows(
   sql: Sql,
   profiles: ReadonlyMap<string, ChannelProfile>,
   slug?: string,
+  additions?: ReadonlyMap<string, ChannelProfile>,
 ) {
   const slugs = slug ? (profiles.has(slug) ? [slug] : []) : [...profiles.keys()];
   if (!slugs.length) return [];
@@ -26,7 +27,8 @@ export async function readReviewedChannelRows(
     [slugs],
   );
   return rows.flatMap((row) => {
-    const p = profiles.get(row.slug);
+    const addition = additions?.get(row.slug);
+    const p = addition?.revision === row.revision ? addition : profiles.get(row.slug);
     return p && p.revision === row.revision && p.biography.join("\n\n") === row.bio ? [p] : [];
   });
 }

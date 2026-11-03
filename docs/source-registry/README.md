@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1344 unique sources as of 28 October 2026. Only 41 are enabled; the other 1303 remain
+The registry contains 1641 unique sources as of 2 November 2026. Only 41 are enabled; the other 1600 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -85,9 +85,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1344 sources create exactly one source job;
+- all 1641 sources create exactly one source job;
 - the 41 enabled and rights-approved sources are queued;
-- the other 1303 sources are retained as blocked jobs with their reason;
+- the other 1600 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -480,3 +480,113 @@ research does not enable automatic collection. Source-specific notes preserve th
 race-day distinction, stale route data, retrieval failures and unresolved edition
 announcements. The complete registry now has 1,344 sources: 41 enabled and 1,303
 disabled. Existing bulk-run count assertions were reconciled to this inventory.
+
+
+## Spanish multisport and athletics result sources — 2 November 2026
+
+Registered 16 disabled sources after comparing the static registry, managed
+source records and wider event inventory. Coverage is limited to the actual
+federation, organiser, timing and archive documents reviewed. Existing World
+Triathlon, World Athletics, RFEA and Spanish Triathlon Federation entries are
+retained without duplicate registrations.
+
+Original publisher and timing-provider credits are preserved for mirrored
+documents. Assessment sheets and entry lists remain distinct from completed-race
+results; inaccessible result links and incomplete archive coverage are identified
+in the source notes. Athlete-specific captures, matching decisions and publication
+receipts remain private. All additions use enabled=0 and follow_history_links=0.
+Registration does not authorise automated collection or verify participant results.
+
+That batch brought the registry to 1625 sources: 41 enabled and 1584 disabled.
+
+## Palencia organiser and Galician federation result documents — 2 November 2026
+
+Registered two disabled manual research sources after checking the canonical
+registry, managed sources and wider repository event inventory for duplicates.
+San Silvestre Palentina provides an organiser classifications index and the
+inspected 31 December 2023 result PDF. The municipal edition notice describes
+an approximately six-kilometre course; the result sheet does not establish
+certified exact-distance personal-best eligibility or chip/gun timing.
+
+The Federación Galega de Atletismo hosts an inspected copy of the 2024 Getafe
+Spanish cross-country championship result book. RFEA remains the original
+publisher and Conersys retains its timing credit. Individual finishing positions,
+team-scoring points and regional-team standings remain distinct. A hosted copy
+does not create a second event or establish complete archive coverage.
+
+Existing result-provider registrations are retained. The new sources use
+`enabled=0` and `follow_history_links=0`; registration neither enables automated
+collection nor verifies participant results. Individual source captures and
+identity-review evidence remain outside source control.
+
+That batch brought the registry to 1630 sources: 41 enabled and 1589 disabled.
+
+
+## Spanish national result documents and archival recovery — 2 November 2026
+
+Registered four disabled manual research references after checking the canonical
+registry, managed sources and wider repository inventory for duplicate providers.
+FECANTRI hosts an inspected, working copy of the 2024 Merida national triathlon
+result book; the Spanish Triathlon Federation remains the original publisher and
+Conersys retains its data-processing credit. Triatlon Noticias supplies an
+inspected secondary transcript of the 2021 Valladolid duathlon relay results.
+Neither source establishes complete archive coverage.
+
+The Conersys and Spanish Modern Pentathlon Federation (FEPM) additions record
+complete indexed historical result documents whose original PDF links currently
+return 404. These are archival research references, not working result feeds or
+fresh live source comparisons. FEPM's inspected 2022 national laser-run report
+retains Runvasport credit and explicitly separates combined running and
+laser-pistol shooting from standalone running.
+
+The existing RockTheSport entry now records two working 2021 Alcobendas talent
+duathlon result PDFs and their exact blob host. The existing Runvasport document
+entry retains its original Cigales entry-list reference and adds the recovered
+complete indexed team finish report, with the current download failure preserved.
+Team totals, individual elapsed marks, relay legs and distinct classification
+scopes must not be interchanged. Exact youth distances remain unresolved where
+only a result document was available.
+
+The existing ResultadosCarreras entry now identifies the inspected 2021 Primavera
+5 km option as virtual and preserves its 12–21 February participation window.
+This window does not establish an individual completion day, and a self-selected
+virtual route does not establish a certified road 5 km performance. Only the
+observed event-level results URL is recorded; athlete-specific identifiers are
+excluded.
+
+All four additions use `enabled=0` and `follow_history_links=0`. The three existing
+entries remain disabled. Registration does not authorise automated collection,
+settle data-reuse rights or verify an athlete result. Participant names, identities,
+private audits and individual result captures are excluded from this change.
+
+That batch brought the registry to 1634 sources: 41 enabled and 1593 disabled.
+
+## Auckland and Dublin athlete research sources, 2 November 2026
+
+Added seven disabled manual research sources after inspecting their actual pages:
+Athletics Canterbury official result PDFs, the Timaru Ten organiser, Dublin
+Athletics club reports, the Paralympics Ireland athlete directory, and a Spinal
+Support NZ publication containing a first-person sporting account. Pakuranga
+Athletic Club newsletters and Auckland City Tri Club public honour-board/racing
+pages were also inspected for club and event context. Narrative and club accounts
+do not replace original result rows or establish a cross-event identity link.
+The unresolved athlete matches remain held. No athlete-specific private audit is
+included in the registry.
+
+Athletics Canterbury's two inspected PDFs identify the 24 October 2026 Timaru Ten
+and the 1 August 2026 New Zealand cross-country championships. Their upload
+directory is not the event date. Preserve the actual timing headings, tenths of a
+second where supplied, distances and classification groups.
+
+Appended successful source checks to the existing Dublin Marathon, SportSplits,
+Timing Sports and Athletics New Zealand entries without replacing earlier check
+dates or failed retrieval outcomes. The Dublin organiser's public search now
+returned selected actual marathon and wheelchair rows. Its Chip Time and Finish
+Time columns remain separate, and Finish Time is not relabelled Gun Time.
+Timing Sports already covers the inspected Wellington result destination; no
+duplicate Wellington or Sporty provider was added.
+
+All seven additions remain disabled. Existing enabled flags, permission records,
+page limits and rate limits are unchanged. The registry contains 1641 sources:
+41 enabled and 1600 disabled. Registration neither starts collection nor verifies
+all participants or permits unrelated personal-data reuse.

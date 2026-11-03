@@ -1,3 +1,4 @@
+import { OwnerRaceReview } from "./OwnerRaceReview";
 import { isParkrunResult, PARKRUN_TIMING_LABEL } from "@/lib/athrecs/parkrun-timing";
 import { ClaimIdentityGate } from "./ClaimIdentityGate";
 import { useState } from "react";
@@ -134,6 +135,7 @@ function ProfileResultConfirmationBody({
             and PBs follow the existing result checks. Your own biography stays unchanged.
           </p>
         ) : null}
+        {submit.data.status === "approved" && <OwnerRaceReview />}
         <div className="flex flex-wrap gap-3">
           <Button asChild>
             <Link to="/my-athlete-profile">View my private profile</Link>
@@ -193,6 +195,7 @@ function ProfileResultConfirmationBody({
           <p className="mt-2 text-sm text-amber-800">{claim.conflictReason}</p>
         ) : null}
       </div>
+      {claim?.status === "approved" && <OwnerRaceReview />}
       <fieldset disabled={submit.isPending} className="space-y-5">
         <legend className="sr-only">Choose the results that belong to you</legend>
         {onDecline ? (

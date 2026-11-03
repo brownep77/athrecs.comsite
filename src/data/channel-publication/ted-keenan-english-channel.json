@@ -1,0 +1,292 @@
+{
+  "slug": "ted-keenan-english-channel",
+  "name": "Ted Keenan",
+  "country": "Ireland",
+  "aliases": [
+    "Edward Keenan",
+    "Edward Ted Keenan"
+  ],
+  "highlight": "Keenan swam from Dover to Sangatte in 18h11 and went on to complete the English, North and Bristol Channels.",
+  "biography": [
+    "Edward “Ted” Keenan trained on Lough Erne and off Bundoran. In August 1972 the 37-year-old from Enniskillen set out from Shakespeare Beach, Dover, with his son Brian aboard the escort boat. A tide change near Cap Gris-Nez carried his swim on towards Sangatte, where he came ashore the next morning.",
+    "A year later Keenan swam from Orlock Point in Northern Ireland to the Scottish coast in 18 hours 27 minutes. He completed the Original Triple Crown in July 1975 when he reached Coney Beach in Porthcawl after crossing the Bristol Channel. Brian accompanied his father on all three swims."
+  ],
+  "flags": [
+    {
+      "code": "IE",
+      "label": "Ireland",
+      "abbr": "IRL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Name in the CSA register",
+      "value": "Edward Keenan"
+    },
+    {
+      "label": "Sporting country",
+      "value": "Ireland in the CSA result. The CS&PF historical register lists UK [Northern Ireland]."
+    },
+    {
+      "label": "Home town",
+      "value": "Enniskillen, County Fermanagh"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "keenan-english-1972",
+      "title": "Dover to Sangatte, 12–13 August 1972",
+      "lines": [
+        {
+          "label": "Route and time",
+          "text": "Solo, England to France. Keenan left Shakespeare Beach at 15:23 on 12 August and reached Sangatte at 09:34 on 13 August. The two register clocks span 18 hours 11 minutes overnight. The register does not specify a time zone."
+        },
+        {
+          "label": "Why two dates appear",
+          "text": "The CS&PF register and the exhibition heading give 12 August. The Irish association’s memorial uses 13 August, the finish date. The exhibition narrative also describes departure on the 13th and mixes up the weekdays."
+        },
+        {
+          "label": "Escort and recognition",
+          "text": "The Channel Swimming Association recognises this crossing. The CS&PF register names Leonard Hutchinson as pilot, Envictor as the boat and Brian Keenan as trainer."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF crossing register, swim 443045",
+          "url": "https://cspf.co.uk/swim/443045"
+        },
+        {
+          "text": "Channel Swimming Association results, Edward Keenan",
+          "url": "https://www.channelswimmingassociation.com/swim/2520/edward-keenan"
+        },
+        {
+          "text": "Ted Keenan exhibition panel, English Channel",
+          "url": "https://storage.googleapis.com/ildsa_public/p/39/English%20Channel%201cf.pdf"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association exhibition on Ted Keenan",
+          "url": "https://www.ildsa.info/the-legend-ted-keenan-triple-channel-swimmer-1934-2013/"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "keenan-north-1973",
+      "title": "North Channel, 11 August 1973",
+      "lines": [
+        {
+          "label": "Route and clocks",
+          "text": "00:54 from Orlock Point and 19:21 at the cliffs south of Portpatrick, Scotland. The exhibition identifies the landing as Knockinam."
+        },
+        {
+          "label": "Escort",
+          "text": "William Long piloted the crossing. The North Channel register names his boat as Alice 7th."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Ted Keenan exhibition panel, North Channel",
+          "url": "https://storage.googleapis.com/ildsa_public/p/39/North%20Channel%202%20Panelcf.pdf"
+        },
+        {
+          "text": "Infinity Channel Swimming, North Channel solo register",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association, North Channel history",
+          "url": "https://www.ildsa.info/north-channel-history/"
+        }
+      ]
+    },
+    {
+      "id": "keenan-bristol-1975",
+      "title": "Bristol Channel, 17 July 1975",
+      "lines": [
+        {
+          "label": "Registered result",
+          "text": "14 hours 26 minutes 15 seconds for the crossing from Glenthorne to Porthcawl. The British Long Distance Swimming Association ratified the swim."
+        },
+        {
+          "label": "Route and clocks",
+          "text": "The family exhibition gives 06:04 at Glen Cove and 20:30 at Coney Beach and reports the duration to the minute. It identifies John Lewis as pilot and Brian Keenan as feeder."
+        },
+        {
+          "label": "Date",
+          "text": "17 July appears in both the route register and the exhibition heading. An August reference later in the exhibition text conflicts with those dates."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Bristol Channel Swimming Association, Glenthorne to Porthcawl",
+          "url": "https://www.bcswimmers.com/glenthorne-porthcawl"
+        },
+        {
+          "text": "Ted Keenan exhibition panel, Bristol Channel",
+          "url": "https://storage.googleapis.com/ildsa_public/p/39/Bristol%20Channel%203%20Panelcf.pdf"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Ted Keenan swim the English Channel?",
+      "value": "He started on 12 August 1972 and landed in France on 13 August after 18 hours 11 minutes."
+    },
+    {
+      "label": "Where did Ted Keenan land in France?",
+      "value": "He landed at Sangatte after starting at Shakespeare Beach in Dover."
+    },
+    {
+      "label": "Which three channels did Ted Keenan swim?",
+      "value": "He crossed the English Channel in 1972, the North Channel in 1973 and the Bristol Channel in 1975."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF crossing register, swim 443045",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/443045"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association results, Edward Keenan",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swim/2520/edward-keenan"
+        }
+      ]
+    },
+    {
+      "title": "Ted Keenan exhibition panel, English Channel",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://storage.googleapis.com/ildsa_public/p/39/English%20Channel%201cf.pdf"
+        }
+      ]
+    },
+    {
+      "title": "Irish Long Distance Swimming Association exhibition on Ted Keenan",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.ildsa.info/the-legend-ted-keenan-triple-channel-swimmer-1934-2013/"
+        }
+      ]
+    },
+    {
+      "title": "Ted Keenan exhibition panel, North Channel",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://storage.googleapis.com/ildsa_public/p/39/North%20Channel%202%20Panelcf.pdf"
+        }
+      ]
+    },
+    {
+      "title": "Infinity Channel Swimming, North Channel solo register",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        }
+      ]
+    },
+    {
+      "title": "Irish Long Distance Swimming Association, North Channel history",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.ildsa.info/north-channel-history/"
+        }
+      ]
+    },
+    {
+      "title": "Bristol Channel Swimming Association, Glenthorne to Porthcawl",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.bcswimmers.com/glenthorne-porthcawl"
+        }
+      ]
+    },
+    {
+      "title": "Ted Keenan exhibition panel, Bristol Channel",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://storage.googleapis.com/ildsa_public/p/39/Bristol%20Channel%203%20Panelcf.pdf"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "keenan-english-1972",
+      "title": "Dover to Sangatte, 12–13 August 1972",
+      "lines": [
+        {
+          "label": "Route and time",
+          "text": "Solo, England to France. Keenan left Shakespeare Beach at 15:23 on 12 August and reached Sangatte at 09:34 on 13 August. The two register clocks span 18 hours 11 minutes overnight. The register does not specify a time zone."
+        },
+        {
+          "label": "Why two dates appear",
+          "text": "The CS&PF register and the exhibition heading give 12 August. The Irish association’s memorial uses 13 August, the finish date. The exhibition narrative also describes departure on the 13th and mixes up the weekdays."
+        },
+        {
+          "label": "Escort and recognition",
+          "text": "The Channel Swimming Association recognises this crossing. The CS&PF register names Leonard Hutchinson as pilot, Envictor as the boat and Brian Keenan as trainer."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "keenan-north-1973",
+      "title": "North Channel, 11 August 1973",
+      "lines": [
+        {
+          "label": "Route and clocks",
+          "text": "00:54 from Orlock Point and 19:21 at the cliffs south of Portpatrick, Scotland. The exhibition identifies the landing as Knockinam."
+        },
+        {
+          "label": "Escort",
+          "text": "William Long piloted the crossing. The North Channel register names his boat as Alice 7th."
+        }
+      ]
+    },
+    {
+      "id": "keenan-bristol-1975",
+      "title": "Bristol Channel, 17 July 1975",
+      "lines": [
+        {
+          "label": "Registered result",
+          "text": "14 hours 26 minutes 15 seconds for the crossing from Glenthorne to Porthcawl. The British Long Distance Swimming Association ratified the swim."
+        },
+        {
+          "label": "Route and clocks",
+          "text": "The family exhibition gives 06:04 at Glen Cove and 20:30 at Coney Beach and reports the duration to the minute. It identifies John Lewis as pilot and Brian Keenan as feeder."
+        },
+        {
+          "label": "Date",
+          "text": "17 July appears in both the route register and the exhibition heading. An August reference later in the exhibition text conflicts with those dates."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-8e776e17a122607da47c"
+}

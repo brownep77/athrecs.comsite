@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
+import { countryFlagImageCode } from "@/lib/athrecs/country-flags";
 import {
   channelPath,
   type ChannelFlag,
@@ -12,21 +14,19 @@ import {
 const sectionTitle = "font-display text-2xl font-semibold text-fg";
 const tile = "space-y-3 rounded-xl border border-border bg-surface p-5";
 export function ChannelFlags({ flags }: { flags: ChannelFlag[] }) {
+  // Archives may contain both GBR and a home nation. Show their shared flag once.
+  const seen = new Set<string>();
+  const displayed = flags.filter((flag) => {
+    const code = countryFlagImageCode(flag.code) || flag.code;
+    if (seen.has(code)) return false;
+    seen.add(code);
+    return true;
+  });
   return (
     <span className="inline-flex flex-wrap items-center gap-2">
-      {flags.map((f) => (
+      {displayed.map((f) => (
         <span key={f.code} className="inline-flex items-center gap-1">
-          <img
-            src={
-              f.code === "GB-NIR"
-                ? "/flags/gb-nir.svg"
-                : `https://flagcdn.com/${f.code.toLowerCase()}.svg`
-            }
-            width={24}
-            height={16}
-            alt={f.label}
-            className="h-4 w-6 object-contain"
-          />
+          <CountryFlag country={f.code} />
           <abbr title={f.label} className="no-underline">
             {f.abbr}
           </abbr>

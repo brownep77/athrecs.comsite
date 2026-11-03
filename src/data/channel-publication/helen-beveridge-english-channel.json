@@ -1,0 +1,326 @@
+{
+  "slug": "helen-beveridge-english-channel",
+  "name": "Helen Beveridge",
+  "country": "Scotland",
+  "aliases": [],
+  "highlight": "Helen Beveridge crossed the English Channel from England to France in 19 hours 27 minutes 20 seconds on 6 October 2013.",
+  "biography": [
+    "Beveridge’s English Channel swim started in the evening and finished in France the following afternoon. In 2014 she crossed from Catalina to the California mainland. The Scottish Amateur Swimming Association’s North District included that crossing in its annual open-water report.",
+    "The English Channel swim on 6 October 2013 took 19 hours 27 minutes 20 seconds. The Catalina federation records 13 hours 43 minutes 7 seconds on 1 October 2014. In New York the 16 June 2015 Manhattan circuit took 9 hours 39 minutes 57 seconds."
+  ],
+  "flags": [
+    {
+      "code": "GB-SCT",
+      "label": "Scotland",
+      "abbr": "SCO"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "UK [Scotland]"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-444750",
+      "title": "English Channel solo, 6 October 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "19:27:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "20:29:40"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "15:57:00 on 7 October 2013"
+        },
+        {
+          "label": "Pilot",
+          "text": "Neil Streeter with co-pilot Sam Jones"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Suva"
+        },
+        {
+          "label": "Observer",
+          "text": "John Thorpe"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "UK [Scotland]"
+        },
+        {
+          "label": "Record note",
+          "text": "Beveridge dates the swim to 6–7 October. The British association annual report lists 7 October, the finish date, and rounds the duration to 19 hours 27 minutes."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 444750",
+          "url": "https://cspf.co.uk/swim/444750"
+        },
+        {
+          "text": "Helen Beveridge’s post-swim account",
+          "url": "https://wildhighlanderswims.wordpress.com/2013/10/16/english-channel-success/"
+        },
+        {
+          "text": "British Long Distance Swimming Association annual report, 2013–14",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSAannualrep2013.pdf"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2014-10-01",
+      "title": "Catalina Channel solo, 1 October 2014",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:43:07 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Scotland"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 315 · Helen Beveridge, Scotland",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-832",
+      "title": "Manhattan Island swim, 16 June 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:39:57 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "GBR"
+        },
+        {
+          "label": "Published place",
+          "text": "3"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 832 · Helen Beveridge",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Helen Beveridge swim the English Channel?",
+      "value": "Helen Beveridge swam from England to France on 6 October 2013 in 19 hours 27 minutes 20 seconds."
+    },
+    {
+      "label": "Who piloted Helen Beveridge’s Channel crossing?",
+      "value": "Neil Streeter with co-pilot Sam Jones piloted Suva on 6 October 2013."
+    },
+    {
+      "label": "How long did Helen Beveridge take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 1 October 2014 took 13 hours 43 minutes 7 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 444750",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444750"
+        }
+      ]
+    },
+    {
+      "title": "Helen Beveridge’s post-swim account",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://wildhighlanderswims.wordpress.com/2013/10/16/english-channel-success/"
+        }
+      ]
+    },
+    {
+      "title": "British Long Distance Swimming Association annual report, 2013–14",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://bldsa.org.uk/wp-content/uploads/BLDSAannualrep2013.pdf"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 315 · Helen Beveridge, Scotland",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 832 · Helen Beveridge",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Scottish Amateur Swimming Association North District, 2014 report",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.sasanorth.org.uk/Openwater/OPEN%20WATER%20SASA_NORTH_DISTRICT_AGM_REPORT_2014.pdf"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-444750",
+      "title": "English Channel solo, 6 October 2013",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "19:27:20 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "20:29:40"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "15:57:00 on 7 October 2013"
+        },
+        {
+          "label": "Pilot",
+          "text": "Neil Streeter with co-pilot Sam Jones"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Suva"
+        },
+        {
+          "label": "Observer",
+          "text": "John Thorpe"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "UK [Scotland]"
+        },
+        {
+          "label": "Record note",
+          "text": "Beveridge dates the swim to 6–7 October. The British association annual report lists 7 October, the finish date, and rounds the duration to 19 hours 27 minutes."
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2014-10-01",
+      "title": "Catalina Channel solo, 1 October 2014",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "13:43:07 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Scotland"
+        }
+      ]
+    },
+    {
+      "id": "nyow-832",
+      "title": "Manhattan Island swim, 16 June 2015",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:39:57 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "GBR"
+        },
+        {
+          "label": "Published place",
+          "text": "3"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-6a302ac697062242129b"
+}

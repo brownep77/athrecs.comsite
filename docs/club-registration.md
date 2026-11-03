@@ -2,7 +2,7 @@
 
 The public `/clubs` directory is the entry point. Listings remain available before
 any representative registers. Country/sport filters and 48-card pages make the
-directory browsable. Each listing and profile links to **Register this club**.
+directory browsable. Unmanaged listings offer **Claim this club profile**. Managed listings offer **Request club access**.
 Existing directory evidence badges are not representative-approval badges.
 The AthRecs facade uses the shared public club readers for every sport, including
 swimming, cycling and triathlon-only clubs with no linked athlete results. Event
@@ -20,6 +20,22 @@ and unaffiliated clubs are accepted. Missing clubs are requested privately first
 Staff use `/admin/club-registrations` on the existing staff host. Approval requires
 independent club-identity and representative-authority checks, a private evidence
 record and an applicant-facing decision. Staff cannot approve their own request.
+For each new appointment, staff independently locate an official contact and use
+the confirmation controls to send a 48-hour link or record a named officer’s
+direct reply, contact source and date. An email click opens the decision form.
+Only an explicit POST records a response. The response is bound to the exact
+application revision and target listing. A reported request blocks approval.
+A manual confirmation is an attestation by the independent reviewer.
+
+Existing representatives receive private notices in **My club registrations**.
+They can flag a pending request. Staff resolve disputes through a current officer
+and request a revised application before proceeding. Separately revoke a former
+officer’s access only after confirming the handover. Additional appointments grant
+another representative access without removing incumbents.
+
+Approved representatives can publish a biography, training information and a
+public contact page under **From the club**. Public edits cannot alter the
+independent verification contact, directory evidence or athlete records.
 An existing club cannot be silently reassigned or overwritten. A missing-club
 request must be matched to an existing listing or explicitly approved for a new
 listing; normalized same-name/country duplicates block new listing creation.
@@ -29,7 +45,7 @@ by an applicant remains self-reported and is not promoted into directory evidenc
 Approval creates a scoped `club_representatives` record. Other active
 representatives are highlighted in review; additional appointments require an
 independent authority check. Rejection, requests for more information and access
-revocation are explicit decisions. Future club tools must call
+revocation are explicit decisions. Club editing and other representative tools must call
 `requireClubRepresentative`; it rechecks active approval and the current verified
 email against the submission. Club approval grants no athlete ownership, access to
 athlete private data, automatic imports or email invitations. Bulk member upload is

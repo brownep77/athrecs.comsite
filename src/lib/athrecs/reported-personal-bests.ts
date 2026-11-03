@@ -39,7 +39,11 @@ export function selectProfilePersonalBests(
     | { kind: "recorded"; value: AchievementResult; verified: boolean }
     | { kind: "reported"; value: ReportedPersonalBest; verified: boolean };
   const bests = new Map<string, Candidate>();
-  const projected = profileAchievementResults(results, histories);
+  // Published legacy histories may predate the explicit verification field.
+  // Count their eligible marks; verification remains a separate display decision.
+  const projected = profileAchievementResults(results, histories, {
+    includeUnreviewedHistory: true,
+  });
   // Prefer confirmed evidence for equal marks without hiding a faster pending PB.
   const confirmedFirst = [...projected].sort(
     (a, b) => Number(achievementResultVerified(b)) - Number(achievementResultVerified(a)),

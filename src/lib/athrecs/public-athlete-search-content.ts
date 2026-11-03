@@ -8,6 +8,29 @@ export { searchSnippet } from "./search-text.ts";
 
 const clean = (value: string) => value.replace(/\s+/g, " ").trim();
 
+/** Use an already published road PB, keeping its verification qualification next to the mark. */
+export function publicRoadBestAnswer(profile: PublicAthletePreview) {
+  const best = profile.personalBests?.find(
+    (row) =>
+      row.label === "PB" &&
+      /^(?:running|athletics)$/i.test(row.sport) &&
+      /^road$/i.test(row.surface) &&
+      /^(?:5K|10K|Half|Marathon)$/i.test(row.distance) &&
+      row.event &&
+      row.mark &&
+      row.date,
+  );
+  if (!best) return null;
+  const distance =
+    best.distance === "Half"
+      ? "half marathon"
+      : best.distance === "Marathon"
+        ? "marathon"
+        : best.distance;
+  const status = best.verified ? "verified" : "awaiting verification";
+  return `${profile.displayName}’s road ${distance} best recorded on AthRecs is ${best.mark} (${status}), at ${best.event} on ${best.date}.`;
+}
+
 /** Only the anonymous preview and its bounded public career summary supply metadata. */
 export function publicAthleteSearchContent(profile: PublicAthletePreview) {
   const sports = [
@@ -20,11 +43,20 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
   const sportLabel = sports.length <= 2 ? sports.join(" & ") : "Sport";
   const nationality = publicNationality(profile.nationality);
   const presentation = profile.biography.length ? profile.biographyPresentation : undefined;
-  const title = profile.channelArchive
+  const club = profile.club?.trim();
+  const publicClub = club && !/^(?:unattached|unknown|tbc|n\/?a)$/i.test(club) ? club : null;
+  const page = profile.resultPage ?? 1;
+  const sportResults = sportLabel
+    ? `${sportLabel} results & ${profile.personalBests?.length ? "personal bests" : "biography"}`
+    : "Biography & latest results";
+  const identityLabel = publicClub || nationality;
+  const baseTitle = profile.channelArchive
     ? `${profile.displayName} — English Channel swims & biography | ${SITE_NAME}`
     : presentation
       ? `${presentation.title} | ${SITE_NAME}`
-      : `${profile.displayName} — ${sportLabel ? `${sportLabel} results & biography` : "Biography & latest results"}${nationality ? ` · ${nationality}` : ""} | ${SITE_NAME}`;
+      : `${profile.displayName} — ${sportResults}${identityLabel ? " · " + identityLabel : ""} | ${SITE_NAME}`;
+  const title =
+    page > 1 ? `${profile.displayName} — recorded results, page ${page} | ${SITE_NAME}` : baseTitle;
   const biography = clean(publicAthleteNarrative(profile).join(" "));
   const career = profile.careerSummary;
   const careerText = career
@@ -34,7 +66,7 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
     : "";
   const events = [
     ...new Set(
-      career?.events.length
+      page === 1 && career?.events.length
         ? career.events.map((event) => event.name)
         : profile.entries
             .map((entry) =>
@@ -64,10 +96,15 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
     ? `${profile.displayName} — ${sportLabel || "Sport"} results${nationality ? `; recorded nationality: ${nationality}` : ""}.`
     : intro;
   const description = searchSnippet(
-    (profile.channelArchive
-      ? profile.displayName + "’s English Channel swims. " + profile.channelArchive.highlight
-      : presentation?.description) ??
-      `${identity || `${profile.displayName}'s athlete profile.`} ${resultsSummary}`,
+    page > 1
+      ? `Recorded results for ${profile.displayName}, page ${page}. ${resultsSummary}`
+      : ((profile.channelArchive
+          ? profile.displayName + "’s English Channel swims. " + profile.channelArchive.highlight
+          : presentation?.description) ??
+          (!profile.biographyPresentation && generatedIntro
+            ? publicRoadBestAnswer(profile)
+            : null) ??
+          `${identity || `${profile.displayName}'s athlete profile.`} ${resultsSummary}`),
   );
   const athleteUrl = absoluteUrl(publicAthleteResultPath(profile.slug));
   const url = absoluteUrl(publicAthleteResultPath(profile.slug, profile.resultPage));
@@ -108,11 +145,11 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
             }
           : {}),
         ...(nationality ? { nationality: { "@type": "Country", name: nationality } } : {}),
-        ...(profile.club && !/^(?:unattached|unknown|tbc|n\/?a)$/i.test(profile.club.trim())
+        ...(publicClub
           ? {
               memberOf: {
                 "@type": "SportsOrganization",
-                name: profile.club,
+                name: publicClub,
                 ...(profile.clubSlug
                   ? { url: absoluteUrl(`/clubs/${encodeURIComponent(profile.clubSlug)}`) }
                   : {}),

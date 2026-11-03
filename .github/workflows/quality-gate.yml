@@ -96,11 +96,20 @@ jobs:
       - name: Verify fixture geography, flag mappings and correction safety
         run: npm run verify:fixture-geography
 
+      - name: Verify consistent UK flags
+        run: node scripts/verify-uk-flag-presentation.mjs
+
       - name: Verify search URLs and sitemap privacy
         run: npm run verify:search-discovery
 
       - name: Verify sports directory coverage and jurisdiction filters
         run: node scripts/verify-sports-directory.mjs
+
+      - name: Editorial geography, substantial reports and private athlete linking
+        run: |
+          node --experimental-strip-types scripts/verify-editorial-browse.mjs
+          node --experimental-strip-types scripts/verify-editorial-athletes.mjs
+          node --experimental-strip-types scripts/verify-editorial-reports.mjs
 
       - name: Verify location race pages and automatic date rollover
         run: node scripts/verify-event-colours.mjs
@@ -149,6 +158,7 @@ jobs:
           node scripts/verify-result-source-sync.mjs
           node scripts/verify-anz-import.mjs
           node scripts/verify-historical-personal-bests.mjs
+          node scripts/verify-bowden-road-pb-metadata.mjs
 
       - name: Verify independent result evidence comparisons
         run: node scripts/verify-result-evidence-audit.mjs
@@ -247,6 +257,9 @@ jobs:
 
       - name: Fixture geography on desktop and mobile
         run: node scripts/verify-fixture-geography-ui.mjs
+
+      - name: Editorial navigation and mobile article layout
+        run: node scripts/verify-editorial-navigation-browser.mjs
 
       - name: Catalogue automation authentication smoke test
         run: |

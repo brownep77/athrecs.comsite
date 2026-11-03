@@ -51,7 +51,7 @@ export function ClubCard({ club }: { club: ClubListItem }) {
           search={{ club: club.slug }}
           className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-accent underline"
         >
-          Register this club
+          {club.managed ? "Request club access" : "Claim this club profile"}
         </Link>
       )}
     </article>

@@ -1,0 +1,294 @@
+{
+  "slug": "anne-marie-ward-english-channel",
+  "name": "Anne-Marie Ward",
+  "country": "Ireland",
+  "aliases": [
+    "Anne Marie Ward",
+    "Ann Marie Ward",
+    "Anna Marie Ward",
+    "Annemarie Ward"
+  ],
+  "highlight": "Ward crossed the English Channel in 20h04 in 2007. In 2010 she became the first woman from Ireland to swim the North Channel.",
+  "biography": [
+    "Anne-Marie Ward of Portnablagh, County Donegal, began marathon swimming with a wetsuit crossing from Tory Island to Magheroarty in 2003. Three years later she helped a six-person team swim around Ireland in stages. At 41 she crossed the English Channel, finishing in rising winds after 20 hours 4 minutes.",
+    "Ward completed the North Channel on her fourth attempt, swimming overnight from the Gobbins to Scotland in September 2010. She received the 2010 World Open Water Swimming Woman of the Year award. She went on to complete an Ice Mile in Mulroy Bay and entered the Ireland Marathon Swimming Hall of Fame in 2019."
+  ],
+  "flags": [
+    {
+      "code": "IE",
+      "label": "Ireland",
+      "abbr": "IRL"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality",
+      "value": "Ireland"
+    },
+    {
+      "label": "Name in the CSA results",
+      "value": "Anna Marie Ward"
+    },
+    {
+      "label": "Home community",
+      "value": "Portnablagh, County Donegal"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "ward-english-2007",
+      "title": "Dover coast to France, 5 September 2007",
+      "lines": [
+        {
+          "label": "Registered crossing",
+          "text": "Solo, England to France in 20 hours 4 minutes. The register gives 03:20 to 23:24. The register does not specify a time zone."
+        },
+        {
+          "label": "Route and clock discrepancy",
+          "text": "A contemporary report places the start on the Dover coast at 03:00. The register’s 03:20 start matches its finish and duration. The precise French landing remains unconfirmed."
+        },
+        {
+          "label": "Escort and ratification",
+          "text": "Pilot R. Cooper, vessel Sea Venture II and crew member Kieran Fitzgerald. The Channel Swimming Association ratified the swim."
+        },
+        {
+          "label": "Recognition",
+          "text": "The Irish Hall of Fame records a CSA award for swimming in arduous conditions and reports force 5–6 winds at the finish."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF crossing register, swim 444151",
+          "url": "https://cspf.co.uk/swim/444151"
+        },
+        {
+          "text": "Channel Swimming Association results, Anna Marie Ward",
+          "url": "https://www.channelswimmingassociation.com/swims?q=ward"
+        },
+        {
+          "text": "The Irish Times, contemporary account of the Dover start",
+          "url": "https://www.irishtimes.com/news/in-short-1.960093"
+        },
+        {
+          "text": "Ireland Marathon Swimming Hall of Fame, class of 2019",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2019/"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "ward-north-2010",
+      "title": "North Channel, 1–2 September 2010",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "18 hours 59 minutes 26 seconds. The register dates the crossing 2 September, when Ward finished. She started on 1 September and became the first woman from Ireland to complete the solo crossing."
+        },
+        {
+          "label": "Clocks and escort",
+          "text": "Ward recalled roughly 08:30 to 03:30. Crew member Kieran Fitzgerald logged the shore signals at 08:36 and 03:36. His account names Lucky Lizzy as the main support boat and two inflatables. The solo register names Derek Flanaghan as pilot."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Infinity Channel Swimming, North Channel solo register",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        },
+        {
+          "text": "Kieran Fitzgerald’s North Channel crew log, Sligo Triathlon Club",
+          "url": "https://sligotriathlon.blogspot.com/2010/09/north-channel-swim-report.html"
+        },
+        {
+          "text": "Anne-Marie Ward’s recollection of the North Channel start and finish",
+          "url": "https://johnoregan.blogspot.com/2010/"
+        },
+        {
+          "text": "Irish Long Distance Swimming Association, North Channel history",
+          "url": "https://www.ildsa.info/north-channel-history/"
+        },
+        {
+          "text": "Ireland Marathon Swimming Hall of Fame, class of 2019",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2019/"
+        }
+      ]
+    },
+    {
+      "id": "ward-icemile-2012",
+      "title": "Ice Mile, Mulroy Bay, 5 February 2012",
+      "lines": [
+        {
+          "label": "Certified swim",
+          "text": "The International Ice Swimming Association records 1.04 miles in 35 minutes 51 seconds, with a water temperature of 4.5 °C. This was Ward’s first certified Ice Mile."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "International Ice Swimming Association certificate, Ice ID 23",
+          "url": "https://internationaliceswimming.com/wp-content/themes/rttheme18-child/php/pdf_ice_mile_certificate.php?swim=1&user=30"
+        },
+        {
+          "text": "Ireland Marathon Swimming Hall of Fame, class of 2019",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2019/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Anne-Marie Ward swim the English Channel?",
+      "value": "On 5 September 2007 she crossed from England to France in 20 hours 4 minutes."
+    },
+    {
+      "label": "Who was the first woman from Ireland to swim the North Channel?",
+      "value": "Anne-Marie Ward started on 1 September 2010 and landed in Scotland early on 2 September."
+    },
+    {
+      "label": "How cold was the water for Anne-Marie Ward’s certified Ice Mile?",
+      "value": "The water in Mulroy Bay was 4.5 °C on 5 February 2012. She swam 1.04 miles in 35 minutes 51 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF crossing register, swim 444151",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/444151"
+        }
+      ]
+    },
+    {
+      "title": "Channel Swimming Association results, Anna Marie Ward",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.channelswimmingassociation.com/swims?q=ward"
+        }
+      ]
+    },
+    {
+      "title": "The Irish Times, contemporary account of the Dover start",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.irishtimes.com/news/in-short-1.960093"
+        }
+      ]
+    },
+    {
+      "title": "Ireland Marathon Swimming Hall of Fame, class of 2019",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.ildsa.info/ireland-mshof-class-of-2019/"
+        }
+      ]
+    },
+    {
+      "title": "Infinity Channel Swimming, North Channel solo register",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://infinitychannelswimming.com/solo-swimmers-north-channel/"
+        }
+      ]
+    },
+    {
+      "title": "Kieran Fitzgerald’s North Channel crew log, Sligo Triathlon Club",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://sligotriathlon.blogspot.com/2010/09/north-channel-swim-report.html"
+        }
+      ]
+    },
+    {
+      "title": "Anne-Marie Ward’s recollection of the North Channel start and finish",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://johnoregan.blogspot.com/2010/"
+        }
+      ]
+    },
+    {
+      "title": "Irish Long Distance Swimming Association, North Channel history",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.ildsa.info/north-channel-history/"
+        }
+      ]
+    },
+    {
+      "title": "International Ice Swimming Association certificate, Ice ID 23",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://internationaliceswimming.com/wp-content/themes/rttheme18-child/php/pdf_ice_mile_certificate.php?swim=1&user=30"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "ward-english-2007",
+      "title": "Dover coast to France, 5 September 2007",
+      "lines": [
+        {
+          "label": "Registered crossing",
+          "text": "Solo, England to France in 20 hours 4 minutes. The register gives 03:20 to 23:24. The register does not specify a time zone."
+        },
+        {
+          "label": "Route and clock discrepancy",
+          "text": "A contemporary report places the start on the Dover coast at 03:00. The register’s 03:20 start matches its finish and duration. The precise French landing remains unconfirmed."
+        },
+        {
+          "label": "Escort and ratification",
+          "text": "Pilot R. Cooper, vessel Sea Venture II and crew member Kieran Fitzgerald. The Channel Swimming Association ratified the swim."
+        },
+        {
+          "label": "Recognition",
+          "text": "The Irish Hall of Fame records a CSA award for swimming in arduous conditions and reports force 5–6 winds at the finish."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "ward-north-2010",
+      "title": "North Channel, 1–2 September 2010",
+      "lines": [
+        {
+          "label": "Result",
+          "text": "18 hours 59 minutes 26 seconds. The register dates the crossing 2 September, when Ward finished. She started on 1 September and became the first woman from Ireland to complete the solo crossing."
+        },
+        {
+          "label": "Clocks and escort",
+          "text": "Ward recalled roughly 08:30 to 03:30. Crew member Kieran Fitzgerald logged the shore signals at 08:36 and 03:36. His account names Lucky Lizzy as the main support boat and two inflatables. The solo register names Derek Flanaghan as pilot."
+        }
+      ]
+    },
+    {
+      "id": "ward-icemile-2012",
+      "title": "Ice Mile, Mulroy Bay, 5 February 2012",
+      "lines": [
+        {
+          "label": "Certified swim",
+          "text": "The International Ice Swimming Association records 1.04 miles in 35 minutes 51 seconds, with a water temperature of 4.5 °C. This was Ward’s first certified Ice Mile."
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-90154081bd069ff755e7"
+}

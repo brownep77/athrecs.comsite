@@ -1,0 +1,324 @@
+{
+  "slug": "nathan-payas-english-channel",
+  "name": "Nathan Payas",
+  "country": "Gibraltar",
+  "aliases": [],
+  "highlight": "Nathan Payas crossed the English Channel from England to France in 9 hours 13 minutes on 11 September 2016.",
+  "biography": [
+    "Payas crossed the English Channel in 9 hours 13 minutes, with Eddie Spelling piloting Mighty Mo and John Payas listed as trainer. His 2018 Manhattan finish completed the international Triple Crown. The Gibraltar Chronicle identified him as the first Gibraltarian to complete it.",
+    "The English Channel swim on 11 September 2016 took 9 hours 13 minutes. The Catalina federation records 9 hours 34 minutes 51 seconds on 11 August 2017. In New York the 14 July 2018 Manhattan circuit took 7 hours 21 minutes."
+  ],
+  "flags": [
+    {
+      "code": "GI",
+      "label": "Gibraltar",
+      "abbr": "GIB"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Sporting nationality in the Channel register",
+      "value": "UK [Gibraltar]"
+    }
+  ],
+  "crossings": [
+    {
+      "id": "cspf-445078",
+      "title": "English Channel solo, 11 September 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "09:13:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "05:52:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "15:05:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Eddie Spelling"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Mighty Mo"
+        },
+        {
+          "label": "Observer",
+          "text": "Robert Nibbs"
+        },
+        {
+          "label": "Trainer",
+          "text": "John Payas"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "UK [Gibraltar]"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "CS&PF historical crossing register, swim 445078",
+          "url": "https://cspf.co.uk/swim/445078"
+        }
+      ]
+    }
+  ],
+  "otherEvents": [
+    {
+      "id": "catalina-2017-08-11",
+      "title": "Catalina Channel solo, 11 August 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:34:51 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Gibraltar"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "Catalina Channel Swimming Federation, solo 432 · Nathan Payas, Gibraltar",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "id": "nyow-989",
+      "title": "Manhattan Island swim, 14 July 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:21:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "GIB"
+        },
+        {
+          "label": "Published place",
+          "text": "2"
+        },
+        {
+          "heading": true,
+          "text": "How the record was checked"
+        },
+        {
+          "text": "New York Open Water, result 989 · Nathan Payas",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    }
+  ],
+  "milestones": [],
+  "media": [],
+  "questions": [
+    {
+      "label": "When did Nathan Payas swim the English Channel?",
+      "value": "Nathan Payas swam from England to France on 11 September 2016 in 9 hours 13 minutes."
+    },
+    {
+      "label": "Who piloted Nathan Payas’s Channel crossing?",
+      "value": "Eddie Spelling piloted Mighty Mo on 11 September 2016."
+    },
+    {
+      "label": "How long did Nathan Payas take to swim the Catalina Channel?",
+      "value": "The island-to-mainland swim on 11 August 2017 took 9 hours 34 minutes 51 seconds."
+    }
+  ],
+  "sources": [
+    {
+      "title": "CS&PF historical crossing register, swim 445078",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://cspf.co.uk/swim/445078"
+        }
+      ]
+    },
+    {
+      "title": "Catalina Channel Swimming Federation, solo 432 · Nathan Payas, Gibraltar",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://swimcatalina.org/swim-successes/"
+        }
+      ]
+    },
+    {
+      "title": "New York Open Water, result 989 · Nathan Payas",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.nyopenwater.org/20-bridgesmanhattan-island-swim-solo-swim-results/"
+        }
+      ]
+    },
+    {
+      "title": "Gibraltar Chronicle report on Nathan Payas",
+      "lines": [
+        {
+          "text": "Read the source",
+          "url": "https://www.chronicle.gi/triple-crown-success-for-nathan-payas/"
+        }
+      ]
+    }
+  ],
+  "nativeCrossings": [
+    {
+      "id": "cspf-445078",
+      "title": "English Channel solo, 11 September 2016",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "09:13:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "England to France"
+        },
+        {
+          "label": "Departure clock",
+          "text": "05:52:00"
+        },
+        {
+          "label": "Arrival clock",
+          "text": "15:05:00"
+        },
+        {
+          "label": "Pilot",
+          "text": "Eddie Spelling"
+        },
+        {
+          "label": "Escort vessel",
+          "text": "Mighty Mo"
+        },
+        {
+          "label": "Observer",
+          "text": "Robert Nibbs"
+        },
+        {
+          "label": "Trainer",
+          "text": "John Payas"
+        },
+        {
+          "label": "Ratification",
+          "text": "Channel Swimming & Piloting Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "UK [Gibraltar]"
+        },
+        {
+          "label": "Clock basis",
+          "text": "The source does not specify a time zone."
+        }
+      ]
+    }
+  ],
+  "nativeOtherEvents": [
+    {
+      "id": "catalina-2017-08-11",
+      "title": "Catalina Channel solo, 11 August 2017",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "9:34:51 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Santa Catalina Island to the California mainland"
+        },
+        {
+          "label": "Ratification",
+          "text": "Catalina Channel Swimming Federation"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "Gibraltar"
+        }
+      ]
+    },
+    {
+      "id": "nyow-989",
+      "title": "Manhattan Island swim, 14 July 2018",
+      "lines": [
+        {
+          "label": "Elapsed time",
+          "text": "7:21:00 (h:mm:ss)"
+        },
+        {
+          "label": "Course",
+          "text": "Counterclockwise around Manhattan"
+        },
+        {
+          "label": "Start location",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Landing",
+          "text": "Pier A, Battery"
+        },
+        {
+          "label": "Ratification",
+          "text": "New York Open Water"
+        },
+        {
+          "label": "Sporting country on this result",
+          "text": "GIB"
+        },
+        {
+          "label": "Published place",
+          "text": "2"
+        }
+      ]
+    }
+  ],
+  "checkedAt": "2026-11-02",
+  "revision": "channel-6bff619d8d52e0c63152"
+}

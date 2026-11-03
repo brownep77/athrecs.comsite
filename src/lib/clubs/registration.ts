@@ -155,6 +155,12 @@ export type ClubReviewApplication = ClubApplication & {
   user_id: string;
   submitted_email: string | null;
   active_representatives: number;
+  confirmation_club_id: number | null;
+  confirmation_status: string | null;
+  confirmation_method: string | null;
+  confirmation_source: string | null;
+  confirmation_contact: string | null;
+  confirmation_note: string | null;
 };
 export function registrationKey(clubId: number | null, details: ClubDetails) {
   return clubId
@@ -163,3 +169,32 @@ export function registrationKey(clubId: number | null, details: ClubDetails) {
         .map((v) => v.normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim())
         .join("|")}`;
 }
+
+export const clubConfirmationSchema = z
+  .object({
+    id: z.uuid(),
+    revision: z.number().int().positive(),
+    targetClubId: z.number().int().positive().nullable(),
+    method: z.enum(["email", "manual"]),
+    sourceUrl: publicUrl.refine(Boolean, "Enter the independently sourced public contact page."),
+    contact: z.string().trim().min(3).max(254),
+    replyNote: z.string().trim().max(1200).default(""),
+  })
+  .superRefine((v, ctx) => {
+    if (v.method === "email" && !z.email().safeParse(v.contact).success)
+      ctx.addIssue({ code: "custom", message: "Enter the officer's published email address." });
+    if (v.method === "manual" && v.replyNote.length < 30)
+      ctx.addIssue({
+        code: "custom",
+        message: "Record who replied, when and how they authorised this applicant.",
+      });
+  });
+export type ClubConfirmation = z.infer<typeof clubConfirmationSchema>;
+export const clubContentSchema = z.object({
+  clubId: z.number().int().positive(),
+  revision: z.number().int().nonnegative(),
+  biography: z.string().trim().max(3000),
+  training: z.string().trim().max(1600),
+  contactUrl: publicUrl,
+});
+export type ClubContent = z.infer<typeof clubContentSchema>;

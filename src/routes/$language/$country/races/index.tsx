@@ -1,3 +1,4 @@
+import { directoryStructuredData } from "@/lib/athrecs/directory-structured-data";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { useState } from "react";
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
@@ -20,7 +21,6 @@ import {
   searchToApi,
   type EventSearchValues,
 } from "@/components/races/EventSearch";
-import { Button } from "@/components/ui/button";
 
 const SPORTS = new Set<Sport>(
   PUBLIC_SPORTS.filter((sport): sport is Sport => sport !== "All"),
@@ -128,6 +128,8 @@ export const Route = createFileRoute("/$language/$country/races/")({
         offset: ((deps.page ?? 1) - 1) * PAGE_SIZE,
       },
     });
+    const filtered = Object.entries(deps).some(([key, value]) => key !== "page" && Boolean(value));
+    if (!filtered && (deps.page ?? 1) > 1 && !races.length) throw notFound();
     return { site, language: params.language, races };
   },
   head: ({ loaderData, match }) => {
@@ -141,6 +143,8 @@ export const Route = createFileRoute("/$language/$country/races/")({
     return {
       meta: siteGraphMeta({ title: `${translateCountryText(copy.racesIn, country)}${page > 1 ? ` — ${page}` : ""} | ATHRECS`, description: translateCountryText(copy.racesIntro, country), url }).map((tag) => (filtered || loaderData.races.length === 0) && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
       links: [{ rel: "canonical", href: url }],
+      scripts: filtered ? [] : directoryStructuredData(url, translateCountryText(copy.racesIn, country),
+        loaderData.races.slice(0, PAGE_SIZE).map((race) => ({ name: race.name, path: `/${language}/${site.slug}/races/${encodeURIComponent(race.slug)}` })), language),
     };
   },
   component: CountryRacesPage,
@@ -169,19 +173,6 @@ function CountryRacesPage() {
       search: searchFromFilters(fixed),
       replace: true,
       resetScroll: false,
-    });
-  };
-
-  const changePage = (nextPage: number) => {
-    const safePage = Math.min(Math.max(nextPage, 1), MAX_PAGE);
-    void navigate({
-      to: "/$language/$country/races",
-      params: { language, country: site.slug },
-      search: {
-        ...searchFromFilters(filters),
-        page: safePage > 1 ? safePage : undefined,
-      },
-      resetScroll: true,
     });
   };
 
@@ -270,24 +261,21 @@ function CountryRacesPage() {
               aria-label="Event pages"
               className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3 shadow-card"
             >
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() => changePage(page - 1)}
-                disabled={page === 1}
-                aria-label="Previous page"
-              >
-                ←
-              </Button>
+              {page > 1 ? (
+                <Link from={Route.fullPath} to="." rel="prev" aria-label="Previous page"
+                  search={{ ...routeSearch, page: page > 2 ? page - 1 : undefined }}
+                  className="inline-flex min-h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg">
+                  ←
+                </Link>
+              ) : <span />}
               <span className="text-sm text-subtle">{page}</span>
-              <Button
-                type="button"
-                onClick={() => changePage(page + 1)}
-                disabled={!hasNextPage || page >= MAX_PAGE}
-                aria-label="Next page"
-              >
-                →
-              </Button>
+              {hasNextPage && page < MAX_PAGE ? (
+                <Link from={Route.fullPath} to="." rel="next" aria-label="Next page"
+                  search={{ ...routeSearch, page: page + 1 }}
+                  className="inline-flex min-h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg">
+                  →
+                </Link>
+              ) : <span />}
             </nav>
           ) : null}
         </div>

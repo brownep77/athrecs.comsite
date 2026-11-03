@@ -47,13 +47,16 @@ const apps=()=>JSON.parse(localStorage.getItem('synthetic-club-applications')||'
 export async function getMyClubRegistrations(){window.privateReads++;return {email:'officer@example.test',emailVerified:!location.search.includes('unverified'),applications:apps()};}
 export async function saveClubRegistration({data}){window.saves.push(data);if(window.failSave)throw Error('Synthetic connection interruption. Please retry.');const app={id:data.id||'00000000-0000-4000-8000-000000000001',club_id:data.clubId,club_name:'Synthetic Club 01',club_slug:'synthetic-club-1',details:data.details,status:data.submit?'pending':'draft',revision:(data.revision||0)+1,review_message:'',updated_at:'2026-10-13',submitted_at:data.submit?'2026-10-13':null};localStorage.setItem('synthetic-club-applications',JSON.stringify([app]));return app;}
 export async function withdrawClubRegistration(){localStorage.setItem('synthetic-club-applications','[]');return {withdrawn:true};}
-export async function getClubRegistrationReviewQueue(){return {total:1,applications:apps().map(a=>({...a,user_id:'synthetic-officer',submitted_email:'officer@example.test',active_representatives:0}))};}
+export async function getClubRegistrationReviewQueue(){return {total:1,applications:apps().map(a=>({...a,user_id:'synthetic-officer',submitted_email:'officer@example.test',active_representatives:0,confirmation_status:window.clubConfirmed?'confirmed':null,confirmation_club_id:a.club_id}))};}
+export async function confirmClubOfficer(){window.clubConfirmed=true;return {saved:true};}
+export async function publishClubDetails(){return {saved:true};}
+export async function reportClubAccessRequest(){return {saved:true};}
 export async function reviewClubRegistration({data}){window.reviews.push(data);return {saved:true};}
 `,
 );
 const directory = file(
   "directory-api.js",
-  `export async function listClubs({data}){return window.fixtureClubs.filter(c=>!data?.q||[c.name,c.city,c.country,...c.sports].join(' ').toLowerCase().includes(data.q.toLowerCase()));}`,
+  `export async function getClubBySlug(){return null;}export async function listClubs({data}){return window.fixtureClubs.filter(c=>!data?.q||[c.name,c.city,c.country,...c.sports].join(' ').toLowerCase().includes(data.q.toLowerCase()));}`,
 );
 file(
   "index.html",
@@ -100,17 +103,17 @@ try {
   await page.goto(`${origin}/clubs`);
   await page.getByRole("heading", { name: "Clubs", exact: true }).waitFor();
   assert.equal(
-    await page.getByRole("link", { name: "Register this club", exact: true }).count(),
+    await page.getByRole("link", { name: "Claim this club profile", exact: true }).count(),
     48,
   );
   await page.getByRole("button", { name: "Next", exact: true }).click();
   assert.equal(
-    await page.getByRole("link", { name: "Register this club", exact: true }).count(),
+    await page.getByRole("link", { name: "Claim this club profile", exact: true }).count(),
     4,
   );
   await page.getByLabel("Country", { exact: true }).selectOption("Ireland");
   assert.equal(
-    await page.getByRole("link", { name: "Register this club", exact: true }).count(),
+    await page.getByRole("link", { name: "Claim this club profile", exact: true }).count(),
     2,
   );
   await page.getByLabel("Sport", { exact: true }).selectOption("Running");
@@ -232,6 +235,20 @@ try {
     .fill(
       "Confirmed the club and appointment using independently sourced official contact details.",
     );
+  await page.getByLabel("Verification route").selectOption("manual");
+  await page
+    .getByLabel("Official contact source", { exact: true })
+    .fill("https://club.example.test/committee");
+  await page
+    .getByLabel("Officer name, role and contact route", { exact: true })
+    .fill("Synthetic Chair via club directory telephone");
+  await page
+    .getByLabel("Officer’s reply", { exact: true })
+    .fill(
+      "Synthetic chair confirmed the appointment of this named applicant through the published club contact.",
+    );
+  await page.getByRole("button", { name: "Record club confirmation", exact: true }).click();
+  await page.getByText("Officer response: confirmed", { exact: true }).waitFor();
   for (const checkbox of await page.getByRole("checkbox").all()) await checkbox.check();
   await page.getByRole("button", { name: "Approve representative", exact: true }).click();
   await page.waitForFunction(() => window.reviews.length === 1);
