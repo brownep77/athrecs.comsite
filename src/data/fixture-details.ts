@@ -17,6 +17,7 @@ import countyTbcReview from "./county-tbc-review-2026-10-21.json" with { type: "
 import batch6ThreeMonthStarts from "./three-month-starts-batch6-2026-10-25.json" with { type: "json" };
 import batch7ThreeMonthStarts from "./three-month-starts-batch7-2026-10-25.json" with { type: "json" };
 import weekendStartCorrections from "./weekend-start-corrections-2026-10-30.json" with { type: "json" };
+import urgentStarts20261101 from "./urgent-starts-2026-11-01.json" with { type: "json" };
 
 import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
@@ -522,6 +523,16 @@ for (const [key, reviewed] of [
 
 // Apply the 30 October public-readback corrections last so stale earlier reviews cannot override them.
 for (const [key, reviewed] of Object.entries(weekendStartCorrections)) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
+}
+
+// Apply the 1 November organiser-confirmed starts last for exact-date local-time display.
+for (const [key, reviewed] of Object.entries(urgentStarts20261101)) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {
     ...existing,
