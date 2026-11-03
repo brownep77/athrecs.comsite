@@ -51,7 +51,7 @@ function ResultRow({ result, parkrun }: { result: PublicRaceResult; parkrun: boo
       <td className="px-1 py-2.5 font-mono text-xs font-semibold sm:px-2">
         {result.nationality ? <CountryFlag country={result.nationality} showCode /> : <span aria-label="Nationality not recorded">—</span>}
       </td>
-      <td className="px-2 py-2 text-right font-mono text-xs font-semibold tabular-nums [overflow-wrap:anywhere] sm:px-3 sm:text-sm">
+      <td className="px-2 py-2 text-right font-mono text-xs font-semibold tabular-nums whitespace-nowrap sm:px-3 sm:text-sm">
         {finished ? result.reported_performance || formatDuration(result.finish_time_seconds) : status}
       </td>
     </tr>

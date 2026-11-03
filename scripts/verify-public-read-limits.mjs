@@ -86,7 +86,7 @@ try {
       status text, result_details jsonb, overall_place integer, finish_time_seconds integer,
       category text, result_visibility text);
     create table athlete_account_links(user_id text, athlete_id integer, status text);
-    create table athlete_public_shares(user_id text, enabled boolean, share_results boolean);
+    create table athlete_public_shares(user_id text, enabled boolean, share_results boolean, share_club boolean default true);
     create table athlete_profile_hidden_results(user_id text, result_id integer);
     create table athlete_profile_history_choices(user_id text, athlete_id integer,
       provider text, external_id text, performance_hash text, excluded boolean);
@@ -107,7 +107,7 @@ try {
     update athletes set profile_visibility='private' where id=1;
     insert into athlete_account_links values ('disabled',2,'active'), ('hidden',3,'active'),
       ('no-results',4,'active'), ('inactive',5,'revoked');
-    insert into athlete_public_shares values ('disabled',false,true), ('hidden',true,true),
+    insert into athlete_public_shares(user_id,enabled,share_results) values ('disabled',false,true), ('hidden',true,true),
       ('no-results',true,false), ('inactive',false,false);
     insert into athlete_profile_hidden_results values ('hidden',3);
     update results set result_visibility='private' where id=6;
@@ -147,6 +147,21 @@ try {
   assert.equal(results.length, 100, "Race previews cannot return unbounded results");
   for (const id of [1, 2, 3, 4, 6]) assert(!results.some((r) => r.id === id));
   assert(results.some((r) => r.id === 5));
+  await db.exec("begin; update athletes set profile_type='Public figure' where id=6");
+  try {
+    assert(!(await athrecs.getEditionResults({data:1})).some(row => row.id === 6),
+      'Public-figure status must not expose a private performance in race previews');
+    assert.equal((await athrecs.listAthletes({data:{q:'Synthetic 006'}}))[0].result_count, 1,
+      'Public result counts exclude the private canonical performance, retaining the published source history');
+  } finally { await db.exec('rollback'); }
+  await db.exec(`begin;
+    insert into athlete_account_links values ('club-hidden',7,'active');
+    insert into athlete_public_shares(user_id,enabled,share_results,share_club) values ('club-hidden',true,true,false);
+  `);
+  try {
+    assert.equal((await athrecs.getEditionResults({data:1})).find(row => row.id === 7).club,null,
+      'Race previews respect a private profile club preference');
+  } finally { await db.exec('rollback'); }
   for (const data of [0, -1, 1.5, Infinity, "1", {}, 2147483648]) {
     const count = queryCount;
     await assert.rejects(async () => athrecs.getEditionResults({ data }));
