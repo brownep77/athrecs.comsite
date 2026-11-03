@@ -106,6 +106,8 @@ try {
   const publicProfile = await get('/athletes/synthetic-public');
   assert.match(publicProfile.$('title').text(), /Synthetic Public Runner.*Athletics results/);
   assert.match(publicProfile.$('main').text(), /4 minutes and 26 seconds/);
+  const editionLink = publicProfile.$('#results-history a').filter((_, el) => publicProfile.$(el).attr('href') === resultsPath);
+  assert.equal(editionLink.text(), 'Synthetic Archive Meeting · 1500m 2014 results');
   const entities = publicProfile.$('script[type="application/ld+json"]').toArray().map((e)=>JSON.parse(publicProfile.$(e).text()));
   assert(entities.some((item)=>item.mainEntity?.['@type']==='Person' && item.mainEntity.name==='Synthetic Public Runner'));
   const languageHome = await get('/nl/czechia');
@@ -119,6 +121,10 @@ try {
   for (const visibility of ['public', 'private', 'public']) {
     await sql`update results set result_visibility=${visibility} where athlete_id=${publicId}`;
     const resultSitemap = await get('/sitemaps/results-1.xml');
+    const athleteResponse = await fetch(origin + '/athletes/synthetic-public', {headers: {connection: 'close'}});
+    const athleteHtml = cheerio.load(await athleteResponse.text());
+    const linksToEdition = athleteHtml('#results-history a').filter((_, el) => athleteHtml(el).attr('href') === resultsPath);
+    assert.equal(linksToEdition.length, visibility === 'public' ? 1 : 0, 'Edition links follow live withdrawal/restoration');
     assert.equal(resultSitemap.headers.get('cache-control'), 'no-store');
     assert.equal(resultSitemap.html.includes(`https://www.athrecs.com${resultsPath}</loc>`), visibility === 'public');
     const response = await fetch(`${origin}${resultsPath}`, {

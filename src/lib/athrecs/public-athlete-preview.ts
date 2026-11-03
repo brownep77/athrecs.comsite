@@ -61,6 +61,7 @@ export type PublicAthletePreview = {
   championshipMedals?: ChampionshipMedalSummary[];
   publicLicenceCredits?: PublicResultLicenceCreditId[];
   entries: ResultsHistoryEntry[];
+  editionLinks?: Record<number, { slug: string; label: string }>;
   reportedRecords: ReportedRaceRecord[];
   totalResults: number;
   resultPage?: number;

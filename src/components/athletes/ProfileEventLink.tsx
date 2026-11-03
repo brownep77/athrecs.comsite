@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
+import { sportIsInPublicSiteScope } from "@/lib/site-scope";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 
 export function ProfileEventLink({
@@ -19,8 +20,7 @@ export function ProfileEventLink({
         {children}
       </span>
     );
-  const running = ["Running", "Parkrun"].includes(result.sport);
-  if (result.sport === "Athletics" || running)
+  if (sportIsInPublicSiteScope(result.sport))
     return (
       <Link
         to="/races/$slug"

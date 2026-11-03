@@ -1301,7 +1301,8 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
     setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     try {
       if (IS_RUNRECS_SITE) return null;
-      const identity = await readAthleteIdentity(await ready(), data.slug, true);
+      const sql = await ready();
+      const identity = await readAthleteIdentity(sql, data.slug, true);
       if (!identity) return null;
       // Choose the owner-shared path before hydrating a catalogue history that
       // would immediately be discarded. Approval and indexability are live reads.
@@ -1321,7 +1322,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
       }
       const profile = await readAdministratorPublishedAthlete(data.slug, identity);
       if (!profile) return null;
-      const { buildPublicAthletePreview } = await import("./public-athlete-preview");
+      const { buildLinkedPublicAthletePreview } = await import("./public-athlete-edition-links.server");
       const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
       const career = getEditorialAthleteCareer(profile.athlete.slug);
       const { athleteSearchContent } = await import("./athlete-search-content");
@@ -1334,7 +1335,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
         profile.athlete.slug.endsWith("-english-channel")
           ? await (await import("./english-channel.server")).nativeChannel(profile.athlete.slug)
           : undefined;
-      return buildPublicAthletePreview({
+      return await buildLinkedPublicAthletePreview(sql, {
         channelArchive,
         slug: profile.athlete.slug,
         displayName: profile.athlete.display_name,

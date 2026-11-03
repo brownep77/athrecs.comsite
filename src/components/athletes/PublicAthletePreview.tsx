@@ -192,6 +192,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             <CompactResultsTable
               results={[]}
               entries={profile.entries}
+              editionLinks={profile.editionLinks}
               hasHistory
               reportedRecords={profile.reportedRecords}
               personalBestIds={NO_PERSONAL_BESTS}
