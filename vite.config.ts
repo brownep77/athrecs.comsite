@@ -5,6 +5,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
+import { publicFixtureJson } from "./src/lib/athrecs/public-fixture-reference.ts";
 import { WORKER_MAX_DURATION_SECONDS } from "./src/lib/race-collector/timing.ts";
 
 /**
@@ -324,6 +325,17 @@ export default defineConfig(({ command }) => ({
   },
   resolve: { tsconfigPaths: true },
   plugins: [
+    {
+      name: "athrecs:public-fixture-references",
+      enforce: "pre",
+      applyToEnvironment: (environment) => environment.name === "client",
+      transform(code, id) {
+        if (!/\/src\/data\/[^/]*(?:start|fixture|programme)[^/]*\.json(?:\?|$)/.test(id)) return;
+        // Backend jobs and SSR keep the original review JSON. Published fixture assets
+        // carry their clocks and dates without the external results used to verify them.
+        return { code: publicFixtureJson(code), map: null };
+      },
+    },
     runRecsVariantPlugin(),
     athleticsVariantPlugin(),
     pgliteBootstrapPlugin(),

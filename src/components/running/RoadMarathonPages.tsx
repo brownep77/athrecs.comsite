@@ -656,7 +656,10 @@ export function RoadMarathonPage({
                   <dt className="text-sm font-semibold">{item.label}</dt>
                   <dd className="mt-1 text-sm leading-6 text-muted">
                     {item.value}{" "}
-                    <a href={item.sourceUrl || undefined} className="text-accent underline underline-offset-4">
+                    <a
+                      href={item.sourceUrl || undefined}
+                      className="text-accent underline underline-offset-4"
+                    >
                       {item.label} information
                     </a>
                   </dd>
@@ -704,7 +707,6 @@ export function RoadMarathonPage({
                   >
                     {edition.year} {race.name}
                   </h3>
-
                 </div>
                 {edition.date ? (
                   <p className="mt-1 text-xs text-muted">
@@ -718,7 +720,6 @@ export function RoadMarathonPage({
                       <section key={category.category} className="py-3">
                         <h4 className="font-semibold">{category.category}</h4>
                         <p className="mt-1 text-sm leading-6 text-muted">{category.summary}</p>
-
                       </section>
                     ))}
                   </div>

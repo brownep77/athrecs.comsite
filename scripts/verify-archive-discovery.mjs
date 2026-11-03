@@ -1,27 +1,37 @@
 import assert from "node:assert/strict";
 import { load } from "cheerio";
-import { createServer } from "vite";
+import { PGlite } from "@electric-sql/pglite";
 
 // Keep the public route test isolated from live credentials and the large fixture catalogue.
 for (const key of ["DATABASE_URL", "DATABASE_URL_UNPOOLED", "POSTGRES_URL_NON_POOLING", "RESEND_API_KEY"])
   process.env[key] = "";
 process.env.VITE_SITE_BRAND = "athrecs";
-const server = await createServer({ server: { host: "127.0.0.1", port: 18273, strictPort: true, watch: null, hmr: false } });
-let database;
+// Vercel uses Neon in production; supply the installed, asset-complete PGlite
+// runtime here so the same built handler can run its migrations against a disposable database.
+const database = new PGlite({ parsers: { 20: Number, 1082: String, 1186: String } });
 try {
-  await server.listen();
+  await database.waitReady;
+  await database.exec("create table _migrations (name text primary key, applied_at timestamptz not null default now())");
+  globalThis.__pgliteInstance__ = Promise.resolve(database);
   globalThis.__athrecsFullSeedPromise__ = Promise.resolve();
-  const db = await server.ssrLoadModule("/src/lib/db.ts");
-  database = await db.getPglite();
-  const sql = await db.getSql();
-  const [{ id: eventId }] = await sql`insert into events(slug,name,sport,country,city,surface)
-    values ('edition-search-test','Synthetic Archive Half Marathon','Running','United Kingdom','Test City','Road') returning id`;
-  const [{ id: athleteId }] = await sql`insert into athletes(slug,display_name,profile_visibility)
-    values ('edition-search-athlete','Synthetic Runner','public') returning id`;
+  const { default: app } = await import("../.vercel/output/functions/__server.func/index.mjs");
+  const origin = "https://www.athrecs.com";
+  const landing = await app.fetch(new Request(origin + "/search"));
+  assert.equal(landing.status, 200);
+  await landing.text();
+  await globalThis.__pgBootstrapPromise__;
+  // The full catalogue seed normally creates this legacy table.
+  await database.exec(`create table if not exists event_groups (
+    event_id int, group_code text, label text, level text, source_url text, checked_at date, note text
+  )`);
+  const { rows: [{ id: eventId }] } = await database.query(`insert into events(slug,name,sport,country,city,surface)
+    values ('edition-search-test','Synthetic Archive Half Marathon','Running','United Kingdom','Test City','Road') returning id`);
+  const { rows: [{ id: athleteId }] } = await database.query(`insert into athletes(slug,display_name,profile_visibility)
+    values ('edition-search-athlete','Synthetic Runner','public') returning id`);
   const sourceUrl = "https://example.org/results/raw-list";
   const get = async (path) => {
     assert(path);
-    const response = await fetch("http://127.0.0.1:18273" + path, { redirect: "manual", headers: { connection: "close" } });
+    const response = await app.fetch(new Request(origin + path));
     const html = await response.text();
     if (response.status !== 200) {
       const page = load(html);
@@ -32,12 +42,13 @@ try {
     return load(html);
   };
   const addEditions = async (firstYear, lastYear) => {
-    await sql`insert into editions(event_id,event_date,distance_code,distance_km,status,results_official_url)
-      select ${eventId},make_date(y,3,19),'Half',21.1,'Finished',${sourceUrl}
-      from generate_series(${firstYear}::int,${lastYear}::int) as y`;
-    await sql`insert into results(athlete_id,edition_id,status,finish_time_seconds,result_visibility,source_url,result_source)
-      select ${athleteId},ed.id,'finished',5400,'public',${sourceUrl},'Example Timing'
-      from editions ed where ed.event_id=${eventId} and extract(year from ed.event_date) between ${firstYear} and ${lastYear}`;
+    await database.query(`insert into editions(event_id,event_date,distance_code,distance_km,status,results_official_url)
+      select $1,make_date(y,3,19),'Half',21.1,'Finished',$2
+      from generate_series($3::int,$4::int) as y`, [eventId, sourceUrl, firstYear, lastYear]);
+    await database.query(`insert into results(athlete_id,edition_id,status,finish_time_seconds,result_visibility,source_url,result_source)
+      select $1,ed.id,'finished',5400,'public',$2,'Example Timing'
+      from editions ed where ed.event_id=$3 and extract(year from ed.event_date) between $4 and $5`,
+      [athleteId, sourceUrl, eventId, firstYear, lastYear]);
   };
   await addEditions(2005, 2005);
   const single = await get("/races/edition-search-test");
@@ -64,6 +75,5 @@ try {
   assert.match(missing("#search-results").text(), /No published editions/);
   console.log("PASS: 22 native editions are linked in race hub HTML and from results search, with a bounded main search, exact year matches and backend-only evidence URLs.");
 } finally {
-  await server.close();
-  await database?.close();
+  await database.close();
 }

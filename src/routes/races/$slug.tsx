@@ -1,3 +1,4 @@
+import { fixtureReferenceText } from "@/lib/athrecs/public-fixture-reference";
 import { isParkrunResult } from "@/lib/athrecs/parkrun-timing";
 import { RaceResultsBoard } from "@/components/races/RaceResultsBoard";
 import { RaceActions } from "@/components/races/RaceActions";
@@ -392,10 +393,10 @@ export function RacePageContent({
                   key={key}
                   className="w-full rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-950"
                 >
-                  {review.note}{" "}
-                  <a href={review.sourceUrl} className="underline">
-                    Organiser information
-                  </a>{" "}
+                  {fixtureReferenceText(review.note)}{" "}
+                  {fixtureReferenceText(review.sourceUrl) ? (
+                    <a href={review.sourceUrl} className="underline">Organiser information</a>
+                  ) : null}{" "}
                   · Checked {review.checkedAt}
                 </p>
               ))}

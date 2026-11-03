@@ -1,8 +1,5 @@
 import { parsePublicDirectorySearch, type DirectorySearch } from "./directory-search.ts";
-import {
-  ORGANISATION_TYPES,
-  SPORTS_ORGANISATIONS,
-} from "../../data/sports-organisations.ts";
+import { ORGANISATION_TYPES, SPORTS_ORGANISATIONS } from "../../data/sports-organisations.ts";
 import { SPORT_PAGES } from "./sport-pages.ts";
 
 export const DIRECTORY_COUNTRIES = [

@@ -160,11 +160,10 @@ try {
   );
   const results = rows.filter((row) => row.kind === "results");
   assert.equal(results.length, 1, "Only a past approved, verified, non-alias result may appear");
-  assert.equal(
-    results[0].results_url,
-    "https://example.org/verified",
-    "Retain the original provider link",
-  );
+  assert.equal(results[0].results_url, undefined, "Public updates must not export timing links");
+  assert.deepEqual((await db.query("select results_url from edition_result_links where id=2")).rows,
+    [{ results_url: "https://example.org/verified" }], "Staff retain the original result link");
+  assert.match(updatesSource, /resultsUrl: .*?\/races\//);
   assert.equal(results[0].provider_name, "Synthetic Timer");
 } finally {
   await db.close();

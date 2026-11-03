@@ -107,7 +107,9 @@ function RaceCard({ race, index }: { race: SuperHalfsRace; index: number }) {
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-3 border-t border-border pt-4 text-sm">
           <OfficialLink href={race.entryUrl}>Official entry</OfficialLink>
-          <a href={`/results?q=${encodeURIComponent(race.name)}`} className={linkStyle}>Search AthRecs results</a>
+          <a href={`/results?q=${encodeURIComponent(race.name)}`} className={linkStyle}>
+            Search AthRecs results
+          </a>
           <OfficialLink href={race.eliteUrl}>
             {race.id === "cardiff" || race.id === "copenhagen"
               ? "Elite information"

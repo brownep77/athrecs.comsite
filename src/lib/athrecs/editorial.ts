@@ -299,7 +299,8 @@ export function editorialJsonLd(article: EditorialArticle, origin: string) {
         citation: [
           ...new Set(
             article.sections?.flatMap(
-              (section) => section.sources?.flatMap((source) => source.url ? [source.url] : []) ?? [],
+              (section) =>
+                section.sources?.flatMap((source) => (source.url ? [source.url] : [])) ?? [],
             ) ?? [],
           ),
         ],

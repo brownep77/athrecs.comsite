@@ -9,7 +9,6 @@ import {
   editorialLevels,
   editorialLocationOptions,
   editorialPath,
-
   filterEditorialArticles,
   type EditorialKind,
   type EditorialLevel,

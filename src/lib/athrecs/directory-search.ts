@@ -8,7 +8,10 @@ export type DirectorySearch = {
   type?: keyof typeof ORGANISATION_TYPES;
 };
 
-export function parsePublicDirectorySearch(raw: Record<string, unknown>, countries?: string[]): DirectorySearch {
+export function parsePublicDirectorySearch(
+  raw: Record<string, unknown>,
+  countries?: string[],
+): DirectorySearch {
   return {
     q: typeof raw.q === "string" ? raw.q.trim().slice(0, 120) || undefined : undefined,
     country:

@@ -24,7 +24,9 @@ export const Route = createFileRoute("/running/$guide")({
     const halfCountry = halfMarathonCountryFromPath(params.guide);
     const country = halfCountry ?? countryGuideFromPath(params.guide);
     if (!country) throw notFound();
-    const races = await getRoadGuideCountry({ data: { country: country.id, half: Boolean(halfCountry) } });
+    const races = await getRoadGuideCountry({
+      data: { country: country.id, half: Boolean(halfCountry) },
+    });
     return {
       kind: "guide" as const,
       country,

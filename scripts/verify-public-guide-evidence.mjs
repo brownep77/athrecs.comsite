@@ -6,8 +6,11 @@ import path from "node:path";
 
 const cacheDir = await mkdtemp(path.join(tmpdir(), "athrecs-public-guides-"));
 const vite = await createServer({
-  configFile: false, cacheDir, appType: "custom",
-  server: { middlewareMode: true, hmr: false }, optimizeDeps: { noDiscovery: true },
+  configFile: false,
+  cacheDir,
+  appType: "custom",
+  server: { middlewareMode: true, hmr: false },
+  optimizeDeps: { noDiscovery: true },
   resolve: { alias: { "@": path.resolve("src") } },
 });
 try {
@@ -21,17 +24,49 @@ try {
   const credit = story.links.find((link) => link.label.includes("Webscorer"));
   assert.equal(credit.url, "", "Credit the timer by name without exporting its URL");
   assert(story.links.some((link) => link.url.startsWith("/results/")));
-  assert(story.links.some((link) => link.label.includes("race report") && link.url.startsWith("https://")));
+  assert(
+    story.links.some(
+      (link) => link.label.includes("race report") && link.url.startsWith("https://"),
+    ),
+  );
   assert(!JSON.stringify(story).includes("webscorer.com"));
   assert(bure.links.some((link) => link.url.includes("webscorer.com")));
-  const auckland = publicEditorialArticle(EDITORIAL_ARTICLES.find((article) => article.slug.includes("auckland-marathon-2026")));
-  assert(!JSON.stringify([auckland, editorialJsonLd(auckland, "https://www.athrecs.com")]).includes("sportsplits.com"));
+  const auckland = publicEditorialArticle(
+    EDITORIAL_ARTICLES.find((article) => article.slug.includes("auckland-marathon-2026")),
+  );
+  assert(
+    !JSON.stringify([auckland, editorialJsonLd(auckland, "https://www.athrecs.com")]).includes(
+      "sportsplits.com",
+    ),
+  );
   assert.equal(isResultDocument("https://example.org/2026-Final-Results.pdf"), true);
   assert.equal(isResultDocument("https://example.org/account", "2026 league standings"), true);
-  assert.equal(isResultDocument("https://worldathletics.org/competition/calendar-results/calendar"), false);
+  assert.equal(
+    isResultDocument("https://worldathletics.org/competition/calendar-results/calendar"),
+    false,
+  );
   assert.equal(isResultDocument("https://www.niftyentries.com/register"), false);
   assert.equal(isResultDocument("https://example.org/2026-course-map.pdf"), false);
   assert.equal(isResultDocument("/results/native", "Results"), false);
+
+  const { publicFixtureJson } = await load("lib/athrecs/public-fixture-reference.ts");
+  for (const file of [
+    "duplicate-programme-starts-2026-10-26",
+    "fixture-duplicate-reviews-2026-10-26",
+    "imminent-starts-2026-10-25",
+  ]) {
+    const { readFile } = await import("node:fs/promises");
+    const original = await readFile(`src/data/${file}.json`, "utf8");
+    const projected = publicFixtureJson(original);
+    assert(!/raceresults\/669|10323\/results/i.test(projected));
+    if (file.startsWith("imminent")) {
+      assert(projected.includes("https://liveresults.com.au/261024/groups.html"));
+      assert(projected.includes("09:00 ACDT"));
+      assert(!projected.includes("https://liveresults.com.au/261024/;"));
+    } else {
+      assert(/raceresults\/669|10323\/results/i.test(original));
+    }
+  }
 
   const { publicOrganisation } = await load("lib/athrecs/public-directory-api.ts");
   const { SPORTS_ORGANISATIONS } = await load("data/sports-organisations.ts");
@@ -46,23 +81,41 @@ try {
   for (const race of [...ROAD_MARATHONS, ...ROAD_HALF_MARATHONS]) {
     const publicRace = publicRoadRace(race);
     assert.equal(publicRace.resultsUrl, "");
-    assert(publicRace.pastEditions.every((edition) => !edition.resultsUrl && edition.categories.every((category) => !category.sourceUrl)));
+    assert(
+      publicRace.pastEditions.every(
+        (edition) =>
+          !edition.resultsUrl && edition.categories.every((category) => !category.sourceUrl),
+      ),
+    );
     assert(publicRace.sources.every((link) => !isResultDocument(link.url, link.label)));
-    assert.deepEqual(publicRace.pastEditions.map((edition) => edition.summary), race.pastEditions.map((edition) => edition.summary));
+    assert.deepEqual(
+      publicRace.pastEditions.map((edition) => edition.summary),
+      race.pastEditions.map((edition) => edition.summary),
+    );
   }
 
   const { publicChannelProfile } = await load("lib/athrecs/english-channel.ts");
   const evidence = "https://example.test/athlete/1";
   const resultsCard = { title: "Solo", lines: [{ text: "10h", url: evidence }] };
-  const media = { title: "Interview", lines: [{ text: "Watch", url: "https://example.test/watch" }] };
+  const media = {
+    title: "Interview",
+    lines: [{ text: "Watch", url: "https://example.test/watch" }],
+  };
   const swimmer = publicChannelProfile({
-    crossings: [resultsCard], nativeCrossings: [resultsCard], otherEvents: [], nativeOtherEvents: [],
-    sources: [resultsCard], media: [media], milestones: [],
+    crossings: [resultsCard],
+    nativeCrossings: [resultsCard],
+    otherEvents: [],
+    nativeOtherEvents: [],
+    sources: [resultsCard],
+    media: [media],
+    milestones: [],
   });
   assert(!JSON.stringify(swimmer).includes(evidence));
   assert.equal(swimmer.crossings[0].lines[0].text, "10h");
   assert.deepEqual(swimmer.media[0], media);
-  console.log("Public editorial, road guide and swimmer data preserve results and credits without exporting source links.");
+  console.log(
+    "Public editorial, road guide and swimmer data preserve results and credits without exporting source links.",
+  );
 } finally {
   await vite.close();
   await rm(cacheDir, { recursive: true, force: true });

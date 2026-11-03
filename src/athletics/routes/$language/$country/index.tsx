@@ -45,7 +45,10 @@ export const Route = createFileRoute("/$language/$country/")({
 });
 function CountrySportsPage() {
   // Vite replaces the base country route; the generated tree retains its loader type.
-  const { site, inDirectory } = Route.useLoaderData() as unknown as { site: CountrySite; inDirectory: boolean };
+  const { site, inDirectory } = Route.useLoaderData() as unknown as {
+    site: CountrySite;
+    inDirectory: boolean;
+  };
   return (
     <div className="space-y-6 pb-8">
       <nav aria-label="Breadcrumb" className="flex min-h-11 items-center gap-2 text-sm">

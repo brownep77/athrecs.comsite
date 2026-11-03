@@ -9,8 +9,15 @@ export function publicEditorialArticle(article: EditorialArticle): EditorialArti
   return {
     ...article,
     links: article.links?.map(publicLink),
-    callToAction: article.callToAction && !isResultDocument(article.callToAction.url, article.callToAction.label) ? article.callToAction : undefined,
-    sections: article.sections?.map((section) => ({ ...section, sources: section.sources?.map(publicLink) })),
+    callToAction:
+      article.callToAction &&
+      !isResultDocument(article.callToAction.url, article.callToAction.label)
+        ? article.callToAction
+        : undefined,
+    sections: article.sections?.map((section) => ({
+      ...section,
+      sources: section.sources?.map(publicLink),
+    })),
   };
 }
 
@@ -25,11 +32,19 @@ export const getEditorialArticle = createServerFn({ method: "GET" })
 export const getEditorialSummaries = createServerFn({ method: "GET" }).handler(async () => {
   const { EDITORIAL_ARTICLES } = await import("../../data/athrecs-editorial");
   return EDITORIAL_ARTICLES.map((article) => ({
-    slug: article.slug, kind: article.kind, listInRaceReports: article.listInRaceReports,
-    date: article.date, publishedAt: article.publishedAt, displayDate: article.displayDate,
-    title: article.title, standfirst: article.standfirst, sports: article.sports,
-    locations: article.locations, coverageLevels: article.coverageLevels,
-    coverageContinents: article.coverageContinents, minutes: editorialReadingMinutes(article),
+    slug: article.slug,
+    kind: article.kind,
+    listInRaceReports: article.listInRaceReports,
+    date: article.date,
+    publishedAt: article.publishedAt,
+    displayDate: article.displayDate,
+    title: article.title,
+    standfirst: article.standfirst,
+    sports: article.sports,
+    locations: article.locations,
+    coverageLevels: article.coverageLevels,
+    coverageContinents: article.coverageContinents,
+    minutes: editorialReadingMinutes(article),
     body: [] as string[],
   }));
 });

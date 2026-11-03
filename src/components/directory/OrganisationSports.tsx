@@ -3,7 +3,11 @@ import type { SportsOrganisation } from "@/data/sports-organisations";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { sportColourClass } from "@/lib/athrecs/event-colours";
 
-export function OrganisationSports({ body }: { body: Pick<SportsOrganisation, "type" | "sports"> }) {
+export function OrganisationSports({
+  body,
+}: {
+  body: Pick<SportsOrganisation, "type" | "sports">;
+}) {
   if (body.type === "funding")
     return <p className="text-xs text-muted">Cross-sport funding and development</p>;
   return (

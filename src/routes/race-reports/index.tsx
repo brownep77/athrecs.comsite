@@ -6,7 +6,7 @@ import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/race-reports/")({
-  loader: () => IS_RUNRECS_SITE ? [] : getEditorialSummaries(),
+  loader: () => (IS_RUNRECS_SITE ? [] : getEditorialSummaries()),
   validateSearch: parseEditorialSearch,
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();

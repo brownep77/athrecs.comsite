@@ -1,3 +1,4 @@
+import { publicFixtureUrl, fixtureReferenceText } from "./public-fixture-reference";
 import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
 import type { Sql } from "../db";
@@ -213,7 +214,7 @@ export async function readSportFixtures(
           region: row.region,
           state: detail?.place?.state ?? null,
           country: countryName,
-          website: publicHttpUrl(detail?.sourceUrl ?? row.website),
+          website: publicFixtureUrl(publicHttpUrl(detail?.sourceUrl)) ?? publicFixtureUrl(publicHttpUrl(row.website)),
           summary: fixtureSummary(detail?.summary ?? row.summary, row.sport, row.city),
           timeZone,
           starts: starts
@@ -249,7 +250,7 @@ export async function readSportFixtures(
                     ...catalogueCalendarDetails(
                       {
                         slug,
-                        website: publicHttpUrl(row.website),
+                        website: publicFixtureUrl(publicHttpUrl(row.website)),
                         city,
                         county,
                         region: row.region,
@@ -270,9 +271,9 @@ export async function readSportFixtures(
                 time,
                 endDate: start.endDate,
                 endTime: start.endTime,
-                sourceUrl,
+                sourceUrl: publicFixtureUrl(sourceUrl),
                 checkedAt: checked ? detail.checkedAt : null,
-                note: checked?.publicNote ?? checked?.note ?? null,
+                note: fixtureReferenceText(checked?.publicNote ?? checked?.note ?? "") || null,
                 label,
                 calendarRace,
               };
