@@ -2,6 +2,129 @@ import type { EditorialArticle } from "../lib/athrecs/editorial";
 
 export const NOVEMBER_3_NEWS: EditorialArticle[] = [
   {
+    slug: "remembering-ciara-mageean-champion-legacy-2026",
+    kind: "news",
+    date: "2026-11-03",
+    displayDate: "3 November 2026",
+    title: "Remembering Ciara Mageean: the champion who gave Ireland so much to celebrate",
+    standfirst:
+      "From a teenage world medal to European gold in Rome, Ciara Mageean brought Irish athletics moments of joy and gave young runners someone to believe in.",
+    body: [
+      "For a few strides in Rome, the way through appeared closed. Ciara Mageean was behind the leaders as the European 1500m final reached its decisive stretch. Then a gap opened. Mageean committed, accelerated through it and ran towards a finish she had spent years working to reach.",
+      "On 9 June 2024, in 4:04.66, the runner from Portaferry became European champion. It was a sporting moment Ireland could celebrate together: the bronze medallist from Amsterdam and silver medallist from Munich had completed her collection with gold.",
+      "Following confirmation of her death on Sunday 1 November, aged 34, that race is one of many memories being held close by the athletics community. Our thoughts are with Ciara’s family, friends, teammates, coaches and everyone grieving her loss.",
+    ],
+    sports: ["track-and-field"],
+    locations: [
+      {
+        country: "Ireland",
+      },
+      {
+        country: "Northern Ireland",
+        area: "Northern Ireland",
+        county: "County Down",
+      },
+    ],
+    coverageLevels: ["national", "local"],
+    athleteNames: ["Ciara Mageean"],
+    athleteLinks: {},
+    seoTitle: "Remembering Ciara Mageean: European Champion and Irish Athletics Legacy | AthRecs",
+    description:
+      "Celebrating Ciara Mageean’s European 1500m gold, championship medals, Irish records and inspiration to young athletes, with sympathy for her family and friends.",
+    author: "AthRecs Editorial",
+    sections: [
+      {
+        id: "career-over-many-seasons",
+        heading: "A career built over many seasons",
+        paragraphs: [
+          "Rome’s gold came long after Mageean’s talent first reached an international podium. At 17, she won 800m silver at the 2009 World Youth Championships. A year later she took 1500m silver at the World Junior Championships in Moncton, improving her Irish junior record to 4:09.51. European junior silver followed in 2011.",
+          "Her senior career brought European outdoor bronze in 2016 and silver in 2022, European indoor bronze in 2019 and Commonwealth silver for Northern Ireland in 2022. She raced for Ireland at the Rio and Tokyo Olympics. Selected again for Paris, she had to withdraw before competing because of an Achilles injury.",
+          "Those achievements belong to different stages of a long international career. The athlete who reached a world junior podium was still finding new levels more than a decade later.",
+        ],
+        sources: [
+          {
+            label: "Athletics Ireland — European gold in Rome, 9 June 2024",
+            url: "https://www.athleticsireland.ie/rome-2024-day-3-evening-session/",
+          },
+          {
+            label: "Olympic Federation of Ireland — athlete biography",
+            url: "https://olympics.ie/athletes/ciara-mageean/",
+          },
+          {
+            label: "World Athletics — 2009 World Youth 800m final",
+            url: "https://worldathletics.org/results/iaaf-world-u18-championships/2009/6th-iaaf-world-youth-championships-6998523/women/800-metres/final/result",
+          },
+          {
+            label: "World Athletics — 2010 World Junior results",
+            url: "https://worldathletics.org/competition/calendar-results/results/7003365?eventId=10229513",
+          },
+          {
+            label: "Sport Ireland — 2011 European Junior silver",
+            url: "https://www.sportireland.ie/news/excellent-silver-for-irelands-ciara-mageean-over-1500m-at-european-junior",
+          },
+        ],
+      },
+      {
+        id: "records-and-medals",
+        heading: "The records behind the medals",
+        paragraphs: [
+          "In Brussels in September 2022, Mageean broke four minutes for 1500m for the first time. Her winning 3:56.63 took more than two seconds from the longstanding Irish record. It was a breakthrough in both time and competition: a Diamond League victory against some of the world’s best.",
+          "The next year brought fourth place at the World Championships in Budapest in 3:56.61. Within weeks she improved again, running 3:55.87 in Brussels. Her mile best of 4:14.58 in Monaco, 1000m best of 2:31.06 and 800m best of 1:58.51 added further Irish records to a remarkable body of work.",
+          "She had already become the first Irish woman to run under two minutes for 800m in July 2020. Less than three weeks later, she set the national 1000m record in Monaco. These were achievements across several distances, reflecting the speed and endurance she brought to middle-distance racing.",
+        ],
+        sources: [
+          {
+            label: "Athletics Ireland — Brussels Diamond League victory, 2022",
+            url: "https://www.athleticsireland.ie/mageean-masterclass-claims-national-1500m-record/",
+          },
+          {
+            label: "Athletics Ireland — fourth at the 2023 World Championships",
+            url: "https://www.athleticsireland.ie/day-4-evening-session-magnificent-mageean-4th-in-the-world/",
+          },
+          {
+            label: "Athletics Ireland — Irish 1500m record, September 2023",
+            url: "https://www.athleticsireland.ie/ciara-mageean-breaks-national-1500m-record/",
+          },
+          {
+            label: "World Athletics — personal bests",
+            url: "https://worldathletics.org/athletes/_/14275665",
+          },
+          {
+            label: "Athletics Ireland — first sub-two-minute Irish 800m",
+            url: "https://www.athleticsireland.ie/mageean-sets-new-irish-800m-record/",
+          },
+        ],
+      },
+      {
+        id: "next-generation",
+        heading: "A track shared with the next generation",
+        paragraphs: [
+          "There is another scene to remember alongside the finish lines. On 26 July this year, more than 400 young athletes joined Mageean at Morton Stadium for Run with Ciara during the national championships.",
+          "They arrived wearing the colours of clubs across Ireland. For those children, the European champion was someone they had shared a track with.",
+          "Her results will remain part of athletics history. So will the opportunities those performances created for others to imagine their own place in the sport. Today we celebrate what Ciara achieved and remember her with gratitude, while respecting the space and privacy of those closest to her.",
+        ],
+        sources: [
+          {
+            label: "Athletics Ireland — Run with Ciara at the 2026 national championships",
+            url: "https://www.athleticsireland.ie/championship-records-fall-as-athletics-community-celebrate-ciara-mageean-at-national-2026/",
+          },
+          {
+            label: "Athletics Ireland — statement of sympathy, 1 November 2026",
+            url: "https://www.athleticsireland.ie/athletics-ireland-deeply-saddened-by-the-passing-of-ciara-mageean/",
+          },
+        ],
+      },
+    ],
+    hashtags: ["#CiaraMageean", "#IrishAthletics", "#Portaferry"],
+    publishedAt: "2026-11-03",
+    links: [
+      {
+        label: "Ciara Mageean’s athlete profile",
+        url: "/athletes/source-ciara-mageean-po10-a16d519e73d2",
+      },
+    ],
+  },
+  {
     slug: "sydney-marathon-2027-ballot-results-day",
     kind: "news",
     date: "2026-11-03",
@@ -397,7 +520,7 @@ export const NOVEMBER_3_NEWS: EditorialArticle[] = [
         id: "results",
         heading: "Hamburg Elite 15 podiums",
         paragraphs: [
-          "Finishing times follow BOXROX’s coverage from Hamburg, corroborated by The Barbell Spin.",
+          "The finishing times here follow BOXROX’s coverage from the event, corroborated by The Barbell Spin. They are reported results; this article does not establish independently verified AthRecs profile performances.",
         ],
         table: {
           caption: "Elite 15 singles · 30 October 2026 · Times reported by BOXROX",
