@@ -95,6 +95,7 @@ export type EditorialArticle = {
   seoTitle?: string;
   description?: string;
   author?: string;
+  hashtags?: string[];
   publishedAt?: string;
   modifiedAt?: string;
   image?: { src: string; alt: string; caption: string; width: number; height: number };
@@ -281,6 +282,7 @@ export function editorialJsonLd(article: EditorialArticle, origin: string) {
         datePublished: article.publishedAt ?? article.date,
         dateModified: article.modifiedAt ?? article.publishedAt ?? article.date,
         inLanguage: "en-GB",
+        ...(article.hashtags?.length ? { keywords: article.hashtags.join(", ") } : {}),
         wordCount: editorialWordCount(article),
         timeRequired: `PT${editorialReadingMinutes(article)}M`,
         ...(athleteSlugs.length
