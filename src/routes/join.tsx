@@ -52,7 +52,7 @@ export const Route = createFileRoute("/join")({
     meta: siteGraphMeta({
       title: "Join ATHRECS | Every athlete has a story",
       description:
-        "Create your account, claim your athlete profile and preserve your results and achievements. You choose what to share.",
+        "Create a private athlete account, find your sporting records and request ownership of your profile. Learn how account sharing and public results differ.",
       url: `${SITE_URL}/join`,
     }),
     links: [{ rel: "canonical", href: `${SITE_URL}/join` }],
@@ -151,8 +151,9 @@ function JoinPage() {
                 One email. Your sporting story.
               </h2>
               <p className="mt-3 text-sm leading-6 text-muted">
-                Add your name, country and location, then verify your email with a six-digit code to
-                create your account. No password needed.
+                Add your name, country and town, city or postal code, then verify your email with a
+                six-digit code to create your account. No password needed. Profile ownership is
+                checked separately.
               </p>
               <Button
                 className="mt-5 w-full sm:w-auto"
@@ -187,9 +188,17 @@ function JoinPage() {
             </li>
             <li className="flex gap-3">
               <LockKeyhole className="size-5 shrink-0 text-accent" aria-hidden="true" />
-              <span>Private by default. You choose what to share.</span>
+              <span>Your account details start private. You control account sharing.</span>
             </li>
           </ul>
+          <p className="mt-4 text-xs leading-5 text-muted">
+            Reviewed race results and approved sporting profiles can already be public, including
+            before an athlete joins. These records are separate from your private account.{" "}
+            <Link to="/privacy" hash="public-records" className="text-accent underline">
+              Read how privacy works
+            </Link>
+            .
+          </p>
           <p className="mt-5 border-t border-border pt-4 text-xs leading-5 text-muted">
             For every level, from first-timers to lifelong athletes. Add current and previous clubs
             and optional profile links to help find your results as you join.
@@ -364,7 +373,7 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
         </label>
         <p className="text-xs leading-5 text-muted">
           These links stay private. We’ll notify our team to check your profile and look for more
-          results. You can claim suggested results immediately while we check.
+          results. You can review suggested results and submit an ownership claim while we search.
         </p>
       </fieldset>
       <label className="flex items-start gap-3 text-sm leading-6">
@@ -381,7 +390,7 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
           <Link to="/privacy" target="_blank" className="text-accent underline">
             privacy notice
           </Link>{" "}
-          and understand my profile starts private.
+          and understand that my private account is separate from public sporting records.
         </span>
       </label>
       {error ? (
@@ -402,7 +411,7 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
         Create my private profile
       </Button>
       <p className="text-xs text-muted">
-        This does not sign you up for marketing emails or make your profile public.
+        This does not sign you up for marketing emails or publish your private account details.
       </p>
     </form>
   );
@@ -410,6 +419,9 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
 
 function ProfileReady({ account }: { account: AthleteAccountData }) {
   const queryClient = useQueryClient();
+  const ownershipReviewRequired = account.claimedProfiles.some(
+    (profile) => profile.managementReviewed === false,
+  );
   if (!account.claimedProfiles.length)
     return (
       <div className="space-y-5">
@@ -429,9 +441,20 @@ function ProfileReady({ account }: { account: AthleteAccountData }) {
     <div>
       <CheckCircle2 className="size-8 text-accent" aria-hidden="true" />
       <h2 className="mt-3 font-display text-2xl font-semibold">Your profile is linked</h2>
+      {ownershipReviewRequired ? (
+        <p className="mt-3 rounded-xl border border-amber-400 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+          <strong>Ownership review required.</strong> You can access your existing private records.
+          Staff must check ownership before you manage public profile details or share those linked
+          records.{" "}
+          <Link to="/privacy" hash="ownership-review" className="underline">
+            How to request review
+          </Link>
+          .
+        </p>
+      ) : null}
       <p className="mt-3 text-sm leading-6 text-muted">
-        Review your results, add anything missing and keep your achievements together. You choose
-        what to share.
+        Review your results, add anything missing and keep your achievements together. Your account
+        sharing choices are separate from the public sporting record.
       </p>
       <div className="mt-5 flex flex-wrap gap-3">
         <Button asChild>

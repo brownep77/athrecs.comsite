@@ -5,13 +5,27 @@ import { buildRaceWinAchievements } from "../src/lib/athrecs/race-win-achievemen
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
+import {
+  approveSyntheticClaim,
+  createAthleteRpc,
+  createSyntheticStaffSession,
+  createSyntheticVerifiedSession,
+} from "./fixtures/ownership-review.mjs";
 process.env.DATABASE_URL = "";
+process.env.DATABASE_URL_UNPOOLED = "";
+process.env.POSTGRES_URL = "";
+process.env.POSTGRES_URL_NON_POOLING = "";
 process.env.RESEND_API_KEY = "";
-process.env.VITE_AUTH_ENABLED = "false";
+process.env.VITE_AUTH_ENABLED = "true";
+process.env.VITE_SITE_BRAND = "athrecs";
+process.env.ATHRECS_STAFF_EMAILS = "unified-reviewer@example.test";
 const origin = "http://127.0.0.1:18189";
+process.env.BETTER_AUTH_URL = origin;
+process.env.BETTER_AUTH_SECRET = "unified-profile-test-only-secret-at-least-32-chars";
 process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
 const server = await createServer({ server: { host: "127.0.0.1", port: 18189, strictPort: true } });
 let database;
+let athleteToken;
 const cache = new Map();
 async function rpc(file, name, data, headers) {
   if (!cache.has(file)) {
@@ -32,7 +46,12 @@ async function rpc(file, name, data, headers) {
     createClientRpc(id)({
       method,
       data,
-      headers: { origin, "sec-fetch-site": "same-origin", ...headers },
+      headers: {
+        origin,
+        "sec-fetch-site": "same-origin",
+        authorization: `Bearer ${athleteToken}`,
+        ...headers,
+      },
       context: {},
     }),
   );
@@ -47,6 +66,20 @@ try {
   const { applyResultsImport } = await server.ssrLoadModule(
     "/src/lib/athrecs/results-import.server.ts",
   );
+  const athleteSession = await createSyntheticVerifiedSession(
+    origin,
+    sql,
+    "unified-athlete@example.test",
+    "Synthetic Development Runner",
+  );
+  athleteToken = athleteSession.token;
+  const athleteUserId = athleteSession.user.id;
+  const reviewer = await createSyntheticStaffSession(origin, sql, "unified-reviewer@example.test");
+  const reviewRpc = createAthleteRpc(origin, reviewer.token);
+  await rpc("athlete-account-api", "saveMyAthleteRacingName", {
+    fullName: "Synthetic Development Runner",
+    privacyAcknowledged: true,
+  });
   const account = await rpc("athlete-account-api", "getMyAthleteAccount");
   assert.match(account.athleteProfileId, /^[a-f0-9-]{36}$/);
   assert.match(account.athleteNumber, /^[1-9]\d*$/);
@@ -128,7 +161,13 @@ try {
     buildRaceWinAchievements([publicResult]).map((w) => w.kind),
     ["gender", "category"],
   );
-  const renderedProfile = await fetch(`${origin}/athletes/${knownSlug}`);
+  const renderedProfile = await fetch(`${origin}/athletes/${knownSlug}`, {
+    headers: {
+      origin,
+      "sec-fetch-site": "same-origin",
+      authorization: `Bearer ${athleteToken}`,
+    },
+  });
   assert.equal(renderedProfile.status, 200);
   const html = await renderedProfile.text();
   assert.equal((html.match(/data-competition-honour=/g) ?? []).length, 2);
@@ -197,7 +236,7 @@ try {
     concurrent.reduce((count, report) => count + report.skipped, 0),
     1,
   );
-  await sql`update athlete_private_profiles set full_name='Synthetic Development Runner', date_of_birth='1982-01-01',nationality='Irish',world_athletics_url='https://worldathletics.org/athletes/test/fixture-76543210' where user_id='dev-user'`;
+  await sql`update athlete_private_profiles set full_name='Synthetic Development Runner', date_of_birth='1982-01-01',nationality='Irish',world_athletics_url='https://worldathletics.org/athletes/test/fixture-76543210' where user_id=${athleteUserId}`;
   let matches = await rpc("result-match-api", "listMyPotentialResultMatches");
   assert(
     matches.matches.some((match) => match.athleteId === known),
@@ -243,16 +282,33 @@ try {
     resultId: knownResult,
     declarationAccepted: true,
   });
-  assert.equal(claim.status, "approved");
+  assert.equal(claim.status, "pending", "Matching identity clues cannot approve new ownership");
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=${known}`).length,
+    0,
+    "A pending declaration does not create an ownership link",
+  );
+  assert.equal(
+    (await sql`select athlete_management_reviewed(${known},${athleteUserId}) as reviewed`)[0]
+      .reviewed,
+    false,
+  );
+  const [pendingAudit] =
+    await sql`select confirmation_method,reviewed_at from result_claims where id=${claim.claimId}`;
+  assert.equal(pendingAudit.confirmation_method, "unrecorded");
+  assert.equal(pendingAudit.reviewed_at, null);
+  await approveSyntheticClaim(reviewRpc, claim.claimId, reviewer.user.id, sql);
   assert.equal(
     (await sql`select * from athlete_account_links where athlete_id=${known}`).length,
     1,
   );
   const [claimAudit] =
     await sql`select confirmation_method, reviewed_at from result_claims where id=${claim.claimId}`;
-  assert.equal(claimAudit.confirmation_method, "athlete");
-  assert.equal(claimAudit.reviewed_at, null);
-  console.log("Imports, source matching, dismissals and real self-confirmed ownership passed.");
+  assert.equal(claimAudit.confirmation_method, "staff");
+  assert(claimAudit.reviewed_at);
+  console.log(
+    "Imports, source matching, dismissals, pending claims and independent staff approval passed.",
+  );
   const after = await rpc("athlete-account-api", "getMyAthleteAccount");
   assert.equal(after.athleteProfileId, account.athleteProfileId);
   assert.equal(after.athleteNumber, account.athleteNumber);
@@ -356,16 +412,24 @@ try {
   const alias = (
     await sql`insert into athletes(slug,display_name,profile_visibility) values('fixture-confirmed-alias','Fixture Previous Name','private') returning id`
   )[0].id;
-  await sql`insert into athlete_account_links(athlete_id,user_id,user_email) values(${alias},'dev-user','fixture@example.test')`;
+  await sql`update athletes set gender='F' where id=${alias}`;
+  const [aliasResult] =
+    await sql`insert into results(edition_id,athlete_id,status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,gender_place,category_place,category,source_url)
+    select edition_id,${alias},status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,gender_place,category_place,category,'https://extra-source.example/race/1' from results where id=${knownResult} returning id`;
+  // A saved previous name makes this fixture a candidate; it cannot grant ownership.
+  await sql`update athlete_private_profiles set previous_names=array['Fixture Previous Name'] where user_id=${athleteUserId}`;
+  const aliasClaim = await rpc("result-claims-api", "submitResultClaim", {
+    resultId: aliasResult.id,
+    declarationAccepted: true,
+  });
+  assert.equal(aliasClaim.status, "pending");
+  await approveSyntheticClaim(reviewRpc, aliasClaim.claimId, reviewer.user.id, sql);
   assert.equal(
     (await sql`select athlete_number::text from athlete_resolved_ids where athlete_id=${alias}`)[0]
       .athlete_number,
     account.athleteNumber,
     "Every confirmed source identity resolves to the same account ID",
   );
-  await sql`update athletes set gender='F' where id=${alias}`;
-  await sql`insert into results(edition_id,athlete_id,status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,gender_place,category_place,category,source_url)
-    select edition_id,${alias},status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,gender_place,category_place,category,'https://extra-source.example/race/1' from results where id=${knownResult}`;
   published = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
     slug: share.slug,
   });
@@ -374,7 +438,7 @@ try {
   );
   assert.equal(combined.length, 1);
   assert.equal(combined[0].sourceResultIds.length, 2);
-  await sql`insert into athlete_profile_hidden_results(user_id,result_id) values('dev-user',${knownResult})`;
+  await sql`insert into athlete_profile_hidden_results(user_id,result_id) values(${athleteUserId},${knownResult})`;
   published = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
     slug: share.slug,
   });

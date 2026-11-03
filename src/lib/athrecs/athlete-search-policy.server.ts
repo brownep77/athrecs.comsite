@@ -24,7 +24,7 @@ export const approvedPublicAthleteSql = `a.profile_visibility = 'public'
       and approval.after_value->>'profile_visibility' = 'public'
       and not exists (select 1 from athlete_account_links l where l.athlete_id = a.id)
   ) or exists (
-    select 1 from athlete_account_links l
+    select 1 from athlete_reviewed_account_links l
     join athlete_public_shares s on s.user_id = l.user_id
     where l.athlete_id = a.id and l.status = 'active'
       and s.enabled = true and s.share_results = true
@@ -73,7 +73,7 @@ export const indexableApprovedAthleteSetSql = `a.profile_visibility = 'public'
       and approval.after_value->>'profile_visibility' = 'public'
       and not exists (select 1 from athlete_account_links l where l.athlete_id::text = approval.entity_id)
     union all
-    select l.athlete_id::text from athlete_account_links l
+    select l.athlete_id::text from athlete_reviewed_account_links l
     join athlete_public_shares s on s.user_id = l.user_id
     where l.status = 'active' and s.enabled = true and s.share_results = true
   )

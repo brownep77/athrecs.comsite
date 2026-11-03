@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'src/lib/athlete-workspace/**'
+      - 'src/lib/athrecs/athlete-management.server.ts'
       - 'src/components/athletes/AthleteWorkspace.tsx'
       - 'src/routes/admin/athlete-workspace.tsx'
       - 'src/routes/athlete-results.tsx'
@@ -10,7 +11,9 @@ on:
       - 'src/lib/athrecs/profile-records.ts'
       - 'src/lib/athrecs/result-details.ts'
       - 'migrations/20260926_athlete_result_workspace.sql'
+      - 'migrations/*reviewed_athlete_management.sql'
       - 'scripts/verify-athlete-workspace*.mjs'
+      - 'scripts/fixtures/reviewed-link.mjs'
       - '.github/workflows/athlete-workspace.yml'
   workflow_dispatch:
 permissions:

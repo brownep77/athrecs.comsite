@@ -25,13 +25,15 @@ function memberEntry(row: CandidateResult): CandidateResult {
   return {index:row.index,race:row.race,date:row.date,distance:row.distance,time:row.time,timingBasis:row.timingBasis,sourceUrl:row.sourceUrl,bib:row.bib,place:row.place,state:row.state,response:row.response,responseAt:row.responseAt,responseNote:row.responseNote,resultId:row.resultId};
 }
 async function owners(sql: Sql, athleteId: number) {
-  return sql<{ user_id: string; email: string }>`select l.user_id,u.email from athlete_account_links l join "user" u on u.id=l.user_id where l.athlete_id=${athleteId} and l.status='active'`;
+  return sql<{ user_id: string; email: string; reviewed: boolean }>`select l.user_id,u.email,
+    athlete_management_reviewed(l.athlete_id,l.user_id) as reviewed
+    from athlete_account_links l join "user" u on u.id=l.user_id where l.athlete_id=${athleteId} and l.status='active'`;
 }
 async function mayEdit(sql: Sql, actor: Actor, athleteId: number) {
   const links = await owners(sql, athleteId);
-  if (links.some(l => l.user_id === actor.userId)) return;
+  if (links.some(l => l.user_id === actor.userId && l.reviewed)) return;
   if (actor.staff && !links.length) return;
-  throw new Error("This is an account-managed profile. Its owner must make or approve this change; ownership is not changed by a review link.");
+  throw new Error("Staff must independently review ownership before this account can change the athlete profile or its stored results. Existing account data is retained; a result-review link does not grant ownership.");
 }
 async function profile(sql: Sql, athleteId: number, lock = false) {
   const rows = await sql.query<ProfileFields & { id: number; slug: string; profile_visibility: string }>(`
@@ -78,7 +80,7 @@ export async function workspace(athleteId: number | null, actor: Actor) {
   const batches=await sql<{id:string;athlete_id:number|null;revision:number;updated_at:string;entries:CandidateResult[]}>`
     select id::text,athlete_id,revision,updated_at::text,entries from athlete_result_proposals
     where (${actor.staff} or submitted_by=${actor.userId}) and (${athleteId}::integer is null or athlete_id=${athleteId}) order by updated_at desc limit 100`;
-  return {profile:p,profileVersion:p?hash(p):null,editable:Boolean(p && (links.some(l=>l.user_id===actor.userId)||(actor.staff&&!links.length))),linked,results,batches:actor.staff?batches:batches.map(b=>({...b,entries:b.entries.map(memberEntry)})),email:account.email};
+  return {profile:p,profileVersion:p?hash(p):null,editable:Boolean(p && (links.some(l=>l.user_id===actor.userId&&l.reviewed)||(actor.staff&&!links.length))),linked,results,batches:actor.staff?batches:batches.map(b=>({...b,entries:b.entries.map(memberEntry)})),email:account.email};
 }
 export async function editProfile(data: {athleteId:number;version:string;fields:ProfileFields;reason:string}, actor:Actor) {
   const sql=await ready();await user(sql,actor);

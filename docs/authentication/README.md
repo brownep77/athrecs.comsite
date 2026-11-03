@@ -4,21 +4,21 @@ ATHRECS supports a provider-aware public sign-up chooser while keeping the priva
 
 ## Public account methods
 
-| Method                             | Purpose                                                             | Required configuration                                                          |
-| ---------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Email and password                 | Universal manual account creation and sign-in                       | Enabled by the application feature flag                                         |
-| Email code                         | Passwordless sign-in or registration using a six-digit code         | `RESEND_API_KEY`; verified sender domain                                        |
-| Verification and password recovery | Verified manual email, verification resend and one-hour reset links | `RESEND_API_KEY`, `AUTH_EMAIL_FROM`                                             |
-| Google                             | Primary fast sign-up                                                | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`                                      |
-| Apple                              | Privacy-friendly identity sign-up                                   | Apple Service ID, Team ID, Key ID and `.p8` private key                         |
-| Microsoft                          | Personal, work and school accounts                                  | Microsoft Entra client ID and secret plus ATHRECS email delivery                |
-| Facebook                           | Mainstream social login                                             | Meta app client ID and secret plus ATHRECS email delivery                       |
-| LinkedIn                           | Professional identity                                               | LinkedIn OpenID Connect client ID and secret plus ATHRECS email delivery        |
-| X                                  | Optional later social login                                         | X OAuth 2.0 client ID and secret with `user.email`, plus ATHRECS email delivery |
+| Method                             | Purpose                                                             | Required configuration                                                             |
+| ---------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Email and password                 | Universal manual account creation and sign-in                       | Enabled by the application feature flag; production requires email delivery        |
+| Email code                         | Passwordless sign-in or registration using a six-digit code         | `RESEND_API_KEY`; verified sender domain                                           |
+| Verification and password recovery | Verified manual email, verification resend and one-hour reset links | `RESEND_API_KEY`; verified sender domain, with optional `AUTH_EMAIL_FROM` override |
+| Google                             | Primary fast sign-up                                                | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`                                         |
+| Apple                              | Privacy-friendly identity sign-up                                   | Apple Service ID, Team ID, Key ID and `.p8` private key                            |
+| Microsoft                          | Personal, work and school accounts                                  | Microsoft Entra client ID and secret plus ATHRECS email delivery                   |
+| Facebook                           | Mainstream social login                                             | Meta app client ID and secret plus ATHRECS email delivery                          |
+| LinkedIn                           | Professional identity                                               | LinkedIn OpenID Connect client ID and secret plus ATHRECS email delivery           |
+| X                                  | Optional later social login                                         | X OAuth 2.0 client ID and secret with `user.email`, plus ATHRECS email delivery    |
 
 GitHub and Discord are deliberately excluded from this public rollout. Their audiences and identity signals are less closely aligned with mainstream athlete registration, and each would add another OAuth application, secret and account-linking path to maintain.
 
-Email/password account creation and sign-in remain rendered when transactional email is unavailable. In that limited mode, new manual accounts can sign in immediately, but verification-email resend and password recovery are hidden. The interface tells visitors to keep their password safe. Unverified local accounts cannot save an athlete profile or be automatically linked to another identity provider. The account screen shows the actual email-verification state and offers verification when delivery is available.
+In isolated development and preview environments, email/password account creation and sign-in remain rendered when transactional email is unavailable. In that limited mode, new manual accounts can sign in immediately, but verification-email resend and password recovery are hidden. The interface explains the limitation. Unverified local accounts cannot save an athlete profile or be automatically linked to another identity provider. Production builds and runtime authentication refuse this configuration: email verification and recovery must be configured before production email/password authentication can start.
 
 Providers whose email may be absent or unverified remain held back until ATHRECS email delivery is configured, so visitors are not offered a provider path that cannot be recovered safely.
 
@@ -26,9 +26,17 @@ Providers whose email may be absent or unverified remain held back until ATHRECS
 
 Passwords are handled by Better Auth and never stored in Athlete Account tables. New and reset passwords require at least 10 characters; sign-in also accepts valid older credentials.
 
-When Resend delivery is configured, manual accounts require email verification before sign-in. Password reset links expire after one hour, and a successful reset revokes existing sessions.
+When Resend delivery is configured, manual accounts require email verification before sign-in. Password reset links expire after one hour, and a successful reset revokes existing sessions. Authentication checks read the server-side session record rather than accepting a cached cookie snapshot. Saved cookies cannot continue accessing private account records, photos or certificates after sign-out or password reset.
 
-When Resend delivery is not configured, manual accounts can sign in without email verification. Profile saving, result claims and automatic account linking still require a verified local email. Email verification establishes mailbox control, not athlete identity: the existing first-uncontested-claim rule remains a separate ownership policy. Password recovery is unavailable in this mode.
+When Resend delivery is not configured in local development or isolated previews, manual accounts can sign in without email verification. Profile saving, result claims and automatic account linking still require a verified local email. Email verification establishes mailbox control; athlete ownership remains a separate review decision. Password recovery is unavailable in this local/preview mode.
+
+If a provider rejects a sign-in-code email or delivery cannot be confirmed, the sign-in-code endpoint returns a generic HTTP 503 response and the form offers a retry. The undelivered code is invalidated without deleting a newer code from a concurrent successful send. New and existing email addresses receive the same failure response. Other recovery endpoints retain their neutral account-existence responses.
+
+## Production configuration and regression checks
+
+The shared `src/lib/auth/production-config.ts` validator runs before production build migrations and when the authentication server starts. With `VERCEL_ENV=production`, it requires enabled authentication, a `BETTER_AUTH_SECRET` of at least 32 characters, a public HTTPS `BETTER_AUTH_URL` origin, a non-local PostgreSQL `DATABASE_URL`, and `RESEND_API_KEY` when email/password authentication is enabled. The default verified-domain sender can be used without an `AUTH_EMAIL_FROM` override. Configuration errors name the setting without printing its value. Production never silently falls back to a generated preview secret, embedded database or email authentication without delivery.
+
+Run `node scripts/verify-production-auth-config.mjs` for invalid configuration and secret-output checks. Run `node scripts/verify-signup-security.mjs` for two-account privacy isolation, saved-cookie revocation after sign-out and password reset, private photo/certificate access, and failed email delivery with recovery. This integration test uses disposable local storage and intercepted synthetic emails; it cannot establish actual inbox delivery or a production provider handshake.
 
 The sender domain in `AUTH_EMAIL_FROM` must be verified by Resend. Use a dedicated address such as `accounts@athrecs.com`.
 
@@ -78,9 +86,9 @@ Strava, Garmin Connect, COROS, Instagram and TikTok should be connected _after_ 
 
 ## Activation order
 
-1. Keep email/password account creation and sign-in available.
+1. Configure production authentication, database and email delivery, then enable email/password registration.
 2. Keep Google active and verify its public callbacks.
-3. Configure Resend to add email verification and password recovery.
+3. Verify that Resend accepts the sender and that verification and recovery messages arrive.
 4. Add Apple and Microsoft.
 5. Add Facebook and LinkedIn.
 6. Consider X only if athlete demand justifies the extra provider.

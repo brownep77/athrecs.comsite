@@ -115,7 +115,9 @@ function ProfileResultConfirmationBody({
         <CheckCircle2 className="size-8" aria-hidden="true" />
         <h2 className="text-2xl font-semibold">
           {submit.data.status === "approved"
-            ? "Claim complete"
+            ? submit.data.managementReviewed
+              ? "Claim complete"
+              : "Ownership review required"
             : "Profile and results confirmation saved"}
         </h2>
         <p>
@@ -125,7 +127,9 @@ function ProfileResultConfirmationBody({
         </p>
         <p>
           {submit.data.status === "approved"
-            ? "Your profile is linked to your account. Your confirmation is separate from independent result verification and photo or ID checks."
+            ? submit.data.managementReviewed
+              ? "Your profile is linked with recorded staff ownership review. Your confirmation is separate from independent result verification and photo or ID checks."
+              : "Your existing private link and results are retained. Staff must review ownership before you can manage or share this athlete profile."
             : "Your profile claim is awaiting an ownership check. You do not need to claim each result separately."}{" "}
           You’ll receive one summary email for this confirmation.
         </p>
@@ -135,7 +139,7 @@ function ProfileResultConfirmationBody({
             and PBs follow the existing result checks. Your own biography stays unchanged.
           </p>
         ) : null}
-        {submit.data.status === "approved" && <OwnerRaceReview />}
+        {submit.data.managementReviewed && <OwnerRaceReview />}
         <div className="flex flex-wrap gap-3">
           <Button asChild>
             <Link to="/my-athlete-profile">View my private profile</Link>
@@ -165,13 +169,15 @@ function ProfileResultConfirmationBody({
         <p className="mt-2 text-sm text-muted">
           Registration creates your account. You must also claim your athlete profile to manage its
           results. Review the list, remove anything that is not yours and add any missing results
-          before confirming. Straightforward, uncontested matches link immediately without waiting
-          for staff approval. We notify the team afterwards. Staff check conflicts, discrepancies,
-          protected profiles and child or guardian claims.
+          before confirming. A new claim remains pending until staff independently check ownership.
+          Email verification proves mailbox access, not athlete identity. Existing reviewed owners
+          can confirm additional results without another ownership review.
         </p>
         {claim?.status === "approved" ? (
           <p role="status" className="mt-2 font-semibold text-emerald-800">
-            Claim complete — your profile is linked. You can review your result selection below.
+            {claim.managementReviewed
+              ? "Claim complete — ownership reviewed. You can review your result selection below."
+              : "Your existing private link is retained; ownership review is required before management or sharing."}
           </p>
         ) : null}
         {review.lastConfirmedAt ? (
@@ -182,8 +188,8 @@ function ProfileResultConfirmationBody({
         ) : null}
         {claim?.status === "pending" ? (
           <p className="mt-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-950">
-            Your earlier claim is saved. Confirm the reviewed selection below to complete an
-            eligible claim. Claims with a review flag stay with staff.
+            Your earlier claim is saved for independent staff ownership review. You can update your
+            selected results without submitting a separate claim for every race.
           </p>
         ) : null}
         {claim?.staffNote ? (
@@ -195,7 +201,7 @@ function ProfileResultConfirmationBody({
           <p className="mt-2 text-sm text-amber-800">{claim.conflictReason}</p>
         ) : null}
       </div>
-      {claim?.status === "approved" && <OwnerRaceReview />}
+      {claim?.managementReviewed && <OwnerRaceReview />}
       <fieldset disabled={submit.isPending} className="space-y-5">
         <legend className="sr-only">Choose the results that belong to you</legend>
         {onDecline ? (
@@ -233,9 +239,8 @@ function ProfileResultConfirmationBody({
           </Button>
           {adding ? (
             <p className="mt-2 text-sm">
-              Add or cancel the open result before confirming. Straightforward, uncontested matches
-              link immediately; staff check conflicts, discrepancies, protected profiles and child
-              or guardian claims.
+              Add or cancel the open result before confirming. New ownership claims stay pending for
+              independent staff review; your result choices are saved privately.
             </p>
           ) : null}
           {!included.size && !additions.length ? (

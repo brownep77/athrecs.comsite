@@ -5,19 +5,27 @@ import { createHash } from "node:crypto";
 import { mkdir } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { createServer } from "vite";
+import {
+  approveSyntheticClaim,
+  createAthleteRpc,
+  createSyntheticStaffSession,
+} from "./fixtures/ownership-review.mjs";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 const origin = "http://127.0.0.1:18246";
 Object.assign(process.env, {
   DATABASE_URL: "",
   DATABASE_URL_UNPOOLED: "",
+  POSTGRES_URL: "",
   POSTGRES_URL_NON_POOLING: "",
   RESEND_API_KEY: "",
   ATHRECS_CLAIMS_EMAILS: "",
+  ATHRECS_STAFF_EMAILS: "journey-reviewer@example.test",
   VITE_SITE_BRAND: "athrecs",
   VITE_AUTH_ENABLED: "true",
   BETTER_AUTH_URL: origin,
   BETTER_AUTH_SECRET: "profile-claim-test-only-secret-at-least-32-chars",
+  TSS_SERVER_FN_BASE: `${origin}/_serverFn/`,
 });
 const realFetch = globalThis.fetch;
 globalThis.fetch = (input, init) => {
@@ -37,6 +45,8 @@ try {
   // This matches the other account browser fixtures and keeps seed failures
   // explicit instead of surfacing as a first-page browser timeout.
   await (await server.ssrLoadModule("/src/lib/athrecs/seed.server.ts")).ensureAthrecsSeeded();
+  const reviewer = await createSyntheticStaffSession(origin, sql, "journey-reviewer@example.test");
+  const reviewRpc = createAthleteRpc(origin, reviewer.token);
   browser = await chromium.launch({
     executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
@@ -50,6 +60,11 @@ try {
     assert.equal(response.status(), 200, await response.text());
     const { user } = await response.json();
     await sql`update "user" set name='',"emailVerified"=true where id=${user.id}`;
+    const signedIn = await context.request.post(`${origin}/api/auth/sign-in/email`, {
+      headers: { origin },
+      data: { email, password: "Synthetic-password-123!" },
+    });
+    assert.equal(signedIn.status(), 200, await signedIn.text());
     const page = await context.newPage();
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
@@ -157,10 +172,27 @@ try {
     "Adding stays in the draft until confirmation",
   );
   await page.getByRole("button", { name: "Confirm my 2 selected results", exact: true }).click();
-  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
+  await page
+    .getByRole("heading", { name: "Profile and results confirmation saved", exact: true })
+    .waitFor();
   const [claim] =
-    await sql`select status from result_claims where claimant_user_id=${plain.user.id}`;
-  assert.equal(claim.status, "approved");
+    await sql`select id,status from result_claims where claimant_user_id=${plain.user.id}`;
+  assert.equal(claim.status, "pending");
+  assert.equal(
+    (await sql`select * from athlete_account_links where user_id=${plain.user.id}`).length,
+    0,
+    "Confirmation saves the request without granting ownership",
+  );
+  assert.equal(
+    (await sql`select athlete_management_reviewed(992101,${plain.user.id}) as reviewed`)[0]
+      .reviewed,
+    false,
+  );
+  await approveSyntheticClaim(reviewRpc, claim.id, reviewer.user.id, sql);
+  assert.equal(
+    (await sql`select status from result_claims where id=${claim.id}`)[0].status,
+    "approved",
+  );
   assert.equal(
     (await sql`select * from athlete_account_links where user_id=${plain.user.id}`).length,
     1,
@@ -201,7 +233,7 @@ try {
     0,
   );
   console.log(
-    "PASS: Required identity -> same selected profile -> remembered navigation -> one completed claim -> clear receipt after reload.",
+    "PASS: Required identity -> same selected profile -> pending confirmation without ownership -> independent staff approval -> private history and receipt preserved after reload.",
   );
 
   const invited = await account("invited-claim@example.test");
@@ -238,7 +270,9 @@ try {
   await invited.page
     .getByRole("button", { name: "Confirm all results are mine", exact: true })
     .click();
-  await invited.page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
+  await invited.page
+    .getByRole("heading", { name: "Profile and results confirmation saved", exact: true })
+    .waitFor();
   await invited.page.screenshot({ path: "artifacts/claim-received-mobile.png", fullPage: true });
   assert.equal(
     (await sql`select * from result_claims where claimant_user_id=${invited.user.id}`).length,
@@ -256,8 +290,29 @@ try {
   assert.equal(optionalIdentity.nationality, null, "Invitation claim succeeds without nationality");
   assert.equal(bound.user_id, invited.user.id);
   assert(bound.claim_id);
+  assert.equal(
+    (await sql`select status from result_claims where id=${bound.claim_id}`)[0].status,
+    "pending",
+    "An invitation does not bypass independent ownership review",
+  );
+  assert.equal(
+    (await sql`select * from athlete_account_links where user_id=${invited.user.id}`).length,
+    0,
+  );
+  assert.equal(
+    (await sql`select athlete_management_reviewed(992102,${invited.user.id}) as reviewed`)[0]
+      .reviewed,
+    false,
+  );
+  await approveSyntheticClaim(reviewRpc, bound.claim_id, reviewer.user.id, sql);
+  await invited.page.reload({ waitUntil: "networkidle" });
+  await invited.page.getByText(/Claim complete — ownership reviewed/).waitFor();
+  assert.equal(
+    (await sql`select * from athlete_account_links where user_id=${invited.user.id}`).length,
+    1,
+  );
   console.log(
-    "PASS: Verified blank-name account resumes its email invitation on mobile and completes exactly one self-confirmed profile claim.",
+    "PASS: Verified blank-name account resumes its email invitation on mobile, submits one pending claim and gains ownership only after separate staff approval.",
   );
   assert.deepEqual(errors, []);
 } finally {

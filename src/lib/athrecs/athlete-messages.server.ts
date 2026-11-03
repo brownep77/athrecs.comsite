@@ -23,16 +23,16 @@ async function resolveTarget(sql: Sql, target: MessageTarget) {
           number: string;
         }>`select user_id,athlete_id,number::text from athlete_identifiers where number=${target.athleteNumber}::bigint`;
   if (!row) throw new Error("Athlete record not found.");
-  // Only approved active account links join histories. Names and suggested matches do not.
+  // Only independently reviewed active links join histories. Names and suggested matches do not.
   const linked = await sql<{ athlete_id: number; user_id: string | null }>`
     select a.athlete_id,l.user_id from athlete_resolved_ids a
-    left join athlete_account_links l on l.athlete_id=a.athlete_id and l.status='active'
+    left join athlete_reviewed_account_links l on l.athlete_id=a.athlete_id and l.status='active'
     where a.athlete_number=${row.number}::bigint or a.source_number=${row.number}::bigint`;
   const userId = row.user_id ?? linked.find((item) => item.user_id)?.user_id ?? null;
   const sources = userId
     ? await sql<{
         athlete_id: number;
-      }>`select athlete_id from athlete_account_links where user_id=${userId} and status='active'`
+      }>`select athlete_id from athlete_reviewed_account_links where user_id=${userId} and status='active'`
     : linked;
   const [user] = userId
     ? await sql<{

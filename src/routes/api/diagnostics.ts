@@ -11,7 +11,13 @@ export const Route = createFileRoute("/api/diagnostics")({
           return await recordBrowserDiagnostic(
             request,
             await getSql(),
-            async () => (await auth.api.getSession({ headers: request.headers }))?.user.id ?? null,
+            async () =>
+              (
+                await auth.api.getSession({
+                  headers: request.headers,
+                  query: { disableCookieCache: true },
+                })
+              )?.user.id ?? null,
           );
         } catch {
           console.warn("[browser-diagnostics] Capture unavailable");

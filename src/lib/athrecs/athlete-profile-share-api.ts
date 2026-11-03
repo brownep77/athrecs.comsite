@@ -1,4 +1,5 @@
 import { loadPublishedSourceHistories } from "./athlete-publication.server";
+import { hasUnreviewedAthleteLinks } from "./athlete-management.server";
 import type { SourceHistory } from "./source-performance-history";
 import { profileReadMiddleware } from "@/lib/auth/profile-access";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
@@ -18,6 +19,7 @@ import type { ProfileConnection, SocialPlatform } from "./profile-connections";
 import { buildShareSlug, isValidShareSlug, sharedProfilePath } from "./athlete-profile-share";
 
 export type AthleteShareSettings = {
+  ownershipReviewRequired: boolean;
   enabled: boolean;
   searchIndexable: boolean;
   slug: string;
@@ -97,10 +99,11 @@ async function ready() {
   return getSql();
 }
 
-function mapSettings(row: ShareRow): AthleteShareSettings {
+function mapSettings(row: ShareRow, ownershipReviewRequired = false): AthleteShareSettings {
   return {
-    enabled: row.enabled,
-    searchIndexable: row.search_indexable === true,
+    ownershipReviewRequired,
+    enabled: row.enabled && !ownershipReviewRequired,
+    searchIndexable: row.search_indexable === true && !ownershipReviewRequired,
     slug: row.slug,
     shareUrlPath: sharedProfilePath(row.slug),
     shareBio: row.share_bio,
@@ -245,7 +248,7 @@ async function loadVisibleResults(
       result.finish_time_seconds,
       result.overall_place, result.gender_place, result.category_place, athlete.gender as result_gender,
       result.category
-    from athlete_account_links account_link
+    from athlete_reviewed_account_links account_link
     join athletes athlete on athlete.id = account_link.athlete_id
     join results result on result.athlete_id = account_link.athlete_id
     join editions edition on edition.id = result.edition_id
@@ -296,7 +299,7 @@ async function buildPublicProfile(
   // Resolve linked histories alongside identity/results, and do not fetch
   // member-only future plans or connections for the five-result public preview.
   const linked = sql<{ athlete_id: number }>`
-    select l.athlete_id from athlete_account_links l join athletes a on a.id=l.athlete_id
+    select l.athlete_id from athlete_reviewed_account_links l join athletes a on a.id=l.athlete_id
     where l.user_id=${share.user_id} and l.status='active'
       and (${!publicPreview} or a.profile_visibility='public')`;
   const [
@@ -409,7 +412,7 @@ export const getMyProfileShare = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const sql = await ready();
     const row = await ensureShareRow(sql, context.userId);
-    return mapSettings(row);
+    return mapSettings(row, await hasUnreviewedAthleteLinks(sql, context.userId));
   });
 
 export const saveMyProfileShare = createServerFn({ method: "POST" })
@@ -417,6 +420,12 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
   .validator((input: AthleteShareInput) => validateShareInput(input))
   .handler(async ({ data, context }) => {
     const sql = await ready();
+    const ownershipReviewRequired = await hasUnreviewedAthleteLinks(sql, context.userId);
+    if (data.enabled && ownershipReviewRequired) {
+      throw new Error(
+        "Staff must review the ownership of your linked athlete profiles before sharing can be enabled. Your private account and results are retained.",
+      );
+    }
     const [test] = await sql<{
       test: boolean;
     }>`select athrecs_is_test_user(${context.userId}) as test`;
@@ -467,7 +476,7 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
         search_indexable, acknowledged_at::text as acknowledged_at,
         published_at::text as published_at
     `;
-    return mapSettings(rows[0]);
+    return mapSettings(rows[0], ownershipReviewRequired);
   });
 
 async function readPublishedSharedProfile(slug: string, publicPreview = false) {
@@ -481,11 +490,14 @@ async function readPublishedSharedProfile(slug: string, publicPreview = false) {
           published_at::text as published_at
         from athlete_public_shares
         where (slug = ${slug} or exists (
-          select 1 from athlete_account_links link join athletes a on a.id=link.athlete_id
+          select 1 from athlete_reviewed_account_links link join athletes a on a.id=link.athlete_id
           where link.user_id=athlete_public_shares.user_id and link.status='active'
             and a.slug=${slug} and a.profile_visibility='public' and a.profile_type <> 'Public figure'
         ))
           and enabled = true
+          and not exists (select 1 from athlete_account_links unreviewed
+            where unreviewed.user_id=athlete_public_shares.user_id and unreviewed.status='active'
+              and not athlete_management_reviewed(unreviewed.athlete_id,unreviewed.user_id))
           and (${!publicPreview} or share_results = true)
         limit 1
       `;
@@ -520,7 +532,8 @@ export const getPublicSharedProfilePreview = createServerFn({ method: "GET" })
     setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     const profile = await readPublishedSharedProfile(data.slug, true);
     if (!profile) return null;
-    const { buildLinkedPublicAthletePreview } = await import("./public-athlete-edition-links.server");
+    const { buildLinkedPublicAthletePreview } =
+      await import("./public-athlete-edition-links.server");
     return buildLinkedPublicAthletePreview(await getSql(), {
       slug: profile.slug,
       displayName: profile.displayName,

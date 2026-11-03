@@ -122,8 +122,8 @@ function MyAthleteProfilePage() {
             Sign in to view your profile
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
-            Ordinary athlete profiles and claimed results are private. Sign in with the account that
-            claimed the results.
+            This account view is private. Sign in with the account linked to your results. Reviewed
+            race results and approved sporting profiles may also appear on separate public pages.
           </p>
           <Button className="mt-5" type="button" onClick={startSignIn}>
             <LogIn className="size-4" aria-hidden="true" />
@@ -195,12 +195,12 @@ function MyAthleteProfilePage() {
               <div className="flex flex-wrap items-center gap-2">
                 <Badge className="border-cyan-300/30 bg-cyan-300/10 text-cyan-100">
                   <LockKeyhole className="mr-1 size-3.5" aria-hidden="true" />
-                  Private profile
+                  Private account view
                 </Badge>
                 {data.claimedProfiles.length ? (
                   <Badge className="border-emerald-300/30 bg-emerald-300/10 text-emerald-100">
                     <CheckCircle2 className="mr-1 size-3.5" aria-hidden="true" />
-                    Results claimed
+                    Results linked
                   </Badge>
                 ) : null}
               </div>
@@ -254,6 +254,18 @@ function MyAthleteProfilePage() {
         </div>
       </section>
 
+      {data.claimedProfiles.some((profile) => profile.managementReviewed === false) ? (
+        <p className="rounded-xl border border-amber-400 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+          <strong>Ownership review required.</strong> These existing links remain available in your
+          private account. Staff must check ownership before you manage public profile details or
+          share those linked records.{" "}
+          <Link to="/privacy" hash="ownership-review" className="underline">
+            Request ownership review
+          </Link>
+          .
+        </p>
+      ) : null}
+
       <section className="grid grid-cols-2 gap-2 lg:grid-cols-4">
         <StatCard
           icon={Trophy}
@@ -265,7 +277,7 @@ function MyAthleteProfilePage() {
           icon={UserRound}
           label="Linked identities"
           value={data.claimedProfiles.length}
-          detail="Private athlete records"
+          detail="Linked sporting profiles"
         />
         <StatCard
           icon={CalendarDays}
@@ -412,8 +424,9 @@ function MyAthleteProfilePage() {
         </TabsContent>
         <TabsContent value="sharing">
           <p className="mb-4 text-sm text-muted">
-            Your photograph and ordinary athlete profile are not published publicly. You choose
-            which details to include in a separate shareable profile below.
+            This account view and your uploaded photograph stay private. You can choose details for
+            a separate unlisted link below. These sharing settings do not control separate public
+            race results or approved sporting-record previews.
           </p>
           <ShareProfileCard />
         </TabsContent>

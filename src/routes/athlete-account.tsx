@@ -254,7 +254,7 @@ function AthleteAccountPage() {
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
             {IS_ATHRECS_SITE
-              ? "Start with your email or an available sign-in provider. No date of birth or address needed. You can add your athlete details later."
+              ? "Create an account with your name, country, town or city (or postal code), and email. No date of birth or street address is needed. You can add optional athlete details later."
               : "Use your email address or choose an available sign-in provider to create your ATHRECS Athlete Account. Gmail, Outlook, Hotmail, Yahoo, iCloud and other email addresses are welcome."}
           </p>
           <Button
@@ -269,7 +269,7 @@ function AthleteAccountPage() {
               <Check className="size-3.5" aria-hidden="true" /> Choose how you sign in
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <LockKeyhole className="size-3.5" aria-hidden="true" /> Private by default
+              <LockKeyhole className="size-3.5" aria-hidden="true" /> Private account details
             </span>
             <Link to="/privacy" className="font-medium text-accent">
               How ATHRECS uses your data
@@ -466,11 +466,25 @@ function SignedInAccount() {
                 </Badge>
                 <span className="text-sm font-medium text-fg">{account.data.verifiedEmail}</span>
               </div>
+              {account.data.claimedProfiles.some(
+                (profile) => profile.managementReviewed === false,
+              ) ? (
+                <p className="mt-3 rounded-lg border border-amber-400 bg-amber-50 p-3 text-sm leading-6 text-amber-950">
+                  <strong>Ownership review required.</strong> Your existing private records remain
+                  accessible. Staff must check ownership before you manage public profile details,
+                  share those linked records or represent the athlete in partnerships.{" "}
+                  <Link to="/privacy" hash="ownership-review" className="underline">
+                    Request ownership review
+                  </Link>
+                  .
+                </p>
+              ) : null}
               {account.data.claimedProfiles.length ? (
                 <>
                   <p className="mt-2 text-sm text-muted">
-                    Profile completion: <strong className="text-fg">{completion}%</strong>. Optional
-                    sections improve your Entry Passport and any analytics you approve.
+                    Profile completion: <strong className="text-fg">{completion}%</strong>. You can
+                    leave optional sections blank. Consent choices do not affect this score or
+                    account access.
                   </p>
                   <div
                     className="mt-3 h-2 overflow-hidden rounded-full bg-elevated"
@@ -593,7 +607,7 @@ function SignedInAccount() {
                         key={profile.athleteId}
                         className="border-accent/30 bg-accent-soft text-fg"
                       >
-                        {profile.athleteName} · Private profile
+                        {profile.athleteName} · Linked sporting record
                       </Badge>
                     ))}
                   </div>
@@ -659,7 +673,7 @@ function SignedInAccount() {
                     ? "Help ATHRECS find your previous results. These details stay private."
                     : activeSection === "location" && IS_ATHRECS_SITE
                       ? "Your location, nationality and club or team."
-                      : "A name and verified email are required before claiming a profile. Date of birth and nationality are optional and help match your results when supplied. Your profile stays private until you enable sharing."
+                      : "A name and verified email are required before requesting profile ownership. Date of birth and nationality are optional matching clues. Private account details and account sharing are separate from public sporting records."
                 }
               >
                 {show("identity") ? (
@@ -856,7 +870,8 @@ function SignedInAccount() {
                     <p className="mt-2 text-sm leading-6 text-muted">
                       These fields stay private. ATHRECS checks its stored results using your names,
                       source IDs, club, age at the race and nationality. External searching has a
-                      separate optional consent below. Nothing is linked until you claim it.
+                      separate optional consent below. New profile links require an ownership claim
+                      and staff approval.
                     </p>
                     <div className="mt-3 grid gap-4 md:grid-cols-2">
                       <CsvField
@@ -1193,7 +1208,7 @@ function SignedInAccount() {
                     onChange={(checked) =>
                       setForm({ ...form, consents: { ...form.consents, productResearch: checked } })
                     }
-                    title="Anonymous product research"
+                    title="Aggregated product research"
                     description="Allow optional kit, nutrition, technology and clothing choices to be used in aggregated research."
                   />
                   <ConsentChoice
@@ -1229,6 +1244,18 @@ function SignedInAccount() {
                     </span>
                   </span>
                 </label>
+                <p className="mt-4 text-sm leading-6 text-muted">
+                  Save your account to apply changes to these choices. For account access, deletion,
+                  privacy questions or a disputed public sporting record, email{" "}
+                  <a href="mailto:paul@athrecs.com" className="text-accent underline">
+                    paul@athrecs.com
+                  </a>
+                  . See the{" "}
+                  <Link to="/privacy" hash="account-rights" className="text-accent underline">
+                    privacy notice
+                  </Link>{" "}
+                  for the request process and retention information.
+                </p>
               </AccountSection>
             ) : null}
 
@@ -1293,9 +1320,10 @@ function SignedInAccount() {
           </form>
           <PreservedAccountPanel active={show("sharing")}>
             <section id="profile-visibility" className="space-y-3">
-              <h2 className="font-display text-xl font-semibold">Public or private profile</h2>
+              <h2 className="font-display text-xl font-semibold">Account profile sharing</h2>
               <p className="text-sm text-muted">
-                Save your account details, then choose whether to publish your profile.
+                Save your account details, then choose whether to create a separate unlisted link
+                for signed-in members. Public sporting-record previews are handled separately.
               </p>
               <ShareProfileCard />
             </section>
@@ -1817,7 +1845,7 @@ function emptySport(sportCode: AthleteSportCode, isPrimary: boolean): AthleteSpo
 }
 
 function accountCompletion(form: AthleteAccountInput, email: string): number {
-  let score = form.fullName.trim() && email ? 35 : 0;
+  let score = form.fullName.trim() && email ? 40 : 0;
   if (form.sports.length) score += 15;
   if (
     form.sports.some(
@@ -1832,6 +1860,5 @@ function accountCompletion(form: AthleteAccountInput, email: string): number {
     score += 5;
   if (form.preferences.clothingItems.length || form.preferences.clothingBrands.length) score += 5;
   if (form.preferences.recoveryProducts.length) score += 5;
-  if (Object.values(form.consents).some(Boolean)) score += 5;
   return Math.min(score, 100);
 }

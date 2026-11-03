@@ -69,7 +69,7 @@ export function ProfileResultsSetup({
           {status.data.completed
             ? "Our team has checked your profile details."
             : "Your profile is in our review queue. We’ll check your links and look for more results."}{" "}
-          You can review and claim any suggested results immediately below.
+          You can review suggested results below and submit an ownership claim for staff review.
         </p>
       ) : (
         <p className="text-sm text-muted">

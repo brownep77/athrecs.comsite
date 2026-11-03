@@ -4,6 +4,7 @@ import { randomBytes } from "node:crypto";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
+import { seedReviewedLink } from "./fixtures/reviewed-link.mjs";
 process.env.DATABASE_URL = "";
 process.env.RESEND_API_KEY = "";
 process.env.VITE_AUTH_ENABLED = "true";
@@ -175,10 +176,23 @@ try {
   assert(!bodyReads.includes(4));
   for (const id of [a.id, b.id])
     await sql`insert into athlete_account_links(athlete_id,user_id,user_email) values(${id},'athlete','inbox-athlete@example.test')`;
+  assert.equal(
+    await svc.matchInboxSender(sql, "shared@example.test"),
+    "ambiguous",
+    "Bare links cannot bind source-athlete replies to an account",
+  );
+  for (const id of [a.id, b.id])
+    await seedReviewedLink(sql, {
+      athleteId: id,
+      userId: "athlete",
+      email: "inbox-athlete@example.test",
+      reviewerId: "staff",
+      reviewerEmail: "inbox-staff@example.test",
+    });
   assert.deepEqual(
     await svc.matchInboxSender(sql, "shared@example.test"),
     { userId: "athlete", athleteId: null },
-    "Only active approved links combine matching source identities",
+    "Only independently reviewed active links combine matching source identities",
   );
   messages.push(message(5, "inbox-other@example.test"));
   failBody = true;

@@ -32,7 +32,10 @@ function json(body: unknown, status = 200): Response {
 }
 
 export async function handleAthleteGalleryRequest(request: Request): Promise<Response> {
-  const session = await auth.api.getSession({ headers: request.headers });
+  const session = await auth.api.getSession({
+    headers: request.headers,
+    query: { disableCookieCache: true },
+  });
   const userId = session?.user?.id;
   if (!userId) return json({ error: "Sign in to manage your photos" }, 401);
 

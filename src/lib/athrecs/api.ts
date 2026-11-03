@@ -1016,7 +1016,7 @@ const readAthleteIdentity = createServerOnlyFn(
         ${approvedPublicOnly ? `(${indexableApprovedAthleteSql})` : "false"} as search_indexable,
         exists (
           select 1
-          from athlete_account_links account_link
+          from athlete_reviewed_account_links account_link
           where account_link.athlete_id = a.id and account_link.status = 'active'
         ) as is_claimed
         , exists (select 1 from athlete_account_links l where l.athlete_id=a.id) as has_account_link
@@ -1104,7 +1104,7 @@ const readAthleteProfile = createServerOnlyFn(
       ? Promise.resolve([])
       : sql<{
           user_id: string;
-        }>`select l.user_id from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id and s.enabled=true where l.athlete_id=${athlete.id} and l.status='active' limit 1`;
+        }>`select l.user_id from athlete_reviewed_account_links l join athlete_public_shares s on s.user_id=l.user_id and s.enabled=true where l.athlete_id=${athlete.id} and l.status='active' limit 1`;
     const {
       date_of_birth,
       profile_details,

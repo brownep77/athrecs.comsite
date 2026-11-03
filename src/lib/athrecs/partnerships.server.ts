@@ -59,11 +59,11 @@ async function eligibleAthlete(
 ) {
   const [link] = await sql<{
     name: string;
-  }>`select a.display_name as name from athlete_account_links l join athletes a on a.id = l.athlete_id
+  }>`select a.display_name as name from athlete_reviewed_account_links l join athletes a on a.id = l.athlete_id
     where l.user_id = ${userId} and l.athlete_id = ${athleteId} and l.status = 'active'`;
   if (!link)
     throw new Error(
-      "Choose an athlete profile that is linked to your account through an approved claim.",
+      "Staff must review your ownership before you can represent this athlete in a partnership application.",
     );
   const [preferences] = await sql<{
     sponsorship: boolean;
@@ -114,7 +114,7 @@ export async function myPartnerships(sql: Sql, userId: string) {
         `select ${applicationColumns.replace("a.review_note", "''::text as review_note")}
       from partner_applications a join partner_opportunities o on o.id = a.opportunity_id join partner_brands b on b.id = o.brand_id
       where b.owner_user_id = $1 and b.status = 'approved' and a.status = 'shared'
-      and (a.applicant_kind = 'club' or exists (select 1 from athlete_account_links l
+      and (a.applicant_kind = 'club' or exists (select 1 from athlete_reviewed_account_links l
         where l.user_id = a.user_id and l.athlete_id = a.athlete_id and l.status = 'active'))
       order by a.created_at desc`,
         [userId],
@@ -130,7 +130,7 @@ export async function myPartnerships(sql: Sql, userId: string) {
       sql<{
         id: number;
         name: string;
-      }>`select a.id, a.display_name as name from athlete_account_links l join athletes a on a.id = l.athlete_id
+      }>`select a.id, a.display_name as name from athlete_reviewed_account_links l join athletes a on a.id = l.athlete_id
       where l.user_id = ${userId} and l.status = 'active' order by a.display_name`,
       sql<{ emailVerified: boolean }>`select "emailVerified" from "user" where id = ${userId}`,
     ]);
@@ -419,7 +419,7 @@ export async function respondToApplication(sql: Sql, userId: string, id: number,
       await tx`update partner_applications a set brand_response = ${response}, revision = a.revision + 1, updated_at = now()
       from partner_opportunities o, partner_brands b where o.id = a.opportunity_id and b.id = o.brand_id
       and b.owner_user_id = ${userId} and b.status = 'approved' and a.id = ${id} and a.status = 'shared'
-      and (a.applicant_kind = 'club' or exists (select 1 from athlete_account_links l where l.user_id = a.user_id and l.athlete_id = a.athlete_id and l.status = 'active')) returning a.id`;
+      and (a.applicant_kind = 'club' or exists (select 1 from athlete_reviewed_account_links l where l.user_id = a.user_id and l.athlete_id = a.athlete_id and l.status = 'active')) returning a.id`;
     if (!rows.length) throw new Error("This application is not available to your brand.");
     await audit(tx, userId, "application", id, "brand_response_updated");
     return { saved: true };
