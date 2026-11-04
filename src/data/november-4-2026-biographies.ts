@@ -18,9 +18,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "Which leg did Ayano Shiomi run in Hiratsuka?",
         "answer": "She ran the opening 1500 metres for Iwatani in the team’s 17:20.12 relay on 1 November 2026."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/japan/ayano-shiomi-14728006"
     ]
   },
   {
@@ -40,9 +37,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "Which team does Ayu Koyama race for?",
         "answer": "Koyama races for Iwatani Corporation in Japan and ran its second leg in the Hiratsuka 4×1500m record."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/japan/ayu-koyama-14950087"
     ]
   },
   {
@@ -62,9 +56,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "Which relay leg did Iroha Kodama run in Hiratsuka?",
         "answer": "Kodama ran the third 1500-metre leg for Iwatani Corporation on 1 November 2026."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/japan/iroha-kodama-15164016"
     ]
   },
   {
@@ -84,9 +75,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "Who anchored Iwatani’s 17:20.12 relay in Hiratsuka?",
         "answer": "Mahiro Hasegawa ran the final 1500 metres for Iwatani Corporation."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/japan/mahiro-hasegawa-14904550"
     ]
   },
   {
@@ -104,9 +92,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "Who ran the first leg for Botswana at the 2026 World Relays?",
         "answer": "Lee Bhekempilo Eppie ran the opening lap in 44.26 seconds. Botswana won in 2:54.47."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/botswana/lee-eppie-14804565"
     ],
     "alternateName": [
       "Lee Eppie"
@@ -127,9 +112,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "What time did Letsile Tebogo run to win Olympic 200m gold?",
         "answer": "Tebogo ran 19.46 seconds to win the men’s 200 metres at the 2024 Paris Olympics."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/-/14883897"
     ]
   },
   {
@@ -147,9 +129,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "What time won Bayapo Ndori world 400m bronze in 2025?",
         "answer": "Ndori ran 44.20 seconds in the Tokyo final."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/botswana/bayapo-ndori-14847443"
     ]
   },
   {
@@ -167,9 +146,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "Who anchored Botswana to victory in the 2026 World Relays final?",
         "answer": "Busang Collen Kebinatshipi ran the anchor leg in 43.09 seconds as Botswana finished in 2:54.47."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/botswana/busang-collen-kebinatshipi-14935809"
     ]
   },
   {
@@ -191,9 +167,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "What is Josh Kerr’s mile record?",
         "answer": "Josh Kerr ran 3:42.66 at the London Athletics Meet on 18 July 2026."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/great-britain-ni/josh-kerr-14533464"
     ]
   },
   {
@@ -213,9 +186,6 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
         "question": "How fast did Sabastian Sawe run the London Marathon?",
         "answer": "He won the 2026 London Marathon in 1 hour, 59 minutes and 30 seconds."
       }
-    ],
-    "sameAs": [
-      "https://worldathletics.org/athletes/kenya/sabastian-kimaru-sawe-14833335"
     ],
     "alternateName": [
       "Sabastian Kimaru Sawe"
