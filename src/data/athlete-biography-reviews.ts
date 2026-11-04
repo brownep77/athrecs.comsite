@@ -1,6 +1,9 @@
+import { november4BiographyReviews } from "./november-4-2026-biographies.ts";
+
 // Public editorial copy. Supporting evidence and publication receipts live in staff storage.
 // A matching slug alone never publishes this text: exact-text approval is required.
 export const athleteBiographyReviews = [
+  ...november4BiographyReviews,
   {
     slug: "matt-james-television",
     title: "Matt James marathon times, running results & biography",

@@ -4,6 +4,13 @@ import { reviewedBiographyPresentation } from "../src/lib/athrecs/reviewed-biogr
 import { biographyParagraphs } from "../src/lib/athrecs/biography-presentation.ts";
 import { createServer } from "vite";
 import { publicAthleteSearchContent } from "../src/lib/athrecs/public-athlete-search-content.ts";
+import { historyPerformanceSchema, sourcePerformanceSchema } from "../src/lib/athrecs/source-performance-history.ts";
+
+const legacyStatus = historyPerformanceSchema.shape.verificationStatus;
+assert.equal(legacyStatus.parse("verified"), undefined);
+assert.equal(legacyStatus.parse("source_verified"), "source_verified");
+assert.equal(sourcePerformanceSchema.shape.verificationStatus.safeParse("verified").success, false);
+
 const server = await createServer({ server: { middlewareMode: true } });
 let buildPublicAthletePreview;
 try {
