@@ -590,3 +590,46 @@ All seven additions remain disabled. Existing enabled flags, permission records,
 page limits and rate limits are unchanged. The registry contains 1641 sources:
 41 enabled and 1600 disabled. Registration neither starts collection nor verifies
 all participants or permits unrelated personal-data reuse.
+
+## Mano bėgimas organiser results — 4 November 2026
+
+Added Mano bėgimas as one disabled manual research reference after checking the
+canonical registry and wider event inventories. The inspected public table covers
+the Rimi Vilniaus Maratonas 2023 programme and identifies VšĮ Tarptautinis maratonas
+as the publisher. Other events and years have not been established. Preserve its
+original result headings; the separate LTUtiming provider retains its own credit.
+
+The page prohibits copying information without consent. Registration grants no
+copying permission and does not enable collection. A subsequent ordinary HTTP
+request returned 403 and was stopped; the earlier opened table is the recorded
+capability evidence. No participant rows or private athlete audits are included.
+
+The existing Run4Time row and its 23 October 2026 check date are unchanged. The
+registry now contains 1658 sources: 41 enabled and 1617 disabled. The bulk-run
+verifier's older 1641-source assertion was already stale before this addition; its
+counts now reflect the measured inventory, with all existing checks retained.
+
+## Irish organiser archives and series standings — 4 November 2026
+
+Added three disabled manual research references after checking the source
+registry, managed sources and wider event inventory for matching domains.
+Warriors Run provides an inspected organiser archive and original PDF/XLSX
+result tables for selected 2010–2015 and 2019 editions. Later timer links retain
+their own provider identities; uninspected years and complete coverage remain
+unestablished. Preserve original headings, precision and provisional wording.
+
+RaceFace supplies an inspected February 2018 Irish West Duathlon Series
+standings report. Round points, total points and series classifications remain
+distinct from individual race finish times and placings. The unavailable linked
+historical index is not counted as inspected result evidence.
+
+Athlone Triathlon Club supplies an inspected June 2024 aquathon report and its
+linked original four-page result PDF. Google Drive is the file host, not a new
+event provider. The general Results-label route presented a challenge and was
+stopped. Reuse the existing club identity and preserve its 13 October 2026
+directory evidence; this fresh result-capability check changes no club facts.
+
+All three sources use enabled=0 and follow_history_links=0. Registration neither
+enables automated collection nor verifies participant identities or results.
+Private result captures and athlete audits remain outside source control.
+The registry now contains 1661 sources: 41 enabled and 1620 disabled.
