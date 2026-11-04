@@ -96,7 +96,11 @@ try {
   const mail = {
     authEmailConfigured: () => true,
     sendAthrecsAuthEmail: async (email, options) => {
-      assert.equal(email.to, "results@athrecs.com", "Completed claims use the results route, independently of staff authentication and conflict overrides");
+      assert.equal(
+        email.to,
+        "results@athrecs.com",
+        "Completed claims use the results route, independently of staff authentication and conflict overrides",
+      );
       const [linked] =
         await sql`select count(*)::int n from result_archive_entries where canonical_result_id is not null`;
       assert(linked.n > 0, "Notifications run after archive/profile transaction commits");
@@ -132,12 +136,32 @@ try {
     "./claim.server": claims,
     "../athrecs/result-claim-alerts.server": alerts,
   });
-  await sql`insert into "user"(id,name,email,"emailVerified") values('owner','Synthetic Runner','owner@example.test',true),('stranger','Synthetic Runner','stranger@example.test',true),('unverified','Synthetic Runner','unverified@example.test',false)`;
+  await sql`insert into "user"(id,name,email,"emailVerified") values('owner','Synthetic Runner','owner@example.test',true),('stranger','Synthetic Runner','stranger@example.test',true),('unverified','Synthetic Runner','unverified@example.test',false),('reviewer','Independent Synthetic Reviewer','reviewer@example.test',true)`;
   await sql`insert into athletes(id,slug,display_name) values(1,'synthetic-runner','Synthetic Runner'),(2,'other-runner','Other Runner')`;
   await sql`insert into athlete_private_profiles(user_id,full_name,verified_email,previous_names,privacy_notice_version,privacy_acknowledged_at) values('owner','Synthetic Runner','owner@example.test',array['Synthetic Former'],'synthetic-test',now())`;
-  await sql`insert into athlete_account_links(athlete_id,user_id,user_email,status) values(1,'owner','owner@example.test','active')`;
   await sql`insert into events(id,slug,name,sport) values(1,'synthetic-race','Synthetic Race','Running')`;
-  await sql`insert into editions(id,event_id,event_date,distance_code) values(1,1,'2025-01-01','10K'),(2,1,'2025-02-01','10K'),(3,1,'2025-03-01','10K')`;
+  await sql`insert into editions(id,event_id,event_date,distance_code) values(1,1,'2025-01-01','10K'),(2,1,'2025-02-01','10K'),(3,1,'2025-03-01','10K'),(4,1,'2024-01-01','10K')`;
+  // Archive additions start with an independently reviewed owner. The separate claim-RPC suites
+  // test how that decision is reached; this fixture preserves its evidence and source claim.
+  const [proofResult] =
+    await sql`insert into results(id,edition_id,athlete_id,status,finish_time_seconds,source_url)
+    values(999001,4,1,'finished',2100,'https://example.test/identity-proof-result') returning *`;
+  const proofSnapshot = JSON.stringify(proofResult);
+  const [proofClaim] =
+    await sql`insert into result_claims(result_id,athlete_id,claimant_user_id,claimant_email,
+    status,verification_method,declaration_accepted,confirmation_method,confirmed_at,reviewed_by_user_id,reviewed_by_email,reviewed_at,staff_note)
+    values(999001,1,'owner','owner@example.test','approved','club_confirmation',true,'staff',now(),'reviewer','reviewer@example.test',now(),
+      'Synthetic independent club-officer confirmation reviewed before the archive-addition fixture begins.') returning id`;
+  await sql`insert into athlete_account_links(athlete_id,user_id,user_email,status,source_claim_id,confirmation_method)
+    values(1,'owner','owner@example.test','active',${proofClaim.id},'staff'),(2,'stranger','stranger@example.test','active',null,'athlete')`;
+  assert.equal(
+    (await sql`select athlete_management_reviewed(1,'owner') as reviewed`)[0].reviewed,
+    true,
+  );
+  assert.equal(
+    (await sql`select athlete_management_reviewed(2,'stranger') as reviewed`)[0].reviewed,
+    false,
+  );
   const dataset = crypto.randomUUID();
   await sql`insert into result_archive_datasets(id,edition_id,provider,source_race_key,source_url,permission_note) values(${dataset}::uuid,1,'Synthetic Timer','race','https://example.test/results','Synthetic test source permission')`;
   const payload = (name = "Synthetic Runner", extra = {}) => ({
@@ -197,14 +221,28 @@ try {
     original,
     "Duplicate linking never rewrites existing performance or verification",
   );
-  assert.equal((await sql`select count(*)::int n from results where athlete_id=1`)[0].n, 1);
+  assert.equal(
+    (await sql`select count(*)::int n from results where athlete_id=1`)[0].n,
+    2,
+    "Exactly one archived result is added alongside the existing ownership-evidence fixture",
+  );
+  assert.equal(
+    JSON.stringify((await sql`select * from results where id=999001`)[0]),
+    proofSnapshot,
+    "Archive additions do not rewrite the earlier ownership-evidence result",
+  );
   const unowned = await insert(payload(), 2);
   const held = await member.requestArchiveMatches(sql, "stranger", {
     ...input,
     entries: [{ entryId: unowned, revision: 1 }],
   });
   assert.equal(held.claimed, 0);
-  assert.match(held.held[0].reason, /Claim your athlete profile first/);
+  assert.match(held.held[0].reason, /Staff must review your athlete ownership/);
+  assert.equal(
+    (await sql`select id from results where athlete_id=2`).length,
+    0,
+    "A self-confirmed association cannot add archive results to a canonical athlete",
+  );
   assert.equal(
     (await sql`select user_id from athlete_account_links where athlete_id=1`)[0].user_id,
     "owner",
@@ -241,7 +279,7 @@ try {
   );
   assert.equal((await sql`select count(*)::int n from result_archive_decisions`)[0].n, 2);
   console.log(
-    "PASS: archive declaration → existing owned profile → preserved precision/private unverified result → completed claim → configured results inbox. Duplicate linking, replay, alias, cross-account, unverified email and flagged/conflicting rows checked.",
+    "PASS: archive declaration → independently reviewed owner → preserved precision/private unverified result → completed claim → configured results inbox. Unreviewed ownership, duplicate linking, replay, alias, cross-account, unverified email and flagged/conflicting rows checked.",
   );
 } finally {
   Object.keys(process.env)

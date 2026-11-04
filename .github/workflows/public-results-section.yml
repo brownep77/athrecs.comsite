@@ -7,6 +7,13 @@ on:
       - "src/lib/athrecs/public-results*"
       - "src/lib/athrecs/unlinked-results-api.ts"
       - "src/components/layout/AppShell.tsx"
+      - "src/routes/search.tsx"
+      - "src/routes/races/$slug.tsx"
+      - "src/components/races/*Results*"
+      - "src/components/races/ArchiveResultPanels.tsx"
+      - "scripts/verify-archive-discovery.mjs"
+      - "scripts/verify-mersea-results.mjs"
+      - "scripts/verify-public-guide-evidence.mjs"
       - "scripts/verify-public-results-section.mjs"
       - ".github/workflows/public-results-section.yml"
   workflow_dispatch:
@@ -43,6 +50,11 @@ jobs:
         run: |
           mkdir -p artifacts
           npx vite build --mode development 2>&1 | tee artifacts/results-build.log
+      - name: Verify race archive discovery and public evidence
+        run: |
+          node scripts/verify-archive-discovery.mjs
+          node scripts/verify-mersea-results.mjs
+          node scripts/verify-public-guide-evidence.mjs
       - name: Check generated route types
         run: npm run typecheck
       - name: Lint Results implementation

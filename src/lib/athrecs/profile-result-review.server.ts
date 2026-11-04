@@ -142,9 +142,9 @@ export async function saveProfileResultReview(
   claimantRole: "athlete" | "guardian" = "athlete",
 ) {
   const inputHash = hash({
-    // A fresh explicit confirmation can complete a pre-policy pending review.
-    // Its old audit/receipt stays immutable; retries of this policy are idempotent.
-    policy: "self-confirmation-v1",
+    // Fresh confirmations use the current ownership-review policy. Old receipts
+    // stay immutable; retries of the current policy are idempotent.
+    policy: "independent-ownership-review-v2",
     claimantRole,
     athleteId,
     snapshot: input.snapshot,
@@ -199,7 +199,7 @@ export async function saveProfileResultReview(
   await sql`insert into athlete_profile_result_confirmations(id,user_id,athlete_id,input_hash,snapshot,included_keys,excluded_keys,added_count)
     values(${input.requestId}::uuid,${userId},${athleteId},${inputHash},${input.snapshot},${JSON.stringify(included.map((r) => r.key))}::jsonb,${JSON.stringify(excluded.map((r) => r.key))}::jsonb,${input.additions.length})`;
   const [recipient] = await sql<{ email: string; name: string; owned: boolean }>`
-    select u.email,a.display_name as name,exists(select 1 from athlete_account_links l where l.user_id=u.id and l.athlete_id=a.id and l.status='active') as owned
+    select u.email,a.display_name as name,athlete_management_reviewed(a.id,u.id) as owned
     from "user" u cross join athletes a where u.id=${userId} and a.id=${athleteId}`;
   // Freeze a single summary in the same transaction as the declaration.
   await sql`update athlete_profile_result_confirmations set email_payload=${JSON.stringify({ id: input.requestId, resultId: 0, claimantEmail: recipient.email, athleteName: recipient.name, included: included.length, excluded: excluded.length, added: input.additions.length, status: recipient.owned ? "approved" : "pending" })}::jsonb where id=${input.requestId}::uuid`;

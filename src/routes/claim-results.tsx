@@ -186,9 +186,11 @@ function ClaimResultsPage() {
     onSuccess: (response) => {
       setMessage(
         response.alreadyOwned
-          ? "This athlete identity is already linked to your private profile."
+          ? response.managementReviewed
+            ? "This athlete profile is linked with recorded staff ownership review."
+            : "Your existing private link is retained. Staff ownership review is required before managing or sharing this athlete profile."
           : response.status === "approved"
-            ? "Claim complete — athlete confirmed. Your profile and its results are now linked."
+            ? "Claim complete — ownership reviewed. Your profile and its results are now linked."
             : "This claim needs a staff ownership check. See the reason below.",
       );
       setDeclaration(false);
@@ -518,8 +520,16 @@ function ClaimResultsPage() {
             ) : currentClaim?.status === "approved" || claimCompleted ? (
               <ClaimState
                 status="approved"
-                title="Claim complete"
-                note="Your athlete profile and its stored results are linked. Claiming records your confirmation; timing-source checks and photo or ID verification are separate."
+                title={
+                  currentClaim?.managementReviewed || submitClaim.data?.managementReviewed
+                    ? "Claim complete"
+                    : "Ownership review required"
+                }
+                note={
+                  currentClaim?.managementReviewed || submitClaim.data?.managementReviewed
+                    ? "Your athlete profile is linked with recorded staff ownership review. Result-source verification and any photo or ID check remain separate."
+                    : "Your existing private profile link and results are retained. Staff must review ownership before public sharing or management of this athlete profile is available."
+                }
               >
                 <div className="flex flex-wrap gap-2">
                   <Button asChild>
@@ -606,7 +616,8 @@ function ClaimResultsPage() {
                     </strong>
                     <span className="mt-1 block text-muted">
                       I confirm the profile and its stored results belong to the athlete shown. This
-                      is a self-confirmation, not a photo or ID check. I only need to claim once.
+                      submits an ownership claim for independent staff review. I only need to claim
+                      once.
                     </span>
                   </span>
                 </label>
@@ -626,7 +637,7 @@ function ClaimResultsPage() {
                     ? "Submitting claim…"
                     : guardian
                       ? "Submit guardian claim for review"
-                      : "Yes, this is me — complete my claim"}
+                      : "Yes, this is me — submit my claim"}
                 </Button>
 
                 <details className="rounded-xl border border-border bg-elevated">
@@ -653,9 +664,9 @@ function ClaimResultsPage() {
                 ) : null}
 
                 <p className="text-center text-xs text-subtle">
-                  Straightforward claims complete immediately and notify our team afterwards. Staff
-                  review conflicts, discrepancies and child or guardian claims. Do not put personal
-                  ID documents in public links.
+                  Every new profile claim needs an independent staff ownership check. Email
+                  verification confirms access to your mailbox, not your athlete identity. Do not
+                  put personal ID documents in public links.
                 </p>
               </form>
             )}
@@ -782,12 +793,16 @@ function ClaimHistory({
                       {formatRaceDateShort(claim.eventDate)} · {claim.distanceCode}
                     </p>
                   </div>
-                  <Badge className={statusClass(claim.status)}>{STATUS_LABELS[claim.status]}</Badge>
+                  <Badge className={statusClass(claim.status)}>
+                    {claim.status === "approved" && !claim.managementReviewed
+                      ? "Ownership review required"
+                      : STATUS_LABELS[claim.status]}
+                  </Badge>
                 </div>
                 {claim.status === "approved" ? (
                   <p className="mt-2 text-xs text-muted">
                     {claim.confirmationMethod === "athlete"
-                      ? "Athlete confirmed · self-confirmation"
+                      ? "Previous self-confirmation · ownership review required"
                       : claim.confirmationMethod === "staff"
                         ? "Staff reviewed"
                         : "Linked profile · verification basis not recorded"}

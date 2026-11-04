@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { HomeUpdatesFeed } from "@/components/editorial/HomeUpdatesFeed";
 import type { HomeSportUpdate } from "@/lib/athrecs/home-updates";
 import type { EditorialArticle } from "@/lib/athrecs/editorial";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
@@ -57,7 +58,10 @@ type Props = {
   broadcasts?: SportBroadcast[];
   updates?: HomeSportUpdate[];
   updatesUnavailable?: boolean;
-  news?: Pick<EditorialArticle, "slug" | "title" | "standfirst" | "date" | "displayDate">[];
+  news?: Pick<
+    EditorialArticle,
+    "slug" | "title" | "standfirst" | "date" | "displayDate" | "locations"
+  >[];
 };
 
 const sideLink =
@@ -125,6 +129,14 @@ export function CompactDiscoveryPage({
       });
     else void navigate({ to: "/", search: next, hash: "fixtures" });
   }
+  function fixturePageHref(nextPage: number) {
+    const query = new URLSearchParams();
+    for (const [key, value] of Object.entries(search)) {
+      if (key !== "page" && value) query.set(key, String(value));
+    }
+    if (nextPage > 1) query.set("page", String(nextPage));
+    return `${pathname}${query.size ? "?" + query : ""}#fixtures`;
+  }
   function filter(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     changeSearch(parseSportFixtureSearch(Object.fromEntries(new FormData(event.currentTarget))));
@@ -169,9 +181,23 @@ export function CompactDiscoveryPage({
             {news.map((article) => (
               <li key={article.slug} className="min-w-0">
                 <article className="flex h-full flex-col rounded-lg border border-border bg-accent-soft/30 p-4 sm:p-5">
-                  <time dateTime={article.date} className="text-xs font-semibold text-accent">
-                    {article.displayDate}
-                  </time>
+                  <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+                    <time dateTime={article.date} className="text-xs font-semibold text-accent">
+                      {article.displayDate}
+                    </time>
+                    {article.locations.some(({ country }) => country.trim()) ? (
+                      <span
+                        aria-label="Report countries"
+                        className="ml-auto inline-flex flex-wrap items-center gap-3 text-xs font-semibold text-fg"
+                      >
+                        {[...new Set(article.locations.map(({ country }) => country.trim()))]
+                          .filter(Boolean)
+                          .map((country) => (
+                            <CountryFlag key={country} country={country} showCode />
+                          ))}
+                      </span>
+                    ) : null}
+                  </div>
                   <h3 className="mt-2 font-display text-xl font-semibold leading-snug">
                     <Link
                       to="/news/$slug"
@@ -482,24 +508,21 @@ export function CompactDiscoveryPage({
                 aria-label="Fixture pages"
                 className="mt-3 flex items-center justify-between gap-3"
               >
-                <button
-                  type="button"
-                  disabled={page <= 1}
-                  onClick={() => changeSearch({ ...search, page: page - 1 })}
-                  className={`${actionLink} disabled:invisible`}
-                >
-                  ← Previous
-                </button>
+                {page > 1 ? (
+                  <a className={actionLink} rel="prev" href={fixturePageHref(page - 1)}>
+                    ← Previous
+                  </a>
+                ) : (
+                  <span />
+                )}
                 <span className="text-xs text-muted">Page {page}</span>
-                <button
-                  type="button"
-                  disabled={!hasMore || page >= 400}
-                  onClick={() => changeSearch({ ...search, page: page + 1 })}
-                  className={`${actionLink} disabled:invisible`}
-                >
-                  Next
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </button>
+                {hasMore && page < 400 ? (
+                  <a className={actionLink} rel="next" href={fixturePageHref(page + 1)}>
+                    Next <ArrowRight className="size-4" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <span />
+                )}
               </nav>
             )}
           </section>

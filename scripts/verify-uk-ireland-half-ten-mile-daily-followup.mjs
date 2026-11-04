@@ -48,6 +48,7 @@ const CURRENT_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-30";
 const PREVIOUS_LATEST_ROLLING_START_REVIEW_CHECKED_AT = "2026-10-31";
 const LATEST_ROLLING_START_REVIEW_CHECKED_AT = "2026-11-01";
 const CURRENT_ROLLING_START_CHECKPOINT_AT = "2026-11-03";
+const LATEST_ROLLING_START_CHECKPOINT_AT = "2026-11-04";
 const CURRENT_LANCASTER_CALENDAR_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_BOOKITZONE_SCAN_CHECKED_AT = "2026-10-27";
 const CURRENT_RUNTHROUGH_RESCAN_CHECKED_AT = "2026-10-28";
@@ -2775,14 +2776,47 @@ assert.match(breconsResearch.reason, /12K activity/, "Brecons lost its invalid-d
 
 assert.deepEqual(
   dailyHalfTenMileRetiredEditionKeys,
-  [{ seriesSlug: "november-nightmare", date: "2026-11-01", distance: "Half" }],
-  "The non-standard November Nightmare half retirement changed",
+  [
+    { seriesSlug: "november-nightmare", date: "2026-11-01", distance: "Half" },
+    {
+      seriesSlug: "phoenix-manchester-wings-of-remembrance",
+      date: "2026-11-08",
+      distance: "Half",
+    },
+    {
+      seriesSlug: "phoenix-manchester-wings-of-remembrance",
+      date: "2026-11-08",
+      distance: "10mi",
+    },
+  ],
+  "The invalid fixed-distance retirement set changed",
 );
 const nightmareResearch = dailyHalfTenMileResearchQueue.find(
   (candidate) => candidate.slug === "november-nightmare",
 );
 assert(nightmareResearch, "November Nightmare must remain traceable in research");
 assert.match(nightmareResearch.reason, /approximately 16 miles/, "Nightmare lost its distance hold");
+
+const phoenixManchesterResearch = dailyHalfTenMileResearchQueue.find(
+  (candidate) => candidate.slug === "phoenix-manchester-wings-of-remembrance",
+);
+assert(phoenixManchesterResearch, "Phoenix Manchester must remain traceable in research");
+assert.match(
+  phoenixManchesterResearch.reason,
+  /2\.92-mile loop/,
+  "Phoenix Manchester lost its variable-distance evidence",
+);
+for (const distance of ["Half", "10mi"]) {
+  assert(
+    !catalogue.editions.some(
+      (edition) =>
+        edition.seriesSlug === "phoenix-manchester-wings-of-remembrance" &&
+        edition.date === "2026-11-08" &&
+        edition.distance === distance,
+    ),
+    `Phoenix Manchester must not retain its unsupported ${distance} row`,
+  );
+}
 
 const apocalypseResearch = dailyHalfTenMileResearchQueue.find(
   (candidate) => candidate.slug === "apocalypse-run",
@@ -2898,7 +2932,7 @@ const packageSource = await fs.readFile(new URL("../package.json", import.meta.u
 const startCheckpoint = JSON.parse(
   await fs.readFile(
     new URL(
-      "../docs/fixture-reviews/uk-ireland-half-ten-mile-starts-2026-11-03-checkpoint.json",
+      "../docs/fixture-reviews/uk-ireland-half-ten-mile-starts-2026-11-04-checkpoint.json",
       import.meta.url,
     ),
     "utf8",
@@ -2940,8 +2974,8 @@ assert(
 assert.deepEqual(
   startCheckpoint.window,
   {
-    from: "2026-11-03",
-    through: "2027-02-03",
+    from: "2026-11-04",
+    through: "2027-02-04",
     rule: "Three calendar months inclusive; month-end clamped.",
   },
   "The start-time checkpoint lost the required inclusive three-calendar-month window",
@@ -2950,6 +2984,16 @@ assert.equal(startCheckpoint.records.length, 255, "The start-time checkpoint is 
 assert.equal(startCheckpoint.sourceSnapshot.liveRecordCount, 253);
 assert.equal(startCheckpoint.sourceSnapshot.pendingSeedCount, 1);
 assert.equal(startCheckpoint.sourceSnapshot.invalidatedResearchCount, 1);
+assert.equal(startCheckpoint.sourceSnapshot.branchDuplicateAliasCount, 1);
+assert.equal(startCheckpoint.sourceSnapshot.branchRetiredEditionCount, 2);
+assert.deepEqual(
+  startCheckpoint.records.reduce((summary, record) => {
+    summary[record.reviewStatus] = (summary[record.reviewStatus] ?? 0) + 1;
+    return summary;
+  }, {}),
+  startCheckpoint.summary,
+  "The start-time status summary does not match its records",
+);
 assert.equal(
   new Set(startCheckpoint.records.map((record) => record.key)).size,
   startCheckpoint.records.length,
@@ -2974,6 +3018,7 @@ assert(
         PREVIOUS_LATEST_ROLLING_START_REVIEW_CHECKED_AT,
         LATEST_ROLLING_START_REVIEW_CHECKED_AT,
         CURRENT_ROLLING_START_CHECKPOINT_AT,
+        LATEST_ROLLING_START_CHECKPOINT_AT,
       ].includes(record.checkedOn) &&
       ["Europe/London", "Europe/Dublin"].includes(record.timeZone),
   ),
@@ -3001,6 +3046,20 @@ assert(
       ["Europe/London", "Europe/Dublin"].includes(record.timeZone),
   ),
   "Every current-run start review needs real attempted URLs, an outcome, wave scope and timezone",
+);
+const reviewedOnLatestRun = startCheckpoint.records.filter(
+  (record) => record.checkedOn === LATEST_ROLLING_START_CHECKPOINT_AT,
+);
+assert.equal(reviewedOnLatestRun.length, 20, "The 4 November imminent start-review batch is incomplete");
+assert(
+  reviewedOnLatestRun.every(
+    (record) =>
+      record.attemptedSources.length > 0 &&
+      record.sourceOutcome &&
+      record.waveScope &&
+      ["Europe/London", "Europe/Dublin"].includes(record.timeZone),
+  ),
+  "Every latest-run start review needs real attempted URLs, an outcome, wave scope and timezone",
 );
 const loggerheadsStartReview = startCheckpoint.records.find(
   (record) => record.key === "loggerheads-half-marathon|2026-11-28|Half Marathon",
@@ -3034,7 +3093,7 @@ assert.equal(stAnnesStartReview?.localTime, "10:30");
 assert.equal(stAnnesStartReview?.retryOn, "2027-01-17");
 assert.match(stAnnesStartReview?.sourceOutcome ?? "", /authorised current-edition entry page/i);
 for (const [key, localTime, checkedOn] of [
-  ["london-morun|2026-11-08|Half", "09:30", PREVIOUS_ROLLING_START_REVIEW_CHECKED_AT],
+  ["london-morun|2026-11-08|Half", "09:30", LATEST_ROLLING_START_CHECKPOINT_AT],
   [
     "london-riverside-morun|2026-11-29|Half",
     "09:30",
@@ -3095,6 +3154,40 @@ assert.equal(clowneStartReview?.localTime, "09:00");
 assert.equal(clowneStartReview?.checkedOn, CURRENT_ROLLING_START_CHECKPOINT_AT);
 assert.equal(clowneStartReview?.retryOn, null);
 assert.match(clowneStartReview?.sourceOutcome ?? "", /licence 31922/i);
+const dorneyAliasReview = startCheckpoint.records.find(
+  (record) =>
+    record.key === "dorney-lake-half-marathon-10k-5k-november|2026-11-08|Half",
+);
+assert.equal(dorneyAliasReview?.reviewStatus, "duplicate-alias");
+assert.match(dorneyAliasReview?.sourceOutcome ?? "", /guarded retirement/i);
+const canonicalDorneyReview = startCheckpoint.records.find(
+  (record) =>
+    record.key === "dorney-5k-10k-half-marathon-august-1|2026-11-08|Half",
+);
+assert.equal(canonicalDorneyReview?.reviewStatus, "corrected");
+assert.equal(canonicalDorneyReview?.localTime, "09:10");
+assert.equal(canonicalDorneyReview?.checkedOn, LATEST_ROLLING_START_CHECKPOINT_AT);
+const rotherStartReview = startCheckpoint.records.find(
+  (record) => record.key === "rother-valley-remembrance-day-trail-runs|2026-11-08|HM",
+);
+assert.equal(rotherStartReview?.reviewStatus, "corrected");
+assert.equal(rotherStartReview?.localTime, "09:00");
+assert.match(rotherStartReview?.sourceOutcome ?? "", /prior half clock of 09:30/i);
+for (const distance of ["Half", "10mi"]) {
+  const phoenixReview = startCheckpoint.records.find(
+    (record) =>
+      record.key === `phoenix-manchester-wings-of-remembrance|2026-11-08|${distance}`,
+  );
+  assert.equal(phoenixReview?.reviewStatus, "invalidated");
+  assert.equal(phoenixReview?.localTime, null);
+  assert.match(phoenixReview?.sourceOutcome ?? "", /2\.92-mile laps/i);
+}
+const stebbingStartReview = startCheckpoint.records.find(
+  (record) => record.key === "ea-runevents-stebbing-remembrance-10-dunmow|2026-11-08|10mi",
+);
+assert.equal(stebbingStartReview?.reviewStatus, "open");
+assert.equal(stebbingStartReview?.localTime, "11:02");
+assert.match(stebbingStartReview?.sourceOutcome ?? "", /internally inconsistent|date conflict/i);
 assert(
   startCheckpoint.records
     .filter((record) => !["open", "unresolved"].includes(record.reviewStatus))
@@ -3108,5 +3201,5 @@ assert.equal(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (72 half-marathon editions and 22 ten-mile editions), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid cards, ${dailyHalfTenMileRetiredEditionKeys.length} retired invalid distance row and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (72 half-marathon editions and 22 ten-mile editions), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid cards, ${dailyHalfTenMileRetiredEditionKeys.length} retired invalid distance rows and catalogue-level duplicate protection.`,
 );

@@ -54,7 +54,9 @@ assert.match(migration, /source_url text not null check \(source_url ~ '\^https:
 assert.match(migration, /where is_verified/);
 assert.match(sharedApi, /from edition_spectator_access spectator/);
 assert.match(sharedApi, /and spectator\.is_verified/);
-assert.match(sharedApi, /spectator_access: parseSpectatorAccess/);
+assert.match(sharedApi, /const spectator = parseSpectatorAccess\(spectator_access_json\)/);
+assert.match(sharedApi, /spectator_access: spectator && \{/);
+assert.match(sharedApi, /ticket_url: spectator\.ticket_url && privateResultUrl\(spectator\.ticket_url\) \? null : spectator\.ticket_url/);
 assert.match(athleticsApi, /spectator_access_type/);
 assert.match(athleticsApi, /filter \(where spectator\.is_verified\)/);
 assert.match(calendarRoute, /Free to watch/);

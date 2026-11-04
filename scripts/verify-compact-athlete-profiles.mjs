@@ -9,7 +9,11 @@ import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
 import { createMemoryHistory, createRootRoute, createRouter, RouterProvider } from "@tanstack/react-router";
 import { distanceAliasResults } from "./verify-profile-distance-aliases.mjs";
+import { seedReviewedLink } from "./fixtures/reviewed-link.mjs";
 process.env.DATABASE_URL = "";
+process.env.DATABASE_URL_UNPOOLED = "";
+process.env.POSTGRES_URL = "";
+process.env.POSTGRES_URL_NON_POOLING = "";
 process.env.RESEND_API_KEY = "";
 process.env.VITE_AUTH_ENABLED = "true";
 process.env.ATHRECS_STAFF_EMAILS = "compact-staff@example.test";
@@ -362,7 +366,14 @@ try {
   );
   const [source] =
     await sql`insert into athletes (slug,display_name,profile_visibility) values ('compact-linked-athlete','Compact previous name','public') returning id`;
-  await sql`insert into athlete_account_links (athlete_id,user_id,user_email) values (${source.id},'compact-owner','compact-owner@example.test')`;
+  // This downstream rendering fixture starts after independent ownership review.
+  await seedReviewedLink(sql, {
+    athleteId: source.id,
+    userId: "compact-owner",
+    email: "compact-owner@example.test",
+    reviewerId: "compact-staff",
+    reviewerEmail: "compact-staff@example.test",
+  });
   const directory = await rpc(
     "staff-athlete-directory-api",
     "getStaffAthleteDirectory",

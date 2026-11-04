@@ -114,7 +114,7 @@ export function CompactDiscoveryHeader({
           className={`order-last flex min-w-0 w-full items-center rounded-lg border border-border px-3 lg:order-none lg:w-auto lg:flex-1 ${theme === "colourful" ? "bg-[#f7f9fa]" : "bg-elevated"}`}
         >
           <label className="sr-only" htmlFor="discovery-header-search">
-            Search athletes, {active?.toLowerCase() ?? "sports"} fixtures and places
+            Search athletes, race results, {active?.toLowerCase() ?? "sports"} fixtures and places
           </label>
           {selectedSport ? <input type="hidden" name="sport" value={selectedSport.slug} /> : null}
           {(["country", "month", "distance"] as const).map((key) =>
@@ -129,7 +129,7 @@ export function CompactDiscoveryHeader({
             name="q"
             defaultValue={currentSearch.q ?? ""}
             maxLength={120}
-            placeholder={`Search athletes, ${active?.toLowerCase() ?? "sports"} fixtures and places…`}
+            placeholder={`Search athletes, race results, ${active?.toLowerCase() ?? "sports"} fixtures and places…`}
             className="h-10 min-w-0 flex-1 bg-transparent px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-accent"
           />
           <button type="submit" className="min-h-10 px-2 text-xs font-semibold text-accent">

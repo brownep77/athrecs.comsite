@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { CalendarDays, MapPin, UserRound } from "lucide-react";
+import { CalendarDays, MapPin, Trophy, UserRound } from "lucide-react";
 import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard";
 import { CompactFixtureRow } from "@/components/discovery/CompactFixtureRow";
 import { useSavedFixtures } from "@/components/discovery/useSavedFixtures";
+import { listPublicResultEditions } from "@/lib/athrecs/public-results-api";
+import { resultEditionLabel, resultSlug } from "@/lib/athrecs/result-slug";
 import { getAthleteDirectory } from "@/lib/athrecs/athlete-directory-api";
 import { getRunningFixtures, getSportFixtures } from "@/lib/athrecs/sport-fixtures-api";
 import {
@@ -21,27 +23,29 @@ export const Route = createFileRoute("/search")({
   loaderDeps: ({ search }) => search,
   loader: async ({ deps }) => {
     if (!deps.q) return null;
-    const [athletes, fixtures] = await Promise.allSettled([
+    const [athletes, fixtures, results] = await Promise.allSettled([
       getAthleteDirectory({ data: { q: deps.q, pageSize: 8, includeFacets: false } }),
       deps.sport
         ? getSportFixtures({ data: { ...deps, slug: deps.sport } })
         : getRunningFixtures({ data: deps }),
+      listPublicResultEditions({ data: { q: deps.q, category: deps.sport, distance: deps.distance } }),
     ]);
     return {
       athletes: athletes.status === "fulfilled" ? athletes.value : null,
       fixtures: fixtures.status === "fulfilled" ? fixtures.value : null,
+      editions: results.status === "fulfilled" ? results.value.editions.slice(0, 8) : null,
     };
   },
   headers: () => ({ "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, follow" }),
   head: () => ({
     meta: [
-      { title: "Search athletes, fixtures and places | ATHRECS" },
+      { title: "Search athletes, race results, fixtures and places | ATHRECS" },
       { name: "robots", content: "noindex, follow" },
     ],
   }),
   pendingComponent: () => (
     <p role="status" className="p-8 text-muted">
-      Searching athletes, fixtures and places…
+      Searching athletes, race results, fixtures and places…
     </p>
   ),
   errorComponent: ({ reset }) => (
@@ -75,12 +79,15 @@ function SearchPage() {
           {search.q ? `Search results for “${search.q}”` : "Search AthRecs"}
         </h1>
         <p className="text-sm text-muted">
-          Find athletes by name, upcoming {sportLabel.toLowerCase()} fixtures and places.
+          Find athletes, past race results, upcoming {sportLabel.toLowerCase()} fixtures and places.
         </p>
         {search.q ? (
           <nav aria-label="Search result categories" className="flex flex-wrap gap-x-6">
             <a href="#search-athletes" className={linkClass}>
               Athletes
+            </a>
+            <a href="#search-results" className={linkClass}>
+              Race results
             </a>
             <a href="#search-fixtures" className={linkClass}>
               Fixtures
@@ -128,6 +135,44 @@ function SearchPage() {
             ) : (
               <p role="status" className="text-sm text-muted">
                 Athlete search is temporarily unavailable. Please try again.
+              </p>
+            )}
+          </section>
+          <section
+            id="search-results"
+            aria-labelledby="search-results-heading"
+            className="scroll-mt-52 space-y-4"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 id="search-results-heading" className={headingClass}>
+                <Trophy className="size-5 text-accent" aria-hidden="true" />
+                Race results
+              </h2>
+              <Link
+                to="/results"
+                search={{ q: search.q, category: search.sport, distance: search.distance }}
+                className={linkClass}
+              >
+                See all matching editions →
+              </Link>
+            </div>
+            {data.editions?.length ? (
+              <ul className="grid gap-2 sm:grid-cols-2">
+                {data.editions.map((edition) => (
+                  <li key={edition.edition_id}>
+                    <Link
+                      to="/results/$editionId"
+                      params={{ editionId: resultSlug(edition) }}
+                      className="block rounded-xl border border-border bg-surface p-4 text-sm font-semibold text-fg no-underline hover:border-accent hover:text-accent"
+                    >
+                      {resultEditionLabel(edition)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-muted">
+                {data.editions ? "No published editions matched this search." : "Race results are temporarily unavailable."}
               </p>
             )}
           </section>

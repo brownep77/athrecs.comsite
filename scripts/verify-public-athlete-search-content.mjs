@@ -30,6 +30,14 @@ assert.match(
 );
 assert.match(content.description, /Recorded results include Example 10K/);
 assert.equal(content.jsonLd.mainEntity.name, preview.displayName);
+for (const [code, name] of [["PHL", "Philippines"], ["PHI", "Philippines"], ["MYS", "Malaysia"], ["BRN", "Bahrain"]]) {
+  const reported = publicAthleteSearchContent({ ...preview, nationality: code });
+  assert.deepEqual(reported.jsonLd.mainEntity.nationality, { "@type": "Country", name });
+}
+for (const code of ["AIN", "???", null]) {
+  assert.equal(publicAthleteSearchContent({ ...preview, nationality: code }).jsonLd.mainEntity.nationality, undefined);
+}
+
 assert(content.jsonLd.mainEntity.description.startsWith(preview.biography[0]));
 assert.match(content.jsonLd.mainEntity.description, /Example 10K \(unverified record\)/);
 assert.equal(content.jsonLd.url, "https://www.athrecs.com/athletes/alex-example");

@@ -1,3 +1,4 @@
+import { eventImageJsonLd } from "../athrecs/event-images.ts";
 import { roadGuideTitle } from "../athrecs/race-search-title.ts";
 import { verifiedGuideOrganiser } from "../athrecs/race-organiser.ts";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
@@ -50,6 +51,7 @@ export function roadUltraHead(today: string, race?: RoadUltra) {
         .filter((edition) => !edition.provisional)
         .map((edition) => ({
           "@type": "SportsEvent",
+          ...eventImageJsonLd(race.slug, edition.date),
           "@id": `${url}#${edition.date}`,
           name: `${race.name}${edition.label ? ` — ${edition.label}` : ""}`,
           sport: "Running",

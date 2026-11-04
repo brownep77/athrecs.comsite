@@ -25,7 +25,11 @@ export const Route = createFileRoute("/sitemap.xml")({
             [
               `${SITE_URL}/sitemaps/pages.xml`,
               ...(!IS_RUNRECS_SITE
-                ? [`${SITE_URL}/sitemaps/countries.xml`, `${SITE_URL}/sitemaps/channel.xml`]
+                ? [
+                    `${SITE_URL}/sitemaps/countries.xml`,
+                    `${SITE_URL}/sitemaps/channel.xml`,
+                    `${SITE_URL}/sitemaps/mersea.xml`,
+                  ]
                 : []),
               ...(!IS_RUNRECS_SITE ? [`${SITE_URL}/sitemaps/race-places.xml`] : []),
               ...Array.from(

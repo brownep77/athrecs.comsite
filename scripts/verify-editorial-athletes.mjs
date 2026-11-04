@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { PGlite } from "@electric-sql/pglite";
+import { installReviewedManagementSchema } from "./fixtures/reviewed-management-schema.mjs";
 import {
   editorialAthleteNames,
   editorialAthleteReviewRow,
@@ -130,6 +131,7 @@ try {
   `);
   await db.exec(foldSql);
   await db.exec(identifierViewSql);
+  await installReviewedManagementSchema(db);
 
   const profiles = [
     [1, "Synthetic Reviewed Runner", "synthetic-reviewed-runner", "public", "Athlete", 1],

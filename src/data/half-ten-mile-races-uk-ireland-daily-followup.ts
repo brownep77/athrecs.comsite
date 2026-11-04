@@ -3069,6 +3069,15 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://www.codrc.co.uk/e/the-november-nightmare-12273",
   },
   {
+    slug: "phoenix-manchester-wings-of-remembrance",
+    date: "2026-11-08",
+    country: "England",
+    reason:
+      "Checked 2026-11-04: the current organiser programme is an 08:30 seven-hour variable-lap challenge on a 2.92-mile loop. It does not authorise exact half-marathon or 10-mile categories, so those two imported fixed-distance rows are retired while the valid event identity and other catalogue distances remain untouched.",
+    sourceUrl:
+      "https://www.phoenixrunning.co.uk/events/manchester-wings-of-remembrance-2026",
+  },
+  {
     slug: "apocalypse-run",
     date: "2026-11-01",
     country: "England",
@@ -3090,6 +3099,16 @@ export const dailyHalfTenMileRetiredEditionKeys = [
     seriesSlug: "november-nightmare",
     date: "2026-11-01",
     distance: "Half",
+  },
+  {
+    seriesSlug: "phoenix-manchester-wings-of-remembrance",
+    date: "2026-11-08",
+    distance: "Half",
+  },
+  {
+    seriesSlug: "phoenix-manchester-wings-of-remembrance",
+    date: "2026-11-08",
+    distance: "10mi",
   },
 ] as const;
 

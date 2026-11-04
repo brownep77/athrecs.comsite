@@ -65,6 +65,21 @@ assert.equal(
   false,
 );
 
+// Similar club strings must not corroborate a different club. Geography is one signal.
+assert.equal(scorePotentialResultNameMatch(['Paul Browne'],'P Browne',
+  {clubOrTeam:'Norwich Road Runners'},{clubName:'West Norwich Road Runners'}),null);
+const samePlace=scorePotentialResultNameMatch(['Paul Browne'],'Paul Browne',
+  {city:'Norwich',region:'Norfolk',country:'England'},
+  {city:'Norwich',region:'Norfolk',country:'England'});
+assert.equal(samePlace.score,108,'Geography is capped at its strongest signal');
+assert.match(exact.reasons.join(' '),/no supporting identity details/);
+const wrongAge=scorePotentialResultNameMatch(['Paul Browne'],'Paul Browne',
+  {dateOfBirth:'1978-01-01',clubOrTeam:'Synthetic Club',city:'Norwich'},
+  {eventDate:'2026-01-01',category:'M70-74',clubName:'Synthetic Club',city:'Norwich'});
+assert.equal(wrongAge.confidence,'possible');
+assert(wrongAge.score<=69,
+  'Contradictory age evidence cannot be outweighed by name, club and geography');
+
 const patterns = buildPotentialMatchSearchPatterns(["Paul T Browne"]);
 assert.ok(patterns.normalizedPatterns.includes("%paul%browne%"));
 assert.ok(patterns.normalizedPatterns.includes("%p%browne%"));

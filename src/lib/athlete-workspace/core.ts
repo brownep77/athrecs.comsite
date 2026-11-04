@@ -15,6 +15,13 @@ export const draftSchema = z.object({
   time: z.string().trim().max(80), timingBasis: z.enum(["chip", "gun", "unspecified"]),
   sourceUrl: z.string().trim().max(2000), bib: z.string().trim().max(80).default(""),
   place: z.string().trim().max(20).default(""),
+  athleteName: z.string().trim().max(200).optional(),
+  club: z.string().trim().max(200).optional(),
+  ageCategory: z.string().trim().max(80).optional(),
+  ageAtRace: z.string().trim().max(20).optional(),
+  nationality: z.string().trim().max(150).optional(),
+  residence: z.string().trim().max(200).optional(),
+  sourceAthleteId: z.string().trim().max(200).optional(),
 }).strict();
 export type DraftResult = z.infer<typeof draftSchema>;
 export type CandidateResult = DraftResult & {
@@ -24,7 +31,7 @@ export type CandidateResult = DraftResult & {
   resultId?: number; decisionNote?: string;
 };
 export type Batch = {
-  id: string; athlete_id: number | null; submitted_by: string; source_url: string;
+  id: string; athlete_id: number | null; athlete_name?: string | null; submitted_by: string; source_url: string;
   original_text: string; input_hash: string; entries: CandidateResult[]; revision: number;
   evidence_for: string; evidence_against: string; updated_at: string;
 };
@@ -48,6 +55,7 @@ export const profileSchema = z.object({
   county: z.string().trim().max(150), country: z.string().trim().max(150), bio: z.string().trim().max(4000),
 }).strict();
 export const normal = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
+export const identityName = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
 export function distanceValue(value: string): { code: string; km: number } | null {
   if (/^half(?:\s*marathon)?$/i.test(value)) return { code: "Half", km: 21.0975 };
   if (/^marathon$/i.test(value)) return { code: "Marathon", km: 42.195 };
@@ -122,5 +130,16 @@ export function parsePaste(text: string, defaults: { sourceUrl: string; timingBa
   if(dateIndex<0||timeIndex<0)throw new Error("The pasted table needs Date and Time/Performance headings. Use the example headings below or edit the copied table first.");
   const idx={race:raceIndex>=0?raceIndex:find(["event"]),date:dateIndex,distance:distIndex,time:timeIndex,bib:find(["bib","tag","racenumber"]),place:find(["position","place","overallplace","pos"]),source:find(["sourceurl","resultsurl","url"])};
   const get=(r:string[],i:number)=>i<0?"":r[i]??"";
-  return table.slice(1).map((r,i)=>({index:i+1,race:get(r,idx.race),date:isoDate(get(r,idx.date),defaults.dateOrder),distance:get(r,idx.distance),time:get(r,idx.time),bib:get(r,idx.bib),place:get(r,idx.place),sourceUrl:get(r,idx.source)||defaults.sourceUrl,timingBasis:headers[timeIndex]==="chiptime"?"chip":headers[timeIndex]==="guntime"?"gun":defaults.timingBasis}));
+  // Preserve explicitly labelled identity facts. Country/venue are deliberately
+  // not nationality/residence; a race bib is not a permanent athlete identifier.
+  const identityColumns = {
+    athleteName: find(['athletename','runnername','fullname','name']),
+    club: find(['club','runningclub','clubname']),
+    ageCategory: find(['agecategory','agegroup','category']),
+    ageAtRace: find(['ageatrace','age']),
+    nationality: find(['nationality','nationalities']),
+    residence: find(['residence','cityofresidence','townofresidence','hometown']),
+    sourceAthleteId: find(['athleteid','runnerid','membershipnumber']),
+  };
+  return table.slice(1).map((r,i)=>({...Object.fromEntries(Object.entries(identityColumns).flatMap(([key,column])=>get(r,column)?[[key,get(r,column)]]:[])),index:i+1,race:get(r,idx.race),date:isoDate(get(r,idx.date),defaults.dateOrder),distance:get(r,idx.distance),time:get(r,idx.time),bib:get(r,idx.bib),place:get(r,idx.place),sourceUrl:get(r,idx.source)||defaults.sourceUrl,timingBasis:headers[timeIndex]==="chiptime"?"chip":headers[timeIndex]==="guntime"?"gun":defaults.timingBasis}));
 }

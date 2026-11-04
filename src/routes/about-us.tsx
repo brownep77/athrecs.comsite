@@ -54,6 +54,21 @@ const questions = [
       "Yes. We welcome questions, results and feedback from everyone, whatever their ability, experience or level. Use the site chat or email support@athrecs.com. You do not need to be a professional athlete or a club member to get in touch.",
   },
   {
+    question: "Is my account information public?",
+    answer:
+      "Your email, contact details and claim evidence stay off public pages. Account sharing is a separate choice. Reviewed race results and approved sporting-record previews may already be public, including before an athlete joins; creating an account does not publish your private account details.",
+  },
+  {
+    question: "How is profile ownership checked?",
+    answer:
+      "Verifying an email confirms access to that mailbox. A new profile ownership claim needs staff approval based on independent evidence before the profile is linked. Ownership review is separate from checking a race result against its original source.",
+  },
+  {
+    question: "How do I request account deletion or correct a public record?",
+    answer:
+      "Email paul@athrecs.com to request account access, deletion, a correction or review of a public sporting record. Use your account email where possible and include the relevant page link. Our privacy notice explains identity checks, retention and how to raise an objection.",
+  },
+  {
     question: "Does AthRecs organise the events it lists?",
     answer:
       "AthRecs helps you discover events and reach their organisers or authorised entry providers. A listing does not mean AthRecs organises that event. Always check the organiser’s latest information for entry availability, schedules, course details and race instructions.",
@@ -348,8 +363,9 @@ function AboutPage() {
             investigate.
           </p>
           <p>
-            Athletes can help identify errors and improve their records, with public profiles
-            respecting their sharing choices. Learn more about{" "}
+            Athletes can help identify errors and improve their records. Public sporting records are
+            separate from private account details and optional account sharing. Learn more about
+            corrections, publication reviews and{" "}
             <Link to="/privacy" className="text-accent underline">
               privacy on AthRecs
             </Link>

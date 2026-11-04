@@ -128,7 +128,12 @@ export type AthleteAccountData = {
   sports: AthleteSportProfile[];
   preferences: AthleteProductPreferences;
   consents: AthleteAccountConsents;
-  claimedProfiles: Array<{ athleteId: number; athleteName: string; athleteSlug: string }>;
+  claimedProfiles: Array<{
+    athleteId: number;
+    athleteName: string;
+    athleteSlug: string;
+    managementReviewed: boolean;
+  }>;
   claimedResults: ProfileResult[];
   claimCount: number;
 };
@@ -601,11 +606,17 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         from athlete_account_consents
         where user_id = ${userId}
       `,
-    sql<{ athlete_id: number; athlete_name: string; athlete_slug: string }>`
+    sql<{
+      athlete_id: number;
+      athlete_name: string;
+      athlete_slug: string;
+      management_reviewed: boolean;
+    }>`
         select
           athlete.id as athlete_id,
           athlete.display_name as athlete_name,
-          athlete.slug as athlete_slug
+          athlete.slug as athlete_slug,
+          athlete_management_reviewed(athlete.id, account_link.user_id) as management_reviewed
         from athlete_account_links account_link
         join athletes athlete on athlete.id = account_link.athlete_id
         where account_link.user_id = ${userId} and account_link.status = 'active'
@@ -667,6 +678,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       athleteId: row.athlete_id,
       athleteName: row.athlete_name,
       athleteSlug: row.athlete_slug,
+      managementReviewed: row.management_reviewed === true,
     })),
     claimedResults,
     claimCount: claimCounts[0]?.claim_count ?? 0,
@@ -1086,12 +1098,14 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
           athlete_id: number;
           athlete_name: string;
           athlete_slug: string;
+          management_reviewed: boolean;
         }>`
           select
             account_link.user_id,
             athlete.id as athlete_id,
             athlete.display_name as athlete_name,
-            athlete.slug as athlete_slug
+            athlete.slug as athlete_slug,
+            athlete_management_reviewed(athlete.id, account_link.user_id) as management_reviewed
           from athlete_account_links account_link
           join athletes athlete on athlete.id = account_link.athlete_id
           where account_link.status = 'active'
@@ -1152,6 +1166,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
           athleteId: row.athlete_id,
           athleteName: row.athlete_name,
           athleteSlug: row.athlete_slug,
+          managementReviewed: row.management_reviewed === true,
         })),
         claimedResults: [],
         claimCount: claimCountByUser.get(profile.user_id) ?? 0,

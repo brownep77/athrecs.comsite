@@ -2,12 +2,12 @@ import {
   SUPERHALFS_CHECKED_AT,
   SUPERHALFS_DESCRIPTION,
   SUPERHALFS_PATH,
-  SUPERHALFS_RACES,
+  type SuperHalfsRace,
   SUPERHALFS_TITLE,
-} from "@/data/superhalfs";
+} from "@/data/superhalfs-guide";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 
-export function superhalfsHead() {
+export function superhalfsHead(races: SuperHalfsRace[]) {
   const url = `${SITE_URL}${SUPERHALFS_PATH}`;
   const graph = [
     {
@@ -27,8 +27,8 @@ export function superhalfsHead() {
       "@type": "ItemList",
       "@id": `${url}#races`,
       name: "The six SuperHalfs half marathons",
-      numberOfItems: SUPERHALFS_RACES.length,
-      itemListElement: SUPERHALFS_RACES.map((race, index) => ({
+      numberOfItems: races.length,
+      itemListElement: races.map((race, index) => ({
         "@type": "ListItem",
         position: index + 1,
         item: {

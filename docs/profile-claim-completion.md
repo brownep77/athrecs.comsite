@@ -15,8 +15,8 @@ hint. Existing server-side identity matching and claim authorization still apply
 A direct claim link with a missing racing name asks for that name on the same page.
 Saving it retries the selected result; it does not grant ownership, publish the profile
 or save unrelated consent choices. The athlete reviews the full result list, removes or restores individual rows, adds missing results,
-and explicitly confirms the profile and selected results together. Eligible uncontested claims
-complete immediately; exceptions retain ownership review. One durable summary receipt records
+and explicitly confirms the profile and selected results together. Every new ownership claim remains pending until independent staff review. Existing reviewed
+owners can confirm additional result selections without another ownership review. One durable summary receipt records
 the actual completion status. See `docs/result-claim-flow.md` for the eligibility policy.
 
 Email verification, account binding, conflict safeguards and private-by-default behavior remain.
@@ -27,7 +27,7 @@ Verification:
 
 - `node scripts/verify-profile-claim-journey.mjs`: real browser, authenticated endpoints,
   synthetic accounts and disposable PGlite; missing name, remembered navigation, mobile
-  invitation resume, one explicit completed claim, batch corrections and no duplicate ownership.
+  invitation resume, one pending claim, independent synthetic staff approval, batch corrections and no duplicate ownership.
 - `node --experimental-vm-modules scripts/verify-claim-invitations.mjs`: invitation
   authorization including unauthenticated, wrong-account, unverified, expired, revoked,
   declined and pre-registration cases.

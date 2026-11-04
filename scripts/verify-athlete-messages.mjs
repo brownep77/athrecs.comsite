@@ -1,5 +1,6 @@
 // Real registration, staff RPC, token binding and claims. Only outgoing email is intercepted.
 import { signupDetails } from "./fixtures/signup-details.mjs";
+import { seedReviewedLink } from "./fixtures/reviewed-link.mjs";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { createServer } from "vite";
@@ -264,11 +265,37 @@ try {
     "Same name does not join correspondence",
   );
   await sql`insert into athlete_account_links(user_id,user_email,athlete_id,status) values(${athlete.id},${athlete.email},998901,'active')`;
+  const unreviewedHistory = await call("getStaffAthleteMessages", {
+    ...filters,
+    target: sourceTarget,
+  });
+  assert.equal(
+    unreviewedHistory.recipientUserId,
+    null,
+    "A bare account link cannot redirect athlete correspondence",
+  );
+  assert.equal(unreviewedHistory.recipientEmail, null);
+  assert.equal(
+    (await call("getStaffAthleteMessages", filters)).received,
+    1,
+    "An unreviewed account does not inherit source-athlete messages",
+  );
+  await seedReviewedLink(sql, {
+    athleteId: 998901,
+    userId: athlete.id,
+    email: athlete.email,
+    reviewerId: staff.id,
+    reviewerEmail: staff.email,
+  });
   const linkedHistory = await call("getStaffAthleteMessages", {
     ...filters,
     target: sourceTarget,
   });
-  assert.equal(linkedHistory.recipientUserId, athlete.id, "An approved link resolves its account");
+  assert.equal(
+    linkedHistory.recipientUserId,
+    athlete.id,
+    "An independently reviewed link resolves its account",
+  );
   assert.equal(linkedHistory.recipientEmail, athlete.email);
   assert.equal(
     (await call("getStaffAthleteMessages", filters)).received,

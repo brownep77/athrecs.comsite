@@ -30,10 +30,15 @@ const router = file(
   "router.tsx",
   `import React from 'react';
 const subscribe=(notify)=>{window.addEventListener('popstate',notify);return()=>window.removeEventListener('popstate',notify)};
-function useSearch(){return Object.fromEntries(new URLSearchParams(React.useSyncExternalStore(subscribe,()=>location.search)))}
-export const createFileRoute=(path)=>(options)=>({...options,fullPath:path,useLoaderData:()=>window.fixtureClubs,useSearch});
+function useSearch(){const values=Object.fromEntries(new URLSearchParams(React.useSyncExternalStore(subscribe,()=>location.search))); if(values.page) values.page=Number(values.page); return values}
+export const createFileRoute=(path)=>(options)=>({...options,fullPath:path,useLoaderData:()=>{
+  const search=useSearch(), all=window.fixtureClubs, page=Number(search.page)||1;
+  const matched=all.filter(c=>(!search.sport||c.sports.includes(search.sport))&&(!search.country||c.country===search.country));
+  return {clubs:matched.slice((page-1)*48,page*48),total:matched.length,countries:[...new Set(all.map(c=>c.country))],sports:[...new Set(all.flatMap(c=>c.sports))]};
+},useSearch});
+export function notFound(){return new Error("Not found")}
 export function useNavigate(){return({to,search})=>{const query=new URLSearchParams(Object.entries(search||{}).filter(([,value])=>value!==undefined)).toString();history.replaceState(null,'',to+(query?'?'+query:''));window.dispatchEvent(new PopStateEvent('popstate'))}}
-export function Link({to,search,params,hash,children,...props}){let href=to;if(params)for(const [key,value]of Object.entries(params))href=href.replace('$'+key,value);if(search)href+='?'+new URLSearchParams(search).toString();if(hash)href+='#'+hash;return <a href={href} {...props}>{children}</a>}`,
+export function Link({to,search,params,hash,children,...props}){let href=to;if(params)for(const [key,value]of Object.entries(params))href=href.replace('$'+key,value);if(search)href+='?'+new URLSearchParams(Object.entries(search).filter(([,value])=>value!==undefined)).toString();if(hash)href+='#'+hash;return <a href={href} {...props}>{children}</a>}`,
 );
 const auth = file(
   "auth.js",
@@ -56,7 +61,7 @@ export async function reviewClubRegistration({data}){window.reviews.push(data);r
 );
 const directory = file(
   "directory-api.js",
-  `export async function getClubBySlug(){return null;}export async function listClubs({data}){return window.fixtureClubs.filter(c=>!data?.q||[c.name,c.city,c.country,...c.sports].join(' ').toLowerCase().includes(data.q.toLowerCase()));}`,
+  `export async function getClubBySlug(){return null;}export async function getClubDirectoryPage(){return {}}export async function listClubs({data}){return window.fixtureClubs.filter(c=>!data?.q||[c.name,c.city,c.country,...c.sports].join(' ').toLowerCase().includes(data.q.toLowerCase()));}`,
 );
 file(
   "index.html",
@@ -106,12 +111,14 @@ try {
     await page.getByRole("link", { name: "Claim this club profile", exact: true }).count(),
     48,
   );
-  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await page.getByRole("link", { name: "Next", exact: true }).click();
+  await page.getByText("52 clubs · Page 2 of 2", { exact: true }).waitFor();
   assert.equal(
     await page.getByRole("link", { name: "Claim this club profile", exact: true }).count(),
     4,
   );
   await page.getByLabel("Country", { exact: true }).selectOption("Ireland");
+  await page.getByText("2 clubs · Page 1 of 1", { exact: true }).waitFor();
   assert.equal(
     await page.getByRole("link", { name: "Claim this club profile", exact: true }).count(),
     2,

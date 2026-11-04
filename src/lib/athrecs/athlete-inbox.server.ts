@@ -53,7 +53,7 @@ export async function matchInboxSender(
     ), resolved as (
       select coalesce(c.user_id,l.user_id) as user_id,
         case when coalesce(c.user_id,l.user_id) is null then c.athlete_id end as athlete_id
-      from candidates c left join athlete_account_links l on l.athlete_id=c.athlete_id and l.status='active'
+      from candidates c left join athlete_reviewed_account_links l on l.athlete_id=c.athlete_id and l.status='active'
     ) select distinct user_id as "userId",athlete_id as "athleteId" from resolved
       where user_id is not null or athlete_id is not null`;
   return rows.length === 1 ? rows[0] : rows.length ? "ambiguous" : null;

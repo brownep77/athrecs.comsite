@@ -115,7 +115,9 @@ function AdminResultClaimsPage() {
 
   const counts = (allClaims.data ?? []).reduce(
     (summary, claim) => {
-      summary[claim.status] += 1;
+      summary[
+        claim.status === "approved" && !claim.managementReviewed ? "pending" : claim.status
+      ] += 1;
       return summary;
     },
     { pending: 0, needs_info: 0, approved: 0, rejected: 0, withdrawn: 0 },
@@ -154,9 +156,10 @@ function AdminResultClaimsPage() {
             Result claim review
           </h1>
           <p className="max-w-3xl text-sm text-muted">
-            Straightforward claims complete through athlete self-confirmation. Review conflicts,
-            discrepancies and child or guardian claims here. Record the evidence used to resolve
-            each case; a completed claim does not certify timing data or imply a photo or ID check.
+            Independently check ownership before linking a new account to an athlete. Email access
+            and a matching name are insufficient. Record the evidence and resolve any discrepancies;
+            another staff member must review your own claim. Historical self-confirmations remain in
+            the audit and need review before public management. Result-source checks are separate.
           </p>
         </div>
         <Button asChild variant="secondary">
@@ -271,7 +274,8 @@ function ClaimReviewCard({
   onRevoke: () => void;
   busy: boolean;
 }) {
-  const reviewable = claim.status === "pending" || claim.status === "needs_info";
+  const legacyReview = claim.status === "approved" && !claim.managementReviewed;
+  const reviewable = claim.status === "pending" || claim.status === "needs_info" || legacyReview;
   const revokable = claim.status === "approved";
   const conflict =
     claim.conflictReason ||
@@ -287,7 +291,9 @@ function ClaimReviewCard({
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="font-display text-lg font-semibold text-fg">{claim.athleteName}</h2>
-            <Badge className={statusClass(claim.status)}>{STATUS_LABELS[claim.status]}</Badge>
+            <Badge className={statusClass(claim.status)}>
+              {legacyReview ? "Ownership review required" : STATUS_LABELS[claim.status]}
+            </Badge>
             {conflict ? (
               <Badge className="border-red-500/30 bg-red-50 text-red-900">Conflict check</Badge>
             ) : null}
@@ -350,9 +356,9 @@ function ClaimReviewCard({
               </div>
             ) : (
               <p className="mt-2 text-sm text-muted">
-                No evidence links were supplied. Self-confirmation does not require them. For a
-                claim held for review, record the evidence resolving the issue before approval. For
-                a child, confirm the responsible adult’s authority and consent privately.
+                No evidence links were supplied. Independently establish the claimant's authority
+                and record the evidence before approval. A matching name or mailbox is insufficient.
+                For a child, confirm the responsible adult’s authority and consent privately.
               </p>
             )}
             {claim.evidenceText ? (
@@ -425,7 +431,7 @@ function ClaimReviewCard({
                 type="button"
                 disabled={
                   busy ||
-                  !note.trim() ||
+                  note.trim().length < 12 ||
                   Boolean(
                     claim.existingOwnerEmail && claim.existingOwnerEmail !== claim.claimantEmail,
                   )
@@ -438,7 +444,7 @@ function ClaimReviewCard({
               <Button
                 type="button"
                 variant="secondary"
-                disabled={busy || !note.trim()}
+                disabled={busy || !note.trim() || legacyReview}
                 onClick={() => onReview("needs_info")}
               >
                 <MessageSquareMore className="size-4" aria-hidden="true" />
@@ -447,14 +453,19 @@ function ClaimReviewCard({
               <Button
                 type="button"
                 variant="secondary"
-                disabled={busy || !note.trim()}
+                disabled={busy || !note.trim() || legacyReview}
                 onClick={() => onReview("reject")}
               >
                 <ShieldX className="size-4" aria-hidden="true" />
                 Reject
               </Button>
             </div>
-          ) : revokable ? (
+          ) : !revokable ? (
+            <p className="rounded-lg bg-elevated px-3 py-2 text-sm text-muted">
+              This claim is closed; no further staff action is available.
+            </p>
+          ) : null}
+          {revokable ? (
             <Button
               type="button"
               variant="secondary"
@@ -464,11 +475,7 @@ function ClaimReviewCard({
               <ShieldX className="size-4" aria-hidden="true" />
               Revoke ownership
             </Button>
-          ) : (
-            <p className="rounded-lg bg-elevated px-3 py-2 text-sm text-muted">
-              This claim is closed; no further staff action is available.
-            </p>
-          )}
+          ) : null}
           {busy ? (
             <p className="flex items-center gap-2 text-xs text-subtle">
               <Loader2 className="size-3.5 animate-spin" aria-hidden="true" />

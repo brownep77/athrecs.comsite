@@ -48,6 +48,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Sign-up delivery, revoked sessions and reviewed athlete management
+        run: npm run verify:signup-security
+
       - name: Verify Intercom identity and account session isolation
         run: npm run verify:intercom
 

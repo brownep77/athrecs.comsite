@@ -1,9 +1,11 @@
+import { ReviewedEventImage } from "@/components/races/ReviewedEventImage";
+import { fixtureSlugForGuide } from "@/data/race-guide-links";
 import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
 import { RaceActions } from "@/components/races/RaceActions";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { HALF_MARATHON_COUNTRIES, halfMarathonCountry } from "@/data/road-half-marathons/countries";
-import { SUPERHALFS_PATH } from "@/data/superhalfs";
+import { SUPERHALFS_PATH } from "@/data/superhalfs-guide";
 import { MARATHON_COUNTRIES, countryGuide } from "@/data/road-marathons/countries";
 import type { MarathonCountryGuide, RoadMarathon } from "@/data/road-marathons/types";
 import { roadMarathonDate, upcomingRoadEditions } from "@/lib/running/road-marathon-calendar";
@@ -191,7 +193,7 @@ export function CountryMarathonPage({
                   <tr key={`${race.slug}-${edition.date}`} className="even:bg-elevated/30">
                     <td className="px-4 py-3">
                       <a
-                        href={edition.sourceUrl}
+                        href={edition.sourceUrl || undefined}
                         className="text-accent underline underline-offset-4"
                       >
                         <time dateTime={edition.date}>
@@ -415,6 +417,7 @@ export function RoadMarathonPage({
   useRaceDateRefresh([race.timeZone, ...related.map((item) => item.timeZone)], now);
   const half = race.distanceKm === 21.0975;
   const country = (half ? halfMarathonCountry(race.country) : countryGuide(race.country))!;
+  const fixture = fixtureSlugForGuide.get(race.slug);
   const upcoming = upcomingRoadEditions(race, now);
   const questions = roadRaceQuestions(race, now);
   return (
@@ -436,6 +439,7 @@ export function RoadMarathonPage({
         <h1 className="mt-4 max-w-4xl font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
           {race.name} course and entry guide
         </h1>
+        <ReviewedEventImage slug={race.slug} date={upcoming[0]?.date} />
         <p className="mt-4 text-base text-muted">{roadRaceLocation(race, country.name)}</p>
         <p className="mt-5 max-w-3xl text-base leading-7">{race.description}</p>
         <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -445,6 +449,9 @@ export function RoadMarathonPage({
           >
             Official race website <ArrowUpRight className="size-4" aria-hidden="true" />
           </a>
+          {fixture && <Link to="/races/$slug" params={{slug: fixture}} className={linkClass}>
+            {race.name} fixtures and race history
+          </Link>}
           <a href="#entry" className={linkClass}>
             How to enter
           </a>
@@ -491,7 +498,7 @@ export function RoadMarathonPage({
                   id={`edition-${edition.date}`}
                   className="scroll-mt-24 space-y-2"
                 >
-                  <a href={edition.sourceUrl} className={linkClass}>
+                  <a href={edition.sourceUrl || undefined} className={linkClass}>
                     <time dateTime={edition.date}>
                       {roadMarathonDate(edition.date, edition.endDate)}
                     </time>
@@ -569,7 +576,7 @@ export function RoadMarathonPage({
                 <dt className="font-semibold">Approximate field</dt>
                 <dd>
                   <a
-                    href={race.fieldSize.sourceUrl}
+                    href={race.fieldSize.sourceUrl || undefined}
                     className="text-accent underline underline-offset-4"
                   >
                     {race.fieldSize.display}
@@ -656,7 +663,10 @@ export function RoadMarathonPage({
                   <dt className="text-sm font-semibold">{item.label}</dt>
                   <dd className="mt-1 text-sm leading-6 text-muted">
                     {item.value}{" "}
-                    <a href={item.sourceUrl} className="text-accent underline underline-offset-4">
+                    <a
+                      href={item.sourceUrl || undefined}
+                      className="text-accent underline underline-offset-4"
+                    >
                       {item.label} information
                     </a>
                   </dd>
@@ -674,15 +684,9 @@ export function RoadMarathonPage({
         <h2 id="results-title" className="font-display text-2xl font-semibold">
           Past races and results
         </h2>
-        <a href={race.resultsUrl} className={`${linkClass} mt-2`}>
-          {race.resultsLabel ?? "Official results archive"}{" "}
-          <ArrowUpRight className="size-4" aria-hidden="true" />
+        <a href={`/results?q=${encodeURIComponent(race.name)}`} className={`${linkClass} mt-2`}>
+          Search AthRecs results for {race.name}
         </a>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-          Open the organiser’s results to find a runner, club or published category standing. At
-          festivals with several distances, select the {half ? "half marathon" : "marathon"}{" "}
-          results.
-        </p>
         {race.pastEditions.length > 1 ? (
           <nav aria-label="Results by year" className="mt-3 flex flex-wrap gap-x-5 text-sm">
             {[...race.pastEditions]
@@ -710,10 +714,6 @@ export function RoadMarathonPage({
                   >
                     {edition.year} {race.name}
                   </h3>
-                  <a href={edition.resultsUrl} className={`${linkClass} text-sm`}>
-                    Full {edition.year} results{" "}
-                    <ArrowUpRight className="size-4" aria-hidden="true" />
-                  </a>
                 </div>
                 {edition.date ? (
                   <p className="mt-1 text-xs text-muted">
@@ -727,9 +727,6 @@ export function RoadMarathonPage({
                       <section key={category.category} className="py-3">
                         <h4 className="font-semibold">{category.category}</h4>
                         <p className="mt-1 text-sm leading-6 text-muted">{category.summary}</p>
-                        <a href={category.sourceUrl} className={`${linkClass} text-xs`}>
-                          View result details <ArrowUpRight className="size-3" aria-hidden="true" />
-                        </a>
                       </section>
                     ))}
                   </div>
@@ -739,7 +736,7 @@ export function RoadMarathonPage({
         </div>
         {!race.pastEditions.length ? (
           <p className="mt-3 text-sm leading-6 text-muted">
-            Use the official archive above to find earlier editions and category results.
+            Earlier editions have no published summaries in this guide.
           </p>
         ) : null}
       </section>

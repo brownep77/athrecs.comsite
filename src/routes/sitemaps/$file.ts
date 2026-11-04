@@ -14,7 +14,6 @@ export const Route = createFileRoute("/sitemaps/$file")({
           const runningPaths: string[] = [];
           const modified = new Map<string, string>();
           if (!IS_RUNRECS_SITE) {
-            runningPaths.push("/swimming/english-channel");
             const { EDITORIAL_ARTICLES } = await import("@/data/athrecs-editorial");
             const { editorialPath } = await import("@/lib/athrecs/editorial");
             for (const article of EDITORIAL_ARTICLES)
@@ -84,6 +83,19 @@ export const Route = createFileRoute("/sitemaps/$file")({
               )
                 .filter((path, index, paths) => paths.indexOf(path) === index)
                 .map((path) => ({ url: `${SITE_URL}${path}`, lastmod: modified.get(path) })),
+            ),
+          );
+        }
+        if (!IS_RUNRECS_SITE && params.file === "mersea.xml") {
+          const { default: archive } = await import("@/data/mersea-10/archive.json");
+          return sitemapResponse(
+            sitemapXml(
+              archive.editions
+                .filter(
+                  (edition) =>
+                    edition.rows.length && ["full", "partial"].includes(edition.coverage),
+                )
+                .map((edition) => `${SITE_URL}/results/mersea-10?year=${edition.year}`),
             ),
           );
         }

@@ -221,11 +221,15 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
             <p className="text-sm leading-6 text-muted">
               Sources:{" "}
               {section.sources.map((source, index) => (
-                <span key={source.url}>
+                <span key={source.url || source.label}>
                   {index ? " · " : ""}
-                  <a href={source.url} className="text-accent underline underline-offset-2">
-                    {source.label}
-                  </a>
+                  {source.url ? (
+                    <a href={source.url} className="text-accent underline underline-offset-2">
+                      {source.label}
+                    </a>
+                  ) : (
+                    source.label
+                  )}
                 </span>
               ))}
             </p>
@@ -267,16 +271,36 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
           </a>
         </aside>
       ) : null}
+      {article.hashtags?.length ? (
+        <p
+          aria-label="Article hashtags"
+          className="flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted"
+        >
+          {article.hashtags.map((hashtag) => (
+            <span key={hashtag}>{hashtag}</span>
+          ))}
+        </p>
+      ) : null}
       {article.links?.length ? (
         <nav
           aria-label="Related pages and sources"
           className="flex flex-col gap-3 border-t border-border pt-5"
         >
-          {article.links.map((link) => (
-            <a key={link.url} href={link.url} className="text-accent underline underline-offset-2">
-              {link.label}
-            </a>
-          ))}
+          {article.links.map((link) =>
+            link.url ? (
+              <a
+                key={link.url}
+                href={link.url}
+                className="text-accent underline underline-offset-2"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <span key={link.label} className="text-muted">
+                {link.label}
+              </span>
+            ),
+          )}
         </nav>
       ) : null}
     </article>

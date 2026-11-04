@@ -19,12 +19,13 @@ const getHomeNews = createServerFn({ method: "GET" }).handler(async () => {
         a.slug.localeCompare(b.slug),
     )
     .slice(0, 3)
-    .map(({ slug, title, standfirst, date, displayDate }) => ({
+    .map(({ slug, title, standfirst, date, displayDate, locations }) => ({
       slug,
       title,
       standfirst,
       date,
       displayDate,
+      locations,
     }));
 });
 
@@ -49,17 +50,13 @@ export const Route = createFileRoute("/")({
   },
   staleTime: 60_000,
   head: ({ match }) => ({
-    meta: [
-      ...siteGraphMeta({
-        title: "ATHRECS | Running races, sports, results & athlete profiles",
-        description:
-          "Find your next running race by country, month and distance. Switch sports, explore country marathon guides, save races and find athlete results.",
-        url: SITE_URL,
-      }),
-      ...(Object.values(match.search).some(Boolean)
-        ? [{ name: "robots", content: "noindex, follow" }]
-        : []),
-    ],
+    meta: siteGraphMeta({
+      title: "ATHRECS | Running races, sports, results & athlete profiles",
+      description:
+        "Find your next running race by country, month and distance. Switch sports, explore country marathon guides, save races and find athlete results.",
+      url: SITE_URL,
+      indexable: !Object.values(match.search).some(Boolean),
+    }),
     links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [
       {

@@ -2,7 +2,6 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { listUnlinkedResults } from "@/lib/athrecs/unlinked-results-api";
 import { normalizeResultsSearch } from "@/lib/athrecs/public-results-search";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
-import { resultCredit } from "@/lib/athrecs/result-credit";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { SITE_URL } from "@/lib/athrecs/seo";
 
@@ -109,7 +108,6 @@ function UnlinkedResultsPage() {
           </thead>
           <tbody>
             {results.map((row) => {
-              const credit = resultCredit(row.source_url, row.provider);
               return (
                 <tr key={row.key} className="border-t border-border">
                   <td className="p-3 font-medium">
@@ -132,18 +130,7 @@ function UnlinkedResultsPage() {
                     {row.verification_status === "unverified" ? <span className="block text-xs text-muted">Unverified result</span> : null}
                   </td>
                   <td className="p-3">
-                    {credit ? (
-                      <a
-                        href={credit.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent underline"
-                      >
-                        {credit.name}
-                      </a>
-                    ) : (
-                      "—"
-                    )}
+                    {row.provider || "—"}
                   </td>
                 </tr>
               );

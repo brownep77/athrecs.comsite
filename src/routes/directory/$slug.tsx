@@ -3,8 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { OrganisationSports } from "@/components/directory/OrganisationSports";
 import { SportCollections } from "@/components/directory/SportCollections";
-import { ORGANISATION_TYPES } from "@/data/sports-organisations";
-import { getSportsOrganisation } from "@/lib/athrecs/sports-directory";
+import { ORGANISATION_TYPES } from "@/data/sports-organisation-types";
+import { getDirectoryOrg } from "@/lib/athrecs/public-directory-api";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
@@ -13,8 +13,8 @@ export const Route = createFileRoute("/directory/$slug")({
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
-  loader: ({ params }) => {
-    const body = getSportsOrganisation(params.slug);
+  loader: async ({ params }) => {
+    const body = await getDirectoryOrg({ data: params.slug });
     if (!body) throw notFound();
     return body;
   },
@@ -75,10 +75,7 @@ export const Route = createFileRoute("/directory/$slug")({
 
 function OrganisationPage() {
   const body = Route.useLoaderData();
-  const related = (body.related ?? []).flatMap((slug) => {
-    const organisation = getSportsOrganisation(slug);
-    return organisation ? [organisation] : [];
-  });
+  const related = body.relatedOrganisations;
   return (
     <div className="mx-auto max-w-4xl space-y-7 pb-6">
       <Link

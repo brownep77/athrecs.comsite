@@ -120,7 +120,7 @@ export function ProfileClaimGuide({
     resume && !claims.data?.some((claim) => claim.resultId === resume) ? resume : null;
   const linked = account.claimedProfiles.length > 0;
   const confirmed = claims.data?.some(
-    (claim) => claim.confirmedAt && claim.confirmationMethod === "athlete",
+    (claim) => claim.status === "approved" && claim.managementReviewed && claim.confirmedAt,
   );
   const reviewAnchor = account.claimedResults[0]?.resultId;
   if (linked && !pending && !invitation && !resumable)
@@ -175,7 +175,7 @@ export function ProfileClaimGuide({
               ? "Open it to read what our team needs."
               : pending.conflictReason || pending.staffNote
                 ? "Open it to see why a staff check is needed."
-                : "Open it and confirm to complete it under the simplified claim process."}
+                : "Staff will check ownership before linking the profile."}
           </p>
           <Button asChild className="h-auto min-h-11 max-w-full whitespace-normal py-3">
             <Link to="/claim-results" search={{ resultId: pending.resultId }}>

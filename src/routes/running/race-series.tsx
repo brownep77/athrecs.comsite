@@ -4,7 +4,7 @@ import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { ArrowRight, ExternalLink, ShieldCheck } from "lucide-react";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 import { raceGroupDefinitions } from "@/data/race-collections";
-import { SUPERHALFS_PATH } from "@/data/superhalfs";
+import { SUPERHALFS_PATH } from "@/data/superhalfs-guide";
 import { listEvents } from "@/runrecs/api";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import type { EventListItem, RaceGroupCode } from "@/lib/athrecs/types";

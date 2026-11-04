@@ -27,7 +27,7 @@ const sql = sqlFor(db),
   stranger = { userId: "stranger", staff: false };
 try {
   await db.exec(`create table "user"(id text primary key,"emailVerified" boolean);insert into "user" values ('staff',true),('owner',true),('stranger',true);
- create table athletes(id int primary key,profile_visibility text,profile_type text);insert into athletes values(1,'public','Athlete'),(2,'private','Athlete');
+ create table athletes(id int primary key,profile_visibility text,profile_type text,display_name text default 'Synthetic Athlete',profile_details jsonb default '{}'::jsonb);insert into athletes(id,profile_visibility,profile_type) values(1,'public','Athlete'),(2,'private','Athlete');
  create table athlete_account_links(athlete_id int,user_id text,status text);insert into athlete_account_links values(1,'owner','active');
  create table athlete_public_shares(user_id text,enabled boolean,share_results boolean);
  create table athlete_profile_history_choices(user_id text,athlete_id int,provider text,external_id text,performance_hash text,excluded boolean);
@@ -80,6 +80,10 @@ try {
   await sql`update athlete_result_proposals set entries='[{"index":1,"state":"pending","response":"no"}]' where id=${batchId}::uuid`;
   await assert.rejects(() => publishAdminHistory(sql, input, staff), /denied/);
   await sql`update athlete_result_proposals set entries='[{"index":1,"state":"pending","response":"unsure"}]' where id=${batchId}::uuid`;
+  await sql`update athlete_result_proposals set entries='[{"index":1,"state":"pending","response":"unsure","athleteName":"Synthetic Previous Athlete"}]' where id=${batchId}::uuid`;
+  await assert.rejects(() => publishAdminHistory(sql, input, staff), /source athlete name differs/);
+  assert.equal((await sql`select count(*)::int as n from athlete_source_histories`)[0].n,0,'A source-name conflict cannot bypass review through history publication');
+  await sql`update athletes set profile_details='{"aliases":["Synthetic Previous Athlete"]}'::jsonb where id=1`;
   assert.deepEqual(await publishAdminHistory(sql, input, staff), { added: 1, replay: false });
   assert.deepEqual(await publishAdminHistory(sql, input, staff), { added: 1, replay: true });
   await assert.rejects(

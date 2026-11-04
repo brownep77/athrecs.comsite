@@ -17,6 +17,8 @@ for (const name of [
   "0013_result_claims.sql",
   "0014_athlete_accounts.sql",
   "0031_brand_partnerships.sql",
+  "20261011_result_claim_confirmation.sql",
+  "20261103_reviewed_athlete_management.sql",
 ]) {
   await pg.exec(await readFile(new URL(`../migrations/${name}`, import.meta.url), "utf8"));
 }
@@ -30,11 +32,32 @@ function wrap(db) {
   return sql;
 }
 const sql = wrap(pg);
-for (const id of ["brand", "other", "athlete", "junior", "staff", "club", "unverified"]) {
+for (const id of [
+  "brand",
+  "other",
+  "athlete",
+  "junior",
+  "staff",
+  "club",
+  "unverified",
+  "unreviewed",
+]) {
   await sql`insert into "user" (id, name, email, "emailVerified") values (${id}, ${id}, ${`${id}@example.test`}, ${id !== "unverified"})`;
 }
-await sql`insert into athletes (id, slug, display_name) values (101, 'test-athlete', 'Test Athlete'), (102, 'test-junior', 'Test Junior')`;
-await sql`insert into athlete_account_links (athlete_id, user_id, user_email) values (101, 'athlete', 'athlete@example.test'), (102, 'junior', 'junior@example.test')`;
+await sql`insert into athletes (id, slug, display_name) values (101, 'test-athlete', 'Test Athlete'), (102, 'test-junior', 'Test Junior'), (103, 'test-unreviewed', 'Test Unreviewed Athlete')`;
+// This downstream partnership fixture starts with an independently reviewed ownership claim.
+// Keep a distinct reviewer, supporting note and matching source-claim link rather than a bare flag.
+await sql`insert into events(id,slug,name,sport) values(9001,'synthetic-owner-proof','Synthetic Owner Proof','Running')`;
+await sql`insert into editions(id,event_id,event_date,distance_code) values(9001,9001,'2025-01-01','10K')`;
+await sql`insert into results(id,edition_id,athlete_id,status,finish_time_seconds) values(9001,9001,101,'finished',2400)`;
+const [ownershipClaim] =
+  await sql`insert into result_claims(result_id,athlete_id,claimant_user_id,claimant_email,
+  status,verification_method,declaration_accepted,confirmation_method,confirmed_at,reviewed_by_user_id,reviewed_by_email,reviewed_at,staff_note)
+  values(9001,101,'athlete','athlete@example.test','approved','club_confirmation',true,'staff',now(),'staff','staff@example.test',now(),
+    'Synthetic independent club-officer confirmation reviewed before the partnership fixture begins.') returning id`;
+await sql`insert into athlete_account_links (athlete_id, user_id, user_email,source_claim_id,confirmation_method)
+  values (101, 'athlete', 'athlete@example.test',${ownershipClaim.id},'staff'),
+    (102, 'junior', 'junior@example.test',null,'unrecorded'),(103,'unreviewed','unreviewed@example.test',null,'athlete')`;
 await sql`insert into athlete_private_profiles (user_id, verified_email, full_name, date_of_birth, privacy_notice_version, privacy_acknowledged_at)
   values ('junior', 'junior@example.test', 'Test Junior', (current_date - interval '16 years')::date, 'test', now())`;
 
@@ -129,6 +152,12 @@ const application = applicationSchema.parse({
   adultConfirmed: true,
 });
 await assert.rejects(
+  () => service.applyToOpportunity(sql, "unreviewed", { ...application, athleteId: 103 }),
+  /Staff must review your ownership/,
+  "Self-confirmation cannot authorise representation in a partnership application",
+);
+assert.equal((await sql`select id from partner_applications where user_id='unreviewed'`).length, 0);
+await assert.rejects(
   () => service.applyToOpportunity(sql, "athlete", application),
   /Enable this type/,
 );
@@ -156,7 +185,10 @@ await service.savePreferences(sql, "athlete", {
   offers: false,
   adultConfirmed: true,
 });
-await assert.rejects(() => service.applyToOpportunity(sql, "other", application), /approved claim/);
+await assert.rejects(
+  () => service.applyToOpportunity(sql, "other", application),
+  /Staff must review your ownership/,
+);
 const applied = await service.applyToOpportunity(sql, "athlete", application);
 const applicationId = Number(applied.id);
 await assert.rejects(

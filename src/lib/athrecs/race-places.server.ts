@@ -1,3 +1,4 @@
+import { publicFixtureUrl, fixtureReferenceText } from "./public-fixture-reference.ts";
 import { fixtureDistanceLabel } from "./fixture-distance-policy.ts";
 import { unconfirmedFixtureEditionIds } from "./fixture-distance-policy.server.ts";
 import { publicCatalogueContent } from "./public-catalogue-content.ts";
@@ -116,9 +117,10 @@ export async function queryRacePlaceRows(
               : edition.sourceUrl && !/runabc\.co\.uk/i.test(edition.sourceUrl)
                 ? edition.startTime
                 : null,
-            startNote: checked?.note ?? null,
+            entryUrl: publicFixtureUrl(edition.entryUrl),
+            startNote: fixtureReferenceText(checked?.publicNote ?? checked?.note ?? "") || null,
             startLabel: checked?.label ?? null,
-            sourceUrl: checked?.sourceUrl ?? detail?.sourceUrl ?? edition.sourceUrl,
+            sourceUrl: publicFixtureUrl(checked?.sourceUrl ?? detail?.sourceUrl ?? edition.sourceUrl),
             checkedAt: detail?.checkedAt ?? null,
             checkedCity: detail?.place?.city ?? detail?.place?.town ?? null,
           };

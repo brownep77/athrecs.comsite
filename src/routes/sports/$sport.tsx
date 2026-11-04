@@ -6,6 +6,7 @@ import { getSportFixtures } from "@/lib/athrecs/sport-fixtures-api";
 import { getSportPage, parseSportFixtureSearch } from "@/lib/athrecs/sport-pages";
 import { disciplineIntros, sportGuideText } from "@/lib/athrecs/sport-guide-text";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { directoryStructuredData } from "@/lib/athrecs/directory-structured-data";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/sports/$sport")({
@@ -39,7 +40,7 @@ export const Route = createFileRoute("/sports/$sport")({
     return { sport, ...fixtures, broadcasts: upcomingBroadcasts(sport) };
   },
   staleTime: 60_000,
-  head: ({ params, match }) => {
+  head: ({ params, match, loaderData }) => {
     const sport = getSportPage(params.sport);
     if (!sport) return {};
     const page = match.search.page ?? 1;
@@ -48,15 +49,24 @@ export const Route = createFileRoute("/sports/$sport")({
     );
     const url = `${SITE_URL}/sports/${sport.slug}${!filtered && page > 1 ? `?page=${page}` : ""}`;
     return {
-      meta: [
-        ...siteGraphMeta({
-          title: `${sport.label} events, dates & results${page > 1 ? ` — Page ${page}` : ""} | AthRecs`,
-          description: disciplineIntros[sport.slug] ?? sportGuideText(sport.sport).intro,
-          url,
-        }),
-        ...(filtered ? [{ name: "robots", content: "noindex, follow" }] : []),
-      ],
+      meta: siteGraphMeta({
+        title: `${sport.label} events, dates & results${page > 1 ? ` — Page ${page}` : ""} | AthRecs`,
+        description: disciplineIntros[sport.slug] ?? sportGuideText(sport.sport).intro,
+        url,
+        indexable: !filtered,
+      }),
       links: [{ rel: "canonical", href: url }],
+      scripts: filtered
+        ? []
+        : directoryStructuredData(
+            url,
+            `${sport.label} fixtures`,
+            (loaderData?.fixtures ?? []).flatMap((fixture) =>
+              fixture.slug
+                ? [{ name: fixture.name, path: "/races/" + encodeURIComponent(fixture.slug) }]
+                : [],
+            ),
+          ),
     };
   },
   pendingComponent: () => (

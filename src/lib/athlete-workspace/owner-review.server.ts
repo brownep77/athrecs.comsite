@@ -19,7 +19,7 @@ async function ownedQueues(sql: Sql, userId: string, athleteId?: number) {
   return sql.query<Owner>(
     `
     select a.id,a.display_name,a.profile_details#>'{sourceReview,ownerReviewCandidates}' as candidates
-    from athlete_account_links l join athletes a on a.id=l.athlete_id
+    from athlete_reviewed_account_links l join athletes a on a.id=l.athlete_id
     join "user" u on u.id=l.user_id
     where l.user_id=$1 and l.status='active' and u."emailVerified"
       and jsonb_typeof(a.profile_details#>'{sourceReview,ownerReviewCandidates}')='array'

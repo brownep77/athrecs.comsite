@@ -4,6 +4,7 @@ import { readFileSync,readdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import crypto from 'node:crypto';
 import { Client,types } from 'pg';
+import { seedReviewedLink } from './fixtures/reviewed-link.mjs';
 const require=createRequire(import.meta.url),ts=require('typescript'),zod=require('zod');
 function load(path,deps={}){const m={exports:{}};const c=ts.transpileModule(readFileSync(path,'utf8'),{fileName:path,compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}});new Function('require','module','exports',c.outputText)(name=>{if(!(name in deps))throw Error(`Unexpected dependency ${name}`);return deps[name];},m,m.exports);return m.exports;}
 assert.equal(process.env.CI,'true');assert.equal(process.env.DATABASE_URL??'','');
@@ -35,13 +36,15 @@ try{
   const [other]=await sql`insert into athletes(slug,display_name,profile_visibility) values('workspace-other-synthetic','Workspace Other Synthetic','public') returning id`;
   const [managed]=await sql`insert into athletes(slug,display_name,profile_visibility) values('workspace-managed-synthetic','Workspace Managed Synthetic','public') returning id`;
   await sql`insert into athlete_account_links(athlete_id,user_id,user_email) values(${managed.id},${owner.userId},'workspace-owner@example.test')`;
+  assert.equal((await service.workspace(managed.id,owner)).editable,false,'An old link without independent review keeps private access only');
+  await seedReviewedLink(sql,{athleteId:managed.id,userId:owner.userId,email:'workspace-owner@example.test',reviewerId:staff.userId,reviewerEmail:'workspace-staff@example.test'});
   await assert.rejects(()=>service.workspace(a.id,owner),/linked athlete/);
   await assert.rejects(()=>service.workspace(a.id,{userId:'missing',staff:true}),/verified email/);
   const loaded=await service.workspace(a.id,staff);const {id,slug,profile_visibility,...fields}=loaded.profile;assert.equal(id,a.id);assert.equal(slug,'workspace-unmanaged-synthetic');assert.equal(profile_visibility,'public');
   await service.editProfile({athleteId:a.id,version:loaded.profileVersion,fields:{...fields,bio:'A sourced factual correction.'},reason:'Synthetic profile correction verified.'},staff);
   await assert.rejects(()=>service.editProfile({athleteId:a.id,version:loaded.profileVersion,fields,reason:'Stale edit must be rejected.'},staff),/changed/);
   const managedView=await service.workspace(managed.id,staff);const {id:mid,slug:ms,profile_visibility:mv,...mf}=managedView.profile;assert(mid&&ms&&mv);
-  await assert.rejects(()=>service.editProfile({athleteId:managed.id,version:managedView.profileVersion,fields:mf,reason:'Attempted unapproved owner change.'},staff),/account-managed/);
+  await assert.rejects(()=>service.editProfile({athleteId:managed.id,version:managedView.profileVersion,fields:mf,reason:'Attempted unapproved owner change.'},staff),/independently review ownership/);
   const ownView=await service.workspace(managed.id,owner);
   await service.editProfile({athleteId:managed.id,version:ownView.profileVersion,fields:{...mf,city:'Owner supplied city'},reason:'Own profile correction authorised.'},owner);
   const parsed=core.parsePaste('Meeting\tDate\tEvent\tPerf\nSynthetic race\t20 Sep 2026\t10K\t00:40:00.1',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'});
@@ -52,6 +55,18 @@ try{
   assert.throws(()=>core.parsePaste('Race,Date,Chip Time,Gun Time\nExample,2026-09-20,40:00,40:01',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'}),/More than one/);
   assert.throws(()=>core.tableCells('Race,Date,Time\nExample,40:00'),/column counts/);
   assert.equal(core.httpsUrl.safeParse('javascript:alert(1)').success,false);assert.equal(core.httpsUrl.safeParse('https://user:secret@example.test/').success,false);
+  const identityRows=core.parsePaste('Race,Date,Distance,Time,Name,Club,Age category,Age,Nationality,Residence,Athlete ID,Country\nIdentity Synthetic 10K,20/09/2026,10K,00:40:00,Synthetic Athlete,Synthetic Club,M40-44,42,Irish,Norwich,provider-123,France',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'});
+  assert.equal(identityRows[0].athleteName,'Synthetic Athlete');assert.equal(identityRows[0].nationality,'Irish');
+  assert.equal(identityRows[0].residence,'Norwich');assert.equal(identityRows[0].sourceAthleteId,'provider-123');
+  const ambiguousIdentity=core.parsePaste('Race,Date,Distance,Time,Country,City,Bib\nIdentity Synthetic 10K,20/09/2026,10K,00:40:00,France,Paris,42',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'});
+  assert.equal(ambiguousIdentity[0].nationality,undefined);assert.equal(ambiguousIdentity[0].residence,undefined);assert.equal(ambiguousIdentity[0].sourceAthleteId,undefined);
+  assert.notEqual(core.identityName('あ'),core.identityName('い'),'Non-Latin names must remain distinguishable');
+  const named=await makeBatch(other.id,[{...row(1,'Identity Guard Synthetic 10K'),athleteName:'Synthetic Previous Name'}]);
+  await assert.rejects(()=>publication.reviewBatch(request(named.id,1,other.id,[1]),staff),/source athlete name differs/);
+  assert.equal((await sql`select revision from athlete_result_proposals where id=${named.id}::uuid`)[0].revision,1);
+  await sql`update athletes set profile_details=jsonb_set(profile_details,'{aliases}','["Synthetic Previous Name"]'::jsonb) where id=${other.id}`;
+  assert.equal((await publication.reviewBatch(request(named.id,1,other.id,[1]),staff)).added,1,'Confirmed stored aliases support manual review');
+
   const saved=await makeBatch(a.id,[row(1),row(2,'Second Workspace Synthetic 10K')]);
   assert.equal((await sql`select count(*)::integer as n from results where athlete_id=${a.id}`)[0].n,0,'Saving pasted candidates cannot publish');
   await assert.rejects(()=>service.getBatch(saved.id,stranger),/not available/);
@@ -90,7 +105,7 @@ try{
   assert.equal((await publication.reviewBatch(approved,staff)).replay,true);
   assert.deepEqual((await sql`select result_details from results where id=${storedResult.id}`)[0].result_details.staffApproval,originalApproval,'An identical retry preserves the first approval timestamp and note');
   const removal={athleteId:a.id,resultId:storedResult.id,excluded:true,reason:'Synthetic source assignment under review.'};
-  await assert.rejects(()=>service.excludeResult(removal,stranger),/account-managed/);
+  await assert.rejects(()=>service.excludeResult(removal,stranger),/independently review ownership/);
   await service.excludeResult(removal,staff);
   let current=(await sql`select * from results where id=${storedResult.id}`)[0];assert.equal(current.result_details.profileExcluded,true);assert.equal(current.result_visibility,'public');
   await service.excludeResult({...removal,excluded:false},staff);current=(await sql`select * from results where id=${storedResult.id}`)[0];assert.equal(current.result_details.profileExcluded,false);

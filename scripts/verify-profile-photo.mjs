@@ -45,7 +45,11 @@ assert.match(fallbackMigration, /alter column blob_pathname drop not null/);
 assert.match(fallbackMigration, /storage_backend = 'database'/);
 assert.match(fallbackMigration, /storage_backend = 'blob'/);
 
-assert.match(handler, /auth\.api\.getSession\(\{ headers: request\.headers \}\)/);
+assert.match(
+  handler,
+  /auth\.api\.getSession\(\{\s*headers: request\.headers,\s*query: \{ disableCookieCache: true \},?\s*\}\)/,
+  "Private profile photos must validate the current session without trusting a cached cookie",
+);
 assert.match(handler, /mutationIsSameOrigin/);
 assert.match(handler, /MAX_UPLOAD_BYTES = 2 \* 1024 \* 1024/);
 assert.match(handler, /image\/webp/);
@@ -96,7 +100,11 @@ assert.match(profileRoute, /ProfilePhotoUploader/);
 assert.doesNotMatch(profileRoute, /fallbackImageUrl=/);
 assert.doesNotMatch(profileRoute, /authImageUrl/);
 assert.match(profileRoute, /uploadAvailable=\{data\.profilePhotoUploadAvailable\}/);
-assert.match(profileRoute, /photograph and ordinary athlete profile are not published publicly/);
+assert.match(profileRoute, /This account view and your uploaded photograph stay private/);
+assert.match(
+  profileRoute,
+  /These sharing settings do not control separate public\s+race results or approved sporting-record previews/,
+);
 assert.match(profileRoute, /rounded-3xl/);
 
 assert.match(routeTree, /AthleteProfilePhotoRouteImport/);

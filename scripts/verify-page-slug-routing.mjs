@@ -125,7 +125,7 @@ const route = (file, extra = {}) =>
     "@/lib/site-scope": { IS_RUNRECS_SITE: false },
     "@/lib/athrecs/berlin-results": berlin,
     "@/data/race-collections": raceCollections,
-    "@/data/superhalfs": superhalfs,
+    "@/data/superhalfs-guide": superhalfs,
     "@/lib/running/series-guides": seriesGuides,
     "@/data/berlin-marathon-2026.json": {
       default: JSON.parse(fs.readFileSync("src/data/berlin-marathon-2026.json", "utf8")),

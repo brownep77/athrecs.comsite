@@ -1,5 +1,5 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
-import { SUPERHALFS_PATH } from "@/data/superhalfs";
+import { SUPERHALFS_PATH } from "@/data/superhalfs-guide";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/super-halfs")({

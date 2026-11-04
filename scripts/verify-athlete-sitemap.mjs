@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { PGlite } from "@electric-sql/pglite";
 import {
+  installReviewedManagementSchema,
+  recordSyntheticManagementReview,
+} from "./fixtures/reviewed-management-schema.mjs";
+import {
   athleteSitemapPageCount,
   athleteSitemapSlugs,
   sitemapXml,
@@ -71,6 +75,7 @@ try {
       ('unlisted', true, true, false), ('opt-in', true, true, true),
       ('withdrawn', false, true, true), ('results-withdrawn', true, false, true);
   `);
+  await installReviewedManagementSchema(db);
   const settings = () =>
     sql.query(
       "select current_setting('work_mem') as memory, current_setting('max_parallel_workers_per_gather') as workers",
@@ -127,8 +132,15 @@ try {
   await db.exec("update athlete_source_histories set published_at=null where athlete_id=5011");
   assert.equal(
     await isApprovedAthleteIndexable(sql, 5011),
+    false,
+    "An unreviewed raw link cannot replace withdrawn source-publication approval",
+  );
+  await assertSameEligibility();
+  await recordSyntheticManagementReview(db, { athleteId: 5011, userId: "opt-in" });
+  assert.equal(
+    await isApprovedAthleteIndexable(sql, 5011),
     true,
-    "Owner-approved profile remains public while an individual history is withdrawn",
+    "An independently reviewed owner can publish while an individual history is withdrawn",
   );
   await db.exec("update athlete_account_links set status='revoked' where athlete_id=5011");
   assert.equal(

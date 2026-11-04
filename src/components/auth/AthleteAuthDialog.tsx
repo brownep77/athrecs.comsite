@@ -730,8 +730,17 @@ export function AthleteAuthDialog() {
                     />
                   </label>
                   <p id="athrecs-signup-location-help" className="text-xs text-muted">
-                    Enter whichever location is easiest. These details are saved privately with your
-                    account.
+                    A town or city is enough; you do not need to give a postcode or street address.
+                    These registration details stay in your private account.{" "}
+                    <Link
+                      to="/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-accent underline"
+                    >
+                      Privacy notice (opens in a new tab)
+                    </Link>
+                    .
                   </p>
                 </fieldset>
               ) : null}
@@ -1110,8 +1119,15 @@ export function AthleteAuthDialog() {
               <div className="rounded-lg bg-elevated p-3 text-xs leading-5 text-muted">
                 <p className="flex items-start gap-2">
                   <LockKeyhole className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-                  ATHRECS keeps account details private. Result claims are checked before a public
-                  athlete profile is linked.
+                  <span>
+                    ATHRECS keeps your registration details off public pages. Email verification
+                    confirms access to your mailbox. New profile ownership claims require an
+                    independent staff check before the profile is linked.
+                  </span>
+                </p>
+                <p className="mt-2">
+                  Reviewed sporting records can already be public. Creating an account does not
+                  enable account sharing, marketing or optional research.
                 </p>
                 <p className="mt-2 text-center">
                   By continuing, you acknowledge the{" "}

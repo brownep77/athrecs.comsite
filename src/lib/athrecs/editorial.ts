@@ -95,6 +95,7 @@ export type EditorialArticle = {
   seoTitle?: string;
   description?: string;
   author?: string;
+  hashtags?: string[];
   publishedAt?: string;
   modifiedAt?: string;
   image?: { src: string; alt: string; caption: string; width: number; height: number };
@@ -201,8 +202,8 @@ export function matchesEditorialLocation(location: EditorialLocation, search: Ed
   );
 }
 
-export function filterEditorialArticles(
-  articles: readonly EditorialArticle[],
+export function filterEditorialArticles<T extends EditorialArticle>(
+  articles: readonly T[],
   kind: EditorialKind,
   search: EditorialSearch,
 ) {
@@ -281,6 +282,7 @@ export function editorialJsonLd(article: EditorialArticle, origin: string) {
         datePublished: article.publishedAt ?? article.date,
         dateModified: article.modifiedAt ?? article.publishedAt ?? article.date,
         inLanguage: "en-GB",
+        ...(article.hashtags?.length ? { keywords: article.hashtags.join(", ") } : {}),
         wordCount: editorialWordCount(article),
         timeRequired: `PT${editorialReadingMinutes(article)}M`,
         ...(athleteSlugs.length
@@ -322,7 +324,8 @@ export function editorialJsonLd(article: EditorialArticle, origin: string) {
         citation: [
           ...new Set(
             article.sections?.flatMap(
-              (section) => section.sources?.map((source) => source.url) ?? [],
+              (section) =>
+                section.sources?.flatMap((source) => (source.url ? [source.url] : [])) ?? [],
             ) ?? [],
           ),
         ],

@@ -4,10 +4,17 @@ import { load } from "cheerio";
 export const ATHLETE_SEARCH_ORIGIN = "https://www.athrecs.com";
 const blockedRobots = /\b(noindex|nofollow|none)\b/i;
 
+export function isMerseaEditionUrl(url) {
+  return url.pathname === "/results/mersea-10" && /^\?year=[1-2][0-9]{3}$/.test(url.search);
+}
+
 function siteUrl(value) {
   const url = new URL(value);
   assert.equal(url.origin, ATHLETE_SEARCH_ORIGIN, "Only the production AthRecs origin is allowed");
-  assert(!url.username && !url.password && !url.search && !url.hash, "Unexpected URL attributes");
+  assert(
+    !url.username && !url.password && (!url.search || isMerseaEditionUrl(url)) && !url.hash,
+    "Unexpected URL attributes",
+  );
   assert.equal(url.href, value, "Use the exact canonical URL");
   return url;
 }

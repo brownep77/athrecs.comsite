@@ -1,5 +1,5 @@
 // Applies to a results row r and its athlete a in the public edition archive.
-export const publicResultVisibilitySql = `(r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
+export const publicResultVisibilitySql = `r.result_visibility in ('public', 'public_figure')
   and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
     or (a.profile_visibility = 'private' and a.parent_athlete_id is null
       and a.profile_details#>>'{nameReview,mode}' = 'results_only'

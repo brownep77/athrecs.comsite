@@ -1,15 +1,17 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
-import { PUBLIC_PAGES } from "@/lib/athrecs/public-pages";
+import { PUBLIC_PAGE_SECTIONS } from "@/lib/athrecs/public-pages";
 import { COUNTRY_SITES } from "@/lib/athrecs/country-sites";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 const loadGuideLinks = createServerFn({ method: "GET" }).handler(async () => {
   const { getRunningGuideDirectory } = await import("@/lib/running/guide-directory.server");
+  const { PUBLIC_PAGES } = await import("@/lib/athrecs/public-pages");
   const directory = await getRunningGuideDirectory();
   return {
+    pages: PUBLIC_PAGES,
     countries: directory.countries.flatMap((country) =>
       country.links.map((link) => ({ name: link.name, path: link.path, country: country.name })),
     ),
@@ -44,21 +46,39 @@ function SiteMapPage() {
           Explore sports, athlete records and events around the world.
         </p>
       </header>
-      <section>
-        <h2 className="font-display text-2xl font-semibold">Pages and sports</h2>
-        <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {PUBLIC_PAGES.filter((page) => page.path !== "/site-map").map((page) => (
-            <li key={page.path}>
-              <a
-                href={page.path}
-                className="inline-flex min-h-11 items-center text-accent underline"
-              >
-                {page.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <nav
+        aria-label="On this page"
+        className="flex flex-wrap gap-x-5 gap-y-2 text-accent underline"
+      >
+        {PUBLIC_PAGE_SECTIONS.map((section) => (
+          <a key={section.id} href={`#${section.id}`}>
+            {section.name}
+          </a>
+        ))}
+        <a href="#running-guide-links">Country running guides and series</a>
+        <a href="#events-by-country">Events by country</a>
+      </nav>
+      {PUBLIC_PAGE_SECTIONS.map((section) => (
+        <section key={section.id} aria-labelledby={section.id}>
+          <h2 id={section.id} className="font-display text-2xl font-semibold">
+            {section.name}
+          </h2>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {section.pages
+              .filter((page) => page.path !== "/site-map")
+              .map((page) => (
+                <li key={page.path}>
+                  <a
+                    href={page.path}
+                    className="inline-flex min-h-11 items-center text-accent underline"
+                  >
+                    {page.name}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </section>
+      ))}
       <section aria-labelledby="running-guide-links">
         <h2 id="running-guide-links" className="font-display text-2xl font-semibold">
           Running country guides and race series
@@ -100,8 +120,10 @@ function SiteMapPage() {
           ))}
         </ul>
       </section>
-      <section>
-        <h2 className="font-display text-2xl font-semibold">Events by country</h2>
+      <section aria-labelledby="events-by-country">
+        <h2 id="events-by-country" className="font-display text-2xl font-semibold">
+          Events by country
+        </h2>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {COUNTRY_SITES.map((site) => (
             <li key={site.slug}>

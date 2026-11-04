@@ -242,7 +242,7 @@ try {
     a.token,
   );
   await check(
-    "Verified-email athlete can explicitly self-confirm an uncontested matching profile",
+    "Verified email and matching name submit a pending claim without granting ownership",
     async () => {
       const outcome = await rpc(
         "athrecs/result-claims-api",
@@ -252,11 +252,16 @@ try {
       );
       const links =
         await sql`select count(*)::int as n from athlete_account_links where athlete_id=991501 and status='active'`;
-      assert.equal(outcome.status, "approved");
-      assert.equal(links[0].n, 1, "Self-confirmation links the existing profile");
+      assert.equal(outcome.status, "pending");
+      assert.equal(
+        links[0].n,
+        0,
+        "A matching name and verified mailbox do not establish athlete ownership",
+      );
+      assert.equal(outcome.managementReviewed, false);
       const [basis] =
         await sql`select confirmation_method,reviewed_at from result_claims where id=${outcome.claimId}`;
-      assert.equal(basis.confirmation_method, "athlete");
+      assert.equal(basis.confirmation_method, "unrecorded");
       assert.equal(
         basis.reviewed_at,
         null,
@@ -265,26 +270,28 @@ try {
       return { status: outcome.status, ownerLinks: links[0].n };
     },
   );
-  await check("A second same-name account cannot replace the self-confirmed owner", async () => {
-    await rpc(
-      "athrecs/athlete-account-api",
-      "saveMyAthleteRacingName",
-      { fullName: "Synthetic Same Name", privacyAcknowledged: true },
-      b.token,
-    );
-    const outcome = await rpc(
-      "athrecs/result-claims-api",
-      "submitResultClaim",
-      { resultId: 991501, declarationAccepted: true },
-      b.token,
-    );
-    assert.equal(outcome.status, "pending");
-    const links =
-      await sql`select user_id from athlete_account_links where athlete_id=991501 and status='active'`;
-    assert.equal(links.length, 1);
-    assert.equal(links[0].user_id, a.user.id);
-    return { status: outcome.status, ownerLinks: links.length };
-  });
+  await check(
+    "A second same-name account also stays pending and cannot seize ownership",
+    async () => {
+      await rpc(
+        "athrecs/athlete-account-api",
+        "saveMyAthleteRacingName",
+        { fullName: "Synthetic Same Name", privacyAcknowledged: true },
+        b.token,
+      );
+      const outcome = await rpc(
+        "athrecs/result-claims-api",
+        "submitResultClaim",
+        { resultId: 991501, declarationAccepted: true },
+        b.token,
+      );
+      assert.equal(outcome.status, "pending");
+      const links =
+        await sql`select user_id from athlete_account_links where athlete_id=991501 and status='active'`;
+      assert.equal(links.length, 0);
+      return { status: outcome.status, ownerLinks: links.length };
+    },
+  );
   await check("A normal athlete cannot approve their own claim through the staff API", async () => {
     const claims = await rpc("athrecs/result-claims-api", "listMyResultClaims", undefined, a.token);
     const claimId = claims.find((c) => c.resultId === 991501).claimId;

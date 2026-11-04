@@ -83,7 +83,10 @@ function mutationIsSameOrigin(request: Request): boolean {
 }
 
 async function requireUserId(request: Request): Promise<string | null> {
-  const session = await auth.api.getSession({ headers: request.headers });
+  const session = await auth.api.getSession({
+    headers: request.headers,
+    query: { disableCookieCache: true },
+  });
   return session?.user?.id ?? null;
 }
 

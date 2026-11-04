@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import { createServer } from "vite";
 import { load } from "cheerio";
+import { seedReviewedLink } from "./fixtures/reviewed-link.mjs";
 for (const key of [
   "DATABASE_URL",
   "DATABASE_URL_UNPOOLED",
+  "POSTGRES_URL",
   "POSTGRES_URL_NON_POOLING",
   "RESEND_API_KEY",
 ])
@@ -178,7 +180,9 @@ try {
       'section[aria-labelledby="event-athletes-heading"] a[href="/athletes/career-test-runner"]',
     ).length > 0,
   );
-  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values('career-owner','Career Test Runner','career-owner@example.test',true,now(),now())`;
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
+    values('career-owner','Career Test Runner','career-owner@example.test',true,now(),now()),
+      ('career-reviewer','Independent Fixture Reviewer','career-reviewer@example.test',true,now(),now())`;
   await sql`insert into athlete_account_links(athlete_id,user_id,user_email,status) values(${athlete},'career-owner','career-owner@example.test','active')`;
   assert.equal(
     await isApprovedAthleteIndexable(sql, athlete),
@@ -187,6 +191,19 @@ try {
   );
   assert.deepEqual(await readEventAthleteLinks(sql, "career-early-marathon"), []);
   await sql`insert into athlete_public_shares(user_id,slug,enabled,share_results,share_bio,share_club,share_location,search_indexable) values('career-owner','career-test-runner',true,true,true,true,true,false)`;
+  assert.equal(
+    (await get("/athletes/career-test-runner")).response.status,
+    404,
+    "Enabling a share does not grant public profile control to an unreviewed link",
+  );
+  // The downstream publication fixture starts after a separate independent ownership review.
+  await seedReviewedLink(sql, {
+    athleteId: athlete,
+    userId: "career-owner",
+    email: "career-owner@example.test",
+    reviewerId: "career-reviewer",
+    reviewerEmail: "career-reviewer@example.test",
+  });
   assert.equal(await isApprovedAthleteIndexable(sql, athlete), false, "Search opt-out wins");
   const optedOutRedirect = await fetch(origin + "/athletes/career-old-name", {
     redirect: "manual",

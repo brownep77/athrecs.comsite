@@ -7,7 +7,7 @@ import {
   sourceHistorySchema,
   historyPerformanceSchema,
 } from "../athrecs/source-performance-history.ts";
-import type { CandidateResult } from "./core";
+import { identityName, type CandidateResult } from "./core.ts";
 
 export const ADMIN_HISTORY_PROVIDER = "AthRecs additions";
 type Actor = { userId: string; staff: boolean };
@@ -52,7 +52,9 @@ export async function publishAdminHistory(
     await verified(tx, actor);
     const [athlete] = await tx<{
       profile_visibility: string;
-    }>`select profile_visibility from athletes where id=${data.athleteId} for update`;
+      display_name: string;
+      aliases: unknown;
+    }>`select profile_visibility,display_name,profile_details->'aliases' as aliases from athletes where id=${data.athleteId} for update`;
     if (!athlete) throw new Error("Athlete not found.");
     const [prior] = await tx<{
       actor_user_id: string;
@@ -83,6 +85,16 @@ export async function publishAdminHistory(
         const row = batch.entries.find((entry) => entry.index === index);
         if (!row || row.state !== "pending" || row.response === "no")
           throw new Error("Only pending proposals not denied by the athlete can be published.");
+        const recordedNames = [
+          athlete.display_name,
+          ...(Array.isArray(athlete.aliases)
+            ? athlete.aliases.filter((n): n is string => typeof n === "string")
+            : []),
+        ].map(identityName);
+        if (row.athleteName && !recordedNames.includes(identityName(row.athleteName)))
+          throw new Error(
+            "The source athlete name differs from this profile. Use the checked result review to resolve the identity before adding it to history.",
+          );
       }
       batches.push({ ref, batch });
     }

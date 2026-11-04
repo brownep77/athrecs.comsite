@@ -4,10 +4,20 @@ import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "vite";
 import { createRequire } from "node:module";
+import {
+  approveSyntheticClaim,
+  createAthleteRpc,
+  createSyntheticStaffSession,
+} from "./fixtures/ownership-review.mjs";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 
-for (const key of ["DATABASE_URL", "DATABASE_URL_UNPOOLED", "POSTGRES_URL_NON_POOLING"])
+for (const key of [
+  "DATABASE_URL",
+  "DATABASE_URL_UNPOOLED",
+  "POSTGRES_URL",
+  "POSTGRES_URL_NON_POOLING",
+])
   process.env[key] = "";
 process.env.VITE_AUTH_ENABLED = "true";
 process.env.RESEND_API_KEY = "test-key-not-used-for-delivery";
@@ -16,13 +26,19 @@ const origin = "http://127.0.0.1:18228";
 const signupOnly = process.argv.includes("--signup-only");
 const source = process.argv.includes("--linkedin") ? "linkedin" : "instagram";
 process.env.BETTER_AUTH_URL = origin;
+process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
+process.env.ATHRECS_STAFF_EMAILS = "recruitment-reviewer@example.test";
 const sent = [];
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
   const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
   if (url === "https://api.resend.com/emails") {
     const email = JSON.parse(init.body);
-    assert(email.to.every((address) => address === "onboarding-runner@example.test"));
+    assert(
+      email.to.every((address) =>
+        ["onboarding-runner@example.test", "recruitment-reviewer@example.test"].includes(address),
+      ),
+    );
     sent.push(email);
     return Response.json({ id: `fixture-mail-${sent.length}` });
   }
@@ -189,7 +205,27 @@ try {
   await confirmation
     .getByRole("button", { name: "Confirm all results are mine", exact: true })
     .click();
-  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
+  await page
+    .getByRole("heading", { name: "Profile and results confirmation saved", exact: true })
+    .waitFor();
+  const [pendingClaim] = await sql`select id,status from result_claims where result_id=991601`;
+  assert.equal(pendingClaim.status, "pending");
+  assert.equal(
+    (await sql`select athlete_id from athlete_account_links where athlete_id=991601`).length,
+    0,
+    "Signup and confirmation alone cannot claim another person's sporting profile",
+  );
+  assert.equal(
+    (await sql`select athlete_management_reviewed(991601,${rows[0].id}) as reviewed`)[0].reviewed,
+    false,
+  );
+  const reviewer = await createSyntheticStaffSession(
+    origin,
+    sql,
+    "recruitment-reviewer@example.test",
+  );
+  const reviewRpc = createAthleteRpc(origin, reviewer.token);
+  await approveSyntheticClaim(reviewRpc, pendingClaim.id, reviewer.user.id, sql);
   assert.deepEqual(await sql`select status from result_claims where result_id=991601`, [
     { status: "approved" },
   ]);
@@ -198,14 +234,15 @@ try {
     1,
   );
   await confirmation.getByRole("button", { name: "Close", exact: true }).click();
+  await page.reload({ waitUntil: "networkidle" });
+  await page
+    .getByRole("heading", { name: "Your results are part of your story", exact: true })
+    .waitFor();
   assert.equal(
     await match.count(),
     0,
     "Completed ownership removes the athlete from potential matches",
   );
-  await page
-    .getByRole("heading", { name: "Your results are part of your story", exact: true })
-    .waitFor();
   assert.equal(
     await page
       .getByRole("link", { name: "Find more of my results", exact: true })
@@ -214,12 +251,22 @@ try {
   );
   await page.goto(`${origin}/claim-results?resultId=991601`, { waitUntil: "networkidle" });
   await page.getByText(/Previous review saved/).waitFor();
-  await page.getByText(/Claim complete — your profile is linked/).waitFor();
+  await page.getByText(/Claim complete — ownership reviewed/).waitFor();
   assert.equal(await page.getByText(/Another account has already claimed/).count(), 0);
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
   await page.screenshot({ path: "artifacts/recruitment-claim-mobile.png", fullPage: true });
   if (!signupOnly) {
+    // These catalogue rows default to private. Publish the intended display
+    // fixtures explicitly in this disposable database; public-figure status
+    // must never stand in for a result's visibility preference.
+    const { ensureAthrecsSeeded } = await server.ssrLoadModule("/src/lib/athrecs/seed.server.ts");
+    await ensureAthrecsSeeded();
+    const [publicFixture] = await sql`select id from athletes where slug='mo-farah'`;
+    assert(publicFixture, "The sourced profile fixture is seeded");
+    await sql`update results set result_visibility='public_figure' where athlete_id=${publicFixture.id}`;
+    await sql`insert into results (id,edition_id,athlete_id,status,finish_time_seconds,result_visibility)
+      values (991602,991601,${publicFixture.id},'finished',37,'private')`;
     await page.goto(`${origin}/athletes/mo-farah`, { waitUntil: "networkidle", timeout: 90000 });
     await page.getByRole("heading", { name: "Mo Farah", exact: true }).waitFor();
     await page.getByText("More about Mo Farah", { exact: true }).click();
@@ -248,6 +295,11 @@ try {
     assert.equal(await page.getByText("Show all 52 results", { exact: true }).count(), 0);
     assert.equal(await page.locator("#results-history table").count(), 1);
     assert.equal(await page.locator("#results-history tbody tr:visible").count(), 52);
+    assert.equal(
+      await page.locator("#results-history").getByRole("row").filter({ hasText: "Synthetic Recruitment 10K" }).count(),
+      0,
+      "A private result on a public figure must not enter member result tables or PBs",
+    );
     await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
     await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
     assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
@@ -314,7 +366,7 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    `Recruitment journey passed (${source}): direct signup, real email code, verified private profile save, unchanged marketing consent, return visit, profile claim, results confirmation and missing-result next step.${signupOnly ? "" : " Public athlete layout also checked."}`,
+    `Recruitment journey passed (${source}): direct signup, real email code, private profile save, unchanged marketing consent, pending ownership declaration, independent staff approval, results confirmation and missing-result next step.${signupOnly ? "" : " Public athlete layout also checked."}`,
   );
 } catch (error) {
   await mkdir("artifacts", { recursive: true });
