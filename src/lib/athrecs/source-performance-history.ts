@@ -86,6 +86,12 @@ export const sourcePerformanceSchema = z.object({
   disqualification: disqualificationSchema.optional(),
 });
 export const historyPerformanceSchema = sourcePerformanceSchema.extend({
+  // Some older imports recorded an unspecified verification basis.
+  // Keep the performance readable without assigning it a verification badge.
+  verificationStatus: z.preprocess(
+    (value) => (value === "verified" ? undefined : value),
+    sourcePerformanceSchema.shape.verificationStatus,
+  ),
   // Historical result sheets can omit these descriptive fields.
   sourceDate: sourcePerformanceSchema.shape.sourceDate.default(""),
   ageGroup: sourcePerformanceSchema.shape.ageGroup.default(""),
