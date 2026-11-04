@@ -61,11 +61,11 @@ export function signupDetailsError(input: unknown) {
   else if (!countryByName.has(details.signupCountry.toLowerCase()))
     code = "SIGNUP_COUNTRY_REQUIRED";
   else if (!details.signupLocation) code = "SIGNUP_LOCATION_REQUIRED";
-  else if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(details.signupDateOfBirth) ||
+  else if (!/^\d{4}-\d{2}-\d{2}$/.test(details.signupDateOfBirth) ||
     !Number.isFinite(Date.parse(`${details.signupDateOfBirth}T00:00:00Z`)) ||
     new Date(`${details.signupDateOfBirth}T00:00:00Z`).toISOString().slice(0, 10) !== details.signupDateOfBirth ||
     details.signupDateOfBirth > new Date().toISOString().slice(0, 10)) code = "SIGNUP_BIRTHDATE_REQUIRED";
-  else if (details.signupClubs.length > 1000 || details.signupClubs.split(/[,\\n]/).filter(Boolean).length > 20) code = "SIGNUP_CLUBS_INVALID";
+  else if (details.signupClubs.length > 1000 || details.signupClubs.split(/[,\n]/).filter(Boolean).length > 20) code = "SIGNUP_CLUBS_INVALID";
   else if (
     details.firstName.length > 60 ||
     details.lastName.length > 60 ||
