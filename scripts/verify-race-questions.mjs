@@ -67,6 +67,9 @@ assert.match(answer(waves, "What time does it start?"), /Waves from 09:00/);
 const archive = questions([]);
 assert.match(answer(archive, "When is the next event?"), /No future date/);
 assert.doesNotMatch(JSON.stringify(archive), /4 April 2027|09:00/);
+const noVenue = questions([row], { city: "", county: "", country: "" });
+assert.match(answer(noVenue, "Where is it held?"), /venue.*not yet been confirmed/i);
+assert.doesNotMatch(answer(noVenue, "Where is it held?"), /International|Unknown/);
 const cancelled = questions([{ ...row, status: "Cancelled" }]);
 assert.match(answer(cancelled, "When is the next event?"), /No future date/);
 

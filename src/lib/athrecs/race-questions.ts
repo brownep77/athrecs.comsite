@@ -52,7 +52,9 @@ export function raceQuestions(data: {
       )
     : [];
   const location = compactFixtureLocation(event);
-  const place = [...new Set([location.text, location.countryName].filter(Boolean))].join(", ");
+  const place = [
+    ...new Set([location.text, location.countryCode ? location.countryName : null].filter(Boolean)),
+  ].join(", ");
   const distances = [
     ...new Set(programme.map((row) => distanceDisplayLabel(row.distance_code, row.distance_km))),
   ];
