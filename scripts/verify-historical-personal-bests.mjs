@@ -232,3 +232,22 @@ assert.equal(
     .mark,
   "16:13",
 );
+
+// Qualified historical bests retain their reviewed source status independently of course eligibility.
+const verifiedAided = { ...aided, verificationStatus: "source_verified", reportedPersonalBest: true };
+const verifiedAidedBest = bests([verifiedAided])[0];
+assert.equal(verifiedAidedBest.verified, true);
+assert.equal(verifiedAidedBest.kind, "reported");
+assert.equal(verifiedAidedBest.value.qualification, "Aided course");
+assert.equal(profilePersonalBestSummary([], histories([verifiedAided]))[0].label, "Aided-course best · Reported");
+assert.equal(profilePersonalBestSummary([], histories([verifiedAided]))[0].verified, true);
+assert.deepEqual(
+  profilePersonalBestSummary([], withoutProfileEvidence(histories([verifiedAided]))),
+  profilePersonalBestSummary([], histories([verifiedAided])),
+  "Reviewed qualified-best status survives the public evidence projection",
+);
+assert.equal(bests([{ ...verifiedAided, verificationStatus: "unverified" }])[0].verified, false);
+assert.equal(bests([{ ...verifiedAided, verificationStatus: undefined }])[0].verified, false);
+const externallyReported = { ...verifiedAidedBest.value, id: "external-report" };
+assert.equal(selectProfilePersonalBests([], [externallyReported], [])[0].verified, false);
+console.log("Qualified historical PB verification checks passed.");
