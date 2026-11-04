@@ -30,7 +30,8 @@ export const NOVEMBER_4_NEWS: EditorialArticle[] = [
         "heading": "A result from Bolton",
         "paragraphs": [
           "At nine, she had finished fourth in a Red Rose League race on her club’s home ground at Leigh Sports Village. On 15 December 2012, a ten-year-old Hodgkinson won the under-11 girls’ race at a Red Rose Cross Country League meeting in Bolton. The results sheet gives her club, Leigh Harriers, and her time, 7:11. Nineteen seconds later the next girl came through. That is about all the sheet tells you. Nobody recording those times needed to guess what either runner might become.",
-          "Three winters later she was racing for her school at Longford Park. Her club’s report describes a pack of eight early in the junior girls’ race. Hodgkinson stayed with them, raised the pace and had twenty metres to spare at the finish. The time was 13:42. Put that report beside the Liévin splits and you can pick out something familiar. Even then she could decide where a race was going to get difficult for the people following her."
+          "Three winters later she was racing for her school at Longford Park. Her club’s report describes a pack of eight early in the junior girls’ race. Hodgkinson stayed with them, raised the pace and had twenty metres to spare at the finish. The time was 13:42. Put that report beside the Liévin splits and you can pick out something familiar. Even then she could decide where a race was going to get difficult for the people following her.",
+          "There are less glamorous days in the archive, too. At the 2017 English Schools cross country in Norwich, she finished sixth for Greater Manchester. Her 12:39 at the Norfolk Showground was 21 seconds behind the winner. A year later in Leeds she finished second. Look at both sheets and you can see a young runner learning how to race in a crowd long before anyone expected a world record of her."
         ]
       },
       {
@@ -129,6 +130,10 @@ export const NOVEMBER_4_NEWS: EditorialArticle[] = [
       {
         "label": "The three Moment of the Year finalists",
         "url": "/news/world-athletics-moment-of-the-year-2026-finalists"
+      },
+      {
+        "label": "English Schools · 2017 Norwich championship results",
+        "url": "https://www.somersetschoolsathletics.org.uk/ESAA%20XC%20%20Results%202017.pdf"
       }
     ],
     "faqs": [
@@ -167,7 +172,7 @@ export const NOVEMBER_4_NEWS: EditorialArticle[] = [
         "heading": "The result between college and the Olympics",
         "paragraphs": [
           "Look back through the results under her earlier racing name, Georgia Bell, and there is plenty of running before the comeback. In 2015 she raced cross country for the University of California, Berkeley. The next spring she ran 4:18.89 for 1500m at Stanford. Repeated injuries took the enjoyment out of it. When her college career ended, she put her spikes away and went to work in cybersecurity sales.",
-          "Cycling gave her company on the road during the pandemic. A parkrun gave her a reason to contact her old coach. Then she found a race that let her put running and cycling together. On 30 April 2023 she won the women’s 30–34 age group at the World Duathlon Championships in Ibiza in 2:03:32. She told World Triathlon that making the British age-group team had been the aim. The Olympic Games hadn’t figured in those plans.",
+          "Cycling gave her company on the road during the pandemic. On 19 March 2022 she turned up at Bushy parkrun in Teddington and ran 16:14, second across the line among 1,112 finishers. It gave her a reason to contact her old coach. Then she found a race that let her put running and cycling together. On 30 April 2023 she won the women’s 30–34 age group at the World Duathlon Championships in Ibiza in 2:03:32. She told World Triathlon that making the British age-group team had been the aim. The Olympic Games hadn’t figured in those plans.",
           "Another clue came on the training track, where she found she could stay with Keely Hodgkinson. In August 2024 she ran 3:52.61 to win Olympic 1500m bronze in Paris. By September 2025 she had a world 800m silver from Tokyo, too."
         ]
       },
@@ -175,6 +180,7 @@ export const NOVEMBER_4_NEWS: EditorialArticle[] = [
         "id": "section-2",
         "heading": "Three different ways to win",
         "paragraphs": [
+          "On the night Keely Hodgkinson broke the indoor 800m world record in Liévin, Hunter Bell won the 1500m in the same arena in 4:00.21. People could be forgiven for remembering only one of the clocks that night. A month later the training partners were chasing separate world titles in Poland.",
           "In Toruń on 22 March, the leader opened an enormous gap early in the world indoor 1500m final. Hunter Bell let her go and took responsibility for the chase. By the last lap the race had come back to her. A second acceleration off the final bend won her first senior global title in 3:58.53.",
           "Glasgow called for a change of distance and a different decision. Running the Commonwealth 800m for England on 31 July, she took the inside at Scotstoun and made the reigning world champion race around her. Hunter Bell won in 1:59.51. Sixteen days later she was back over 1500m, this time on a track in the city where she had studied geography. Her 4:07.78 in Birmingham was over nine seconds slower than her indoor winning time. Anyone comparing the two marks without looking at that last lap would miss how well she raced.",
           "There was a fourth final in Budapest in September. She ran 3:57.72 and finished second. For a runner getting back into the sport, Ibiza might be the most encouraging entry of the lot. She entered a race that made room for both sports she loved. A year later she was standing on the Olympic podium in Paris.",
@@ -302,6 +308,14 @@ export const NOVEMBER_4_NEWS: EditorialArticle[] = [
       {
         "label": "The three Moment of the Year finalists",
         "url": "/news/world-athletics-moment-of-the-year-2026-finalists"
+      },
+      {
+        "label": "Bushy parkrun · report and results from 19 March 2022",
+        "url": "https://www.parkrun.org.uk/bushy/news/2022/03/21/run-report-event-no-868-19-march-2022/"
+      },
+      {
+        "label": "European Athletics · Hunter Bell’s Liévin 1500m win",
+        "url": "https://www.rieti2026.com/news/watch-live-hodgkinson-and-hunter-bell-to-race-in-glasgow"
       }
     ],
     "athleteLinks": {
