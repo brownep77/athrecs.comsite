@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "src/lib/athrecs/api.ts"
+      - "src/lib/athrecs/public-result-visibility.server.ts"
+      - "scripts/verify-explicit-result-privacy.mjs"
       - "src/lib/athrecs/public-read-limits.ts"
       - "src/routes/races/$slug.tsx"
       - "scripts/verify-public-read-limits.mjs"
@@ -28,3 +30,5 @@ jobs:
         run: node scripts/verify-public-read-limits.mjs
       - name: Paginated public results remain accessible
         run: node scripts/verify-public-results-section.mjs
+      - name: Explicit result privacy across profiles and discovery
+        run: node --experimental-strip-types scripts/verify-explicit-result-privacy.mjs

@@ -44,3 +44,22 @@ Archive and guide checks verify that staff evidence URLs remain stored while abs
 ## Release gate
 
 This follow-up requires Paul's approval before merge. No merge, deployment, auto-merge or data-import action is authorised by this review itself. After approval, merge through GitHub with the approved head SHA, await deployment, and revisit historical search, Brentwood 2006, New York, Dublin and Auckland. Reconfirm public credits, layouts and profile navigation. Recheck public counts without expecting an import: the patch may reduce counts if previously exposed private records existed.
+
+
+## Independent follow-up review and extended candidate
+
+The production deployment inspected for this review is dpl_GVLAonLKnWcKD1bbLph3QYyWEboF, main f7b1401d8fc5360cea379e9268ced001437115fa. PR #1127 remains draft at 91ba6a777bb37b39de0254a597dc61b4b3c56693. No branch update, merge or deployment is authorised until Paul approves the final candidate.
+
+Additional findings beyond the original PR:
+
+- The shared public-result visibility predicate still allowed public-figure status to bypass explicit private or unset visibility. This affects sitemap edition selection and native edition links. Require published result visibility independently.
+- The member profile query had a separate public-figure bypass. Remove it so membership cannot expose another athlete's private rows.
+- The member directory returned and searched opted-out club details. Hide both club name and slug and exclude private club search matches.
+
+The new verify-explicit-result-privacy regression extracts and executes the actual profile SQL with PGlite and tests the shared discovery predicate. It fails against unchanged production source (private and unset-visibility rows returned) and passes with this candidate. Synthetic records only. Add it to the public read protection workflow. Existing archive and read-limit regressions check opt-outs, hidden rows, results-only identities, counts, race affiliation separation, exact timing and public projections.
+
+Fresh public browser checks confirm 22 searchable Brentwood editions; the 2006 archive reports 1,511 rows and displays 01:11:20 for John Clarke. His result is currently unlinked; the linked Patryk Huczkowski profile works. New York 2026 reports 83 recorded performances. These are coverage checks, not a production privacy canary test.
+
+Fresh render of the actual candidate board and built stylesheet: 320 and 390 px frames stack divisions, document width equals viewport width, and 2:01:00.25 remains unwrapped; 1152 px has equal 550 px boards on the same row. These are width-constrained browser checks, not physical-device tests. Separately recorded race affiliations remain public even if profile club sharing is disabled; this distinction is intentional.
+
+Limits: no real private record was deliberately exposed or created in production. Synthetic SQL/HTTP tests demonstrate the covered controls; a live owner-controlled privacy canary and production recheck follow approval. This patch is not a comprehensive audit of legacy RunRecs directory behavior, all profile source-history publication, third-party caches or previously indexed data. The RunRecs-specific compatibility bypasses in the original PR remain outside the AthRecs release scope. Reverting to a pre-fix build would restore the vulnerability.

@@ -943,8 +943,8 @@ export const listAthletes = createServerFn({ method: "GET" })
       select
         a.id, a.slug, a.display_name, a.gender, a.city, a.county, a.country,
         a.profile_type, a.profile_roles,
-        c.name as club,
-        c.slug as club_slug,
+        case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_club=false) then c.name end as club,
+        case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_club=false) then c.slug end as club_slug,
         (
           select count(*)::int
           from results r
@@ -978,7 +978,7 @@ export const listAthletes = createServerFn({ method: "GET" })
         and (
           ${q}::text is null
           or lower(a.display_name) like ${q}
-          or lower(coalesce(c.name, '')) like ${q}
+          or (lower(coalesce(c.name, '')) like ${q} and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_club=false))
           or lower(coalesce(a.city, '')) like ${q}
           or lower(coalesce(a.profile_type, '')) like ${q}
           or lower(coalesce(a.profile_roles, '')) like ${q}
@@ -1136,8 +1136,7 @@ const readAthleteProfile = createServerOnlyFn(
       join events e on e.id = ed.event_id
       where r.athlete_id = ${athlete.id}
         and (
-          (${!approvedPublicOnly} and ${athlete.profile_type} = 'Public figure')
-          or r.result_visibility in ('public', 'public_figure')
+          r.result_visibility in ('public', 'public_figure')
         )
         and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=r.athlete_id and hidden.result_id=r.id)
         and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=r.athlete_id and l.status='active' and s.share_results=false)

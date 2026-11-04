@@ -161,6 +161,10 @@ try {
   try {
     assert.equal((await athrecs.getEditionResults({data:1})).find(row => row.id === 7).club,null,
       'Race previews respect a private profile club preference');
+    const directory = (await athrecs.listAthletes({data:{q:'Synthetic 007'}}))[0];
+    assert.equal(directory.club, null);
+    assert.equal(directory.club_slug, null);
+    assert(!(await athrecs.listAthletes({data:{q:'Example Club'}})).some(row => row.id===7), 'Directory club searches must not reveal an opted-out athlete');
   } finally { await db.exec('rollback'); }
   for (const data of [0, -1, 1.5, Infinity, "1", {}, 2147483648]) {
     const count = queryCount;
