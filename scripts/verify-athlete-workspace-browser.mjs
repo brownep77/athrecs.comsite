@@ -29,7 +29,7 @@ export async function getStaffResultBatch(){return clone(window.batch)}
 export const getMyResultBatch=getStaffResultBatch;
 export async function createAthleteReviewLink({data}){window.calls.push({kind:'invite',data});return {id:'00000000-0000-4000-8000-000000000009',url:'https://www.athrecs.com/review-results#${'b'.repeat(64)}',expiresInDays:7}}
 export async function revokeAthleteReviewLink({data}){window.calls.push({kind:'revoke',data});return {revoked:true}}
-export async function reviewStaffPastedResults({data}){window.calls.push({kind:'publish',data});if(window.failPublish)throw new Error('Synthetic source conflict; nothing saved.');const row=window.batch.entries[0];row.state='approved';row.decisionNote=data.evidenceFor.trim();window.workspace.results.push({id:12,race:row.race,date:row.date,distance:row.distance,time:row.time,excluded:false,staffApproval:{note:data.evidenceFor.trim(),approvedBy:'synthetic-staff',approvedAt:'2026-09-27T13:00:00.000Z',requestId:data.requestId}});window.batch.revision++;return {added:1,duplicates:0,resultIds:[12],replay:false}}
+export async function reviewStaffPastedResults({data}){window.calls.push({kind:'publish',data});if(window.failPublish)throw new Error('Synthetic source conflict; nothing saved.');let added=0;for(const row of window.batch.entries.filter(r=>data.indexes.includes(r.index))){row.state=data.action==='reject'?'rejected':'approved';row.decisionNote=data.evidenceFor.trim();if(data.action==='publish'){added++;window.workspace.results.push({id:12+window.workspace.results.length-1,race:row.race,date:row.date,distance:row.distance,time:row.time,excluded:false,staffApproval:{note:data.evidenceFor.trim(),approvedBy:'synthetic-staff',approvedAt:'2026-09-27T13:00:00.000Z',requestId:data.requestId}});}}window.batch.revision++;return {added,duplicates:0,resultIds:[12],replay:false}}
 export async function loadAthleteReview(){return {athleteName:'Synthetic Athlete',rows:[{index:1,race:'Suggested Synthetic Race',date:'2026-09-20',distance:'10K',time:'00:40:00.1',timingBasis:'chip',sourceUrl:'https://example.test/results',bib:'1',place:'1'}]}}
 export async function respondToAthleteReview({data}){window.calls.push({kind:'response',data});return {recorded:true}}
 window.verificationRequests=[];
@@ -71,7 +71,7 @@ try{
   await page.getByLabel('Source profile or results URL').fill('https://example.test/results');await page.getByLabel('Unlabelled times mean').selectOption('chip');
   await page.getByLabel('Copied results table').fill('Race,Date,Distance,Time\nNew Synthetic 10K,20/09/2026,10K,00:41:00.1');await page.getByRole('button',{name:'Preview pasted rows'}).click();
   assert.equal(await page.evaluate(()=>window.calls.filter(c=>c.kind==='draft').length),0);await page.getByLabel('I am authorised to submit this material for review.',{exact:false}).check();await page.getByRole('button',{name:'Save proposed results for review'}).click();
-  await page.getByRole('heading',{name:'Review proposed races',exact:true}).waitFor();await page.getByRole('button',{name:'Select 1 ready proposals',exact:true}).click();
+  await page.getByText('Detailed batch tools and athlete confirmation links',{exact:true}).click();await page.getByRole('heading',{name:'Review proposed races',exact:true}).waitFor();await page.getByRole('button',{name:'Select 1 ready proposals',exact:true}).click();
   const publish=page.getByRole('button',{name:'Add 1 checked results to profile'});assert(await publish.isDisabled());
   await page.getByLabel('Athlete’s email').fill('athlete@example.test');await page.getByRole('button',{name:'Create confirmation link'}).click();await page.getByLabel('Copy this link').waitFor();assert.match(await page.getByLabel('Copy this link').inputValue(),/review-results#/);
   const reason=page.getByLabel('Why I approved these races',{exact:true});const identity=page.getByLabel('I checked the selected results belong to this athlete, not just a similar name.');
@@ -91,12 +91,67 @@ try{
   await page.evaluate(()=>{window.batch.athlete_id=null;window.batch.entries[0].state='pending';window.batch.revision++;window.workspace.batches=[window.batch];});
   await page.getByRole('button',{name:'Show all proposal batches'}).click();
   await page.getByRole('button',{name:/1 proposed races.*not linked yet/}).click();
-  await page.getByRole('heading',{name:'Review proposed races',exact:true}).waitFor();
+  await page.getByText('Detailed batch tools and athlete confirmation links',{exact:true}).click();await page.getByRole('heading',{name:'Review proposed races',exact:true}).waitFor();
   await page.getByLabel('Find an athlete',{exact:true}).fill('Synthetic');await page.getByRole('button',{name:'Search athletes',exact:true}).click();
   await page.getByRole('button',{name:/Synthetic Athlete.*Record 7/}).click();
   await page.getByText(/Target athlete 7/).waitFor();
-  assert(await page.getByRole('heading',{name:'Review proposed races',exact:true}).isVisible());
+  await page.getByRole('heading',{name:'Quick result review',exact:true}).waitFor();
+  await page.getByText('Detailed batch tools and athlete confirmation links',{exact:true}).click();
   assert(await page.getByRole('button',{name:'Add 0 checked results to profile'}).isDisabled());
+  // Fast, responsive staff review: no name-only approval, explicit declines and resumable uncertainty.
+  await page.getByLabel('Copied results table').fill('Race,Date,Distance,Time\nQuick Synthetic One,20/09/2026,10K,00:41:00.1\nQuick Synthetic Two,21/09/2026,10K,00:42:00\nQuick Synthetic Three,22/09/2026,10K,00:43:00');
+  await page.getByRole('button',{name:'Preview pasted rows'}).click();
+  await page.getByLabel('I am authorised to submit this material for review.',{exact:false}).check();
+  await page.getByRole('button',{name:'Save proposed results for review'}).click();
+  const quick=page.getByRole('region',{name:'Quick result review',exact:true});
+  await quick.getByRole('article',{name:'Proposed race 3',exact:true}).waitFor();
+  const beforeQuick=await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish').length);
+  await quick.getByRole('article',{name:'Proposed race 3',exact:true}).getByRole('button',{name:'Later',exact:true}).click();
+  assert.equal(await quick.getByRole('article').count(),2);
+  assert.equal(await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish').length),beforeQuick,'Later makes no database decision');
+  await quick.getByLabel('Filter proposed races').fill('One');
+  await quick.getByRole('button',{name:'Select visible pending',exact:true}).click();
+  assert.equal(await quick.getByRole('checkbox',{name:'Quick select proposed race 1'}).isChecked(),true);
+  await quick.getByLabel('Filter proposed races').fill('');
+  assert.equal(await quick.getByRole('checkbox',{name:'Quick select proposed race 2'}).isChecked(),false,'Hidden proposals were not selected');
+  await quick.getByRole('article',{name:'Proposed race 1',exact:true}).getByRole('button',{name:'Approve',exact:true}).click();
+  const quickSave=quick.getByRole('button',{name:'Approve 1 and continue',exact:true});
+  assert(await quickSave.isDisabled());
+  await quick.getByLabel('Full name / confirmed previous name',{exact:true}).check();
+  await quick.getByLabel('I checked every selected source row,',{exact:false}).check();
+  assert(await quickSave.isDisabled(),'Name alone cannot enable approval');
+  await quick.getByLabel('Club at the time of the race',{exact:true}).check();
+  assert(await quickSave.isDisabled(),'Changing evidence clears the previous confirmation');
+  await quick.getByLabel('I checked every selected source row,',{exact:false}).check();
+  assert(await quickSave.isEnabled());
+  await page.evaluate(()=>{window.failPublish=true;});
+  await quickSave.click();await quick.getByRole('alert').filter({hasText:'Synthetic source conflict'}).waitFor();
+  const failedQuick=await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish').at(-1).data);
+  assert.equal(failedQuick.indexes.join(','),'1');
+  assert.match(failedQuick.evidenceFor,/Full name.*Club at the time/);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  await page.screenshot({path:'artifacts/workspace-quick-review-mobile.png',fullPage:true});
+  await page.evaluate(()=>{window.failPublish=false;});
+  await quickSave.click();await quick.getByRole('status').filter({hasText:'1 results added'}).waitFor();
+  const savedQuick=await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish').at(-1).data);
+  assert.deepEqual(savedQuick,failedQuick,'Quick-review retry reuses the exact reviewed request');
+  await quick.getByRole('article',{name:'Proposed race 2',exact:true}).getByRole('button',{name:'Decline',exact:true}).click();
+  await quick.getByLabel('Reason for declining',{exact:true}).selectOption('This result belongs to a different athlete.');
+  await quick.getByRole('button',{name:'Confirm decline (1)',exact:true}).click();
+  await quick.getByRole('status').filter({hasText:'1 proposal(s) declined.'}).waitFor();
+  const rejectedQuick=await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish').at(-1).data);
+  assert.equal(rejectedQuick.action,'reject');assert.equal(rejectedQuick.sourceChecked,false);
+  assert.equal(rejectedQuick.indexes.join(','),'2');
+  await quick.getByRole('button',{name:'Later',exact:true}).click();
+  await quick.getByRole('article',{name:'Proposed race 3',exact:true}).getByRole('button',{name:'Return to review',exact:true}).click();
+  await quick.getByRole('button',{name:'To review',exact:true}).click();
+  assert.equal(await quick.getByRole('article').count(),1);
+  assert.equal(await page.evaluate(()=>window.batch.entries[2].state),'pending','Later did not reject the result');
+  await quick.getByRole('button',{name:'All outcomes',exact:true}).click();
+  assert.equal(await quick.getByRole('article').count(),3);
+  await page.setViewportSize({width:1280,height:900});
+  await page.screenshot({path:'artifacts/workspace-quick-review-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
   // Defence in depth: even an over-complete synthetic member response must not render staff approval evidence.
   await page.goto('http://127.0.0.1:8102/?member=1');await page.getByRole('heading',{name:'Edit Synthetic Athlete',exact:true}).waitFor();
   assert.equal(await page.getByText('Approval note',{exact:true}).count(),0);assert.equal(await page.getByText(historicalNote,{exact:true}).count(),0);

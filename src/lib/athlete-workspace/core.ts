@@ -24,7 +24,7 @@ export type CandidateResult = DraftResult & {
   resultId?: number; decisionNote?: string;
 };
 export type Batch = {
-  id: string; athlete_id: number | null; submitted_by: string; source_url: string;
+  id: string; athlete_id: number | null; athlete_name?: string | null; submitted_by: string; source_url: string;
   original_text: string; input_hash: string; entries: CandidateResult[]; revision: number;
   evidence_for: string; evidence_against: string; updated_at: string;
 };
