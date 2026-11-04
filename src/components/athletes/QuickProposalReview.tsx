@@ -94,6 +94,7 @@ export function QuickProposalReview({
     target &&
     target.id === targetId &&
     !profile.isFetching &&
+      !profile.isError &&
     chosen.length &&
     chosen.length === selected.length &&
     !chosen.some((r) => r.response === "no" || resultIssues(r).length) &&
@@ -287,6 +288,21 @@ export function QuickProposalReview({
             }}
           >
             Clear
+          </button>
+          <button
+            className="min-h-11 px-2 underline"
+            disabled={busy}
+            onClick={() => {
+              setMode(null);
+              setSelected([]);
+              setConfirmed(false);
+              void done().catch(() => {
+                setFailed(true);
+                setMessage("The list could not be refreshed. Try again.");
+              });
+            }}
+          >
+            Refresh list
           </button>
         </div>
       </div>

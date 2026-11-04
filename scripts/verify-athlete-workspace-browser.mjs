@@ -94,9 +94,9 @@ try{
   await page.getByText('Detailed batch tools and athlete confirmation links',{exact:true}).click();await page.getByRole('heading',{name:'Review proposed races',exact:true}).waitFor();
   await page.getByLabel('Find an athlete',{exact:true}).fill('Synthetic');await page.getByRole('button',{name:'Search athletes',exact:true}).click();
   await page.getByRole('button',{name:/Synthetic Athlete.*Record 7/}).click();
-  await page.getByText(/Target athlete 7/).waitFor();
   await page.getByRole('heading',{name:'Quick result review',exact:true}).waitFor();
   await page.getByText('Detailed batch tools and athlete confirmation links',{exact:true}).click();
+  await page.getByText(/Target athlete 7/).waitFor();
   assert(await page.getByRole('button',{name:'Add 0 checked results to profile'}).isDisabled());
   // Fast, responsive staff review: no name-only approval, explicit declines and resumable uncertainty.
   await page.getByLabel('Copied results table').fill('Race,Date,Distance,Time\nQuick Synthetic One,20/09/2026,10K,00:41:00.1\nQuick Synthetic Two,21/09/2026,10K,00:42:00\nQuick Synthetic Three,22/09/2026,10K,00:43:00');
