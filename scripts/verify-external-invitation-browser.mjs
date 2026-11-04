@@ -108,7 +108,8 @@ try {
     "Invitation Athlete",
   );
   await dialog.getByLabel("Country", { exact: true }).selectOption("England");
-  await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Norwich");
+  await dialog.getByLabel("City or town", { exact: true }).fill("Norwich")
+  await dialog.getByLabel("Date of birth", { exact: true }).fill("1990-05-15");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
   await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
   await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
@@ -117,7 +118,7 @@ try {
   await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
   await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
   // Signup already supplies the claim name. A verified account proceeds directly
-  // to explicit result confirmation; optional DOB/nationality are not a gate.
+  // to explicit result confirmation; date of birth is private and required at registration.
   await page.getByText("Synthetic Invitation 10K", { exact: true }).waitFor();
   assert.equal(
     new URL(page.url()).searchParams.get("invitation"),
