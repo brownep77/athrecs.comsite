@@ -115,7 +115,7 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
       "paragraphs": [
         "There was serious quality behind her. Jones finished second for the second year running. Germany’s Katrin Dörre, now known as Katrin Dörre-Heinig, was third in 2:33:21. Nine-time New York winner Grete Waitz finished fourth in 2:34:34 as her attempt at a tenth title ended.",
         "Panfil’s victory belongs in that company. Beating a field like this meant taking on runners who had already shaped the sport, as well as those whose biggest days were still ahead. Dörre-Heinig would share another major podium with her in Tokyo the following summer.",
-        "Boston brought Panfil a 2:24:18 victory in April 1991. That time needs one qualification: Boston’s course is not eligible for records. The win still stands. In August she won the world title in 2:29:53, four seconds ahead of the runner-up. New York’s narrow finish had been followed by another championship decided by a tiny margin."
+        "Boston brought Panfil a 2:24:18 victory in April 1991. That time needs one qualification: Boston’s course is not eligible for records. The win still stands. On 25 August she won the world title in Tokyo in 2:29:53. Japan’s Sachiko Yamashita took silver in 2:29:57 and Dörre-Heinig bronze in 2:30:10. Panfil had beaten Jones by five seconds in New York. With a world title at stake in Japan, she had four seconds to spare."
       ]
     },
     {
@@ -184,7 +184,7 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
       "id": "women-top-ten",
       "heading": "The women’s top ten: a field worth remembering",
       "paragraphs": [
-        "Behind Panfil, Jones, Dörre-Heinig and Waitz came Tatyana Zuyeva in fifth, France’s Jocelyne Villeton in sixth and Zoya Ivanova in seventh. Villeton and Ivanova had finished third and second respectively in the 1987 world marathon, a reminder of the depth in New York’s field.",
+        "Behind Panfil, Jones, Dörre-Heinig and Waitz came Tatyana Zuyeva in fifth, France’s Jocelyne Villeton in sixth and Zoya Ivanova in seventh. Three years earlier in Rome, Ivanova had won world silver for the Soviet Union in 2:32:38. Villeton crossed 15 seconds later to take bronze for France. In New York the order flipped. Villeton ran 2:36:12 and Ivanova 2:36:29. After another 26 miles, the gap between them had changed by just two seconds.",
         "Nancy Ditz took eighth. Her career included 2:30:14 at the 1988 US Olympic Marathon Trials in Pittsburgh and seventh place at the 1987 World Championships.",
         "Evy Palm’s ninth place deserves particular attention. The Swedish runner was 48 and completed New York in 2:38:00. A year earlier she had run 2:31:05 in London. Those performances make compelling reading for anyone who thinks serious running belongs only to the young.",
         "Lisa Vaill completed the top ten in 2:38:05, five seconds behind Palm. Her shorter-distance results include victory at the Kingston Classic 10K earlier in 1990. There are careers to explore throughout this list, well beyond the names on the podium."
