@@ -86,6 +86,10 @@ export const sourcePerformanceSchema = z.object({
   disqualification: disqualificationSchema.optional(),
 });
 export const historyPerformanceSchema = sourcePerformanceSchema.extend({
+  // Historical result sheets can omit these descriptive fields.
+  sourceDate: sourcePerformanceSchema.shape.sourceDate.default(""),
+  ageGroup: sourcePerformanceSchema.shape.ageGroup.default(""),
+  wind: sourcePerformanceSchema.shape.wind.default(""),
   date: z.string().regex(/^(?:\d{4}-\d{2}-\d{2})?$/),
 });
 export type SourcePerformance = z.infer<typeof sourcePerformanceSchema>;
