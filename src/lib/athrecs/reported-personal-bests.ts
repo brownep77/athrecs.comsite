@@ -55,7 +55,7 @@ export function selectProfilePersonalBests(
       verified: achievementResultVerified(value),
     });
   }
-  const supplied: ReportedPersonalBest[] = projected.flatMap((result) => {
+  const supplied: Array<{ value: ReportedPersonalBest; verified: boolean }> = projected.flatMap((result) => {
     const row = result.history?.performance;
     if (!row?.reportedPersonalBest || !hasHistoryFinish(row) || !historicalPbEligible(row))
       return [];
@@ -63,23 +63,29 @@ export function selectProfilePersonalBests(
     if (!eligiblePerformance({ ...result, finishTimeSeconds: mark.seconds })) return [];
     return [
       {
-        id: result.history!.key,
-        sport: result.sport,
-        surface: result.surface,
-        distanceCode: result.distanceCode,
-        distanceKm: result.distanceKm,
-        finishTimeSeconds: mark.seconds,
-        displayMark: mark.mark,
-        event: result.eventName,
-        date: result.eventDate,
-        note: "Reported historical performance; verification is shown separately.",
-        qualification: mark.aided ? ("Aided course" as const) : undefined,
-        sources: row.sourceUrls.map((url) => ({ label: row.providerName || "Source", url })),
-        hasSourceEvidence: Boolean(row.sourceUrls.length || row.sourceKeys?.length),
+        value: {
+          id: result.history!.key,
+          sport: result.sport,
+          surface: result.surface,
+          distanceCode: result.distanceCode,
+          distanceKm: result.distanceKm,
+          finishTimeSeconds: mark.seconds,
+          displayMark: mark.mark,
+          event: result.eventName,
+          date: result.eventDate,
+          note: "Reported historical performance; verification is shown separately.",
+          qualification: mark.aided ? ("Aided course" as const) : undefined,
+          sources: row.sourceUrls.map((url) => ({ label: row.providerName || "Source", url })),
+          hasSourceEvidence: Boolean(row.sourceUrls.length || row.sourceKeys?.length),
+        },
+        verified: achievementResultVerified(result),
       },
     ];
   });
-  for (const value of [...reported, ...supplied]) {
+  for (const { value, verified } of [
+    ...reported.map((value) => ({ value, verified: false })),
+    ...supplied,
+  ]) {
     if (
       !Number.isFinite(value.finishTimeSeconds) ||
       value.finishTimeSeconds <= 0 ||
@@ -90,7 +96,7 @@ export function selectProfilePersonalBests(
     const key = personalBestGroup(value) + (value.qualification ? `|${value.qualification}` : "");
     const previous = bests.get(key);
     if (!previous || value.finishTimeSeconds < previous.value.finishTimeSeconds!) {
-      bests.set(key, { kind: "reported", value, verified: false });
+      bests.set(key, { kind: "reported", value, verified });
     }
   }
   return [...bests.values()].sort(
