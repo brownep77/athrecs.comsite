@@ -4,8 +4,8 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
   "slug": "wanda-panfil-new-york-1990-polish-marathon-champion",
   "kind": "news",
   "listInRaceReports": true,
-  "date": "2026-11-03",
-  "displayDate": "3 November 2026",
+  "date": "2026-11-04",
+  "displayDate": "4 November 2026",
   "title": "Wanda Panfil: from Opoczno to New York and world marathon gold",
   "standfirst": "Five seconds won her New York in 1990. London, Nagoya, Boston and world gold belong to the same remarkable career. We celebrate Wanda Panfil, her Polish roots and the runners who shared that New York top ten.",
   "body": [
@@ -90,7 +90,7 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
   "seoTitle": "Wanda Panfil: 1990 New York Marathon win, Polish roots and life now",
   "description": "Celebrating Wanda Panfil’s 1990 New York victory, world title, Opoczno roots and coaching in Tomaszów Mazowiecki, with the men’s and women’s top-ten results.",
   "author": "AthRecs Editorial",
-  "publishedAt": "2026-11-03",
+  "publishedAt": "2026-11-04",
   "hashtags": [
     "#WandaPanfil",
     "#NewYorkCityMarathon",
