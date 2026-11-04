@@ -19,6 +19,7 @@ import batch7ThreeMonthStarts from "./three-month-starts-batch7-2026-10-25.json"
 import weekendStartCorrections from "./weekend-start-corrections-2026-10-30.json" with { type: "json" };
 import urgentStarts20261101 from "./urgent-starts-2026-11-01.json" with { type: "json" };
 import urgentStarts20261103 from "./urgent-starts-2026-11-03.json" with { type: "json" };
+import urgentStarts20261104 from "./urgent-starts-2026-11-04.json" with { type: "json" };
 
 import countyDeepReview from "./county-deep-recheck-2026-10-21.json" with { type: "json" };
 import countyExpansionDeep from "./county-expansion-deep-2026-10-21.json" with { type: "json" };
@@ -392,6 +393,14 @@ export function isReviewedFixturePlaceholder(slug: string, date: string, distanc
     return true;
   // The TC 10K governing-body programme already has its confirmed 10K edition.
   if (slug === "wa-tc-10k-7245303" && date === "2026-10-03" && distance === "Other") return true;
+  // The organiser's 2026 championship programme confirms the replacement 10K.
+  // Retain the World Athletics unknown-distance row in storage for audit.
+  if (
+    slug === "wa-israeli-10km-road-running-championships-7233553" &&
+    date === "2026-11-06" &&
+    distance === "Other"
+  )
+    return true;
   if (isThirdUrgentPlaceholder(slug, date, distance)) return true;
   if (isNextUrgentPlaceholder(slug, date, distance)) return true;
   if (isUrgentReviewedPlaceholder(slug, date, distance)) return true;
@@ -544,6 +553,16 @@ for (const [key, reviewed] of Object.entries(urgentStarts20261101)) {
 
 // Apply the 3 November organiser-confirmed starts last for exact-date local-time display.
 for (const [key, reviewed] of Object.entries(urgentStarts20261103)) {
+  const existing = FIXTURE_DETAILS[key];
+  FIXTURE_DETAILS[key] = {
+    ...existing,
+    ...reviewed,
+    starts: { ...existing?.starts, ...reviewed.starts },
+  };
+}
+
+// Apply the 4 November organiser-confirmed start last for exact-date local-time display.
+for (const [key, reviewed] of Object.entries(urgentStarts20261104)) {
   const existing = FIXTURE_DETAILS[key];
   FIXTURE_DETAILS[key] = {
     ...existing,

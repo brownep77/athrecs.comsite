@@ -1,0 +1,28 @@
+{
+  "mercedes-benz-stadium-move-with-madd-5k|2026-11-07": {
+    "summary": "Atlanta Track Club's 2026 Move with MADD programme at The Home Depot Backyard.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://www.atlantatrackclub.org/2026-mercedes-benz-stadium-move-with-madd-5k",
+    "checkedAt": "2026-11-04",
+    "starts": {
+      "1mi": {
+        "time": "08:30",
+        "note": "The organiser's 2026 event schedule lists the Mile start at 08:30.",
+        "publicNote": "The one-mile race starts at 08:30 local time."
+      }
+    }
+  },
+  "wa-israeli-10km-road-running-championships-7233553|2026-11-06": {
+    "summary": "The 2026 Israeli 10 km road championships in Nesher, with separate 5 km and junior races.",
+    "timeZone": "Asia/Jerusalem",
+    "sourceUrl": "https://nesherun.shvoong.co.il/?page_id=10",
+    "checkedAt": "2026-11-04",
+    "starts": {
+      "10K": {
+        "time": "07:10",
+        "note": "The organiser's current 2026 timetable lists 10K assembly at 07:00 and the 10K race start at 07:10. The IAA annual calendar lists 06:15 for the combined 10K/5K event; the edition-specific organiser race-day timetable takes precedence. Assembly is not the start.",
+        "publicNote": "The Israeli championship 10K starts at 07:10 local time."
+      }
+    }
+  }
+}

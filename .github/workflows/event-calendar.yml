@@ -7,6 +7,10 @@ on:
       - "src/lib/athrecs/timezone.ts"
       - "src/lib/athrecs/distance.ts"
       - "src/data/fixture-details.ts"
+      - "src/data/urgent-starts-2026-11-04.json"
+      - "scripts/lib/urgent-starts-2026-11-04-review.mjs"
+      - "scripts/publish-urgent-starts-2026-11-04.mjs"
+      - "scripts/verify-urgent-starts-2026-11-04.mjs"
       - "src/lib/running/catalogue.server.ts"
       - "scripts/verify-fixture-start-clarity.mjs"
       - "src/data/accra-start-2026-10-25.json"
@@ -58,6 +62,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/verify-fixture-start-clarity.mjs
+      - run: node scripts/verify-urgent-starts-2026-11-04.mjs
       - run: node scripts/verify-accra-start.mjs
       - run: node scripts/verify-imminent-starts.mjs
       - run: node scripts/verify-urgent-starts-followup.mjs
