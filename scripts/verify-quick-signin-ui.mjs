@@ -192,9 +192,10 @@ try {
     await dialog.getByRole("button", { name: "Continue with an email code" }).click();
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).waitFor();
 
-    // Registration needs four brief details; ordinary sign-in above still needs only email.
+    // Registration needs name, country, city and DOB; clubs remain optional. Ordinary sign-in needs only email.
     dialog = await open("signup");
-    assert.equal(await dialog.getByRole("textbox").count(), 4);
+    assert.equal(await dialog.getByRole("textbox").count(), 5);
+    assert.equal(await dialog.locator('input[type="date"]').count(), 1);
     assert.equal(await dialog.getByRole("combobox").count(), 1);
     assert.equal(await dialog.getByText("Find my race results", { exact: true }).count(), 0);
     await dialog.getByLabel("Email address", { exact: true }).fill("quick-runner@example.test");
@@ -218,14 +219,15 @@ try {
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("England");
     await continueWithEmail.click();
     assert.equal(sent.length, beforeSignup, "One location value is required before a code is sent");
-    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("   ");
+    await dialog.getByLabel("City or town", { exact: true }).fill("   ");
     await continueWithEmail.click();
     await dialog
       .getByRole("alert")
-      .filter({ hasText: "Enter a town, city, postcode or ZIP code" })
+      .filter({ hasText: "Enter your city or town" })
       .waitFor();
     assert.equal(sent.length, beforeSignup, "Spaces do not satisfy the location requirement");
-    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Norwich");
+    await dialog.getByLabel("City or town", { exact: true }).fill("Norwich");
+    await dialog.getByLabel("Date of birth", { exact: true }).fill("1990-05-15");
     await page.setViewportSize({ width: 1280, height: 900 });
     await dialog.evaluate((element) => {
       element.scrollTop = 0;
@@ -327,7 +329,7 @@ try {
     await dialog.getByLabel("First name", { exact: true }).fill("Skip");
     await dialog.getByLabel("Last name", { exact: true }).fill("Results Runner");
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("England");
-    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("NR1 2AB");
+    await dialog.getByLabel("City or town", { exact: true }).fill("NR1 2AB");
     await dialog.getByLabel("Email address", { exact: true }).fill("skip-results@example.test");
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
@@ -371,7 +373,7 @@ try {
     await dialog.getByLabel("First name", { exact: true }).fill("Fresh");
     await dialog.getByLabel("Last name", { exact: true }).fill("Signin Runner");
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("France");
-    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Lyon");
+    await dialog.getByLabel("City or town", { exact: true }).fill("Lyon");
     const emailsBeforeRetry = sent.length;
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
