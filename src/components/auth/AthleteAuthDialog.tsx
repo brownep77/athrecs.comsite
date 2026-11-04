@@ -74,6 +74,8 @@ export function AthleteAuthDialog() {
     lastName: "",
     signupCountry: "",
     signupLocation: "",
+    signupDateOfBirth: "",
+    signupClubs: "",
   });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -170,7 +172,7 @@ export function AthleteAuthDialog() {
       setCode("");
       setCodeSentTo(null);
       setResendAfter(0);
-      setSignupDetails({ firstName: "", lastName: "", signupCountry: "", signupLocation: "" });
+      setSignupDetails({ firstName: "", lastName: "", signupCountry: "", signupLocation: "", signupDateOfBirth: "", signupClubs: "" });
       setOpen(true);
     };
     window.addEventListener(AUTH_DIALOG_EVENT, onOpen);
@@ -713,7 +715,7 @@ export function AthleteAuthDialog() {
                     </select>
                   </div>
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
-                    Town, city, postcode or ZIP code
+                    City or town
                     <input
                       form="athrecs-registration-form"
                       name="signupLocation"
@@ -729,8 +731,36 @@ export function AthleteAuthDialog() {
                       required
                     />
                   </label>
+                  <label className="block space-y-1.5 text-sm font-medium text-fg">
+                    Date of birth
+                    <input
+                      form="athrecs-registration-form"
+                      name="signupDateOfBirth"
+                      type="date"
+                      autoComplete="bday"
+                      max={new Date().toISOString().slice(0, 10)}
+                      value={signupDetails.signupDateOfBirth}
+                      onChange={(event) => setSignupDetails({ ...signupDetails, signupDateOfBirth: event.target.value })}
+                      className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                      required
+                    />
+                  </label>
+                  <label className="block space-y-1.5 text-sm font-medium text-fg">
+                    Clubs you have raced for (optional)
+                    <textarea
+                      form="athrecs-registration-form"
+                      name="signupClubs"
+                      value={signupDetails.signupClubs}
+                      onChange={(event) => setSignupDetails({ ...signupDetails, signupClubs: event.target.value })}
+                      rows={2}
+                      maxLength={1000}
+                      placeholder="Current and previous clubs, one per line"
+                      className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                    />
+                  </label>
+                  <p className="text-xs text-muted">Your date of birth is kept private and used to improve result matching. Do not enter clubs you have not raced for.</p>
                   <p id="athrecs-signup-location-help" className="text-xs text-muted">
-                    A town or city is enough; you do not need to give a postcode or street address.
+                    Your city or town helps us match historical racing results. No street address is needed.
                     These registration details stay in your private account.{" "}
                     <Link
                       to="/privacy"
