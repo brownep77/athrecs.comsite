@@ -393,6 +393,14 @@ export function isReviewedFixturePlaceholder(slug: string, date: string, distanc
     return true;
   // The TC 10K governing-body programme already has its confirmed 10K edition.
   if (slug === "wa-tc-10k-7245303" && date === "2026-10-03" && distance === "Other") return true;
+  // The organiser's 2026 championship programme confirms the replacement 10K.
+  // Retain the World Athletics unknown-distance row in storage for audit.
+  if (
+    slug === "wa-israeli-10km-road-running-championships-7233553" &&
+    date === "2026-11-06" &&
+    distance === "Other"
+  )
+    return true;
   if (isThirdUrgentPlaceholder(slug, date, distance)) return true;
   if (isNextUrgentPlaceholder(slug, date, distance)) return true;
   if (isUrgentReviewedPlaceholder(slug, date, distance)) return true;
@@ -552,7 +560,6 @@ for (const [key, reviewed] of Object.entries(urgentStarts20261103)) {
     starts: { ...existing?.starts, ...reviewed.starts },
   };
 }
-
 
 // Apply the 4 November organiser-confirmed start last for exact-date local-time display.
 for (const [key, reviewed] of Object.entries(urgentStarts20261104)) {
