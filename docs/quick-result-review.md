@@ -7,7 +7,12 @@ its athlete. Unassigned submissions still require an explicit target selection.
 The default review uses responsive cards with race, date, distance, timing basis,
 bib, athlete response, validation issues, and Approve / Decline / Later actions.
 The target's recorded club, residence, name, ID and visibility remain above the
-list. Source evidence stays staff-only.
+list. Explicitly labelled source athlete names, clubs, ages/categories, nationalities,
+residence and athlete IDs are retained from pasted tables and shown beside the
+profile facts. A generic Country or City column does not establish nationality
+or residence, and Bib does not populate Athlete ID. A source-name difference
+requires a recorded independent explanation; the server checks the profile name
+and stored aliases before publication. Source evidence stays staff-only.
 
 - **Approve** opens a compact decision panel. Check the identity evidence actually
   inspected; those choices form the staff audit note. A name alone cannot enable

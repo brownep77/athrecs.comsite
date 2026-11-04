@@ -55,6 +55,18 @@ try{
   assert.throws(()=>core.parsePaste('Race,Date,Chip Time,Gun Time\nExample,2026-09-20,40:00,40:01',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'}),/More than one/);
   assert.throws(()=>core.tableCells('Race,Date,Time\nExample,40:00'),/column counts/);
   assert.equal(core.httpsUrl.safeParse('javascript:alert(1)').success,false);assert.equal(core.httpsUrl.safeParse('https://user:secret@example.test/').success,false);
+  const identityRows=core.parsePaste('Race,Date,Distance,Time,Name,Club,Age category,Age,Nationality,Residence,Athlete ID,Country\nIdentity Synthetic 10K,20/09/2026,10K,00:40:00,Synthetic Athlete,Synthetic Club,M40-44,42,Irish,Norwich,provider-123,France',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'});
+  assert.equal(identityRows[0].athleteName,'Synthetic Athlete');assert.equal(identityRows[0].nationality,'Irish');
+  assert.equal(identityRows[0].residence,'Norwich');assert.equal(identityRows[0].sourceAthleteId,'provider-123');
+  const ambiguousIdentity=core.parsePaste('Race,Date,Distance,Time,Country,City,Bib\nIdentity Synthetic 10K,20/09/2026,10K,00:40:00,France,Paris,42',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'});
+  assert.equal(ambiguousIdentity[0].nationality,undefined);assert.equal(ambiguousIdentity[0].residence,undefined);assert.equal(ambiguousIdentity[0].sourceAthleteId,undefined);
+  assert.notEqual(core.identityName('あ'),core.identityName('い'),'Non-Latin names must remain distinguishable');
+  const named=await makeBatch(other.id,[{...row(1,'Identity Guard Synthetic 10K'),athleteName:'Synthetic Previous Name'}]);
+  await assert.rejects(()=>publication.reviewBatch(request(named.id,1,other.id,[1]),staff),/source athlete name differs/);
+  assert.equal((await sql`select revision from athlete_result_proposals where id=${named.id}::uuid`)[0].revision,1);
+  await sql`update athletes set profile_details=jsonb_set(profile_details,'{aliases}','["Synthetic Previous Name"]'::jsonb) where id=${other.id}`;
+  assert.equal((await publication.reviewBatch(request(named.id,1,other.id,[1]),staff)).added,1,'Confirmed stored aliases support manual review');
+
   const saved=await makeBatch(a.id,[row(1),row(2,'Second Workspace Synthetic 10K')]);
   assert.equal((await sql`select count(*)::integer as n from results where athlete_id=${a.id}`)[0].n,0,'Saving pasted candidates cannot publish');
   await assert.rejects(()=>service.getBatch(saved.id,stranger),/not available/);

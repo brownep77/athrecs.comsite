@@ -99,12 +99,14 @@ try{
   await page.getByText(/Target athlete 7/).waitFor();
   assert(await page.getByRole('button',{name:'Add 0 checked results to profile'}).isDisabled());
   // Fast, responsive staff review: no name-only approval, explicit declines and resumable uncertainty.
-  await page.getByLabel('Copied results table').fill('Race,Date,Distance,Time\nQuick Synthetic One,20/09/2026,10K,00:41:00.1\nQuick Synthetic Two,21/09/2026,10K,00:42:00\nQuick Synthetic Three,22/09/2026,10K,00:43:00');
+  await page.getByLabel('Copied results table').fill('Race,Date,Distance,Time,Name,Club,Age category,Nationality,Residence,Athlete ID\nQuick Synthetic One,20/09/2026,10K,00:41:00.1,Synthetic Athlete,Synthetic Club,M40-44,Irish,Norwich,provider-1\nQuick Synthetic Two,21/09/2026,10K,00:42:00,Synthetic Athlete,Synthetic Club,M40-44,Irish,Norwich,provider-1\nQuick Synthetic Three,22/09/2026,10K,00:43:00,Different Synthetic Athlete,Synthetic Club,M40-44,Irish,Norwich,provider-2');
   await page.getByRole('button',{name:'Preview pasted rows'}).click();
   await page.getByLabel('I am authorised to submit this material for review.',{exact:false}).check();
   await page.getByRole('button',{name:'Save proposed results for review'}).click();
   const quick=page.getByRole('region',{name:'Quick result review',exact:true});
   await quick.getByRole('article',{name:'Proposed race 3',exact:true}).waitFor();
+  await quick.getByRole('article',{name:'Proposed race 1',exact:true}).getByText('M40-44',{exact:true}).waitFor();
+  assert.equal(await quick.getByRole('article',{name:'Proposed race 1',exact:true}).getByText('Irish',{exact:true}).count(),1);
   const beforeQuick=await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish').length);
   await quick.getByRole('article',{name:'Proposed race 3',exact:true}).getByRole('button',{name:'Later',exact:true}).click();
   assert.equal(await quick.getByRole('article').count(),2);
@@ -147,6 +149,15 @@ try{
   await quick.getByRole('button',{name:'To review',exact:true}).click();
   assert.equal(await quick.getByRole('article').count(),1);
   assert.equal(await page.evaluate(()=>window.batch.entries[2].state),'pending','Later did not reject the result');
+  await quick.getByRole('article',{name:'Proposed race 3',exact:true}).getByRole('button',{name:'Approve',exact:true}).click();
+  await quick.getByLabel('Full name / confirmed previous name',{exact:true}).check();
+  await quick.getByLabel('Club at the time of the race',{exact:true}).check();
+  await quick.getByLabel('I checked every selected source row,',{exact:false}).check();
+  assert(await quick.getByRole('button',{name:'Approve 1 and continue',exact:true}).isDisabled(),'A differing source name needs a recorded resolution');
+  await quick.getByLabel('Resolution',{exact:true}).fill('An independent provider record confirms this previous racing name.');
+  await quick.getByLabel('I checked every selected source row,',{exact:false}).check();
+  assert(await quick.getByRole('button',{name:'Approve 1 and continue',exact:true}).isEnabled());
+  await quick.getByRole('button',{name:'Cancel',exact:true}).click();
   await quick.getByRole('button',{name:'All outcomes',exact:true}).click();
   assert.equal(await quick.getByRole('article').count(),3);
   await page.setViewportSize({width:1280,height:900});

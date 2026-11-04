@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import * as api from "@/lib/athlete-workspace/api";
-import { httpsUrl, resultIssues, type Batch } from "@/lib/athlete-workspace/core";
+import { httpsUrl, identityName, resultIssues, type Batch } from "@/lib/athlete-workspace/core";
 
 const button =
   "min-h-11 rounded-lg border px-4 py-2 text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed";
@@ -81,6 +81,12 @@ export function QuickProposalReview({
         .join("; ")}.`
     : "";
   const evidence = [generated, note.trim()].filter(Boolean).join("\n");
+  const differentSourceName = Boolean(
+    target &&
+    chosen.some(
+      (r) => r.athleteName && identityName(r.athleteName) !== identityName(target.display_name),
+    ),
+  );
   const currentVersion = `${batch.id}:${batch.revision}:${targetId}`;
   const sameReview = reviewVersion === currentVersion;
   const corroborated =
@@ -94,7 +100,7 @@ export function QuickProposalReview({
     target &&
     target.id === targetId &&
     !profile.isFetching &&
-      !profile.isError &&
+    !profile.isError &&
     chosen.length &&
     chosen.length === selected.length &&
     !chosen.some((r) => r.response === "no" || resultIssues(r).length) &&
@@ -102,7 +108,8 @@ export function QuickProposalReview({
     corroborated &&
     evidence.trim().length >= 12 &&
     confirmed &&
-    (!against.trim() || resolution.trim()),
+    (!against.trim() || resolution.trim()) &&
+    (!differentSourceName || resolution.trim().length >= 12),
   );
 
   function open(action: "publish" | "reject", indexes: number[]) {
@@ -138,7 +145,17 @@ export function QuickProposalReview({
       indexes: chosen.map((r) => r.index),
       action: mode,
       evidenceFor: mode === "publish" ? evidence : reason,
-      evidenceAgainst: mode === "publish" ? against : "",
+      evidenceAgainst:
+        mode === "publish"
+          ? [
+              differentSourceName
+                ? "The source athlete name differs from the selected profile name."
+                : "",
+              against,
+            ]
+              .filter(Boolean)
+              .join("\n")
+          : "",
       resolution: mode === "publish" ? resolution : "",
       sourceChecked: mode === "publish" && confirmed,
       identityChecked: mode === "publish" && confirmed,
@@ -380,7 +397,13 @@ export function QuickProposalReview({
                     placeholder="Add a detail when needed; checked evidence is recorded automatically."
                   />
                 </label>
-                <details>
+                {differentSourceName && (
+                  <p role="alert" className="text-sm text-amber-900">
+                    A source name differs from this profile. Record the independent evidence for a
+                    previous name or other difference before approval.
+                  </p>
+                )}
+                <details open={differentSourceName || undefined}>
                   <summary className="min-h-11 cursor-pointer py-2 text-sm font-semibold">
                     Record a conflict and how it was resolved
                   </summary>
@@ -445,6 +468,7 @@ export function QuickProposalReview({
               <label className="block text-sm">
                 Reason for declining
                 <select
+                  aria-label="Reason for declining"
                   className={input}
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
@@ -527,6 +551,68 @@ export function QuickProposalReview({
                 </div>
                 <span className="text-xs font-semibold">{r.state}</span>
               </div>
+              {(r.athleteName ||
+                r.club ||
+                r.ageCategory ||
+                r.ageAtRace ||
+                r.nationality ||
+                r.residence ||
+                r.sourceAthleteId) && (
+                <div className="overflow-x-auto rounded-lg bg-slate-50 p-2">
+                  <table className="w-full text-left text-xs">
+                    <caption className="pb-2 text-left font-semibold">
+                      Identity comparison · missing means unknown
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th className="p-1">Detail</th>
+                        <th className="p-1">Source result</th>
+                        <th className="p-1">Recorded profile / check</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        ["Name", r.athleteName, target?.display_name],
+                        [
+                          "Club",
+                          r.club,
+                          target?.source_club_name
+                            ? `${target.source_club_name} (check historical club)`
+                            : "",
+                        ],
+                        [
+                          "Age / category",
+                          [r.ageAtRace, r.ageCategory].filter(Boolean).join(" · "),
+                          "Check age at this race date and its category rules",
+                        ],
+                        [
+                          "Nationality",
+                          r.nationality,
+                          "Check explicitly recorded nationality separately from residence",
+                        ],
+                        [
+                          "Residence",
+                          r.residence,
+                          target?.city ? `${target.city} (current record; check race date)` : "",
+                        ],
+                        [
+                          "Athlete ID",
+                          r.sourceAthleteId,
+                          "Check within the source provider; bib is separate",
+                        ],
+                      ].map(([label, source, recorded]) => (
+                        <tr key={label}>
+                          <th className="p-1 align-top">{label}</th>
+                          <td className="break-words p-1 align-top">{source || "Not supplied"}</td>
+                          <td className="break-words p-1 align-top">
+                            {recorded || "Not supplied"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
               <p
                 className={`text-sm ${r.response === "no" ? "font-semibold text-red-800" : "text-slate-600"}`}
               >
