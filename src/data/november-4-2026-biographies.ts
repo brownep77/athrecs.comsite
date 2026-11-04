@@ -44,6 +44,27 @@ export const november4BiographyReviews: (BiographyPresentation & { slug: string;
     ]
   },
   {
+    "slug": "jolanda-ceplak",
+    "title": "Jolanda Čeplak – Slovenian 800m records, Olympic medal and results",
+    "description": "Jolanda Čeplak’s 800m career, from her 1:55.82 indoor world record in Vienna to Olympic bronze in Athens, with results from 1993 to 2010.",
+    "headings": [
+      "From junior racing to the Vienna world record",
+      "European titles and an Olympic medal",
+      "The federation ruling and her return"
+    ],
+    "paragraphs": [
+      "Jolanda Čeplak is a Slovenian middle-distance runner who won the European 800m title indoors and outdoors in 2002. She had already won European junior bronze over 1500m under her maiden name, Steblovnik, and placed fourth over 800m at the 2000 European Indoor Championships. In Vienna on 3 March 2002 she led much of the final, lost the lead and fought back to win in 1:55.82. Three hundredths of a second separated first and second. The world indoor record stood until 19 February 2026, when Keely Hodgkinson ran 1:54.87 in Liévin.",
+      "Outdoors, Čeplak ran 1:55.19 in Heusden-Zolder in July 2002 and won European gold in Munich the following month. She also won over 1500m at the 2003 Prefontaine Classic in 4:02.44. Her 2004 season brought world indoor 800m silver in Budapest and Olympic bronze in Athens. In the Olympic final she ran 1:56.43, the same published time as the silver medallist. In March 2007 she took European indoor bronze in Birmingham.",
+      "Later in 2007, an out-of-competition sample collected on 18 June tested positive for recombinant EPO. The Slovenian federation imposed two years of ineligibility, from 25 July 2007 to 24 July 2009, and disqualified her results from 18 June 2007. The IAAF published the decision in 2008. She returned to competition in July 2009 and won the 800m at the Daegu pre-championship meeting that September in 2:04.49."
+    ],
+    "questions": [
+      {
+        "question": "When did Jolanda Čeplak set the indoor 800m world record?",
+        "answer": "On 3 March 2002, she won the European indoor final in Vienna in 1:55.82. Keely Hodgkinson lowered the mark to 1:54.87 in Liévin on 19 February 2026."
+      }
+    ]
+  },
+  {
     "slug": "ayano-shiomi",
     "title": "Ayano Shiomi – 800m results and Japan’s 4×1500m relay",
     "description": "Meet Japanese middle-distance runner Ayano Shiomi, an Asian indoor 800m medallist and lead-off runner for Iwatani’s 2026 record relay.",
