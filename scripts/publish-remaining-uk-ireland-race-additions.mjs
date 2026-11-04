@@ -10,6 +10,13 @@ const HALF_TEN_SOURCE_KEY =
   "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints:2026-08-28";
 const HALF_TEN_OVERFLOW_SOURCE_KEY =
   "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints-overflow:2026-09-05";
+const HALF_TEN_SECOND_OVERFLOW_SOURCE_KEY =
+  "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints-overflow-2:2026-10-27";
+const HALF_TEN_SOURCE_KEYS = [
+  HALF_TEN_SOURCE_KEY,
+  HALF_TEN_OVERFLOW_SOURCE_KEY,
+  HALF_TEN_SECOND_OVERFLOW_SOURCE_KEY,
+];
 const NON_STANDARD_SOURCE_URL =
   "https://github.com/brownep77/athrecs.comsite/blob/main/src/data/non-standard-races-uk-ireland.ts";
 const HALF_TEN_SOURCE_URL =
@@ -306,13 +313,20 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
     ...halfTenEditions.map((edition) => edition.seriesSlug),
   ]);
   const halfTenEvents = eventsFor(halfTenSlugs);
-  const halfTenBatches = [halfTenEvents.slice(0, 75), halfTenEvents.slice(75)]
+  const halfTenBatches = Array.from(
+    { length: Math.ceil(halfTenEvents.length / 75) },
+    (_, index) => halfTenEvents.slice(index * 75, (index + 1) * 75),
+  )
     .filter((events) => events.length)
     .map((events, index) => {
+      const sourceKey = HALF_TEN_SOURCE_KEYS[index];
+      if (!sourceKey) {
+        throw new Error(`Missing source key for half/10-mile publication part ${index + 1}`);
+      }
       const eventSlugs = new Set(events.map((event) => event.slug));
       return {
         label: `half-ten-mile-and-10k-checkpoints-part-${index + 1}`,
-        sourceKey: index === 0 ? HALF_TEN_SOURCE_KEY : HALF_TEN_OVERFLOW_SOURCE_KEY,
+        sourceKey,
         sourceUrl: HALF_TEN_SOURCE_URL,
         events,
         editions: halfTenEditions

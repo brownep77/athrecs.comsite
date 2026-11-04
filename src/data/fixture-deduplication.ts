@@ -15,6 +15,13 @@ export type VerifiedEditionReplacement = {
  * Database seeding refuses to retire an alias that already holds results.
  */
 export const verifiedFixtureAliases: Readonly<Record<string, string>> = {
+  // Same 8 November 2026 RunThrough programme at Dorney Lake. Keep the
+  // established year-round Dorney card used by the verified 2027 editions;
+  // retire the date-specific November alias and replace the established card's
+  // stale 09:00 clock with the current organiser's 09:10 schedule.
+  // Checked 4 November 2026.
+  "dorney-lake-half-marathon-10k-5k-november":
+    "dorney-5k-10k-half-marathon-august-1",
   // Same 28 February 2027 race at Queensway Stadium; runABC and RunThrough
   // partner listing checked 8 October 2026 (see docs/fixture-geography).
   "wrexham-half-marathon-february": "wrexham-half-marathon-2027",
@@ -130,6 +137,12 @@ export const allFixtureAliases: Readonly<Record<string, string>> = {
 
 /** Incorrect second-day dates found during the all-sport duplicate audit. */
 export const verifiedFixtureEditionReplacements: VerifiedEditionReplacement[] = [
+  {
+    seriesSlug: "rosliston-rumble-autumn",
+    distance: "Half",
+    fromDate: "2026-10-31",
+    toDate: "2026-11-01",
+  },
   {
     seriesSlug: "isle-of-wight-fell-series-sunday",
     distance: "Other",
@@ -253,6 +266,39 @@ export const verifiedFixtureEditionReplacements: VerifiedEditionReplacement[] = 
 ];
 
 export const verifiedFixtureEditionOverrides: Record<string, Partial<Edition>> = {
+  "dorney-5k-10k-half-marathon-august-1|2026-11-08|Half": {
+    startTime: "09:10",
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+    source:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+    notes:
+      "The current organiser page and authorised schedule give the half marathon, 10K and 5K one 09:10 start on 8 November 2026; the date-specific duplicate card is retired into this established series.",
+  },
+  "dorney-5k-10k-half-marathon-august-1|2026-11-08|10K": {
+    startTime: "09:10",
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+    source:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+  },
+  "dorney-5k-10k-half-marathon-august-1|2026-11-08|5K": {
+    startTime: "09:10",
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+    source:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+  },
+  "rother-valley-remembrance-day-trail-runs|2026-11-08|HM": {
+    startTime: "09:00",
+    source:
+      "https://www.wilddeerevents.co.uk/e/rother-valley-remembrance-day-trail-runs-2026-14810",
+    notes:
+      "The current organiser schedule and authorised Eventrac half-marathon category both give a 09:00 start on 8 November 2026; the prior 09:30 clock belonged to shorter-distance entry categories.",
+  },
   "wa-deloitte-fast-fun-5-10km-trakks-lbfa-road-tour-7244627|2026-09-06|Other": {
     distance: "10K",
     distanceKm: 10,

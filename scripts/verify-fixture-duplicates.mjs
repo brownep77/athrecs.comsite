@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { createServer } from "vite";
 
 const [
@@ -216,14 +217,41 @@ assert.equal(
   undefined,
   "Retained public alias must never be deleted by catalogue seeding",
 );
+assert.equal(
+  verifiedFixtureAliases["dorney-lake-half-marathon-10k-5k-november"],
+  "dorney-5k-10k-half-marathon-august-1",
+  "The date-specific Dorney duplicate is not mapped to the established organiser card",
+);
 for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
   assert(!assembledSlugs.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
   assert(assembledSlugs.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
 }
 
+const correctedDorneyHalf = assembledCatalogue.editions.find(
+  (edition) =>
+    edition.seriesSlug === "dorney-5k-10k-half-marathon-august-1" &&
+    edition.date === "2026-11-08" &&
+    edition.distance === "Half",
+);
+assert.equal(correctedDorneyHalf?.startTime, "09:10");
+assert.equal(
+  correctedDorneyHalf?.source,
+  "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+);
+const countyExpansionMore = JSON.parse(
+  await readFile("src/data/county-expansion-more-2026-10-21.json", "utf8"),
+);
+const correctedRotherValleyHalf = countyExpansionMore.editions.find(
+  (edition) =>
+    edition.eventSlug === "rother-valley-remembrance-day-trail-runs" &&
+    edition.date === "2026-11-08" &&
+    edition.distance === "HM",
+);
+assert.equal(correctedRotherValleyHalf?.startTime, "09:00");
+
 for (const replacement of verifiedFixtureEditionReplacements) {
   assert(
-    editions.some(
+    assembledCatalogue.editions.some(
       (edition) =>
         edition.seriesSlug === replacement.seriesSlug &&
         edition.date === replacement.toDate &&
@@ -232,7 +260,7 @@ for (const replacement of verifiedFixtureEditionReplacements) {
     `Corrected fixture is missing: ${replacement.seriesSlug}|${replacement.toDate}`,
   );
   assert(
-    !editions.some(
+    !assembledCatalogue.editions.some(
       (edition) =>
         edition.seriesSlug === replacement.seriesSlug &&
         edition.date === replacement.fromDate &&

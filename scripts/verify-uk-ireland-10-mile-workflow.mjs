@@ -115,21 +115,58 @@ for (const edition of verifiedTenMileEditions) {
     assert(!edition.entryOptions?.length, `${key} must not advertise unconfirmed entry`);
   }
   for (const option of edition.entryOptions ?? []) {
-    assert.equal(option.checkedAt, TODAY, `${key} has a stale entry check date`);
+    const expectedCheckDate =
+      edition.seriesSlug === "midleton-greenway-10-mile-2027"
+        ? "2026-11-01"
+        : edition.seriesSlug === "bramley-10-mile-road-race-2027"
+          ? "2026-11-04"
+          : TODAY;
+    assert.equal(option.checkedAt, expectedCheckDate, `${key} has a stale entry check date`);
     assert.equal(option.isVerified, true, `${key} has an unverified entry provider`);
     assert.equal(option.isPrimary, true, `${key} primary entry provider is not marked`);
     assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
   }
 }
 
+const bramleySeries = verifiedTenMileSeries.find(
+  (series) => series.slug === "bramley-10-mile-road-race-2027",
+);
+const bramleyEdition = verifiedTenMileEditions.find(
+  (edition) => edition.seriesSlug === "bramley-10-mile-road-race-2027",
+);
+assert(bramleySeries && bramleyEdition, "The verified Bramley 2027 race is missing");
+assert.equal(bramleyEdition.date, "2027-02-14", "Bramley has the wrong date");
+assert.equal(bramleyEdition.startTime, "10:00", "Bramley has the wrong start time");
+assert.equal(bramleyEdition.status, "Open", "Bramley must expose its open entry");
+assert.equal(
+  bramleyEdition.entryUrl,
+  "https://www.entryhub.co.uk/2027-bramley-10-Mile-road-race",
+  "Bramley lost its event-specific checkout",
+);
+assert.equal(
+  bramleyEdition.entryOptions?.[0]?.checkedAt,
+  "2026-11-04",
+  "Bramley entry provenance was not checked in the current scan",
+);
+assert.equal(
+  bramleyEdition.entryOptions?.[0]?.priceAmount,
+  30,
+  "Bramley has the wrong lowest affiliated early-bird price",
+);
+assert.equal(
+  bramleySeries.source_url,
+  "https://www.entryhub.co.uk/2027-bramley-10-Mile-road-race",
+  "Bramley lost its authorised event source",
+);
+
 assert.equal(
   verifiedTenMileEditions.filter((edition) => edition.status === "Open").length,
-  10,
+  12,
   "The verified live-entry total changed unexpectedly",
 );
 assert.equal(
   verifiedTenMileEditions.filter((edition) => edition.status === "TBC").length,
-  5,
+  3,
   "The conservative TBC total changed unexpectedly",
 );
 
