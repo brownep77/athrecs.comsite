@@ -11,5 +11,18 @@
         "publicNote": "The one-mile race starts at 08:30 local time."
       }
     }
+  },
+  "wa-israeli-10km-road-running-championships-7233553|2026-11-06": {
+    "summary": "The 2026 Israeli 10 km road championships in Nesher, with separate 5 km and junior races.",
+    "timeZone": "Asia/Jerusalem",
+    "sourceUrl": "https://nesherun.shvoong.co.il/?page_id=10",
+    "checkedAt": "2026-11-04",
+    "starts": {
+      "10K": {
+        "time": "07:10",
+        "note": "The organiser's current 2026 timetable lists 10K assembly at 07:00 and the 10K race start at 07:10.",
+        "publicNote": "The Israeli championship 10K starts at 07:10 local time."
+      }
+    }
   }
 }
