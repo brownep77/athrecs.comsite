@@ -303,7 +303,7 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
             "name": "Steve Brace",
             "place": 3,
             "time": "2:13:32",
-            "country": "Wales (GBR)"
+            "country": "Great Britain"
           },
           {
             "division": "Men",
