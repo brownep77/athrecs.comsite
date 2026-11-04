@@ -196,6 +196,12 @@ try {
     assert(response.status >= 400 && response.status < 500, "Invalid registration must be rejected");
   });
   const alpha = await signIn("security-alpha@example.test", "Security Alpha");
+  await check("registration stores private DOB and clubs while public session omits them", async () => {
+    const rows = await sql`select "signupDateOfBirth", "signupClubs" from "user" where email=${alpha.user.email}`;
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].signupDateOfBirth, "1990-05-15");
+    assert.equal(rows[0].signupClubs, "Synthetic Runners AC");
+  });
   await check("verified login and session do not reveal private date of birth or clubs", async () => {
     assert(!JSON.stringify(alpha).includes("1990-05-15"));
     assert(!JSON.stringify(alpha).includes("Synthetic Runners AC"));
