@@ -240,7 +240,7 @@ export function QuickProposalReview({
           </p>
         )}
       </header>
-      <div className="sticky top-0 z-10 space-y-2 rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="space-y-2 rounded-lg border border-slate-200 bg-white p-3 shadow-sm lg:sticky lg:top-0 lg:z-10">
         <div className="flex flex-wrap gap-2" aria-label="Proposal filters">
           {(
             [

@@ -144,7 +144,7 @@ try{
   const rejectedQuick=await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish').at(-1).data);
   assert.equal(rejectedQuick.action,'reject');assert.equal(rejectedQuick.sourceChecked,false);
   assert.equal(rejectedQuick.indexes.join(','),'2');
-  await quick.getByRole('button',{name:'Later',exact:true}).click();
+  await quick.getByLabel('Proposal filters',{exact:true}).getByRole('button',{name:'Later',exact:true}).click();
   await quick.getByRole('article',{name:'Proposed race 3',exact:true}).getByRole('button',{name:'Return to review',exact:true}).click();
   await quick.getByRole('button',{name:'To review',exact:true}).click();
   assert.equal(await quick.getByRole('article').count(),1);
