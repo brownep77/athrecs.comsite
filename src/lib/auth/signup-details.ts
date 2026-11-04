@@ -5,6 +5,8 @@ export type SignupDetails = {
   lastName: string;
   signupCountry: string;
   signupLocation: string;
+  signupDateOfBirth: string;
+  signupClubs: string;
 };
 
 // Nullable for existing members. New-account requirements are enforced by the
@@ -15,6 +17,8 @@ export const signupUserFields = {
   lastName: { type: "string", required: false, returned: false },
   signupCountry: { type: "string", required: false, returned: false },
   signupLocation: { type: "string", required: false, returned: false },
+  signupDateOfBirth: { type: "string", required: false, returned: false },
+  signupClubs: { type: "string", required: false, returned: false },
 } as const;
 
 export const SIGNUP_COUNTRIES = [
@@ -26,7 +30,9 @@ const countryByName = new Map(SIGNUP_COUNTRIES.map((country) => [country.toLower
 export const SIGNUP_ERRORS = {
   SIGNUP_NAME_REQUIRED: "Enter your first and last name to create an account.",
   SIGNUP_COUNTRY_REQUIRED: "Choose your country to create an account.",
-  SIGNUP_LOCATION_REQUIRED: "Enter a town, city, postcode or ZIP code to create an account.",
+  SIGNUP_LOCATION_REQUIRED: "Enter your city or town to create an account.",
+  SIGNUP_BIRTHDATE_REQUIRED: "Enter a valid date of birth to create an account.",
+  SIGNUP_CLUBS_INVALID: "List no more than 20 clubs (up to 1,000 characters total).",
   SIGNUP_DETAILS_INVALID:
     "Use up to 60 characters for each name, 120 for your full name and 120 for your location.",
 } as const;
@@ -43,6 +49,8 @@ export function normalizeSignupDetails(input: unknown): SignupDetails {
     lastName: cleanText(value.lastName),
     signupCountry: countryByName.get(country.toLowerCase()) ?? country,
     signupLocation: cleanText(value.signupLocation),
+    signupDateOfBirth: cleanText(value.signupDateOfBirth),
+    signupClubs: typeof value.signupClubs === "string" ? value.signupClubs.trim() : "",
   };
 }
 
@@ -53,6 +61,11 @@ export function signupDetailsError(input: unknown) {
   else if (!countryByName.has(details.signupCountry.toLowerCase()))
     code = "SIGNUP_COUNTRY_REQUIRED";
   else if (!details.signupLocation) code = "SIGNUP_LOCATION_REQUIRED";
+  else if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(details.signupDateOfBirth) ||
+    !Number.isFinite(Date.parse(`${details.signupDateOfBirth}T00:00:00Z`)) ||
+    new Date(`${details.signupDateOfBirth}T00:00:00Z`).toISOString().slice(0, 10) !== details.signupDateOfBirth ||
+    details.signupDateOfBirth > new Date().toISOString().slice(0, 10)) code = "SIGNUP_BIRTHDATE_REQUIRED";
+  else if (details.signupClubs.length > 1000 || details.signupClubs.split(/[,\\n]/).filter(Boolean).length > 20) code = "SIGNUP_CLUBS_INVALID";
   else if (
     details.firstName.length > 60 ||
     details.lastName.length > 60 ||
