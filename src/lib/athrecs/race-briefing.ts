@@ -68,6 +68,8 @@ function sportWhat(sport: Sport, name: string): string {
       return "A mass-start ride or race on the road or mixed surface. Confirm whether it is a sportive, a closed-road race or a time trial — the rules and support are different.";
     case "Swimming":
       return "An open-water or pool race. Cut-offs, wave starts and wetsuit policy come from the organiser. Never treat a listing time as a guarantee of water conditions.";
+    case "HYROX":
+      return "A fitness race combining running with functional workout stations. Distances, division standards and individual start slots come from the event programme; it is not a standalone running race.";
     case "Rowing":
       return "A regatta or head race. Boat class, division and tide window are on the official draw — ATHRECS only records the meeting, not the lane draw.";
     case "OCR":
@@ -120,6 +122,13 @@ function athleteChecklist(sport: Sport): string[] {
         "Wetsuit rule and water temperature",
         "Cap, goggles and bright tow-float if required",
         "Cut-off and safety-cover details",
+      ];
+    case "HYROX":
+      return [
+        ...common,
+        "Your division and assigned individual start slot",
+        "The athlete briefing, workout standards and division weights",
+        "Check-in deadline and required identification",
       ];
     case "OCR":
       return [
