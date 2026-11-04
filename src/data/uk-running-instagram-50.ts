@@ -13,7 +13,8 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
   "body": [
     "Running Instagram can be a wonderful place. You open it for one training tip and emerge forty minutes later convinced you need trail shoes, a foam roller and a race in a country you had not considered visiting.",
     "At its best, it also introduces you to people who make running feel possible, explain something useful or give you a laugh when your own session has gone sideways. There is room for the first 5K, the ambitious marathon and the person who considers a mountain range a reasonable weekend plan.",
-    "This selection covers the UK running scene: runners from the UK, creators based here and British athletes who now train abroad. Some write blogs; others make films, coach, present, race professionally or build communities. Each has an Instagram account connected to that work. The numbers make the list easier to browse; they are not finishing positions."
+    "This selection covers the UK running scene: runners from the UK, creators based here and British athletes who now train abroad. Some write blogs; others make films, coach, present, race professionally or build communities. Each has an Instagram account connected to that work. The numbers make the list easier to browse; they are not finishing positions.",
+    "Follow the AthRecs profile links to explore the race results currently recorded. The Instagram links take you straight to their own accounts."
   ],
   "sections": [
     {
@@ -1144,7 +1145,57 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     "Nell McAndrew",
     "Iwan Thomas"
   ],
-  "athleteLinks": {},
+  "athleteLinks": {
+    "Adrienne Adhami": "adrienne-adhami",
+    "Allie Bailey": "allie-bailey",
+    "Andy Raynor": "andy-raynor-london-2026-44750",
+    "Anna Harding": "anna-harding",
+    "Anna McNuff": "anna-mcnuff",
+    "Anya Culling": "anya-culling",
+    "Becky Briggs": "becky-briggs",
+    "Ben Felton": "ben-felton-27c973e2",
+    "Ben Parkes": "ben-parkes",
+    "Ben Sheppard": "ben-sheppard",
+    "Beth Pascall": "beth-pascall-utmb-273484",
+    "Charlie Watson": "charlie-watson",
+    "Charlotte Purdue": "charlotte-purdue",
+    "Chris Ford": "christopher-ford-wmm-b44c4017-5d67-11eb-a712-02848444c773",
+    "Claire Maxted": "claire-maxted",
+    "Damian Hall": "damian-hall",
+    "Dan Osborn-Nash": "dan-nash",
+    "David Hellard": "david-hellard-wmm-bea95cc0-5d67-11eb-a712-02848444c773",
+    "Emma Kirk-Odunubi": "emma-kirk-odunubi-london-2026-mass-42545",
+    "Flora Beverley": "flora-beverley-london-2026-mass-56659",
+    "Gary House": "gary-house",
+    "Imo Boddy": "imogen-boddy-duv-1866255",
+    "Iwan Thomas": "iwan-thomas",
+    "James Dunne": "james-dunne",
+    "James Lattanzio": "james-lattanzio",
+    "Jasmin Paris": "jasmin-paris",
+    "Jonathan Albon": "jonathan-albon-utmb-527631",
+    "Joshua Patterson": "joshua-patterson-london-2024-ab82286edb1337f6",
+    "Laura Fountain": "laura-fountain-wmm-0763547f-43c7-11ed-a7f8-02848444c773",
+    "Lucy Davis": "lucy-davis-london-2024-ec6b1125cbe2a9c2",
+    "Marcus Brown": "marcus-brown-london-2025-0d47a727846dc048",
+    "Matt Rees": "matthew-rees-b5f8f491",
+    "Nell McAndrew": "nell-mcandrew",
+    "Nick Bester": "nick-bester",
+    "Nicky Spinks": "nicky-spinks",
+    "Phily Bowden": "philippa-bowden-wa-14586863",
+    "Rick Kelsey": "rick-kelsey-london-2026-57936",
+    "Rose Harvey": "rose-harvey-wa-14750322",
+    "Russ Cook": "russ-cook",
+    "Sabrina Verjee": "sabrina-verjee-duv-615956",
+    "Sarah Hartley": "sarah-hartley-london-2024-d165d79710474dda",
+    "Sarah Place": "sarah-place-london-2024-246d67fd62b7db15",
+    "Sophie Power": "sophie-power",
+    "Spencer Matthews": "spencer-matthews-untapped",
+    "Stephen Scullion": "stephen-scullion",
+    "Susie Chan": "susie-chan-wmm-a00bdb76-7cd3-11ee-a850-06cd92543711",
+    "Tasha Thompson": "natasha-thompson-wmm-4fd5ad5a-ffaf-11ed-800d-06cd92543711",
+    "Tom Evans": "tom-evans-utmb-1410311",
+    "William Goodge": "william-goodge"
+  },
   "faqs": [
     {
       "question": "Which UK running Instagram accounts are included?",
@@ -1161,6 +1212,10 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     {
       "question": "When were the Instagram handles checked?",
       "answer": "Handles and background sources were checked on 4 November 2026 using public profile information, creators' own websites and links, and published interviews. Instagram usernames can change; use the linked account and check the displayed name."
+    },
+    {
+      "question": "Where can I see their race results?",
+      "answer": "Select a linked runner's name to open their AthRecs profile. Race histories show the results currently recorded and are expanded as additional reliable sources are found. Expedition achievements and conventional timed races are kept distinct."
     }
   ],
   "callToAction": {
