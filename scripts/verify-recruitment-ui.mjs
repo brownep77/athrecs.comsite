@@ -257,6 +257,16 @@ try {
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
   await page.screenshot({ path: "artifacts/recruitment-claim-mobile.png", fullPage: true });
   if (!signupOnly) {
+    // These catalogue rows default to private. Publish the intended display
+    // fixtures explicitly in this disposable database; public-figure status
+    // must never stand in for a result's visibility preference.
+    const { ensureAthrecsSeeded } = await server.ssrLoadModule("/src/lib/athrecs/seed.server.ts");
+    await ensureAthrecsSeeded();
+    const [publicFixture] = await sql`select id from athletes where slug='mo-farah'`;
+    assert(publicFixture, "The sourced profile fixture is seeded");
+    await sql`update results set result_visibility='public_figure' where athlete_id=${publicFixture.id}`;
+    await sql`insert into results (id,edition_id,athlete_id,status,finish_time_seconds,result_visibility)
+      values (991602,991601,${publicFixture.id},'finished',37,'private')`;
     await page.goto(`${origin}/athletes/mo-farah`, { waitUntil: "networkidle", timeout: 90000 });
     await page.getByRole("heading", { name: "Mo Farah", exact: true }).waitFor();
     await page.getByText("More about Mo Farah", { exact: true }).click();
@@ -285,6 +295,11 @@ try {
     assert.equal(await page.getByText("Show all 52 results", { exact: true }).count(), 0);
     assert.equal(await page.locator("#results-history table").count(), 1);
     assert.equal(await page.locator("#results-history tbody tr:visible").count(), 52);
+    assert.equal(
+      await page.locator("#results-history").getByRole("row").filter({ hasText: "Synthetic Recruitment 10K" }).count(),
+      0,
+      "A private result on a public figure must not enter member result tables or PBs",
+    );
     await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
     await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
     assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);

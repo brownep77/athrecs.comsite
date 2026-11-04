@@ -575,7 +575,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
           from results r
           join athletes a on a.id = r.athlete_id
           where r.edition_id = ed.id
-            and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
+            and r.result_visibility in ('public', 'public_figure')
             and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
               or (a.profile_visibility='private' and a.parent_athlete_id is null
                 and a.profile_details#>>'{nameReview,mode}'='results_only'
@@ -893,14 +893,18 @@ export const getEditionResults = createServerFn({ method: "GET" })
         r.category,
         a.display_name as athlete_name,
         a.slug as athlete_slug,
-        c.name as club
+        case when ${IS_RUNRECS_SITE} or not exists (
+          select 1 from athlete_account_links l
+          join athlete_public_shares s on s.user_id=l.user_id
+          where l.athlete_id=a.id and l.status='active' and s.share_club=false
+        ) then c.name end as club
       from results r
       join athletes a on a.id = r.athlete_id
       left join clubs c on c.id = a.club_id
       where r.edition_id = ${editionId}
         and (
           r.result_visibility in ('public', 'public_figure')
-          or a.profile_type = 'Public figure'
+          or (${IS_RUNRECS_SITE} and a.profile_type = 'Public figure')
         )
         and (${IS_RUNRECS_SITE} or (
           (a.profile_visibility = 'public' or a.profile_type = 'Public figure')
@@ -939,14 +943,14 @@ export const listAthletes = createServerFn({ method: "GET" })
       select
         a.id, a.slug, a.display_name, a.gender, a.city, a.county, a.country,
         a.profile_type, a.profile_roles,
-        c.name as club,
-        c.slug as club_slug,
+        case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_club=false) then c.name end as club,
+        case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_club=false) then c.slug end as club_slug,
         (
           select count(*)::int
           from results r
           where r.athlete_id = a.id
             and (
-              a.profile_type = 'Public figure'
+              (${IS_RUNRECS_SITE} and a.profile_type = 'Public figure')
                   or r.result_visibility in ('public', 'public_figure')
             )
             and (${IS_RUNRECS_SITE} or (
@@ -974,7 +978,7 @@ export const listAthletes = createServerFn({ method: "GET" })
         and (
           ${q}::text is null
           or lower(a.display_name) like ${q}
-          or lower(coalesce(c.name, '')) like ${q}
+          or (lower(coalesce(c.name, '')) like ${q} and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_club=false))
           or lower(coalesce(a.city, '')) like ${q}
           or lower(coalesce(a.profile_type, '')) like ${q}
           or lower(coalesce(a.profile_roles, '')) like ${q}
@@ -1132,8 +1136,7 @@ const readAthleteProfile = createServerOnlyFn(
       join events e on e.id = ed.event_id
       where r.athlete_id = ${athlete.id}
         and (
-          (${!approvedPublicOnly} and ${athlete.profile_type} = 'Public figure')
-          or r.result_visibility in ('public', 'public_figure')
+          r.result_visibility in ('public', 'public_figure')
         )
         and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=r.athlete_id and hidden.result_id=r.id)
         and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=r.athlete_id and l.status='active' and s.share_results=false)

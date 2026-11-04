@@ -80,7 +80,7 @@ export const listPublicResultEditions = createServerFn({ method: "GET" })
       join editions ed on ed.id = r.edition_id
       join events e on e.id = ed.event_id
       where ed.event_date <= ${todayIso()}::date
-        and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
+        and r.result_visibility in ('public', 'public_figure')
         and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
           or (a.profile_visibility='private' and a.parent_athlete_id is null
             and a.profile_details#>>'{nameReview,mode}'='results_only'
@@ -133,7 +133,7 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
       join editions ed on ed.id = r.edition_id
       join events e on e.id = ed.event_id
       where ed.id = ${data.editionId} and ed.event_date <= ${todayIso()}::date
-        and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
+        and r.result_visibility in ('public', 'public_figure')
         and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
           or (a.profile_visibility='private' and a.parent_athlete_id is null
             and a.profile_details#>>'{nameReview,mode}'='results_only'
@@ -188,7 +188,12 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
             r.result_details->>'sourceClub' as race_club,
             case when r.result_details->>'verificationStatus' in ('source_verified','verified_by_administrator')
               then coalesce(r.result_details->>'sourceFootwear',r.result_details->>'shoeModel') end as footwear,
-            c.name as profile_club, r.source_url, r.result_source,
+            case when a.profile_details#>>'{nameReview,mode}'='results_only'
+              or exists (
+                select 1 from athlete_account_links l
+                join athlete_public_shares s on s.user_id=l.user_id
+                where l.athlete_id=a.id and l.status='active' and s.share_club=false
+              ) then null else c.name end as profile_club, r.source_url, r.result_source,
             r.overall_place, r.gender_place, r.category_place,
             r.category, r.status, r.finish_time_seconds, r.chip_time_seconds, r.gun_time_seconds,
             left(r.result_details->>'reportedPerformance',100) as reported_performance,
@@ -200,7 +205,7 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
           join athletes a on a.id = r.athlete_id
           left join clubs c on c.id = a.club_id
           where r.edition_id = ${data.editionId}
-            and (r.result_visibility in ('public', 'public_figure') or a.profile_type = 'Public figure')
+            and r.result_visibility in ('public', 'public_figure')
             and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'
               or (a.profile_visibility='private' and a.parent_athlete_id is null
                 and a.profile_details#>>'{nameReview,mode}'='results_only'
@@ -216,7 +221,14 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
               join athlete_account_links l on l.user_id = h.user_id and l.status = 'active'
               where l.athlete_id = a.id and h.result_id = r.id
             )
-            and (${q}::text is null or a.display_name ilike ${q} or c.name ilike ${q} or r.category ilike ${q}
+            and (${q}::text is null or a.display_name ilike ${q}
+              or (c.name ilike ${q}
+                and coalesce(a.profile_details#>>'{nameReview,mode}','') <> 'results_only'
+                and not exists (
+                  select 1 from athlete_account_links l
+                  join athlete_public_shares s on s.user_id=l.user_id
+                  where l.athlete_id=a.id and l.status='active' and s.share_club=false
+                )) or r.category ilike ${q}
               or r.result_details->>'sourceAthleteName' ilike ${q}
               or r.result_details#>>'{fullFieldArchive,publishedName}' ilike ${q}
               or r.result_details->>'sourceClub' ilike ${q} or r.bib ilike ${q})

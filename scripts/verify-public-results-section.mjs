@@ -104,7 +104,7 @@ try {
       overall_place integer, gender_place integer, category_place integer, category text,
       finish_time_seconds integer, chip_time_seconds integer, gun_time_seconds integer, bib text);
     create table athlete_account_links (user_id text, athlete_id integer, status text);
-    create table athlete_public_shares (user_id text, enabled boolean, share_results boolean);
+    create table athlete_public_shares (user_id text, enabled boolean, share_results boolean, share_club boolean default true);
     create table athlete_profile_hidden_results (user_id text, result_id integer);
     insert into events (id, name, sport, city, country) values (10, 'Synthetic 10K', 'Running', 'Example town', 'United Kingdom'),
       (11, 'Future race', 'Running', 'Example town', 'United Kingdom');
@@ -133,10 +133,38 @@ try {
       (90, 1, 11, 'Finished', 'public');
     insert into athlete_account_links values ('u3', 3, 'active'), ('u4', 4, 'active'),
       ('u5', 5, 'active'), ('u9', 9, 'active');
-    insert into athlete_public_shares values ('u3', true, true), ('u4', false, true),
+    insert into athlete_public_shares(user_id,enabled,share_results) values ('u3', true, true), ('u4', false, true),
       ('u5', true, false), ('u9', false, true);
     insert into athlete_profile_hidden_results values ('u3', 3);
   `);
+
+  // Public-figure status never publishes an explicitly private performance.
+  await db.exec(`begin;
+    insert into events (id,name,sport) values (12,'Private figure edition','Running');
+    insert into editions values (12,12,'2026-09-20','Half');
+    insert into results(id,athlete_id,edition_id,status,result_visibility)
+      values (91,7,10,'finished','private'), (92,7,12,'finished','private');
+  `);
+  try {
+    assert(!(await api.getPublicRaceResults({data:{editionId:10}})).results.some(row => row.id === 91),
+      'Private public-figure performances must not enter standings');
+    assert.equal(await api.getPublicRaceResults({data:{editionId:12}}), null);
+    assert(!(await api.listPublicResultEditions({data:{}})).editions.some(row => row.edition_id === 12),
+      'An edition containing only private results must not be searchable');
+  } finally { await db.exec('rollback'); }
+
+  await db.exec(`begin;
+    insert into athlete_account_links values ('club-private',1,'active');
+    insert into athlete_public_shares(user_id,enabled,share_results,share_club)
+      values ('club-private',true,true,false);
+  `);
+  try {
+    const row = (await api.getPublicRaceResults({data:{editionId:10}})).results.find(row => row.id === 1);
+    assert.equal(row.profile_club,null,'An owner club-sharing opt-out must apply to results payloads');
+    assert(!(await api.getPublicRaceResults({data:{editionId:10,q:'Synthetic Club'}})).results.some(row => row.id === 1),
+      'Private profile club data must not be searchable');
+    assert.equal(row.race_club,'Archive Runners','Recorded race affiliation is separate from private profile data');
+  } finally { await db.exec('rollback'); }
 
   const snapshot = async () => JSON.stringify((await db.query("select * from results order by id")).rows);
   const before = await snapshot();
@@ -468,6 +496,7 @@ try {
       (900001,'Example Timer','source-2','https://example.test/results','[{"year":2025,"meeting":"Private history"}]',null),
       (900002,'Example Timer','source-3','https://example.test/results','[{"year":2025,"meeting":"Owned history"}]',now());
   `);
+  await db.exec('update athletes set club_id=1 where id=900001');
   const heldEdition = await api.getPublicRaceResults({ data: {editionId:10,q:'Jo?'} });
   const heldResult = heldEdition.results;
   route.useLoaderData = () => heldEdition;
@@ -479,6 +508,9 @@ try {
   assert.match(heldTable("#result-900001").text(), /Unverified result/);
   assert.equal(heldResult.length,1);
   assert.equal(heldResult[0].athlete_slug,null);
+  assert.equal(heldResult[0].profile_club,null,'A results-only hold must not expose private profile club data');
+  assert(!(await api.getPublicRaceResults({data:{editionId:10,q:'Synthetic Club'}})).results.some(row => row.id === 900001),
+    'Results-only profile clubs must not be searchable');
   const heldHead=publicResultsHead(resultPage1.edition,heldResult,{q:'',page:1});
   assert.doesNotMatch(heldHead.scripts[0].children,/\/athletes\/null|"@type":"Person"/);
   const unlinked=loadTypeScript('src/lib/athrecs/unlinked-results-api.ts',{
