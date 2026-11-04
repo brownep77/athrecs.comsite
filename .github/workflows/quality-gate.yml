@@ -139,6 +139,7 @@ jobs:
 
       - name: Verify race-page event structured data
         run: |
+          node scripts/verify-race-questions.mjs
           node scripts/verify-race-page-schema.mjs
           node scripts/verify-event-offer-publication.mjs
           node scripts/verify-event-schema-publication.mjs

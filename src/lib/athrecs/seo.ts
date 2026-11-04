@@ -208,6 +208,8 @@ export function sportsEventJsonLd(
   return {
     "@context": "https://schema.org",
     "@type": "SportsEvent",
+    "@id": `${url}#event`,
+    mainEntityOfPage: url,
     name: input.name,
     description,
     url,
