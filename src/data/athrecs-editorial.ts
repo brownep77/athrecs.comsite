@@ -1,3 +1,4 @@
+import { UK_RUNNING_INSTAGRAM_50 } from "./uk-running-instagram-50";
 import { NOVEMBER_4_NEWS } from "./november-4-2026-news";
 import { WANDA_PANFIL_NEW_YORK_1990 } from "./wanda-panfil-new-york-1990";
 import { NOVEMBER_3_NEWS } from "./november-3-2026-news";
@@ -19,6 +20,7 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  UK_RUNNING_INSTAGRAM_50,
   WANDA_PANFIL_NEW_YORK_1990,
   ...NOVEMBER_4_NEWS,
   ...NOVEMBER_3_NEWS,
