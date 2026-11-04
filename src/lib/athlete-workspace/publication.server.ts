@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { getSql, dbSource } from "../db";
 import { IS_RUNRECS_SITE } from "../site-scope";
-import { normal, distanceValue, timeSeconds, resultIssues, type Batch, type CandidateResult } from "./core";
+import { normal, identityName, distanceValue, timeSeconds, resultIssues, type Batch, type CandidateResult } from "./core";
 export type ReviewRequest = { batchId:string; revision:number; athleteId:number; indexes:number[]; action:'publish'|'reject'; evidenceFor:string; evidenceAgainst:string; resolution:string; sourceChecked:boolean; identityChecked:boolean; rightsConfirmed:boolean; requestId:string };
 const digest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const slug=(text:string)=>text.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,140);
@@ -26,13 +26,15 @@ export async function reviewBatch(data:ReviewRequest,actor:{userId:string;staff:
     if(selected.some(row=>!row||row.state!=='pending'))throw new Error('Only pending proposals can be reviewed.');
     const rows=selected as CandidateResult[];
     if(data.evidenceAgainst.trim()&&!data.resolution.trim())throw new Error('Record how the conflicting evidence was resolved before publishing.');
-    const [athlete]=await tx<{id:number;profile_visibility:string}>`select id,profile_visibility from athletes where id=${data.athleteId} for update`;
+    const [athlete]=await tx<{id:number;profile_visibility:string;display_name:string;aliases:unknown}>`select id,profile_visibility,display_name,profile_details->'aliases' as aliases from athletes where id=${data.athleteId} for update`;
     if(!athlete)throw new Error('Athlete not found.');
     let added=0,duplicates=0;const resultIds:number[]=[];const changes=new Map<number,CandidateResult>();
     if(data.action==='reject') {
       for(const r of rows)changes.set(r.index,{...r,state:'rejected',decisionNote:data.evidenceAgainst||data.evidenceFor});
     } else {
       if(!data.sourceChecked||!data.identityChecked||!data.rightsConfirmed||data.evidenceFor.trim().length<12)throw new Error('Confirm the source, athlete identity and publication authority, and record the supporting evidence.');
+      const identityNames=[athlete.display_name,...(Array.isArray(athlete.aliases)?athlete.aliases.filter((n):n is string=>typeof n==='string'):[])].map(identityName);
+      if(rows.some(r=>r.athleteName&&!identityNames.includes(identityName(r.athleteName)))&&data.resolution.trim().length<12)throw new Error('A source athlete name differs from this profile and its recorded aliases. Record independent identity evidence resolving the difference before publishing.');
       const approval={note:data.evidenceFor.trim(),resolution:data.resolution.trim(),approvedBy:actor.userId,approvedAt:new Date().toISOString(),requestId:data.requestId};
       const linked=await tx<{user_id:string}>`select user_id from athlete_account_links where athlete_id=${data.athleteId} and status='active'`;
       for(const r of rows){

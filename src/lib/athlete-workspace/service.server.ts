@@ -77,9 +77,10 @@ export async function workspace(athleteId: number | null, actor: Actor) {
     const approval=actor.staff?staffApprovalSchema.safeParse(staffApproval):null;
     return approval?.success?{...result,staffApproval:approval.data}:result;
   });
-  const batches=await sql<{id:string;athlete_id:number|null;revision:number;updated_at:string;entries:CandidateResult[]}>`
-    select id::text,athlete_id,revision,updated_at::text,entries from athlete_result_proposals
-    where (${actor.staff} or submitted_by=${actor.userId}) and (${athleteId}::integer is null or athlete_id=${athleteId}) order by updated_at desc limit 100`;
+  const batches=await sql<{id:string;athlete_id:number|null;athlete_name:string|null;revision:number;updated_at:string;entries:CandidateResult[]}>`
+    select p.id::text,p.athlete_id,a.display_name as athlete_name,p.revision,p.updated_at::text,p.entries from athlete_result_proposals p
+    left join athletes a on a.id=p.athlete_id
+    where (${actor.staff} or p.submitted_by=${actor.userId}) and (${athleteId}::integer is null or p.athlete_id=${athleteId}) order by p.updated_at desc limit 100`;
   return {profile:p,profileVersion:p?hash(p):null,editable:Boolean(p && (links.some(l=>l.user_id===actor.userId&&l.reviewed)||(actor.staff&&!links.length))),linked,results,batches:actor.staff?batches:batches.map(b=>({...b,entries:b.entries.map(memberEntry)})),email:account.email};
 }
 export async function editProfile(data: {athleteId:number;version:string;fields:ProfileFields;reason:string}, actor:Actor) {

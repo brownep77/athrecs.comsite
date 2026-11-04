@@ -201,41 +201,36 @@ function contextualBoost(
     .map(comparableText)
     .filter(Boolean);
   const candidateClub = comparableText(candidate.clubName);
-  if (
-    candidateClub &&
-    accountClubs.some(
-      (accountClub) =>
-        accountClub === candidateClub ||
-        (accountClub.length >= 5 && candidateClub.includes(accountClub)) ||
-        (candidateClub.length >= 5 && accountClub.includes(candidateClub)),
-    )
-  ) {
+  if (candidateClub && accountClubs.some((accountClub) => accountClub === candidateClub)) {
     boost += 12;
     reasons.push("Current or previous club matches");
   }
 
+  // Geography is related evidence: city, county and country must not be
+  // counted as three independent confirmations of the same person's identity.
+  let geographyBoost = 0;
   const accountCity = comparableText(account.city);
   const candidateCity = comparableText(candidate.city);
   if (accountCity && candidateCity && accountCity === candidateCity) {
-    boost += 8;
+    geographyBoost = 8;
     reasons.push("City or town matches");
   }
 
   const accountRegion = comparableText(account.region);
   const candidateRegion = comparableText(candidate.region);
   if (accountRegion && candidateRegion && accountRegion === candidateRegion) {
-    boost += 6;
+    geographyBoost = Math.max(geographyBoost, 6);
     reasons.push("Region or county matches");
   }
 
   const accountCountry = comparableText(account.country);
   const candidateCountry = comparableText(candidate.country);
   if (accountCountry && candidateCountry && accountCountry === candidateCountry) {
-    boost += 3;
+    geographyBoost = Math.max(geographyBoost, 3);
     reasons.push("Country matches");
   }
 
-  return { boost, reasons };
+  return { boost: boost + geographyBoost, reasons };
 }
 
 /**
@@ -261,7 +256,10 @@ export function scorePotentialResultNameMatch(
   const identity = resultIdentityEvidence(accountContext, candidateContext);
   if (best.score < 90 && context.boost < 8) return null;
 
-  const score = best.score + context.boost + identity.boost;
+  const rawScore = best.score + context.boost + identity.boost;
+  // Supporting fields cannot lift a contradictory identity above clean matches.
+  // These are ranking weights, not calibrated probabilities or permission to link.
+  const score = identity.conflict ? Math.min(rawScore, 69) : rawScore;
   const confidence: PotentialResultMatchConfidence = identity.conflict
     ? "possible"
     : best.score < 90
@@ -276,7 +274,14 @@ export function scorePotentialResultNameMatch(
     score,
     confidence,
     matchedName: best.matchedName,
-    reasons: [best.reason, ...context.reasons, ...identity.reasons],
+    reasons: [
+      best.reason,
+      ...context.reasons,
+      ...identity.reasons,
+      ...(context.boost === 0 && identity.boost === 0 && !identity.conflict
+        ? ["Name similarity only — no supporting identity details matched"]
+        : []),
+    ],
   };
 }
 
