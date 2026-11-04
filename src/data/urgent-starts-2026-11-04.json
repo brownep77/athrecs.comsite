@@ -1,0 +1,15 @@
+{
+  "mercedes-benz-stadium-move-with-madd-5k|2026-11-07": {
+    "summary": "Atlanta Track Club's 2026 Move with MADD programme at The Home Depot Backyard.",
+    "timeZone": "America/New_York",
+    "sourceUrl": "https://www.atlantatrackclub.org/2026-mercedes-benz-stadium-move-with-madd-5k",
+    "checkedAt": "2026-11-04",
+    "starts": {
+      "1mi": {
+        "time": "08:30",
+        "note": "The organiser's 2026 event schedule lists the Mile start at 08:30.",
+        "publicNote": "The one-mile race starts at 08:30 local time."
+      }
+    }
+  }
+}
