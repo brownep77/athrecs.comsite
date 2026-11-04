@@ -164,7 +164,45 @@ try {
   const db = await server.ssrLoadModule("/src/lib/db.ts");
   database = await db.getPglite();
   const sql = await db.getSql();
+
+  const signup = await server.ssrLoadModule("/src/lib/auth/signup-details.ts");
+  const validSignup = signupDetails("Synthetic Signup Runner");
+  await check("registration rejects missing or malformed birthdates", async () => {
+    for (const date of ["", "1990-2-3", "not-a-date", "1990-02-30", "2025-02-29", "9999-12-31"]) {
+      assert.equal(signup.signupDetailsError({ ...validSignup, signupDateOfBirth: date })?.code,
+        "SIGNUP_BIRTHDATE_REQUIRED", "Invalid birthdate accepted: " + date);
+    }
+  });
+  await check("registration accepts leap days and normalises country", async () => {
+    assert.equal(signup.signupDetailsError({ ...validSignup, signupDateOfBirth: "2000-02-29" }), null);
+    assert.equal(signup.normalizeSignupDetails({ ...validSignup, signupCountry: "england" }).signupCountry, "England");
+  });
+  await check("registration rejects empty city and excessive clubs", async () => {
+    assert.equal(signup.signupDetailsError({ ...validSignup, signupLocation: "   " })?.code, "SIGNUP_LOCATION_REQUIRED");
+    assert.equal(signup.signupDetailsError({ ...validSignup, signupClubs: "x".repeat(1001) })?.code, "SIGNUP_CLUBS_INVALID");
+    assert.equal(signup.signupDetailsError({ ...validSignup, signupClubs: Array.from({ length: 21 }, (_, i) => "Club " + i).join("\n") })?.code, "SIGNUP_CLUBS_INVALID");
+    assert.equal(signup.signupDetailsError({ ...validSignup, signupClubs: "" }), null);
+    assert.equal(signup.signupDetailsError({ ...validSignup, signupClubs: "Club One\nClub Two" }), null);
+  });
+  await check("date of birth and club history excluded from session schema", async () => {
+    assert.equal(signup.signupUserFields.signupDateOfBirth.returned, false);
+    assert.equal(signup.signupUserFields.signupClubs.returned, false);
+  });
+  await check("OTP registration rejects missing date of birth", async () => {
+    const email = "missing-dob-synthetic@example.test";
+    assert.equal((await post("email-otp/send-verification-otp", { email, type: "sign-in" })).status, 200);
+    const { signupDateOfBirth, ...noBirthdate } = validSignup;
+    const response = await post("sign-in/email-otp", { email, otp: codeFrom(email), ...noBirthdate });
+    assert(response.status >= 400 && response.status < 500, "Invalid registration must be rejected");
+  });
   const alpha = await signIn("security-alpha@example.test", "Security Alpha");
+  await check("verified login and session do not reveal private date of birth or clubs", async () => {
+    assert(!JSON.stringify(alpha).includes("1990-05-15"));
+    assert(!JSON.stringify(alpha).includes("Synthetic Runners AC"));
+    const response = await fetch(origin + "/api/auth/get-session", { headers: headersFor(alpha.cookie) });
+    const body = await response.text();
+    assert(!body.includes("1990-05-15") && !body.includes("Synthetic Runners AC"));
+  });
   const beta = await signIn("security-beta@example.test", "Security Beta");
   await rpc(
     "saveMyAthleteRacingName",
