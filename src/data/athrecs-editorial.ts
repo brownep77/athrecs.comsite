@@ -1,4 +1,5 @@
 import { NOVEMBER_5_WEEKEND_PREVIEW } from "./november-5-2026-weekend-preview";
+import { NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS } from "./november-5-2026-individual-race-previews";
 import { UK_RUNNING_INSTAGRAM_50 } from "./uk-running-instagram-50";
 import { NOVEMBER_4_NEWS } from "./november-4-2026-news";
 import { WANDA_PANFIL_NEW_YORK_1990 } from "./wanda-panfil-new-york-1990";
@@ -21,6 +22,7 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  ...NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS,
   NOVEMBER_5_WEEKEND_PREVIEW,
   UK_RUNNING_INSTAGRAM_50,
   WANDA_PANFIL_NEW_YORK_1990,
