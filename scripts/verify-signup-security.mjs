@@ -191,9 +191,61 @@ try {
   await check("OTP registration rejects missing date of birth", async () => {
     const email = "missing-dob-synthetic@example.test";
     assert.equal((await post("email-otp/send-verification-otp", { email, type: "sign-in" })).status, 200);
-    const { signupDateOfBirth, ...noBirthdate } = validSignup;
+    const { signupDateOfBirth: _signupDateOfBirth, ...noBirthdate } = validSignup;
     const response = await post("sign-in/email-otp", { email, otp: codeFrom(email), ...noBirthdate });
     assert(response.status >= 400 && response.status < 500, "Invalid registration must be rejected");
+  });
+  await check("concurrent attempts cannot spend one signup code twice", async () => {
+    const email = "concurrent-signup@example.test";
+    assert.equal(
+      (await post("email-otp/send-verification-otp", { email, type: "sign-in" })).status,
+      200,
+    );
+    const otp = codeFrom(email);
+    assert(otp);
+    const responses = await Promise.all(
+      Array.from({ length: 6 }, () => post("sign-in/email-otp", { email, otp, ...validSignup })),
+    );
+    assert.equal(responses.filter((response) => response.ok).length, 1);
+    assert(
+      responses.every(
+        (response) => response.ok || response.status === 400 || response.status === 429,
+      ),
+    );
+    assert.equal(
+      (await sql`select count(*)::int as count from "user" where email=${email}`)[0].count,
+      1,
+    );
+    const sessions =
+      await sql`select count(*)::int as count from session s join "user" u on u.id=s."userId" where u.email=${email}`;
+    assert.equal(sessions[0].count, 1);
+  });
+  await check("mailbox owner can replace private details during verified recovery", async () => {
+    const email = "replacement-signup@example.test";
+    const pending = await post("sign-up/email", {
+      email,
+      password: "Unverified-password-123!",
+      ...validSignup,
+    });
+    assert.equal(pending.status, 200);
+    assert.equal(
+      (await post("email-otp/send-verification-otp", { email, type: "sign-in" })).status,
+      200,
+    );
+    const replacement = { signupDateOfBirth: "2000-02-29", signupClubs: "Owner Runners AC" };
+    const recovered = await post("sign-in/email-otp", {
+      email,
+      otp: codeFrom(email),
+      ...validSignup,
+      ...replacement,
+    });
+    assert.equal(recovered.status, 200);
+    const [stored] =
+      await sql`select "signupDateOfBirth","signupClubs" from "user" where email=${email}`;
+    assert.deepEqual(stored, replacement);
+    const payload = await recovered.text();
+    assert(!payload.includes(replacement.signupDateOfBirth));
+    assert(!payload.includes(replacement.signupClubs));
   });
   const alpha = await signIn("security-alpha@example.test", "Security Alpha");
   await check("registration stores private DOB and clubs while public session omits them", async () => {

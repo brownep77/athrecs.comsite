@@ -32,9 +32,9 @@ export const SIGNUP_ERRORS = {
   SIGNUP_COUNTRY_REQUIRED: "Choose your country to create an account.",
   SIGNUP_LOCATION_REQUIRED: "Enter your city or town to create an account.",
   SIGNUP_BIRTHDATE_REQUIRED: "Enter a valid date of birth to create an account.",
-  SIGNUP_CLUBS_INVALID: "List no more than 20 clubs (up to 1,000 characters total).",
+  SIGNUP_CLUBS_INVALID: "List up to 20 clubs using readable text (1,000 characters total).",
   SIGNUP_DETAILS_INVALID:
-    "Use up to 60 characters for each name, 120 for your full name and 120 for your location.",
+    "Use readable text and up to 60 characters for each name, 120 for your full name and 120 for your location.",
 } as const;
 
 function cleanText(value: unknown): string {
@@ -65,20 +65,28 @@ function isValidSignupBirthdate(value: string): boolean {
   return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
 }
 
+const invisibleText = /^[\s\p{Default_Ignorable_Code_Point}]*$/u;
+const invalidText = /[\p{Cc}\p{Cs}]/u;
+
 export function signupDetailsError(input: unknown) {
   const details = normalizeSignupDetails(input);
   let code: keyof typeof SIGNUP_ERRORS | null = null;
-  if (!details.firstName || !details.lastName) code = "SIGNUP_NAME_REQUIRED";
+  if (invisibleText.test(details.firstName) || invisibleText.test(details.lastName))
+    code = "SIGNUP_NAME_REQUIRED";
   else if (!countryByName.has(details.signupCountry.toLowerCase()))
     code = "SIGNUP_COUNTRY_REQUIRED";
-  else if (!details.signupLocation) code = "SIGNUP_LOCATION_REQUIRED";
+  else if (invisibleText.test(details.signupLocation)) code = "SIGNUP_LOCATION_REQUIRED";
   else if (!isValidSignupBirthdate(details.signupDateOfBirth)) code = "SIGNUP_BIRTHDATE_REQUIRED";
   else if (
+    invalidText.test(details.signupClubs.replace(/[\r\n\t]/g, "")) ||
     details.signupClubs.length > 1000 ||
     details.signupClubs.split(/\r\n?|\n/).filter((line) => cleanText(line)).length > 20
   )
     code = "SIGNUP_CLUBS_INVALID";
   else if (
+    [details.firstName, details.lastName, details.signupLocation].some((value) =>
+      invalidText.test(value),
+    ) ||
     details.firstName.length > 60 ||
     details.lastName.length > 60 ||
     `${details.firstName} ${details.lastName}`.length > 120 ||

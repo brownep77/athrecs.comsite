@@ -124,7 +124,7 @@ function assertPrivateSignupOmitted(value, details = signupDetails()) {
     if (details[field]) {
       assert(!serialized.includes(details[field]), `${field} value leaked into the response`);
       assert(
-        !serialized.includes(encodeURIComponent(details[field])),
+        !serialized.includes(encodeURIComponent(details[field].toWellFormed())),
         `URL-encoded ${field} leaked into the response`,
       );
     }
@@ -221,6 +221,18 @@ try {
       "SIGNUP_BIRTHDATE_REQUIRED",
     ],
     ["long-clubs", { ...signupDetails(), signupClubs: "x".repeat(1001) }, "SIGNUP_CLUBS_INVALID"],
+    [
+      "invisible-city",
+      { ...signupDetails(), signupLocation: "\u2060\u200d" },
+      "SIGNUP_LOCATION_REQUIRED",
+    ],
+    ["nul-city", { ...signupDetails(), signupLocation: "Norwich\u0000" }, "SIGNUP_DETAILS_INVALID"],
+    [
+      "nul-clubs",
+      { ...signupDetails(), signupClubs: "Club One\u0000Club Two" },
+      "SIGNUP_CLUBS_INVALID",
+    ],
+    ["surrogate-clubs", { ...signupDetails(), signupClubs: "Club \ud800" }, "SIGNUP_CLUBS_INVALID"],
     ["long-first", { ...signupDetails(), firstName: "A".repeat(61) }, "SIGNUP_DETAILS_INVALID"],
     ["long-last", { ...signupDetails(), lastName: "B".repeat(61) }, "SIGNUP_DETAILS_INVALID"],
     [
@@ -594,14 +606,41 @@ try {
       email: hijackEmail,
       password: attackerPassword,
       ...signupDetails("Unverified Name"),
+      signupDateOfBirth: "1975-09-17",
+      signupClubs: "Unproven Identity AC",
     });
     assert.equal(unverified.status, 200, await unverified.clone().text());
+    const alternateCode = await post("email-otp/send-verification-otp", {
+      email: hijackEmail,
+      type: "email-verification",
+    });
+    assert.equal(alternateCode.status, 200);
+    const alternateOtp = sent
+      .findLast((mail) => mail.to.includes(hijackEmail))
+      ?.text.match(/\b[0-9]{6}\b/)?.[0];
+    assert(alternateOtp);
+    const alternateVerify = await post("email-otp/verify-email", {
+      email: hijackEmail,
+      otp: alternateOtp,
+    });
+    assert.equal(
+      alternateVerify.status,
+      404,
+      "Unused verifier must not activate an unproven password",
+    );
+    assert.equal(
+      (await post("sign-in/email", { email: hijackEmail, password: attackerPassword })).status,
+      403,
+    );
     const ownerLogin = await post("sign-in/email-otp", {
       email: hijackEmail,
       otp: await sendCode(hijackEmail),
     });
     assert.equal(ownerLogin.status, 200, await ownerLogin.clone().text());
     const owner = await ownerLogin.json();
+    const [recoveredRegistration] =
+      await sql`select "signupDateOfBirth","signupClubs" from "user" where id=${owner.user.id}`;
+    assert.deepEqual(recoveredRegistration, { signupDateOfBirth: null, signupClubs: null });
     // This Better Auth version returns its pre-update user snapshot here;
     // the account API and ownership checks must use the authoritative DB value.
     const ownerAccount = await rpc(
@@ -621,6 +660,19 @@ try {
         await sql`select count(*)::int as n from account where "userId"=${owner.user.id} and "providerId"='credential'`
       )[0].n,
       0,
+    );
+    const repeatLogin = await post("sign-in/email-otp", {
+      email: hijackEmail,
+      otp: await sendCode(hijackEmail),
+      ...signupDetails("Different Runner"),
+    });
+    assert.equal(repeatLogin.status, 200);
+    assert.deepEqual(
+      (
+        await sql`select "signupDateOfBirth","signupClubs" from "user" where id=${owner.user.id}`
+      )[0],
+      recoveredRegistration,
+      "Signing into a verified account must not overwrite signup fields",
     );
     const expiredSession = await post("sign-out", {}, { authorization: `Bearer ${owner.token}` });
     assert.equal(expiredSession.status, 200);

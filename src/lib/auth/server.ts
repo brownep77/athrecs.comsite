@@ -341,6 +341,9 @@ export const auth = betterAuth({
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
   user: { additionalFields: signupUserFields },
+  // The app uses the sign-in code flow, which revokes unproven credentials.
+  // The standalone email OTP verifier can activate a pre-registered password.
+  disabledPaths: ["/email-otp/verify-email"],
   hooks: {
     before: createAuthMiddleware(async (context) => {
       if (
@@ -393,6 +396,21 @@ export const auth = betterAuth({
         },
       },
       update: {
+        before: async (user, context) => {
+          if (context?.path !== "/sign-in/email-otp" || user.emailVerified !== true) return;
+          // This update follows a valid code for a previously unverified account.
+          // Discard private details supplied before mailbox ownership was proven.
+          const details = signupDetailsError(context.body)
+            ? null
+            : normalizeSignupDetails(context.body);
+          return {
+            data: {
+              ...user,
+              signupDateOfBirth: details?.signupDateOfBirth ?? null,
+              signupClubs: details?.signupClubs ?? null,
+            },
+          };
+        },
         after: async (user) => {
           if (!user.emailVerified) return;
           const { welcomeNewSignup } = await import("./signup-welcome.server");
