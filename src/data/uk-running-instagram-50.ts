@@ -63,7 +63,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
       "id": "phily-bowden",
       "heading": "3. Phily Bowden",
       "paragraphs": [
-        "British international Phily Bowden makes the work behind elite running unusually accessible. At the New York City Marathon on 1 November 2026, she finished 17th in the professional women's race in 2:30:45, the first British woman home. Marathon training, coaching and race experiences sit alongside the awkward, funny and difficult days between results. Watching her sessions is considerably easier than running them, a detail your watch may fail to mention."
+        "British international Phily Bowden makes the work behind elite running unusually accessible. At the New York City Marathon on 1 November 2026, she finished 17th in the women's race in 2:30:45, the first British woman home. Marathon training, coaching and race experiences sit alongside the awkward, funny and difficult days between results. Watching her sessions is considerably easier than running them, a detail your watch may fail to mention."
       ],
       "sources": [
         {
@@ -77,6 +77,10 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
         {
           "label": "New York City Marathon 2026 result",
           "url": "https://www.athrecs.com/news/new-york-city-marathon-2026-results"
+        },
+        {
+          "label": "New York City Marathon 2026 official results",
+          "url": "https://worldathletics.org/competition/calendar-results/results/7235564"
         },
         {
           "label": "Published interview or podcast",
@@ -109,7 +113,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
       "id": "anya-culling",
       "heading": "5. Anya Culling",
       "paragraphs": [
-        "Anya Culling's progression from novice marathoner to England representative gives her running content an appealing starting point: she remembers being new to this. At the New York City Marathon on 1 November 2026, she recorded 2:49:24, finishing 58th among the professional women. Her work includes training lessons, race reflections and coaching with Runna. Follow when you need a reminder that your current pace is a starting point, rather than a permanent character assessment."
+        "Anya Culling's progression from novice marathoner to England representative gives her running content an appealing starting point: she remembers being new to this. At the New York City Marathon on 1 November 2026, she recorded 2:49:24, finishing 58th among the women. Her work includes training lessons, race reflections and coaching with Runna. Follow when you need a reminder that your current pace is a starting point, rather than a permanent character assessment."
       ],
       "sources": [
         {
@@ -125,8 +129,8 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
           "url": "https://shows.acast.com/therunnapodcast/episodes/how-anya-culling-ran-her-best-marathon-at-london-2025-live-f"
         },
         {
-          "label": "New York City Marathon 2026 British results",
-          "url": "https://world-track.org/2026/11/british-top-finishers-at-the-2026-tcs-new-york-city-marathon/"
+          "label": "New York City Marathon 2026 official results",
+          "url": "https://worldathletics.org/competition/calendar-results/results/7235564"
         }
       ]
     },
