@@ -6,8 +6,8 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
   "listInRaceReports": true,
   "date": "2026-11-04",
   "displayDate": "4 November 2026",
-  "title": "Wanda Panfil: from Opoczno to New York and world marathon gold",
-  "standfirst": "Five seconds won her New York in 1990. London, Nagoya, Boston and world gold belong to the same remarkable career. We celebrate Wanda Panfil, her Polish roots and the runners who shared that New York top ten.",
+  "title": "Wanda Panfil: the five-second New York Marathon win that crowned a world champion",
+  "standfirst": "An injury forced Wanda Panfil out of the 1988 New York City Marathon. Two years later, she held off Kim Jones by five seconds—before winning Boston and the world title. Explore the race, her complete career highlights and the 1990 men’s and women’s top tens.",
   "body": [
     "Wanda Panfil won the New York City Marathon by five seconds. After 26.2 miles and more than two and a half hours of racing, that was the gap between the Polish champion and America’s Kim Jones on 4 November 1990: 2:30:45 to 2:30:50.",
     "It was the closest women’s finish the race had seen. Warm, humid conditions made it a testing day, and Panfil held on to the win. Thirty-six years later, that result deserves another look—and so does the athlete behind it.",
@@ -87,10 +87,18 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
     "Lisa Vaill": "lisa-vaill-nyc1990",
     "Wanda Panfil": "wanda-panfil-nycm-1368272"
   },
-  "seoTitle": "Wanda Panfil: 1990 New York Marathon win, Polish roots and life now",
-  "description": "Celebrating Wanda Panfil’s 1990 New York victory, world title, Opoczno roots and coaching in Tomaszów Mazowiecki, with the men’s and women’s top-ten results.",
+  "seoTitle": "Wanda Panfil: 1990 NYC Marathon Win, Results & Career",
+  "description": "How Wanda Panfil won the 1990 NYC Marathon by five seconds: Kim Jones’s chase, 1988 setback, Boston and Tokyo triumphs, full race top tens and career results.",
   "author": "AthRecs Editorial",
   "publishedAt": "2026-11-04",
+  "modifiedAt": "2026-11-05",
+  "image": {
+    "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wandy%20Panfil%20Street%20in%20Tomasz%C3%B3w%20Mazowiecki%2C%20Poland.jpg",
+    "alt": "Wanda Panfil Street in Tomaszów Mazowiecki, Poland, named after the world champion marathon runner",
+    "caption": "Wanda Panfil Street in Tomaszów Mazowiecki, Poland, honours the marathon world champion. Photo: WrS.tm.pl / Wikimedia Commons (CC0). This is a location photograph, not a photograph of Panfil competing.",
+    "width": 2560,
+    "height": 1440
+  },
   "hashtags": [
     "#WandaPanfil",
     "#NewYorkCityMarathon",
@@ -109,6 +117,67 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
     }
   ],
   "sections": [
+    {
+      "id": "from-disappointment-to-five-seconds",
+      "heading": "From the injury of 1988 to a five-second victory in 1990",
+      "paragraphs": [
+        "Panfil's New York story did not begin with a laurel wreath. In 1988 she fell near the 16-mile mark, bruised her ankle and did not finish. When she returned on 4 November 1990, the Polish runner was chasing more than a place on the podium.",
+        "She took the lead shortly after nine miles in warm, humid conditions. At halfway, American Kim Jones was 62 seconds behind. The race looked under control; the finish told a different story.",
+        "Jones reduced the gap to 39 seconds at 24 miles and only seven seconds at 25 miles. Through Central Park, Panfil fought to preserve what remained. At the line, the clock showed 2:30:45 for Panfil and 2:30:50 for Jones: five seconds after 26.2 miles. It was the closest women's finish in the race's history at the time, though later editions have been closer.",
+        "The men's winner, Douglas Wakiihuri, ran 2:12:39, ahead of Salvador García and Steve Brace. Reigning champion Juma Ikangaa finished fourth after suffering cramp. Those parallel stories help explain how difficult that November day was for the elite field."
+      ],
+      "sources": [
+        { "label": "Washington Post: 1990 New York marathon race report", "url": "https://www.washingtonpost.com/archive/sports/1990/11/05/wakiihuri-panfil-reign-in-new-york/59978888-3697-43da-8a83-ee57cfca5e56/" },
+        { "label": "Los Angeles Times: 1990 New York City Marathon", "url": "https://www.latimes.com/archives/la-xpm-1990-11-05-sp-2869-story.html" },
+        { "label": "New York Road Runners: 2019 NYC Marathon media guide and closest finishes", "url": "https://scblob.nyrr.org/nyrrsitecoreblob/nyrr/pdf/media-guide-pdfs/2019-tcs-new-york-city-marathon-media-guide.pdf" }
+      ]
+    },
+    {
+      "id": "career-marathon-results",
+      "heading": "Wanda Panfil's marathon career: Berlin, London, New York, Boston and Tokyo",
+      "paragraphs": [
+        "The New York win was part of a remarkable sequence. Panfil had finished second in the 1987 Berlin Marathon, won Dębno in 1988 and taken second in London in 1989. Nagoya and London victories preceded New York in 1990; Boston and the world championship followed in 1991.",
+        "Her 1991 Boston winning time of 2:24:18 is the fastest marathon time on her World Athletics profile, but the Boston course is not eligible for record-setting performances. Her 2:26:31 London victory from 1990 is the fastest record-eligible marathon listed there. Course eligibility matters when comparing personal bests and records.",
+        "The two Olympic marathons tell a less triumphant but equally important part of her story: she placed 22nd in Seoul in 1988 and 22nd in Barcelona in 1992. Results archives disagree by five seconds on her Barcelona time; the 2:47:27 shown here follows the Polish Olympic record pending reconciliation with the official event results."
+      ],
+      "table": {
+        "caption": "Selected Wanda Panfil marathon results, 1987–1992. Finish times are historical published results; 1992 Olympic time is subject to archival reconciliation.",
+        "headings": ["Year", "Event", "Result", "Place"],
+        "rows": [
+          ["1987", "Berlin Marathon", "2:32:01", "2nd"],
+          ["1988", "Dębno Marathon", "2:32:23", "1st"],
+          ["1988", "Seoul Olympic Marathon", "2:34:35", "22nd"],
+          ["1989", "London Marathon", "2:27:05", "2nd"],
+          ["1989", "Chicago Marathon", "2:35:40", "6th"],
+          ["1990", "Nagoya Women's Marathon", "2:31:04", "1st"],
+          ["1990", "London Marathon", "2:26:31", "1st"],
+          ["1990", "New York City Marathon", "2:30:45", "1st"],
+          ["1991", "Boston Marathon", "2:24:18", "1st"],
+          ["1991", "World Championships, Tokyo", "2:29:53", "1st"],
+          ["1992", "Boston Marathon", "2:29:29", "6th"],
+          ["1992", "Barcelona Olympic Marathon", "2:47:27", "22nd"]
+        ]
+      },
+      "sources": [
+        { "label": "World Athletics: Wanda Panfil athlete results and personal bests", "url": "https://worldathletics.org/athletes/poland/wanda-panfil-14294229" },
+        { "label": "London Marathon: historical elite medallists", "url": "https://www.londonmarathonevents.co.uk/london-marathon/elite-london-marathon-medallists" },
+        { "label": "Boston Athletic Association: media guide historical results", "url": "https://www.baa.org/sites/default/files/2024-04/FINAL%20BM24%20Media%20Guide%20Pages_ALL%20PAGES-spreads_040424.pdf" },
+        { "label": "Polish running historical marathon results compilation", "url": "https://www.maratonypolskie.pl/mp_index.php?action=2&code=2560&dzial=8" },
+        { "label": "Olympedia: Wanda Panfil Olympic profile", "url": "https://www.olympedia.org/athletes/74640" }
+      ]
+    },
+    {
+      "id": "track-and-goodwill-games",
+      "heading": "More than a marathon specialist: Goodwill Games and track performances",
+      "paragraphs": [
+        "Panfil's range extended well beyond 42.195 kilometres. At the 1990 Goodwill Games in Seattle she won the women's 10,000 metres in 32:01.17. World Athletics records a faster 31:53.83 over 10,000 metres in Oslo on 6 July 1991, and 8:52.07 for 3,000 metres on 10 August 1990.",
+        "These performances make her story bigger than a sequence of marathon wins: the endurance that carried her through New York was supported by world-class speed on the track."
+      ],
+      "sources": [
+        { "label": "World Athletics: Wanda Panfil competition profile", "url": "https://worldathletics.org/athletes/poland/wanda-panfil-14294229" },
+        { "label": "Olympedia: Wanda Panfil biography and Goodwill Games", "url": "https://www.olympedia.org/athletes/74640" }
+      ]
+    },
     {
       "id": "a-champion-among-champions",
       "heading": "A champion among champions",
@@ -364,5 +433,18 @@ export const WANDA_PANFIL_NEW_YORK_1990: EditorialArticle = {
         "Historical New York results: New York Road Runners, compared with retained race records and published historical standings. Career results were researched through World Athletics, national Olympic records and race archives. The tables show places within the men’s and women’s divisions. Soviet representation is retained for the 1990 race; Steve Brace is identified as Welsh, representing Great Britain."
       ]
     }
-  ]
+  ],
+  "faqs": [
+    { "question": "Who won the women's 1990 New York City Marathon?", "answer": "Wanda Panfil of Poland won in 2:30:45 on 4 November 1990, five seconds ahead of American Kim Jones in 2:30:50." },
+    { "question": "How close was the 1990 New York City Marathon women's finish?", "answer": "Five seconds separated Wanda Panfil and Kim Jones. It was the closest women's finish in New York City Marathon history at that time." },
+    { "question": "What are Wanda Panfil's greatest marathon achievements?", "answer": "She won the 1990 Nagoya, London and New York City marathons, the 1991 Boston Marathon, and the 1991 world championship marathon in Tokyo." },
+    { "question": "What is Wanda Panfil's marathon personal best?", "answer": "Her quickest marathon finish listed by World Athletics is 2:24:18 at Boston in 1991, but Boston is not record-eligible. Her 1990 London win of 2:26:31 is her fastest listed record-eligible marathon performance." },
+    { "question": "Where is Wanda Panfil from?", "answer": "She was born in Opoczno, Poland, and is closely associated with Lechia and the sporting community of nearby Tomaszów Mazowiecki." }
+  ],
+  "callToAction": {
+    "heading": "Explore the athletes behind marathon history",
+    "text": "View Wanda Panfil's AthRecs profile and explore the runners who raced her in New York in 1990.",
+    "label": "View Wanda Panfil's athlete profile",
+    "url": "/athletes/wanda-panfil-nycm-1368272"
+  }
 };
