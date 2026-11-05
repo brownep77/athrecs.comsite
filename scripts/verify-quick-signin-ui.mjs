@@ -236,6 +236,11 @@ try {
     await dialog.getByRole("alert").filter({ hasText: "Enter your city or town" }).waitFor();
     assert.equal(sent.length, beforeSignup, "Spaces do not satisfy the location requirement");
     await dialog.getByLabel("City or town", { exact: true }).fill("Norwich");
+    assert.equal(
+      await dialog.getByRole("alert").filter({ hasText: "Enter your city or town" }).count(),
+      0,
+      "Correcting the city must clear its stale validation error immediately",
+    );
     await birthdate.fill("");
     await continueWithEmail.click();
     assert(await birthdate.evaluate((input) => input.validity.valueMissing));
@@ -258,6 +263,17 @@ try {
     await page.setViewportSize({ width: 320, height: 720 });
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     assert(await dialog.evaluate((element) => element.scrollWidth <= element.clientWidth));
+    await check("Intercom launcher cannot cover registration on a narrow viewport", async () => {
+      const visibility = await page.evaluate(() => {
+        const probe = document.createElement("div");
+        probe.className = "intercom-lightweight-app";
+        document.body.appendChild(probe);
+        const result = getComputedStyle(probe).visibility;
+        probe.remove();
+        return result;
+      });
+      assert.equal(visibility, "hidden", "Intercom must be hidden while the auth dialog is open");
+    });
     await dialog.evaluate((element) => {
       element.scrollTop = 0;
     });
