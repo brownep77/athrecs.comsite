@@ -39,7 +39,7 @@ export const Route = createFileRoute("/news/$slug")({
               url: `${SITE_URL}/news/${loaderData.article.slug}`,
               type: "article",
               image: loaderData.editorial?.image
-                ? `${SITE_URL}${loaderData.editorial.image.src}`
+                ? new URL(loaderData.editorial.image.src, SITE_URL).href
                 : undefined,
             }),
             scripts: loaderData.editorial
