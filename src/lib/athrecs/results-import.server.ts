@@ -2,6 +2,7 @@ import { isParkrunResult } from "./parkrun-timing";
 import { createHash, randomUUID } from "node:crypto";
 import { getSql } from "@/lib/db";
 import { slugify } from "./import.server";
+import { providerNeutralAthleteSlug } from "./athlete-public-slug";
 import { sourceIdentityFromUrl, type SourceIdentity } from "./profile-connections";
 
 export type ResultAcquisitionMethod = "scan" | "upload" | "api" | "manual";
@@ -225,7 +226,10 @@ function resolveDisplayName(row: ImportResultRow): string {
 function resolveAthleteSlug(row: ImportResultRow, displayName: string): string {
   if (row.athleteSlug?.trim()) return slugify(row.athleteSlug);
   const source = resultAthleteSource(row);
-  if (source) return `${slugify(displayName)}-${source.provider}-${slugify(source.externalId)}`;
+  if (source) {
+    // Source identifiers stay in the source-mapping table rather than public URLs.
+    return providerNeutralAthleteSlug(slugify(displayName), source.provider, source.externalId);
+  }
   // A name alone cannot identify a person across races. Keep unmatched race
   // entries separate until the athlete confirms them through the claim flow.
   const key = [
@@ -523,10 +527,23 @@ export async function applyResultsImport(
         where identity.provider = ${sourceIdentity.provider} and identity.external_id = ${sourceIdentity.externalId}
       `
           : [];
-        if (mapped[0] && raw.athleteSlug && mapped[0].slug !== athleteSlug)
-          throw new Error(
-            "Source athlete identifier conflicts with supplied athleteSlug; review required",
-          );
+        if (mapped[0] && raw.athleteSlug && mapped[0].slug !== athleteSlug) {
+          // A caller may still supply a historic public slug after a safe rename.
+          // Accept only a redirect belonging to the exact source-matched athlete;
+          // otherwise this is an identity conflict and must be held for review.
+          const historicSlug = await sql<{ entity_id: number }>`
+            select entity_id from slug_redirects
+            where entity_type = 'athlete'
+              and old_slug = ${athleteSlug}
+              and current_slug = ${mapped[0].slug}
+              and entity_id = ${mapped[0].id}
+            limit 1
+          `;
+          if (!historicSlug.length)
+            throw new Error(
+              "Source athlete identifier conflicts with supplied athleteSlug; review required",
+            );
+        }
         let athlete = mapped[0]
           ? { id: mapped[0].id, profileType: mapped[0].profile_type }
           : athleteBySlug.get(athleteSlug);

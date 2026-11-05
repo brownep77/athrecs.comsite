@@ -97,7 +97,11 @@ def source_rows(folder, query):
 def profile(rows,evidence,pages):
     rows=sorted(rows,key=lambda r:(r['date'],r['sourceKey']),reverse=True); first=rows[0]
     ident='source-'+digest(sorted(r['sourceKey'] for r in rows))[:24]
-    slug=re.sub(r'[^a-z0-9]+','-',prep.norm(first['name'])).strip('-')[:90]+'-tlm-'+ident[7:]
+    # Keep the source identity in archive metadata, never in the public URL.
+    # Deterministic AthRecs-specific disambiguation avoids merging same-name athletes.
+    name_slug=re.sub(r'[^a-z0-9]+','-',prep.norm(first['name'])).strip('-')[:62].rstrip('-')
+    if not name_slug: raise ValueError('Source profile has no usable name for a public slug')
+    slug=name_slug+'-athlete-'+hashlib.sha256(ident.encode('utf-8')).hexdigest()[:16]
     names=sorted({r['name'] for r in rows}); fields=dict(zip(first['originalHeaders'],first['originalCells']))
     performances=[]
     for r in rows:

@@ -28,6 +28,9 @@ export const Route = createFileRoute("/race-reports/$slug")({
             description: loaderData.article.description ?? loaderData.article.standfirst,
             url: `${SITE_URL}/race-reports/${loaderData.article.slug}`,
             type: "article",
+            image: loaderData.article.image
+              ? new URL(loaderData.article.image.src, SITE_URL).href
+              : undefined,
           }),
           scripts: [
             {

@@ -5,6 +5,11 @@
   "buildCommand": "node --experimental-strip-types scripts/verify-assistant-provider-live.mjs && node scripts/migrate.mjs && vite build && node scripts/write-brand-static.mjs && node scripts/copy-pglite-assets.mjs && node scripts/publish-after-build.mjs",
   "redirects": [
     {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [
         {

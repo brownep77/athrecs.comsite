@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { ExternalLink, ShieldCheck } from "lucide-react";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 import { raceGroupDefinitions } from "@/data/race-collections";
@@ -23,14 +24,13 @@ export const Route = createFileRoute("/race-series")({
     return collections;
   },
   head: () => ({
-    meta: [
-      { title: "World Marathon Majors & UTMB races | ATHRECS" },
-      {
-        name: "description",
-        content:
-          "Explore the World Marathon Majors, official UTMB World Series events and verified UTMB Index races on ATHRECS.",
-      },
-    ],
+    meta: siteGraphMeta({
+      title: "World Marathon Majors & UTMB race series | AthRecs",
+      description:
+        "Explore the World Marathon Majors, official UTMB World Series events and verified UTMB Index races on AthRecs.",
+      url: `${SITE_URL}/race-series`,
+    }),
+    links: [{ rel: "canonical", href: `${SITE_URL}/race-series` }],
   }),
   component: RaceSeriesPage,
 });
