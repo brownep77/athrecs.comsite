@@ -166,12 +166,12 @@ try {
     await dialog.getByLabel("Email address", { exact: true }).fill(legacyEmail);
     await dialog.getByLabel("Password", { exact: true }).fill(legacyPassword);
     await dialog.getByRole("button", { name: "Sign in with email", exact: true }).click();
-    await check("Existing shorter passwords work through the UI", () =>
-      page.waitForURL(`${origin}/athlete-account?section=potential`, {
-        timeout: 10000,
-        waitUntil: "networkidle",
-      }),
-    );
+    await check("Existing shorter passwords work through the UI", async () => {
+      await page.waitForURL(`${origin}/athlete-account?section=potential`, { timeout: 10000 });
+      const session = await context.request.get(`${origin}/api/auth/get-session`);
+      assert.equal(session.status(), 200);
+      assert.equal((await session.json()).user.email, legacyEmail);
+    });
     await context.clearCookies();
     dialog = await open();
     assert.equal(await dialog.getByRole("heading", { name: "Welcome to AthRecs" }).count(), 1);
