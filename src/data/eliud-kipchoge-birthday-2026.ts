@@ -64,11 +64,11 @@ export const ELIUD_KIPCHOGE_BIRTHDAY_2026: EditorialArticle = {
   athleteNames: ["Eliud Kipchoge"],
   hashtags: ["EliudKipchoge", "HappyBirthdayKipchoge", "NoHumanIsLimited", "MarathonRunning", "AthRecs"],
   image: {
-    src: "https://commons.wikimedia.org/wiki/Special:Redirect/file/2018_London_Marathon_Eliud_Kipchoge.jpg",
-    alt: "Eliud Kipchoge running at the London Marathon in April 2018",
-    caption: "Eliud Kipchoge at the 2018 London Marathon. Photograph: ianwakefield1967 / Wikimedia Commons, CC0 1.0.",
-    width: 4272,
-    height: 2848
+    src: "https://upload.wikimedia.org/wikipedia/commons/0/01/Eliud_Kipchoge_in_Berlin.jpg",
+    alt: "Eliud Kipchoge running through Berlin during his world-record marathon in September 2022",
+    caption: "Eliud Kipchoge at the 2022 Berlin Marathon. Photograph: Desitlicheresguruweil / Wikimedia Commons, CC BY-SA 4.0.",
+    width: 3456,
+    height: 5184
   },
   links: [
     { label: "Eliud Kipchoge — official World Athletics profile and PB", url: "https://worldathletics.org/athletes/kenya/eliud-kipchoge-14208194" },
@@ -76,7 +76,7 @@ export const ELIUD_KIPCHOGE_BIRTHDAY_2026: EditorialArticle = {
     { label: "New York Road Runners — career milestones", url: "https://testcache.nyrr.org/media-center/athletes/eliud-kipchoge" },
     { label: "BBC — Kipchoge on inspiration", url: "https://www.bbc.co.uk/sport/athletics/52354320" },
     { label: "BBC — No human is limited", url: "https://www.bbc.co.uk/sport/athletics/48055305" },
-    { label: "Photo: ianwakefield1967, CC0 (Wikimedia Commons)", url: "https://commons.wikimedia.org/wiki/File:2018_London_Marathon_Eliud_Kipchoge.jpg" }
+    { label: "Photo: Desitlicheresguruweil, CC BY-SA 4.0 (Wikimedia Commons)", url: "https://commons.wikimedia.org/wiki/File:Eliud_Kipchoge_in_Berlin.jpg" }
   ],
   callToAction: { heading: "Explore Eliud Kipchoge's results", text: "From world championship track races to legendary marathons, discover his results on AthRecs.", label: "Find Eliud Kipchoge on AthRecs", url: "/athletes/eliud-kipchoge-wmm-b58f4c68-5d67-11eb-a712-02848444c773" }
 };
