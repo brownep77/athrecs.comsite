@@ -571,6 +571,7 @@ export function AthleteAuthDialog() {
 
   return (
     <Dialog.Root
+      modal
       open={open}
       onOpenChange={(nextOpen) => {
         if (!nextOpen) closeDialog();
@@ -588,6 +589,7 @@ export function AthleteAuthDialog() {
               pointer-events: none !important;
             }`}</style>
           <Dialog.Content
+            aria-modal="true"
             onEscapeKeyDown={(event) => {
               if (busy) event.preventDefault();
             }}
