@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { OrganisationSports } from "@/components/directory/OrganisationSports";
@@ -16,6 +16,14 @@ export const Route = createFileRoute("/directory/$slug")({
   loader: async ({ params }) => {
     const body = await getDirectoryOrg({ data: params.slug });
     if (!body) throw notFound();
+    // A renamed or aliased directory entry must have just one indexable URL.
+    if (body.slug !== params.slug) {
+      throw redirect({
+        to: "/directory/$slug",
+        params: { slug: body.slug },
+        statusCode: 301,
+      });
+    }
     return body;
   },
   head: ({ loaderData: body }) => {
