@@ -602,7 +602,7 @@ export function AthleteAuthDialog() {
                     ? codeSentTo
                       ? "Enter your six-digit code to continue."
                       : mode === "signup"
-                        ? "Add your name and location, then verify your email. No password needed."
+                        ? "Add your name, date of birth and location, then verify your email. No password needed."
                         : "Sign in with your email. New here? Choose Create account."
                     : sponsorshipAccount
                       ? "Sign in to submit a private sponsorship enquiry and read responses from our team."
@@ -878,7 +878,7 @@ export function AthleteAuthDialog() {
                     {!quickEntry ? (
                       <p className="text-sm text-muted">
                         Use any email address. We’ll send you a one-time code, so you don’t need a
-                        password. Choose Create account to register with your name and location.
+                        password. Choose Create account if you’re new to AthRecs.
                       </p>
                     ) : null}
                     <label className="block space-y-1.5 text-sm font-medium text-fg">

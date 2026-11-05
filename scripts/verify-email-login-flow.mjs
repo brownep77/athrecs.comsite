@@ -364,10 +364,13 @@ try {
       firstName: "  Ana\u00a0María  ",
       lastName: " O’Neill-Smith ",
       signupCountry: " england ",
-      signupLocation: "  NR1  2AB  ",
+      signupLocation: "  St  Albans  ",
+      signupDateOfBirth: "2000-02-29",
     });
     assert.equal(recovered.status, 200, await recovered.clone().text());
-    const recoveredUser = (await recovered.json()).user;
+    const recoveredPayload = await recovered.json();
+    assertPrivateSignupOmitted(recoveredPayload, { signupDateOfBirth: "2000-02-29" });
+    const recoveredUser = recoveredPayload.user;
     assert.equal(recoveredUser.name, "Ana María O’Neill-Smith");
     for (const key of ["firstName", "lastName", "signupCountry", "signupLocation"])
       assert(!(key in recoveredUser), `${key} stays out of the auth response`);
@@ -377,10 +380,10 @@ try {
       firstName: "Ana María",
       lastName: "O’Neill-Smith",
       signupCountry: "England",
-      signupLocation: "NR1 2AB",
+      signupLocation: "St Albans",
     });
     // Synthetic legacy data explicitly represents registrations made before this requirement.
-    await sql`update "user" set name='',"firstName"=null,"lastName"=null,"signupCountry"=null,"signupLocation"=null where id=${recoveredUser.id}`;
+    await sql`update "user" set name='',"firstName"=null,"lastName"=null,"signupCountry"=null,"signupLocation"=null,"signupDateOfBirth"=null,"signupClubs"=null where id=${recoveredUser.id}`;
     const legacyOtp = await post("sign-in/email-otp", {
       email: recoveredEmail,
       otp: await sendCode(recoveredEmail),

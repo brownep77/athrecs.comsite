@@ -165,9 +165,9 @@ try {
   await signupDialog.getByLabel("First name", { exact: true }).fill("Test");
   await signupDialog.getByLabel("Last name", { exact: true }).fill("Runner");
   await signupDialog.getByLabel("Country", { exact: true }).selectOption("England");
-  await signupDialog
-    .getByLabel("Town, city, postcode or ZIP code", { exact: true })
-    .fill("Norwich");
+  await signupDialog.getByLabel("City or town", { exact: true }).fill("Norwich");
+  await signupDialog.getByLabel("Date of birth", { exact: true }).fill("2000-02-29");
+  assert(await signupDialog.evaluate((dialog) => dialog.scrollWidth <= dialog.clientWidth));
   await page
     .getByRole("dialog")
     .getByRole("button", { name: "Continue with Google", exact: true })
@@ -176,6 +176,8 @@ try {
   await page.getByRole("heading", { name: "Search your race results", exact: true }).waitFor();
   const session = await page.evaluate(async () => (await fetch("/api/auth/get-session")).json());
   assert.equal(session.user.email, `${oauthIdentity}@example.test`);
+  assert(!Object.hasOwn(session.user, "signupDateOfBirth"));
+  assert(!JSON.stringify(session).includes("2000-02-29"));
   const tokenCookie = (await context.cookies()).find(
     (cookie) => cookie.name === "__Host-grok-auth.session_token",
   );

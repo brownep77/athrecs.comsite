@@ -167,7 +167,10 @@ try {
     await dialog.getByLabel("Password", { exact: true }).fill(legacyPassword);
     await dialog.getByRole("button", { name: "Sign in with email", exact: true }).click();
     await check("Existing shorter passwords work through the UI", () =>
-      page.waitForURL(`${origin}/athlete-account?section=potential`, { timeout: 10000 }),
+      page.waitForURL(`${origin}/athlete-account?section=potential`, {
+        timeout: 10000,
+        waitUntil: "networkidle",
+      }),
     );
     await context.clearCookies();
     dialog = await open();
