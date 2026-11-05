@@ -527,10 +527,23 @@ export async function applyResultsImport(
         where identity.provider = ${sourceIdentity.provider} and identity.external_id = ${sourceIdentity.externalId}
       `
           : [];
-        if (mapped[0] && raw.athleteSlug && mapped[0].slug !== athleteSlug)
-          throw new Error(
-            "Source athlete identifier conflicts with supplied athleteSlug; review required",
-          );
+        if (mapped[0] && raw.athleteSlug && mapped[0].slug !== athleteSlug) {
+          // A caller may still supply a historic public slug after a safe rename.
+          // Accept only a redirect belonging to the exact source-matched athlete;
+          // otherwise this is an identity conflict and must be held for review.
+          const historicSlug = await sql<{ entity_id: number }>`
+            select entity_id from slug_redirects
+            where entity_type = 'athlete'
+              and old_slug = ${athleteSlug}
+              and current_slug = ${mapped[0].slug}
+              and entity_id = ${mapped[0].id}
+            limit 1
+          `;
+          if (!historicSlug.length)
+            throw new Error(
+              "Source athlete identifier conflicts with supplied athleteSlug; review required",
+            );
+        }
         let athlete = mapped[0]
           ? { id: mapped[0].id, profileType: mapped[0].profile_type }
           : athleteBySlug.get(athleteSlug);
