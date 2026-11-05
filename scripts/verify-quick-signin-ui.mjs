@@ -239,10 +239,12 @@ try {
     await birthdate.fill("");
     await continueWithEmail.click();
     assert(await birthdate.evaluate((input) => input.validity.valueMissing));
+    await dialog.getByRole("alert").filter({ hasText: "Enter a valid date of birth" }).waitFor();
     assert.equal(sent.length, beforeSignup, "A missing birth date prevents code delivery");
     await birthdate.fill("9999-12-31");
     await continueWithEmail.click();
     assert(await birthdate.evaluate((input) => input.validity.rangeOverflow));
+    await dialog.getByRole("alert").filter({ hasText: "Enter a valid date of birth" }).waitFor();
     assert.equal(sent.length, beforeSignup, "A future birth date prevents code delivery");
     await birthdate.fill("2000-02-29");
     const clubs = dialog.getByLabel("Clubs you have raced for (optional)", { exact: true });
