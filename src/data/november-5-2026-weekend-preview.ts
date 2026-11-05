@@ -16,6 +16,78 @@ export const NOVEMBER_5_WEEKEND_PREVIEW: EditorialArticle = {
   ],
   "sections": [
     {
+      "id": "race-times-at-a-glance",
+      "heading": "What time do the weekend's big races start?",
+      "paragraphs": [
+        "All times below are in the location of each race, not UK time. The published time may be the first gun rather than an athlete's own assigned wave. Start lists and weather forecasts can change: check the official organiser information before travelling."
+      ],
+      "table": {
+        "caption": "Major running and triathlon races on 7–8 November 2026: verified schedules and start-time qualifications",
+        "headings": [
+          "Race",
+          "Date",
+          "Local start",
+          "Important qualification"
+        ],
+        "rows": [
+          [
+            "Indianapolis Monumental Marathon",
+            "Sat 7 November",
+            "08:00",
+            "Marathon; confirm own corral"
+          ],
+          [
+            "IRONMAN Florida",
+            "Sat 7 November",
+            "05:40 professional start reported",
+            "Age-group waves must follow official athlete guide"
+          ],
+          [
+            "Athens Authentic Marathon",
+            "Sun 8 November",
+            "08:30",
+            "Elite/first block; assigned blocks later"
+          ],
+          [
+            "Boston Half",
+            "Sun 8 November",
+            "08:00",
+            "Check B.A.A. start guidance"
+          ],
+          [
+            "Porto Marathon",
+            "Sun 8 November",
+            "08:00",
+            "Marathon; separate 10K"
+          ],
+          [
+            "Málaga Marathon",
+            "Sun 8 November",
+            "08:30",
+            "First wave; later waves follow"
+          ],
+          [
+            "Nice–Cannes Marathon",
+            "Sun 8 November",
+            "08:00",
+            "Elite first, general field follows"
+          ],
+          [
+            "Ravenna Marathon",
+            "Sun 8 November",
+            "09:15",
+            "Marathon and half start listed"
+          ],
+          [
+            "IRONMAN 70.3 Melbourne",
+            "Sun 8 November",
+            "07:30 event-time listing",
+            "Individual swim-wave times unverified"
+          ]
+        ]
+      }
+    },
+    {
       "id": "boston-half",
       "heading": "Boston Half: can Fentaye Belayneh win three in a row?",
       "paragraphs": [
@@ -317,6 +389,14 @@ export const NOVEMBER_5_WEEKEND_PREVIEW: EditorialArticle = {
     {
       "label": "IRONMAN 70.3 Melbourne",
       "url": "/races/ironman-703-melbourne"
+    },
+    {
+      "label": "Hero photograph by George E. Koronaios — Wikimedia Commons (CC0)",
+      "url": "https://commons.wikimedia.org/wiki/File:The_Panathenaic_Stadium_of_Athens.jpg"
+    },
+    {
+      "label": "Hero photograph licence — Creative Commons CC0 1.0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/"
     }
   ],
   "faqs": [
@@ -364,5 +444,13 @@ export const NOVEMBER_5_WEEKEND_PREVIEW: EditorialArticle = {
     "label": "Find or create your athlete profile",
     "url": "/athletes"
   },
-  "modifiedAt": "2026-11-05"
+  "modifiedAt": "2026-11-05",
+  "image": {
+    "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/The_Panathenaic_Stadium_of_Athens.jpg/1280px-The_Panathenaic_Stadium_of_Athens.jpg",
+    "alt": "Panathenaic Stadium in Athens, Greece, where runners finish the Athens Authentic Marathon",
+    "width": 1280,
+    "height": 853,
+    "caption": "The Panathenaic Stadium in Athens, photographed in 2018 by George E. Koronaios. Wikimedia Commons, CC0 1.0. Historical venue photograph, not the 2026 race."
+  },
+  "publishedAt": "2026-11-05T13:24:00Z"
 };
