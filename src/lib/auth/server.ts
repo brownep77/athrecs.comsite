@@ -118,7 +118,7 @@ const vercelPreviewHosts =
   env("VERCEL_ENV") === "preview"
     ? [env("VERCEL_URL"), env("VERCEL_BRANCH_URL")].filter(
         (host): host is string =>
-          Boolean(host && /^[a-z0-9-]+(?:\\.[a-z0-9-]+)*\\.vercel\\.app$/i.test(host)),
+          Boolean(host && /^[a-z0-9-]+(?:\.[a-z0-9-]+)*\.vercel\.app$/i.test(host)),
       )
     : [];
 const previewAllowedHosts: string[] = unique([
