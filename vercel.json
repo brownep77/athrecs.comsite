@@ -7,7 +7,7 @@
     {
       "source": "/sitemap_index.xml",
       "destination": "/sitemap.xml",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/",
