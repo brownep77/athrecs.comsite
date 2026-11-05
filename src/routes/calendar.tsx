@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { listCalendarEditions } from "@/lib/athrecs/api";
-import { SITE_NAME } from "@/lib/athrecs/seo";
+import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import {
   effectiveStatus,
   formatRaceDateShort,
@@ -123,6 +123,16 @@ export const Route = createFileRoute("/calendar")({
       );
     return { initial, highlighted };
   },
+  head: ({ match }) => ({
+    meta: siteGraphMeta({
+      title: "Sports & running race calendar by country and date | AthRecs",
+      description:
+        "Browse upcoming running races and sporting events worldwide. Filter by country, region, distance, surface and date, with local start times and event details.",
+      url: `${SITE_URL}/calendar`,
+      indexable: !Object.values(match.search).some(Boolean),
+    }),
+    links: [{ rel: "canonical", href: `${SITE_URL}/calendar` }],
+  }),
   component: CalendarPage,
 });
 
