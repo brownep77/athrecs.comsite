@@ -1,15 +1,15 @@
 import type { EditorialArticle } from "../lib/athrecs/editorial";
 
 export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
-  "slug": "50-uk-running-instagram-accounts-bloggers",
+  "slug": "49-uk-running-instagram-accounts-bloggers",
   "kind": "news",
   "date": "2026-11-05",
   "displayDate": "5 November 2026",
   "author": "AthRecs Editorial",
-  "title": "Beyond the Feed: 50 UK Running Instagram Accounts Worth Following",
-  "seoTitle": "50 UK Running Instagram Accounts and Bloggers to Follow",
-  "description": "Meet 50 UK running Instagram accounts, including Hardest Geezer, Phily Bowden and Ben Parkes, with handles, training stories and a little running humour.",
-  "standfirst": "From the Hardest Geezer's enormous adventures to first 5Ks, honest marathon diaries and an alarming number of trainers, meet 50 people worth making room for in your running feed.",
+  "title": "Beyond the Feed: 49 UK Running Instagram Accounts Worth Following",
+  "seoTitle": "49 UK Running Instagram Accounts and Bloggers to Follow",
+  "description": "Meet 49 UK running Instagram accounts, including Hardest Geezer, Phily Bowden and Ben Parkes, with handles, training stories and a little running humour.",
+  "standfirst": "From the Hardest Geezer's enormous adventures to first 5Ks, honest marathon diaries and an alarming number of trainers, meet 49 people worth making room for in your running feed.",
   "body": [
     "Running Instagram can be a wonderful place. You open it for one training tip and emerge forty minutes later convinced you need trail shoes, a foam roller and a race in a country you had not considered visiting.",
     "At its best, it also introduces you to people who make running feel possible, explain something useful or give you a laugh when your own session has gone sideways. There is room for the first 5K, the ambitious marathon and the person who considers a mountain range a reasonable weekend plan.",
@@ -560,29 +560,8 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
       ]
     },
     {
-      "id": "charlotte-duffett",
-      "heading": "27. Charlotte Duffett, Charlotte Clarke Coaching",
-      "paragraphs": [
-        "Charlotte Duffett, known through Charlotte Clarke Coaching, takes runners into trail races, ultra preparation and the practicalities of going further. Her content includes race experiences and an approach that leaves room for walking when needed. Reassuring if you suspect an ultramarathon is partly a running event and partly an ambitious snack-management exercise."
-      ],
-      "sources": [
-        {
-          "label": "Instagram: @charlotteclarkeuk",
-          "url": "https://www.instagram.com/charlotteclarkeuk/"
-        },
-        {
-          "label": "Background and biography",
-          "url": "https://www.charlotteclarkecoaching.com/"
-        },
-        {
-          "label": "Official links",
-          "url": "https://linktr.ee/charlotteclarkeuk"
-        }
-      ]
-    },
-    {
       "id": "susie-chan",
-      "heading": "28. Susie Chan",
+      "heading": "27. Susie Chan",
       "paragraphs": [
         "Peloton instructor and ultrarunner Susie Chan mixes endurance adventures with encouragement and humour. Her world ranges from treadmill sessions to desert races and trail miles. Follow for the breadth of what running can become. Her Marathon des Sables experience may also make you reconsider describing a slightly warm parkrun as basically the Sahara."
       ],
@@ -603,7 +582,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "sophie-power",
-      "heading": "29. Sophie Power",
+      "heading": "28. Sophie Power",
       "paragraphs": [
         "Sophie Power combines ultrarunning with work to make races fairer for women through SheRACES. Her material covers endurance challenges, motherhood and the changes that help more women reach the start line. Her own running includes 24-hour events. That is a fairly substantial commitment to being unavailable for the rest of the afternoon."
       ],
@@ -624,7 +603,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "allie-bailey",
-      "heading": "30. Allie Bailey",
+      "heading": "29. Allie Bailey",
       "paragraphs": [
         "Endurance coach and author Allie Bailey brings long adventures, mindset and an ability to say the awkward bit out loud. Her writing and conversations explore the reality of preparing for demanding goals. Follow for a candid view of the sport, with straight talking that could make a motivational fridge magnet quietly take itself down."
       ],
@@ -645,7 +624,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "anna-mcnuff",
-      "heading": "31. Anna McNuff",
+      "heading": "30. Anna McNuff",
       "paragraphs": [
         "British adventurer and author Anna McNuff shares journeys under her own steam, alongside outdoor family life. Her running adventures include the length of New Zealand and Barefoot Britain, with cycling also part of the picture. Follow for curiosity and the urge to explore. Locating the other sock can be your opening expedition."
       ],
@@ -666,7 +645,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "imo-boddy",
-      "heading": "32. Imo Boddy",
+      "heading": "31. Imo Boddy",
       "paragraphs": [
         "Imo Boddy shares training and films from the long-distance end of running. Her public work includes a Three Peaks documentary, the South Downs Way 100 and community sessions. Follow for adventure with preparation attached, rather than just the finish-line moment. Her interpretation of a little run deserves its own map scale."
       ],
@@ -683,7 +662,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "william-goodge",
-      "heading": "33. William Goodge",
+      "heading": "32. William Goodge",
       "paragraphs": [
         "British endurance runner William Goodge turns ambitious projects into stories of training, travel, recovery and fundraising. His challenges have taken him across countries, with crews and logistics part of the action. Follow for the expedition end of running Instagram, where working out the route can involve considerably more than deciding which park gate to use."
       ],
@@ -704,7 +683,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "spencer-matthews",
-      "heading": "34. Spencer Matthews",
+      "heading": "33. Spencer Matthews",
       "paragraphs": [
         "Spencer Matthews now devotes a substantial part of his public life to endurance projects, marathon preparation and conversations with athletes and coaches on UNTAPPED. His account offers the build-up as well as the finish line, alongside his wider life. There are easier ways to develop a new interest, but most generate considerably less laundry."
       ],
@@ -725,7 +704,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "joshua-patterson",
-      "heading": "35. Joshua Patterson",
+      "heading": "34. Joshua Patterson",
       "paragraphs": [
         "Joshua Patterson combines endurance challenges with fundraising and public discussion about mental health. His 2023 project involved 76 marathon distances in 76 UK cities on consecutive days, supporting Samaritans. Follow for ambitious projects and the people behind them. Completing one marathon and then becoming closely acquainted with the sofa remains an entirely respectable response."
       ],
@@ -746,7 +725,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "jasmin-paris",
-      "heading": "36. Jasmin Paris",
+      "heading": "35. Jasmin Paris",
       "paragraphs": [
         "Jasmin Paris became the first woman to finish the Barkley Marathons in 2024. The Scotland-based fell runner also co-founded The Green Runners. Follow for mountain running, environmental advocacy and reflections on extraordinary endurance. Her achievements suggest that a demanding weekend has several possible definitions, some requiring rather more preparation than checking the café opening times."
       ],
@@ -767,7 +746,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "nicky-spinks",
-      "heading": "37. Nicky Spinks",
+      "heading": "36. Nicky Spinks",
       "paragraphs": [
         "Fell runner and coach Nicky Spinks specialises in outings that most people would divide between several days and a hotel booking. Her public running life centres on mountain rounds, race preparation and the practical business of keeping going. Follow for experience from the hills, where knowing what to pack matters more than arranging it attractively."
       ],
@@ -788,7 +767,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "sabrina-verjee",
-      "heading": "38. Sabrina Verjee",
+      "heading": "37. Sabrina Verjee",
       "paragraphs": [
         "Lake District ultrarunner and vet Sabrina Verjee is at home in long mountain races and ambitious routes. Her running includes a continuous round of the 214 Wainwright peaks. Follow for fell-running adventure and preparation. Most walkers reach a summit and admire the view; this is the world of wondering how to fit in the other 213."
       ],
@@ -809,7 +788,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "beth-pascall",
-      "heading": "39. Beth Pascall",
+      "heading": "38. Beth Pascall",
       "paragraphs": [
         "British trail runner Beth Pascall won the women's Western States race in 2021 while building a career in paediatrics. Her account offers a window into mountain running and the work behind endurance sport. Follow for an athlete with substantial commitments beyond racing. Fitting a run around work can mean rather more than taking the scenic route to the printer."
       ],
@@ -830,7 +809,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "damian-hall",
-      "heading": "40. Damian Hall",
+      "heading": "39. Damian Hall",
       "paragraphs": [
         "Ultrarunner, coach and writer Damian Hall combines long days in the hills with environmental advocacy through The Green Runners. His work covers mountain challenges, running reflections and the sport's footprint. There is also a documented enthusiasm for tea, which seems sensible in a discipline where a refreshment break may separate two enormous amounts of climbing."
       ],
@@ -851,7 +830,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "claire-maxted",
-      "heading": "41. Claire Maxted, Wild Ginger Running",
+      "heading": "40. Claire Maxted, Wild Ginger Running",
       "paragraphs": [
         "Claire Maxted created Wild Ginger Running after co-founding and editing Trail Running magazine. She covers trail and ultra advice, equipment and runner interviews, making this a useful starting point for going off-road. Especially helpful before discovering that a jacket's description of water resistance and British November's expectations are not necessarily aligned."
       ],
@@ -872,7 +851,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "tom-evans",
-      "heading": "42. Tom Evans",
+      "heading": "41. Tom Evans",
       "paragraphs": [
         "British trail runner and former Army captain Tom Evans has won Western States and UTMB. His account takes followers into elite ultramarathon preparation, training and racing in enormous landscapes. Follow for the work behind those performances. It is possible to enjoy the scenery without immediately upgrading your Sunday run to something requiring a support crew."
       ],
@@ -893,7 +872,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "jonathan-albon",
-      "heading": "43. Jonathan Albon",
+      "heading": "42. Jonathan Albon",
       "paragraphs": [
         "British-born, Norway-based Jonathan Albon takes the feed into serious mountain terrain. Expect trail racing, training and outdoor adventures, with further discussion through The Albon Way podcast. Magnificent viewing if you love hills. Slightly less reassuring if the railway bridge currently accounts for most of your weekly climbing."
       ],
@@ -914,7 +893,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "stephen-scullion",
-      "heading": "44. Stephen Scullion",
+      "heading": "43. Stephen Scullion",
       "paragraphs": [
         "Belfast's Stephen Scullion is an Irish Olympic marathon runner who shares a detailed view of training and preparation. His wider content includes candid conversations about performance and the mental side of racing. Follow for the thinking behind the sessions. An Olympian's training week is fascinating viewing without becoming your own Monday-morning to-do list."
       ],
@@ -935,7 +914,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "dan-osborn-nash",
-      "heading": "45. Dan Osborn-Nash",
+      "heading": "44. Dan Osborn-Nash",
       "paragraphs": [
         "Runner and sports physiologist Dan Osborn-Nash helps explain the thinking behind endurance training, including through The Physiology of Endurance Running Podcast. His work connects running experience with the science of performance. A useful follow if you have ever asked what your watch's numbers mean and hoped for an answer more substantial than try harder."
       ],
@@ -956,7 +935,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "charlotte-purdue",
-      "heading": "46. Charlotte Purdue",
+      "heading": "45. Charlotte Purdue",
       "paragraphs": [
         "British marathon runner Charlotte Purdue offers a look at elite preparation alongside her work as a coach. Training, racing and the running community are central themes. Follow if you enjoy seeing how a professional approaches the same 26.2 miles the rest of us spend several months confidently describing as probably fine."
       ],
@@ -977,7 +956,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "rose-harvey",
-      "heading": "47. Rose Harvey",
+      "heading": "46. Rose Harvey",
       "paragraphs": [
         "Rose Harvey went from corporate law to professional marathon running and the Paris 2024 Olympics. Her account follows training and life around top-level racing, with an unusually substantial career-change story behind it. Swapping legal briefs for an Olympic race bib is quite a career move."
       ],
@@ -998,7 +977,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "becky-briggs",
-      "heading": "48. Becky Briggs",
+      "heading": "47. Becky Briggs",
       "paragraphs": [
         "British international runner Becky Briggs brings together racing experience, coaching and content creation, including her That's Hot community. Her work covers training, race-day thinking and the process of improving. Follow for an athlete's perspective on the sessions between the milestones. Even very quick runners still have to do the hard work themselves."
       ],
@@ -1019,7 +998,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "nell-mcandrew",
-      "heading": "49. Nell McAndrew",
+      "heading": "48. Nell McAndrew",
       "paragraphs": [
         "Nell McAndrew's running background sits within a broader interest in helping people keep moving. Her recent public conversations include midlife fitness, confidence and finding exercise that fits your life. Follow for a perspective that extends beyond the next race target, particularly if you would like your relationship with movement to outlast your current training spreadsheet."
       ],
@@ -1040,7 +1019,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     },
     {
       "id": "iwan-thomas",
-      "heading": "50. Iwan Thomas",
+      "heading": "49. Iwan Thomas",
       "paragraphs": [
         "Olympic medallist and former British 400m record-holder Iwan Thomas brings an athlete's perspective to running, presenting and life beyond the track. His adventures have also included a 100-mile ultramarathon. Follow for a broad sporting feed with personality. Moving from one lap to 100 miles certainly alters the meaning of going a bit further."
       ],
@@ -1120,7 +1099,6 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
     "David Hellard",
     "Adrienne Adhami",
     "Flora Beverley",
-    "Charlotte Duffett",
     "Susie Chan",
     "Sophie Power",
     "Allie Bailey",
@@ -1199,10 +1177,10 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
   "faqs": [
     {
       "question": "Which UK running Instagram accounts are included?",
-      "answer": "The selection includes Russ Cook, the Hardest Geezer, Phily Bowden, Ben Parkes, Anya Culling, Tasha Thompson and 45 more runners, coaches, presenters and creators. Every entry has a linked Instagram handle and an introduction to their running content."
+      "answer": "The selection includes Russ Cook, the Hardest Geezer, Phily Bowden, Ben Parkes, Anya Culling, Tasha Thompson and 44 more runners, coaches, presenters and creators. Every entry has a linked Instagram handle and an introduction to their running content."
     },
     {
-      "question": "Are all 50 runners based in the UK?",
+      "question": "Are all 49 runners based in the UK?",
       "answer": "The article covers people from the UK, creators based here and British athletes living or training overseas. For example, Nick Bester is South African-born and London-based, while British runner Jonathan Albon is based in Norway."
     },
     {

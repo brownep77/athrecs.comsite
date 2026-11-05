@@ -2,6 +2,342 @@ import type { EditorialArticle } from "../lib/athrecs/editorial";
 
 export const NOVEMBER_4_NEWS: EditorialArticle[] = [
   {
+    "slug": "keely-hodgkinson-lievin-800m-world-record-leigh-harriers",
+    "kind": "news",
+    "date": "2026-11-04",
+    "displayDate": "4 November 2026",
+    "author": "AthRecs Editorial",
+    "title": "Keely Hodgkinson and the 800m record set on the day she was born",
+    "seoTitle": "Keely Hodgkinson and the 800m record set on the day she was born",
+    "standfirst": "Five days and four laps separated a British record from a world record. Long before either, a results sheet in Bolton had the name Keely Hodgkinson beside a winning time of 7:11.",
+    "description": "How did Keely Hodgkinson break the indoor 800m world record? Her splits in Birmingham and Liévin reveal where she found the time, and her first club results tell the story before the medals.",
+    "body": [
+      "On 3 March 2002, Slovenia’s Jolanda Čeplak ran 1:55.82 in Vienna to set the women’s indoor 800m world record. That same day Keely Hodgkinson was born. She grew up, joined Leigh Harriers, ran in the Olympics twice and won gold in Paris. When she stood on the start line in Liévin on 19 February 2026, the time from Vienna was still the one to beat.",
+      "Now the fans’ votes have been counted, there is a good reason to watch those four laps again. World Athletics put them among its 18 nominees for Moment of the Year on 19 October. They missed the final three announced on 3 November. The interesting bit, if you run at any level, is what happened over the five days leading up to the record."
+    ],
+    "sections": [
+      {
+        "id": "section-1",
+        "heading": "Five days and four laps",
+        "paragraphs": [
+          "On the Saturday in Birmingham, Hodgkinson ran 1:56.33 in a heat at the British Indoor Championships. There was no pacemaker to follow. At 400m she had 56.28 on the clock. She kept going until she had taken almost a second off her own British record. To anybody watching the final, it would have been easy to miss the fastest race of the weekend.",
+          "On Thursday in northern France she had a pacemaker and a particular time to chase. The first 200m went by in 26.83. At halfway, the clock showed 56.00. After all that work she was only 0.28 seconds ahead of where she had been in Birmingham.",
+          "Watch the third lap. She reached 600m in 1:25.05, more than a second ahead of her Birmingham split at the same point. She had a lead to carry through the last turn and a clock waiting at the end of the straight. She crossed in 1:54.87. A record that had lasted her entire life was gone by 0.95 seconds."
+        ]
+      },
+      {
+        "id": "section-2",
+        "heading": "A result from Bolton",
+        "paragraphs": [
+          "At nine, she had finished fourth in a Red Rose League race on her club’s home ground at Leigh Sports Village. On 15 December 2012, a ten-year-old Hodgkinson won the under-11 girls’ race at a Red Rose Cross Country League meeting in Bolton. The results sheet gives her club, Leigh Harriers, and her time, 7:11. Nineteen seconds later the next girl came through. That is about all the sheet tells you. Nobody recording those times needed to guess what either runner might become.",
+          "Three winters later she was racing for her school at Longford Park. Her club’s report describes a pack of eight early in the junior girls’ race. Hodgkinson stayed with them, raised the pace and had twenty metres to spare at the finish. The time was 13:42. Put that report beside the Liévin splits and you can pick out something familiar. Even then she could decide where a race was going to get difficult for the people following her.",
+          "There are less glamorous days in the archive, too. At the 2017 English Schools cross country in Norwich, she finished sixth for Greater Manchester. Her 12:39 at the Norfolk Showground was 21 seconds behind the winner. A year later in Leeds she finished second. Look at both sheets and you can see a young runner learning how to race in a crowd long before anyone expected a world record of her."
+        ]
+      },
+      {
+        "id": "section-3",
+        "heading": "Back for the relay",
+        "paragraphs": [
+          "Just over four weeks after Liévin came the world indoor championships in Toruń. On 22 March, the same evening her training partner Georgia Hunter Bell won the 1500m, Hodgkinson took the 800m title in 1:55.30. She was the first British woman to win that event at a world indoor championships. Then somebody needed her for the relay.",
+          "Less than an hour later she was back to anchor Britain’s 4×400m team. They finished fifth in 3:28.09. British Athletics credited her with a 50.1-second leg, the quickest in the final. Ask what Hodgkinson ran that Sunday and most people would quite reasonably give you the winning time. Her three teammates had another answer."
+        ]
+      }
+    ],
+    "locations": [
+      {
+        "country": "France",
+        "area": "Liévin"
+      },
+      {
+        "country": "England",
+        "area": "Greater Manchester"
+      },
+      {
+        "country": "Poland",
+        "area": "Toruń"
+      }
+    ],
+    "sports": [
+      "track-and-field",
+      "cross-country"
+    ],
+    "coverageLevels": [
+      "world",
+      "national"
+    ],
+    "athleteNames": [
+      "Keely Hodgkinson",
+      "Georgia Hunter Bell",
+      "Jolanda Čeplak"
+    ],
+    "links": [
+      {
+        "label": "World Athletics · original Moment of the Year nominees",
+        "url": "https://worldathletics.org/awards/news/nominees-2026-moment-of-year"
+      },
+      {
+        "label": "World Athletics · three finalists",
+        "url": "https://worldathletics.org/awards/news/finalists-2026-moment-of-the-year"
+      },
+      {
+        "label": "World Athletics · British indoor heat and splits",
+        "url": "https://worldathletics.org/news/report/keely-hodgkinson-british-indoor-800m-record"
+      },
+      {
+        "label": "World Athletics · Liévin record, date and splits",
+        "url": "https://worldathletics.org/news/report/hodgkinson-world-indoor-800m-record-lievin"
+      },
+      {
+        "label": "SportSoft · 2011 Red Rose League, Leigh",
+        "url": "https://www.race-results.co.uk/results/2011/rr111.htm"
+      },
+      {
+        "label": "SportSoft · 2012 Red Rose League, Bolton",
+        "url": "https://www.race-results.co.uk/results/2012/rr124.htm"
+      },
+      {
+        "label": "Leigh Harriers · junior girls’ race at Longford Park",
+        "url": "https://www.leighharriers.org/greater-manchester-schools-xc-champs-2016/"
+      },
+      {
+        "label": "British Athletics · world indoor titles and relay",
+        "url": "https://www.britishathletics.org.uk/golden-girls-star-in-the-final-night-of-world-indoor-championships-as-caudrey-hunter-bell-and-hodgkinson-claim-world-titles/"
+      },
+      {
+        "label": "European Athletics · Toruń double and time between races",
+        "url": "https://www.birmingham26.com/news/brilliant-hodgkinson-wins-first-world-title-in-championship-record"
+      },
+      {
+        "label": "Team GB · Olympic career",
+        "url": "https://www.teamgb.com/athlete/keely-hodgkinson/1GJBQOdHD1nQqffXw8V4Ex"
+      },
+      {
+        "label": "World Athletics · Jolanda Čeplak’s career record",
+        "url": "https://worldathletics.org/athletes/_/14300101"
+      },
+      {
+        "label": "Photograph · filip bossuyt",
+        "url": "https://commons.wikimedia.org/wiki/File:2026_European_Athletics_Championships_%E2%80%93_Women%27s_800_metres_%E2%80%93_final_4.jpg"
+      },
+      {
+        "label": "Photo licence · CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      {
+        "label": "Read the companion feature · The parkrun, the bike and Georgia Hunter Bell’s three gold medals",
+        "url": "/news/georgia-hunter-bell-parkrun-three-gold-medals-2026"
+      },
+      {
+        "label": "The three Moment of the Year finalists",
+        "url": "/news/world-athletics-moment-of-the-year-2026-finalists"
+      },
+      {
+        "label": "English Schools · 2017 Norwich championship results",
+        "url": "https://www.somersetschoolsathletics.org.uk/ESAA%20XC%20%20Results%202017.pdf"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is Keely Hodgkinson’s indoor 800m world record?",
+        "answer": "Keely Hodgkinson ran 1:54.87 for 800m on the short track in Liévin, France, on 19 February 2026."
+      }
+    ],
+    "athleteLinks": {
+      "Keely Hodgkinson": "keely-hodgkinson",
+      "Georgia Hunter Bell": "georgia-hunter-bell-wa-14329797",
+      "Jolanda Čeplak": "jolanda-ceplak"
+    },
+    "image": {
+      "alt": "Keely Hodgkinson racing on the bend in Birmingham, with her surname on her bib and the Great Britain flag on her vest.",
+      "src": "/images/editorial/nov04/keely-hodgkinson-article.webp",
+      "width": 1440,
+      "height": 810,
+      "caption": "Keely Hodgkinson, left in the Great Britain vest, in the European 800m final at Alexander Stadium, Birmingham, on 14 August 2026. Photograph by filip bossuyt via Wikimedia Commons. CC BY 4.0. Cropped and resized by AthRecs."
+    },
+    "hashtags": [
+      "KeelyHodgkinson",
+      "Lievin",
+      "800m",
+      "IndoorAthletics",
+      "LeighHarriers"
+    ]
+  },
+  {
+    "title": "The parkrun, the bike and Georgia Hunter Bell’s three gold medals",
+    "slug": "georgia-hunter-bell-parkrun-three-gold-medals-2026",
+    "standfirst": "A world duathlon result sits between Georgia Hunter Bell’s college races and her Olympic bronze. It helps explain how a Saturday runner came back to win three major track titles in one season.",
+    "sections": [
+      {
+        "id": "section-1",
+        "heading": "The result between college and the Olympics",
+        "paragraphs": [
+          "Look back through the results under her earlier racing name, Georgia Bell, and there is plenty of running before the comeback. In 2015 she raced cross country for the University of California, Berkeley. The next spring she ran 4:18.89 for 1500m at Stanford. Repeated injuries took the enjoyment out of it. When her college career ended, she put her spikes away and went to work in cybersecurity sales.",
+          "Cycling gave her company on the road during the pandemic. On 19 March 2022 she turned up at Bushy parkrun in Teddington and ran 16:14, second across the line among 1,112 finishers. It gave her a reason to contact her old coach. Then she found a race that let her put running and cycling together. On 30 April 2023 she won the women’s 30–34 age group at the World Duathlon Championships in Ibiza in 2:03:32. She told World Triathlon that making the British age-group team had been the aim. The Olympic Games hadn’t figured in those plans.",
+          "Another clue came on the training track, where she found she could stay with Keely Hodgkinson. In August 2024 she ran 3:52.61 to win Olympic 1500m bronze in Paris. By September 2025 she had a world 800m silver from Tokyo, too."
+        ]
+      },
+      {
+        "id": "section-2",
+        "heading": "Three different ways to win",
+        "paragraphs": [
+          "On the night Keely Hodgkinson broke the indoor 800m world record in Liévin, Hunter Bell won the 1500m in the same arena in 4:00.21. People could be forgiven for remembering only one of the clocks that night. A month later the training partners were chasing separate world titles in Poland.",
+          "In Toruń on 22 March, the leader opened an enormous gap early in the world indoor 1500m final. Hunter Bell let her go and took responsibility for the chase. By the last lap the race had come back to her. A second acceleration off the final bend won her first senior global title in 3:58.53.",
+          "Glasgow called for a change of distance and a different decision. Running the Commonwealth 800m for England on 31 July, she took the inside at Scotstoun and made the reigning world champion race around her. Hunter Bell won in 1:59.51. Sixteen days later she was back over 1500m, this time on a track in the city where she had studied geography. Her 4:07.78 in Birmingham was over nine seconds slower than her indoor winning time. Anyone comparing the two marks without looking at that last lap would miss how well she raced.",
+          "There was a fourth final in Budapest in September. She ran 3:57.72 and finished second. For a runner getting back into the sport, Ibiza might be the most encouraging entry of the lot. She entered a race that made room for both sports she loved. A year later she was standing on the Olympic podium in Paris.",
+          "Hunter Bell’s three wins did not appear on the original World Athletics Moment of the Year ballot. If you want one lap that makes the case for her, go back to Birmingham and start the replay at the bell."
+        ]
+      }
+    ],
+    "body": [
+      "With one lap left in the European 1500m final in Birmingham, Georgia Hunter Bell had the inside lane and two women close enough to take it from her. The clock read 3:09.4. She stayed on the rail, made the runner on her shoulder go the long way round and covered the last 400 metres in 58.44 seconds. At the finish she had a full second to spare.",
+      "It was her third major title of 2026. Each had asked a different question of a runner who, a few years earlier, had been quite happy to spend a Saturday morning doing a 5k at Bushy Park."
+    ],
+    "kind": "news",
+    "date": "2026-11-04",
+    "displayDate": "4 November 2026",
+    "author": "AthRecs Editorial",
+    "description": "How Georgia Hunter Bell went from parkrun and an age-group world duathlon title to Olympic bronze and three major track titles in 2026.",
+    "seoTitle": "Georgia Hunter Bell’s comeback and three gold medals in 2026",
+    "athleteNames": [
+      "Georgia Hunter Bell",
+      "Keely Hodgkinson"
+    ],
+    "coverageLevels": [
+      "world",
+      "national"
+    ],
+    "sports": [
+      "track-and-field",
+      "cross-country",
+      "duathlon"
+    ],
+    "locations": [
+      {
+        "country": "England",
+        "area": "West Midlands",
+        "county": "West Midlands"
+      },
+      {
+        "country": "Scotland",
+        "area": "Glasgow"
+      },
+      {
+        "country": "Poland",
+        "area": "Toruń"
+      },
+      {
+        "country": "Spain",
+        "area": "Balearic Islands"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Which titles did Georgia Hunter Bell win in 2026?",
+        "answer": "The world indoor 1500m in Toruń, the Commonwealth 800m in Glasgow and the European 1500m in Birmingham."
+      },
+      {
+        "question": "Was Georgia Hunter Bell a duathlete?",
+        "answer": "Yes. Racing as Georgia Bell, she won the women’s 30–34 age group at the 2023 World Duathlon Championships in Ibiza."
+      }
+    ],
+    "links": [
+      {
+        "label": "Team GB athlete biography",
+        "url": "https://www.teamgb.com/athlete/georgia-bell/1f65BO35xw9PPm4Denafm8"
+      },
+      {
+        "label": "World Triathlon interview with Georgia Bell",
+        "url": "https://triathlon.org/news/world-triathlon-podcast-93---georgia-bell-from-duathlon-world-champs-to-olympic-1500m-podium"
+      },
+      {
+        "label": "World Triathlon age-group result",
+        "url": "https://triathlon.org/athletes/profile/177218/georgia-bell"
+      },
+      {
+        "label": "Toruń final, World Athletics race report",
+        "url": "https://worldathletics.org/news/report/wic-kujawy-pomorze-26-report-womens-1500m"
+      },
+      {
+        "label": "Glasgow final, Team England race report",
+        "url": "https://www.teamengland.org/index.php/news/hunter-bell-cruises-to-dominant-800m-gold"
+      },
+      {
+        "label": "Birmingham final, European Athletics race report",
+        "url": "https://www.birmingham26.com/news/womens-1500m-report-hunter-bell-unleashes-a-58-44-last-lap-for-1500m-gold-in-birmingham"
+      },
+      {
+        "label": "Birmingham final, World Athletics results",
+        "url": "https://worldathletics.org/competition/calendar-results/results/7192415?eventId=10229513&gender=W"
+      },
+      {
+        "label": "Budapest final, British Athletics race report",
+        "url": "https://www.britishathletics.org.uk/round-up-of-day-two-at-the-ultimate-champs/"
+      },
+      {
+        "label": "University of Birmingham, former students at the European Championships",
+        "url": "https://www.sportandfitness.bham.ac.uk/blog/georgia-hunter-bell-strikes-european-gold-on-home-turf/"
+      },
+      {
+        "label": "Georgia Bell’s college results, TFRRS",
+        "url": "https://www.tfrrs.org/athletes/5461236/California_CA/Georgia_Bell.html"
+      },
+      {
+        "label": "World Athletics athlete profile",
+        "url": "https://worldathletics.org/athletes/united-kingdom/georgia-hunter-bell-14329797"
+      },
+      {
+        "label": "Georgia Bell’s former school on her Bushy parkrun",
+        "url": "https://www.cvms.co.uk/News/Vaughan-Alumna-Wins-Bronze-Olympic-Medal/"
+      },
+      {
+        "label": "World Athletics · the original award ballot",
+        "url": "https://worldathletics.org/awards/news/nominees-2026-moment-of-year"
+      },
+      {
+        "label": "Photograph · Peter Arnold",
+        "url": "https://commons.wikimedia.org/wiki/File:Georgia_Hunter_Bell_(GBR)_DSC00480.jpg"
+      },
+      {
+        "label": "Photo licence · CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      {
+        "label": "Read the companion feature · Keely Hodgkinson and the 800m record set on the day she was born",
+        "url": "/news/keely-hodgkinson-lievin-800m-world-record-leigh-harriers"
+      },
+      {
+        "label": "The three Moment of the Year finalists",
+        "url": "/news/world-athletics-moment-of-the-year-2026-finalists"
+      },
+      {
+        "label": "Bushy parkrun · report and results from 19 March 2022",
+        "url": "https://www.parkrun.org.uk/bushy/news/2022/03/21/run-report-event-no-868-19-march-2022/"
+      },
+      {
+        "label": "European Athletics · Hunter Bell’s Liévin 1500m win",
+        "url": "https://www.rieti2026.com/news/watch-live-hodgkinson-and-hunter-bell-to-race-in-glasgow"
+      }
+    ],
+    "athleteLinks": {
+      "Georgia Hunter Bell": "georgia-hunter-bell-wa-14329797",
+      "Keely Hodgkinson": "keely-hodgkinson"
+    },
+    "image": {
+      "alt": "Georgia Hunter Bell by the track at Letzigrund Stadium, wearing a light orange vest and a bib bearing her surname.",
+      "src": "/images/editorial/nov04/georgia-hunter-bell-article.webp",
+      "width": 1440,
+      "height": 810,
+      "caption": "Georgia Hunter Bell at Letzigrund Stadium in Zürich on 27 August 2026, when she ran 1:55.03 for third place in the Diamond League 800m. Photograph by Peter Arnold via Wikimedia Commons. CC BY-SA 4.0. Cropped and resized by AthRecs. Image adaptation shared under the same licence."
+    },
+    "hashtags": [
+      "GeorgiaHunterBell",
+      "Birmingham2026",
+      "1500m",
+      "Glasgow2026",
+      "Duathlon"
+    ]
+  },
+  {
     "slug": "world-athletics-moment-of-the-year-2026-finalists",
     "kind": "news",
     "date": "2026-11-04",
@@ -90,6 +426,14 @@ export const NOVEMBER_4_NEWS: EditorialArticle[] = [
       {
         "label": "Photograph licence · CC BY-SA 4.0",
         "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      {
+        "label": "Keely Hodgkinson and the 800m record set on the day she was born",
+        "url": "/news/keely-hodgkinson-lievin-800m-world-record-leigh-harriers"
+      },
+      {
+        "label": "The parkrun, the bike and Georgia Hunter Bell’s three gold medals",
+        "url": "/news/georgia-hunter-bell-parkrun-three-gold-medals-2026"
       }
     ],
     "faqs": [

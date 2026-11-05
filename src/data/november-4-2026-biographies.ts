@@ -2,6 +2,69 @@ import type { BiographyPresentation } from "../lib/athrecs/biography-presentatio
 
 export const november4BiographyReviews: (BiographyPresentation & { slug: string; paragraphs: string[] })[] = [
   {
+    "slug": "keely-hodgkinson",
+    "title": "Keely Hodgkinson – 800m records, Olympic gold and race results",
+    "description": "Keely Hodgkinson’s career from Leigh Harriers to Olympic 800m gold and the indoor world record of 1:54.87 in Liévin.",
+    "headings": [
+      "Leigh Harriers and the cross-country leagues",
+      "Olympic and world championship racing",
+      "An indoor world record"
+    ],
+    "paragraphs": [
+      "Keely Hodgkinson is a British 800m runner from Greater Manchester, the 2024 Olympic champion and the holder of the women’s short track 800m world record. As a young Leigh Harriers runner she competed on the roads and across country. At ten she won an under-11 Red Rose League cross-country race in Bolton. The following September she ran the opening leg for Leigh in the North West Road Relays in Lancaster. At thirteen she took the Greater Manchester schools junior girls’ cross-country title.",
+      "Hodgkinson won Olympic 800m silver as a teenager in Tokyo in 2021 and gold in Paris three years later. At the outdoor World Championships she took silver in 2022 and 2023 and bronze in 2025. In February 2026 she ran 1:56.33 in her heat at the British Indoor Championships and, five days later, 1:54.87 in Liévin to break the indoor world record set on the day she was born.",
+      "At the 2026 World Indoor Championships in Toruń she ran 1:55.30 for Britain’s first women’s 800m title at those championships. Within an hour she was anchoring the British 4×400m team. The squad finished fifth in 3:28.09, with Hodgkinson credited by British Athletics with the fastest leg in the final. Outdoors she ran a British record of 1:54.33 in Stockholm and won European 800m silver in Birmingham."
+    ],
+    "questions": [
+      {
+        "question": "What is Keely Hodgkinson’s indoor 800m world record?",
+        "answer": "Keely Hodgkinson ran 1:54.87 for 800m on the short track in Liévin, France, on 19 February 2026."
+      }
+    ]
+  },
+  {
+    "slug": "georgia-hunter-bell-wa-14329797",
+    "title": "Georgia Hunter Bell – 800m, 1500m and duathlon results",
+    "description": "Georgia Hunter Bell’s race results and biography, from an Ibiza duathlon title and Paris Olympic bronze to three major track gold medals in 2026.",
+    "headings": [
+      "College racing and duathlon",
+      "Returning to the track",
+      "Three major titles in one season"
+    ],
+    "paragraphs": [
+      "Georgia Hunter Bell is a British middle-distance runner and former age-group duathlon world champion. Born in Paris, she studied geography in Birmingham and competed for the University of California, Berkeley, as Georgia Bell. In the United States she raced on grass as well as on the track, running 20:52.1 over 6km at the 2015 collegiate Pre-Nationals and 4:18.89 for 1500m at Stanford in 2016. A succession of injuries led her to leave competitive running and build a career in cybersecurity sales.",
+      "Cycling and parkrun drew her back. In 2023 she won the women’s 30–34 title at the World Duathlon Championships in Ibiza. A year later she took European 1500m silver in Rome, then won Olympic bronze in Paris in a British record of 3:52.61. At the 2025 World Championships in Tokyo she stepped down to 800m and ran 1:54.90 for silver.",
+      "Hunter Bell won her first senior global title in March 2026, clocking 3:58.53 for the world indoor 1500m in Toruń. She followed it with Commonwealth 800m gold for England in Glasgow and European 1500m gold for Great Britain and Northern Ireland in Birmingham. Her season also included victory over 1500m at the Rome and Paris Diamond League meetings and second place at the World Athletics Ultimate Championship in Budapest."
+    ],
+    "questions": [
+      {
+        "question": "Which titles did Georgia Hunter Bell win in 2026?",
+        "answer": "The world indoor 1500m in Toruń, the Commonwealth 800m in Glasgow and the European 1500m in Birmingham."
+      }
+    ]
+  },
+  {
+    "slug": "jolanda-ceplak",
+    "title": "Jolanda Čeplak – Slovenian 800m records, Olympic medal and results",
+    "description": "Jolanda Čeplak’s 800m career, from her 1:55.82 indoor world record in Vienna to Olympic bronze in Athens, with results from 1993 to 2010.",
+    "headings": [
+      "From junior racing to the Vienna world record",
+      "European titles and an Olympic medal",
+      "The federation ruling and her return"
+    ],
+    "paragraphs": [
+      "Jolanda Čeplak is a Slovenian middle-distance runner who won the European 800m title indoors and outdoors in 2002. She had already won European junior bronze over 1500m under her maiden name, Steblovnik, and placed fourth over 800m at the 2000 European Indoor Championships. In Vienna on 3 March 2002 she led much of the final, lost the lead and fought back to win in 1:55.82. Three hundredths of a second separated first and second. The world indoor record stood until 19 February 2026, when Keely Hodgkinson ran 1:54.87 in Liévin.",
+      "Outdoors, Čeplak ran 1:55.19 in Heusden-Zolder in July 2002 and won European gold in Munich the following month. She also won over 1500m at the 2003 Prefontaine Classic in 4:02.44. Her 2004 season brought world indoor 800m silver in Budapest and Olympic bronze in Athens. In the Olympic final she ran 1:56.43, the same published time as the silver medallist. In March 2007 she took European indoor bronze in Birmingham.",
+      "Later in 2007, an out-of-competition sample collected on 18 June tested positive for recombinant EPO. The Slovenian federation imposed two years of ineligibility, from 25 July 2007 to 24 July 2009, and disqualified her results from 18 June 2007. The IAAF published the decision in 2008. She returned to competition in July 2009 and ran 2:04.49 for 800m at the Daegu pre-championship meeting that September."
+    ],
+    "questions": [
+      {
+        "question": "When did Jolanda Čeplak set the indoor 800m world record?",
+        "answer": "On 3 March 2002, she won the European indoor final in Vienna in 1:55.82. Keely Hodgkinson lowered the mark to 1:54.87 in Liévin on 19 February 2026."
+      }
+    ]
+  },
+  {
     "slug": "ayano-shiomi",
     "title": "Ayano Shiomi – 800m results and Japan’s 4×1500m relay",
     "description": "Meet Japanese middle-distance runner Ayano Shiomi, an Asian indoor 800m medallist and lead-off runner for Iwatani’s 2026 record relay.",

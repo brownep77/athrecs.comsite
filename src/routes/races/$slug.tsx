@@ -67,6 +67,7 @@ import { breadcrumbJsonLd } from "@/lib/athrecs/breadcrumbs";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { RacePracticalInformation } from "@/components/races/RacePracticalInformation";
 import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
+import { RaceQuestions } from "@/components/races/RaceQuestions";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { editionEntry } from "@/lib/athrecs/race-information";
 import { raceSearchContent, nextRaceEdition } from "@/lib/athrecs/race-search-content";
@@ -611,6 +612,8 @@ export function RacePageContent({
             officialWebsite={event.website}
           />
         ))}
+
+      {!IS_RUNRECS_SITE ? <RaceQuestions data={data} /> : null}
 
       {spectatorAccess && spectatorLabel ? (
         <section className="flex flex-wrap items-start justify-between gap-4 rounded-xl border border-border bg-surface p-5 shadow-card">
