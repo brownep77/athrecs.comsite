@@ -168,9 +168,12 @@ try {
     await dialog.getByRole("button", { name: "Sign in with email", exact: true }).click();
     await check("Existing shorter passwords work through the UI", async () => {
       await page.waitForURL(`${origin}/athlete-account?section=potential`, { timeout: 10000 });
-      const session = await context.request.get(`${origin}/api/auth/get-session`);
-      assert.equal(session.status(), 200);
-      assert.equal((await session.json()).user.email, legacyEmail);
+      const session = await page.evaluate(async () => {
+        const response = await fetch("/api/auth/get-session");
+        return { status: response.status, data: await response.json() };
+      });
+      assert.equal(session.status, 200);
+      assert.equal(session.data?.user?.email, legacyEmail);
     });
     await context.clearCookies();
     dialog = await open();
