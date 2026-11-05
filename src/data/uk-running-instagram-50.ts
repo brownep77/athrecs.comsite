@@ -861,7 +861,7 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
       "id": "tom-evans",
       "heading": "41. Tom Evans",
       "paragraphs": [
-        "British trail runner and former Army captain Tom Evans has won Western States and UTMB. His account takes followers into elite ultramarathon preparation, training and racing in enormous landscapes. Follow for the work behind those performances. It is possible to enjoy the scenery without immediately upgrading your Sunday run to something requiring a support crew."
+        "British trail runner and former Army captain Tom Evans has won Western States and UTMB. More recently, he finished seventh at October 2026's 180km Diagonale des Fous on Réunion, in 26:21:33. His account takes followers into elite ultramarathon preparation, training and racing in enormous landscapes. It is possible to enjoy the scenery without immediately upgrading your Sunday run to something requiring a support crew."
       ],
       "sources": [
         {
@@ -875,6 +875,10 @@ export const UK_RUNNING_INSTAGRAM_50: EditorialArticle = {
         {
           "label": "Background and biography",
           "url": "https://www.redbull.com/gb-en/flying-laps-running-tips"
+        },
+        {
+          "label": "2026 Diagonale des Fous result (UTMB Index)",
+          "url": "https://utmb.world/runner/1410311.tom.evans"
         }
       ]
     },
