@@ -254,39 +254,39 @@ export const NOVEMBER_5_WEEKEND_PREVIEW: EditorialArticle = {
   "links": [
     {
       "label": "Athens Authentic Marathon",
-      "url": "/events/athens-authentic-marathon"
+      "url": "/races/athens-authentic-marathon"
     },
     {
       "label": "Boston Half Marathon",
-      "url": "/events/baa-boston-half-marathon"
+      "url": "/races/baa-boston-half-marathon"
     },
     {
       "label": "IRONMAN Florida",
-      "url": "/events/ironman-florida"
+      "url": "/races/ironman-florida"
     },
     {
       "label": "Indianapolis Monumental Marathon",
-      "url": "/events/indianapolis-monumental-marathon"
+      "url": "/races/indianapolis-monumental-marathon"
     },
     {
       "label": "Porto Marathon",
-      "url": "/events/wa-edp-porto-marathon-7236106"
+      "url": "/races/wa-edp-porto-marathon-7236106"
     },
     {
       "label": "Ravenna Marathon",
-      "url": "/events/wa-maratona-di-ravenna-citt-d-arte-7237514"
+      "url": "/races/wa-maratona-di-ravenna-citt-d-arte-7237514"
     },
     {
       "label": "Málaga Marathon",
-      "url": "/events/malaga-marathon"
+      "url": "/races/malaga-marathon"
     },
     {
       "label": "Nice–Cannes Marathon",
-      "url": "/events/nice-cannes-marathon"
+      "url": "/races/nice-cannes-marathon"
     },
     {
       "label": "IRONMAN 70.3 Melbourne",
-      "url": "/events/ironman-703-melbourne"
+      "url": "/races/ironman-703-melbourne"
     }
   ],
   "faqs": [
