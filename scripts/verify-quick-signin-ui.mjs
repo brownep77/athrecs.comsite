@@ -203,6 +203,11 @@ try {
 
     // Registration needs name, country, city and DOB; clubs remain optional. Ordinary sign-in needs only email.
     dialog = await open("signup");
+    assert.equal(
+      await dialog.getAttribute("aria-modal"),
+      "true",
+      "Registration dialog must be exposed as modal to assistive technology",
+    );
     assert.equal(await dialog.getByRole("textbox").count(), 6);
     assert.equal(await dialog.locator('input[type="date"]').count(), 1);
     assert.equal(await dialog.getByRole("combobox").count(), 1);
