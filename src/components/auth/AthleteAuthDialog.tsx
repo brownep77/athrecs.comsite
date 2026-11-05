@@ -867,6 +867,7 @@ export function AthleteAuthDialog() {
                   <form
                     id="athrecs-registration-form"
                     className="space-y-4"
+                    noValidate
                     onSubmit={(event) => void submitCode(event)}
                   >
                     {quickEntry && !codeSentTo && socialProviders.length > 0 ? (
