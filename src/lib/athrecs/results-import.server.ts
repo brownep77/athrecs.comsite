@@ -2,6 +2,7 @@ import { isParkrunResult } from "./parkrun-timing";
 import { createHash, randomUUID } from "node:crypto";
 import { getSql } from "@/lib/db";
 import { slugify } from "./import.server";
+import { providerNeutralAthleteSlug } from "./athlete-public-slug";
 import { sourceIdentityFromUrl, type SourceIdentity } from "./profile-connections";
 
 export type ResultAcquisitionMethod = "scan" | "upload" | "api" | "manual";
@@ -226,13 +227,8 @@ function resolveAthleteSlug(row: ImportResultRow, displayName: string): string {
   if (row.athleteSlug?.trim()) return slugify(row.athleteSlug);
   const source = resultAthleteSource(row);
   if (source) {
-    // Keep provider identities in athlete_source_identities, never in a public URL.
-    // A stable opaque AthRecs suffix keeps distinct people separate until identity
-    // evidence supports a merge. Existing source mappings above take precedence.
-    const identityKey = `${source.provider}:${source.externalId}`;
-    const suffix = createHash("sha256").update(identityKey).digest("hex").slice(0, 16);
-    const name = slugify(displayName).slice(0, 62).replace(/-+$/g, "");
-    return `${name}-athlete-${suffix}`;
+    // Source identifiers stay in the source-mapping table rather than public URLs.
+    return providerNeutralAthleteSlug(slugify(displayName), source.provider, source.externalId);
   }
   // A name alone cannot identify a person across races. Keep unmatched race
   // entries separate until the athlete confirms them through the claim flow.
