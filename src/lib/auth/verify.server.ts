@@ -65,23 +65,7 @@ export async function getSessionUser(
     headers.set("Authorization", `Bearer ${bearerToken}`);
   }
   const session = await auth.api.getSession({ headers, query: { disableCookieCache: true } });
-  if (!session?.user) {
-    // TEMPORARY PR #1139 preview diagnostic — remove before merge. Logs cookie
-    // NAMES only (never values), to tell a missing cookie from a failed lookup.
-    if (process.env.VERCEL_ENV === "preview") {
-      const names = (headers.get("cookie") ?? "")
-        .split(";")
-        .map((part) => part.split("=")[0]?.trim())
-        .filter(Boolean);
-      console.warn("[auth-diag] no session", {
-        hasSessionCookie: names.some((name) => name.endsWith("session_token")),
-        cookieNames: names.filter((name) => /auth|session|vercel/i.test(name)),
-        host: headers.get("host"),
-        bearer: Boolean(bearerToken),
-      });
-    }
-    return null;
-  }
+  if (!session?.user) return null;
   return { id: session.user.id, email: session.user.email ?? null };
 }
 
