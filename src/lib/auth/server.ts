@@ -112,7 +112,19 @@ export const authConfigured =
   directGithubConfigured ||
   brokerConfigured;
 
-const previewAllowedHosts: string[] = [...PREVIEW_ALLOWED_HOSTS];
+// Vercel supplies the exact deployment/branch hostname to preview functions.
+// Trust only those platform-provided hosts, never a client-supplied Host header.
+const vercelPreviewHosts =
+  env("VERCEL_ENV") === "preview"
+    ? [env("VERCEL_URL"), env("VERCEL_BRANCH_URL")].filter(
+        (host): host is string =>
+          Boolean(host && /^[a-z0-9-]+(?:\\.[a-z0-9-]+)*\\.vercel\\.app$/i.test(host)),
+      )
+    : [];
+const previewAllowedHosts: string[] = unique([
+  ...PREVIEW_ALLOWED_HOSTS,
+  ...vercelPreviewHosts,
+]);
 const DEPLOYED_AUTH_HOSTS: string[] = [
   "www.athrecs.com",
   "athrecs.com",
@@ -137,10 +149,12 @@ function unique(values: string[]): string[] {
 const explicitBase = parseAbsoluteURL(explicitBaseURL);
 const deployedAllowedHosts = unique([
   ...DEPLOYED_AUTH_HOSTS,
+  ...vercelPreviewHosts,
   ...(explicitBase ? [explicitBase.host] : []),
 ]);
 const deployedTrustedOrigins = unique([
   ...DEPLOYED_AUTH_HOSTS.map((host) => `https://${host}`),
+  ...vercelPreviewHosts.map((host) => `https://${host}`),
   ...(explicitBase ? [explicitBase.origin] : []),
   ...(directAppleConfigured ? ["https://appleid.apple.com"] : []),
 ]);
