@@ -117,6 +117,19 @@ function responseCookies(response) {
     .map((cookie) => cookie.split(";")[0])
     .join("; ");
 }
+function assertPrivateSignupOmitted(value, details = signupDetails()) {
+  const serialized = JSON.stringify(value);
+  for (const field of ["signupDateOfBirth", "signupClubs"]) {
+    assert(!serialized.includes(field), `${field} leaked into the response`);
+    if (details[field]) {
+      assert(!serialized.includes(details[field]), `${field} value leaked into the response`);
+      assert(
+        !serialized.includes(encodeURIComponent(details[field])),
+        `URL-encoded ${field} leaked into the response`,
+      );
+    }
+  }
+}
 async function startGoogle(details) {
   const response = await post("sign-in/social", {
     provider: "google",
@@ -126,7 +139,9 @@ async function startGoogle(details) {
     ...(details ? { additionalData: { athrecsSignup: details } } : {}),
   });
   assert.equal(response.status, 200, await response.clone().text());
-  const url = new URL((await response.json()).url);
+  const data = await response.json();
+  assertPrivateSignupOmitted({ data, headers: [...response.headers] }, details);
+  const url = new URL(data.url);
   // The provider receives an opaque state, never the submitted private location.
   assert(!url.href.includes("Norwich") && !url.href.includes("signupLocation"));
   return { state: url.searchParams.get("state"), cookie: responseCookies(response) };
@@ -185,6 +200,27 @@ try {
       { ...signupDetails(), signupLocation: " \u00a0\u200b " },
       "SIGNUP_LOCATION_REQUIRED",
     ],
+    [
+      "missing-dob",
+      { ...signupDetails(), signupDateOfBirth: undefined },
+      "SIGNUP_BIRTHDATE_REQUIRED",
+    ],
+    [
+      "year-zero",
+      { ...signupDetails(), signupDateOfBirth: "0000-01-01" },
+      "SIGNUP_BIRTHDATE_REQUIRED",
+    ],
+    [
+      "invalid-dob",
+      { ...signupDetails(), signupDateOfBirth: "1900-02-29" },
+      "SIGNUP_BIRTHDATE_REQUIRED",
+    ],
+    [
+      "future-dob",
+      { ...signupDetails(), signupDateOfBirth: "9999-12-31" },
+      "SIGNUP_BIRTHDATE_REQUIRED",
+    ],
+    ["long-clubs", { ...signupDetails(), signupClubs: "x".repeat(1001) }, "SIGNUP_CLUBS_INVALID"],
     ["long-first", { ...signupDetails(), firstName: "A".repeat(61) }, "SIGNUP_DETAILS_INVALID"],
     ["long-last", { ...signupDetails(), lastName: "B".repeat(61) }, "SIGNUP_DETAILS_INVALID"],
     [
@@ -207,7 +243,9 @@ try {
       password: "Test-password-123!",
     });
     assert.equal(response.status, 400, `${label}: ${await response.clone().text()}`);
-    assert.equal((await response.json()).code, expectedCode, label);
+    const error = await response.json();
+    assertPrivateSignupOmitted(error, details);
+    assert.equal(error.code, expectedCode, label);
     assert.equal((await sql`select count(*)::int as n from "user" where email=${email}`)[0].n, 0);
     assert.equal(sent.length, before, "Rejected signup sends no verification or welcome message");
   }
@@ -227,7 +265,8 @@ try {
       ...signupDetails("Password Test"),
     });
     assert.equal(created.status, 200, await created.clone().text());
-    await sql`update "user" set name='',"firstName"=null,"lastName"=null,"signupCountry"=null,"signupLocation"=null where email='password-only@example.test'`;
+    assertPrivateSignupOmitted(await created.json());
+    await sql`update "user" set name='',"firstName"=null,"lastName"=null,"signupCountry"=null,"signupLocation"=null,"signupDateOfBirth"=null,"signupClubs"=null where email='password-only@example.test'`;
     const login = await post("sign-in/email", {
       email: "password-only@example.test",
       password: "Test-password-123!",
@@ -364,7 +403,19 @@ try {
     });
     assert.equal(login.status, 200, await login.clone().text());
     const user = await login.json();
+    assertPrivateSignupOmitted(user);
     assert.equal(user.user.emailVerified, true);
+    const privateFieldsUpdate = await post(
+      "update-user",
+      { signupDateOfBirth: "9999-12-31", signupClubs: "Unvalidated club" },
+      { authorization: `Bearer ${user.token}` },
+    );
+    assert.equal(privateFieldsUpdate.status, 400);
+    assertPrivateSignupOmitted(await privateFieldsUpdate.json());
+    const [savedRegistration] =
+      await sql`select "signupDateOfBirth","signupClubs" from "user" where id=${user.user.id}`;
+    assert.equal(savedRegistration.signupDateOfBirth, "1990-05-15");
+    assert.equal(savedRegistration.signupClubs, "Synthetic Runners AC");
     assert.equal(user.user.name, "Code Runner");
     assert(
       (await post("sign-in/email-otp", { email, otp: code })).status >= 400,
@@ -518,15 +569,22 @@ try {
       callbackURL: "/athlete-account",
     });
     assert.equal(signup.status, 200, await signup.clone().text());
-    assert.equal((await post("sign-in/email", { email: passwordEmail, password })).status, 403);
+    assertPrivateSignupOmitted(await signup.json());
+    const beforeVerification = await post("sign-in/email", { email: passwordEmail, password });
+    assert.equal(beforeVerification.status, 403);
+    assertPrivateSignupOmitted(await beforeVerification.json());
     const verificationEmail = sent.findLast((mail) => mail.to.includes(passwordEmail));
+    assertPrivateSignupOmitted(verificationEmail);
     const verificationUrl = verificationEmail.text.match(/http:\/\/[^\s]+/)?.[0];
     assert(verificationUrl?.startsWith(origin));
     const verified = await fetch(verificationUrl, { headers: { origin }, redirect: "manual" });
     assert(verified.status < 400);
+    assertPrivateSignupOmitted({ body: await verified.text(), headers: [...verified.headers] });
     const credentialLogin = await post("sign-in/email", { email: passwordEmail, password });
     assert.equal(credentialLogin.status, 200, await credentialLogin.clone().text());
-    assert.equal((await credentialLogin.json()).user.emailVerified, true);
+    const signedIn = await credentialLogin.json();
+    assertPrivateSignupOmitted(signedIn);
+    assert.equal(signedIn.user.emailVerified, true);
     const hijackEmail = "preclaimed-email@example.test";
     const attackerPassword = "Attacker-password-123!";
     const unverified = await post("sign-up/email", {
@@ -595,7 +653,19 @@ try {
       (await sql`select count(*)::int as n from "user" where email=${missingOAuthEmail}`)[0].n,
       0,
     );
-    const validOAuth = await startGoogle(signupDetails("OAuth Test Runner"));
+    const oauthDetails = signupDetails("OAuth Test Runner");
+    const noBirthdate = await finishGoogle(
+      await startGoogle({ ...oauthDetails, signupDateOfBirth: undefined }),
+      missingOAuthEmail,
+      { signupDateOfBirth: oauthDetails.signupDateOfBirth },
+    );
+    assert.equal(noBirthdate.status, 302);
+    assert(new URL(noBirthdate.headers.get("location"), origin).searchParams.has("error"));
+    assert.equal(
+      (await sql`select count(*)::int as n from "user" where email=${missingOAuthEmail}`)[0].n,
+      0,
+    );
+    const validOAuth = await startGoogle(oauthDetails);
     const oauthEmail = "oauth-complete-details@example.test";
     const missingCookie = await finishGoogle({ ...validOAuth, cookie: "" }, oauthEmail);
     assert.equal(missingCookie.status, 302);
@@ -606,13 +676,17 @@ try {
     );
     const completedOAuth = await finishGoogle(validOAuth, oauthEmail);
     assert.equal(completedOAuth.status, 302);
+    assertPrivateSignupOmitted({
+      body: await completedOAuth.text(),
+      headers: [...completedOAuth.headers],
+    });
     assert.equal(
       new URL(completedOAuth.headers.get("location"), origin).pathname,
       "/athlete-account",
     );
     assert(!new URL(completedOAuth.headers.get("location"), origin).searchParams.has("error"));
     const [oauthUser] =
-      await sql`select id,name,"firstName","lastName","signupCountry","signupLocation" from "user" where email=${oauthEmail}`;
+      await sql`select id,name,"firstName","lastName","signupCountry","signupLocation","signupDateOfBirth","signupClubs" from "user" where email=${oauthEmail}`;
     assert.deepEqual(
       { ...oauthUser, id: undefined },
       {
@@ -622,13 +696,17 @@ try {
         lastName: "Test Runner",
         signupCountry: "England",
         signupLocation: "Norwich",
+        signupDateOfBirth: oauthDetails.signupDateOfBirth,
+        signupClubs: oauthDetails.signupClubs,
       },
     );
     const oauthSession = await fetch(`${origin}/api/auth/get-session`, {
       headers: { origin, cookie: responseCookies(completedOAuth) },
     });
     assert.equal(oauthSession.status, 200);
-    const sessionUser = (await oauthSession.json()).user;
+    const oauthSessionData = await oauthSession.json();
+    assertPrivateSignupOmitted(oauthSessionData);
+    const sessionUser = oauthSessionData.user;
     assert.equal(sessionUser.id, oauthUser.id);
     for (const key of ["firstName", "lastName", "signupCountry", "signupLocation"])
       assert(!(key in sessionUser), `${key} stays out of the session response`);

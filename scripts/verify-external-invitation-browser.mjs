@@ -108,7 +108,7 @@ try {
     "Invitation Athlete",
   );
   await dialog.getByLabel("Country", { exact: true }).selectOption("England");
-  await dialog.getByLabel("City or town", { exact: true }).fill("Norwich")
+  await dialog.getByLabel("City or town", { exact: true }).fill("Norwich");
   await dialog.getByLabel("Date of birth", { exact: true }).fill("1990-05-15");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
   await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();

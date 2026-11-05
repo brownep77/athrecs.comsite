@@ -22,6 +22,7 @@ import {
   normalizeSignupDetails,
   SIGNUP_COUNTRIES,
   signupDetailsError,
+  latestSignupBirthdate,
   type SignupDetails,
 } from "@/lib/auth/signup-details";
 import {
@@ -142,7 +143,7 @@ export function AthleteAuthDialog() {
         if (isSignupDetailsError(oauthError)) {
           setMode("signup");
           setError(
-            "Add your name, country and location below, then continue with email or your sign-in provider.",
+            "Add your name, date of birth, country and city or town below, then continue with email or your sign-in provider.",
           );
         } else
           setError(
@@ -172,7 +173,14 @@ export function AthleteAuthDialog() {
       setCode("");
       setCodeSentTo(null);
       setResendAfter(0);
-      setSignupDetails({ firstName: "", lastName: "", signupCountry: "", signupLocation: "", signupDateOfBirth: "", signupClubs: "" });
+      setSignupDetails({
+        firstName: "",
+        lastName: "",
+        signupCountry: "",
+        signupLocation: "",
+        signupDateOfBirth: "",
+        signupClubs: "",
+      });
       setOpen(true);
     };
     window.addEventListener(AUTH_DIALOG_EVENT, onOpen);
@@ -308,7 +316,7 @@ export function AthleteAuthDialog() {
         setCode("");
         setResendAfter(0);
         setMessage(
-          "To create your account, add your name, country and location, then request a new code.",
+          "To create your account, add your name, date of birth, country and city or town, then request a new code.",
         );
         setBusy(null);
         return;
@@ -738,30 +746,41 @@ export function AthleteAuthDialog() {
                       name="signupDateOfBirth"
                       type="date"
                       autoComplete="bday"
-                      max={new Date().toISOString().slice(0, 10)}
+                      min="0001-01-01"
+                      max={latestSignupBirthdate()}
+                      aria-describedby="athrecs-signup-birthdate-help"
                       value={signupDetails.signupDateOfBirth}
-                      onChange={(event) => setSignupDetails({ ...signupDetails, signupDateOfBirth: event.target.value })}
-                      className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                      onChange={(event) =>
+                        setSignupDetails({
+                          ...signupDetails,
+                          signupDateOfBirth: event.target.value,
+                        })
+                      }
+                      className="h-11 w-full min-w-0 rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                       required
                     />
                   </label>
+                  <p id="athrecs-signup-birthdate-help" className="text-xs text-muted">
+                    Your date of birth is stored privately to help identify your results.
+                  </p>
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
                     Clubs you have raced for (optional)
                     <textarea
                       form="athrecs-registration-form"
                       name="signupClubs"
                       value={signupDetails.signupClubs}
-                      onChange={(event) => setSignupDetails({ ...signupDetails, signupClubs: event.target.value })}
+                      onChange={(event) =>
+                        setSignupDetails({ ...signupDetails, signupClubs: event.target.value })
+                      }
                       rows={2}
                       maxLength={1000}
                       placeholder="Current and previous clubs, one per line"
                       className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                     />
                   </label>
-                  <p className="text-xs text-muted">Your date of birth is kept private and used to improve result matching. Do not enter clubs you have not raced for.</p>
                   <p id="athrecs-signup-location-help" className="text-xs text-muted">
-                    Your city or town helps us match historical racing results. No street address is needed.
-                    These registration details stay in your private account.{" "}
+                    Your city or town helps us match historical racing results. No street address is
+                    needed. These registration details stay in your private account.{" "}
                     <Link
                       to="/privacy"
                       target="_blank"

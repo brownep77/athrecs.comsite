@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { APIError, getOAuthState } from "better-auth/api";
+import { APIError, createAuthMiddleware, getOAuthState } from "better-auth/api";
 import { bearer, emailOTP, genericOAuth } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getCookie } from "@tanstack/react-start/server";
@@ -341,6 +341,19 @@ export const auth = betterAuth({
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
   user: { additionalFields: signupUserFields },
+  hooks: {
+    before: createAuthMiddleware(async (context) => {
+      if (
+        context.path === "/update-user" &&
+        ["signupDateOfBirth", "signupClubs"].some((field) =>
+          Object.hasOwn(context.body ?? {}, field),
+        )
+      )
+        throw new APIError("BAD_REQUEST", {
+          message: "Private registration details cannot be changed through this endpoint.",
+        });
+    }),
+  },
   databaseHooks: {
     session: {
       create: {

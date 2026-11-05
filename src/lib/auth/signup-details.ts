@@ -54,6 +54,17 @@ export function normalizeSignupDetails(input: unknown): SignupDetails {
   };
 }
 
+export function latestSignupBirthdate(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function isValidSignupBirthdate(value: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || value < "0001-01-01" || value > latestSignupBirthdate())
+    return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
 export function signupDetailsError(input: unknown) {
   const details = normalizeSignupDetails(input);
   let code: keyof typeof SIGNUP_ERRORS | null = null;
@@ -61,11 +72,12 @@ export function signupDetailsError(input: unknown) {
   else if (!countryByName.has(details.signupCountry.toLowerCase()))
     code = "SIGNUP_COUNTRY_REQUIRED";
   else if (!details.signupLocation) code = "SIGNUP_LOCATION_REQUIRED";
-  else if (!/^\d{4}-\d{2}-\d{2}$/.test(details.signupDateOfBirth) ||
-    !Number.isFinite(Date.parse(`${details.signupDateOfBirth}T00:00:00Z`)) ||
-    new Date(`${details.signupDateOfBirth}T00:00:00Z`).toISOString().slice(0, 10) !== details.signupDateOfBirth ||
-    details.signupDateOfBirth > new Date().toISOString().slice(0, 10)) code = "SIGNUP_BIRTHDATE_REQUIRED";
-  else if (details.signupClubs.length > 1000 || details.signupClubs.split(/[,\n]/).filter(Boolean).length > 20) code = "SIGNUP_CLUBS_INVALID";
+  else if (!isValidSignupBirthdate(details.signupDateOfBirth)) code = "SIGNUP_BIRTHDATE_REQUIRED";
+  else if (
+    details.signupClubs.length > 1000 ||
+    details.signupClubs.split(/\r\n?|\n/).filter((line) => cleanText(line)).length > 20
+  )
+    code = "SIGNUP_CLUBS_INVALID";
   else if (
     details.firstName.length > 60 ||
     details.lastName.length > 60 ||

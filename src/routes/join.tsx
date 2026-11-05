@@ -151,9 +151,9 @@ function JoinPage() {
                 One email. Your sporting story.
               </h2>
               <p className="mt-3 text-sm leading-6 text-muted">
-                Add your name, date of birth, country, city and clubs you have raced for, then verify your email with a
-                six-digit code to create your account. No password needed. Profile ownership is
-                checked separately.
+                Add your name, date of birth, country and city or town. You can also list clubs you
+                have raced for. Verify your email with a six-digit code to create your account. No
+                password needed. Profile ownership is checked separately.
               </p>
               <Button
                 className="mt-5 w-full sm:w-auto"
