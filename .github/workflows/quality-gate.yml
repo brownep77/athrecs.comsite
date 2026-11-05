@@ -18,7 +18,7 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     # Runs take 26–41 minutes and slower runners have reached 45, so allow headroom.
-    timeout-minutes: 60
+    timeout-minutes: 90
     env:
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/athrecs_ci
       # Deliberately omit Resend. Browser coverage must prove that account
