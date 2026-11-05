@@ -355,6 +355,42 @@ export const NOVEMBER_5_WEEKEND_PREVIEW: EditorialArticle = {
   },
   "links": [
     {
+      "label": "Boston Half 2026: elite field, rolling course, athlete guide",
+      "url": "/news/boston-half-marathon-2026-elite-field-course-weather"
+    },
+    {
+      "label": "IRONMAN Florida 2026: professional field, wind and course",
+      "url": "/news/ironman-florida-2026-ditlev-sam-long-course-conditions"
+    },
+    {
+      "label": "Athens Marathon 2026: contenders and hills",
+      "url": "/news/athens-authentic-marathon-2026-karaiskos-noula-hills-guide"
+    },
+    {
+      "label": "Ravenna Marathon 2026: elite contenders",
+      "url": "/news/ravenna-marathon-2026-shumay-moroni-elite-field"
+    },
+    {
+      "label": "Indianapolis Monumental Marathon guide",
+      "url": "/news/indianapolis-monumental-marathon-2026-runner-guide"
+    },
+    {
+      "label": "Porto Marathon 2026 race-day guide",
+      "url": "/news/porto-marathon-2026-start-time-course-runner-guide"
+    },
+    {
+      "label": "Málaga Marathon 2026 guide",
+      "url": "/news/malaga-marathon-2026-course-heat-race-day-guide"
+    },
+    {
+      "label": "Nice–Cannes Marathon 2026 guide",
+      "url": "/news/nice-cannes-marathon-2026-coastal-wind-course-guide"
+    },
+    {
+      "label": "IRONMAN 70.3 Melbourne 2026 guide",
+      "url": "/news/ironman-703-melbourne-2026-st-kilda-weather-guide"
+    },
+    {
       "label": "Athens Authentic Marathon",
       "url": "/races/athens-authentic-marathon"
     },
