@@ -214,6 +214,13 @@ export function AthleteAuthDialog() {
     setNeedsVerification(false);
   }
 
+  function updateSignupField(field: keyof SignupDetails, value: string) {
+    setSignupDetails((current) => ({ ...current, [field]: value }));
+    // A previously submitted validation error no longer describes the edited form.
+    // The next submit still validates every field on the server and client.
+    setError(null);
+  }
+
   function switchMode(nextMode: AuthDialogMode) {
     if (busy) return;
     clearStatus();
@@ -570,7 +577,16 @@ export function AthleteAuthDialog() {
       }}
     >
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-5">
+        <Dialog.Overlay data-athrecs-auth-dialog className="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-5">
+          <style>{`/* Keep Intercom from obscuring registration fields and alerts on narrow screens.
+             It becomes visible again as soon as this dialog closes. */
+            body:has([data-athrecs-auth-dialog]) .intercom-lightweight-app,
+            body:has([data-athrecs-auth-dialog]) #intercom-container,
+            body:has([data-athrecs-auth-dialog]) iframe.intercom-launcher-frame,
+            body:has([data-athrecs-auth-dialog]) iframe.intercom-messenger-frame {
+              visibility: hidden !important;
+              pointer-events: none !important;
+            }`}</style>
           <Dialog.Content
             onEscapeKeyDown={(event) => {
               if (busy) event.preventDefault();
@@ -688,9 +704,7 @@ export function AthleteAuthDialog() {
                           type="text"
                           autoComplete={field === "firstName" ? "given-name" : "family-name"}
                           value={signupDetails[field]}
-                          onChange={(event) =>
-                            setSignupDetails({ ...signupDetails, [field]: event.target.value })
-                          }
+                          onChange={(event) => updateSignupField(field, event.target.value)}
                           maxLength={60}
                           className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                           required
@@ -708,9 +722,7 @@ export function AthleteAuthDialog() {
                       name="signupCountry"
                       autoComplete="country-name"
                       value={signupDetails.signupCountry}
-                      onChange={(event) =>
-                        setSignupDetails({ ...signupDetails, signupCountry: event.target.value })
-                      }
+                      onChange={(event) => updateSignupField("signupCountry", event.target.value)}
                       className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                       required
                     >
@@ -730,9 +742,7 @@ export function AthleteAuthDialog() {
                       type="text"
                       autoComplete="address-level2"
                       value={signupDetails.signupLocation}
-                      onChange={(event) =>
-                        setSignupDetails({ ...signupDetails, signupLocation: event.target.value })
-                      }
+                      onChange={(event) => updateSignupField("signupLocation", event.target.value)}
                       maxLength={120}
                       aria-describedby="athrecs-signup-location-help"
                       className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
@@ -750,12 +760,7 @@ export function AthleteAuthDialog() {
                       max={latestSignupBirthdate()}
                       aria-describedby="athrecs-signup-birthdate-help"
                       value={signupDetails.signupDateOfBirth}
-                      onChange={(event) =>
-                        setSignupDetails({
-                          ...signupDetails,
-                          signupDateOfBirth: event.target.value,
-                        })
-                      }
+                      onChange={(event) => updateSignupField("signupDateOfBirth", event.target.value)}
                       className="h-11 w-full min-w-0 rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                       required
                     />
@@ -769,9 +774,7 @@ export function AthleteAuthDialog() {
                       form="athrecs-registration-form"
                       name="signupClubs"
                       value={signupDetails.signupClubs}
-                      onChange={(event) =>
-                        setSignupDetails({ ...signupDetails, signupClubs: event.target.value })
-                      }
+                      onChange={(event) => updateSignupField("signupClubs", event.target.value)}
                       rows={2}
                       maxLength={1000}
                       placeholder="Current and previous clubs, one per line"
