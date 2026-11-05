@@ -13,8 +13,8 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "Who is running the Boston Half Marathon on 8 November 2026? Elite entrants, the rolling course, start time, race-day logistics and profile links.",
     "standfirst": "A third consecutive women’s title is on the line in Boston. Fentaye Belayneh has the winning habit, but a field that includes Melat Kejeta, Sara Hall and Emily Durgin will not give her a clear road. On the men’s side, the blend of 58-minute credentials and Habtom Samuel’s remarkable Houston debut makes this a race worth following kilometre by kilometre.",
     "body": [
-      "A third consecutive women’s title is on the line in Boston. Fentaye Belayneh has the winning habit, but a field that includes Melat Kejeta, Sara Hall and Emily Durgin will not give her a clear road. On the men’s side, the blend of 58-minute credentials and Habtom Samuel’s remarkable Houston debut makes this a race worth following kilometre by kilometre.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
@@ -156,8 +156,8 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "IRONMAN Florida 2026 pro field, 140.6-mile race course, Gulf swim, bike wind, marathon pacing and athlete guide for 7 November.",
     "standfirst": "For a race that finishes with a marathon, IRONMAN Florida asks some of its toughest questions hours before anyone puts on their running shoes. Magnus Ditlev, Sam Long and Cam Wurf headline a fascinating men’s field, while Holly Lawrence and Alanis Siffert add considerable pedigree to the women’s race. The real contest may be how intelligently they handle the open-water swim and the wind-exposed bike.",
     "body": [
-      "For a race that finishes with a marathon, IRONMAN Florida asks some of its toughest questions hours before anyone puts on their running shoes. Magnus Ditlev, Sam Long and Cam Wurf headline a fascinating men’s field, while Holly Lawrence and Alanis Siffert add considerable pedigree to the women’s race. The real contest may be how intelligently they handle the open-water swim and the wind-exposed bike.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
@@ -283,8 +283,8 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "Athens Authentic Marathon 2026 start blocks, iconic route elevation, forecast, Greek elite runners and practical advice for the 8 November race.",
     "standfirst": "There is no hiding from the Athens hills. Panagiotis Karaiskos and Stamatia Noula know the history, the climbs and the enormous pull of a finish inside the Panathenaic Stadium. For the rest of the field, the challenge is not simply to reach Athens; it is to leave enough in the legs to enjoy the final descent.",
     "body": [
-      "There is no hiding from the Athens hills. Panagiotis Karaiskos and Stamatia Noula know the history, the climbs and the enormous pull of a finish inside the Panathenaic Stadium. For the rest of the field, the challenge is not simply to reach Athens; it is to leave enough in the legs to enjoy the final descent.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
@@ -414,8 +414,8 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "Ravenna Marathon 2026 elite entrants including Solomon Mogos Shumay and Federica Moroni, 09:15 start, flat course and athlete information.",
     "standfirst": "Ravenna's combination of art, long straights and a potentially fast marathon makes for an intriguing elite race. Eritrea’s Solomon Mogos Shumay is advertised with a 2:07:00 personal best, while Caleb Alhamis Machas, Kebede Fikadu Merga and a strong women's group add depth to the field.",
     "body": [
-      "Ravenna's combination of art, long straights and a potentially fast marathon makes for an intriguing elite race. Eritrea’s Solomon Mogos Shumay is advertised with a 2:07:00 personal best, while Caleb Alhamis Machas, Kebede Fikadu Merga and a strong women's group add depth to the field.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
@@ -526,24 +526,21 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "Indianapolis Monumental Marathon on 7 November 2026: 08:00 start, marathon and half options, pacing, race-day logistics and official runner information.",
     "standfirst": "Indianapolis offers runners a clear Saturday target: a marathon through the city, with the opportunity to pace for a personal best. It is the kind of event where an overexcited opening 5K can cost far more than it earns. The 08:00 local start means your arrival, warm-up and corral plan matter.",
     "body": [
-      "Indianapolis offers runners a clear Saturday target: a marathon through the city, with the opportunity to pace for a personal best. It is the kind of event where an overexcited opening 5K can cost far more than it earns. The 08:00 local start means your arrival, warm-up and corral plan matter.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
         "id": "racing-preview",
         "heading": "Who's racing — and what makes the course demanding?",
         "paragraphs": [
-          "On Saturday, the CNO Financial Indianapolis Monumental Marathon starts at 08:00 local time. It is a fast-course opportunity for serious club runners and first-time marathoners alike. On Sunday, Porto starts at 08:00 from the Queimódromo; organisers publish a six-hour marathon limit and water stations every 5 km. Those are the details a runner with a race number needs, not just a preview of podium hopefuls.",
-          "Indianapolis and Porto offer opportunities to run efficiently without Athens-style long climbs, but wind, crowds and hydration still affect pace. Málaga's seafront setting and the Nice–Cannes coastal stretches can expose runners to shifting wind: running by effort rather than forcing every kilometre split is a practical strategy. Race maps and weather notices from the organisers take precedence over general advice, especially if rain or stronger gusts develop."
+          "The marathon begins at 08:00 Saturday morning in Indianapolis, with the half marathon and 5K making it a larger weekend for families and clubs. The broad, relatively quick city streets offer a chance to run well, but a strong first half is no guarantee of a PB. The smartest racing is often hardest to notice: staying relaxed through the early crowds and sticking to a fuel plan before fatigue arrives."
         ]
       },
       {
         "id": "conditions-and-course",
         "heading": "Course difficulty, weather and what athletes need to know",
         "paragraphs": [
-          "Across all these events, check the official event instructions for your start corral, collection deadline, transport, weather, aid and any changes announced in the final 48 hours. AthRecs event pages are designed to help you find your exact event and, once verified, your result.",
-          "Indianapolis and Porto offer opportunities to run efficiently without Athens-style long climbs, but wind, crowds and hydration still affect pace. Málaga's seafront setting and the Nice–Cannes coastal stretches can expose runners to shifting wind: running by effort rather than forcing every kilometre split is a practical strategy. Race maps and weather notices from the organisers take precedence over general advice, especially if rain or stronger gusts develop.",
           "The event also includes shorter distances. Confirm your specific entry and starting arrangements, use the official maps for aid and road closures, and build your fuel plan around the real course. AthRecs will add named participants only from a verified 2026 field or timing list—an athlete running last year is not evidence of starting this year."
         ]
       },
@@ -633,24 +630,21 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "Porto Marathon 2026 local start time, marathon versus 10K, six-hour cutoff, water points and logistics for 8 November.",
     "standfirst": "Porto's marathon offers another chance to discover what 42.195 kilometres can feel like when the pacing, weather and atmosphere come together. The city’s famous riverfront scenery is a bonus; it will not rescue anyone who mistakes the first 10 kilometres for a tempo run.",
     "body": [
-      "Porto's marathon offers another chance to discover what 42.195 kilometres can feel like when the pacing, weather and atmosphere come together. The city’s famous riverfront scenery is a bonus; it will not rescue anyone who mistakes the first 10 kilometres for a tempo run.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
         "id": "racing-preview",
         "heading": "Who's racing — and what makes the course demanding?",
         "paragraphs": [
-          "On Saturday, the CNO Financial Indianapolis Monumental Marathon starts at 08:00 local time. It is a fast-course opportunity for serious club runners and first-time marathoners alike. On Sunday, Porto starts at 08:00 from the Queimódromo; organisers publish a six-hour marathon limit and water stations every 5 km. Those are the details a runner with a race number needs, not just a preview of podium hopefuls.",
-          "Indianapolis and Porto offer opportunities to run efficiently without Athens-style long climbs, but wind, crowds and hydration still affect pace. Málaga's seafront setting and the Nice–Cannes coastal stretches can expose runners to shifting wind: running by effort rather than forcing every kilometre split is a practical strategy. Race maps and weather notices from the organisers take precedence over general advice, especially if rain or stronger gusts develop."
+          "Porto's marathon and competitive 10K are scheduled at 08:00 on Sunday, with distinct results and different pacing strategies. The marathon's coastal and river setting can reward disciplined rhythm while still testing those who start too hard. The published six-hour cutoff and aid stations are key details for runners planning their day."
         ]
       },
       {
         "id": "conditions-and-course",
         "heading": "Course difficulty, weather and what athletes need to know",
         "paragraphs": [
-          "Across all these events, check the official event instructions for your start corral, collection deadline, transport, weather, aid and any changes announced in the final 48 hours. AthRecs event pages are designed to help you find your exact event and, once verified, your result.",
-          "Indianapolis and Porto offer opportunities to run efficiently without Athens-style long climbs, but wind, crowds and hydration still affect pace. Málaga's seafront setting and the Nice–Cannes coastal stretches can expose runners to shifting wind: running by effort rather than forcing every kilometre split is a practical strategy. Race maps and weather notices from the organisers take precedence over general advice, especially if rain or stronger gusts develop.",
           "The 08:00 Sunday start applies to the marathon and 10K programme, but they are distinct distances and must never be mixed when assigning results. The organiser publishes a six-hour marathon cutoff and aid information. Check the full rules for your wave, bib collection, route maps and transport; preserve an extra margin for travel and arrival."
         ]
       },
@@ -740,24 +734,21 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "Generali Málaga Marathon 8 November 2026: 08:30 first wave, marathon and half marathon, coastal conditions, aid and runner logistics.",
     "standfirst": "A November marathon in Málaga can look deceptively inviting, with the city, the coast and mild-season running conditions. But a race in which the early pace feels easy can still become a challenge when the wind shifts or the temperature rises.",
     "body": [
-      "A November marathon in Málaga can look deceptively inviting, with the city, the coast and mild-season running conditions. But a race in which the early pace feels easy can still become a challenge when the wind shifts or the temperature rises.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
         "id": "racing-preview",
         "heading": "Who's racing — and what makes the course demanding?",
         "paragraphs": [
-          "Málaga’s marathon starts Sunday at 08:30 local time, with marathon and half-marathon fields requiring separate results matching. At Nice–Cannes, the first Sunday marathon wave is 08:00, with others following. Its coastal route is scenic, but changing weather and the time limit still deserve attention. Names for elite competitors at these events will be added once the current official entry lists confirm them; making up an elite field would be less useful than acknowledging the gap.",
-          "Indianapolis and Porto offer opportunities to run efficiently without Athens-style long climbs, but wind, crowds and hydration still affect pace. Málaga's seafront setting and the Nice–Cannes coastal stretches can expose runners to shifting wind: running by effort rather than forcing every kilometre split is a practical strategy. Race maps and weather notices from the organisers take precedence over general advice, especially if rain or stronger gusts develop."
+          "Málaga's 08:30 first wave gives runners a Sunday morning start on the Spanish coast, with separate marathon and half-marathon distances. The potential challenge isn't just pace but staying patient if the morning warms or coastal wind arrives. Know your assigned wave, aid points and official time limit before settling on a target."
         ]
       },
       {
         "id": "conditions-and-course",
         "heading": "Course difficulty, weather and what athletes need to know",
         "paragraphs": [
-          "Across all these events, check the official event instructions for your start corral, collection deadline, transport, weather, aid and any changes announced in the final 48 hours. AthRecs event pages are designed to help you find your exact event and, once verified, your result.",
-          "Indianapolis and Porto offer opportunities to run efficiently without Athens-style long climbs, but wind, crowds and hydration still affect pace. Málaga's seafront setting and the Nice–Cannes coastal stretches can expose runners to shifting wind: running by effort rather than forcing every kilometre split is a practical strategy. Race maps and weather notices from the organisers take precedence over general advice, especially if rain or stronger gusts develop.",
           "The first marathon wave is scheduled for 08:30 local time, with later waves following. Athletes should check the official event regulations for their specific distance, starting corral, kit, aid stations and cutoff. A forecast is most useful when it is checked just before race day; do not treat historical Málaga weather averages as Sunday's confirmed conditions."
         ]
       },
@@ -847,24 +838,21 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "Nice–Cannes Marathon 2026 first gun time, coastline course, weather exposure, six-hour cutoff, transport and race-day athlete advice.",
     "standfirst": "Nice–Cannes is the sort of marathon where runners should look up from the watch occasionally. The Riviera scenery is exceptional, but the long exposed coastal sections can make wind direction a serious pacing variable. The best plan allows for that rather than demanding identical kilometre splits in every headwind.",
     "body": [
-      "Nice–Cannes is the sort of marathon where runners should look up from the watch occasionally. The Riviera scenery is exceptional, but the long exposed coastal sections can make wind direction a serious pacing variable. The best plan allows for that rather than demanding identical kilometre splits in every headwind.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
         "id": "racing-preview",
         "heading": "Who's racing — and what makes the course demanding?",
         "paragraphs": [
-          "Málaga’s marathon starts Sunday at 08:30 local time, with marathon and half-marathon fields requiring separate results matching. At Nice–Cannes, the first Sunday marathon wave is 08:00, with others following. Its coastal route is scenic, but changing weather and the time limit still deserve attention. Names for elite competitors at these events will be added once the current official entry lists confirm them; making up an elite field would be less useful than acknowledging the gap.",
-          "Indianapolis and Porto offer opportunities to run efficiently without Athens-style long climbs, but wind, crowds and hydration still affect pace. Málaga's seafront setting and the Nice–Cannes coastal stretches can expose runners to shifting wind: running by effort rather than forcing every kilometre split is a practical strategy. Race maps and weather notices from the organisers take precedence over general advice, especially if rain or stronger gusts develop."
+          "Starting in Nice and finishing in Cannes, this 42.195 km event places runners close to the Mediterranean for long stretches. The first elite start is listed at 08:00, followed by general waves. Wind can change the energy required at the same watch pace; a six-hour limit and point-to-point logistics make this a race where planning pays off."
         ]
       },
       {
         "id": "conditions-and-course",
         "heading": "Course difficulty, weather and what athletes need to know",
         "paragraphs": [
-          "Across all these events, check the official event instructions for your start corral, collection deadline, transport, weather, aid and any changes announced in the final 48 hours. AthRecs event pages are designed to help you find your exact event and, once verified, your result.",
-          "Indianapolis and Porto offer opportunities to run efficiently without Athens-style long climbs, but wind, crowds and hydration still affect pace. Málaga's seafront setting and the Nice–Cannes coastal stretches can expose runners to shifting wind: running by effort rather than forcing every kilometre split is a practical strategy. Race maps and weather notices from the organisers take precedence over general advice, especially if rain or stronger gusts develop.",
           "The first elite start is scheduled for 08:00 local time with mass waves shortly afterwards. Check your bib for your actual start allocation, the transport instructions between Nice and Cannes and the six-hour marathon limit. Other distances and team formats must be distinguished from the full marathon in the results archive."
         ]
       },
@@ -954,8 +942,8 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "description": "IRONMAN 70.3 Melbourne 8 November 2026: St Kilda start, swim-bike-run distances, forecast wind, transitions and age-group advice.",
     "standfirst": "St Kilda offers a different kind of endurance test on Sunday: swim 1.9 km, cycle 90 km, then run a half marathon. The important forecast story is the contrast between a chilly early start and potentially sunnier, windier conditions later. Athletes who plan only for the temperature at the start may find themselves uncomfortable by the run.",
     "body": [
-      "St Kilda offers a different kind of endurance test on Sunday: swim 1.9 km, cycle 90 km, then run a half marathon. The important forecast story is the contrast between a chilly early start and potentially sunnier, windier conditions later. Athletes who plan only for the temperature at the start may find themselves uncomfortable by the run.",
-      "The event is one of nine major running and triathlon fixtures covered by AthRecs for 7–8 November 2026. Start times are given in the race's local time zone; always check your own assigned wave and organiser updates. AthRecs distinguishes announced competitors from recorded finishers."
+      "The 7–8 November 2026 endurance-racing weekend features professional athletes, club runners and newcomers. This race has its own demands and a start time that must be read in local time, with individual waves checked against the organiser.",
+      "AthRecs links named athletes only where a matching profile can be supported and does not treat a start list as a confirmed finish."
     ],
     "sections": [
       {
