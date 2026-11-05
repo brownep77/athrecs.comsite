@@ -22,6 +22,7 @@ import {
   normalizeSignupDetails,
   SIGNUP_COUNTRIES,
   signupDetailsError,
+  latestSignupBirthdate,
   type SignupDetails,
 } from "@/lib/auth/signup-details";
 import {
@@ -74,6 +75,8 @@ export function AthleteAuthDialog() {
     lastName: "",
     signupCountry: "",
     signupLocation: "",
+    signupDateOfBirth: "",
+    signupClubs: "",
   });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -140,7 +143,7 @@ export function AthleteAuthDialog() {
         if (isSignupDetailsError(oauthError)) {
           setMode("signup");
           setError(
-            "Add your name, country and location below, then continue with email or your sign-in provider.",
+            "Add your name, date of birth, country and city or town below, then continue with email or your sign-in provider.",
           );
         } else
           setError(
@@ -170,7 +173,14 @@ export function AthleteAuthDialog() {
       setCode("");
       setCodeSentTo(null);
       setResendAfter(0);
-      setSignupDetails({ firstName: "", lastName: "", signupCountry: "", signupLocation: "" });
+      setSignupDetails({
+        firstName: "",
+        lastName: "",
+        signupCountry: "",
+        signupLocation: "",
+        signupDateOfBirth: "",
+        signupClubs: "",
+      });
       setOpen(true);
     };
     window.addEventListener(AUTH_DIALOG_EVENT, onOpen);
@@ -202,6 +212,13 @@ export function AthleteAuthDialog() {
     setMessage(null);
     setError(null);
     setNeedsVerification(false);
+  }
+
+  function updateSignupField(field: keyof SignupDetails, value: string) {
+    setSignupDetails((current) => ({ ...current, [field]: value }));
+    // A previously submitted validation error no longer describes the edited form.
+    // The next submit still validates every field on the server and client.
+    setError(null);
   }
 
   function switchMode(nextMode: AuthDialogMode) {
@@ -306,7 +323,7 @@ export function AthleteAuthDialog() {
         setCode("");
         setResendAfter(0);
         setMessage(
-          "To create your account, add your name, country and location, then request a new code.",
+          "To create your account, add your name, date of birth, country and city or town, then request a new code.",
         );
         setBusy(null);
         return;
@@ -554,14 +571,25 @@ export function AthleteAuthDialog() {
 
   return (
     <Dialog.Root
+      modal
       open={open}
       onOpenChange={(nextOpen) => {
         if (!nextOpen) closeDialog();
       }}
     >
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-5">
+        <Dialog.Overlay data-athrecs-auth-dialog className="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-5">
+          <style>{`/* Keep Intercom from obscuring registration fields and alerts on narrow screens.
+             It becomes visible again as soon as this dialog closes. */
+            body:has([data-athrecs-auth-dialog]) .intercom-lightweight-app,
+            body:has([data-athrecs-auth-dialog]) #intercom-container,
+            body:has([data-athrecs-auth-dialog]) iframe.intercom-launcher-frame,
+            body:has([data-athrecs-auth-dialog]) iframe.intercom-messenger-frame {
+              visibility: hidden !important;
+              pointer-events: none !important;
+            }`}</style>
           <Dialog.Content
+            aria-modal="true"
             onEscapeKeyDown={(event) => {
               if (busy) event.preventDefault();
             }}
@@ -592,7 +620,7 @@ export function AthleteAuthDialog() {
                     ? codeSentTo
                       ? "Enter your six-digit code to continue."
                       : mode === "signup"
-                        ? "Add your name and location, then verify your email. No password needed."
+                        ? "Add your name, date of birth and location, then verify your email. No password needed."
                         : "Sign in with your email. New here? Choose Create account."
                     : sponsorshipAccount
                       ? "Sign in to submit a private sponsorship enquiry and read responses from our team."
@@ -678,9 +706,7 @@ export function AthleteAuthDialog() {
                           type="text"
                           autoComplete={field === "firstName" ? "given-name" : "family-name"}
                           value={signupDetails[field]}
-                          onChange={(event) =>
-                            setSignupDetails({ ...signupDetails, [field]: event.target.value })
-                          }
+                          onChange={(event) => updateSignupField(field, event.target.value)}
                           maxLength={60}
                           className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                           required
@@ -698,9 +724,7 @@ export function AthleteAuthDialog() {
                       name="signupCountry"
                       autoComplete="country-name"
                       value={signupDetails.signupCountry}
-                      onChange={(event) =>
-                        setSignupDetails({ ...signupDetails, signupCountry: event.target.value })
-                      }
+                      onChange={(event) => updateSignupField("signupCountry", event.target.value)}
                       className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                       required
                     >
@@ -713,25 +737,55 @@ export function AthleteAuthDialog() {
                     </select>
                   </div>
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
-                    Town, city, postcode or ZIP code
+                    City or town
                     <input
                       form="athrecs-registration-form"
                       name="signupLocation"
                       type="text"
                       autoComplete="address-level2"
                       value={signupDetails.signupLocation}
-                      onChange={(event) =>
-                        setSignupDetails({ ...signupDetails, signupLocation: event.target.value })
-                      }
+                      onChange={(event) => updateSignupField("signupLocation", event.target.value)}
                       maxLength={120}
                       aria-describedby="athrecs-signup-location-help"
                       className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                       required
                     />
                   </label>
+                  <label className="block space-y-1.5 text-sm font-medium text-fg">
+                    Date of birth
+                    <input
+                      form="athrecs-registration-form"
+                      name="signupDateOfBirth"
+                      type="date"
+                      autoComplete="bday"
+                      min="0001-01-01"
+                      max={latestSignupBirthdate()}
+                      aria-describedby="athrecs-signup-birthdate-help"
+                      value={signupDetails.signupDateOfBirth}
+                      onChange={(event) => updateSignupField("signupDateOfBirth", event.target.value)}
+                      className="h-11 w-full min-w-0 rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                      required
+                    />
+                  </label>
+                  <p id="athrecs-signup-birthdate-help" className="text-xs text-muted">
+                    Your date of birth is stored privately to help identify your results.
+                  </p>
+                  <label className="block space-y-1.5 text-sm font-medium text-fg">
+                    Clubs you have raced for (optional)
+                    <textarea
+                      form="athrecs-registration-form"
+                      name="signupClubs"
+                      value={signupDetails.signupClubs}
+                      onChange={(event) => updateSignupField("signupClubs", event.target.value)}
+                      rows={2}
+                      maxLength={1000}
+                      placeholder="Current and previous clubs, one per line"
+                      className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                    />
+                  </label>
                   <p id="athrecs-signup-location-help" className="text-xs text-muted">
-                    A town or city is enough; you do not need to give a postcode or street address.
-                    These registration details stay in your private account.{" "}
+                    Your city or town helps us match historical racing results. No street address is
+                    needed. These registration details stay in your private account.{" "}
                     <Link
                       to="/privacy"
                       target="_blank"
@@ -818,6 +872,7 @@ export function AthleteAuthDialog() {
                   <form
                     id="athrecs-registration-form"
                     className="space-y-4"
+                    noValidate
                     onSubmit={(event) => void submitCode(event)}
                   >
                     {quickEntry && !codeSentTo && socialProviders.length > 0 ? (
@@ -829,7 +884,7 @@ export function AthleteAuthDialog() {
                     {!quickEntry ? (
                       <p className="text-sm text-muted">
                         Use any email address. We’ll send you a one-time code, so you don’t need a
-                        password. Choose Create account to register with your name and location.
+                        password. Choose Create account if you’re new to AthRecs.
                       </p>
                     ) : null}
                     <label className="block space-y-1.5 text-sm font-medium text-fg">

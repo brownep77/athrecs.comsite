@@ -148,7 +148,10 @@ try {
     assert.equal(signup.status, 200, await signup.clone().text());
     const legacyId = (await signup.json()).user.id;
     const legacyPassword = "Older123";
-    await database.query('update "user" set "emailVerified"=true where id=$1', [legacyId]);
+    await database.query(
+      'update "user" set "emailVerified"=true, "signupDateOfBirth"=null, "signupClubs"=null where id=$1',
+      [legacyId],
+    );
     await database.query(
       'update account set password=$1 where "userId"=$2 and "providerId"=\'credential\'',
       [await hashPassword(legacyPassword), legacyId],
@@ -163,9 +166,15 @@ try {
     await dialog.getByLabel("Email address", { exact: true }).fill(legacyEmail);
     await dialog.getByLabel("Password", { exact: true }).fill(legacyPassword);
     await dialog.getByRole("button", { name: "Sign in with email", exact: true }).click();
-    await check("Existing shorter passwords work through the UI", () =>
-      page.waitForURL(`${origin}/athlete-account?section=potential`, { timeout: 10000 }),
-    );
+    await check("Existing shorter passwords work through the UI", async () => {
+      await page.waitForURL(`${origin}/athlete-account?section=potential`, { timeout: 10000 });
+      const session = await page.evaluate(async () => {
+        const response = await fetch("/api/auth/get-session");
+        return { status: response.status, data: await response.json() };
+      });
+      assert.equal(session.status, 200);
+      assert.equal(session.data?.user?.email, legacyEmail);
+    });
     await context.clearCookies();
     dialog = await open();
     assert.equal(await dialog.getByRole("heading", { name: "Welcome to AthRecs" }).count(), 1);
@@ -192,9 +201,15 @@ try {
     await dialog.getByRole("button", { name: "Continue with an email code" }).click();
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).waitFor();
 
-    // Registration needs four brief details; ordinary sign-in above still needs only email.
+    // Registration needs name, country, city and DOB; clubs remain optional. Ordinary sign-in needs only email.
     dialog = await open("signup");
-    assert.equal(await dialog.getByRole("textbox").count(), 4);
+    assert.equal(
+      await dialog.getAttribute("aria-modal"),
+      "true",
+      "Registration dialog must be exposed as modal to assistive technology",
+    );
+    assert.equal(await dialog.getByRole("textbox").count(), 6);
+    assert.equal(await dialog.locator('input[type="date"]').count(), 1);
     assert.equal(await dialog.getByRole("combobox").count(), 1);
     assert.equal(await dialog.getByText("Find my race results", { exact: true }).count(), 0);
     await dialog.getByLabel("Email address", { exact: true }).fill("quick-runner@example.test");
@@ -218,21 +233,52 @@ try {
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("England");
     await continueWithEmail.click();
     assert.equal(sent.length, beforeSignup, "One location value is required before a code is sent");
-    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("   ");
+    const birthdate = dialog.getByLabel("Date of birth", { exact: true });
+    // Complete every other required native control before testing a single field.
+    await birthdate.fill("1990-05-15");
+    await dialog.getByLabel("City or town", { exact: true }).fill("   ");
     await continueWithEmail.click();
-    await dialog
-      .getByRole("alert")
-      .filter({ hasText: "Enter a town, city, postcode or ZIP code" })
-      .waitFor();
+    await dialog.getByRole("alert").filter({ hasText: "Enter your city or town" }).waitFor();
     assert.equal(sent.length, beforeSignup, "Spaces do not satisfy the location requirement");
-    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Norwich");
+    await dialog.getByLabel("City or town", { exact: true }).fill("Norwich");
+    assert.equal(
+      await dialog.getByRole("alert").filter({ hasText: "Enter your city or town" }).count(),
+      0,
+      "Correcting the city must clear its stale validation error immediately",
+    );
+    await birthdate.fill("");
+    await continueWithEmail.click();
+    assert(await birthdate.evaluate((input) => input.validity.valueMissing));
+    await dialog.getByRole("alert").filter({ hasText: "Enter a valid date of birth" }).waitFor();
+    assert.equal(sent.length, beforeSignup, "A missing birth date prevents code delivery");
+    await birthdate.fill("9999-12-31");
+    await continueWithEmail.click();
+    assert(await birthdate.evaluate((input) => input.validity.rangeOverflow));
+    await dialog.getByRole("alert").filter({ hasText: "Enter a valid date of birth" }).waitFor();
+    assert.equal(sent.length, beforeSignup, "A future birth date prevents code delivery");
+    await birthdate.fill("2000-02-29");
+    const clubs = dialog.getByLabel("Clubs you have raced for (optional)", { exact: true });
+    assert.equal(await clubs.inputValue(), "");
+    await clubs.fill("Synthetic City AC\nFormer Synthetic Harriers");
     await page.setViewportSize({ width: 1280, height: 900 });
     await dialog.evaluate((element) => {
       element.scrollTop = 0;
     });
     await page.screenshot({ path: "artifacts/signup-details-desktop.png" });
-    await page.setViewportSize({ width: 390, height: 844 });
+    await page.setViewportSize({ width: 320, height: 720 });
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    assert(await dialog.evaluate((element) => element.scrollWidth <= element.clientWidth));
+    await check("Intercom launcher cannot cover registration on a narrow viewport", async () => {
+      const visibility = await page.evaluate(() => {
+        const probe = document.createElement("div");
+        probe.className = "intercom-lightweight-app";
+        document.body.appendChild(probe);
+        const result = getComputedStyle(probe).visibility;
+        probe.remove();
+        return result;
+      });
+      assert.equal(visibility, "hidden", "Intercom must be hidden while the auth dialog is open");
+    });
     await dialog.evaluate((element) => {
       element.scrollTop = 0;
     });
@@ -275,9 +321,16 @@ try {
       .filter({ hasText: "Quick Signin Test 10K" })
       .getByRole("button", { name: "Claim profile & review all results", exact: true })
       .waitFor();
-    const userId = (
-      await database.query('select id from "user" where email = $1', ["quick-runner@example.test"])
-    ).rows[0].id;
+    const [registered] = (
+      await database.query(
+        'select id, "emailVerified", "signupDateOfBirth", "signupClubs" from "user" where email = $1',
+        ["quick-runner@example.test"],
+      )
+    ).rows;
+    assert.equal(registered.emailVerified, true);
+    assert.equal(registered.signupDateOfBirth, "2000-02-29");
+    assert.equal(registered.signupClubs, "Synthetic City AC\nFormer Synthetic Harriers");
+    const userId = registered.id;
     const profile = (
       await database.query(
         "select full_name, date_of_birth, postcode from athlete_private_profiles where user_id=$1",
@@ -322,12 +375,23 @@ try {
       0,
     );
     await context.clearCookies();
+    await check("Anonymous directory and athlete HTML omit private registration data", async () => {
+      for (const path of ["/athletes?q=Quick+Signup+Runner", "/athletes/quick-signin-runner"]) {
+        const response = await context.request.get(`${origin}${path}`);
+        assert([200, 404].includes(response.status()), `Unexpected response for ${path}`);
+        const html = await response.text();
+        for (const value of ["2000-02-29", "Synthetic City AC", "Former Synthetic Harriers"]) {
+          assert(!html.includes(value), `Registration data appeared on ${path}`);
+        }
+      }
+    });
     dialog = await open("signup");
     assert.equal(await dialog.getByRole("checkbox", { name: /Find my race results/ }).count(), 0);
     await dialog.getByLabel("First name", { exact: true }).fill("Skip");
     await dialog.getByLabel("Last name", { exact: true }).fill("Results Runner");
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("England");
-    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("NR1 2AB");
+    await dialog.getByLabel("City or town", { exact: true }).fill("Norwich");
+    await dialog.getByLabel("Date of birth", { exact: true }).fill("1990-05-15");
     await dialog.getByLabel("Email address", { exact: true }).fill("skip-results@example.test");
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
@@ -371,7 +435,8 @@ try {
     await dialog.getByLabel("First name", { exact: true }).fill("Fresh");
     await dialog.getByLabel("Last name", { exact: true }).fill("Signin Runner");
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("France");
-    await dialog.getByLabel("Town, city, postcode or ZIP code", { exact: true }).fill("Lyon");
+    await dialog.getByLabel("City or town", { exact: true }).fill("Lyon");
+    await dialog.getByLabel("Date of birth", { exact: true }).fill("1990-05-15");
     const emailsBeforeRetry = sent.length;
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
@@ -385,7 +450,7 @@ try {
     assert.deepEqual(
       (
         await database.query(
-          'select name,"firstName","lastName","signupCountry","signupLocation" from "user" where email=$1',
+          'select name,"firstName","lastName","signupCountry","signupLocation","signupDateOfBirth","signupClubs" from "user" where email=$1',
           [freshEmail],
         )
       ).rows,
@@ -396,11 +461,13 @@ try {
           lastName: "Signin Runner",
           signupCountry: "France",
           signupLocation: "Lyon",
+          signupDateOfBirth: "1990-05-15",
+          signupClubs: "",
         },
       ],
     );
     console.log(
-      "PASS: required name/country/location signup, email-only existing login, new sign-in registration recovery with a fresh code, wrong/correct codes, mobile layout, default result discovery, optional matching details, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
+      "PASS: required name/country/city/date of birth and optional clubs, email-only existing login, new sign-in registration recovery with a fresh code, wrong/correct codes, mobile layout, default result discovery, optional matching details, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
     );
   }
   assert.deepEqual(errors, []);

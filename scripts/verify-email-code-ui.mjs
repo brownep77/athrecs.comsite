@@ -165,9 +165,8 @@ try {
   await registrationDialog.getByLabel("First name", { exact: true }).waitFor();
   await registrationDialog.getByLabel("Last name", { exact: true }).waitFor();
   await registrationDialog.getByRole("combobox", { name: "Country", exact: true }).waitFor();
-  await registrationDialog
-    .getByLabel("Town, city, postcode or ZIP code", { exact: true })
-    .waitFor();
+  await registrationDialog.getByLabel("City or town", { exact: true }).waitFor();
+  await registrationDialog.getByLabel("Date of birth", { exact: true }).waitFor();
   assert.equal(
     await registrationDialog
       .getByRole("tab", { name: "Create account", exact: true })

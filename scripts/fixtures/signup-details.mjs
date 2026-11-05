@@ -7,5 +7,7 @@ export function signupDetails(name = "Synthetic Test Runner") {
     lastName: familyName.join(" "),
     signupCountry: "England",
     signupLocation: "Norwich",
+    signupDateOfBirth: "1990-05-15",
+    signupClubs: "Synthetic Runners AC",
   };
 }

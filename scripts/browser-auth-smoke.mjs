@@ -85,7 +85,9 @@ try {
   const firstName = signUpDialog.getByLabel("First name", { exact: true });
   const lastName = signUpDialog.getByLabel("Last name", { exact: true });
   const country = signUpDialog.getByLabel("Country", { exact: true });
-  const location = signUpDialog.getByLabel("Town, city, postcode or ZIP code", { exact: true });
+  const location = signUpDialog.getByLabel("City or town", { exact: true });
+  const birthdate = signUpDialog.getByLabel("Date of birth", { exact: true });
+  const clubs = signUpDialog.getByLabel("Clubs you have raced for (optional)", { exact: true });
   const email = signUpDialog.locator('input[autocomplete="email"]');
   const newPasswords = signUpDialog.locator('input[autocomplete="new-password"]');
   const createWithEmail = signUpDialog.getByRole("button", {
@@ -96,16 +98,19 @@ try {
     lastName,
     country,
     location,
+    birthdate,
+    clubs,
     email,
     newPasswords.first(),
     createWithEmail,
   ]) {
     await field.waitFor({ state: "visible", timeout: timeoutMs });
   }
-  record("first name, last name, country and one location field are present", true);
-  for (const field of [firstName, lastName, country, location]) {
+  record("the complete registration form is present", true);
+  for (const field of [firstName, lastName, country, location, birthdate]) {
     record("registration detail is required", await field.evaluate((input) => input.required));
   }
+  record("club history is optional", await clubs.evaluate((input) => !input.required));
   record("email field is present", true);
   record("password field is present", (await newPasswords.count()) >= 1);
   record("password is entered once on AthRecs sign-up", (await newPasswords.count()) === 1);

@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { APIError, getOAuthState } from "better-auth/api";
+import { APIError, createAuthMiddleware, getOAuthState } from "better-auth/api";
 import { bearer, emailOTP, genericOAuth } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getCookie } from "@tanstack/react-start/server";
@@ -112,7 +112,19 @@ export const authConfigured =
   directGithubConfigured ||
   brokerConfigured;
 
-const previewAllowedHosts: string[] = [...PREVIEW_ALLOWED_HOSTS];
+// Vercel supplies the exact deployment/branch hostname to preview functions.
+// Trust only those platform-provided hosts, never a client-supplied Host header.
+const vercelPreviewHosts =
+  env("VERCEL_ENV") === "preview"
+    ? [env("VERCEL_URL"), env("VERCEL_BRANCH_URL")].filter(
+        (host): host is string =>
+          Boolean(host && /^[a-z0-9-]+(?:\.[a-z0-9-]+)*\.vercel\.app$/i.test(host)),
+      )
+    : [];
+const previewAllowedHosts: string[] = unique([
+  ...PREVIEW_ALLOWED_HOSTS,
+  ...vercelPreviewHosts,
+]);
 const DEPLOYED_AUTH_HOSTS: string[] = [
   "www.athrecs.com",
   "athrecs.com",
@@ -137,10 +149,12 @@ function unique(values: string[]): string[] {
 const explicitBase = parseAbsoluteURL(explicitBaseURL);
 const deployedAllowedHosts = unique([
   ...DEPLOYED_AUTH_HOSTS,
+  ...vercelPreviewHosts,
   ...(explicitBase ? [explicitBase.host] : []),
 ]);
 const deployedTrustedOrigins = unique([
   ...DEPLOYED_AUTH_HOSTS.map((host) => `https://${host}`),
+  ...vercelPreviewHosts.map((host) => `https://${host}`),
   ...(explicitBase ? [explicitBase.origin] : []),
   ...(directAppleConfigured ? ["https://appleid.apple.com"] : []),
 ]);
@@ -341,6 +355,22 @@ export const auth = betterAuth({
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
   user: { additionalFields: signupUserFields },
+  // The app uses the sign-in code flow, which revokes unproven credentials.
+  // The standalone email OTP verifier can activate a pre-registered password.
+  disabledPaths: ["/email-otp/verify-email"],
+  hooks: {
+    before: createAuthMiddleware(async (context) => {
+      if (
+        context.path === "/update-user" &&
+        ["signupDateOfBirth", "signupClubs"].some((field) =>
+          Object.hasOwn(context.body ?? {}, field),
+        )
+      )
+        throw new APIError("BAD_REQUEST", {
+          message: "Private registration details cannot be changed through this endpoint.",
+        });
+    }),
+  },
   databaseHooks: {
     session: {
       create: {
@@ -380,6 +410,21 @@ export const auth = betterAuth({
         },
       },
       update: {
+        before: async (user, context) => {
+          if (context?.path !== "/sign-in/email-otp" || user.emailVerified !== true) return;
+          // This update follows a valid code for a previously unverified account.
+          // Discard private details supplied before mailbox ownership was proven.
+          const details = signupDetailsError(context.body)
+            ? null
+            : normalizeSignupDetails(context.body);
+          return {
+            data: {
+              ...user,
+              signupDateOfBirth: details?.signupDateOfBirth ?? null,
+              signupClubs: details?.signupClubs ?? null,
+            },
+          };
+        },
         after: async (user) => {
           if (!user.emailVerified) return;
           const { welcomeNewSignup } = await import("./signup-welcome.server");
