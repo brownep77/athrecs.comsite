@@ -90,6 +90,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "verify:slug-stability": "node --experimental-strip-types scripts/verify-slug-stability.mjs",
+    "audit:seo": "node scripts/audit-live-seo.mjs",
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
     "verify:multisport-taxonomy": "node scripts/verify-multisport-taxonomy.mjs",
     "verify:sportsrecs-network": "node scripts/verify-sportsrecs-network-foundation.mjs",
