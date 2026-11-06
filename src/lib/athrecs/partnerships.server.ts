@@ -81,10 +81,10 @@ async function eligibleAthlete(
 export async function publicPartnerships(sql: Sql) {
   const [brands, opportunities] = await Promise.all([
     sql.query<Brand>(
-      `select ${brandPublicColumns} from partner_brands where status = 'approved' order by name limit 200`,
+      `select ${brandPublicColumns} from partner_brands where status = 'approved' and not synthetic_test order by name limit 200`,
     ),
     sql.query<Opportunity>(`select ${opportunityColumns} from partner_opportunities o join partner_brands b on b.id = o.brand_id
-      where o.status = 'approved' and b.status = 'approved' and o.closing_date >= current_date
+      where o.status = 'approved' and b.status = 'approved' and not b.synthetic_test and o.closing_date >= current_date
       order by o.created_at desc, o.id desc limit 200`),
   ]);
   return { brands, opportunities };
@@ -94,7 +94,7 @@ export async function myPartnerships(sql: Sql, userId: string) {
   const [brands, opportunities, applications, incoming, preferences, athletes, users] =
     await Promise.all([
       sql.query<PrivateBrand>(
-        `select ${brandPublicColumns}, contact_name, contact_role, status, review_note, revision
+        `select ${brandPublicColumns}, contact_name, contact_role, status, review_note, revision, synthetic_test
       from partner_brands where owner_user_id = $1`,
         [userId],
       ),
@@ -181,8 +181,11 @@ export async function registerBrand(sql: Sql, userId: string, input: BrandInput)
       values (${userId}, ${input.name}, ${input.website}, ${host}, ${input.category}, ${input.description}, ${input.sports}, ${input.markets}, ${input.contactName}, ${input.contactRole})
       on conflict (owner_user_id) do update set name = excluded.name, website = excluded.website, website_host = excluded.website_host,
         category = excluded.category, description = excluded.description, sports = excluded.sports, markets = excluded.markets,
-        contact_name = excluded.contact_name, contact_role = excluded.contact_role, status = 'pending', review_note = '',
-        revision = partner_brands.revision + 1, reviewed_at = null, updated_at = now()
+        contact_name = excluded.contact_name, contact_role = excluded.contact_role,
+        status = case when partner_brands.synthetic_test then 'approved' else 'pending' end,
+        review_note = case when partner_brands.synthetic_test then partner_brands.review_note else '' end,
+        revision = partner_brands.revision + 1,
+        reviewed_at = case when partner_brands.synthetic_test then now() else null end, updated_at = now()
       returning id`;
     await audit(tx, userId, "brand", brand.id, "submitted", {
       website: input.website,
@@ -198,7 +201,8 @@ export async function submitOpportunity(sql: Sql, userId: string, input: Opportu
     const [brand] = await tx<{
       id: number;
       status: string;
-    }>`select id, status from partner_brands where owner_user_id = ${userId} for update`;
+      synthetic_test: boolean;
+    }>`select id, status, synthetic_test from partner_brands where owner_user_id = ${userId} for update`;
     if (brand?.status !== "approved")
       throw new Error("Your brand must be approved before submitting an opportunity.");
     const [date] = await tx<{
@@ -224,8 +228,9 @@ export async function submitOpportunity(sql: Sql, userId: string, input: Opportu
         id: number;
       }>`update partner_opportunities set title = ${input.title}, kind = ${input.kind}, audience = ${input.audience},
         description = ${input.description}, benefits = ${input.benefits}, requirements = ${input.requirements}, sports = ${input.sports},
-        markets = ${input.markets}, closing_date = ${input.closingDate}::date, status = 'pending', review_note = '',
-        revision = revision + 1, reviewed_at = null, updated_at = now()
+        markets = ${input.markets}, closing_date = ${input.closingDate}::date,
+        status = ${brand.synthetic_test ? "approved" : "pending"}, review_note = '',
+        revision = revision + 1, reviewed_at = ${brand.synthetic_test ? new Date() : null}, updated_at = now()
         where id = ${input.id} and brand_id = ${brand.id} and revision = ${input.revision ?? 0} returning id`;
       if (!rows.length)
         throw new Error("This opportunity changed or is not yours. Refresh before editing.");
@@ -239,8 +244,9 @@ export async function submitOpportunity(sql: Sql, userId: string, input: Opportu
           "Close an existing opportunity before adding another. The initial limit is ten open opportunities per brand.",
         );
       const [row] = await tx<{ id: number }>`insert into partner_opportunities
-        (brand_id, title, kind, audience, description, benefits, requirements, sports, markets, closing_date)
-        values (${brand.id}, ${input.title}, ${input.kind}, ${input.audience}, ${input.description}, ${input.benefits}, ${input.requirements}, ${input.sports}, ${input.markets}, ${input.closingDate}::date) returning id`;
+        (brand_id, title, kind, audience, description, benefits, requirements, sports, markets, closing_date, status, reviewed_at)
+        values (${brand.id}, ${input.title}, ${input.kind}, ${input.audience}, ${input.description}, ${input.benefits}, ${input.requirements}, ${input.sports}, ${input.markets}, ${input.closingDate}::date,
+          ${brand.synthetic_test ? "approved" : "pending"}, ${brand.synthetic_test ? new Date() : null}) returning id`;
       id = row.id;
     }
     await audit(tx, userId, "opportunity", id, "submitted", { policy: PARTNER_POLICY_VERSION });
@@ -286,7 +292,8 @@ export async function applyToOpportunity(sql: Sql, userId: string, input: Applic
       Opportunity & { owner_user_id: string }
     >`select o.*, b.owner_user_id
       from partner_opportunities o join partner_brands b on b.id = o.brand_id
-      where o.id = ${input.opportunityId} and o.status = 'approved' and b.status = 'approved' and o.closing_date >= current_date
+      where o.id = ${input.opportunityId} and o.status = 'approved' and b.status = 'approved' and not b.synthetic_test
+      and o.closing_date >= current_date
       for share of o, b`;
     if (!opportunity) throw new Error("This opportunity is no longer accepting applications.");
     if (opportunity.owner_user_id === userId)
