@@ -109,6 +109,8 @@ import { Route as SportsSportRouteImport } from './routes/sports/$sport'
 import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$country/index'
 import { Route as AdminAthletesAthleteIdRouteImport } from './routes/admin/athletes.$athleteId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiFinActionsRouteImport } from './routes/api/fin/actions'
+import { Route as ApiFinCleanupRouteImport } from './routes/api/fin/cleanup'
 import { Route as ApiRaceCalendarTokenRouteImport } from './routes/api/race-calendar/$token'
 import { Route as RacesPlacesIndexRouteImport } from './routes/races/places/index'
 import { Route as RacesPlacesSplatRouteImport } from './routes/races/places/$'
@@ -627,6 +629,16 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiFinActionsRoute = ApiFinActionsRouteImport.update({
+  id: '/api/fin/actions',
+  path: '/api/fin/actions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFinCleanupRoute = ApiFinCleanupRouteImport.update({
+  id: '/api/fin/cleanup',
+  path: '/api/fin/cleanup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRaceCalendarTokenRoute = ApiRaceCalendarTokenRouteImport.update({
   id: '/api/race-calendar/$token',
   path: '/api/race-calendar/$token',
@@ -789,6 +801,8 @@ export interface FileRoutesByFullPath {
   '/running/': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/fin/actions': typeof ApiFinActionsRoute
+  '/api/fin/cleanup': typeof ApiFinCleanupRoute
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
@@ -902,6 +916,8 @@ export interface FileRoutesByTo {
   '/running': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/fin/actions': typeof ApiFinActionsRoute
+  '/api/fin/cleanup': typeof ApiFinCleanupRoute
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
@@ -1016,6 +1032,8 @@ export interface FileRoutesById {
   '/running/': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/fin/actions': typeof ApiFinActionsRoute
+  '/api/fin/cleanup': typeof ApiFinCleanupRoute
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
@@ -1131,6 +1149,8 @@ export interface FileRouteTypes {
     | '/running/'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/api/fin/actions'
+    | '/api/fin/cleanup'
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
@@ -1244,6 +1264,8 @@ export interface FileRouteTypes {
     | '/running'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/api/fin/actions'
+    | '/api/fin/cleanup'
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
@@ -1357,6 +1379,8 @@ export interface FileRouteTypes {
     | '/running/'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/api/fin/actions'
+    | '/api/fin/cleanup'
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
@@ -1471,6 +1495,8 @@ export interface RootRouteChildren {
   RunningIndexRoute: typeof RunningIndexRoute
   AdminAthletesAthleteIdRoute: typeof AdminAthletesAthleteIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiFinActionsRoute: typeof ApiFinActionsRoute
+  ApiFinCleanupRoute: typeof ApiFinCleanupRoute
   ApiRaceCalendarTokenRoute: typeof ApiRaceCalendarTokenRoute
   RacesPlacesSplatRoute: typeof RacesPlacesSplatRoute
   RunningRacesSlugRoute: typeof RunningRacesSlugRoute
@@ -2187,6 +2213,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/fin/actions': {
+      id: '/api/fin/actions'
+      path: '/api/fin/actions'
+      fullPath: '/api/fin/actions'
+      preLoaderRoute: typeof ApiFinActionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/fin/cleanup': {
+      id: '/api/fin/cleanup'
+      path: '/api/fin/cleanup'
+      fullPath: '/api/fin/cleanup'
+      preLoaderRoute: typeof ApiFinCleanupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/race-calendar/$token': {
       id: '/api/race-calendar/$token'
       path: '/api/race-calendar/$token'
@@ -2367,6 +2407,8 @@ const rootRouteChildren: RootRouteChildren = {
   RunningIndexRoute: RunningIndexRoute,
   AdminAthletesAthleteIdRoute: AdminAthletesAthleteIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiFinActionsRoute: ApiFinActionsRoute,
+  ApiFinCleanupRoute: ApiFinCleanupRoute,
   ApiRaceCalendarTokenRoute: ApiRaceCalendarTokenRoute,
   RacesPlacesSplatRoute: RacesPlacesSplatRoute,
   RunningRacesSlugRoute: RunningRacesSlugRoute,
