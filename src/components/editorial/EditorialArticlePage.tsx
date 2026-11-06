@@ -170,6 +170,19 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
               <ArticleText text={paragraph} links={article.athleteLinks} />
             </p>
           ))}
+          {section.image ? (
+            <figure className="space-y-2">
+              <img
+                src={section.image.src}
+                alt={section.image.alt}
+                width={section.image.width}
+                height={section.image.height}
+                loading="lazy"
+                className="mx-auto h-auto max-h-[38rem] w-full rounded-xl object-contain"
+              />
+              <figcaption className="text-sm text-muted">{section.image.caption}</figcaption>
+            </figure>
+          ) : null}
           {section.standings && (
             <ReportStandings
               key={article.slug}

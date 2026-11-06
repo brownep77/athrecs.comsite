@@ -65,9 +65,7 @@ export function slugify(input: string): string {
 /** A supplied public identifier is not a display name to truncate or regenerate. */
 export function importEventSlug(supplied: string | undefined, name = ""): string {
   const explicit = supplied?.trim();
-  return explicit && /^[a-z0-9][a-z0-9-]*$/.test(explicit)
-    ? explicit
-    : slugify(explicit || name);
+  return explicit && /^[a-z0-9][a-z0-9-]*$/.test(explicit) ? explicit : slugify(explicit || name);
 }
 
 function parseSport(raw: string): Sport {
@@ -358,7 +356,14 @@ export async function applyImportBundle(
     try {
       const sport = parseSport(raw.sport);
       const slug = importEventSlug(raw.slug, raw.name);
-      const distances = raw.distances?.length ? raw.distances : ["Other"];
+      // A reviewed parkrun venue may be listed before its programme is verified.
+      // Explicit [] means no distance claim; omitted legacy input keeps its fallback.
+      const distances =
+        sport === "Parkrun" && Array.isArray(raw.distances)
+          ? raw.distances
+          : raw.distances?.length
+            ? raw.distances
+            : ["Other"];
       const existing = await sql<{ id: number }>`
         select id from events where slug = ${slug} limit 1
       `;

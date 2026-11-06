@@ -1,3 +1,5 @@
+import { PARKRUN_UK_FEATURE } from "./parkrun-uk-feature-2026";
+import { PARKRUN_COUNTRY_FEATURES } from "./parkrun-country-features-2026";
 import { ELIUD_KIPCHOGE_BIRTHDAY_2026 } from "./eliud-kipchoge-birthday-2026";
 import { NOVEMBER_5_WEEKEND_PREVIEW } from "./november-5-2026-weekend-preview";
 import { NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS } from "./november-5-2026-individual-race-previews";
@@ -23,6 +25,8 @@ const publishedReport = NEWS_ARTICLES.find(
 );
 
 export const EDITORIAL_ARTICLES: EditorialArticle[] = [
+  PARKRUN_UK_FEATURE,
+  ...PARKRUN_COUNTRY_FEATURES,
   ELIUD_KIPCHOGE_BIRTHDAY_2026,
   ...NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS,
   NOVEMBER_5_WEEKEND_PREVIEW,

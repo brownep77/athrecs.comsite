@@ -1,0 +1,917 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-06",
+  "scope": "UK12 map keys missing from repository source. Seven alreadylive; oneWakehurst rename; fournew venuecandidates. Read-onlyresearch only.",
+  "note": "No live mutations. No externalmessages. Futureweeklydates must useexplicitconfirmedrecurrence anddebut, neverUKdefault. Venue map seriesid is recorded but not silently substituted forprogrammeverification.",
+  "global_cancellation_review": {
+    "status": "inaccessible",
+    "checked_on": "2026-11-06",
+    "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+    "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+    "next_check_on": "2026-11-07"
+  },
+  "events": [
+    {
+      "official_id": 3446,
+      "official_key": "kewwakehurst",
+      "name": "Kew Wakehurst parkrun",
+      "athrecs_slug": "wakehurst-parkrun",
+      "live_already_existed_2026_10_21": true,
+      "official_home": "https://www.parkrun.org.uk/kewwakehurst/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -0.088633,
+        51.066755
+      ],
+      "official_map_location": "Wakehurst",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": null,
+      "first_date_status": "Exact debut not established; venue press release of 16 December 2025 already lists it as operating.",
+      "distance_km_confirmed": 5,
+      "weekly_schedule_confirmed": {
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "scope": "Recurring 5k venue schedule, not event-specific cancellation clearance."
+      },
+      "weekly_schedule_lead": null,
+      "location": {
+        "city": "Ardingly",
+        "county": "West Sussex",
+        "region": "South East England",
+        "country": "England",
+        "venue": "Wakehurst",
+        "postcode": "RH17 6TN",
+        "previous_repo_county": "Surrey",
+        "previous_repo_official_url": "https://www.parkrun.org.uk/wakehurst/"
+      },
+      "evidence": [
+        {
+          "url": "https://www.kew.org/wakehurst/whats-on/parkrun",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Explicit year-round Saturday 09:00 schedule and 5k. It also links to the old /wakehurst/ official key. A 3 October cancellation is past, not a November cancellation.",
+          "excerpt": "Every Saturday, year-round; 9am"
+        },
+        {
+          "url": "https://www.kew.org/about-us/contact-us",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Wakehurst visitor address is Ardingly, West Sussex, RH17 6TN."
+        },
+        {
+          "url": "https://www.kew.org/about-us/press-media/january-2026",
+          "source_type": "venue_owner_press_release",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Released 16 December 2025; lists Wakehurst parkrun as operating every Saturday at 09:00 over 5k. This predates the current map-key change."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/kewwakehurst/",
+          "outcome": "New official URL inaccessible via web; previous /wakehurst/ URL also HTTP405",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07",
+        "known_past_notice": "Venue page states cancellation Saturday 3 October; no year given in notice. Past relative to research date."
+      },
+      "hold_reasons": [],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "Update existing wakehurst-parkrun name/official URL/location; do not create duplicate.",
+      "publication_recommendation": "Reconcile existing canonical venue and correct West Sussex; do not count as new parkrun."
+    },
+    {
+      "official_id": 3996,
+      "official_key": "lostshoresurfresort",
+      "name": "Lost Shore Surf Resort parkrun",
+      "athrecs_slug": "lostshoresurfresort-parkrun",
+      "live_already_existed_2026_10_21": false,
+      "official_home": "https://www.parkrun.org.uk/lostshoresurfresort/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -3.397714,
+        55.920006
+      ],
+      "official_map_location": "Lost Shore Surf Resort",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-10-24",
+      "first_date_status": "Two running clubs publish first-hand member participation in inaugural on 24 October; official organiser report inaccessible.",
+      "distance_km_confirmed": null,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "day": "Saturday",
+        "time": "09:30",
+        "timezone": "Europe/London",
+        "source": "Park5K mirror and Edinburgh Daily; do not label primary source verified."
+      },
+      "location": {
+        "city": "Newbridge / Ratho",
+        "county": "City of Edinburgh",
+        "region": null,
+        "country": "Scotland",
+        "venue": "Lost Shore Surf Resort",
+        "address": "11 South Platt Hill, Newbridge, EH28 8AY",
+        "address_status": "Exact address and Ratho location confirmed on venue owner getting-here page6 November2026."
+      },
+      "evidence": [
+        {
+          "url": "https://www.claremontroadrunners.co.uk/2026/10/26/parkrun-24th-october-2026/",
+          "source_type": "participant_club_primary_report",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Club reports members attended the inaugural Lost Shore Surf Resort parkrun on 24 October 2026."
+        },
+        {
+          "url": "https://www.hydeparkharriers.co.uk/parkrunday-24th-october-2026/",
+          "source_type": "participant_club_primary_report",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Independent club report identifies two members at inaugural Lost Shore Surf Resort on 24 October 2026; describes three-lap mixed tarmac and shale route."
+        },
+        {
+          "url": "https://www.lostshore.com/whats-on/",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Venue calendar gives Newbridge, Edinburgh, City of location, but no parkrun schedule found."
+        },
+        {
+          "url": "https://park5k.com/parkrun/lostshoresurfresort",
+          "source_type": "secondary_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Lead only: Saturday09:30,5k, exact address and course. Its no-cancellation statement is not independently confirmed."
+        },
+        {
+          "url": "https://edinburghdaily.uk/news/lost-shore-ratho-parkrun",
+          "source_type": "secondary_news",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Reports 24October launch and weekly09:30 5k. Not sufficient alone for source-verified start."
+        },
+        {
+          "url": "https://www.lostshore.com/visit/getting-here/",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Venue owner confirms Lost Shore Surf Resort,11 South Platt Hill,Newbridge,EH28 8AY,located in Ratho. No parkrun start time stated."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/lostshoresurfresort/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        },
+        {
+          "url": "https://www.lostshore.com/whats-on-at-lost-shore-this-november/",
+          "outcome": "Opened and searched; no parkrun mention."
+        },
+        {
+          "url": "https://www.lostshore.com/?s=parkrun",
+          "outcome": "Not accessible via web tool."
+        },
+        {
+          "url": "https://www.lostshore.com/",
+          "outcome": "Final bounded search of owner and Edinburgh council sources found no primary09:30 parkrun schedule. Venue general08:00 opening must not be substituted for event start.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Need accessible primary exact weekly start/distance or parent review of official series definition.",
+        "Cancellation source unavailable."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "New venue candidate; no duplicate found in supplied map comparison.",
+      "publication_recommendation": "Official map supports venue identity. Keep start time and dated recurrence held until organiser or venue schedule confirms; club reports support already launched."
+    },
+    {
+      "official_id": 4014,
+      "official_key": "norfolkshowgroundtrail",
+      "name": "Norfolk Showground Trail parkrun",
+      "athrecs_slug": "norfolkshowgroundtrail-parkrun",
+      "live_already_existed_2026_10_21": false,
+      "official_home": "https://www.parkrun.org.uk/norfolkshowgroundtrail/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        1.169303,
+        52.651749
+      ],
+      "official_map_location": "Norfolk Showground Trail",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-10-24",
+      "first_date_status": "Venue market partner explicitly moved market to24October to coincide with parkrun launch; corroborated by independent attendance reports. Venue parkrun page still has stale coming-soon language.",
+      "distance_km_confirmed": 5,
+      "weekly_schedule_confirmed": {
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "scope": "Venue-owner recurring 5k announcement; exact launch corroboration below; cancellations unresolved."
+      },
+      "weekly_schedule_lead": null,
+      "location": {
+        "city": "New Costessey",
+        "county": "Norfolk",
+        "region": "East of England",
+        "country": "England",
+        "venue": "Norfolk Showground Trail, Norfolk Showground",
+        "address": "Dereham Road, New Costessey, Norfolk NR5 0TT",
+        "postcode": "NR5 0TT"
+      },
+      "evidence": [
+        {
+          "url": "https://norfolkfoodhall.co.uk/parkrun-at-norfolk-food-hall",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Explicit free weekly5K everySaturday09:00 at Norfolk Food Hall/Norfolk Showground. Page still says launch coming soon.",
+          "excerpt": "Time: Every Saturday at 9:00am",
+          "sha256": "e8a02985445dbeacd68266dd30cab09463bc6b15dd01ff324546b4382235f381"
+        },
+        {
+          "url": "https://www.native2norfolk.co.uk/the-norfolk-food-hall",
+          "source_type": "venue_market_partner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Autumn market clearly moved to24October2026; text says parkrun launches the same day. An earlier10October sentence remains but is explicitly superseded by moved-to24October wording. This is market organiser evidence, not the parkrun organiser."
+        },
+        {
+          "url": "https://norfolkfoodhall.co.uk/norfolk-farmers-market",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Venue confirms its farmers market date24October, supporting market-partner page context; does not itself confirm parkrun date."
+        },
+        {
+          "url": "https://norfolkshowground.co.uk/contact/",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "FAQ identifies Norfolk Showground on Dereham Road, New Costessey, Norfolk NR5 0TT."
+        },
+        {
+          "url": "https://www.elliottline.com/parkrun/2026/10/25/parkrun-attendance-and-milestone-stats-for-24-october-2026-and-25-october-2026",
+          "source_type": "independent_statistics",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Reports Norfolk Showground Trail as new UK parkrun on24October2026; not promoted to official result source."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/norfolkshowgroundtrail/",
+          "outcome": "Parent reported direct HTTP403 and web405; did not repeat blocked resource",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Official debut/results source inaccessible; distinguish partner-supported launch from official organiser confirmation.",
+        "Live cancellation clearance unavailable."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "New venue candidate.",
+      "publication_recommendation": "Venue identity, distance and weekly time verified. Debut24October supported by local venue partner plus independent reports; retain provenance qualification. Do not treat stale coming-soon text as a current postponement without evidence."
+    },
+    {
+      "official_id": 4034,
+      "official_key": "meadowbank-juniors",
+      "name": "Meadowbank junior parkrun",
+      "athrecs_slug": "meadowbank-junior-parkrun",
+      "live_already_existed_2026_10_21": false,
+      "official_home": "https://www.parkrun.org.uk/meadowbank-juniors/",
+      "official_series_id": 2,
+      "official_map_coordinates": [
+        -0.331399,
+        51.235109
+      ],
+      "official_map_location": "Meadowbank juniors",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": "2026-11-22",
+      "first_date_lead": null,
+      "first_date_status": "Official supporting council press release explicitly confirms debut.",
+      "distance_km_confirmed": 2,
+      "weekly_schedule_confirmed": {
+        "day": "Sunday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "starts_on": "2026-11-22",
+        "scope": "Official announced inaugural followed by weeklyjunior2km."
+      },
+      "weekly_schedule_lead": null,
+      "location": {
+        "city": "Dorking",
+        "county": "Surrey",
+        "region": "South East England",
+        "country": "England",
+        "venue": "Meadowbank Park",
+        "start_finish": "Bandstand; route uses upper and lower recreation ground"
+      },
+      "evidence": [
+        {
+          "url": "https://news.molevalley.gov.uk/2026/10/30/brand-new-junior-parkrun-to-launch-in-meadowbank-park-dorking/",
+          "source_type": "supporting_council_official_press_release",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "direct_http_200_after_web_502",
+          "summary": "Council confirmsSunday22November2026 09:00,weekly2km,ages4–14,bandstand start/finish. Event director and parkrun engagement manager quoted.",
+          "excerpt": "At 9am on Sunday 22 November 2026 a brand-new junior parkrun will launch in Meadowbank Park in Dorking",
+          "sha256": "eb4c000e5d93dc6493900de79b26015673b3bfbd19777913508691124b186a11"
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/meadowbank-juniors/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        },
+        {
+          "url": "https://news.molevalley.gov.uk/2026/10/30/brand-new-junior-parkrun-to-launch-in-meadowbank-park-dorking/",
+          "outcome": "Web502; normal direct HTTP GET200; full source text read."
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Check cancellations/launch updates three days later and seven/two days before debut; no present schedule conflict found."
+      ],
+      "next_check_on": "2026-11-09",
+      "canonical_action": "New announced junior event.",
+      "eligibility": "Ages4–14",
+      "publication_recommendation": "Can publish announced22November2026 launch with2km and09:00. No dates before debut. Recheck closer to debut."
+    },
+    {
+      "official_id": 4041,
+      "official_key": "theoldshowfield-juniors",
+      "name": "The Old Showfield junior parkrun",
+      "athrecs_slug": "theoldshowfield-junior-parkrun",
+      "live_already_existed_2026_10_21": false,
+      "official_home": "https://www.parkrun.org.uk/theoldshowfield-juniors/",
+      "official_series_id": 2,
+      "official_map_coordinates": [
+        -2.309763,
+        51.236053
+      ],
+      "official_map_location": "The Old Showfield juniors",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-11-29",
+      "first_date_status": "Independent junior-event tracker only; no accessible official launch announcement located.",
+      "distance_km_confirmed": null,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": null,
+      "location": {
+        "city": "Frome",
+        "county": "Somerset",
+        "region": "South West England",
+        "country": "England",
+        "venue": "The Old Showfield",
+        "venue_source": "Frome Town Council official park page + official map. Existing5k source countyWiltshire is wrong."
+      },
+      "evidence": [
+        {
+          "url": "https://www.frometowncouncil.gov.uk/our-community/parks-and-green-spaces/spaces-we-care-for/the-old-showfield/",
+          "source_type": "venue_owner_council",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Confirms Old Showfield in Frome and identifies existingSaturday09:00 parkrun; not evidence for junior time."
+        },
+        {
+          "url": "https://www.sotwe.com/hashtag/newparkrun",
+          "source_type": "secondary_social_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Independent tracker says29November2026 junior launch; not primary confirmation."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/theoldshowfield-juniors/",
+          "outcome": "Inaccessible via web tool",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Junior firstdate/start/distance programme not yet read on accessible organiser/venue source.",
+        "Do not infer junior schedule from adult event."
+      ],
+      "next_check_on": "2026-11-09",
+      "canonical_action": "Separate junior event; must not merge into existing5k The Old Showfield.",
+      "publication_recommendation": "Keep announced-date candidate private pending primary confirmation. Map supports separatejunior venue identity. Do not copySaturday09:00 from5k to junior event."
+    },
+    {
+      "official_id": 4001,
+      "official_key": "brockshillcountrypark",
+      "name": "Brocks Hill Country Park parkrun",
+      "athrecs_slug": "brockshillcountrypark-parkrun",
+      "live_already_existed_2026_10_21": true,
+      "official_home": "https://www.parkrun.org.uk/brockshillcountrypark/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -1.085941,
+        52.592566
+      ],
+      "official_map_location": "Brocks Hill Country Park",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-10-10",
+      "first_date_status": "Lead only; direct organiser source inaccessible.",
+      "distance_km_confirmed": null,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "distance_km": 5,
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "source": "Park5K mirrored event/course text, not sourceverified."
+      },
+      "location": {
+        "city": "Oadby",
+        "county": "Leicestershire",
+        "country": "England",
+        "status": "Existing live mapping supplied by parent; not a fresh geographic audit."
+      },
+      "evidence": [
+        {
+          "url": "https://park5k.com/parkrun/brockshillcountrypark",
+          "source_type": "secondary_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Provides candidate schedule and course details; no independent organiser verification."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/brockshillcountrypark/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Official event home unavailable; independent mirror is a lead, not source verification."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "Already in live catalogue; no newvenue insertion.",
+      "publication_recommendation": "Keep existing venue; add no unsupported dates/times."
+    },
+    {
+      "official_id": 4004,
+      "official_key": "impeywalkknightshayes",
+      "name": "Impey Walk Knightshayes parkrun",
+      "athrecs_slug": "impeywalkknightshayes-parkrun",
+      "live_already_existed_2026_10_21": true,
+      "official_home": "https://www.parkrun.org.uk/impeywalkknightshayes/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -3.477466,
+        50.92781
+      ],
+      "official_map_location": "Impey Walk Knightshayes",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-10-10",
+      "first_date_status": "Lead only; direct organiser source inaccessible.",
+      "distance_km_confirmed": null,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "distance_km": 5,
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "source": "Opened official counciltourism listing confirms details; parent must decide organiser-authorisation gate."
+      },
+      "location": {
+        "city": "Tiverton",
+        "county": "Devon",
+        "country": "England",
+        "status": "Existing live mapping supplied by parent; not a fresh geographic audit."
+      },
+      "evidence": [
+        {
+          "url": "https://park5k.com/parkrun/impeywalkknightshayes",
+          "source_type": "secondary_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Provides candidate schedule and course details; no independent organiser verification."
+        },
+        {
+          "url": "https://visitmiddevon.co.uk/listing/impey-walk-knightshayes-parkrun/",
+          "source_type": "official_council_tourism_listing",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Opened listing confirms5k,Saturday09:00 (arrival08:45),Knightshayes Estate nearTiverton. It is not itself the event organiser."
+        },
+        {
+          "url": "https://visitmiddevon.co.uk/about-us/",
+          "source_type": "publisher_about",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Search confirmsmanaged byMidDevonDistrictCouncil andTivertonMuseum tourismservice; publisher authority only."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/impeywalkknightshayes/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "No accessible direct organiser/venueowner schedule; counciltourism evidence is current but do not call it an organiser timetable.",
+        "No cancellation clearance."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "Already in live catalogue; no newvenue insertion.",
+      "publication_recommendation": "Keep existing venue; add no unsupported dates/times."
+    },
+    {
+      "official_id": 4010,
+      "official_key": "grizedaleforest",
+      "name": "Grizedale Forest parkrun",
+      "athrecs_slug": "grizedaleforest-parkrun",
+      "live_already_existed_2026_10_21": true,
+      "official_home": "https://www.parkrun.org.uk/grizedaleforest/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -3.029152,
+        54.335839
+      ],
+      "official_map_location": "Grizedale Forest",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-10-17",
+      "first_date_status": "Lead only; direct organiser source inaccessible.",
+      "distance_km_confirmed": 5,
+      "weekly_schedule_confirmed": {
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "scope": "Venueowner explicitly advertisesautumn2026 weekly5km; no exact inaugural or cancellationclearance."
+      },
+      "weekly_schedule_lead": {
+        "distance_km": 5,
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "source": "Park5K mirrored event/course text, not sourceverified."
+      },
+      "location": {
+        "city": "Grizedale",
+        "county": "Cumbria",
+        "country": "England",
+        "status": "Existing live mapping supplied by parent; not a fresh geographic audit."
+      },
+      "evidence": [
+        {
+          "url": "https://park5k.com/parkrun/grizedaleforest",
+          "source_type": "secondary_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Provides candidate schedule and course details; no independent organiser verification."
+        },
+        {
+          "url": "https://www.forestryengland.uk/grizedale/parkrun-grizedale",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Current page saysnewforautumn2026; everySaturday09:00; trail length5km; addressGrizedaleForest,Hawkshead,LA220QJ.",
+          "excerpt": "Brand new for autumn 2026! Come and join us every Saturday at 9am."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/grizedaleforest/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Exactfirstdate stillunverified; cancellationclearance unavailable."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "Already in live catalogue; no newvenue insertion.",
+      "publication_recommendation": "Existing venue schedule can be refreshed fromprimaryvenue evidence; do not fabricate exactfirstdate from17October secondarylead."
+    },
+    {
+      "official_id": 4019,
+      "official_key": "parklanerecreationground-juniors",
+      "name": "Park Lane Recreation Ground junior parkrun",
+      "athrecs_slug": "parklanerecreationground-junior-parkrun",
+      "live_already_existed_2026_10_21": true,
+      "official_home": "https://www.parkrun.org.uk/parklanerecreationground-juniors/",
+      "official_series_id": 2,
+      "official_map_coordinates": [
+        -1.186483,
+        50.858418
+      ],
+      "official_map_location": "Park Lane Recreation Ground juniors",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-11-01",
+      "first_date_status": "Lead only; direct organiser source inaccessible.",
+      "distance_km_confirmed": null,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "distance_km": 2,
+        "day": "Sunday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "source": "Park5K mirrored event/course text, not sourceverified."
+      },
+      "location": {
+        "city": "Fareham",
+        "county": "Hampshire",
+        "country": "England",
+        "status": "Existing live mapping supplied by parent; not a fresh geographic audit."
+      },
+      "evidence": [
+        {
+          "url": "https://park5k.com/parkrun/parklanerecreationground-juniors",
+          "source_type": "secondary_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Provides candidate schedule and course details; no independent organiser verification."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/parklanerecreationground-juniors/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Official event home unavailable; independent mirror is a lead, not source verification."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "Already in live catalogue; no newvenue insertion.",
+      "publication_recommendation": "Keep existing venue; add no unsupported dates/times."
+    },
+    {
+      "official_id": 4023,
+      "official_key": "peterpanparkkirriemuir-juniors",
+      "name": "Peter Pan Park junior parkrun, Kirriemuir",
+      "athrecs_slug": "peterpanparkkirriemuir-junior-parkrun",
+      "live_already_existed_2026_10_21": true,
+      "official_home": "https://www.parkrun.org.uk/peterpanparkkirriemuir-juniors/",
+      "official_series_id": 2,
+      "official_map_coordinates": [
+        -3.000029,
+        56.679431
+      ],
+      "official_map_location": "Peter Pan Park juniors, Kirriemuir",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-11-08",
+      "first_date_status": "Lead only; direct organiser source inaccessible.",
+      "distance_km_confirmed": null,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "distance_km": 2,
+        "day": "Sunday",
+        "time": "09:30",
+        "timezone": "Europe/London",
+        "source": "Park5K mirrored event/course text, not sourceverified."
+      },
+      "location": {
+        "city": "Kirriemuir",
+        "county": "Angus",
+        "country": "Scotland",
+        "status": "Existing live mapping supplied by parent; not a fresh geographic audit."
+      },
+      "evidence": [
+        {
+          "url": "https://park5k.com/parkrun/peterpanparkkirriemuir-juniors",
+          "source_type": "secondary_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Provides candidate schedule and course details; no independent organiser verification."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/peterpanparkkirriemuir-juniors/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Official event home unavailable; independent mirror is a lead, not source verification.",
+        "Do not generate any weeklydate beforecandidate debut 2026-11-08; candidate itselfstillneedsprimaryconfirmation."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "Already in live catalogue; no newvenue insertion.",
+      "publication_recommendation": "Keep existing venue; add no unsupported dates/times."
+    },
+    {
+      "official_id": 4026,
+      "official_key": "wymondhamhighacademy-juniors",
+      "name": "Wymondham High Academy junior parkrun",
+      "athrecs_slug": "wymondhamhighacademy-junior-parkrun",
+      "live_already_existed_2026_10_21": true,
+      "official_home": "https://www.parkrun.org.uk/wymondhamhighacademy-juniors/",
+      "official_series_id": 2,
+      "official_map_coordinates": [
+        1.117125,
+        52.575087
+      ],
+      "official_map_location": "Wymondham High Academy juniors",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": null,
+      "first_date_status": "Lead only; direct organiser source inaccessible.",
+      "distance_km_confirmed": null,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "distance_km": 2,
+        "day": "Sunday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "source": "Park5K mirrored event/course text, not sourceverified."
+      },
+      "location": {
+        "city": "Wymondham",
+        "county": "Norfolk",
+        "country": "England",
+        "status": "Existing live mapping supplied by parent; not a fresh geographic audit."
+      },
+      "evidence": [
+        {
+          "url": "https://park5k.com/parkrun/wymondhamhighacademy-juniors",
+          "source_type": "secondary_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Provides candidate schedule and course details; no independent organiser verification."
+        },
+        {
+          "url": "https://www.wymondhammagazine.co.uk/sport/volunteers-needed-for-junior-parkrun-at-wymondham-high",
+          "source_type": "organising_volunteer_first_person_contribution",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "June2 2026 volunteerappeal confirms proposed2km onschoolplayingfields andplannedautumnlaunch. Course wasnotfinalised; noactualstartdate or exactstarttime. Do not reuseprovisional2.5laps."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/wymondhamhighacademy-juniors/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Official event home unavailable; independent mirror is a lead, not source verification."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "Already in live catalogue; no newvenue insertion.",
+      "publication_recommendation": "Keep existing venue; add no unsupported dates/times."
+    },
+    {
+      "official_id": 4028,
+      "official_key": "coalvillepark-juniors",
+      "name": "Coalville Park junior parkrun",
+      "athrecs_slug": "coalvillepark-junior-parkrun",
+      "live_already_existed_2026_10_21": true,
+      "official_home": "https://www.parkrun.org.uk/coalvillepark-juniors/",
+      "official_series_id": 2,
+      "official_map_coordinates": [
+        -1.365119,
+        52.723765
+      ],
+      "official_map_location": "Coalville Park juniors",
+      "checked_on": "2026-11-06",
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-11-15",
+      "first_date_status": "Lead only; direct organiser source inaccessible.",
+      "distance_km_confirmed": null,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "distance_km": 2,
+        "day": "Sunday",
+        "time": "09:00",
+        "timezone": "Europe/London",
+        "source": "Park5K mirrored event/course text, not sourceverified."
+      },
+      "location": {
+        "city": "Coalville",
+        "county": "Leicestershire",
+        "country": "England",
+        "status": "Existing live mapping supplied by parent; not a fresh geographic audit."
+      },
+      "evidence": [
+        {
+          "url": "https://park5k.com/parkrun/coalvillepark-juniors",
+          "source_type": "secondary_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Provides candidate schedule and course details; no independent organiser verification."
+        },
+        {
+          "url": "https://minutes-1.nwleics.gov.uk/ieListDocuments.aspx?CId=131&MId=2654",
+          "source_type": "council_meeting_record",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "June2025 approvalsupportsweeklyjuniorparkrun atCoalvillePark, butnot2026 launchdate/start."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.org.uk/coalvillepark-juniors/",
+          "outcome": "HTTP 405 Method Not Allowed",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+        "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Official event home unavailable; independent mirror is a lead, not source verification.",
+        "Do not generate any weeklydate beforecandidate debut 2026-11-15; candidate itselfstillneedsprimaryconfirmation."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "Already in live catalogue; no newvenue insertion.",
+      "publication_recommendation": "Keep existing venue; add no unsupported dates/times."
+    }
+  ]
+}

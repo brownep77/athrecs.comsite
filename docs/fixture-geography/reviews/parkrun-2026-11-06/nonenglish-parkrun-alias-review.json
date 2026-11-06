@@ -1,0 +1,927 @@
+{
+  "checkedAt": "2026-11-06",
+  "scope": "Twelve non-English-country missing official-map identities; bounded alias review only",
+  "sourceInputs": [
+    "parkrun-missing-map.json",
+    "parkrun-events-current.json",
+    "parkrun-live-inventory.json"
+  ],
+  "method": [
+    "Normalised official URL comparison across all 2985 saved live event identities",
+    "Normalised English/localised-name comparison and same-country similarity shortlist",
+    "Nearest map coordinates among existing live venues to identify local alternatives",
+    "Same-country live URLs absent from the current official map examined for retired keys and renames",
+    "Targeted external source checks for plausible rename transitions; no automated fuzzy merges"
+  ],
+  "counts": {
+    "reviewed": 12,
+    "distinctCatalogueCandidates": 11,
+    "renameHolds": 1,
+    "liveMutations": 0,
+    "generatedDatedFixtures": 0
+  },
+  "removedLiveKeysByCountry": {
+    "Austria": [],
+    "Finland": [],
+    "Germany": [
+      {
+        "id": 3063669,
+        "name": "Grüner Weg parkrun",
+        "website": "https://www.parkrun.com.de/gruenerweg/"
+      }
+    ],
+    "Italy": [],
+    "Japan": [
+      {
+        "id": 3064255,
+        "name": "Sunset Hills Shitasanbashi parkrun",
+        "website": "https://www.parkrun.jp/sunsethillsshitasanbashi/"
+      }
+    ],
+    "Netherlands": []
+  },
+  "findings": [
+    {
+      "mapId": 3971,
+      "eventKey": "hiroshimastadiumpark",
+      "name": "Hiroshima Stadium Park parkrun",
+      "country": "Japan",
+      "officialUrl": "https://www.parkrun.jp/hiroshimastadiumpark/",
+      "coordinates": [
+        132.452551,
+        34.401449
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3064167,
+          "name": "Chichibu Muse Park parkrun",
+          "similarity": 0.556,
+          "website": "https://www.parkrun.jp/chichibumusepark/"
+        },
+        {
+          "id": 3064388,
+          "name": "Shibamata koen kadan parkrun",
+          "similarity": 0.474,
+          "website": "https://www.parkrun.jp/shibamatakoenkadan/"
+        },
+        {
+          "id": 3064655,
+          "name": "Yamata Sports Park parkrun",
+          "similarity": 0.444,
+          "website": "https://www.parkrun.jp/yamatasportspark/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "horinouchikoen",
+          "name": "Horinouchi koen parkrun",
+          "distanceKm": 68.6,
+          "liveIds": [
+            3063615
+          ]
+        },
+        {
+          "mapKey": "yamaguchikirarahakukinenkoen",
+          "name": "Yamaguchi Kirarahaku kinen koen parkrun",
+          "distanceKm": 108.8,
+          "liveIds": [
+            3064533
+          ]
+        },
+        {
+          "mapKey": "kitanagasemiraifureaisogokoen",
+          "name": "Kitanagase Mirai Fureai Sogokoen parkrun",
+          "distanceKm": 134.6,
+          "liveIds": [
+            3064292
+          ]
+        },
+        {
+          "mapKey": "sanukikodomonokuni",
+          "name": "Sanukikodomonokuni parkrun",
+          "distanceKm": 145.5,
+          "liveIds": [
+            3063636
+          ]
+        }
+      ],
+      "assessment": "No plausible existing English/localised name or nearby active map alias was found. The only removed Japanese live key was Sunset Hills Shitasanbashi, separately resolved to Sakura Furusato Hiroba.",
+      "evidence": [],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 3976,
+      "eventKey": "valkeinen",
+      "name": "Valkeinen parkrun",
+      "country": "Finland",
+      "officialUrl": "https://www.parkrun.fi/valkeinen/",
+      "coordinates": [
+        27.663325,
+        62.891779
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3063885,
+          "name": "Pokkinen parkrun",
+          "similarity": 0.588,
+          "website": "https://www.parkrun.fi/pokkinen/"
+        },
+        {
+          "id": 3063372,
+          "name": "Vääksyn kanava parkrun",
+          "similarity": 0.455,
+          "website": "https://www.parkrun.fi/vaaksynkanava/"
+        },
+        {
+          "id": 3063359,
+          "name": "Tokoinranta parkrun",
+          "similarity": 0.4,
+          "website": "https://www.parkrun.fi/tokoinranta/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "mattilanniemi",
+          "name": "Mattilanniemi parkrun",
+          "distanceKm": 123.3,
+          "liveIds": [
+            3064193
+          ]
+        },
+        {
+          "mapKey": "vaaksynkanava",
+          "name": "Vääksyn kanava parkrun",
+          "distanceKm": 220.4,
+          "liveIds": [
+            3063372
+          ]
+        },
+        {
+          "mapKey": "lahdensatama",
+          "name": "Lahden satama parkrun",
+          "distanceKm": 236.2,
+          "liveIds": [
+            3064076
+          ]
+        },
+        {
+          "mapKey": "tampere",
+          "name": "Tampere parkrun",
+          "distanceKm": 255.3,
+          "liveIds": [
+            3063076
+          ]
+        }
+      ],
+      "assessment": "No existing Finnish URL/name match and no Finnish live key missing from the current map; no plausible rename found.",
+      "evidence": [],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 3977,
+      "eventKey": "zuiderparkrotterdam",
+      "name": "Zuiderpark parkrun, Rotterdam",
+      "country": "Netherlands",
+      "officialUrl": "https://www.parkrun.co.nl/zuiderparkrotterdam/",
+      "coordinates": [
+        4.487687,
+        51.879237
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3063753,
+          "name": "Zuiderpark parkrun, Den Haag",
+          "similarity": 0.667,
+          "website": "https://www.parkrun.co.nl/zuiderpark/"
+        },
+        {
+          "id": 3064302,
+          "name": "Zuiderpark parkrun, Hoogeveen",
+          "similarity": 0.632,
+          "website": "https://www.parkrun.co.nl/zuiderparkhoogeveen/"
+        },
+        {
+          "id": 3064152,
+          "name": "De Potten parkrun",
+          "similarity": 0.519,
+          "website": "https://www.parkrun.co.nl/depotten/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "kralingsebos",
+          "name": "Kralingse Bos parkrun",
+          "distanceKm": 6.7,
+          "liveIds": [
+            3063699
+          ]
+        },
+        {
+          "mapKey": "wantijpark",
+          "name": "Wantijpark parkrun",
+          "distanceKm": 16.1,
+          "liveIds": [
+            3064374
+          ]
+        },
+        {
+          "mapKey": "delftsehout",
+          "name": "Delftse Hout parkrun",
+          "distanceKm": 17.6,
+          "liveIds": [
+            3064025
+          ]
+        },
+        {
+          "mapKey": "balijbos",
+          "name": "Balijbos parkrun",
+          "distanceKm": 18.6,
+          "liveIds": [
+            3064636
+          ]
+        }
+      ],
+      "assessment": "Distinct from Zuiderpark Den Haag (live ID 3063753; current map key zuiderpark), Zuiderpark Hoogeveen (live ID 3064302), and Kralingse Bos (live ID 3063699). The Rotterdam organiser identifies the new local venue. All comparison venues retain distinct current map identities.",
+      "evidence": [
+        {
+          "url": "https://www.uitagendarotterdam.nl/agenda/zuiderpark-parkrun/",
+          "sourceType": "primary organiser programme on official city agenda",
+          "observed": "Opened. Names Zuiderpark Rotterdam; launch 5 September 2026; regular Saturday 09:00 and 5 km; current 7 November listing."
+        }
+      ],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 3978,
+      "eventKey": "sakurafurusatohiroba",
+      "name": "Sakura Furusato Hiroba parkrun",
+      "country": "Japan",
+      "officialUrl": "https://www.parkrun.jp/sakurafurusatohiroba/",
+      "coordinates": [
+        140.202824,
+        35.740588
+      ],
+      "decision": "hold_existing_event_rename",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3063858,
+          "name": "Yuuka Family Road parkrun",
+          "similarity": 0.457,
+          "website": "https://www.parkrun.jp/yuukafamilyroad/"
+        },
+        {
+          "id": 3064442,
+          "name": "Heiwa koen Kurashino mori parkrun",
+          "similarity": 0.429,
+          "website": "https://www.parkrun.jp/heiwakoenkurashinomori/"
+        },
+        {
+          "id": 3063911,
+          "name": "Sunshine Beach parkrun",
+          "similarity": 0.424,
+          "website": "https://www.parkrun.jp/sunshinebeach/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "urayasushisogokoen",
+          "name": "Urayasushi sogo koen parkrun",
+          "distanceKm": 27.0,
+          "liveIds": [
+            3063821
+          ]
+        },
+        {
+          "mapKey": "kashiwanoha",
+          "name": "Kashiwanoha parkrun",
+          "distanceKm": 29.1,
+          "liveIds": [
+            3063529
+          ]
+        },
+        {
+          "mapKey": "shibamatakoenkadan",
+          "name": "Shibamata koen kadan parkrun",
+          "distanceKm": 29.1,
+          "liveIds": [
+            3064388
+          ]
+        },
+        {
+          "mapKey": "shingashigawaukima",
+          "name": "Shingashigawa Ukima parkrun",
+          "distanceKm": 44.9,
+          "liveIds": [
+            3063865
+          ]
+        }
+      ],
+      "assessment": "Do not insert a new event. Existing Sunset Hills Shitasanbashi (live ID 3064255; slug sunsethillsshitasanbashi-parkrun) is absent from the current map. Local reporting describes its move to the Furusato Hiroba windmill course from 2 August 2025, and a participant/volunteer later explicitly describes the change to Sakura Furusato Hiroba. Exact formal rename day remains unverified. Parent accepted the duplicate/rename hold; retain old identity pending a reviewed update.",
+      "evidence": [
+        {
+          "url": "https://sakura-yotsukaido-yachimata.goguynet.jp/2025/08/23/sunsethills-shitasanbashi-parkrun-new-course/",
+          "sourceType": "local reporting with event-team course material",
+          "observed": "Opened. Article dated 23 August 2025 describes the Sunset Hills course move from 2 August 2025 to Furusato Hiroba near the Dutch windmill, after embankment works."
+        },
+        {
+          "url": "https://ameblo.jp/app19701102/entry-12976415661.html",
+          "sourceType": "participant/volunteer first-person report",
+          "observed": "Opened. Explicitly says Sunset Hills Shitasanbashi will be renamed Sakura Furusato Hiroba. No exact formal rename date is asserted from relative wording."
+        }
+      ],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 3980,
+      "eventKey": "tione",
+      "name": "Tione parkrun",
+      "country": "Italy",
+      "officialUrl": "https://www.parkrun.it/tione/",
+      "coordinates": [
+        10.831036,
+        45.354242
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3064448,
+          "name": "Sabine parkrun",
+          "similarity": 0.545,
+          "website": "https://www.parkrun.it/sabine/"
+        },
+        {
+          "id": 3062721,
+          "name": "Uditore parkrun",
+          "similarity": 0.5,
+          "website": "https://www.parkrun.it/uditore/"
+        },
+        {
+          "id": 3062996,
+          "name": "Treviso parkrun",
+          "similarity": 0.5,
+          "website": "https://www.parkrun.it/treviso/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "farfalle",
+          "name": "Farfalle parkrun",
+          "distanceKm": 84.0,
+          "liveIds": [
+            3063172
+          ]
+        },
+        {
+          "mapKey": "treviso",
+          "name": "Treviso parkrun",
+          "distanceKm": 118.4,
+          "liveIds": [
+            3062996
+          ]
+        },
+        {
+          "mapKey": "milanonord",
+          "name": "Milano Nord parkrun",
+          "distanceKm": 127.9,
+          "liveIds": [
+            3062942
+          ]
+        },
+        {
+          "mapKey": "terme",
+          "name": "Terme parkrun",
+          "distanceKm": 163.2,
+          "liveIds": [
+            3063387
+          ]
+        }
+      ],
+      "assessment": "No existing Italian URL/name match and no Italian live key missing from the current map; no plausible rename found. Conflicting secondary launch-year material does not establish a schedule.",
+      "evidence": [],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 3991,
+      "eventKey": "park21",
+      "name": "PARK21 parkrun",
+      "country": "Netherlands",
+      "officialUrl": "https://www.parkrun.co.nl/park21/",
+      "coordinates": [
+        4.628945,
+        52.296586
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3064374,
+          "name": "Wantijpark parkrun",
+          "similarity": 0.5,
+          "website": "https://www.parkrun.co.nl/wantijpark/"
+        },
+        {
+          "id": 3064065,
+          "name": "Beatrixpark parkrun",
+          "similarity": 0.471,
+          "website": "https://www.parkrun.co.nl/beatrixpark/"
+        },
+        {
+          "id": 3064309,
+          "name": "van Heekpark parkrun",
+          "similarity": 0.471,
+          "website": "https://www.parkrun.co.nl/vanheekpark/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "schoterbos",
+          "name": "Schoterbos parkrun",
+          "distanceKm": 12.9,
+          "liveIds": [
+            3063762
+          ]
+        },
+        {
+          "mapKey": "kagerzoom",
+          "name": "Kagerzoom parkrun",
+          "distanceKm": 15.1,
+          "liveIds": [
+            3063741
+          ]
+        },
+        {
+          "mapKey": "amsterdamsebos",
+          "name": "Amsterdamse Bos parkrun",
+          "distanceKm": 15.6,
+          "liveIds": [
+            3063710
+          ]
+        },
+        {
+          "mapKey": "zegerplas",
+          "name": "Zegerplas parkrun",
+          "distanceKm": 17.7,
+          "liveIds": [
+            3064295
+          ]
+        }
+      ],
+      "assessment": "Distinct from Schoterbos, Kagerzoom, Amsterdamse Bos and Zegerplas; these nearby venues keep separate current map keys. Municipal Visit Haarlemmermeer hosts the current PARK21 organiser programme.",
+      "evidence": [
+        {
+          "url": "https://visithaarlemmermeer.nl/agenda/park21-parkrun",
+          "sourceType": "municipal tourism partner organiser programme",
+          "observed": "Opened. Current 7 November 2026 listing explicitly says every Saturday 09:00 and 5 km; calendar attendance window is 08:45-11:00. No coming-soon qualification."
+        }
+      ],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 4000,
+      "eventKey": "okurakaigankoen",
+      "name": "Okura kaigan koen parkrun",
+      "country": "Japan",
+      "officialUrl": "https://www.parkrun.jp/okurakaigankoen/",
+      "coordinates": [
+        135.008025,
+        34.642379
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3063657,
+          "name": "Hirono kaigankoen parkrun",
+          "similarity": 0.71,
+          "website": "https://www.parkrun.jp/hironokaigankoen/"
+        },
+        {
+          "id": 3064510,
+          "name": "Ohno Gokurakuji Koen parkrun",
+          "similarity": 0.667,
+          "website": "https://www.parkrun.jp/ohnogokurakujikoen/"
+        },
+        {
+          "id": 3064630,
+          "name": "Muromi kahan koen parkrun",
+          "similarity": 0.667,
+          "website": "https://www.parkrun.jp/muromikahankoen/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "hattoriryokuchi",
+          "name": "Hattori Ryokuchi parkrun",
+          "distanceKm": 46.6,
+          "liveIds": [
+            3064483
+          ]
+        },
+        {
+          "mapKey": "shinhinookoen",
+          "name": "Shinhinoo koen parkrun",
+          "distanceKm": 46.7,
+          "liveIds": [
+            3064506
+          ]
+        },
+        {
+          "mapKey": "harayamakoen",
+          "name": "Harayama koen parkrun",
+          "distanceKm": 47.8,
+          "liveIds": [
+            3064071
+          ]
+        },
+        {
+          "mapKey": "yodogawakasenkoenyagumochiku",
+          "name": "Yodogawa kasenkoen Yagumo chiku parkrun",
+          "distanceKm": 52.6,
+          "liveIds": [
+            3064612
+          ]
+        }
+      ],
+      "assessment": "The similarly named Hirono kaigan koen (live ID 3063657) is approximately 309 km away and retains a separate current map key. Other koen names likewise identify different locations. Removed Sunset Hills Shitasanbashi resolves to Sakura, not Okura.",
+      "evidence": [],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 4003,
+      "eventKey": "grosserspektesee",
+      "name": "Großer Spektesee parkrun",
+      "country": "Germany",
+      "officialUrl": "https://www.parkrun.com.de/grosserspektesee/",
+      "coordinates": [
+        13.164824,
+        52.546411
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3064318,
+          "name": "Prestelsee parkrun",
+          "similarity": 0.538,
+          "website": "https://www.parkrun.com.de/prestelsee/"
+        },
+        {
+          "id": 3063796,
+          "name": "Obersee parkrun",
+          "similarity": 0.522,
+          "website": "https://www.parkrun.com.de/obersee/"
+        },
+        {
+          "id": 3064561,
+          "name": "Werdersee parkrun",
+          "similarity": 0.48,
+          "website": "https://www.parkrun.com.de/werdersee/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "havelkanal",
+          "name": "Havelkanal parkrun",
+          "distanceKm": 7.7,
+          "liveIds": [
+            3064140
+          ]
+        },
+        {
+          "mapKey": "tempelhoferfeld",
+          "name": "Tempelhofer Feld parkrun",
+          "distanceKm": 17.3,
+          "liveIds": [
+            3064733
+          ]
+        },
+        {
+          "mapKey": "hasenheide",
+          "name": "Hasenheide parkrun",
+          "distanceKm": 18.4,
+          "liveIds": [
+            3063131
+          ]
+        },
+        {
+          "mapKey": "mauerweg",
+          "name": "Mauerweg parkrun",
+          "distanceKm": 19.5,
+          "liveIds": [
+            3064501
+          ]
+        }
+      ],
+      "assessment": "Nearby Havelkanal, Hasenheide, Tempelhofer Feld and Mauerweg remain distinct current map venues. The only removed German live key is Gruener Weg in Bad Urach, geographically and nominally unrelated.",
+      "evidence": [],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 4021,
+      "eventKey": "wasserwerkoberwerth",
+      "name": "Wasserwerk Oberwerth parkrun",
+      "country": "Germany",
+      "officialUrl": "https://www.parkrun.com.de/wasserwerkoberwerth/",
+      "coordinates": [
+        7.588044,
+        50.331106
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3064199,
+          "name": "Mattheiser Weiher parkrun",
+          "similarity": 0.457,
+          "website": "https://www.parkrun.com.de/mattheiserweiher/"
+        },
+        {
+          "id": 3064561,
+          "name": "Werdersee parkrun",
+          "similarity": 0.429,
+          "website": "https://www.parkrun.com.de/werdersee/"
+        },
+        {
+          "id": 3063457,
+          "name": "Aachener Weiher parkrun",
+          "similarity": 0.424,
+          "website": "https://www.parkrun.com.de/aachenerweiher/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "rheinaue",
+          "name": "Rheinaue parkrun",
+          "distanceKm": 52.3,
+          "liveIds": [
+            3063428
+          ]
+        },
+        {
+          "mapKey": "maaraue",
+          "name": "Maaraue parkrun",
+          "distanceKm": 62.1,
+          "liveIds": [
+            3063781
+          ]
+        },
+        {
+          "mapKey": "naturlehrpfadwetzlar",
+          "name": "Naturlehrpfad parkrun, Wetzlar",
+          "distanceKm": 71.4,
+          "liveIds": [
+            3064426
+          ]
+        },
+        {
+          "mapKey": "nidda",
+          "name": "Nidda parkrun",
+          "distanceKm": 77.7,
+          "liveIds": [
+            3063115
+          ]
+        }
+      ],
+      "assessment": "No plausible existing URL/name or nearby current-map alias found. The only removed German key, Gruener Weg in Bad Urach, does not correspond to the Koblenz venue.",
+      "evidence": [],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 4032,
+      "eventKey": "mondscheinwiese",
+      "name": "Mondscheinwiese parkrun",
+      "country": "Germany",
+      "officialUrl": "https://www.parkrun.com.de/mondscheinwiese/",
+      "coordinates": [
+        7.016968,
+        51.417712
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3063740,
+          "name": "Lahnwiesen parkrun",
+          "similarity": 0.56,
+          "website": "https://www.parkrun.com.de/lahnwiesen/"
+        },
+        {
+          "id": 3064178,
+          "name": "Emmerwiesen parkrun",
+          "similarity": 0.538,
+          "website": "https://www.parkrun.com.de/emmerwiesen/"
+        },
+        {
+          "id": 3064202,
+          "name": "Wertwiesen parkrun",
+          "similarity": 0.48,
+          "website": "https://www.parkrun.com.de/wertwiesen/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "kemnadersee",
+          "name": "Kemnader See parkrun",
+          "distanceKm": 18.5,
+          "liveIds": [
+            3064094
+          ]
+        },
+        {
+          "mapKey": "uerdingerstadtpark",
+          "name": "Uerdinger Stadtpark parkrun",
+          "distanceKm": 27.0,
+          "liveIds": [
+            3064613
+          ]
+        },
+        {
+          "mapKey": "volksgarten",
+          "name": "Volksgarten parkrun",
+          "distanceKm": 27.8,
+          "liveIds": [
+            3063500
+          ]
+        },
+        {
+          "mapKey": "pferdebachtal",
+          "name": "Pferdebachtal parkrun",
+          "distanceKm": 32.1,
+          "liveIds": [
+            3064439
+          ]
+        }
+      ],
+      "assessment": "Nearby Kemnader See retains a different current map key. The only removed German key, Gruener Weg in Bad Urach, is not a plausible venue alias.",
+      "evidence": [],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 4036,
+      "eventKey": "auerwelsbachpark",
+      "name": "Auer-Welsbach-Park parkrun",
+      "country": "Austria",
+      "officialUrl": "https://www.parkrun.co.at/auerwelsbachpark/",
+      "coordinates": [
+        16.319424,
+        48.189546
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3063914,
+          "name": "Donaupark parkrun",
+          "similarity": 0.48,
+          "website": "https://www.parkrun.co.at/donaupark/"
+        },
+        {
+          "id": 3064486,
+          "name": "Europapark parkrun",
+          "similarity": 0.385,
+          "website": "https://www.parkrun.co.at/europapark/"
+        },
+        {
+          "id": 3063992,
+          "name": "Donauradweg parkrun",
+          "similarity": 0.37,
+          "website": "https://www.parkrun.co.at/donauradweg/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "donaupark",
+          "name": "Donaupark parkrun",
+          "distanceKm": 9.3,
+          "liveIds": [
+            3063914
+          ]
+        },
+        {
+          "mapKey": "stadtparkgraz",
+          "name": "Stadtpark parkrun, Graz",
+          "distanceKm": 140.2,
+          "liveIds": [
+            3064252
+          ]
+        },
+        {
+          "mapKey": "donauradweg",
+          "name": "Donauradweg parkrun",
+          "distanceKm": 150.7,
+          "liveIds": [
+            3063992
+          ]
+        },
+        {
+          "mapKey": "europapark",
+          "name": "Europapark parkrun",
+          "distanceKm": 233.4,
+          "liveIds": [
+            3064486
+          ]
+        }
+      ],
+      "assessment": "Distinct from Donaupark Vienna (live ID 3063914), approximately 9.3 km away with a continuing map identity. No Austrian live key is absent from the current map.",
+      "evidence": [],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    },
+    {
+      "mapId": 4040,
+      "eventKey": "elsenzufer",
+      "name": "Elsenzufer parkrun",
+      "country": "Germany",
+      "officialUrl": "https://www.parkrun.com.de/elsenzufer/",
+      "coordinates": [
+        8.918972,
+        49.139229
+      ],
+      "decision": "new_catalogue_identity_after_bounded_alias_review",
+      "exactUrlMatches": [],
+      "exactNameMatches": [],
+      "similarNames": [
+        {
+          "id": 3064235,
+          "name": "Ebenberg parkrun",
+          "similarity": 0.556,
+          "website": "https://www.parkrun.com.de/ebenberg/"
+        },
+        {
+          "id": 3064318,
+          "name": "Prestelsee parkrun",
+          "similarity": 0.5,
+          "website": "https://www.parkrun.com.de/prestelsee/"
+        },
+        {
+          "id": 3063507,
+          "name": "Kiessee parkrun",
+          "similarity": 0.471,
+          "website": "https://www.parkrun.com.de/kiessee/"
+        }
+      ],
+      "nearestExistingMapVenues": [
+        {
+          "mapKey": "wertwiesen",
+          "name": "Wertwiesen parkrun",
+          "distanceKm": 20.6,
+          "liveIds": [
+            3064202
+          ]
+        },
+        {
+          "mapKey": "monrepos",
+          "name": "Monrepos parkrun",
+          "distanceKm": 30.7,
+          "liveIds": [
+            3063521
+          ]
+        },
+        {
+          "mapKey": "prestelsee",
+          "name": "Prestelsee parkrun",
+          "distanceKm": 31.4,
+          "liveIds": [
+            3064318
+          ]
+        },
+        {
+          "mapKey": "bahnstadtpromenade",
+          "name": "Bahnstadt Promenade parkrun",
+          "distanceKm": 34.5,
+          "liveIds": [
+            3064254
+          ]
+        }
+      ],
+      "assessment": "No URL/name match. The primary municipal announcement places the new event in Eppingen and plans launch for 28 November 2026. The only removed German key, Gruener Weg in Bad Urach, is a different locality; no evidence of an alias was found.",
+      "evidence": [
+        {
+          "url": "https://www.gueglingen.de/news?action=view_one_article&article_id=66018",
+          "sourceType": "primary municipal announcement",
+          "observed": "Full primary council announcement dated 3 November 2026 opened by the lead reviewer on 6 November. Identifies Eppingen; planned official launch 28 November 2026, Saturday 09:00 and 5 km, with earlier test runs. Source review is preserved in the separate dated-publication payload; no dates are generated by this alias audit."
+        }
+      ],
+      "schedulePublication": "No dates generated in this alias audit; primary schedule/launch review is a separate publication gate."
+    }
+  ],
+  "limitation": "A bounded review found no other plausible alias; it does not prove global catalogue completeness or verify all local schedules. Event-map presence establishes a public venue identity only."
+}

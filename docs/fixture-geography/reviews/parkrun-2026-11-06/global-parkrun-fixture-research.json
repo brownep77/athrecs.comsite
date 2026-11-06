@@ -1,0 +1,2428 @@
+{
+  "checkedAt": "2026-11-06",
+  "scope": "44 missing non-UK map identities reconciled with 2,985 live public event identities. Research focus: Ireland, Australia, New Zealand, Singapore, United States. Canada/South Africa delegated; remaining countries are outstanding.",
+  "publicationPolicy": "PublishReady items have verified regular schedules, including Coffs Creek’s explicit firsthand event-director interview accepted by the parent reviewer. Generated weekly dates remain subject to cancellation; they are not individually guaranteed. No unverified start time or provisional launch is promoted.",
+  "counts": {
+    "nonUKCandidates": 44,
+    "priorityCandidates": 22,
+    "readyAdditions": 6,
+    "interviewReview": 0,
+    "delegatedCanadaSouthAfrica": 10,
+    "outstandingOtherCountry": 12
+  },
+  "sources": {
+    "map": {
+      "url": "https://images.parkrun.com/events.json",
+      "sourceType": "official_event_map",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Official country domain, event identifier, canonical slug, series identifier, name, venue and coordinates. Presence confirms a published venue identity, not its launch date or schedule."
+    },
+    "ie_official": {
+      "url": "https://de.linkedin.com/company/parkrun-ireland",
+      "sourceType": "official_parkrun_social",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "parkrun Ireland confirms the October return of Castletown after its 2023 pause, and launches of Cork Harbour Greenway, Corkagh junior and Dungarvan Greenway. A shared post by territory manager Jenny Branigan describes Irish 5k parkruns as Saturdays at 09:30.",
+      "limitations": "Relative social dates are not used to determine exact inaugural dates. The national 5k timing statement is not applied to juniors."
+    },
+    "castletown_hub": {
+      "url": "https://run.hersport.ie/locations/",
+      "sourceType": "partner_event_host",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "The Celbridge hub lists Castletown, County Kildare, 5km and 09:30.",
+      "limitations": "Historical 2023/2024 campaign page; corroboration only. Current activity is established by official parkrun Ireland."
+    },
+    "castletown_restart": {
+      "url": "https://podcasts.apple.com/au/podcast/ep-81-castletown-parkrun/id1835276796?i=1000795936529",
+      "sourceType": "participant_firsthand_report",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "12 October podcast describes attending the Castletown restart on 10 October 2026.",
+      "limitations": "Independent participant report, not the event organiser; exact date retained as a lead."
+    },
+    "waterford_launch": {
+      "url": "https://www.waterfordsportspartnership.ie/dungarvan-parkrun-coming-soon/",
+      "sourceType": "official_delivery_partner",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Sport Ireland local partnership announces the Dungarvan Greenway October launch, with weekly Saturday 09:30 starts at the Railway Cottage. Modified 27 August 2026.",
+      "shortExcerpt": "Saturdays @ 9:30am from the Railway Cottage"
+    },
+    "waterford_format": {
+      "url": "https://www.waterfordsportspartnership.ie/parkrun/",
+      "sourceType": "official_delivery_partner",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Partner explains the 5k Saturday and 2k Sunday formats.",
+      "limitations": "January 2025 page; contains an erroneous 2014 origin date, which must not be reused. It predates the new adult Dungarvan event."
+    },
+    "dungarvan_report": {
+      "url": "https://corkrunning.blogspot.com/2026/10/the-dungarvan-5k-parkrun-started-on.html?m=1",
+      "sourceType": "independent_local_running_report",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Reports adult Dungarvan Greenway inaugural 17 October 2026 and 5km out-and-back route at Ballinroad.",
+      "limitations": "Launch date is a secondary lead, not needed to create future regular fixtures."
+    },
+    "cork_partner": {
+      "url": "https://corksports.ie/cork-parkruns/",
+      "sourceType": "official_delivery_partner",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Cork Sports Partnership current event list includes Cork Harbour Greenway, Carrigaline among its adult events and describes the adult format as 5km. Its FAQ expressly states all listed events start at 09:30 (search-confirmed turn161search3)."
+    },
+    "cork_launch_release": {
+      "url": "https://www.thecork.ie/2026/10/21/vhi-parkrun-takes-place-every-saturday-on-carrigaline-to-crosshaven-greenway/",
+      "sourceType": "published_organiser_press_release",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "21 October coverage with Vhi and parkrun Ireland named statements gives first event 17 October 2026, weekly Saturdays 09:30 and 5km at Carrigaline.",
+      "limitations": "Hosted by a newspaper, corroborated by parkrun Ireland and its delivery partner."
+    },
+    "south_dublin": {
+      "url": "https://www.sdcc.ie/en/activesouthdublin/get-active/active-communities/park-run/",
+      "sourceType": "municipal_delivery_partner",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Council confirms adult Corkagh 5k Saturday 09:30 and Griffeen junior 2k Sunday 09:30, but does not list new Corkagh junior.",
+      "limitations": "Do not transfer Griffeen junior time to Corkagh junior."
+    },
+    "junior_tracker": {
+      "url": "https://www.sotwe.com/newjnrparkruns",
+      "sourceType": "secondary_tracker_mirror",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Tracker reports Corkagh junior launch 18 October, Forge Field junior 25 October, and provisional Mary Kinross junior 8 November after a test event.",
+      "limitations": "Discovery only. Neither the tracker nor its mirror is an official schedule or launch confirmation."
+    },
+    "forge_directory": {
+      "url": "https://palaner.com/events/parkrun-e6820143c8",
+      "sourceType": "third_party_calendar",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Forge Field junior appears with Sunday 09:00 and dates preceding its reported launch.",
+      "limitations": "Unreliable recurrence defaults; other known Irish 09:30 juniors also appear as 09:00 on this directory. Do not publish this time."
+    },
+    "narrogin_tourism": {
+      "url": "https://www.dryandratourism.org.au/plan/news/event-calendar/event/1280-old-golf-course-parkrun-narrogin",
+      "sourceType": "official_local_tourism_event_listing",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Narrogin tourism lists the specific Old Golf Course event as free weekly 5km, every Saturday 08:00, Earl Street, Narrogin WA 6312.",
+      "shortExcerpt": "Every Saturday at 8:00am.",
+      "limitations": "Search index accessible; one direct open of the shorter alias URL timed out. No exact launch date is asserted from this page."
+    },
+    "au_official": {
+      "url": "https://au.linkedin.com/company/parkrun-australia",
+      "sourceType": "official_parkrun_social",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Official Australia page confirms Coffs Creek launch and the subsequent launches of JC Slaughter Falls and Nijong Oval. It defines Saturday events as 5k and Sunday juniors as 2k.",
+      "limitations": "No venue start times. Relative post dates are not used alone to derive launch dates."
+    },
+    "coffs_creek_interview": {
+      "url": "https://embed-rech-01.dialog.cm/newsofthearea/docs/coffs_coast_news_of_the_area_23_october_2026",
+      "sourceType": "firsthand_event_director_interview",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "23 October local newspaper interviews event director Keelan Birch about Coffs Creek: inaugural 24 October 2026, then weekly Saturday 07:00, 5km from Coffs Harbour Showground. It explicitly distinguishes the new event from Park Beach Reserve and Bongil Bongil.",
+      "limitations": "Direct organiser interview hosted in local newspaper, not on the parkrun domain."
+    },
+    "coffs_council": {
+      "url": "https://www.coffsharbour.nsw.gov.au/Your-Council/Public-notices/Current-public-notices/Proposed-Licence-Agreement-%E2%80%93-Community-Land-Coffs-Creek-Coffs-Harbour",
+      "sourceType": "municipal_venue_licensing",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Council notice licenses community land at Coffs Creek to parkrun Australia for Saturday morning organised running. Submission deadline 15 October 2026.",
+      "limitations": "Does not itself establish the local start time."
+    },
+    "coffs_existing_health": {
+      "url": "https://www.activeandhealthy.nsw.gov.au/program/view/3406",
+      "sourceType": "government_hosted_organiser_listing",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "NSW Health listing links the exact Coffs Harbour parkrun website and organiser email, identifies Park Beach Reserve, 5km and weekly Saturdays 07:00.",
+      "shortExcerpt": "Every Saturday morning commencing at 7.00am",
+      "limitations": "Page has no dated schedule revision. Some unrelated milestone-shirt text is outdated and must not be reused."
+    },
+    "au_nz_launch_podcast": {
+      "url": "https://log.5kadventures.net/segments/launches-and-anniversaries-where-is-the-cake",
+      "sourceType": "independent_participant_podcast",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Reports Narrogin inaugural 12 September, Moot Yang Gunya 26 September; Endeavour, Sunnynook and Queen Elizabeth Kapiti 3 October 2026. Describes Endeavour as the successor to Nathan Road.",
+      "limitations": "Secondary discovery for dates/alias; not primary start-time verification."
+    },
+    "endeavour_directory": {
+      "url": "https://park5k.com/parkrun/endeavour",
+      "sourceType": "third_party_parkrun_mirror",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Lists Endeavour Park, Endeavour Esplanade, Newport Queensland 4020, Saturdays 07:00, 5km.",
+      "limitations": "Primary venue schedule not accessible."
+    },
+    "moot_directory": {
+      "url": "https://park5k.com/parkrun/mootyanggunyaswamp",
+      "sourceType": "third_party_parkrun_mirror",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Lists Mundulla Showgrounds/Kennedy Street, South Australia 5270; Saturdays 08:00 and 5km.",
+      "limitations": "Primary venue schedule not accessible."
+    },
+    "moot_news": {
+      "url": "https://borderchronicle.com.au/news/2026/09/30/mundulla-hits-its-stride-with-first-parkrun/",
+      "sourceType": "local_newspaper",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "30 September report covers Mundulla inaugural with 58 participants."
+    },
+    "cabarita_council": {
+      "url": "https://www.canadabay.nsw.gov.au/sites/default/files/Agenda%2021%20April%202026.pdf",
+      "sourceType": "municipal_agenda",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "21 April agenda describes approved six-month Cabarita trial: 5km, Saturdays 08:00, western Cabarita Park to Breakfast Point, two loops. Start remained contingent on fundraising.",
+      "limitations": "Proposal/approval evidence, not confirmation that launch conditions were satisfied. Latest start date must be established."
+    },
+    "new5k_tracker": {
+      "url": "https://www.sotwe.com/new5kparkruns",
+      "sourceType": "secondary_tracker_mirror",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Tracker reports 31 October launches at Gums Loop, Nijong Oval, JC Slaughter Falls and Jurong Lake Gardens; planned 7 November Historic Kopu Bridge and Cabarita; 14 November Larkspur Landing; 21 November Provo.",
+      "limitations": "Discovery only; map presence and tracker dates do not prove an event has begun."
+    },
+    "nz_launch_stats": {
+      "url": "https://runswithabarcode.substack.com/p/parkrun-nz-stats-october-3-2026",
+      "sourceType": "independent_local_running_report",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "4 October report lists Sunnynook and Queen Elizabeth Kapiti Coast launches on 3 October."
+    },
+    "nz_new_directory": {
+      "url": "https://palaner.com/auckland/page/2",
+      "sourceType": "third_party_calendar",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Lists recent New Zealand venues at Saturdays 08:00.",
+      "limitations": "Automated directory; not a primary confirmation of actual local schedules or first dates."
+    },
+    "waitangi_venue": {
+      "url": "https://www.trademe.co.nz/a/marketplace/business-farming-industry/businesses-for-sale/tourism-hospitality/restaurants-bars-cafes/listing/6152887167",
+      "sourceType": "venue_operator_advertisement",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Waitangi Mountain Bike Park cafe operator advertisement mentions launch of a free weekly 5km parkrun on 17 October 2026.",
+      "limitations": "No start time; operator attribution needs primary-site corroboration."
+    },
+    "linklater_posts": {
+      "url": "https://www.localgymsandfitness.com/NZ/Palmerston-North/1150704964786298/Linklater-Reserve-5k-Run",
+      "sourceType": "mirror_of_organiser_social_posts",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Mirror of founding-team posts dated 21–24 October states 24 October inaugural, weekly Saturday 08:00, 5km; first-timers briefing 07:50. Identifies directors Wendy and Karen and links the new official Facebook page.",
+      "limitations": "Primary Facebook page is unavailable to retrieval; strong specific organiser-material lead, but reproduced by an independent mirror."
+    },
+    "linklater_facebook": {
+      "url": "https://www.facebook.com/linklaterreserveparkrun",
+      "sourceType": "official_event_social_unavailable",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Canonical official Facebook page linked in founding-team post.",
+      "limitations": "Web open returned DisabledError. No session or access-control bypass attempted."
+    },
+    "kopu_trial": {
+      "url": "https://www.valleyprofile.co.nz/2026/09/08/pop-up-parkrun-a-success/",
+      "sourceType": "firsthand_organiser_interview",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Kendall Todd and Chris Kemp discuss the 5 September test run across Historic Kopu Bridge and plans for an official launch later in 2026.",
+      "limitations": "Confirms a test event, not the formal launch or weekly start time."
+    },
+    "kopu_venue": {
+      "url": "https://www.historickopubridge.co.nz/",
+      "sourceType": "official_venue",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Historic bridge site directs readers to its Facebook page for upcoming events.",
+      "limitations": "No parkrun weekly schedule observed."
+    },
+    "provo_organiser": {
+      "url": "https://www.roadrunners.club/events/parkrun",
+      "sourceType": "organising_club",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Organising Roadrunner Club explicitly states 5km every Saturday at Delta Gateway Park, 311 N Lakeshore Drive, Provo; practice starts 17 October, official launch 21 November 2026. Local starts are 09:00 November–April and 08:00 May–October.",
+      "shortExcerpt": "Official Start Nov 21, 2026"
+    },
+    "larkspur_directory": {
+      "url": "https://mymindisracing.com/event/4266a6ff-e669-4edd-a371-5e2debec5c40",
+      "sourceType": "third_party_calendar",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Lists Larkspur Landing 5km every Saturday 09:00, but also advertises 24 October before reported launch.",
+      "limitations": "Not acceptable to establish first date; primary local schedule still unverified."
+    },
+    "sg_poster": {
+      "url": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+      "sourceType": "official_parkrun_resource",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Current official Singapore event-poster resource is explicitly titled 7.30am start.",
+      "shortExcerpt": "Singapore Event Poster — 7.30am Start",
+      "limitations": "National collateral template does not independently name or confirm all six local schedules."
+    },
+    "sg_government": {
+      "url": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+      "sourceType": "government_hosted_organiser_opportunity",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Team Nila volunteer opportunity explicitly names East Coast Park, Bishan and West Coast Park and gives a free 5km every Saturday at 07:30.",
+      "limitations": "Volunteer shift dates on the page are from 2019. Combined with current official 07:30 poster, strong correction evidence for those three, not a fresh cancellation check."
+    },
+    "sg_bay_posts": {
+      "url": "https://www.findglocal.com/XX/Unknown/273793122494467/Bay-East-Garden-parkrun",
+      "sourceType": "mirror_of_organiser_social_posts",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Reproduced 11 September 2026 event-team announcement gives Bay East Garden 5km start 07:30, briefing 07:20, 11 Rhu Cross under Sheares Bridge.",
+      "limitations": "Independent mirror, not primary direct retrieval. No current November cancellation status established."
+    },
+    "sg_bedok_posts": {
+      "url": "https://www.localgymsandfitness.com/SG/Bedok/103870107651684/Bedok-Reservoir-parkrun",
+      "sourceType": "mirror_of_organiser_social_posts",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Reproduced event-team profile and 23 October 2026 post state Bedok Reservoir Saturdays 07:30; 1 November report describes its 100th event.",
+      "limitations": "Independent mirror, not primary direct retrieval. Search excerpt accessible; no current November cancellation status established."
+    },
+    "jurong_linktree": {
+      "url": "https://linktr.ee/stephen.hames",
+      "sourceType": "event_team_link_hub",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Jurong Lake Gardens parkrun link hub was created October 2026 and links a volunteer roster and official apps.",
+      "limitations": "No schedule on this page."
+    },
+    "jurong_directory": {
+      "url": "https://palaner.com/events/parkrun-ae70cb7495",
+      "sourceType": "third_party_calendar",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Lists Jurong Lake Gardens Saturdays 07:30 including 7 November 2026.",
+      "limitations": "Primary local schedule not accessible; cannot establish dates by directory recurrence alone."
+    },
+    "cancel_policy": {
+      "url": "https://volunteer.parkrun.com/hc/en-us/articles/16858037025554-2-4-Cancellations",
+      "sourceType": "official_parkrun_policy",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "22 October policy says recurring events may cancel for safety, course availability, AED or volunteer issues. Decisions appear on event home/news pages, roster and social pages."
+    },
+    "cancel_mirror": {
+      "url": "https://park5k.com/?focusSearch=1",
+      "sourceType": "third_party_cancellation_mirror",
+      "checkedAt": "2026-11-06",
+      "evidenceSummary": "Current third-party cancellation overview searched; no named cancellation found for the primary-ready candidate set.",
+      "limitations": "Absence from this secondary overview is not confirmation that a particular fixture will proceed."
+    }
+  },
+  "candidates": [
+    {
+      "eventMapId": 1338,
+      "eventKey": "castletown",
+      "slug": "castletown-parkrun",
+      "name": "Castletown parkrun",
+      "country": "Ireland",
+      "countryCode": 42,
+      "seriesId": 1,
+      "location": "Castletown House",
+      "latitude": 53.348946,
+      "longitude": -6.528707,
+      "officialUrl": "https://www.parkrun.ie/castletown/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": true,
+      "scheduleStatus": "confirmed",
+      "status": "ready_regular_schedule",
+      "sources": [
+        "map",
+        "ie_official",
+        "castletown_hub",
+        "castletown_restart"
+      ],
+      "weekday": "Saturday",
+      "startTime": "09:30",
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Europe/Dublin",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds.",
+        "searchStatus": "Exact-name/current cancellation search completed; no official cancellation discovered. Official local cancellation feed unavailable.",
+        "secondarySource": "cancel_mirror"
+      },
+      "nextCheck": "Regular schedule may be listed; check the linked official event notices close to each date. Do not label all generated dates as individually confirmed.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "publishFromDate": "2026-11-07",
+      "county": "Kildare",
+      "city": "Celbridge",
+      "identityDecision": "Recovered missing returning venue, not a brand-new parkrun. No canonical URL, slug or Castletown-name match in the live inventory.",
+      "firstDateLead": "2026-10-10",
+      "firstDateLeadType": "restart, independent firsthand report",
+      "scheduleEvidenceNote": "Current official parkrun Ireland confirms restart and explicitly shares Ireland-wide Saturday 09:30/5k schedule; historical event-host page specifically corroborates Castletown 09:30/5km."
+    },
+    {
+      "eventMapId": 3961,
+      "eventKey": "yorktimbers",
+      "slug": "yorktimbers-parkrun",
+      "name": "York Timbers parkrun",
+      "country": "South Africa",
+      "countryCode": 85,
+      "seriesId": 1,
+      "location": "York Timbers",
+      "latitude": -25.107011,
+      "longitude": 30.745764,
+      "officialUrl": "https://www.parkrun.co.za/yorktimbers/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 3971,
+      "eventKey": "hiroshimastadiumpark",
+      "slug": "hiroshimastadiumpark-parkrun",
+      "name": "Hiroshima Stadium Park parkrun",
+      "country": "Japan",
+      "countryCode": 46,
+      "seriesId": 1,
+      "location": "Hiroshima Stadium Park",
+      "latitude": 34.401449,
+      "longitude": 132.452551,
+      "officialUrl": "https://www.parkrun.jp/hiroshimastadiumpark/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 3972,
+      "eventKey": "stormsriver",
+      "slug": "stormsriver-parkrun",
+      "name": "Storms River parkrun",
+      "country": "South Africa",
+      "countryCode": 85,
+      "seriesId": 1,
+      "location": "Storms River",
+      "latitude": -33.965961,
+      "longitude": 23.886769,
+      "officialUrl": "https://www.parkrun.co.za/stormsriver/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 3975,
+      "eventKey": "valducharron",
+      "slug": "valducharron-parkrun",
+      "name": "Val du Charron parkrun",
+      "country": "South Africa",
+      "countryCode": 85,
+      "seriesId": 1,
+      "location": "Val du Charron",
+      "latitude": -33.62479,
+      "longitude": 19.048987,
+      "officialUrl": "https://www.parkrun.co.za/valducharron/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 3976,
+      "eventKey": "valkeinen",
+      "slug": "valkeinen-parkrun",
+      "name": "Valkeinen parkrun",
+      "country": "Finland",
+      "countryCode": 30,
+      "seriesId": 1,
+      "location": "Valkeinen",
+      "latitude": 62.891779,
+      "longitude": 27.663325,
+      "officialUrl": "https://www.parkrun.fi/valkeinen/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 3977,
+      "eventKey": "zuiderparkrotterdam",
+      "slug": "zuiderparkrotterdam-parkrun",
+      "name": "Zuiderpark parkrun, Rotterdam",
+      "country": "Netherlands",
+      "countryCode": 64,
+      "seriesId": 1,
+      "location": "Zuiderpark, Rotterdam",
+      "latitude": 51.879237,
+      "longitude": 4.487687,
+      "officialUrl": "https://www.parkrun.co.nl/zuiderparkrotterdam/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 3978,
+      "eventKey": "sakurafurusatohiroba",
+      "slug": "sakurafurusatohiroba-parkrun",
+      "name": "Sakura Furusato Hiroba parkrun",
+      "country": "Japan",
+      "countryCode": 46,
+      "seriesId": 1,
+      "location": "Sakura Furusato Hiroba",
+      "latitude": 35.740588,
+      "longitude": 140.202824,
+      "officialUrl": "https://www.parkrun.jp/sakurafurusatohiroba/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 3979,
+      "eventKey": "oldgolfcoursenarrogin",
+      "slug": "oldgolfcoursenarrogin-parkrun",
+      "name": "Old Golf Course parkrun, Narrogin",
+      "country": "Australia",
+      "countryCode": 3,
+      "seriesId": 1,
+      "location": "Old Golf Course, Earl Street, Narrogin, WA 6312",
+      "latitude": -32.925766,
+      "longitude": 117.17514,
+      "officialUrl": "https://www.parkrun.com.au/oldgolfcoursenarrogin/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": true,
+      "scheduleStatus": "confirmed",
+      "status": "ready_regular_schedule",
+      "sources": [
+        "map",
+        "narrogin_tourism",
+        "au_nz_launch_podcast"
+      ],
+      "weekday": "Saturday",
+      "startTime": "08:00",
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Australia/Perth",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds.",
+        "searchStatus": "Exact-name/current cancellation search completed; no official cancellation discovered. Official local cancellation feed unavailable.",
+        "secondarySource": "cancel_mirror"
+      },
+      "nextCheck": "Regular schedule may be listed; check the linked official event notices close to each date. Do not label all generated dates as individually confirmed.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "publishFromDate": "2026-11-07",
+      "county": "Western Australia",
+      "city": "Narrogin",
+      "firstDateLead": "2026-09-12",
+      "firstDateLeadType": "independent podcast only"
+    },
+    {
+      "eventMapId": 3980,
+      "eventKey": "tione",
+      "slug": "tione-parkrun",
+      "name": "Tione parkrun",
+      "country": "Italy",
+      "countryCode": 44,
+      "seriesId": 1,
+      "location": "Tione",
+      "latitude": 45.354242,
+      "longitude": 10.831036,
+      "officialUrl": "https://www.parkrun.it/tione/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 3986,
+      "eventKey": "mootyanggunyaswamp",
+      "slug": "mootyanggunyaswamp-parkrun",
+      "name": "Moot Yang Gunya Swamp parkrun",
+      "country": "Australia",
+      "countryCode": 3,
+      "seriesId": 1,
+      "location": "Moot Yang Gunya Swamp",
+      "latitude": -36.355726,
+      "longitude": 140.690227,
+      "officialUrl": "https://www.parkrun.com.au/mootyanggunyaswamp/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "moot_directory",
+        "moot_news",
+        "au_nz_launch_podcast"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Australia/Adelaide",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "08:00",
+      "county": "South Australia",
+      "city": "Mundulla",
+      "firstDateLead": "2026-09-26",
+      "holdReason": "Launch reported locally; schedule only mirrored. Primary event time still required."
+    },
+    {
+      "eventMapId": 3991,
+      "eventKey": "park21",
+      "slug": "park21-parkrun",
+      "name": "PARK21 parkrun",
+      "country": "Netherlands",
+      "countryCode": 64,
+      "seriesId": 1,
+      "location": "PARK21",
+      "latitude": 52.296586,
+      "longitude": 4.628945,
+      "officialUrl": "https://www.parkrun.co.nl/park21/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 3992,
+      "eventKey": "queenelizabethkapiticoast",
+      "slug": "queenelizabethkapiticoast-parkrun",
+      "name": "Queen Elizabeth parkrun, Kapiti Coast",
+      "country": "New Zealand",
+      "countryCode": 65,
+      "seriesId": 1,
+      "location": "Queen Elizabeth, Kapiti Coast",
+      "latitude": -40.960682,
+      "longitude": 174.968319,
+      "officialUrl": "https://www.parkrun.co.nz/queenelizabethkapiticoast/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "nz_new_directory",
+        "nz_launch_stats",
+        "au_nz_launch_podcast"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Pacific/Auckland",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "08:00",
+      "holdReason": "Current map identity verified, but accessible local schedule evidence is secondary. Do not infer 08:00 from North Island geography.",
+      "county": "Wellington",
+      "city": "Kapiti Coast",
+      "firstDateLead": "2026-10-03",
+      "identityDecision": "Different mapped venue from existing Kapiti Coast parkrun at Otaihanga Domain, id3062655; no evidence it is merely a rename.",
+      "finalTargetedPass": {
+        "checkedAt": "2026-11-06",
+        "attempts": [
+          {
+            "url": "https://www.gw.govt.nz/parks/queen-elizabeth-park/",
+            "result": "Official park page gives access hours and routes, no parkrun timetable."
+          },
+          {
+            "url": "https://www.gw.govt.nz/parks/queen-elizabeth-park/whats-happening-in-queen-elizabeth-park/",
+            "result": "Current park news page opened and searched; no matching parkrun text."
+          },
+          {
+            "search": "Exact event title and park with site:gw.govt.nz / site:kapiticoast.govt.nz",
+            "result": "Only secondary launch report/timing calendars. Hampshire UK Queen Elizabeth results explicitly excluded."
+          }
+        ],
+        "decision": "hold",
+        "nextCheck": "Recheck the local official parkrun home/news/roster when accessible, or an organiser-published local timetable. No default time substitution."
+      }
+    },
+    {
+      "eventMapId": 3995,
+      "eventKey": "sunnynook",
+      "slug": "sunnynook-parkrun",
+      "name": "Sunnynook parkrun",
+      "country": "New Zealand",
+      "countryCode": 65,
+      "seriesId": 1,
+      "location": "Sunnynook",
+      "latitude": -36.757964,
+      "longitude": 174.741069,
+      "officialUrl": "https://www.parkrun.co.nz/sunnynook/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "nz_new_directory",
+        "nz_launch_stats"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Pacific/Auckland",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "08:00",
+      "holdReason": "Current map identity verified, but accessible local schedule evidence is secondary. Do not infer 08:00 from North Island geography.",
+      "county": "Auckland",
+      "city": "Auckland",
+      "firstDateLead": "2026-10-03",
+      "finalTargetedPass": {
+        "checkedAt": "2026-11-06",
+        "attempts": [
+          {
+            "url": "https://sunnynookcomcentre.co.nz/",
+            "result": "Primary nearby community centre homepage and activity pages contain no parkrun timetable."
+          },
+          {
+            "url": "https://sunnynookcomcentre.co.nz/special-events/",
+            "result": "No current special events posted."
+          },
+          {
+            "url": "https://sunnynookcomcentre.co.nz/newsletters/",
+            "result": "Current index lists only term 1 and term 2 2026 newsletters; no October update."
+          },
+          {
+            "url": "https://sunnynookcomcentre.co.nz/wp-content/uploads/2026/04/Term-2-2026.pdf",
+            "result": "Four-page current linked newsletter read; no parkrun schedule."
+          },
+          {
+            "search": "Exact Sunnynook parkrun + community/council/newsletter/2026/8:00 and official Facebook",
+            "result": "Only secondary stats and calendars confirm launch/time; no publishable primary timetable."
+          }
+        ],
+        "decision": "hold",
+        "nextCheck": "Recheck the local official parkrun home/news/roster when accessible, or an organiser-published local timetable. No default time substitution."
+      }
+    },
+    {
+      "eventMapId": 3997,
+      "eventKey": "endeavour",
+      "slug": "endeavour-parkrun",
+      "name": "Endeavour parkrun",
+      "country": "Australia",
+      "countryCode": 3,
+      "seriesId": 1,
+      "location": "Endeavour",
+      "latitude": -27.20285,
+      "longitude": 153.097583,
+      "officialUrl": "https://www.parkrun.com.au/endeavour/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "endeavour_directory",
+        "au_nz_launch_podcast"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Australia/Brisbane",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "07:00",
+      "county": "Queensland",
+      "city": "Newport",
+      "firstDateLead": "2026-10-03",
+      "identityDecision": "Independent account describes successor/rebirth of Nathan Road. No Nathan Road or Endeavour event found in complete live inventory, so no existing identity to duplicate; retain succession note.",
+      "holdReason": "Specific 07:00 schedule exists only in independent mirror; official park/council schedule unverified."
+    },
+    {
+      "eventMapId": 3998,
+      "eventKey": "hhknolllakeview",
+      "slug": "hhknolllakeview-parkrun",
+      "name": "H.H. Knoll Lakeview parkrun",
+      "country": "Canada",
+      "countryCode": 14,
+      "seriesId": 1,
+      "location": "H.H. Knoll Lakeview",
+      "latitude": 42.880132,
+      "longitude": -79.256996,
+      "officialUrl": "https://www.parkrun.ca/hhknolllakeview/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 3999,
+      "eventKey": "redwillowtrail",
+      "slug": "redwillowtrail-parkrun",
+      "name": "Red Willow Trail parkrun",
+      "country": "Canada",
+      "countryCode": 14,
+      "seriesId": 1,
+      "location": "Red Willow Trail",
+      "latitude": 53.641781,
+      "longitude": -113.620693,
+      "officialUrl": "https://www.parkrun.ca/redwillowtrail/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 4000,
+      "eventKey": "okurakaigankoen",
+      "slug": "okurakaigankoen-parkrun",
+      "name": "Okura kaigan koen parkrun",
+      "country": "Japan",
+      "countryCode": 46,
+      "seriesId": 1,
+      "location": "Okura kaigan koen",
+      "latitude": 34.642379,
+      "longitude": 135.008025,
+      "officialUrl": "https://www.parkrun.jp/okurakaigankoen/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 4003,
+      "eventKey": "grosserspektesee",
+      "slug": "grosserspektesee-parkrun",
+      "name": "Großer Spektesee parkrun",
+      "country": "Germany",
+      "countryCode": 32,
+      "seriesId": 1,
+      "location": "Großer Spektesee",
+      "latitude": 52.546411,
+      "longitude": 13.164824,
+      "officialUrl": "https://www.parkrun.com.de/grosserspektesee/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 4005,
+      "eventKey": "corkagh-juniors",
+      "slug": "corkagh-juniors-parkrun",
+      "name": "Corkagh junior parkrun",
+      "country": "Ireland",
+      "countryCode": 42,
+      "seriesId": 2,
+      "location": "Corkagh juniors",
+      "latitude": 53.318005,
+      "longitude": -6.410015,
+      "officialUrl": "https://www.parkrun.ie/corkagh-juniors/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "ie_official",
+        "south_dublin",
+        "junior_tracker"
+      ],
+      "weekday": "Sunday",
+      "startTime": null,
+      "distance": "2K",
+      "distanceKm": 2,
+      "firstDate": null,
+      "timezone": "Europe/Dublin",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "county": "Dublin",
+      "city": "Clondalkin",
+      "firstDateLead": "2026-10-18",
+      "holdReason": "Official launch confirmed, but actual junior local start time is not established. Do not use adult Corkagh time or Palaner 09:00 default.",
+      "identityDecision": "Separate junior series from existing adult Corkagh id 3063045; no duplicate.",
+      "finalTargetedPass": {
+        "checkedAt": "2026-11-06",
+        "attempts": [
+          {
+            "url": "https://www.sdcc.ie/en/activesouthdublin/get-active/active-communities/park-run/",
+            "result": "Council activity page names adult Corkagh and a different junior venue (Griffeen); no Corkagh junior schedule."
+          },
+          {
+            "url": "https://www.sdcc.ie/en/services/sport-and-recreation/parks/corkagh-park.html",
+            "result": "Venue page describes park amenities; no junior parkrun start time."
+          },
+          {
+            "url": "https://de.linkedin.com/company/parkrun-ireland",
+            "result": "Official October junior launch confirmation; no junior start time."
+          },
+          {
+            "search": "Exact Corkagh junior + 2026/start/9:30/9.30; council and official Facebook targeted searches",
+            "result": "No indexed primary junior timetable. Adult Strava/Twitter schedules excluded. Automated calendars use untrusted 09:00 default."
+          }
+        ],
+        "decision": "hold",
+        "nextCheck": "Recheck the local official parkrun home/news/roster when accessible, or an organiser-published local timetable. No default time substitution."
+      }
+    },
+    {
+      "eventMapId": 4006,
+      "eventKey": "dungarvangreenway",
+      "slug": "dungarvangreenway-parkrun",
+      "name": "Dungarvan Greenway parkrun",
+      "country": "Ireland",
+      "countryCode": 42,
+      "seriesId": 1,
+      "location": "Railway Cottage, Waterford Greenway, Ballinroad",
+      "latitude": 52.100642,
+      "longitude": -7.563808,
+      "officialUrl": "https://www.parkrun.ie/dungarvangreenway/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": true,
+      "scheduleStatus": "confirmed",
+      "status": "ready_regular_schedule",
+      "sources": [
+        "map",
+        "waterford_launch",
+        "waterford_format",
+        "ie_official",
+        "dungarvan_report"
+      ],
+      "weekday": "Saturday",
+      "startTime": "09:30",
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Europe/Dublin",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds.",
+        "searchStatus": "Exact-name/current cancellation search completed; no official cancellation discovered. Official local cancellation feed unavailable.",
+        "secondarySource": "cancel_mirror"
+      },
+      "nextCheck": "Regular schedule may be listed; check the linked official event notices close to each date. Do not label all generated dates as individually confirmed.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "publishFromDate": "2026-11-07",
+      "county": "Waterford",
+      "city": "Dungarvan",
+      "firstDateLead": "2026-10-17",
+      "firstDateLeadType": "independent report; official launch confirmation is undated relative post"
+    },
+    {
+      "eventMapId": 4007,
+      "eventKey": "yellowwoodsfarm",
+      "slug": "yellowwoodsfarm-parkrun",
+      "name": "Yellow Woods Farm parkrun",
+      "country": "South Africa",
+      "countryCode": 85,
+      "seriesId": 1,
+      "location": "Yellow Woods Farm",
+      "latitude": -32.93069,
+      "longitude": 27.938997,
+      "officialUrl": "https://www.parkrun.co.za/yellowwoodsfarm/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 4009,
+      "eventKey": "corkharbourgreenwaycarrigaline",
+      "slug": "corkharbourgreenwaycarrigaline-parkrun",
+      "name": "Cork Harbour Greenway parkrun, Carrigaline",
+      "country": "Ireland",
+      "countryCode": 42,
+      "seriesId": 1,
+      "location": "Cork Harbour Greenway, Carrigaline",
+      "latitude": 51.811322,
+      "longitude": -8.370587,
+      "officialUrl": "https://www.parkrun.ie/corkharbourgreenwaycarrigaline/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": true,
+      "scheduleStatus": "confirmed",
+      "status": "ready_regular_schedule",
+      "sources": [
+        "map",
+        "cork_partner",
+        "ie_official",
+        "cork_launch_release"
+      ],
+      "weekday": "Saturday",
+      "startTime": "09:30",
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": "2026-10-17",
+      "timezone": "Europe/Dublin",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds.",
+        "searchStatus": "Exact-name/current cancellation search completed; no official cancellation discovered. Official local cancellation feed unavailable.",
+        "secondarySource": "cancel_mirror"
+      },
+      "nextCheck": "Regular schedule may be listed; check the linked official event notices close to each date. Do not label all generated dates as individually confirmed.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "publishFromDate": "2026-11-07",
+      "county": "Cork",
+      "city": "Carrigaline",
+      "firstDateEvidence": "cork_launch_release",
+      "identityDecision": "New distinct Carrigaline venue; not Cork city Marina or an existing Corkagh venue."
+    },
+    {
+      "eventMapId": 4011,
+      "eventKey": "waitangiforest",
+      "slug": "waitangiforest-parkrun",
+      "name": "Waitangi Forest parkrun",
+      "country": "New Zealand",
+      "countryCode": 65,
+      "seriesId": 1,
+      "location": "Waitangi Forest",
+      "latitude": -35.25374,
+      "longitude": 174.068961,
+      "officialUrl": "https://www.parkrun.co.nz/waitangiforest/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "nz_new_directory",
+        "waitangi_venue"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Pacific/Auckland",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "08:00",
+      "holdReason": "Current map identity verified, but accessible local schedule evidence is secondary. Do not infer 08:00 from North Island geography.",
+      "county": "Northland",
+      "city": "Waitangi",
+      "firstDateLead": "2026-10-17",
+      "finalTargetedPass": {
+        "checkedAt": "2026-11-06",
+        "attempts": [
+          {
+            "url": "https://ridewaitangi.nz/",
+            "result": "Current venue operator homepage found; no parkrun schedule."
+          },
+          {
+            "url": "https://ridewaitangi.nz/faqs/",
+            "result": "Venue FAQ gives general bike-park access hours; these are not parkrun start times."
+          },
+          {
+            "search": "Exact Waitangi Forest parkrun + official venue domain / 8:00 / Facebook",
+            "result": "Venue operator’s Trade Me advert reports launch and 5k but omits local time. Independent NZ Running gives 08:00; not promoted."
+          }
+        ],
+        "decision": "hold",
+        "nextCheck": "Recheck the local official parkrun home/news/roster when accessible, or an organiser-published local timetable. No default time substitution."
+      }
+    },
+    {
+      "eventMapId": 4012,
+      "eventKey": "coffscreek",
+      "slug": "coffscreek-parkrun",
+      "name": "Coffs Creek parkrun",
+      "country": "Australia",
+      "countryCode": 3,
+      "seriesId": 1,
+      "location": "Coffs Harbour Showground, 123 Pacific Highway, Coffs Harbour NSW 2450",
+      "latitude": -30.293502,
+      "longitude": 153.121997,
+      "officialUrl": "https://www.parkrun.com.au/coffscreek/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": true,
+      "scheduleStatus": "confirmed",
+      "status": "ready_regular_schedule",
+      "sources": [
+        "map",
+        "coffs_creek_interview",
+        "au_official",
+        "coffs_council"
+      ],
+      "weekday": "Saturday",
+      "startTime": "07:00",
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": "2026-10-24",
+      "timezone": "Australia/Sydney",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds.",
+        "searchStatus": "Exact-name/current cancellation search completed; no official cancellation discovered. Official local cancellation feed unavailable.",
+        "secondarySource": "cancel_mirror"
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "reviewRecommendation": "Specific firsthand event-director interview plus official parkrun launch confirmation provides strong evidence; reviewer can approve if this provenance satisfies the organiser-evidence gate.",
+      "county": "New South Wales",
+      "city": "Coffs Harbour",
+      "firstDateEvidence": "coffs_creek_interview",
+      "publishFromDate": "2026-11-07",
+      "identityDecision": "Distinct from existing Coffs Harbour parkrun at Park Beach Reserve, id 3062475. Article explicitly says new third local venue.",
+      "reviewDecision": "Parent reviewer accepted direct named event-director interview corroborated by official parkrun Australia launch confirmation, 6 November 2026."
+    },
+    {
+      "eventMapId": 4013,
+      "eventKey": "forgefield-juniors",
+      "slug": "forgefield-juniors-parkrun",
+      "name": "Forge Field junior parkrun",
+      "country": "Ireland",
+      "countryCode": 42,
+      "seriesId": 2,
+      "location": "Forge Field juniors",
+      "latitude": 53.520181,
+      "longitude": -6.167043,
+      "officialUrl": "https://www.parkrun.ie/forgefield-juniors/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "junior_tracker",
+        "forge_directory"
+      ],
+      "weekday": "Sunday",
+      "startTime": null,
+      "distance": "2K",
+      "distanceKm": 2,
+      "firstDate": null,
+      "timezone": "Europe/Dublin",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "county": "Dublin",
+      "firstDateLead": "2026-10-25",
+      "holdReason": "Only secondary launch/time listings. Directory 09:00 is not reliable evidence; organiser/venue confirmation required.",
+      "finalTargetedPass": {
+        "checkedAt": "2026-11-06",
+        "attempts": [
+          {
+            "url": "https://www.fingal.ie/Pitches",
+            "result": "Municipal open-space/pitch information; no current junior parkrun timetable."
+          },
+          {
+            "search": "Exact Forge Field junior + Sunday/9:30/9.30/Donabate; site:fingal.ie and site:facebook.com",
+            "result": "No primary event-time result; generic older junior proposal concerns different Millennium Park."
+          },
+          {
+            "url": "https://www.sotwe.com/newjnrparkruns",
+            "result": "Only independent tracker confirms reported 25 October first date; cannot establish time."
+          }
+        ],
+        "decision": "hold",
+        "nextCheck": "Recheck the local official parkrun home/news/roster when accessible, or an organiser-published local timetable. No default time substitution."
+      }
+    },
+    {
+      "eventMapId": 4015,
+      "eventKey": "juronglakegardens",
+      "slug": "juronglakegardens-parkrun",
+      "name": "Jurong Lake Gardens parkrun",
+      "country": "Singapore",
+      "countryCode": 82,
+      "seriesId": 1,
+      "location": "Jurong Lake Gardens",
+      "latitude": 1.340802,
+      "longitude": 103.723335,
+      "officialUrl": "https://www.parkrun.sg/juronglakegardens/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "sg_poster",
+        "jurong_linktree",
+        "jurong_directory",
+        "new5k_tracker"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Asia/Singapore",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "07:30",
+      "county": "Singapore",
+      "city": "Singapore",
+      "firstDateLead": "2026-10-31",
+      "holdReason": "Specific 07:30 is only on independent calendar; official national poster is corroboration, not independent local timetable."
+    },
+    {
+      "eventMapId": 4016,
+      "eventKey": "linklaterreserve",
+      "slug": "linklaterreserve-parkrun",
+      "name": "Linklater Reserve parkrun",
+      "country": "New Zealand",
+      "countryCode": 65,
+      "seriesId": 1,
+      "location": "Linklater Reserve",
+      "latitude": -40.32319,
+      "longitude": 175.641091,
+      "officialUrl": "https://www.parkrun.co.nz/linklaterreserve/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_social_unavailable",
+      "sources": [
+        "map",
+        "linklater_posts",
+        "linklater_facebook"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Pacific/Auckland",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "08:00",
+      "holdReason": "Very specific founding-team posts establish 08:00/24 October in a mirror, but direct official Facebook could not be retrieved. Needs acceptance of reproduced organiser material or direct primary confirmation.",
+      "county": "Manawatu-Wanganui",
+      "city": "Palmerston North",
+      "firstDateLead": "2026-10-24",
+      "finalTargetedPass": {
+        "checkedAt": "2026-11-06",
+        "attempts": [
+          {
+            "url": "https://www.facebook.com/linklaterreserveparkrun",
+            "result": "Direct primary social retrieval DisabledError. No alternate session or bypass."
+          },
+          {
+            "url": "https://www.pncc.govt.nz/Parks-recreation/Parks-and-reserves/Linklater-Reserve",
+            "result": "Official council park page search text describes amenities only; direct open 403."
+          },
+          {
+            "search": "Exact name + 8am; site:pncc.govt.nz; site:manawatunz.co.nz",
+            "result": "Specific 24 October/08:00 founding-team statements available only through a social mirror. Palaner erroneously offers 17 October before launch and excluded."
+          }
+        ],
+        "decision": "hold",
+        "nextCheck": "Recheck the local official parkrun home/news/roster when accessible, or an organiser-published local timetable. No default time substitution."
+      }
+    },
+    {
+      "eventMapId": 4017,
+      "eventKey": "nijongoval",
+      "slug": "nijongoval-parkrun",
+      "name": "Nijong Oval parkrun",
+      "country": "Australia",
+      "countryCode": 3,
+      "seriesId": 1,
+      "location": "Nijong Oval",
+      "latitude": -36.231558,
+      "longitude": 149.119775,
+      "officialUrl": "https://www.parkrun.com.au/nijongoval/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "au_official",
+        "new5k_tracker"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Australia/Sydney",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "county": "New South Wales",
+      "city": "Cooma",
+      "firstDateLead": "2026-10-31",
+      "holdReason": "Official parkrun Australia confirms launch. No accessible primary local start-time evidence found. Do not assume 08:00 from state."
+    },
+    {
+      "eventMapId": 4018,
+      "eventKey": "gumsloop",
+      "slug": "gumsloop-parkrun",
+      "name": "Gums Loop parkrun",
+      "country": "New Zealand",
+      "countryCode": 65,
+      "seriesId": 1,
+      "location": "Gums Loop",
+      "latitude": -41.276263,
+      "longitude": 174.971074,
+      "officialUrl": "https://www.parkrun.co.nz/gumsloop/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "nz_new_directory",
+        "new5k_tracker"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Pacific/Auckland",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "08:00",
+      "holdReason": "Current map identity verified, but accessible local schedule evidence is secondary. Do not infer 08:00 from North Island geography.",
+      "county": "Wellington",
+      "city": "Lower Hutt",
+      "firstDateLead": "2026-10-31"
+    },
+    {
+      "eventMapId": 4020,
+      "eventKey": "jcslaughterfalls",
+      "slug": "jcslaughterfalls-parkrun",
+      "name": "JC Slaughter Falls parkrun",
+      "country": "Australia",
+      "countryCode": 3,
+      "seriesId": 1,
+      "location": "JC Slaughter Falls",
+      "latitude": -27.472872,
+      "longitude": 152.97003,
+      "officialUrl": "https://www.parkrun.com.au/jcslaughterfalls/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "au_official",
+        "new5k_tracker"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Australia/Brisbane",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "county": "Queensland",
+      "city": "Brisbane",
+      "firstDateLead": "2026-10-31",
+      "holdReason": "Official parkrun Australia confirms launch. City council general 07:00 listings refer to other named parks, so cannot transfer their time to this venue."
+    },
+    {
+      "eventMapId": 4021,
+      "eventKey": "wasserwerkoberwerth",
+      "slug": "wasserwerkoberwerth-parkrun",
+      "name": "Wasserwerk Oberwerth parkrun",
+      "country": "Germany",
+      "countryCode": 32,
+      "seriesId": 1,
+      "location": "Wasserwerk Oberwerth",
+      "latitude": 50.331106,
+      "longitude": 7.588044,
+      "officialUrl": "https://www.parkrun.com.de/wasserwerkoberwerth/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 4022,
+      "eventKey": "stonebridgetrail",
+      "slug": "stonebridgetrail-parkrun",
+      "name": "Stonebridge Trail parkrun",
+      "country": "Canada",
+      "countryCode": 14,
+      "seriesId": 1,
+      "location": "Stonebridge Trail",
+      "latitude": 45.251399,
+      "longitude": -75.708224,
+      "officialUrl": "https://www.parkrun.ca/stonebridgetrail/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 4024,
+      "eventKey": "historickopubridge",
+      "slug": "historickopubridge-parkrun",
+      "name": "Historic Kōpū Bridge parkrun",
+      "country": "New Zealand",
+      "countryCode": 65,
+      "seriesId": 1,
+      "location": "Historic Kōpū Bridge",
+      "latitude": -37.190061,
+      "longitude": 175.56561,
+      "officialUrl": "https://www.parkrun.co.nz/historickopubridge/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "nz_new_directory",
+        "kopu_trial",
+        "kopu_venue",
+        "new5k_tracker"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Pacific/Auckland",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "08:00",
+      "holdReason": "5 September was a test only. Secondary tracker says 7 November formal launch; no current primary start-date/time confirmation.",
+      "county": "Waikato",
+      "city": "Kopu",
+      "firstDateLead": "2026-11-07"
+    },
+    {
+      "eventMapId": 4025,
+      "eventKey": "cabarita",
+      "slug": "cabarita-parkrun",
+      "name": "Cabarita parkrun",
+      "country": "Australia",
+      "countryCode": 3,
+      "seriesId": 1,
+      "location": "Cabarita",
+      "latitude": -33.843131,
+      "longitude": 151.115751,
+      "officialUrl": "https://www.parkrun.com.au/cabarita/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "cabarita_council",
+        "new5k_tracker"
+      ],
+      "weekday": "Saturday",
+      "startTime": "08:00",
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "Australia/Sydney",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "county": "New South Wales",
+      "city": "Cabarita",
+      "firstDateLead": "2026-11-07",
+      "holdReason": "Council-approved schedule is clear, but April approval was conditional and only secondary tracker confirms 7 November launch. Hold until actual current launch is verified."
+    },
+    {
+      "eventMapId": 4027,
+      "eventKey": "marykinross-juniors",
+      "slug": "marykinross-juniors-parkrun",
+      "name": "Mary Kinross junior parkrun",
+      "country": "Australia",
+      "countryCode": 3,
+      "seriesId": 2,
+      "location": "Mary Kinross juniors",
+      "latitude": -24.847157,
+      "longitude": 152.474677,
+      "officialUrl": "https://www.parkrun.com.au/marykinross-juniors/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "junior_tracker"
+      ],
+      "weekday": "Sunday",
+      "startTime": null,
+      "distance": "2K",
+      "distanceKm": 2,
+      "firstDate": null,
+      "timezone": "Australia/Brisbane",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "county": "Queensland",
+      "city": "Bargara",
+      "firstDateLead": "2026-11-08",
+      "holdReason": "Tracker marks proposed launch TBC following a test event; no primary start time or confirmed first official date."
+    },
+    {
+      "eventMapId": 4029,
+      "eventKey": "larkspurlanding",
+      "slug": "larkspurlanding-parkrun",
+      "name": "Larkspur Landing parkrun",
+      "country": "United States",
+      "countryCode": 98,
+      "seriesId": 1,
+      "location": "Larkspur Landing",
+      "latitude": 37.945546,
+      "longitude": -122.50987,
+      "officialUrl": "https://www.parkrun.us/larkspurlanding/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "inaccessible",
+      "status": "hold_primary_schedule",
+      "sources": [
+        "map",
+        "larkspur_directory",
+        "new5k_tracker"
+      ],
+      "weekday": "Saturday",
+      "startTime": null,
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": null,
+      "timezone": "America/Los_Angeles",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "startTimeLead": "09:00",
+      "county": "California",
+      "city": "Larkspur",
+      "firstDateLead": "2026-11-14",
+      "holdReason": "Directory generated fixtures before reported launch. Need primary 14 November launch and local 09:00 confirmation."
+    },
+    {
+      "eventMapId": 4030,
+      "eventKey": "diehoenderhok",
+      "slug": "diehoenderhok-parkrun",
+      "name": "Die Hoenderhok parkrun",
+      "country": "South Africa",
+      "countryCode": 85,
+      "seriesId": 1,
+      "location": "Die Hoenderhok",
+      "latitude": -28.091324,
+      "longitude": 26.853033,
+      "officialUrl": "https://www.parkrun.co.za/diehoenderhok/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 4032,
+      "eventKey": "mondscheinwiese",
+      "slug": "mondscheinwiese-parkrun",
+      "name": "Mondscheinwiese parkrun",
+      "country": "Germany",
+      "countryCode": 32,
+      "seriesId": 1,
+      "location": "Mondscheinwiese",
+      "latitude": 51.417712,
+      "longitude": 7.016968,
+      "officialUrl": "https://www.parkrun.com.de/mondscheinwiese/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 4035,
+      "eventKey": "provoriverdeltagateway",
+      "slug": "provoriverdeltagateway-parkrun",
+      "name": "Provo River Delta Gateway parkrun",
+      "country": "United States",
+      "countryCode": 98,
+      "seriesId": 1,
+      "location": "Delta Gateway Park, 311 N Lakeshore Drive, Provo, UT 84601",
+      "latitude": 40.239851,
+      "longitude": -111.712141,
+      "officialUrl": "https://www.parkrun.us/provoriverdeltagateway/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": true,
+      "scheduleStatus": "confirmed",
+      "status": "ready_regular_schedule",
+      "sources": [
+        "map",
+        "provo_organiser"
+      ],
+      "weekday": "Saturday",
+      "startTime": "09:00",
+      "distance": "5K",
+      "distanceKm": 5,
+      "firstDate": "2026-11-21",
+      "timezone": "America/Denver",
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds.",
+        "searchStatus": "Exact-name/current cancellation search completed; no official cancellation discovered. Official local cancellation feed unavailable.",
+        "secondarySource": "cancel_mirror"
+      },
+      "nextCheck": "Regular schedule may be listed; check the linked official event notices close to each date. Do not label all generated dates as individually confirmed.",
+      "researchAttempts": [
+        "Official current map identity and live inventory canonical matching",
+        "Exact venue/name searches including timing, launch and current 2026 material",
+        "Municipal/venue/official partner and official social discovery"
+      ],
+      "publishFromDate": "2026-11-21",
+      "county": "Utah",
+      "city": "Provo",
+      "firstDateEvidence": "provo_organiser",
+      "seasonalStartTimes": [
+        {
+          "months": [
+            11,
+            12,
+            1,
+            2,
+            3,
+            4
+          ],
+          "startTime": "09:00"
+        },
+        {
+          "months": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "startTime": "08:00"
+        }
+      ],
+      "excludedDatesNote": "17 October through 14 November are practices; do not publish them as official parkruns. Seasonal local time is not simply a daylight-saving UTC conversion."
+    },
+    {
+      "eventMapId": 4036,
+      "eventKey": "auerwelsbachpark",
+      "slug": "auerwelsbachpark-parkrun",
+      "name": "Auer-Welsbach-Park parkrun",
+      "country": "Austria",
+      "countryCode": 4,
+      "seriesId": 1,
+      "location": "Auer-Welsbach-Park",
+      "latitude": 48.189546,
+      "longitude": 16.319424,
+      "officialUrl": "https://www.parkrun.co.at/auerwelsbachpark/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    },
+    {
+      "eventMapId": 4037,
+      "eventKey": "austindrive",
+      "slug": "austindrive-parkrun",
+      "name": "Austin Drive parkrun",
+      "country": "Canada",
+      "countryCode": 14,
+      "seriesId": 1,
+      "location": "Austin Drive",
+      "latitude": 43.867445,
+      "longitude": -79.299261,
+      "officialUrl": "https://www.parkrun.ca/austindrive/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 4039,
+      "eventKey": "dundeegolfclub",
+      "slug": "dundeegolfclub-parkrun",
+      "name": "Dundee Golf Club parkrun",
+      "country": "South Africa",
+      "countryCode": 85,
+      "seriesId": 1,
+      "location": "Dundee Golf Club",
+      "latitude": -28.169723,
+      "longitude": 30.221544,
+      "officialUrl": "https://www.parkrun.co.za/dundeegolfclub/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "delegated_canada_south_africa",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Merge the other researcher’s Canada/South Africa evidence; do not treat this record as a finished check."
+    },
+    {
+      "eventMapId": 4040,
+      "eventKey": "elsenzufer",
+      "slug": "elsenzufer-parkrun",
+      "name": "Elsenzufer parkrun",
+      "country": "Germany",
+      "countryCode": 32,
+      "seriesId": 1,
+      "location": "Elsenzufer",
+      "latitude": 49.139229,
+      "longitude": 8.918972,
+      "officialUrl": "https://www.parkrun.com.de/elsenzufer/",
+      "mapSource": "map",
+      "checkedAt": "2026-11-06",
+      "existingCanonicalMatches": [],
+      "publishReady": false,
+      "scheduleStatus": "unchecked",
+      "status": "outstanding_other_country",
+      "sources": [
+        "map"
+      ],
+      "weekday": null,
+      "startTime": null,
+      "distance": null,
+      "distanceKm": null,
+      "firstDate": null,
+      "timezone": null,
+      "cancellationCheck": {
+        "status": "inaccessible",
+        "note": "Individual official event pages unavailable (HTTP 403/405 in shared access checks). No bypass. A recurring listing is not a guarantee that every date proceeds."
+      },
+      "nextCheck": "Obtain current official venue schedule and cancellation notices before publishing dates."
+    }
+  ],
+  "existingEventCorrections": [
+    {
+      "eventKey": "eastcoastpark",
+      "eventId": 3062563,
+      "name": "East Coast Park parkrun",
+      "country": "Singapore",
+      "oldStartTime": "08:00",
+      "proposedStartTime": "07:30",
+      "weekday": "Saturday",
+      "distance": "5K",
+      "distanceKm": 5,
+      "timezone": "Asia/Singapore",
+      "checkedAt": "2026-11-06",
+      "sources": [
+        "sg_poster",
+        "sg_government"
+      ],
+      "publishReady": true,
+      "cancellationStatus": "inaccessible",
+      "note": "Correct the recurring local start, without claiming each future date is confirmed.",
+      "evidenceLimit": "Specific government opportunity dates are historical, corroborated by current official national poster."
+    },
+    {
+      "eventKey": "bishan",
+      "eventId": 3063206,
+      "name": "Bishan parkrun",
+      "country": "Singapore",
+      "oldStartTime": "08:00",
+      "proposedStartTime": "07:30",
+      "weekday": "Saturday",
+      "distance": "5K",
+      "distanceKm": 5,
+      "timezone": "Asia/Singapore",
+      "checkedAt": "2026-11-06",
+      "sources": [
+        "sg_poster",
+        "sg_government"
+      ],
+      "publishReady": true,
+      "cancellationStatus": "inaccessible",
+      "note": "Correct the recurring local start, without claiming each future date is confirmed.",
+      "evidenceLimit": "Specific government opportunity dates are historical, corroborated by current official national poster."
+    },
+    {
+      "eventKey": "westcoastpark",
+      "eventId": 3062970,
+      "name": "West Coast Park parkrun",
+      "country": "Singapore",
+      "oldStartTime": "08:00",
+      "proposedStartTime": "07:30",
+      "weekday": "Saturday",
+      "distance": "5K",
+      "distanceKm": 5,
+      "timezone": "Asia/Singapore",
+      "checkedAt": "2026-11-06",
+      "sources": [
+        "sg_poster",
+        "sg_government"
+      ],
+      "publishReady": true,
+      "cancellationStatus": "inaccessible",
+      "note": "Correct the recurring local start, without claiming each future date is confirmed.",
+      "evidenceLimit": "Specific government opportunity dates are historical, corroborated by current official national poster."
+    },
+    {
+      "eventKey": "bayeastgarden",
+      "eventId": 3064369,
+      "name": "Bay East Garden parkrun",
+      "country": "Singapore",
+      "oldStartTime": "08:00",
+      "proposedStartTime": "07:30",
+      "weekday": "Saturday",
+      "distance": "5K",
+      "distanceKm": 5,
+      "timezone": "Asia/Singapore",
+      "checkedAt": "2026-11-06",
+      "sources": [
+        "sg_poster",
+        "sg_bay_posts"
+      ],
+      "publishReady": false,
+      "cancellationStatus": "inaccessible",
+      "note": "Correct the recurring local start, without claiming each future date is confirmed.",
+      "holdReason": "Current specific organiser statements retrieved only through independent social mirror."
+    },
+    {
+      "eventKey": "bedokreservoir",
+      "eventId": 3063670,
+      "name": "Bedok Reservoir parkrun",
+      "country": "Singapore",
+      "oldStartTime": "08:00",
+      "proposedStartTime": "07:30",
+      "weekday": "Saturday",
+      "distance": "5K",
+      "distanceKm": 5,
+      "timezone": "Asia/Singapore",
+      "checkedAt": "2026-11-06",
+      "sources": [
+        "sg_poster",
+        "sg_bedok_posts"
+      ],
+      "publishReady": false,
+      "cancellationStatus": "inaccessible",
+      "note": "Correct the recurring local start, without claiming each future date is confirmed.",
+      "holdReason": "Current specific organiser statements retrieved only through independent social mirror."
+    },
+    {
+      "eventKey": "coffsharbour",
+      "eventId": 3062475,
+      "name": "Coffs Harbour parkrun",
+      "country": "Australia",
+      "oldStartTime": "08:00",
+      "proposedStartTime": "07:00",
+      "oldCounty": "Queensland",
+      "proposedCounty": "New South Wales",
+      "weekday": "Saturday",
+      "distance": "5K",
+      "distanceKm": 5,
+      "timezone": "Australia/Sydney",
+      "checkedAt": "2026-11-06",
+      "sources": [
+        "coffs_existing_health"
+      ],
+      "publishReady": true,
+      "cancellationStatus": "inaccessible",
+      "note": "Exact existing event and organiser contact matched; new Coffs Creek must remain a distinct venue."
+    }
+  ],
+  "noLiveWrites": true,
+  "sourceRegistrationAudit": {
+    "checkedAt": "2026-11-06",
+    "checkedLocations": [
+      "docs/source-registry/fixture-result-sources.csv",
+      "Neon public.event_register_sources (read-only host/url search)",
+      "Neon public.managed_fixture_sources (read-only start_url/allowed_domains search)"
+    ],
+    "recommendations": [
+      {
+        "host": "dryandratourism.org.au",
+        "sourceEvidenceId": "narrogin_tourism",
+        "evidenceUrl": "https://www.dryandratourism.org.au/plan/news/event-calendar/event/1280-old-golf-course-parkrun-narrogin",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      },
+      {
+        "host": "roadrunners.club",
+        "sourceEvidenceId": "provo_organiser",
+        "evidenceUrl": "https://www.roadrunners.club/events/parkrun",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      },
+      {
+        "host": "waterfordsportspartnership.ie",
+        "sourceEvidenceId": "waterford_launch",
+        "evidenceUrl": "https://www.waterfordsportspartnership.ie/dungarvan-parkrun-coming-soon/",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      },
+      {
+        "host": "corksports.ie",
+        "sourceEvidenceId": "cork_partner",
+        "evidenceUrl": "https://corksports.ie/cork-parkruns/",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      },
+      {
+        "host": "activeandhealthy.nsw.gov.au",
+        "sourceEvidenceId": "coffs_existing_health",
+        "evidenceUrl": "https://www.activeandhealthy.nsw.gov.au/program/view/3406",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      },
+      {
+        "host": "coffsharbour.nsw.gov.au",
+        "sourceEvidenceId": "coffs_council",
+        "evidenceUrl": "https://www.coffsharbour.nsw.gov.au/Your-Council/Public-notices/Current-public-notices/Proposed-Licence-Agreement-%E2%80%93-Community-Land-Coffs-Creek-Coffs-Harbour",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      },
+      {
+        "host": "volunteer.gov.sg",
+        "sourceEvidenceId": "sg_government",
+        "evidenceUrl": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      },
+      {
+        "host": "sdcc.ie",
+        "sourceEvidenceId": "south_dublin",
+        "evidenceUrl": "https://www.sdcc.ie/en/activesouthdublin/get-active/active-communities/park-run/",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      },
+      {
+        "host": "canadabay.nsw.gov.au",
+        "sourceEvidenceId": "cabarita_council",
+        "evidenceUrl": "https://www.canadabay.nsw.gov.au/sites/default/files/Agenda%2021%20April%202026.pdf",
+        "checkedAt": "2026-11-06",
+        "csvMatches": [],
+        "eventRegisterMatches": [],
+        "managedSourceMatches": [],
+        "recommendation": "Register as disabled manual fixture research reference; preserve all automated collection rights gates. No participant-result collection.",
+        "suggestedEnabled": false
+      }
+    ],
+    "existingParkrunSource": {
+      "sourceId": "parkrun_global",
+      "enabled": false,
+      "rightsStatus": "Rights review required",
+      "note": "Retain existing identity and disabled collection state. Additional official resource/event evidence is manual provenance, not permission to crawl."
+    },
+    "noRegistryWrites": true
+  }
+}

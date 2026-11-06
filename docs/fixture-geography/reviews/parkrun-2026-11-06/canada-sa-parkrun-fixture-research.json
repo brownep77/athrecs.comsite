@@ -1,0 +1,896 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-06",
+  "scope": "Four Canadian and six South African official map additions; read-only research, no live mutations.",
+  "live_inventory_file": "/workspace/scratch/526a0fc02c42/parkrun-live-inventory.json",
+  "live_inventory_count": 2985,
+  "note": "Official map identities are authoritative; debut, recurrence and start time require separate evidence. Dates/times below marked leads are not primary verified. None of10 has a complete accessible current primary timed schedule. Parent decides publication using its evidence policy.",
+  "global_cancellation_review": {
+    "Canada": "Official cancellations URL returned405",
+    "South Africa": "Official cancellations URL returned405",
+    "checked_on": "2026-11-06",
+    "next_check_on": "2026-11-07"
+  },
+  "events": [
+    {
+      "official_id": 3961,
+      "official_key": "yorktimbers",
+      "name": "York Timbers parkrun",
+      "athrecs_slug": "yorktimbers-parkrun",
+      "official_home": "https://www.parkrun.co.za/yorktimbers/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        30.745764,
+        -25.107011
+      ],
+      "official_map_location": "York Timbers",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-08-22",
+      "first_date_status": "A named participant in Rand Aid resident story says it launched on 22 August; no organiser historical page was accessible.",
+      "active_status": "Primary participant account confirms an actual completion on 3 October 2026, so this is already operating.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "day": "Saturday",
+        "time": "08:00",
+        "timezone": "Africa/Johannesburg",
+        "source_type": "secondary_calendar_and_participant_report",
+        "source": "https://zafiri.com/events"
+      },
+      "location": {
+        "country": "South Africa",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "York Timbers",
+        "city": "Sabie",
+        "county": null,
+        "region": "Mpumalanga",
+        "location_status": "Sabie confirmed by primary participant story. Mpumalanga appears in participant regional account; exact event entrance address remains unknown."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://randaid.co.za/2026/10/13/82-year-old-parkrunner-finally-finds-the-missing-letter-y/",
+          "source_type": "participant_primary_report",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Rand Aid reports its 82-year-old resident completed York Timbers in Sabie on 3 October; he states the event launched on 22 August. This establishes activity, but is not an organiser timetable."
+        },
+        {
+          "url": "https://b.org.za/stories/races.htm",
+          "source_type": "participant_primary_report",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "First-person participant describes attending York Timbers on Saturday 26 September 2026 at 08:00. Historical individual attendance does not establish the current recurring start time."
+        },
+        {
+          "url": "https://zafiri.com/events",
+          "source_type": "secondary_calendar",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Lists York Timbers free weekly 5km every Saturday at 08:00."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.co.za/yorktimbers/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.co.za/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "Do not use Park5K country labels: it incorrectly groups York Timbers and other South African venues under Eswatini. Official map country85 is South Africa."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Official map supports venue identity only. Hold dated recurrence and exact start time until evidence review is complete."
+    },
+    {
+      "official_id": 3972,
+      "official_key": "stormsriver",
+      "name": "Storms River parkrun",
+      "athrecs_slug": "stormsriver-parkrun",
+      "official_home": "https://www.parkrun.co.za/stormsriver/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        23.886769,
+        -33.965961
+      ],
+      "official_map_location": "Storms River",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-08-29",
+      "first_date_status": "Independent podcast lists current Storms River inauguration 29 August 2026 with 48 participants. Historical local story refers to Plaatbos Nature Reserve opening 24 May 2025; those identities must not be conflated.",
+      "active_status": "Secondary results index shows active on 31 October 2026; historical primary community page confirms a village parkrun but not current-key debut.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "day": "Saturday",
+        "time": "08:00",
+        "timezone": "Africa/Johannesburg",
+        "source_type": "primary_community_page_historical_context",
+        "source": "https://www.stormsrivervillage.co.za/local-events/",
+        "scope": "Page headed 2025; needs confirmation this schedule applies to the current stormsriver key."
+      },
+      "location": {
+        "country": "South Africa",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "Storms River",
+        "city": "Storms River Village",
+        "county": null,
+        "region": "Eastern Cape",
+        "address_lead": "Rugby field opposite SAPS",
+        "location_status": "Community website gives village meeting point, but its page is headed 2025; current official map point should be retained until course identity confirmed."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://www.stormsrivervillage.co.za/local-events/",
+          "source_type": "local_community_primary_historical",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Community site maintained by village NPC advertises Storms River Village parkrun, Saturdays08:00, free5km, meeting on rugby field opposite SAPS. Page section is headed2025."
+        },
+        {
+          "url": "https://www.stormsrivervillage.co.za/2025/10/the-birth-of-parkrun-in-storms-river-village/",
+          "source_type": "local_community_primary_historical",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Search extraction describes 24 May 2025 formal opening and refers to Plaatbos Nature Reserve official key. Do not assign this historical inaugural date to current Storms River without identity reconciliation."
+        },
+        {
+          "url": "https://log.5kadventures.net/segments/launches-and-anniversaries-where-is-the-cake",
+          "source_type": "secondary_parkrun_podcast_index",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Episode458 lists Storms River, Tsitsikamma, among29 August2026 launches, with48 participants."
+        },
+        {
+          "url": "https://mostevents.parq.run/latestData.html",
+          "source_type": "secondary_results_index",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Lists Storms River latest event31 October2026."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.co.za/stormsriver/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        },
+        {
+          "url": "https://www.stormsrivervillage.co.za/2025/10/the-birth-of-parkrun-in-storms-river-village/",
+          "outcome": "Open returned verification challenge; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.co.za/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "Historical Plaatbos Nature Reserve vs current Storms River identity needs review. Neither Plaatbos nor Storms River appears in live inventory, but this does not prove a rename or a fresh historical start."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Official map supports venue identity only. Hold dated recurrence and exact start time until evidence review is complete."
+    },
+    {
+      "official_id": 3975,
+      "official_key": "valducharron",
+      "name": "Val du Charron parkrun",
+      "athrecs_slug": "valducharron-parkrun",
+      "official_home": "https://www.parkrun.co.za/valducharron/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        19.048987,
+        -33.62479
+      ],
+      "official_map_location": "Val du Charron",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-09-05",
+      "first_date_status": "Mirrored organiser social description gives5 September2026; posts identify31 October as event9 and next Saturday as event10. Native organiser source not accessible.",
+      "active_status": "Venue owner currently advertises official Saturday parkrun; recent mirrored organiser posts report event9 on31 October.",
+      "distance_km_confirmed": 5,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "day": "Saturday",
+        "time": "08:00",
+        "timezone": "Africa/Johannesburg",
+        "starts_on": "2026-09-05",
+        "source_type": "mirrored_organiser_social_page",
+        "source": "https://www.localgymsandfitness.com/ZA/Wellington/829023397195977/Val-du-Charron-parkrun"
+      },
+      "location": {
+        "country": "South Africa",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "Val du Charron",
+        "city": "Wellington",
+        "county": null,
+        "region": "Western Cape",
+        "address": "Val Du Charron, Bovlei Road, Wellington",
+        "address_status": "Venue owner contact page confirms estate, street and town. Province supported by mirrored organiser event listing."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://vdcwines.co.za/wild-boar-trails/",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Current search extraction describes Val du Charron5km trail and invites readers to its official parkrun every Saturday. No time stated. Full open returned429."
+        },
+        {
+          "url": "https://vdcwines.co.za/contact/",
+          "source_type": "venue_owner",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Owner contact page lists Val Du Charron, Bovlei Road, Wellington, South Africa."
+        },
+        {
+          "url": "https://www.localgymsandfitness.com/ZA/Wellington/829023397195977/Val-du-Charron-parkrun",
+          "source_type": "mirrored_organiser_social_page",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "Mirrored description says free timed5km at08:00 every Saturday from5 September2026. Posts dated2 November describe forthcoming event10; event9 occurred31 October. Old Kleinevalleij wording remains, so treat as transferred social profile rather than proof of identical event history."
+        },
+        {
+          "url": "https://happeningnext.com/event/val-du-charron-parkrun-event-8-24-october-2026-eid3a0e6m0fnd",
+          "source_type": "secondary_organiser_event_mirror",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Specific event8 dated24 October2026 at08:00UTC+02, hosted by Val du Charron parkrun, at estate Bovlei Road Wellington Western Cape."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.co.za/valducharron/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        },
+        {
+          "url": "https://vdcwines.co.za/wild-boar-trails/",
+          "outcome": "HTTP429 on web open; did not retry around rate limit. Search extraction supplied primary owner text.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.co.za/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "Exact08:00 only found on social/event mirrors. Native organiser confirmation required to label start time verified. No Kleinevalleij or Wellington South Africa identity in live inventory."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Venue owner supports5km and Saturday recurrence. Exact08:00 and5 September debut remain mirror-supported leads. Parent may stage metadata; do not label a fully verified timed schedule.",
+      "weekly_schedule_partial": {
+        "day": "Saturday",
+        "time": null,
+        "timezone": "Africa/Johannesburg",
+        "source": "https://vdcwines.co.za/wild-boar-trails/",
+        "scope": "Venue owner search extraction confirms weekly Saturday parkrun on its5km trail; no exact time stated."
+      }
+    },
+    {
+      "official_id": 3998,
+      "official_key": "hhknolllakeview",
+      "name": "H.H. Knoll Lakeview parkrun",
+      "athrecs_slug": "hhknolllakeview-parkrun",
+      "official_home": "https://www.parkrun.ca/hhknolllakeview/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -79.256996,
+        42.880132
+      ],
+      "official_map_location": "H.H. Knoll Lakeview",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": null,
+      "first_date_status": "Not verified from accessible organiser source.",
+      "active_status": "Secondary results index lists an event on 31 October 2026; no accessible primary first-date evidence.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "America/Toronto",
+        "source_type": "secondary_calendar",
+        "source": "https://mymindisracing.com/event/37687c2e-54c2-44f3-bed5-83a8c7d8da8e"
+      },
+      "location": {
+        "country": "Canada",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "H.H. Knoll Lakeview",
+        "city": "Port Colborne",
+        "county": null,
+        "region": "Ontario",
+        "address_lead": "Sugarloaf Street",
+        "location_status": "City, province and street reported by secondary calendar; venue owner page not verified."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://mymindisracing.com/event/37687c2e-54c2-44f3-bed5-83a8c7d8da8e",
+          "source_type": "secondary_calendar",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Lists H.H. Knoll Lakeview parkrun, Port Colborne, Ontario, Sugarloaf Street, every Saturday 09:00, 5km. Its generated dates do not prove inaugural status."
+        },
+        {
+          "url": "https://mostevents.parq.run/latestData.html",
+          "source_type": "secondary_results_index",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Lists H.H. Knoll Lakeview in Ontario with latest event date 31 October 2026. This is an activity lead, not an official results page."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.ca/hhknolllakeview/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.ca/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "No primary confirmation of actual start date or current weekly schedule located."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Official map supports venue identity only. Hold dated recurrence and exact start time until evidence review is complete."
+    },
+    {
+      "official_id": 3999,
+      "official_key": "redwillowtrail",
+      "name": "Red Willow Trail parkrun",
+      "athrecs_slug": "redwillowtrail-parkrun",
+      "official_home": "https://www.parkrun.ca/redwillowtrail/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -113.620693,
+        53.641781
+      ],
+      "official_map_location": "Red Willow Trail",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-10-10",
+      "first_date_status": "Independent parkrun podcast lists inauguration on 10 October with 68 participants and nine volunteers; local news roundup reports inaugural turnout near 70. Original linked interview is blocked.",
+      "active_status": "Already active according to two independent secondary reports.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "America/Edmonton",
+        "source_type": "secondary_local_news",
+        "source": "https://edmonton.taproot.news/roundups/regional/2026/10/28"
+      },
+      "location": {
+        "country": "Canada",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "Red Willow Trail",
+        "city": "St. Albert",
+        "county": null,
+        "region": "Alberta",
+        "address_lead": "Red Willow Park trailhead",
+        "location_status": "City and meeting point reported in local news; exact street address and local administrative mapping not independently confirmed."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://edmonton.taproot.news/roundups/regional/2026/10/28",
+          "source_type": "secondary_local_news",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "web_open",
+          "summary": "28 October roundup reports inaugural 5km drew nearly 70 finishers. It states free volunteer-led meetings Saturdays at 09:00 at Red Willow Park trailhead in St. Albert."
+        },
+        {
+          "url": "https://log.5kadventures.net/segments/launches-and-anniversaries-where-is-the-cake",
+          "source_type": "secondary_parkrun_podcast_index",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Episode 461 lists inaugural Red Willow Trail, St. Albert, on 10 October 2026, with 68 participants and nine volunteers."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.ca/redwillowtrail/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        },
+        {
+          "url": "https://www.stalbertgazette.com/local-news/global-volunteer-led-run-club-parkrun-arrives-in-st-albert-12918456",
+          "outcome": "Linked original news interview returned HTTP403.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.ca/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "Usable local-news schedule lead; no accessible organiser or venue confirmation found. Do not use the unrelated paid Red Willow virtual race timetable."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Official map supports venue identity only. Hold dated recurrence and exact start time until evidence review is complete."
+    },
+    {
+      "official_id": 4007,
+      "official_key": "yellowwoodsfarm",
+      "name": "Yellow Woods Farm parkrun",
+      "athrecs_slug": "yellowwoodsfarm-parkrun",
+      "official_home": "https://www.parkrun.co.za/yellowwoodsfarm/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        27.938997,
+        -32.93069
+      ],
+      "official_map_location": "Yellow Woods Farm",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-10-17",
+      "first_date_status": "Independent tracker and parkrun podcast agree on17 October inauguration,324 participants16 volunteers; primary organiser result not accessible.",
+      "active_status": "Already operating according to secondary inauguration report and latest event index.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "day": "Saturday",
+        "time": "08:00",
+        "timezone": "Africa/Johannesburg",
+        "source_type": "secondary_calendar",
+        "source": "https://zafiri.com/events"
+      },
+      "location": {
+        "country": "South Africa",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "Yellow Woods Farm",
+        "city": "Near East London",
+        "county": null,
+        "region": "Eastern Cape",
+        "location_status": "Podcast identifies location near East London; exact farm entrance and local municipality not verified."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://twstalker.com/new5kparkruns",
+          "source_type": "secondary_inaugural_tracker",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Reports inauguration17 October2026,324 participants and16 volunteers."
+        },
+        {
+          "url": "https://log.5kadventures.net/segments/launches-and-anniversaries-where-is-the-cake",
+          "source_type": "secondary_parkrun_podcast_index",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Episode461 independently lists Yellow Woods Farm near East London as17 October launch,324 participants16 volunteers."
+        },
+        {
+          "url": "https://zafiri.com/events",
+          "source_type": "secondary_calendar",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Lists Yellow Woods Farm5km every Saturday at08:00."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.co.za/yellowwoodsfarm/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.co.za/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Official map supports venue identity only. Hold dated recurrence and exact start time until evidence review is complete."
+    },
+    {
+      "official_id": 4022,
+      "official_key": "stonebridgetrail",
+      "name": "Stonebridge Trail parkrun",
+      "athrecs_slug": "stonebridgetrail-parkrun",
+      "official_home": "https://www.parkrun.ca/stonebridgetrail/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -75.708224,
+        45.251399
+      ],
+      "official_map_location": "Stonebridge Trail",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-10-31",
+      "first_date_status": "Independent tracker reports inauguration on 31 October, 143 participants and 18 volunteers; earlier 24 October described as an untimed test.",
+      "active_status": "Already active according to secondary tracker and results index.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": {
+        "day": "Saturday",
+        "time": "09:00",
+        "timezone": "America/Toronto",
+        "source_type": "secondary_calendar",
+        "source": "https://mymindisracing.com/event/9ea5a20f-4bb4-435f-bd77-cd07949415a8"
+      },
+      "location": {
+        "country": "Canada",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "Stonebridge Trail",
+        "city": "Ottawa / Barrhaven",
+        "county": null,
+        "region": "Ontario",
+        "address_lead": "1 Hazelwood Way, Nepean, Barrhaven West, K2J 5M8",
+        "location_status": "Exact event address from secondary calendar only; city parks PDF lists a different trail access address, so no primary event start address is confirmed."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://www.sotwe.com/new5kparkruns",
+          "source_type": "secondary_inaugural_tracker",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Reports Stonebridge Trail inaugurated 31 October 2026 with 143 participants and 18 volunteers."
+        },
+        {
+          "url": "https://mymindisracing.com/event/9ea5a20f-4bb4-435f-bd77-cd07949415a8",
+          "source_type": "secondary_calendar",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Lists 5km every Saturday 09:00 at 1 Hazelwood Way, Ottawa. It advertised 17 October, earlier than the tracker inaugural date, demonstrating that generated calendar dates must not be accepted as debut proof."
+        },
+        {
+          "url": "https://mostevents.parq.run/latestData.html",
+          "source_type": "secondary_results_index",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Lists Stonebridge Trail latest event 31 October 2026."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.ca/stonebridgetrail/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.ca/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "Secondary generated calendar listed a pre-launch occurrence; do not backfill those dates or infer a debut from weekly recurrence."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Official map supports venue identity only. Hold dated recurrence and exact start time until evidence review is complete."
+    },
+    {
+      "official_id": 4030,
+      "official_key": "diehoenderhok",
+      "name": "Die Hoenderhok parkrun",
+      "athrecs_slug": "diehoenderhok-parkrun",
+      "official_home": "https://www.parkrun.co.za/diehoenderhok/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        26.853033,
+        -28.091324
+      ],
+      "official_map_location": "Die Hoenderhok",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-11-14",
+      "first_date_status": "Future inaugural date reported by independent tracker; no primary timetable found.",
+      "active_status": "Upcoming per secondary tracker; do not create7 November occurrence.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": null,
+      "location": {
+        "country": "South Africa",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "Die Hoenderhok",
+        "city": null,
+        "county": null,
+        "region": "Free State",
+        "location_status": "Province from independent tracker; no confirmed city or exact farm address."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://www.sotwe.com/new5kparkruns",
+          "source_type": "secondary_inaugural_tracker",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Current launch list gives Die Hoenderhok, Free State,14 November2026."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.co.za/diehoenderhok/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.co.za/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "Future inaugural lead only. Exact start, confirmed debut, city and entrance remain unverified."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Official map supports venue identity only. Keep inaugural and dated recurrence held; specifically no7 November occurrence."
+    },
+    {
+      "official_id": 4037,
+      "official_key": "austindrive",
+      "name": "Austin Drive parkrun",
+      "athrecs_slug": "austindrive-parkrun",
+      "official_home": "https://www.parkrun.ca/austindrive/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        -79.299261,
+        43.867445
+      ],
+      "official_map_location": "Austin Drive",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-11-21",
+      "first_date_status": "Future inaugural date reported by independent tracker; no accessible primary date confirmation.",
+      "active_status": "Treat as upcoming, not already active. A map entry and an editorial headline do not establish a first occurrence.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": null,
+      "location": {
+        "country": "Canada",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "Austin Drive",
+        "city": "Markham",
+        "county": null,
+        "region": "Ontario",
+        "location_status": "City tourism page lists an Austin Drive parkrun article; exact event address and schedule not confirmed."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://www.sotwe.com/new5kparkruns",
+          "source_type": "secondary_inaugural_tracker",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Reports Austin Drive in Ontario starts 21 November 2026."
+        },
+        {
+          "url": "https://visitmarkham.ca/things-to-do/",
+          "source_type": "official_destination_tourism",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Current indexed page lists a new article titled Lace Up, Markham: Austin Drive parkrun is Here! The accessible web view shows older articles and no usable debut or timetable details."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.ca/austindrive/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        },
+        {
+          "url": "https://visitmarkham.ca/things-to-do/",
+          "outcome": "Web view stale versus current search extract; normal Python urllib GET returned HTTP403. No attempt to bypass.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.ca/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "Inaugural may be 21 November. An aggregator advertises 7 November, but this appears to be automatic recurrence and conflicts with the explicit inaugural lead. Hold all dated occurrences pending primary debut confirmation."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Add official map venue metadata only if needed. Keep first date, exact time and all dated recurrence unpublished pending primary launch evidence."
+    },
+    {
+      "official_id": 4039,
+      "official_key": "dundeegolfclub",
+      "name": "Dundee Golf Club parkrun",
+      "athrecs_slug": "dundeegolfclub-parkrun",
+      "official_home": "https://www.parkrun.co.za/dundeegolfclub/",
+      "official_series_id": 1,
+      "official_map_coordinates": [
+        30.221544,
+        -28.169723
+      ],
+      "official_map_location": "Dundee Golf Club",
+      "checked_on": "2026-11-06",
+      "live_identity_matches": [],
+      "first_date_confirmed": null,
+      "first_date_lead": "2026-11-28",
+      "first_date_status": "Independent tracker revised tentative8 November to28 November2026 within last day. No primary launch confirmation found.",
+      "active_status": "Upcoming per secondary tracker; do not create7 November or obsolete8 November occurrence.",
+      "distance_km_confirmed": null,
+      "distance_km_lead": 5,
+      "weekly_schedule_confirmed": null,
+      "weekly_schedule_lead": null,
+      "location": {
+        "country": "South Africa",
+        "country_status": "Confirmed by official current map country code.",
+        "venue": "Dundee Golf Club",
+        "city": "Dundee",
+        "county": null,
+        "region": "KwaZulu-Natal",
+        "location_status": "Town inferred from club name and official map; province from tracker KZN Inland. Exact club address not verified."
+      },
+      "evidence": [
+        {
+          "url": "https://images.parkrun.com/events.json",
+          "source_type": "official_map_feed",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "local_official_map_snapshot",
+          "summary": "Identity, country, series ID, map location and coordinates read from parent-fetched official feed saved in parkrun-events-current.json. The feed has no first date, timetable or cancellation state."
+        },
+        {
+          "url": "https://www.sotwe.com/new5kparkruns",
+          "source_type": "secondary_inaugural_tracker",
+          "checked_on": "2026-11-06",
+          "retrieval_method": "search_extraction",
+          "summary": "Latest post says inaugural date changed to28 November2026; earlier tentative date was8 November."
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://www.parkrun.co.za/dundeegolfclub/",
+          "outcome": "HTTP 405 Method Not Allowed via web retrieval; no attempt to bypass.",
+          "checked_on": "2026-11-06"
+        }
+      ],
+      "cancellation_review": {
+        "status": "inaccessible",
+        "checked_on": "2026-11-06",
+        "attempted_url": "https://www.parkrun.co.za/cancellations/",
+        "outcome": "HTTP 405 Method Not Allowed; do not imply that the next occurrence is confirmed uncancelled.",
+        "next_check_on": "2026-11-07"
+      },
+      "hold_reasons": [
+        "Current organiser timetable and start time are not independently verified.",
+        "Cancellation source could not be checked.",
+        "Future launch date has changed. Need confirmed inaugural, start time and venue address; do not confuse with Camperdown parkrun in Dundee, Scotland."
+      ],
+      "next_check_on": "2026-11-07",
+      "canonical_action": "No match by official key, canonical home URL or exact name in 2,985-event live inventory; add as a new venue candidate, subject to parent canonical reconciliation.",
+      "publication_recommendation": "Official map supports venue identity only. Hold all dates and start time; do not publish obsolete tentative dates."
+    }
+  ]
+}
