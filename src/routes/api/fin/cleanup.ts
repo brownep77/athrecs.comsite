@@ -23,8 +23,11 @@ export const Route = createFileRoute("/api/fin/cleanup")({
         try {
           const { getSql } = await import("@/lib/db");
           const { cleanupFinOnboarding } = await import("@/lib/athrecs/fin-onboarding.server");
+          const { cleanupFinResearch } = await import("@/lib/athrecs/fin-research.server");
           // Cleanup remains available after Fin is switched off.
-          await cleanupFinOnboarding(await getSql());
+          const sql = await getSql();
+          await cleanupFinOnboarding(sql);
+          await cleanupFinResearch(sql);
           return Response.json({ status: "complete" }, { headers });
         } catch {
           console.error("[fin] onboarding cleanup failed");

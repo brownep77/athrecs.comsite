@@ -274,19 +274,192 @@ signup and result review continue; leave the additive tables and cleanup in
 place until expired hints are removed. The code can then be reverted without
 removing existing athlete data.
 
-## Next implementation: asynchronous result research
+## Result research jobs
 
-The existing optional Grok search is authenticated, adult/consent-gated, checks
-the provider's zero-data-retention status and treats results as unverified
-suggestions. Its probe can take 15 seconds and research another 45 seconds. It
-must not be placed directly inside this synchronous connector.
+The signup actions above stay synchronous. Result research is a separate, still
+**off-by-default** flow. It reuses the existing xAI call (`store: false`, a
+zero-data-retention probe, then `web_search`). xAI's zero-data-retention mode
+disables deferred completions, the Batch API and stateful Responses, so AthRecs
+stores the job itself. The connector returns as soon as the job is queued.
+Intercom's connector budget is 30 seconds; the worker, not the connector, waits
+for the provider.
 
-The next slice should extract that existing service into a durable user-scoped
-job, return a job ID promptly, and expose authenticated status/review actions.
-Preserve the current saved-identity, consent-revision, source and ownership
-checks. A separate purpose-scoped user action token is required; the integration
-bearer and current Messenger identity JWT do not authorize private account writes.
-OpenAI or Claude can be added behind the same research interface later if useful.
+Checked 6 November 2026: [xAI API security / ZDR](https://docs.x.ai/docs/developers/faq/security)
+and [web search](https://docs.x.ai/guides/tools/search-tools).
+
+### Authorisation
+
+The connector bearer does not authorise a private search. The Messenger JWT is
+not accepted. The athlete must open the saved handoff in a verified account and
+choose public-result search. That creates one purpose-scoped code, stored only
+as a hash, bound to the account and the current name/settings revisions, and
+valid for two hours. A newer code revokes the previous one.
+
+The code is required on every private connector action below. The same account
+can also use the signed-in AthRecs page, which does not need the code.
+
+### Connector actions
+
+All use `POST /api/fin/actions` and the same bearer as the signup actions.
+Unknown fields are rejected. Poll about every 10 seconds while `state` is
+`queued` or `running`. Do not treat a queued response as results, a draft, a
+claim, a published profile, or a signup.
+
+Start:
+
+```json
+{
+  "action": "start_result_research",
+  "userActionToken": "<43-character research code>",
+  "requestId": "fin:synthetic-conversation:research:1",
+  "eventName": "Synthetic Harbour 10K",
+  "year": 2024
+}
+```
+
+`eventName` and `year` are optional. The racing name comes from the saved
+account, not from Fin. The same `requestId` and details return the same job.
+The same saved scope within 24 hours also returns the current job instead of
+calling the provider again, unless the signed-in athlete explicitly refreshes
+that search. A refresh is a new job and still counts towards the eight-job
+limit. A reused `requestId` with different details is `409`.
+
+Successful acknowledgement, HTTP 200:
+
+```json
+{
+  "status": "queued",
+  "jobId": "<uuid>",
+  "state": "queued",
+  "message": "Your public result search has started...",
+  "pollAfterSeconds": 10,
+  "candidates": [],
+  "outcomes": {
+    "suggestionsFound": false,
+    "draftSaved": false,
+    "claimSubmitted": false,
+    "profilePublished": false,
+    "signupCounted": false
+  }
+}
+```
+
+Read, review, save, supply a link, or continue without results:
+
+```json
+{ "action": "get_result_research", "userActionToken": "<code>", "jobId": "<uuid>" }
+```
+
+```json
+{
+  "action": "review_result_research",
+  "userActionToken": "<code>",
+  "jobId": "<uuid>",
+  "decisions": [{ "candidateId": "<uuid>", "decision": "selected" }]
+}
+```
+
+`decision` is `selected`, `rejected`, or `uncertain`.
+
+```json
+{
+  "action": "save_research_profile_draft",
+  "userActionToken": "<code>",
+  "jobId": "<uuid>",
+  "fullName": "Synthetic Fin Runner",
+  "candidateIds": ["<uuid>"],
+  "privacyAcknowledged": true
+}
+```
+
+```json
+{ "action": "supply_result_link", "userActionToken": "<code>", "jobId": "<uuid>", "sourceUrl": "https://results.example-races.org/2024" }
+```
+
+```json
+{ "action": "continue_profile_setup", "userActionToken": "<code>" }
+```
+
+A candidate the athlete can see has the event, date, sport, discipline,
+distance, separate chip and gun times, published finish time, timing label,
+finish status, separate overall/gender/category positions, source URL, provider,
+checked time, row locator, and AthRecs-written match notes. Empty fields were
+not known. `evidenceLevel` is `source_checked`, `suggested`, or
+`athlete_supplied`. `ownership` stays `not_confirmed`. `signupCounted` is always
+false here.
+
+`source_checked` means the athlete name plus a performance, or the event name
+and date, were read on the page. It is not ownership and not a claim.
+`athlete_supplied` means the link was saved and no result was invented from it.
+Parkrun times are stored as published finish times, labelled "parkrun finish time · Not chip timed", never as chip times.
+
+### Worker, limits and consent
+
+`GET /api/fin/research-worker` uses the existing cron bearer and processes one
+job. It is scheduled every two minutes. A job has at most two attempts. A stale
+running lock is retried once, then marked failed. Provider calls stop when
+consent is off or the saved name/settings revision changed; delayed output is
+discarded. Turning the search choice off revokes codes, cancels active jobs and
+deletes research candidates and private research drafts. It does not delete the
+account or the verified signup receipt.
+
+Each account can start at most eight research jobs and ten research codes per
+rolling day/hour window. Each job keeps at most eight candidates, one provider
+call per attempt, and three source-page reads. Birth date is used only to apply
+the existing adult rule. It is not sent to the provider. Email, phone, postcode
+and street address are not sent. Under-18 and guardian searches still need
+staff assistance outside this connector.
+
+Athlete-facing states stay distinct: `queued`, `running`, `suggestions_found`,
+`no_matches`, `failed`, `cancelled`, `draft_saved`, `link_saved`, and
+`profile_setup_continued`. Draft save writes the private profile and the
+existing profile-setup queue. It does not submit `result_claims`, link
+ownership, or publish a profile.
+
+### Measures
+
+`fin_assisted_signups` is unchanged: only a verified new account that resumes
+its handoff. Research adds `fin_research_outcomes`:
+
+| Outcome | Counted when |
+| --- | --- |
+| `search_completed` | A job finishes, including no matches. Not when it is only queued. |
+| `candidates_reviewed` | The athlete selects, rejects or marks uncertainty, once per job. |
+| `first_accepted_result` | The first selected sourced performance for that account. Not a click, a code, or a job. |
+| `profile_draft_saved` | The first private draft saved from this flow. |
+| `profile_setup_continued` | The athlete continues profile setup, including when nothing was found. |
+
+```sql
+select outcome, count(*)::integer
+from fin_research_outcomes
+where created_at >= now() - interval '30 days'
+group by 1
+order by 1;
+```
+
+Staff can read untrusted research notes with `listStaffFinResearchJobs`. Those
+notes are not returned to Fin. Source text is evidence, never an instruction.
+
+### What is not live
+
+This code does not enable `ATHRECS_FIN_ENABLED`, create Intercom connectors, or
+call xAI during tests. Before any athlete can use it:
+
+1. Apply `20261106_fin_onboarding.sql` and `20261106_fin_result_research.sql`.
+2. Set the Fin flag, connector secret and cron secret on an isolated environment.
+3. Add the private connector actions in Intercom and map `userActionToken` from the code the athlete copies from AthRecs. Do not put the connector secret in the conversation.
+4. Run a restricted test with a fictional account. Confirm a queued acknowledgement, a later completed job, and that signup, draft, claim and publication stay separate.
+5. Keep the feature off in production until that test is accepted.
+
+Rollback remains the Fin flag plus the workspace connectors. Research tables are
+additive. Disabling the flag stops new connector calls; the cron worker also
+stops while the flag is off.
+
+## Still outside this patch
+
+Do not move the older synchronous account search into the connector. OpenAI or
+Claude can later use the same job interface. Paid Fin roles, help-centre content
+and live workspace setup remain operational steps, not part of this patch.
 
 ### Official integration references
 

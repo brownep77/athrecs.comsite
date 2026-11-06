@@ -33,6 +33,8 @@ export const saveMyMatchingSettings = createServerFn({ method: "POST" })
       values(${context.userId},${JSON.stringify(data)}::jsonb,${MATCHING_NOTICE_VERSION})
       on conflict(user_id) do update set settings=excluded.settings,notice_version=excluded.notice_version,updated_at=now()`;
       await tx`delete from athlete_external_match_searches where user_id=${context.userId}`;
+      const { discardFinResearchAfterSettingsChange } = await import("./fin-research.server.ts");
+      await discardFinResearchAfterSettingsChange(tx, context.userId, data.externalSearchConsent);
     });
     return data;
   });

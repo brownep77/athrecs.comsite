@@ -31,7 +31,13 @@ export function openAthleteAuth(options){window.authCalls.push(options);}`,
 export async function getMyAthleteAccount(){return window.fixture.account;}
 export async function saveMyAthleteAccount(){window.saveCalls++;throw new Error('No save allowed in this UI test');}
 export async function saveMyProfileSetup(){window.saveCalls++;throw new Error('No save allowed in this UI test');}
-export async function resumeFinOnboarding({data}){window.resumeCalls.push(data);const response=window.fixture.response;if(window.fixture.responseMode==='deferred')return await new Promise(resolve=>window.resolveResume=()=>resolve(response));if(window.fixture.responseMode==='error')throw new Error('Synthetic server detail should not render');await new Promise(resolve=>setTimeout(resolve,80));return response;}`,
+export async function resumeFinOnboarding({data}){window.resumeCalls.push(data);const response=window.fixture.response;if(window.fixture.responseMode==='deferred')return await new Promise(resolve=>window.resolveResume=()=>resolve(response));if(window.fixture.responseMode==='error')throw new Error('Synthetic server detail should not render');await new Promise(resolve=>setTimeout(resolve,80));return response;}
+export async function startMyFinResearch(){window.researchCalls=(window.researchCalls||[]).concat(['start']);throw new Error('Research must not start unless the athlete asks');}
+export async function getMyFinResearch(){return {status:'unavailable'};}
+export async function reviewMyFinResearch(){return {status:'unavailable'};}
+export async function saveMyFinResearchDraft(){window.saveCalls++;throw new Error('No save allowed in this UI test');}
+export async function supplyMyFinResultLink(){return {status:'unavailable'};}
+export async function continueMyFinProfile(){return {status:'profile_setup_continued'};}`,
   "panels.tsx": `import React from 'react';export function PotentialResultMatchesPanel(){return <div>Existing stored-result panel</div>;}export function ProfileClaimGuide(){return <div>Existing claim guide</div>;}export function ProfileResultsSetup(){return <div>Existing profile setup</div>;}`,
   "styles.css": `@import "${repo}/src/styles.css";\n@source "${repo}/src";\n@source "./";`,
   "main.tsx": `import React,{useState} from 'react';import {createRoot} from 'react-dom/client';import {QueryClient,QueryClientProvider} from '@tanstack/react-query';import {Route} from '${repo}/src/routes/join.tsx';import './styles.css';
@@ -48,6 +54,7 @@ const alias = [
   ["@/lib/athrecs/athlete-account-api", `${fixture}/api.ts`],
   ["@/lib/athrecs/profile-setup-api", `${fixture}/api.ts`],
   ["@/lib/athrecs/fin-onboarding-api", `${fixture}/api.ts`],
+  ["@/lib/athrecs/fin-research-api", `${fixture}/api.ts`],
   ["@/components/athletes/PotentialResultMatchesPanel", `${fixture}/panels.tsx`],
   ["@/components/athletes/ProfileClaimGuide", `${fixture}/panels.tsx`],
   ["@/components/athletes/ProfileResultsSetup", `${fixture}/panels.tsx`],

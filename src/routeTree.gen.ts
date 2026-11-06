@@ -111,6 +111,7 @@ import { Route as AdminAthletesAthleteIdRouteImport } from './routes/admin/athle
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiFinActionsRouteImport } from './routes/api/fin/actions'
 import { Route as ApiFinCleanupRouteImport } from './routes/api/fin/cleanup'
+import { Route as ApiFinResearchWorkerRouteImport } from './routes/api/fin/research-worker'
 import { Route as ApiRaceCalendarTokenRouteImport } from './routes/api/race-calendar/$token'
 import { Route as RacesPlacesIndexRouteImport } from './routes/races/places/index'
 import { Route as RacesPlacesSplatRouteImport } from './routes/races/places/$'
@@ -639,6 +640,11 @@ const ApiFinCleanupRoute = ApiFinCleanupRouteImport.update({
   path: '/api/fin/cleanup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiFinResearchWorkerRoute = ApiFinResearchWorkerRouteImport.update({
+  id: '/api/fin/research-worker',
+  path: '/api/fin/research-worker',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRaceCalendarTokenRoute = ApiRaceCalendarTokenRouteImport.update({
   id: '/api/race-calendar/$token',
   path: '/api/race-calendar/$token',
@@ -803,6 +809,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/fin/actions': typeof ApiFinActionsRoute
   '/api/fin/cleanup': typeof ApiFinCleanupRoute
+  '/api/fin/research-worker': typeof ApiFinResearchWorkerRoute
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
@@ -918,6 +925,7 @@ export interface FileRoutesByTo {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/fin/actions': typeof ApiFinActionsRoute
   '/api/fin/cleanup': typeof ApiFinCleanupRoute
+  '/api/fin/research-worker': typeof ApiFinResearchWorkerRoute
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
@@ -1034,6 +1042,7 @@ export interface FileRoutesById {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/fin/actions': typeof ApiFinActionsRoute
   '/api/fin/cleanup': typeof ApiFinCleanupRoute
+  '/api/fin/research-worker': typeof ApiFinResearchWorkerRoute
   '/api/race-calendar/$token': typeof ApiRaceCalendarTokenRoute
   '/races/places/$': typeof RacesPlacesSplatRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
@@ -1151,6 +1160,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/api/fin/actions'
     | '/api/fin/cleanup'
+    | '/api/fin/research-worker'
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
@@ -1266,6 +1276,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/api/fin/actions'
     | '/api/fin/cleanup'
+    | '/api/fin/research-worker'
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
@@ -1381,6 +1392,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/api/fin/actions'
     | '/api/fin/cleanup'
+    | '/api/fin/research-worker'
     | '/api/race-calendar/$token'
     | '/races/places/$'
     | '/running/races/$slug'
@@ -1497,6 +1509,7 @@ export interface RootRouteChildren {
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiFinActionsRoute: typeof ApiFinActionsRoute
   ApiFinCleanupRoute: typeof ApiFinCleanupRoute
+  ApiFinResearchWorkerRoute: typeof ApiFinResearchWorkerRoute
   ApiRaceCalendarTokenRoute: typeof ApiRaceCalendarTokenRoute
   RacesPlacesSplatRoute: typeof RacesPlacesSplatRoute
   RunningRacesSlugRoute: typeof RunningRacesSlugRoute
@@ -2227,6 +2240,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiFinCleanupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/fin/research-worker': {
+      id: '/api/fin/research-worker'
+      path: '/api/fin/research-worker'
+      fullPath: '/api/fin/research-worker'
+      preLoaderRoute: typeof ApiFinResearchWorkerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/race-calendar/$token': {
       id: '/api/race-calendar/$token'
       path: '/api/race-calendar/$token'
@@ -2409,6 +2429,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiFinActionsRoute: ApiFinActionsRoute,
   ApiFinCleanupRoute: ApiFinCleanupRoute,
+  ApiFinResearchWorkerRoute: ApiFinResearchWorkerRoute,
   ApiRaceCalendarTokenRoute: ApiRaceCalendarTokenRoute,
   RacesPlacesSplatRoute: RacesPlacesSplatRoute,
   RunningRacesSlugRoute: RunningRacesSlugRoute,
