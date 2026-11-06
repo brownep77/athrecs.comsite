@@ -125,6 +125,7 @@ export type PrivateBrand = Brand & {
   status: string;
   review_note: string;
   revision: number;
+  synthetic_test?: boolean;
 };
 export type Opportunity = {
   id: number;

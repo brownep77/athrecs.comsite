@@ -76,6 +76,17 @@ function BrandDashboard() {
         </section>
       ) : (
         <>
+          {data.brand.synthetic_test ? (
+            <div className="rounded-xl border-2 border-amber-400 bg-amber-50 p-4 text-slate-900">
+              <p className="text-sm font-bold uppercase tracking-wide">
+                Private test company · Demo only
+              </p>
+              <p className="mt-1 text-sm">
+                This company and its opportunities are never shown on the public website and cannot
+                receive applications. Changes you make here go live on this dashboard straight away.
+              </p>
+            </div>
+          ) : null}
           <section className={panelClass}>
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
