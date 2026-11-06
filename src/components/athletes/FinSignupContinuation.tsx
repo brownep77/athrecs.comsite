@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Loader2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { resumeFinOnboarding } from "@/lib/athrecs/fin-onboarding-api";
+import { FinResultResearchPanel } from "@/components/athletes/FinResultResearchPanel";
 import type { AthleteAccountData } from "@/lib/athrecs/athlete-account-api";
 import { openAthleteAuth } from "@/lib/auth/client";
 
@@ -133,6 +134,12 @@ export function FinSignupContinuation({
               </Link>
             </Button>
           </div>
+          <FinResultResearchPanel
+            continuation={continuation}
+            eventName={result.eventName}
+            year={result.year}
+            accountExists={account.exists}
+          />
         </>
       ) : account?.emailVerified && result?.status === "unavailable" ? (
         <Button asChild className={actionClass}>

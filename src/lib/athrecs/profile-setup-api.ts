@@ -28,6 +28,8 @@ export const saveMyProfileSetup = createServerFn({ method: "POST" })
         values(${context.userId},${JSON.stringify({ previousClubs: data.previousClubs, sourceUrls: data.sourceUrls })}::jsonb,${MATCHING_NOTICE_VERSION})
         on conflict(user_id) do update set settings=athlete_result_matching_settings.settings||excluded.settings,updated_at=now()`;
       await tx`delete from athlete_external_match_searches where user_id=${context.userId}`;
+      const { discardFinResearchAfterSettingsChange } = await import("./fin-research.server.ts");
+      await discardFinResearchAfterSettingsChange(tx, context.userId, true);
       const snapshot = JSON.stringify(data);
       const [request] = await tx<{
         id: number;

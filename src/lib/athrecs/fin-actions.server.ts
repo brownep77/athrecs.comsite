@@ -219,8 +219,10 @@ export async function handleFinActionRequest(
   }
   // Runtime application imports occur only after connector authentication.
   const { finActionSchema } = await import("./fin-onboarding.ts");
+  const { finResearchActionSchema } = await import("./fin-research.ts");
   const parsed = finActionSchema.safeParse(input);
-  if (!parsed.success) {
+  const research = parsed.success ? null : finResearchActionSchema.safeParse(input);
+  if (!parsed.success && !research?.success) {
     return respond(
       { status: "invalid_request", message: "Check the action and required fields." },
       400,
@@ -239,9 +241,29 @@ export async function handleFinActionRequest(
         { "Retry-After": String(quota.retryAfter) },
       );
     }
-    if (parsed.data.action === "find_public_profiles") {
+    if (parsed.success && parsed.data.action === "find_public_profiles") {
       const findProfiles = dependencies.findPublicProfiles ?? findFinPublicProfiles;
       return respond(await findProfiles(sql, parsed.data.racingName));
+    }
+    if (research?.success) {
+      const { fetchPublicSourcePage, handleFinResearchAction, FinResearchError } = await import(
+        "./fin-research.server.ts"
+      );
+      try {
+        const outcome = await handleFinResearchAction(sql, research.data, fetchPublicSourcePage);
+        return respond(outcome.body, outcome.httpStatus);
+      } catch (error) {
+        if (error instanceof FinResearchError) {
+          return respond({ status: error.code, message: error.message }, error.status);
+        }
+        throw error;
+      }
+    }
+    if (!parsed.success || parsed.data.action !== "create_signup_link") {
+      return respond(
+        { status: "invalid_request", message: "Check the action and required fields." },
+        400,
+      );
     }
     const { createFinSignupLink, FinOnboardingError } = await import("./fin-onboarding.server.ts");
     const createSignupLink = dependencies.createSignupLink ?? createFinSignupLink;

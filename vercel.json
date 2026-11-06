@@ -638,6 +638,10 @@
     {
       "path": "/api/fin/cleanup",
       "schedule": "17 * * * *"
+    },
+    {
+      "path": "/api/fin/research-worker",
+      "schedule": "*/2 * * * *"
     }
   ]
 }
