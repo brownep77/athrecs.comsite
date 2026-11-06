@@ -8,7 +8,16 @@ on:
     paths:
       - "scripts/verify-race-actions-mobile.mjs"
       - "scripts/verify-race-actions-safari.mjs"
+      - "scripts/verify-race-actions-ios-native.mjs"
+      - "scripts/ios-safari-input-probe.mjs"
+      - "scripts/ios-safari-share-sheet.mjs"
+      - "scripts/ios-safari-appium-http.mjs"
+      - "scripts/ios-safari-clear-control.mjs"
+      - "scripts/verify-ios-safari-clear-control.mjs"
+      - "scripts/wait-ios-appium-ready.mjs"
       - "scripts/prepare-ios-safari-simulator.mjs"
+      - "scripts/select-ios-safari-simulator.mjs"
+      - "scripts/prepare-ios-webdriveragent-prebuilt.mjs"
       - ".github/workflows/race-actions-live-browser.yml"
   workflow_dispatch:
 
@@ -21,33 +30,106 @@ concurrency:
 
 jobs:
   safari:
-    name: Safari - ${{ matrix.platform }}
+    name: Safari - macos
     runs-on: macos-15
     timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [macos, ios]
+    env:
+      ATHRECS_SAFARI_PLATFORM: macos
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Select Xcode matching the installed iOS Simulator
-        if: matrix.platform == 'ios'
-        run: sudo /usr/bin/xcode-select --switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Check native viewport and touch guards
+        run: node --test scripts/verify-ios-safari-clear-control.mjs
       - name: Enable Safari's native WebDriver
         run: sudo /usr/bin/safaridriver --enable
-      - name: Boot an installed iPhone Simulator
-        if: matrix.platform == 'ios'
-        run: node scripts/prepare-ios-safari-simulator.mjs
       - name: Test public calendar and sharing in native Safari
         run: node scripts/verify-race-actions-safari.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: race-actions-safari-${{ matrix.platform }}
+          name: race-actions-safari-macos
           path: artifacts/race-actions-safari-*
+          if-no-files-found: warn
+
+  native-ios:
+    name: Safari - native iOS ${{ matrix.runtime }} interface (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runtime: "18.5"
+            runner: macos-15
+            xcode: /Applications/Xcode_16.4.app/Contents/Developer
+            device: iPhone 16
+            driver: "12.12.4"
+            startup: managed
+            arch: arm64
+          - runtime: "26.5"
+            runner: macos-26
+            xcode: /Applications/Xcode_26.6.app/Contents/Developer
+            device: iPhone 17
+            driver: "12.20.0"
+            startup: managed
+            arch: arm64
+    env:
+      DEVELOPER_DIR: ${{ matrix.xcode }}
+      ATHRECS_SAFARI_REQUIRED_RUNTIME_VERSION: ${{ matrix.runtime }}
+      ATHRECS_SAFARI_REQUIRED_DEVICE_NAME: ${{ matrix.device }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Select matching Xcode
+        run: sudo /usr/bin/xcode-select --switch "$DEVELOPER_DIR"
+      - name: Install pinned native XCTest automation
+        timeout-minutes: 8
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm install --global appium@3.8.0 2>&1 | tee artifacts/race-actions-ios-native-appium-install.log
+          appium driver install xcuitest@${{ matrix.driver }} 2>&1 | tee artifacts/race-actions-ios-native-driver-install.log
+      - name: Prepare the matching official Simulator test runner
+        timeout-minutes: 3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/prepare-ios-webdriveragent-prebuilt.mjs
+      - name: Start and verify Appium before Simulator boot
+        timeout-minutes: 3
+        run: |
+          mkdir -p artifacts
+          appium --address 127.0.0.1 --port 4723 --log artifacts/race-actions-ios-native-appium.log > artifacts/race-actions-ios-native-server.log 2>&1 < /dev/null &
+          ATHRECS_APPIUM_PROCESS=$!
+          export ATHRECS_APPIUM_PROCESS
+          echo "ATHRECS_APPIUM_PROCESS=$ATHRECS_APPIUM_PROCESS" >> "$GITHUB_ENV"
+          node scripts/wait-ios-appium-ready.mjs
+      - name: Select the installed iPhone for Appium-managed startup
+        if: matrix.startup == 'managed'
+        run: node scripts/select-ios-safari-simulator.mjs
+      - name: Boot the installed iPhone and verify Safari screen readiness
+        if: matrix.startup == 'prebooted'
+        timeout-minutes: 12
+        run: node scripts/prepare-ios-safari-simulator.mjs
+      - name: Test calendar and sharing through native iPhone controls
+        timeout-minutes: 30
+        run: node scripts/verify-race-actions-ios-native.mjs
+      - name: Stop this job's native automation server
+        if: always()
+        run: |
+          if [ -n "${ATHRECS_APPIUM_PROCESS:-}" ]; then
+            kill "$ATHRECS_APPIUM_PROCESS" 2>/dev/null || true
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: race-actions-safari-native-interface-ios-${{ matrix.runtime }}-${{ matrix.arch }}
+          path: |
+            artifacts/race-actions-safari-ios-setup*
+            artifacts/race-actions-ios-native*
           if-no-files-found: warn
 
   mobile:
