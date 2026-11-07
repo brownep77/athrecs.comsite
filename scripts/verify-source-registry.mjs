@@ -188,7 +188,12 @@ const runningOnlyRows = enabledRows.filter((row) =>
   /road|trail|fell|cross country|track|mixed terrain|beach/i.test(row.surface_scope),
 );
 
-assert.equal(enabledRows.length, 1052, "Enabled source count changed unexpectedly");
+assert.equal(enabledRows.length, 889, "Enabled source count changed unexpectedly");
+assert.equal(
+  enabledRows.filter((row) => /Membership-directory reference/.test(row.rights_status)).length,
+  0,
+  "Membership-directory references stay off until actual data pages are inspected",
+);
 const ownerCleared = enabledRows.filter((row) =>
   row.rights_status.startsWith("Cleared by owner rights review"),
 );

@@ -49,6 +49,7 @@ import { Route as AdminCollectionStatsRouteImport } from './routes/admin/collect
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminEmailInboxRouteImport } from './routes/admin/email-inbox'
 import { Route as AdminEventRegisterRouteImport } from './routes/admin/event-register'
+import { Route as AdminFixtureAutoingestRouteImport } from './routes/admin/fixture-autoingest'
 import { Route as AdminFixtureImportRouteImport } from './routes/admin/fixture-import'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
 import { Route as AdminNetworkRouteImport } from './routes/admin/network'
@@ -68,6 +69,9 @@ import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scan
 import { Route as ApiCollectionStatsWorkerRouteImport } from './routes/api/collection-stats-worker'
 import { Route as ApiDiagnosticsRouteImport } from './routes/api/diagnostics'
 import { Route as ApiEventCalendarRouteImport } from './routes/api/event-calendar'
+import { Route as ApiFixtureAutoingestRouteImport } from './routes/api/fixture-autoingest'
+import { Route as ApiFixtureAutoingestWorkerRouteImport } from './routes/api/fixture-autoingest-worker'
+import { Route as ApiFixtureDailySummaryRouteImport } from './routes/api/fixture-daily-summary'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
 import { Route as ApiResultCertificatesRouteImport } from './routes/api/result-certificates'
 import { Route as ApiResultClaimAlertsRouteImport } from './routes/api/result-claim-alerts'
@@ -324,6 +328,11 @@ const AdminEventRegisterRoute = AdminEventRegisterRouteImport.update({
   path: '/admin/event-register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminFixtureAutoingestRoute = AdminFixtureAutoingestRouteImport.update({
+  id: '/admin/fixture-autoingest',
+  path: '/admin/fixture-autoingest',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminFixtureImportRoute = AdminFixtureImportRouteImport.update({
   id: '/admin/fixture-import',
   path: '/admin/fixture-import',
@@ -418,6 +427,22 @@ const ApiDiagnosticsRoute = ApiDiagnosticsRouteImport.update({
 const ApiEventCalendarRoute = ApiEventCalendarRouteImport.update({
   id: '/api/event-calendar',
   path: '/api/event-calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFixtureAutoingestRoute = ApiFixtureAutoingestRouteImport.update({
+  id: '/api/fixture-autoingest',
+  path: '/api/fixture-autoingest',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFixtureAutoingestWorkerRoute =
+  ApiFixtureAutoingestWorkerRouteImport.update({
+    id: '/api/fixture-autoingest-worker',
+    path: '/api/fixture-autoingest-worker',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiFixtureDailySummaryRoute = ApiFixtureDailySummaryRouteImport.update({
+  id: '/api/fixture-daily-summary',
+  path: '/api/fixture-daily-summary',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiRaceCollectorWorkerRoute = ApiRaceCollectorWorkerRouteImport.update({
@@ -729,6 +754,7 @@ export interface FileRoutesByFullPath {
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
+  '/admin/fixture-autoingest': typeof AdminFixtureAutoingestRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -748,6 +774,9 @@ export interface FileRoutesByFullPath {
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
+  '/api/fixture-autoingest': typeof ApiFixtureAutoingestRoute
+  '/api/fixture-autoingest-worker': typeof ApiFixtureAutoingestWorkerRoute
+  '/api/fixture-daily-summary': typeof ApiFixtureDailySummaryRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
@@ -842,6 +871,7 @@ export interface FileRoutesByTo {
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
+  '/admin/fixture-autoingest': typeof AdminFixtureAutoingestRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -861,6 +891,9 @@ export interface FileRoutesByTo {
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
+  '/api/fixture-autoingest': typeof ApiFixtureAutoingestRoute
+  '/api/fixture-autoingest-worker': typeof ApiFixtureAutoingestWorkerRoute
+  '/api/fixture-daily-summary': typeof ApiFixtureDailySummaryRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
@@ -956,6 +989,7 @@ export interface FileRoutesById {
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
+  '/admin/fixture-autoingest': typeof AdminFixtureAutoingestRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -975,6 +1009,9 @@ export interface FileRoutesById {
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
+  '/api/fixture-autoingest': typeof ApiFixtureAutoingestRoute
+  '/api/fixture-autoingest-worker': typeof ApiFixtureAutoingestWorkerRoute
+  '/api/fixture-daily-summary': typeof ApiFixtureDailySummaryRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
@@ -1071,6 +1108,7 @@ export interface FileRouteTypes {
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
     | '/admin/event-register'
+    | '/admin/fixture-autoingest'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -1090,6 +1128,9 @@ export interface FileRouteTypes {
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
     | '/api/event-calendar'
+    | '/api/fixture-autoingest'
+    | '/api/fixture-autoingest-worker'
+    | '/api/fixture-daily-summary'
     | '/api/race-collector-worker'
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
@@ -1184,6 +1225,7 @@ export interface FileRouteTypes {
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
     | '/admin/event-register'
+    | '/admin/fixture-autoingest'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -1203,6 +1245,9 @@ export interface FileRouteTypes {
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
     | '/api/event-calendar'
+    | '/api/fixture-autoingest'
+    | '/api/fixture-autoingest-worker'
+    | '/api/fixture-daily-summary'
     | '/api/race-collector-worker'
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
@@ -1297,6 +1342,7 @@ export interface FileRouteTypes {
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
     | '/admin/event-register'
+    | '/admin/fixture-autoingest'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -1316,6 +1362,9 @@ export interface FileRouteTypes {
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
     | '/api/event-calendar'
+    | '/api/fixture-autoingest'
+    | '/api/fixture-autoingest-worker'
+    | '/api/fixture-daily-summary'
     | '/api/race-collector-worker'
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
@@ -1411,6 +1460,7 @@ export interface RootRouteChildren {
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminEmailInboxRoute: typeof AdminEmailInboxRoute
   AdminEventRegisterRoute: typeof AdminEventRegisterRoute
+  AdminFixtureAutoingestRoute: typeof AdminFixtureAutoingestRoute
   AdminFixtureImportRoute: typeof AdminFixtureImportRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
   AdminNetworkRoute: typeof AdminNetworkRoute
@@ -1430,6 +1480,9 @@ export interface RootRouteChildren {
   ApiCollectionStatsWorkerRoute: typeof ApiCollectionStatsWorkerRoute
   ApiDiagnosticsRoute: typeof ApiDiagnosticsRoute
   ApiEventCalendarRoute: typeof ApiEventCalendarRoute
+  ApiFixtureAutoingestRoute: typeof ApiFixtureAutoingestRoute
+  ApiFixtureAutoingestWorkerRoute: typeof ApiFixtureAutoingestWorkerRoute
+  ApiFixtureDailySummaryRoute: typeof ApiFixtureDailySummaryRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
   ApiResultCertificatesRoute: typeof ApiResultCertificatesRoute
   ApiResultClaimAlertsRoute: typeof ApiResultClaimAlertsRoute
@@ -1767,6 +1820,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEventRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/fixture-autoingest': {
+      id: '/admin/fixture-autoingest'
+      path: '/admin/fixture-autoingest'
+      fullPath: '/admin/fixture-autoingest'
+      preLoaderRoute: typeof AdminFixtureAutoingestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/fixture-import': {
       id: '/admin/fixture-import'
       path: '/admin/fixture-import'
@@ -1898,6 +1958,27 @@ declare module '@tanstack/react-router' {
       path: '/api/event-calendar'
       fullPath: '/api/event-calendar'
       preLoaderRoute: typeof ApiEventCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/fixture-autoingest': {
+      id: '/api/fixture-autoingest'
+      path: '/api/fixture-autoingest'
+      fullPath: '/api/fixture-autoingest'
+      preLoaderRoute: typeof ApiFixtureAutoingestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/fixture-autoingest-worker': {
+      id: '/api/fixture-autoingest-worker'
+      path: '/api/fixture-autoingest-worker'
+      fullPath: '/api/fixture-autoingest-worker'
+      preLoaderRoute: typeof ApiFixtureAutoingestWorkerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/fixture-daily-summary': {
+      id: '/api/fixture-daily-summary'
+      path: '/api/fixture-daily-summary'
+      fullPath: '/api/fixture-daily-summary'
+      preLoaderRoute: typeof ApiFixtureDailySummaryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/race-collector-worker': {
@@ -2307,6 +2388,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminEmailInboxRoute: AdminEmailInboxRoute,
   AdminEventRegisterRoute: AdminEventRegisterRoute,
+  AdminFixtureAutoingestRoute: AdminFixtureAutoingestRoute,
   AdminFixtureImportRoute: AdminFixtureImportRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
   AdminNetworkRoute: AdminNetworkRoute,
@@ -2326,6 +2408,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCollectionStatsWorkerRoute: ApiCollectionStatsWorkerRoute,
   ApiDiagnosticsRoute: ApiDiagnosticsRoute,
   ApiEventCalendarRoute: ApiEventCalendarRoute,
+  ApiFixtureAutoingestRoute: ApiFixtureAutoingestRoute,
+  ApiFixtureAutoingestWorkerRoute: ApiFixtureAutoingestWorkerRoute,
+  ApiFixtureDailySummaryRoute: ApiFixtureDailySummaryRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
   ApiResultCertificatesRoute: ApiResultCertificatesRoute,
   ApiResultClaimAlertsRoute: ApiResultClaimAlertsRoute,

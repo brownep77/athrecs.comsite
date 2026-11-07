@@ -1,0 +1,111 @@
+name: Automatic fixture collection
+
+# Owner instruction, 7 November 2026: collect fixtures from every approved source
+# daily and send them to the site, which publishes clean fixtures automatically and
+# leaves only possible duplicates and unresolved missing details for staff.
+on:
+  schedule:
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Collect and check, but do not send to the site
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fixture-autoingest
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Collect this share of the enabled sources (robots.txt and crawl delays honoured)
+        run: |
+          set -euo pipefail
+          from=$(date -u +%F)
+          to=$(date -u -d "+18 months" +%F)
+          node scripts/source-importer/run.mjs --from "$from" --to "$to" \
+            --shard ${{ matrix.shard }}/8 --concurrency 8 --out out/plain-${{ matrix.shard }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fixtures-plain-${{ matrix.shard }}
+          path: out/
+          retention-days: 7
+          if-no-files-found: warn
+
+  render:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - name: Read JavaScript calendars (Racebest)
+        run: |
+          from=$(date -u +%F)
+          to=$(date -u -d "+18 months" +%F)
+          node scripts/source-importer/render.mjs --adapter racebest --from "$from" --to "$to" --out out/render
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fixtures-render
+          path: out/
+          retention-days: 7
+          if-no-files-found: warn
+
+  send:
+    needs: [collect, render]
+    # Send whatever was collected, even if one share or the renderer failed.
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FIXTURE_AUTOINGEST_URL: ${{ vars.FIXTURE_AUTOINGEST_URL || 'https://www.athrecs.com/api/fixture-autoingest' }}
+      FIXTURE_AUTOINGEST_TOKEN: ${{ secrets.FIXTURE_AUTOINGEST_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: fixtures-*
+          path: out
+          merge-multiple: true
+      - name: Check and send to the site
+        run: |
+          set -euo pipefail
+          dirs=$(find out -mindepth 1 -maxdepth 1 -type d | sort | tr '\n' ' ')
+          if [ -z "$dirs" ]; then echo "Nothing was collected." >> "$GITHUB_STEP_SUMMARY"; exit 1; fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            node scripts/source-importer/autoingest-post.mjs --dry-run $dirs | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if [ -z "$FIXTURE_AUTOINGEST_TOKEN" ]; then
+            echo "FIXTURE_AUTOINGEST_TOKEN is not set in repository secrets; nothing was sent." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          node scripts/source-importer/autoingest-post.mjs --run-key "collector:${GITHUB_RUN_ID}" $dirs | tee -a "$GITHUB_STEP_SUMMARY"

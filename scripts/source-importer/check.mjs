@@ -13,7 +13,9 @@ const rows = parseCsv(await readFile(file, "utf8"));
 let allowedDomains = {};
 try {
   allowedDomains = loadAllowedDomains(await readFile("docs/source-registry/fixture-result-sources.csv", "utf8"));
-} catch {}
+} catch {
+  // Without the registry the domain check is skipped; every other check still runs.
+}
 const flags = checkRows(rows, { today, allowedDomains });
 const sum = summarise(rows, flags);
 console.log(`${sum.rows} rows: ${sum.clean} clean, ${sum.withWarnings} with warnings, ${sum.withErrors} with errors`);

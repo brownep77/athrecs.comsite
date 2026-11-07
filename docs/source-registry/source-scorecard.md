@@ -8,19 +8,19 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 
 | Tier | Sources |
 | --- | ---: |
-| A (Every 2 hours) | 328 |
-| B (Daily) | 1067 |
-| C (Weekly) | 304 |
-| Retired (Monthly) | 9 |
+| A (Every 2 hours) | 306 |
+| B (Daily) | 953 |
+| C (Weekly) | 438 |
+| Retired (Monthly) | 11 |
 
 ## Permission
 
 | Permission | Sources |
 | --- | ---: |
-| Open | 1052 |
-| Needs review | 435 |
+| Open | 889 |
+| Needs review | 596 |
 | Manual only | 212 |
-| Not allowed | 9 |
+| Not allowed | 11 |
 
 ## What sources supply
 
@@ -64,7 +64,6 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 | Albanian Swimming Federation — calendar | Albania | Fixtures | 69 | Collect; improve adapter |
 | Albanian Swimming Federation — website | Albania | Fixtures | 69 | Collect; improve adapter |
 | Federació Andorrana de Natació — calendar | Andorra | Fixtures | 69 | Collect; improve adapter |
-| Federació Andorrana de Triatló — calendar | Andorra | Fixtures | 69 | Collect; improve adapter |
 | Asia Run Calendar | Indonesia | Southeast Asia | Fixtures | 69 | Collect; improve adapter |
 | AthleteRanking Japan | Japan | Fixtures | 69 | Collect; improve adapter |
 | Athletics Alberta | Canada | Fixtures | 69 | Collect; improve adapter |
@@ -74,6 +73,7 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 | Ethiopian Athletics Federation | Ethiopia | Fixtures | 69 | Collect; improve adapter |
 | Athletics NSW | Australia | Fixtures | 69 | Collect; improve adapter |
 | Athletics New Zealand | New Zealand | Fixtures | 69 | Collect; improve adapter |
+| Athletics NZ Events | New Zealand | Fixtures | 69 | Collect; improve adapter |
 
 ## How scores work
 

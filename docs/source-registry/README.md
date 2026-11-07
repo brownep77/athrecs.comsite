@@ -631,7 +631,9 @@ The runtime reads the canonical CSV directly; no generated registry is required.
 
 ## Owner-cleared sources (26 October 2026)
 
-The owner confirmed the rights review for the remaining fixture directories and asked for them to be switched on. 1,011 sources now carry the status "Cleared by owner rights review 2026-10-26; robots.txt still enforced at run time", so the registry has 1,052 enabled sources and 656 off.
+The owner confirmed the rights review for the remaining fixture directories and asked for them to be switched on. 1,011 sources now carry the status "Cleared by owner rights review 2026-10-26; robots.txt still enforced at run time", so the registry had 1,052 enabled sources and 656 off.
+
+On 7 November 2026, 152 of those were switched back off because they are membership-directory pages (lists of member federations on World Athletics, World Triathlon, UCI, Olympic committee and similar sites), not fixture calendars. The 23 October owner rule keeps membership-directory links as research references until their actual data pages are inspected. Eleven more were restored to their earlier held settings because existing checks and notes keep them off: the FFA (its terms forbid copying), French Athletics discovery and biography references, Comrades, Two Oceans, and World Athletics member federations, European Athletics, World Para Athletics, World Masters Athletics, DirectAthletics and MileSplit pending their own rights reviews. The registry now has 889 enabled sources and 819 off. The daily automatic collection (`docs/fixture-autoingest.md`) reads the 889 enabled sources.
 
 - Still off: sources marked blocked by site terms or crawl rules, "automated collection not enabled", supervised-review-only, the two race-calendar discovery sites, results archives and athlete-profile sources.
 - The source importer (`npm run source-importer`) reads every enabled source but still honours each site's robots.txt, crawl delay and page budget on every run; a site that disallows a path is skipped, never worked around.
