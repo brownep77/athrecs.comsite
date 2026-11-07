@@ -377,20 +377,16 @@ export function AthleteAuthDialog() {
 
   async function startProvider(providerId: Parameters<typeof signInWithProvider>[0]) {
     clearStatus();
-    if (mode === "signup") {
-      const invalid = signupDetailsError(signupDetails);
-      if (invalid) {
-        setError(invalid.message);
-        if (invalid.code === "SIGNUP_NAME_REQUIRED") firstNameInput.current?.focus();
-        return;
-      }
-    }
+    // Owner decision, 7 November 2026: Google and other providers can create an
+    // account straight away. Details already typed into the form are carried
+    // through; anything missing is asked for on the account page afterwards.
+    const sendDetails = mode === "signup" && !signupDetailsError(signupDetails);
     setBusy(providerId);
     try {
       await signInWithProvider(providerId, {
         callbackURL: destination,
         errorCallbackURL: authCallbackPath(destination, mode),
-        ...(mode === "signup" ? { signupDetails: normalizeSignupDetails(signupDetails) } : {}),
+        ...(sendDetails ? { signupDetails: normalizeSignupDetails(signupDetails) } : {}),
       });
     } catch (cause) {
       setError(errorMessage(cause, "That sign-in method could not be opened."));

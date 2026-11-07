@@ -14,7 +14,13 @@ import { discardUndeliveredOtp, recordOtpDeliveryFailure } from "./otp-delivery.
 import { GROK_PROVIDERS } from "./providers";
 import { pgliteDialect } from "./pglite-dialect";
 import { captureCreatedSession } from "./access-diagnostics.server";
-import { normalizeSignupDetails, signupDetailsError, signupUserFields } from "./signup-details";
+import {
+  normalizeSignupDetails,
+  signupDetailsError,
+  signupUserFields,
+  splitProviderName,
+  usableSignupDetails,
+} from "./signup-details";
 import {
   GROK_ISSUER_DEFAULT,
   PREVIEW_ALLOWED_HOSTS,
@@ -116,15 +122,11 @@ export const authConfigured =
 // Trust only those platform-provided hosts, never a client-supplied Host header.
 const vercelPreviewHosts =
   env("VERCEL_ENV") === "preview"
-    ? [env("VERCEL_URL"), env("VERCEL_BRANCH_URL")].filter(
-        (host): host is string =>
-          Boolean(host && /^[a-z0-9-]+(?:\.[a-z0-9-]+)*\.vercel\.app$/i.test(host)),
+    ? [env("VERCEL_URL"), env("VERCEL_BRANCH_URL")].filter((host): host is string =>
+        Boolean(host && /^[a-z0-9-]+(?:\.[a-z0-9-]+)*\.vercel\.app$/i.test(host)),
       )
     : [];
-const previewAllowedHosts: string[] = unique([
-  ...PREVIEW_ALLOWED_HOSTS,
-  ...vercelPreviewHosts,
-]);
+const previewAllowedHosts: string[] = unique([...PREVIEW_ALLOWED_HOSTS, ...vercelPreviewHosts]);
 const DEPLOYED_AUTH_HOSTS: string[] = [
   "www.athrecs.com",
   "athrecs.com",
@@ -397,6 +399,27 @@ export const auth = betterAuth({
           const state = await getOAuthState();
           const details = normalizeSignupDetails(state?.athrecsSignup ?? user);
           const invalid = signupDetailsError(details);
+          if (invalid && state) {
+            // Owner decision, 7 November 2026: a new athlete may join straight
+            // from Google (or another provider) without filling the form first.
+            // The provider has verified the email; the account page then asks
+            // for date of birth, country and town before anything else.
+            // Anything valid the athlete already typed is kept; callback query
+            // parameters are never read.
+            const usable = usableSignupDetails(state.athrecsSignup);
+            const provider = splitProviderName(user.name, user.email);
+            const firstName = usable.firstName ?? provider.firstName;
+            const lastName = usable.firstName ? (usable.lastName ?? "") : provider.lastName;
+            return {
+              data: {
+                ...user,
+                ...usable,
+                firstName,
+                lastName,
+                name: [firstName, lastName].filter(Boolean).join(" "),
+              },
+            };
+          }
           if (invalid) throw new APIError("BAD_REQUEST", invalid);
           return {
             data: { ...user, ...details, name: `${details.firstName} ${details.lastName}` },

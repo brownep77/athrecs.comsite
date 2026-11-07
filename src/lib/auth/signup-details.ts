@@ -108,3 +108,67 @@ export function isSignupDetailsError(error: { code?: string; message?: string } 
     Object.values(SIGNUP_ERRORS).some((message) => message === error.message)
   );
 }
+
+/** Split a provider display name ("Paula Radcliffe") into first and last names. */
+export function splitProviderName(
+  name: string | null | undefined,
+  email?: string | null,
+): { firstName: string; lastName: string } {
+  const cleaned = cleanText(name).slice(0, 120);
+  const fallback = cleanText(email?.split("@")[0]?.replace(/[._-]+/g, " ")).slice(0, 60);
+  const parts = (cleaned || fallback).split(" ").filter(Boolean);
+  if (!parts.length) return { firstName: "Athlete", lastName: "" };
+  const [first, ...rest] = parts;
+  return { firstName: first.slice(0, 60), lastName: rest.join(" ").slice(0, 60) };
+}
+
+/** True when the private details needed to match historical results are saved. */
+export function signupDetailsComplete(details: {
+  signupCountry?: string | null;
+  signupLocation?: string | null;
+  signupDateOfBirth?: string | null;
+}): boolean {
+  return Boolean(
+    cleanText(details.signupCountry) &&
+    cleanText(details.signupLocation) &&
+    cleanText(details.signupDateOfBirth),
+  );
+}
+
+/**
+ * The usable part of an incomplete form: each field is kept only if it would
+ * pass the full check on its own, otherwise it is left empty (null) so the
+ * account page asks for it. Never reads anything except the protected state.
+ */
+export function usableSignupDetails(input: unknown) {
+  const details = normalizeSignupDetails(input);
+  const valid = (patch: Partial<SignupDetails>) =>
+    !signupDetailsError({ ...COMPLETE_PLACEHOLDER, ...patch });
+  const names = valid({ firstName: details.firstName, lastName: details.lastName });
+  return {
+    firstName: names ? details.firstName : null,
+    lastName: names ? details.lastName : null,
+    signupCountry: valid({ signupCountry: details.signupCountry }) ? details.signupCountry : null,
+    signupLocation:
+      details.signupLocation && valid({ signupLocation: details.signupLocation })
+        ? details.signupLocation
+        : null,
+    signupDateOfBirth:
+      details.signupDateOfBirth && valid({ signupDateOfBirth: details.signupDateOfBirth })
+        ? details.signupDateOfBirth
+        : null,
+    signupClubs:
+      details.signupClubs && valid({ signupClubs: details.signupClubs })
+        ? details.signupClubs
+        : null,
+  };
+}
+
+const COMPLETE_PLACEHOLDER: SignupDetails = {
+  firstName: "Valid",
+  lastName: "Placeholder",
+  signupCountry: "England",
+  signupLocation: "Norwich",
+  signupDateOfBirth: "1990-01-01",
+  signupClubs: "",
+};
