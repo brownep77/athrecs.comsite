@@ -9,11 +9,13 @@ import { OUTPUT_HEADERS, parseCsv, toCsv } from "./lib.mjs";
 const [file, dateFrom, dateTo] = process.argv.slice(2);
 const base = (process.env.SOURCE_IMPORT_URL ?? "").replace(/\/$/, "");
 const token = process.env.SOURCE_IMPORT_TOKEN ?? "";
-if (!file || !dateFrom || !dateTo || !base || !token)
+if (!file || !dateFrom || !dateTo)
   throw new Error(
     "Usage: post.mjs fixtures.csv FROM TO (with SOURCE_IMPORT_URL and SOURCE_IMPORT_TOKEN)",
   );
 const CHUNK = 300;
+// Without the token the run still lists every source's outcome; nothing is imported or emailed.
+const connected = Boolean(base && token);
 
 async function call(body) {
   const response = await fetch(`${base}/api/source-import-worker`, {
@@ -37,7 +39,7 @@ const totals = {
   held: 0,
   failedChunks: 0,
 };
-for (let start = 0; start < rows.length; start += CHUNK) {
+for (let start = 0; connected && start < rows.length; start += CHUNK) {
   const n = start / CHUNK + 1;
   const csv = toCsv(OUTPUT_HEADERS, rows.slice(start, start + CHUNK));
   try {
@@ -69,7 +71,7 @@ for (let start = 0; start < rows.length; start += CHUNK) {
 const access = parseCsv(await readFile(join(dirname(file), "access.csv"), "utf8"));
 const refused = access.filter((row) => row.status === "prohibited");
 const outreach = [];
-for (let start = 0; start < refused.length; start += 25) {
+for (let start = 0; connected && start < refused.length; start += 25) {
   try {
     const reply = await call({
       action: "outreach",
@@ -108,7 +110,7 @@ const outcomeLines = [
   "| --- | --- | --- | --- |",
   ...refused.map((row) => {
     const r = outreachBy.get(row.source_id);
-    return `| ${row.source_name.replaceAll("|", "/")} | ${row.url} | ${r?.contactEmail || row.contact_email || "none found"} | ${r?.status ?? "not attempted"} |`;
+    return `| ${row.source_name.replaceAll("|", "/")} | ${row.url} | ${r?.contactEmail || row.contact_email || "none found"} | ${r?.status ?? (connected ? "not attempted" : "not sent: import not connected")} |`;
   }),
   "",
   "## Sources with ingestion set up",
@@ -126,7 +128,7 @@ const outcomeLines = [
 await writeFile(join(dirname(file), "source-outcomes.md"), outcomeLines.join("\n"));
 
 const summary = [
-  `### Automated fixture import`,
+  `### Automated fixture import${connected ? "" : " (not connected: add SOURCE_IMPORT_TOKEN)"}`,
   `- Rows collected: ${totals.rows}`,
   `- Dropped as invalid or repeated: ${totals.dropped}`,
   `- Already listed (duplicates): ${totals.duplicates}`,

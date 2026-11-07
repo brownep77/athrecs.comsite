@@ -41,8 +41,7 @@ jobs:
           cat tmp/source-import/report.md >> "$GITHUB_STEP_SUMMARY"
         env:
           DAYS: ${{ github.event.inputs.days }}
-      - name: Import and publish through the site's checks
-        if: ${{ env.SOURCE_IMPORT_TOKEN != '' }}
+      - name: Import, publish through the site's checks, and list outcomes
         run: node scripts/source-importer/post.mjs tmp/source-import/fixtures.csv "$FROM" "$TO"
         env:
           SOURCE_IMPORT_URL: https://www.athrecs.com
@@ -52,4 +51,4 @@ jobs:
         with:
           name: source-import
           path: tmp/source-import
-          retention-days: 14
+          retention-days: 30
