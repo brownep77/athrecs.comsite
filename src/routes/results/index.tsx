@@ -1,4 +1,5 @@
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
+import { ClaimProfilePrompt } from "@/components/athletes/ClaimProfilePrompt";
 import { ChatPrompt } from "@/components/assistant/IntercomMessenger";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Search, Trophy } from "lucide-react";
@@ -223,6 +224,7 @@ function ResultsPage() {
         ) : null}
       </form>
 
+      <ClaimProfilePrompt context="results" />
       <section aria-label="Race results" className="space-y-3">
         {(!search.q || /bure|valley|banningham|norfolk/i.test(search.q)) &&
         (!search.year || search.year === "2026") &&
