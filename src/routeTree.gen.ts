@@ -51,6 +51,7 @@ import { Route as AdminEmailInboxRouteImport } from './routes/admin/email-inbox'
 import { Route as AdminEventRegisterRouteImport } from './routes/admin/event-register'
 import { Route as AdminFixtureImportRouteImport } from './routes/admin/fixture-import'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
+import { Route as AdminGrowthRouteImport } from './routes/admin/growth'
 import { Route as AdminNetworkRouteImport } from './routes/admin/network'
 import { Route as AdminPartnershipsRouteImport } from './routes/admin/partnerships'
 import { Route as AdminRaceCollectorRouteImport } from './routes/admin/race-collector'
@@ -334,6 +335,11 @@ const AdminFixtureImportRoute = AdminFixtureImportRouteImport.update({
 const AdminFixtureReviewRoute = AdminFixtureReviewRouteImport.update({
   id: '/admin/fixture-review',
   path: '/admin/fixture-review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminGrowthRoute = AdminGrowthRouteImport.update({
+  id: '/admin/growth',
+  path: '/admin/growth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminNetworkRoute = AdminNetworkRouteImport.update({
@@ -743,6 +749,7 @@ export interface FileRoutesByFullPath {
   '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/growth': typeof AdminGrowthRoute
   '/admin/network': typeof AdminNetworkRoute
   '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
@@ -858,6 +865,7 @@ export interface FileRoutesByTo {
   '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/growth': typeof AdminGrowthRoute
   '/admin/network': typeof AdminNetworkRoute
   '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
@@ -974,6 +982,7 @@ export interface FileRoutesById {
   '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/growth': typeof AdminGrowthRoute
   '/admin/network': typeof AdminNetworkRoute
   '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
@@ -1091,6 +1100,7 @@ export interface FileRouteTypes {
     | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
+    | '/admin/growth'
     | '/admin/network'
     | '/admin/partnerships'
     | '/admin/race-collector'
@@ -1206,6 +1216,7 @@ export interface FileRouteTypes {
     | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
+    | '/admin/growth'
     | '/admin/network'
     | '/admin/partnerships'
     | '/admin/race-collector'
@@ -1321,6 +1332,7 @@ export interface FileRouteTypes {
     | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
+    | '/admin/growth'
     | '/admin/network'
     | '/admin/partnerships'
     | '/admin/race-collector'
@@ -1437,6 +1449,7 @@ export interface RootRouteChildren {
   AdminEventRegisterRoute: typeof AdminEventRegisterRoute
   AdminFixtureImportRoute: typeof AdminFixtureImportRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
+  AdminGrowthRoute: typeof AdminGrowthRoute
   AdminNetworkRoute: typeof AdminNetworkRoute
   AdminPartnershipsRoute: typeof AdminPartnershipsRoute
   AdminRaceCollectorRoute: typeof AdminRaceCollectorRoute
@@ -1805,6 +1818,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/fixture-review'
       fullPath: '/admin/fixture-review'
       preLoaderRoute: typeof AdminFixtureReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/growth': {
+      id: '/admin/growth'
+      path: '/admin/growth'
+      fullPath: '/admin/growth'
+      preLoaderRoute: typeof AdminGrowthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/network': {
@@ -2349,6 +2369,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminEventRegisterRoute: AdminEventRegisterRoute,
   AdminFixtureImportRoute: AdminFixtureImportRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
+  AdminGrowthRoute: AdminGrowthRoute,
   AdminNetworkRoute: AdminNetworkRoute,
   AdminPartnershipsRoute: AdminPartnershipsRoute,
   AdminRaceCollectorRoute: AdminRaceCollectorRoute,
