@@ -96,6 +96,10 @@ export const historyPerformanceSchema = sourcePerformanceSchema.extend({
   sourceDate: sourcePerformanceSchema.shape.sourceDate.default(""),
   ageGroup: sourcePerformanceSchema.shape.ageGroup.default(""),
   wind: sourcePerformanceSchema.shape.wind.default(""),
+  // Historical source sheets may omit descriptive meeting names or placings.
+  // Keep the marks readable without inventing either value.
+  meeting: sourcePerformanceSchema.shape.meeting.default(""),
+  place: sourcePerformanceSchema.shape.place.default(""),
   date: z.string().regex(/^(?:\d{4}-\d{2}-\d{2})?$/),
 });
 export type SourcePerformance = z.infer<typeof sourcePerformanceSchema>;
