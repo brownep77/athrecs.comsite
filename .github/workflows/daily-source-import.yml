@@ -20,26 +20,61 @@ concurrency:
 permissions:
   contents: read
 
+# GitHub caps one job at 6 hours, so the sources are split by website into four
+# parts that collect side by side (up to about 22 hours of collecting in all,
+# finishing within 6 hours). A final job merges them and publishes once.
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
     steps:
       - uses: actions/checkout@v4
       # The importer uses only Node's built-in modules, so no package install is needed.
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Collect fixtures from enabled sources
+      - name: Collect fixtures from this part of the sources
         run: |
           FROM=$(date -u +%F)
           TO=$(date -u -d "+${DAYS:-120} days" +%F)
-          echo "FROM=$FROM" >> "$GITHUB_ENV"
-          echo "TO=$TO" >> "$GITHUB_ENV"
-          node scripts/source-importer/run.mjs --from "$FROM" --to "$TO" --concurrency 8 --out tmp/source-import
-          cat tmp/source-import/report.md >> "$GITHUB_STEP_SUMMARY"
+          printf '%s\n%s\n' "$FROM" "$TO" > window.txt
+          node scripts/source-importer/run.mjs --from "$FROM" --to "$TO" --concurrency 4 \
+            --shard ${{ matrix.shard }}/4 --deadline-minutes 320 --out tmp/shard
+          cp window.txt tmp/shard/window.txt
         env:
           DAYS: ${{ github.event.inputs.days }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: source-shard-${{ matrix.shard }}
+          path: tmp/shard
+          retention-days: 7
+
+  publish:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: source-shard-*
+          path: tmp/shards
+      - name: Merge the parts
+        run: |
+          node scripts/source-importer/merge.mjs tmp/source-import tmp/shards/*
+          WINDOW=$(ls tmp/shards/*/window.txt | head -1)
+          echo "FROM=$(sed -n 1p "$WINDOW")" >> "$GITHUB_ENV"
+          echo "TO=$(sed -n 2p "$WINDOW")" >> "$GITHUB_ENV"
+          cat tmp/source-import/report.md >> "$GITHUB_STEP_SUMMARY"
       - name: Import, publish through the site's checks, and list outcomes
         run: node scripts/source-importer/post.mjs tmp/source-import/fixtures.csv "$FROM" "$TO"
         env:

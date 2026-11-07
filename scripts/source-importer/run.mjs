@@ -4,7 +4,7 @@
 // Writes fixtures.csv (upload it to Import running fixtures), skipped.csv and report.md. Publishes nothing.
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { OUTPUT_HEADERS, enabledSources, parseCsv, runAll, toCsv } from "./lib.mjs";
+import { OUTPUT_HEADERS, enabledSources, parseCsv, runAll, shardOf, toCsv } from "./lib.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name) => {
@@ -16,11 +16,20 @@ const has = (name) => args.includes(`--${name}`);
 const today = new Date().toISOString().slice(0, 10);
 const registryPath = flag("registry")[0] ?? "docs/source-registry/fixture-result-sources.csv";
 const registry = parseCsv(await readFile(registryPath, "utf8"));
-const sources = enabledSources(registry, flag("source"));
+// --shard 2/4 collects one part of the sources (grouped by website).
+const [shardIndex, shardCount] = (flag("shard")[0] ?? "0/1").split("/").map(Number);
+const sources = enabledSources(registry, flag("source")).filter(
+  (s) => shardCount <= 1 || shardOf(s, shardCount) === shardIndex,
+);
+// --deadline-minutes 320 stops starting new sources after that long.
+const deadlineMinutes = Number(flag("deadline-minutes")[0] ?? 0);
+const deadline = deadlineMinutes ? Date.now() + deadlineMinutes * 60_000 : Infinity;
 
 if (has("list")) {
   for (const s of sources)
-    console.log(`${s.source_id}\t${s.source_type}\t${s.start_url}\tpages≤${s.max_pages}\t${s.rate_limit_seconds}s`);
+    console.log(
+      `${s.source_id}\t${s.source_type}\t${s.start_url}\tpages≤${s.max_pages}\t${s.rate_limit_seconds}s`,
+    );
   console.log(`${sources.length} enabled sources of ${registry.length} in the registry.`);
   process.exit(0);
 }
@@ -32,12 +41,16 @@ const concurrency = Number(flag("concurrency")[0] ?? 4);
 const maxEvents = Number(flag("max-events")[0] ?? 200);
 const { results, rows } = await runAll(sources, {
   concurrency,
+  deadline,
   options: { today, from, to, maxEvents },
 });
 await mkdir(out, { recursive: true });
 await writeFile(join(out, "fixtures.csv"), toCsv(OUTPUT_HEADERS, rows));
 const skipped = results.flatMap((r) => r.skipped);
-await writeFile(join(out, "skipped.csv"), toCsv(["source", "url", "name", "date", "reason"], skipped));
+await writeFile(
+  join(out, "skipped.csv"),
+  toCsv(["source", "url", "name", "date", "reason"], skipped),
+);
 const report = [
   `# Source import ${today}`,
   `Window ${from} to ${to}. ${sources.length} enabled sources, ${rows.length} rows, ${skipped.length} skipped.`,
