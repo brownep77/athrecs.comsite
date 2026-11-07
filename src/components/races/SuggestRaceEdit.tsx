@@ -65,6 +65,25 @@ export function SuggestRaceEdit({
   const [category, setCategory] = useState<string>(EDIT_TYPES[0].value);
   const [details, setDetails] = useState("");
   const [evidenceUrl, setEvidenceUrl] = useState("");
+  const [draftLoaded, setDraftLoaded] = useState(false);
+  const draftKey = `athrecs:race-edit-draft:${pageType}:${slug}`;
+  useEffect(() => {
+    // Keep unfinished feedback through the sign-in redirect, in this tab only.
+    try {
+      const saved = window.sessionStorage.getItem(draftKey);
+      if (saved) {
+        const draft = JSON.parse(saved) as Record<string, unknown>;
+        if (typeof draft.edition === "string") setEdition(draft.edition.slice(0, 80));
+        if (typeof draft.category === "string" && EDIT_TYPES.some((item) => item.value === draft.category))
+          setCategory(draft.category);
+        if (typeof draft.details === "string") setDetails(draft.details.slice(0, MAX_DETAILS));
+        if (typeof draft.evidenceUrl === "string") setEvidenceUrl(draft.evidenceUrl.slice(0, 2000));
+      }
+    } catch {
+      // Disabled storage must not block feedback.
+    }
+    setDraftLoaded(true);
+  }, [draftKey]);
   useEffect(() => {
     const openIfLinked = () => {
       if (window.location.hash === "#suggest-edit") setOpen(true);
@@ -90,10 +109,26 @@ export function SuggestRaceEdit({
         },
       }),
     onSuccess: () => {
+      try {
+        window.sessionStorage.removeItem(draftKey);
+      } catch {
+        // Submission succeeded; storage is optional.
+      }
       setDetails("");
       setEvidenceUrl("");
     },
   });
+  useEffect(() => {
+    if (!draftLoaded || save.isSuccess) return;
+    try {
+      window.sessionStorage.setItem(
+        draftKey,
+        JSON.stringify({ edition, category, details, evidenceUrl }),
+      );
+    } catch {
+      // Private or restricted browser sessions can disable storage.
+    }
+  }, [draftKey, draftLoaded, edition, category, details, evidenceUrl, save.isSuccess]);
 
   return (
     <section
@@ -204,8 +239,8 @@ export function SuggestRaceEdit({
           {!user ? (
             <div className="space-y-2">
               <p className="text-sm text-muted">
-                Please sign in to submit. Your draft stays visible while you are here;
-                the website will ask you to sign in before sending.
+                Please sign in to submit. Your draft is kept in this browser tab through
+                sign-in when browser storage is available. Nothing is sent before submission.
               </p>
               <Button
                 type="button"
