@@ -8,8 +8,8 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 
 | Tier | Sources |
 | --- | ---: |
-| A (Every 2 hours) | 327 |
-| B (Daily) | 912 |
+| A (Every 2 hours) | 321 |
+| B (Daily) | 918 |
 | C (Weekly) | 457 |
 | Retired (Monthly) | 12 |
 
@@ -17,8 +17,8 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 
 | Permission | Sources |
 | --- | ---: |
-| Open | 895 |
-| Needs review | 589 |
+| Open | 889 |
+| Needs review | 595 |
 | Manual only | 212 |
 | Not allowed | 12 |
 
@@ -36,7 +36,7 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 
 | Sport | Sources |
 | --- | ---: |
-| Running | 1105 |
+| Running | 1099 |
 | Swimming | 411 |
 | Triathlon | 291 |
 | Athletics | 272 |

@@ -632,12 +632,16 @@ The runtime reads the canonical CSV directly; no generated registry is required.
 ## Owner-cleared sources re-applied and daily collection (7 November 2026)
 
 The owner confirmed on 7 November 2026 that the 26 October rights clearance should be
-re-applied and fixtures collected daily. 854 of the 1,011 cleared sources are enabled
-(895 enabled in total). Held back:
+re-applied and fixtures collected daily. 848 of the 1,011 cleared sources are enabled
+(889 enabled in total). Held back:
 
 - 11 sources whose notes record bot-blocking or copying restrictions (for example the
   British Triathlon, British Cycling and French athletics organisation pages).
 - 146 "Membership reference only" club directories, which hold no fixtures.
+- 6 athletics platforms and federations that the athletics rollout order keeps held until
+  an API, licence or reuse agreement is confirmed (European Athletics, World Athletics
+  member federations, World Para Athletics, World Masters Athletics, DirectAthletics and
+  MileSplit).
 
 `.github/workflows/daily-source-import.yml` runs the source importer at 03:17 UTC every
 day across all enabled sources, honouring robots.txt, crawl delays and page budgets.

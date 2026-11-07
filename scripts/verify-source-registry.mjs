@@ -192,8 +192,8 @@ const runningOnlyRows = enabledRows.filter((row) =>
 const ownerCleared = enabledRows.filter((row) =>
   row.rights_status.startsWith("Cleared by owner rights review"),
 );
-assert.equal(enabledRows.length, 895, "Enabled source count changed unexpectedly");
-assert.equal(ownerCleared.length, 854, "Owner-cleared source count changed unexpectedly");
+assert.equal(enabledRows.length, 889, "Enabled source count changed unexpectedly");
+assert.equal(ownerCleared.length, 848, "Owner-cleared source count changed unexpectedly");
 assert.equal(
   runningOnlyRows.length + ownerCleared.filter((row) => !runningOnlyRows.includes(row)).length,
   enabledRows.length,
