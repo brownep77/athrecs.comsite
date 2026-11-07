@@ -7,7 +7,7 @@ export const NOVEMBER_5_WEEKEND_PREVIEW: EditorialArticle = {
   "displayDate": "5 November 2026",
   "author": "AthRecs Editorial",
   "title": "The big race weekend: Boston’s three-peat chase, Athens history and an IRONMAN showdown",
-  "seoTitle": "Big Race Weekend 7–8 November 2026: Boston, Athens, IRONMAN Florida & More | AthRecs",
+  "seoTitle": "Big Race Weekend 7–8 November 2026: Boston, Athens, IRONMAN Florida & More",
   "description": "Who's racing 7–8 November 2026? Fentaye Belayneh, Abel Kipchumba, Habtom Samuel, Magnus Ditlev, Holly Lawrence and the elite fields at Boston, Athens, Florida and Ravenna.",
   "standfirst": "A champion chasing a Boston first. A trio of Greek runners racing history. A Danish triathlete returning to the deep end. Across nine big races this weekend, the names on the start lists tell more than one story.",
   "body": [

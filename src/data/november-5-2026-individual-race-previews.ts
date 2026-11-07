@@ -9,7 +9,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "Boston Half 2026: Belayneh’s three-peat bid, Samuel’s speed and a course that bites",
-    "seoTitle": "Boston Half 2026: Belayneh’s three-peat bid, Samuel’s speed and a course that bites | AthRecs",
+    "seoTitle": "Boston Half 2026: Belayneh’s three-peat bid, Samuel’s speed and a course that bites",
     "description": "Who is running the Boston Half Marathon on 8 November 2026? Elite entrants, the rolling course, start time, race-day logistics and profile links.",
     "standfirst": "A third consecutive women’s title is on the line in Boston. Fentaye Belayneh has the winning habit, but a field that includes Melat Kejeta, Sara Hall and Emily Durgin will not give her a clear road. On the men’s side, the blend of 58-minute credentials and Habtom Samuel’s remarkable Houston debut makes this a race worth following kilometre by kilometre.",
     "body": [
@@ -152,7 +152,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "IRONMAN Florida 2026: Magnus Ditlev, Sam Long and the long fight against the wind",
-    "seoTitle": "IRONMAN Florida 2026: Magnus Ditlev, Sam Long and the long fight against the wind | AthRecs",
+    "seoTitle": "IRONMAN Florida 2026: Magnus Ditlev, Sam Long and the long fight against the wind",
     "description": "IRONMAN Florida 2026 pro field, 140.6-mile race course, Gulf swim, bike wind, marathon pacing and athlete guide for 7 November.",
     "standfirst": "For a race that finishes with a marathon, IRONMAN Florida asks some of its toughest questions hours before anyone puts on their running shoes. Magnus Ditlev, Sam Long and Cam Wurf headline a fascinating men’s field, while Holly Lawrence and Alanis Siffert add considerable pedigree to the women’s race. The real contest may be how intelligently they handle the open-water swim and the wind-exposed bike.",
     "body": [
@@ -279,7 +279,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "Athens Marathon 2026: Karaiskos, Noula and the hills before the stadium",
-    "seoTitle": "Athens Marathon 2026: Karaiskos, Noula and the hills before the stadium | AthRecs",
+    "seoTitle": "Athens Marathon 2026: Karaiskos, Noula and the hills before the stadium",
     "description": "Athens Authentic Marathon 2026 start blocks, iconic route elevation, forecast, Greek elite runners and practical advice for the 8 November race.",
     "standfirst": "There is no hiding from the Athens hills. Panagiotis Karaiskos and Stamatia Noula know the history, the climbs and the enormous pull of a finish inside the Panathenaic Stadium. For the rest of the field, the challenge is not simply to reach Athens; it is to leave enough in the legs to enjoy the final descent.",
     "body": [
@@ -410,7 +410,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "Ravenna Marathon 2026: the 2:07 contender and a city built for racing",
-    "seoTitle": "Ravenna Marathon 2026: the 2:07 contender and a city built for racing | AthRecs",
+    "seoTitle": "Ravenna Marathon 2026: the 2:07 contender and a city built for racing",
     "description": "Ravenna Marathon 2026 elite entrants including Solomon Mogos Shumay and Federica Moroni, 09:15 start, flat course and athlete information.",
     "standfirst": "Ravenna's combination of art, long straights and a potentially fast marathon makes for an intriguing elite race. Eritrea’s Solomon Mogos Shumay is advertised with a 2:07:00 personal best, while Caleb Alhamis Machas, Kebede Fikadu Merga and a strong women's group add depth to the field.",
     "body": [
@@ -522,7 +522,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "Indianapolis Monumental Marathon 2026: fast roads and the discipline of even pacing",
-    "seoTitle": "Indianapolis Monumental Marathon 2026: fast roads and the discipline of even pacing | AthRecs",
+    "seoTitle": "Indianapolis Monumental Marathon 2026: fast roads and the discipline of even pacing",
     "description": "Indianapolis Monumental Marathon on 7 November 2026: 08:00 start, marathon and half options, pacing, race-day logistics and official runner information.",
     "standfirst": "Indianapolis offers runners a clear Saturday target: a marathon through the city, with the opportunity to pace for a personal best. It is the kind of event where an overexcited opening 5K can cost far more than it earns. The 08:00 local start means your arrival, warm-up and corral plan matter.",
     "body": [
@@ -626,7 +626,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "Porto Marathon 2026: six hours, river scenery and a race-day plan",
-    "seoTitle": "Porto Marathon 2026: six hours, river scenery and a race-day plan | AthRecs",
+    "seoTitle": "Porto Marathon 2026: six hours, river scenery and a race-day plan",
     "description": "Porto Marathon 2026 local start time, marathon versus 10K, six-hour cutoff, water points and logistics for 8 November.",
     "standfirst": "Porto's marathon offers another chance to discover what 42.195 kilometres can feel like when the pacing, weather and atmosphere come together. The city’s famous riverfront scenery is a bonus; it will not rescue anyone who mistakes the first 10 kilometres for a tempo run.",
     "body": [
@@ -730,7 +730,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "Málaga Marathon 2026: fast ambitions, coastal exposure and pacing restraint",
-    "seoTitle": "Málaga Marathon 2026: fast ambitions, coastal exposure and pacing restraint | AthRecs",
+    "seoTitle": "Málaga Marathon 2026: fast ambitions, coastal exposure and pacing restraint",
     "description": "Generali Málaga Marathon 8 November 2026: 08:30 first wave, marathon and half marathon, coastal conditions, aid and runner logistics.",
     "standfirst": "A November marathon in Málaga can look deceptively inviting, with the city, the coast and mild-season running conditions. But a race in which the early pace feels easy can still become a challenge when the wind shifts or the temperature rises.",
     "body": [
@@ -834,7 +834,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "Nice–Cannes Marathon 2026: sea views, coastal wind and 42 kilometres of decisions",
-    "seoTitle": "Nice–Cannes Marathon 2026: sea views, coastal wind and 42 kilometres of decisions | AthRecs",
+    "seoTitle": "Nice–Cannes Marathon 2026: sea views, coastal wind and 42 kilometres of decisions",
     "description": "Nice–Cannes Marathon 2026 first gun time, coastline course, weather exposure, six-hour cutoff, transport and race-day athlete advice.",
     "standfirst": "Nice–Cannes is the sort of marathon where runners should look up from the watch occasionally. The Riviera scenery is exceptional, but the long exposed coastal sections can make wind direction a serious pacing variable. The best plan allows for that rather than demanding identical kilometre splits in every headwind.",
     "body": [
@@ -938,7 +938,7 @@ export const NOVEMBER_5_INDIVIDUAL_RACE_PREVIEWS: EditorialArticle[] = [
     "publishedAt": "2026-11-05",
     "author": "AthRecs Editorial",
     "title": "IRONMAN 70.3 Melbourne 2026: a chilly start and a windy bike leg",
-    "seoTitle": "IRONMAN 70.3 Melbourne 2026: a chilly start and a windy bike leg | AthRecs",
+    "seoTitle": "IRONMAN 70.3 Melbourne 2026: a chilly start and a windy bike leg",
     "description": "IRONMAN 70.3 Melbourne 8 November 2026: St Kilda start, swim-bike-run distances, forecast wind, transitions and age-group advice.",
     "standfirst": "St Kilda offers a different kind of endurance test on Sunday: swim 1.9 km, cycle 90 km, then run a half marathon. The important forecast story is the contrast between a chilly early start and potentially sunnier, windier conditions later. Athletes who plan only for the temperature at the start may find themselves uncomfortable by the run.",
     "body": [
