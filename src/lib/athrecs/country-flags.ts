@@ -1,3 +1,4 @@
+import { NATIONALITY_DEMONYMS } from "./nationality-demonyms.ts";
 // Static names keep server rendering and browsers on different ICU versions identical.
 export const countryNames: Readonly<Record<string, string>> = {
   AD: "Andorra",
@@ -724,6 +725,56 @@ export function countryFlag(value: string | null | undefined) {
       ? String.fromCodePoint(...[...code].map((letter) => letter.charCodeAt(0) + 127397))
       : "",
   };
+}
+
+const UK_HOME_NATIONS = new Set(["England", "Scotland", "Wales", "Northern Ireland"]);
+
+/**
+ * Owner decision, 7 November 2026: an athlete who chooses England, Scotland,
+ * Wales or Northern Ireland is also a United Kingdom athlete. Returns the home
+ * nation (as chosen) when the value is one, otherwise null.
+ */
+export function ukHomeNation(value: string | null | undefined): string | null {
+  const name = countryFlag(value).name;
+  return UK_HOME_NATIONS.has(name) ? name : null;
+}
+
+/** The nations to show and match for a nationality: a home nation plus the UK. */
+export function nationalityNations(value: string | null | undefined): string[] {
+  const original = value?.trim() ?? "";
+  if (!original) return [];
+  const home = ukHomeNation(original);
+  return home ? [home, "United Kingdom"] : [original];
+}
+
+const HOME_NATION_DEMONYMS: Record<string, string> = {
+  England: "English",
+  Scotland: "Scottish",
+  Wales: "Welsh",
+  "Northern Ireland": "Northern Irish",
+};
+
+/**
+ * Owner decision, 7 November 2026: profiles and bios describe nationality with
+ * the nationality word ("Kenyan" for Kenya). Unknown values are shown as given.
+ */
+export function nationalityDemonym(value: string | null | undefined): string {
+  const original = value?.trim() ?? "";
+  if (!original) return "";
+  const home = ukHomeNation(original);
+  if (home) return HOME_NATION_DEMONYMS[home];
+  const { code } = countryFlag(original);
+  return (code && NATIONALITY_DEMONYMS[code]) || original;
+}
+
+/** Flag country plus nationality word for each nation, e.g. England -> English, British. */
+export function nationalityLabels(
+  value: string | null | undefined,
+): { country: string; label: string }[] {
+  return nationalityNations(value).map((country) => ({
+    country,
+    label: nationalityDemonym(country),
+  }));
 }
 
 /** Flag artwork is a display choice, separate from geographic/matching codes. */

@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Loader2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClubSuggest } from "./ClubSuggest";
+import { ukHomeNation } from "@/lib/athrecs/country-flags";
 import {
   SIGNUP_COUNTRIES,
   latestSignupBirthdate,
@@ -143,6 +144,11 @@ export function FinishSignupCard({
               </option>
             ))}
           </select>
+          {ukHomeNation(details.signupNationality) ? (
+            <span className="block text-xs font-normal text-muted">
+              You'll also be shown as a United Kingdom (British) athlete.
+            </span>
+          ) : null}
         </label>
         <label className="block space-y-1.5 text-sm font-medium text-fg">
           City or town

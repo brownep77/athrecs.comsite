@@ -287,7 +287,13 @@ try {
     null,
     "Invitation claim succeeds without birth date",
   );
-  assert.equal(optionalIdentity.nationality, null, "Invitation claim succeeds without nationality");
+  // Nationality is not required to claim; the profile carries only the
+  // athlete's own sign-up choice (the synthetic fixture chose United Kingdom).
+  assert.equal(
+    optionalIdentity.nationality,
+    "United Kingdom",
+    "Invitation claim keeps only the athlete's own sign-up nationality",
+  );
   assert.equal(bound.user_id, invited.user.id);
   assert(bound.claim_id);
   assert.equal(

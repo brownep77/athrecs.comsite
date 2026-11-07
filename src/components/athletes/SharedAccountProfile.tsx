@@ -39,6 +39,7 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
         sport: profile.primarySport,
         city: profile.city,
         country: profile.country,
+        nationality: profile.nationality,
         club: profile.club,
         coach: profile.details.coach,
       })

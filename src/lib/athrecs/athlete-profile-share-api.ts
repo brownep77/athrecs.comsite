@@ -145,7 +145,10 @@ async function loadIdentity(
       profile.city,
       profile.region,
       profile.country,
-      profile.club_or_team, profile.nationality, profile.date_of_birth::text as date_of_birth, profile.profile_details
+      profile.club_or_team,
+      -- The athlete's own sign-up choice until they set one on their profile.
+      coalesce(nullif(profile.nationality, ''), account_user."signupNationality") as nationality,
+      profile.date_of_birth::text as date_of_birth, profile.profile_details
     from "user" account_user
     join athlete_identifiers identifier on identifier.user_id = account_user."id"
     left join athlete_private_profiles profile on profile.user_id = account_user."id"
@@ -365,6 +368,8 @@ async function buildPublicProfile(
         city: share.share_location ? (identity.city ?? "") : "",
         region: share.share_location ? (identity.region ?? "") : "",
         country: share.share_location ? (identity.country ?? "") : "",
+        // Nationality is already shown on the shared profile itself.
+        nationality: identity.nationality ?? "",
         clubOrTeam: share.share_club ? (identity.club_or_team ?? "") : "",
         results: profileAchievementResults(results, sourceHistories).filter((result) =>
           isCompletedResult(result),

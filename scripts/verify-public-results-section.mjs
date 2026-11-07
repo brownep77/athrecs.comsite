@@ -375,7 +375,7 @@ try {
   const router = { Link, createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) };
   const panels = loadTypeScript("src/components/races/ArchiveResultPanels.tsx", { "react/jsx-runtime": jsxRuntime });
   const countryFlag = loadTypeScript("src/components/athletes/CountryFlag.tsx", {
-    react: { useState }, "react/jsx-runtime": jsxRuntime, "@/lib/athrecs/country-flags": loadTypeScript("src/lib/athrecs/country-flags.ts"),
+    react: { useState }, "react/jsx-runtime": jsxRuntime, "@/lib/athrecs/country-flags": loadTypeScript("src/lib/athrecs/country-flags.ts", { "./nationality-demonyms.ts": loadTypeScript("src/lib/athrecs/nationality-demonyms.ts") }),
   });
   const board = loadTypeScript("src/components/races/RaceResultsBoard.tsx", {
     "react/jsx-runtime": jsxRuntime, "@tanstack/react-router": router, "@/components/athletes/CountryFlag": countryFlag,

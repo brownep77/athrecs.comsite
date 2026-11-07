@@ -18,6 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { authClient, signInWithProvider } from "@/lib/auth/client";
 import { ClubSuggest } from "./ClubSuggest";
+import { ukHomeNation } from "@/lib/athrecs/country-flags";
 import { getAvailableAuthMethods } from "@/lib/auth/auth-methods-api";
 import {
   isSignupDetailsError,
@@ -775,6 +776,11 @@ export function AthleteAuthDialog() {
                         </option>
                       ))}
                     </select>
+                    {ukHomeNation(signupDetails.signupNationality) ? (
+                      <p className="text-xs font-normal text-muted">
+                        You'll also be shown as a United Kingdom (British) athlete.
+                      </p>
+                    ) : null}
                   </div>
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
                     City or town

@@ -1,3 +1,4 @@
+import { nationalityDemonym } from "./country-flags.ts";
 export type AthleteBioResult = {
   resultId: number;
   eventName: string;
@@ -13,6 +14,8 @@ export type AthleteBioSource = {
   city: string;
   region: string;
   country: string;
+  /** Athlete or source nationality; written as e.g. "a Kenyan runner". */
+  nationality?: string;
   clubOrTeam: string;
   results: AthleteBioResult[];
   achievements?: string[];
@@ -27,7 +30,9 @@ export function buildGeneratedAthleteBio(source: AthleteBioSource): string {
     (a, b) => b.eventDate.localeCompare(a.eventDate) || b.resultId - a.resultId,
   );
 
-  let introduction = `${name} is ${articleFor(role)} ${role}`;
+  const demonym = nationalityDemonym(source.nationality);
+  const described = demonym ? `${demonym} ${role}` : role;
+  let introduction = `${name} is ${articleFor(described)} ${described}`;
   if (location) introduction += ` based in ${location}`;
   if (club) introduction += `${location ? " and" : ""} affiliated with ${club}`;
 

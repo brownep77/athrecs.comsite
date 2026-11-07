@@ -30,6 +30,7 @@ type IdentityRow = {
   city: string | null;
   region: string | null;
   country: string | null;
+  nationality: string | null;
   club_or_team: string | null;
 };
 
@@ -74,6 +75,7 @@ async function loadBio(
         profile.city,
         profile.region,
         profile.country,
+        coalesce(nullif(profile.nationality, ''), account_user."signupNationality") as nationality,
         profile.club_or_team
       from "user" account_user
       left join athlete_private_profiles profile on profile.user_id = account_user."id"
@@ -124,6 +126,7 @@ async function loadBio(
         city: identity.city ?? "",
         region: identity.region ?? "",
         country: identity.country ?? "",
+        nationality: identity.nationality ?? "",
         clubOrTeam: identity.club_or_team ?? "",
         results: resultRows,
         achievements: bioAchievements(resultRows),
