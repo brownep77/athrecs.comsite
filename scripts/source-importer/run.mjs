@@ -1,6 +1,6 @@
 // Parallel race importer. Usage:
 //   node scripts/source-importer/run.mjs --list
-//   node scripts/source-importer/run.mjs --from 2026-10-26 --to 2026-11-30 [--source id ...] [--out dir]
+//   node scripts/source-importer/run.mjs --from 2026-10-26 --to 2026-11-30 [--source id ...] [--shard 1/8] [--out dir]
 // Writes fixtures.csv (upload it to Import running fixtures), skipped.csv and report.md. Publishes nothing.
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -16,7 +16,11 @@ const has = (name) => args.includes(`--${name}`);
 const today = new Date().toISOString().slice(0, 10);
 const registryPath = flag("registry")[0] ?? "docs/source-registry/fixture-result-sources.csv";
 const registry = parseCsv(await readFile(registryPath, "utf8"));
-const sources = enabledSources(registry, flag("source"));
+const shard = /^(\d+)\/(\d+)$/.exec(flag("shard")[0] ?? "");
+// --shard i/n splits the enabled sources across n parallel runs (i counts from 1).
+const sources = enabledSources(registry, flag("source")).filter(
+  (_, index) => !shard || index % Number(shard[2]) === Number(shard[1]) - 1,
+);
 
 if (has("list")) {
   for (const s of sources)

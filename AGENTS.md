@@ -12,6 +12,20 @@
 
 ## Fixture dates and start times
 
+- Owner instruction, 7 November 2026: ingest fixtures automatically from every
+  enabled source and publish them without staff review when they pass the normal
+  collector checks: exact date, stated distance, start town and country from a
+  primary page, a clean collector duplicate decision ("review"), no quality-checker
+  error, and the usual batch validation and publication guard. Rows already in
+  fixtures are recorded silently. Only possible duplicates and details still missing
+  after automated research go to staff (`/admin/fixture-autoingest`). Research must
+  read a primary page and pass the same checks; never infer a distance from a name
+  or a date from another year. A missing start time does not block publication; the
+  start-time process above still applies. Email the owner at 08:00 and 18:00 London
+  with fixtures added, events that took place, results brought in and the staff
+  queue. See `docs/fixture-autoingest.md`. This supersedes manual Keep/Publish for
+  these clean collector rows only.
+
 - Owner instruction, 26 October 2026: all published race fixtures need a confirmed
   distance. Research each edition against its organiser, authorised entry programme
   or governing body. Do not infer distance from a race name. Keep unresolved

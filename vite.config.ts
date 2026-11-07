@@ -351,6 +351,7 @@ export default defineConfig(({ command }) => ({
               functionRules: {
                 "/api/race-collector-worker": { maxDuration: WORKER_MAX_DURATION_SECONDS },
                 "/api/collection-stats-worker": { maxDuration: 90 },
+                "/api/fixture-autoingest-worker": { maxDuration: WORKER_MAX_DURATION_SECONDS },
               },
             },
           }),
