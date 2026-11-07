@@ -72,3 +72,12 @@ Keep common layout and AthRecs design vocabulary, not identical boilerplate.
 5. Preview, check PR and deploy only after all release gates pass. Verify actual public page, metadata and results afterwards.
 6. Roll out in reviewed batches, prioritising upcoming races (next 90 days), heavily visited event pages and rich historical races. Track number of newly reviewed guides, images cleared, pages published and stale guides; never claim to have processed all fixtures without counts.
 7. Use the same data model for approved PDF/poster ingestion, with deduplication and provenance.
+
+## Public suggestions and review workflow
+- Every individual race page (catalogue events, road marathon/half-marathon guides and road ultras) shows a visible **Suggest an edit** link in the race header as well as an expandable correction form near the bottom.
+- The link scrolls to and opens the form, including when arriving via `#suggest-edit` or returning from sign-in.
+- The form automatically identifies the race and, when available, preselects the upcoming edition date. Submitters can change the edition/year to correct an earlier event.
+- Choose a category (date/time, distance/course, location/logistics, entry, results/records, image credits/rights, other). Include a written correction and optionally an official source/results URL.
+- For now only signed-in users can submit. An unfinished note is kept in the current browser tab across authentication when session storage is available. Do not promise guest submissions until an abuse-resistant route is built.
+- Submissions use the existing race-edit API, staff queue, rate limit (five per hour per account) and notification process. They are never auto-applied to public facts.
+- Avoid creating a second silo, no unreviewed database overwrites, and no leaking the account identity to public race pages. Admins retain final judgement and source verification responsibility.
