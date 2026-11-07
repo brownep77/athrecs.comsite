@@ -19,6 +19,7 @@ import {
   signupDetailsError,
   signupUserFields,
   splitProviderName,
+  usableSignupDetails,
 } from "./signup-details";
 import {
   GROK_ISSUER_DEFAULT,
@@ -403,17 +404,19 @@ export const auth = betterAuth({
             // from Google (or another provider) without filling the form first.
             // The provider has verified the email; the account page then asks
             // for date of birth, country and town before anything else.
-            const { firstName, lastName } = splitProviderName(user.name, user.email);
+            // Anything valid the athlete already typed is kept; callback query
+            // parameters are never read.
+            const usable = usableSignupDetails(state.athrecsSignup);
+            const provider = splitProviderName(user.name, user.email);
+            const firstName = usable.firstName ?? provider.firstName;
+            const lastName = usable.firstName ? (usable.lastName ?? "") : provider.lastName;
             return {
               data: {
                 ...user,
+                ...usable,
                 firstName,
                 lastName,
                 name: [firstName, lastName].filter(Boolean).join(" "),
-                signupCountry: null,
-                signupLocation: null,
-                signupDateOfBirth: null,
-                signupClubs: null,
               },
             };
           }

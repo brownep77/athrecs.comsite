@@ -692,33 +692,94 @@ try {
       assert.equal(url.protocol, "https:");
       assert.equal(url.searchParams.get("redirect_uri"), `${origin}/api/auth/callback/${provider}`);
     }
+    // Owner decision, 7 November 2026: Google may create an account before the
+    // form is filled in. Callback query parameters must still never be trusted.
     const missingOAuthEmail = "oauth-missing-details@example.test";
-    const deniedOAuth = await finishGoogle(await startGoogle(), missingOAuthEmail, {
+    const quickOAuth = await finishGoogle(await startGoogle(), missingOAuthEmail, {
       firstName: "Query",
       lastName: "Spoof",
       signupCountry: "England",
       signupLocation: "Norwich",
+      signupDateOfBirth: "1990-01-01",
     });
-    assert.equal(deniedOAuth.status, 302);
+    assert.equal(quickOAuth.status, 302);
     assert(
-      new URL(deniedOAuth.headers.get("location"), origin).searchParams.has("error"),
-      "OAuth cannot bypass required details with a provider display name or callback query",
+      !new URL(quickOAuth.headers.get("location"), origin).searchParams.has("error"),
+      "Google sign-up works before the form is filled in",
+    );
+    const [quickUser] =
+      await sql`select "firstName","lastName","signupCountry","signupLocation","signupDateOfBirth","signupClubs" from "user" where email=${missingOAuthEmail}`;
+    assert.deepEqual(
+      quickUser,
+      {
+        firstName: "Provider",
+        lastName: "Nickname",
+        signupCountry: null,
+        signupLocation: null,
+        signupDateOfBirth: null,
+        signupClubs: null,
+      },
+      "Provider name is used and callback query parameters are ignored",
+    );
+    const quickCookie = { cookie: responseCookies(quickOAuth) };
+    const quickAccount = await rpc(
+      "athrecs/athlete-account-api",
+      "getMyAthleteAccount",
+      undefined,
+      undefined,
+      quickCookie,
+    );
+    assert.equal(quickAccount.signupDetailsComplete, false, "Account page asks for details");
+    const finishDetails = signupDetails("Finished Runner");
+    const finished = await rpc(
+      "athrecs/athlete-account-api",
+      "completeMySignupDetails",
+      finishDetails,
+      undefined,
+      quickCookie,
+    );
+    assert.equal(finished.signupDetailsComplete, true);
+    await rpc(
+      "athrecs/athlete-account-api",
+      "completeMySignupDetails",
+      { ...finishDetails, signupDateOfBirth: "1970-02-02" },
+      undefined,
+      quickCookie,
     );
     assert.equal(
-      (await sql`select count(*)::int as n from "user" where email=${missingOAuthEmail}`)[0].n,
-      0,
+      (await sql`select "signupDateOfBirth" from "user" where email=${missingOAuthEmail}`)[0]
+        .signupDateOfBirth,
+      finishDetails.signupDateOfBirth,
+      "A private date of birth can only be set once",
+    );
+    await assert.rejects(
+      () =>
+        rpc("athrecs/athlete-account-api", "completeMySignupDetails", {
+          ...finishDetails,
+        }),
+      "Finishing details requires a signed-in account",
     );
     const oauthDetails = signupDetails("OAuth Test Runner");
+    const partialOAuthEmail = "oauth-partial-details@example.test";
     const noBirthdate = await finishGoogle(
       await startGoogle({ ...oauthDetails, signupDateOfBirth: undefined }),
-      missingOAuthEmail,
+      partialOAuthEmail,
       { signupDateOfBirth: oauthDetails.signupDateOfBirth },
     );
     assert.equal(noBirthdate.status, 302);
-    assert(new URL(noBirthdate.headers.get("location"), origin).searchParams.has("error"));
-    assert.equal(
-      (await sql`select count(*)::int as n from "user" where email=${missingOAuthEmail}`)[0].n,
-      0,
+    assert(!new URL(noBirthdate.headers.get("location"), origin).searchParams.has("error"));
+    const [partialUser] =
+      await sql`select "firstName","lastName","signupCountry","signupLocation","signupDateOfBirth" from "user" where email=${partialOAuthEmail}`;
+    assert.deepEqual(
+      partialUser,
+      {
+        firstName: "OAuth",
+        lastName: "Test Runner",
+        signupCountry: "England",
+        signupLocation: "Norwich",
+        signupDateOfBirth: null,
+      },
+      "Valid details typed before Google are kept; a query-string birth date is not",
     );
     const validOAuth = await startGoogle(oauthDetails);
     const oauthEmail = "oauth-complete-details@example.test";
@@ -773,7 +834,7 @@ try {
       1,
     );
     console.log(
-      "Email login flow passed: required names/country/location, normalized private signup details, fresh-code recovery, legacy login, delivery adapter, password verification, hashed one-time codes, expiry, attempts, stable profile IDs, DOB validation, scoped name writes, cross-site/unauthenticated rejection, pre-registration attack prevention, logout revocation, OAuth protected-state signup and six OAuth redirects.",
+      "Email login flow passed: required names/country/location, normalized private signup details, fresh-code recovery, legacy login, delivery adapter, password verification, hashed one-time codes, expiry, attempts, stable profile IDs, DOB validation, scoped name writes, cross-site/unauthenticated rejection, pre-registration attack prevention, logout revocation, OAuth protected-state signup, Google sign-up before details with set-once completion, and six OAuth redirects.",
     );
   }
 } finally {

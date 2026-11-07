@@ -134,3 +134,41 @@ export function signupDetailsComplete(details: {
     cleanText(details.signupDateOfBirth),
   );
 }
+
+/**
+ * The usable part of an incomplete form: each field is kept only if it would
+ * pass the full check on its own, otherwise it is left empty (null) so the
+ * account page asks for it. Never reads anything except the protected state.
+ */
+export function usableSignupDetails(input: unknown) {
+  const details = normalizeSignupDetails(input);
+  const valid = (patch: Partial<SignupDetails>) =>
+    !signupDetailsError({ ...COMPLETE_PLACEHOLDER, ...patch });
+  const names = valid({ firstName: details.firstName, lastName: details.lastName });
+  return {
+    firstName: names ? details.firstName : null,
+    lastName: names ? details.lastName : null,
+    signupCountry: valid({ signupCountry: details.signupCountry }) ? details.signupCountry : null,
+    signupLocation:
+      details.signupLocation && valid({ signupLocation: details.signupLocation })
+        ? details.signupLocation
+        : null,
+    signupDateOfBirth:
+      details.signupDateOfBirth && valid({ signupDateOfBirth: details.signupDateOfBirth })
+        ? details.signupDateOfBirth
+        : null,
+    signupClubs:
+      details.signupClubs && valid({ signupClubs: details.signupClubs })
+        ? details.signupClubs
+        : null,
+  };
+}
+
+const COMPLETE_PLACEHOLDER: SignupDetails = {
+  firstName: "Valid",
+  lastName: "Placeholder",
+  signupCountry: "England",
+  signupLocation: "Norwich",
+  signupDateOfBirth: "1990-01-01",
+  signupClubs: "",
+};
