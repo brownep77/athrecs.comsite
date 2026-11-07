@@ -182,6 +182,7 @@ type UserRow = {
   image: string | null;
   signup_country?: string | null;
   signup_location?: string | null;
+  signup_nationality?: string | null;
   signup_date_of_birth_set?: boolean;
 };
 
@@ -559,6 +560,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       account_user."image" as image,
       account_user."signupCountry" as signup_country,
       account_user."signupLocation" as signup_location,
+      account_user."signupNationality" as signup_nationality,
       (nullif(trim(account_user."signupDateOfBirth"), '') is not null) as signup_date_of_birth_set
     from "user" account_user
     join athlete_identifiers identifier on identifier.user_id = account_user."id"
@@ -668,7 +670,8 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       signupDateOfBirth: user.signup_date_of_birth_set ? "set" : "",
     }),
     profileDetails: readProfileDetails(profile?.profile_details),
-    nationality: profile?.nationality ?? "",
+    // The athlete's own sign-up choice until they set one on their profile.
+    nationality: profile?.nationality || user.signup_nationality || "",
     clubOrTeam: profile?.club_or_team ?? "",
     preferredLanguage: profile?.preferred_language ?? "",
     previousNames: profile?.previous_names ?? [],

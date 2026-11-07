@@ -9,17 +9,20 @@ export function CountryFlag({
   country,
   showName = false,
   showCode = false,
+  label,
 }: {
   country?: string | null;
   showName?: boolean;
   showCode?: boolean;
+  /** Text shown beside the flag instead of the country name (e.g. "Kenyan"). */
+  label?: string;
 }) {
   const [failedCode, setFailedCode] = useState("");
   const flag = countryFlag(country);
   const imageCode = countryFlagImageCode(country);
   const abbreviation = countryAbbreviation(country);
   if (!flag.name) return <span aria-label="Country not specified">—</span>;
-  if (!flag.code) return <span>{flag.name}</span>;
+  if (!flag.code) return <span>{label ?? flag.name}</span>;
   return (
     <span className="inline-flex min-w-0 items-center gap-1.5">
       <span
@@ -50,7 +53,7 @@ export function CountryFlag({
           {abbreviation}
         </abbr>
       ) : null}
-      {showName ? <span>{country}</span> : null}
+      {label ? <span>{label}</span> : showName ? <span>{country}</span> : null}
     </span>
   );
 }

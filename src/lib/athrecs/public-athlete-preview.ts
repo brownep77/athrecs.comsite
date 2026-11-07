@@ -154,6 +154,7 @@ export function buildPublicAthletePreview(input: {
             name: input.displayName,
             sport: sports.includes("Athletics") ? "Athletics" : sports[0],
             country: input.country,
+            nationality: input.nationality,
             club: input.club,
           }),
         ],

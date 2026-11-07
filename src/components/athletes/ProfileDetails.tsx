@@ -1,6 +1,7 @@
 import type { PublicProfileDetails } from "@/lib/athrecs/profile-details";
 import type { SourceNationality } from "@/lib/athrecs/source-nationality";
 import { CountryFlag } from "./CountryFlag";
+import { nationalityLabels } from "@/lib/athrecs/country-flags";
 import { isWmmSource } from "@/lib/athrecs/profile-source-presentation";
 
 export function ProfileDetails({
@@ -35,7 +36,12 @@ export function ProfileDetails({
         <div className="min-w-0 sm:flex sm:items-center sm:gap-1.5">
           <dt className="text-xs text-subtle">Nationality</dt>
           <dd>
-            <CountryFlag country={nationality || details.nationality} showName />
+            {nationalityLabels(nationality || details.nationality).map((nation, index) => (
+              <span key={nation.country}>
+                {index ? <span className="mx-1 text-subtle">·</span> : null}
+                <CountryFlag country={nation.country} label={nation.label} />
+              </span>
+            ))}
             {nationalitySource &&
             !isWmmSource(nationalitySource.provider, [nationalitySource.sourceUrl]) ? (
               <a
