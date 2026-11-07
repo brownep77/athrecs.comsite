@@ -73,7 +73,7 @@ import { RaceQuestions } from "@/components/races/RaceQuestions";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { editionEntry } from "@/lib/athrecs/race-information";
 import { raceSearchContent, nextRaceEdition } from "@/lib/athrecs/race-search-content";
-import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
+import { SuggestRaceEdit, RaceEditJumpLink } from "@/components/races/SuggestRaceEdit";
 import { racePageMetadata, raceEditionStart } from "@/lib/athrecs/race-page-metadata";
 import { publicOrganiserName } from "@/lib/athrecs/seo";
 import { reviewedRacePage } from "@/data/race-page-reviews";
@@ -493,6 +493,7 @@ export function RacePageContent({
                 </a>
               </Button>
             )}
+            <RaceEditJumpLink />
             <Button asChild variant="secondary">
               <Link to={isRunningEvent && !IS_RUNRECS_SITE ? "/running/calendar" : "/calendar"}>
                 <CalendarDays className="h-3.5 w-3.5" />
@@ -996,7 +997,7 @@ export function RacePageContent({
           )}
         </aside>
       )}
-      <SuggestRaceEdit key={event.slug} slug={event.slug} name={event.name} />
+      <SuggestRaceEdit key={event.slug} slug={event.slug} name={event.name} editionDate={next?.event_date} />
     </div>
   );
 }
