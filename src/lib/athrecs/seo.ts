@@ -355,3 +355,8 @@ export function raceFaqJsonLd(input: {
     ],
   };
 }
+
+/** Appends the brand once, even when an editorial title already ends with it. */
+export function brandedTitle(title: string): string {
+  return `${title.replace(/(\s*\|\s*AthRecs)+\s*$/i, "").trim()} | AthRecs`;
+}

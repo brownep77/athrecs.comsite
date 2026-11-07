@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { EditorialArticlePage } from "@/components/editorial/EditorialArticlePage";
 import { getEditorialArticle } from "@/lib/athrecs/public-editorial-api";
-import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { brandedTitle, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { editorialJsonLd } from "@/lib/athrecs/editorial";
 import { getPublicEditorialAthleteLinks } from "@/lib/athrecs/editorial-athletes-api";
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/race-reports/$slug")({
             { rel: "canonical", href: `${SITE_URL}/race-reports/${loaderData.article.slug}` },
           ],
           meta: siteGraphMeta({
-            title: `${loaderData.article.seoTitle ?? loaderData.article.title} | AthRecs`,
+            title: brandedTitle(loaderData.article.seoTitle ?? loaderData.article.title),
             description: loaderData.article.description ?? loaderData.article.standfirst,
             url: `${SITE_URL}/race-reports/${loaderData.article.slug}`,
             type: "article",
