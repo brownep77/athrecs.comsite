@@ -1,6 +1,6 @@
 # Source scorecard
 
-Generated from `fixture-result-sources.csv` by `npm run sources:score`. 1685 sources scored.
+Generated from `fixture-result-sources.csv` by `npm run sources:score`. 1708 sources scored.
 Scores use registry evidence; live collection metrics adjust them once recorded in
 `source-live-metrics.csv`. A score never grants permission to collect.
 
@@ -8,19 +8,19 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 
 | Tier | Sources |
 | --- | ---: |
-| A (Every 2 hours) | 41 |
-| B (Daily) | 781 |
-| C (Weekly) | 851 |
-| Retired (Monthly) | 12 |
+| A (Every 2 hours) | 328 |
+| B (Daily) | 1067 |
+| C (Weekly) | 304 |
+| Retired (Monthly) | 9 |
 
 ## Permission
 
 | Permission | Sources |
 | --- | ---: |
-| Needs review | 1420 |
+| Open | 1052 |
+| Needs review | 435 |
 | Manual only | 212 |
-| Open | 41 |
-| Not allowed | 12 |
+| Not allowed | 9 |
 
 ## What sources supply
 
@@ -28,7 +28,7 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 | --- | ---: |
 | Results | 580 |
 | To assess | 379 |
-| Fixtures | 348 |
+| Fixtures | 371 |
 | Fixtures and results | 192 |
 | Reference | 186 |
 
@@ -37,10 +37,10 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 | Sport | Sources |
 | --- | ---: |
 | Swimming | 411 |
-| Running | 381 |
+| Running | 404 |
 | Unclassified | 305 |
 | Triathlon | 291 |
-| Athletics | 271 |
+| Athletics | 272 |
 | Cycling | 145 |
 | Trail | 76 |
 | HYROX | 12 |
@@ -54,26 +54,26 @@ Scores use registry evidence; live collection metrics adjust them once recorded 
 | World Athletics Combined Events Tour | Global | Fixtures and results | 72 | Rights review, then partner request if needed |
 | World Athletics Cross Country Tour | Global | Fixtures and results | 72 | Rights review, then partner request if needed |
 | World Athletics Race Walking Tour | Global | Fixtures and results | 72 | Rights review, then partner request if needed |
-| Eightmile Event Timing | United Kingdom | Fixtures and results | 70 | Rights review, then partner request if needed |
-| Elite Timing Ireland | Ireland | Fixtures and results | 70 | Rights review, then partner request if needed |
 | Monster Timing Ireland | Ireland | Fixtures and results | 70 | Rights review, then partner request if needed |
-| Precision Timing Ireland | Ireland | Fixtures and results | 70 | Rights review, then partner request if needed |
-| Sports Systems UK | United Kingdom | Fixtures and results | 70 | Rights review, then partner request if needed |
-| StuWeb UK Events and Results | United Kingdom | Fixtures and results | 70 | Rights review, then partner request if needed |
-| British Triathlon Super Series results and rankings | United Kingdom | Results | 69 | Rights review, then partner request if needed |
-| Titanium Race Timing results | United Kingdom | Results | 69 | Rights review, then partner request if needed |
-| Triathlon Scotland championship results and honours | Scotland | Results | 69 | Rights review, then partner request if needed |
-| UCI official calendar and results | Global | Fixtures and results | 68 | Manual research or partner request |
-| Banja Luka Marathon | Bosnia and Herzegovina | Fixtures | 67 | Rights review, then partner request if needed |
-| BBBRun | Australia | Fixtures | 67 | Rights review, then partner request if needed |
-| Changsha Marathon | China | Fixtures | 67 | Rights review, then partner request if needed |
-| Chrono Puces | France | Fixtures and results | 67 | Rights review, then partner request if needed |
-| Chrono-Race (France) | France | Fixtures and results | 67 | Rights review, then partner request if needed |
-| Chronoplace | France | Fixtures and results | 67 | Rights review, then partner request if needed |
-| ecomarathon.run | Japan | Fixtures | 67 | Rights review, then partner request if needed |
-| EGAT Mae Moh Half Marathon | Thailand | Fixtures | 67 | Rights review, then partner request if needed |
-| CS Montereau Athletics | France | Fixtures | 67 | Rights review, then partner request if needed |
-| TREK Marathon de Lille / Ligue Hauts-de-France | France | Fixtures | 67 | Rights review, then partner request if needed |
+| Malaysia Athletics | Malaysia | Fixtures | 69 | Collect; improve adapter |
+| Athletics Federation of India | India | Fixtures | 69 | Collect; improve adapter |
+| Athletics Association of Thailand | Thailand | Fixtures | 69 | Collect; improve adapter |
+| Abbott World Marathon Majors Age Group World Rankings | Global | Results | 69 | Collect; improve adapter |
+| Active.com | United States | Fixtures | 69 | Collect; improve adapter |
+| ADNOC Abu Dhabi Marathon | United Arab Emirates | Fixtures | 69 | Collect; improve adapter |
+| Albanian Swimming Federation — calendar | Albania | Fixtures | 69 | Collect; improve adapter |
+| Albanian Swimming Federation — website | Albania | Fixtures | 69 | Collect; improve adapter |
+| Federació Andorrana de Natació — calendar | Andorra | Fixtures | 69 | Collect; improve adapter |
+| Federació Andorrana de Triatló — calendar | Andorra | Fixtures | 69 | Collect; improve adapter |
+| Asia Run Calendar | Indonesia | Southeast Asia | Fixtures | 69 | Collect; improve adapter |
+| AthleteRanking Japan | Japan | Fixtures | 69 | Collect; improve adapter |
+| Athletics Alberta | Canada | Fixtures | 69 | Collect; improve adapter |
+| Australian Athletics | Australia | Fixtures | 69 | Collect; improve adapter |
+| Athletics Canada | Canada | Fixtures | 69 | Collect; improve adapter |
+| Athletics Canada event calendar | Canada | Fixtures | 69 | Collect; improve adapter |
+| Ethiopian Athletics Federation | Ethiopia | Fixtures | 69 | Collect; improve adapter |
+| Athletics NSW | Australia | Fixtures | 69 | Collect; improve adapter |
+| Athletics New Zealand | New Zealand | Fixtures | 69 | Collect; improve adapter |
 
 ## How scores work
 
