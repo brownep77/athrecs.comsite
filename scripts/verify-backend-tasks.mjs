@@ -24,7 +24,8 @@ try {
   await page.goto("http://127.0.0.1:8101");
   await page.getByRole("heading", { name: "What would you like to do?" }).waitFor();
   const cards = page.locator('[aria-label="Backend tasks"] article');
-  assert.equal(await cards.count(), 29);
+  assert.equal(await cards.count(), 30);
+  assert.equal(await page.getByRole("link", { name: "Open Automatic fixtures", exact: true }).getAttribute("href"), "/admin/fixture-autoingest");
   assert.equal(await page.getByRole("link", { name: "Open Athlete result finder", exact: true }).getAttribute("href"), "/admin/athlete-result-finder");
   assert.equal(await page.getByRole("link", { name: "Open Login & diagnostics", exact: true }).getAttribute("href"), "/admin/athlete-accounts?view=login-log");
   assert.equal(await page.getByRole("link", { name: "Open Stats", exact: true }).getAttribute("href"), "/admin/collection-stats");
@@ -52,15 +53,16 @@ try {
   assert.match(readFileSync("src/routes/admin/result-links.tsx", "utf8"), /Upload result-page links for existing editions/);
   await page.screenshot({ path: "artifacts/import-backend-tasks-desktop.png", fullPage: true });
   await page.getByLabel("Find a backend task").fill("duplicates");
-  // Stats now includes duplicate-review counts as well as the two import tools.
-  assert.equal(await cards.count(), 3);
-  assert.deepEqual((await cards.getByRole("link").evaluateAll(links => links.map(link => link.getAttribute("href")))).sort(), ["/admin/check-results-upload", "/admin/collection-stats", "/admin/fixture-import"]);
+  // Stats includes duplicate-review counts; Automatic fixtures lists possible duplicates for staff.
+  assert.equal(await cards.count(), 4);
+  assert.deepEqual((await cards.getByRole("link").evaluateAll(links => links.map(link => link.getAttribute("href")))).sort(), ["/admin/check-results-upload", "/admin/collection-stats", "/admin/fixture-autoingest", "/admin/fixture-import"]);
   await page.getByLabel('Find a backend task').fill('confirmations');
   assert.equal(await cards.count(),1);assert.equal(await cards.getByRole('link').getAttribute('href'),'/admin/athlete-workspace');
   await page.getByLabel("Find a backend task").fill("does-not-exist-xyz");
   assert.equal(await cards.count(), 0);
   await page.getByRole("button", { name: "Show all tasks", exact: true }).click();
-  assert.equal(await cards.count(), 29);
+  assert.equal(await cards.count(), 30);
+  assert.equal(await page.getByRole("link", { name: "Open Automatic fixtures", exact: true }).getAttribute("href"), "/admin/fixture-autoingest");
   await page.getByRole("button", { name: "Maintenance & data", exact: true }).click();
   assert.equal(await cards.count(), 5);
   await page.getByLabel("Find a backend task").fill("failed attempts");
@@ -68,7 +70,8 @@ try {
   assert.equal(await cards.getByRole("link").getAttribute("href"), "/admin/athlete-accounts?view=login-log");
   await page.getByLabel("Find a backend task").fill("");
   await page.getByRole("button", { name: "All tasks", exact: true }).click();
-  assert.equal(await cards.count(), 29);
+  assert.equal(await cards.count(), 30);
+  assert.equal(await page.getByRole("link", { name: "Open Automatic fixtures", exact: true }).getAttribute("href"), "/admin/fixture-autoingest");
   assert.equal(await page.getByRole("link", { name: "Add or update athletes", exact: true }).getAttribute("href"), "/admin/athlete-tools");
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
@@ -79,7 +82,7 @@ try {
   assert.match(shell, /id="legacy-admin-tools"/);
   assert.doesNotMatch(readFileSync("src/components/staff/BackendTaskPanel.tsx", "utf8"), /createServerFn|getSql|fetch\(|localStorage/);
   assert.deepEqual(errors, []);
-  console.log("PASS: all top-level staff routes covered, 29 distinct tool links including the athlete result finder, login diagnostics and the running event register, editing/confirmation route, accurate results-link purpose, duplicate and failed-attempt searches, preserved authentication/brand gate and desktop/mobile navigation.");
+  console.log("PASS: all top-level staff routes covered, 30 distinct tool links including the athlete result finder, login diagnostics and the running event register, editing/confirmation route, accurate results-link purpose, duplicate and failed-attempt searches, preserved authentication/brand gate and desktop/mobile navigation.");
 } catch (error) {
   if (page) await page.screenshot({ path: "artifacts/import-backend-tasks-failure.png", fullPage: true });
   throw error;
