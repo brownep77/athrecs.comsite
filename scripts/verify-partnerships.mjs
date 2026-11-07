@@ -19,7 +19,21 @@ for (const name of [
   "0031_brand_partnerships.sql",
   "20261011_result_claim_confirmation.sql",
   "20261103_reviewed_athlete_management.sql",
+  "20261106_private_test_brand.sql",
 ]) {
+  if (name === "20261106_private_test_brand.sql") {
+    // The full test-account isolation migration needs unrelated tables; this
+    // suite only needs to know that no synthetic account is a test user.
+    await pg.exec(`
+      create table if not exists athrecs_test_athletes (
+        athlete_id integer primary key, user_id text unique, email text not null unique,
+        created_at timestamptz not null default now()
+      );
+      create or replace function athrecs_is_test_user(uid text) returns boolean language sql stable as $$
+        select exists(select 1 from athrecs_test_athletes t where t.user_id = uid)
+      $$;
+    `);
+  }
   await pg.exec(await readFile(new URL(`../migrations/${name}`, import.meta.url), "utf8"));
 }
 function wrap(db) {
