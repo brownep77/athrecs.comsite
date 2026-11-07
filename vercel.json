@@ -634,6 +634,10 @@
     {
       "path": "/api/collection-stats-worker",
       "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/fixture-duplicate-scan",
+      "schedule": "41 7 * * *"
     }
   ]
 }

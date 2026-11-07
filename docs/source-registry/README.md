@@ -646,9 +646,11 @@ collecting, no fixtures found, unreachable, or refused by its robots.txt. A fail
 robots.txt fetch is never treated as a refusal.
 
 Collected rows are posted to `/api/source-import-worker` (secret `SOURCE_IMPORT_TOKEN`)
-and saved to the collector review queue with the normal duplicate check. Automatic
-publication of ready rows happens only when `AUTO_PUBLISH_SOURCE_FIXTURES=true`, because
-publishing otherwise requires a person to confirm the organiser's programme.
+and saved to the collector review queue with the normal duplicate check. Ready rows
+publish automatically when `AUTO_PUBLISH_SOURCE_FIXTURES=true`; the owner switched this
+on on 7 November 2026, replacing the manual programme check for this pipeline. A daily
+Vercel cron (`/api/fixture-duplicate-scan`, 07:41 UTC) flags likely duplicate upcoming
+fixtures and emails new ones to paul@athrecs.com; it never merges anything itself.
 
 Sites whose robots.txt refuses collection receive one partnership email from
 info@athrecs.com asking whether we may list their races with links back to their site.
