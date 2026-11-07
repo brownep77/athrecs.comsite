@@ -1,4 +1,5 @@
 import { ChannelNativeRecord } from "@/components/swimming/ChannelArchive";
+import { ClaimProfilePrompt } from "@/components/athletes/ClaimProfilePrompt";
 import { useEffect } from "react";
 import { SportBadge } from "@/components/races/EventBadges";
 import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOverview";
@@ -481,8 +482,17 @@ function AthleteContent() {
                 Record all your sporting achievements in one place.{" "}
                 <span className="mt-2 block text-[#c2410c]">Free forever.</span>
               </p>
+              <Link
+                to="/join"
+                search={{ step: "profile" }}
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-[#c2410c] bg-white px-5 py-2.5 text-sm font-semibold text-[#9a3412] no-underline hover:bg-orange-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c2410c] focus-visible:ring-offset-2"
+              >
+                Not you? Create my profile
+              </Link>
             </div>
-          ) : null}
+          ) : (
+            <ClaimProfilePrompt context="athlete" className="lg:w-[26rem] lg:shrink-0" />
+          )}
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />

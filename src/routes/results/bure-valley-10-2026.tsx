@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { ClaimProfilePrompt } from "@/components/athletes/ClaimProfilePrompt";
 import { BURE_WINNERS } from "@/data/bure-valley-2026-winners";
 import { ArchiveResultPanels } from "@/components/races/ArchiveResultPanels";
 import { getPublicEditorialAthleteLinks } from "@/lib/athrecs/editorial-athletes-api";
@@ -41,6 +42,7 @@ function BureResultsPage() {
           their AthRecs profile.
         </p>
       </header>
+      <ClaimProfilePrompt context="results" />
       <p className="text-sm leading-6 text-muted">
         Category awards exclude the top three overall. Winning times retain the timing provider’s
         published precision.

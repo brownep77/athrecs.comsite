@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ClaimProfilePrompt } from "@/components/athletes/ClaimProfilePrompt";
 import { createFileRoute, Link, notFound, stripSearchParams } from "@tanstack/react-router";
 import { ArrowLeft, Download, Copy, Clock3 } from "lucide-react";
 import { ArchiveResultPanels } from "@/components/races/ArchiveResultPanels";
@@ -141,6 +142,7 @@ function BerlinResultsPage() {
           </div>
         </div>
       </header>
+      <ClaimProfilePrompt context="results" />
 
       <section
         aria-label="Berlin results"

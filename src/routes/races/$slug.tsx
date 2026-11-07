@@ -1,4 +1,5 @@
 import { fixtureReferenceText } from "@/lib/athrecs/public-fixture-reference";
+import { ClaimProfilePrompt } from "@/components/athletes/ClaimProfilePrompt";
 import { isParkrunResult } from "@/lib/athrecs/parkrun-timing";
 import { RaceResultsBoard } from "@/components/races/RaceResultsBoard";
 import { ReviewedEventImage } from "@/components/races/ReviewedEventImage";
@@ -498,6 +499,8 @@ export function RacePageContent({
           </div>
         </div>
       </header>
+
+      <ClaimProfilePrompt context="race" />
 
       {!IS_RUNRECS_SITE ? (
         <section

@@ -1,4 +1,5 @@
 import { isParkrunResult, PARKRUN_TIMING_EXPLANATION } from "@/lib/athrecs/parkrun-timing";
+import { ClaimProfilePrompt } from "@/components/athletes/ClaimProfilePrompt";
 import { SportBadge, DistanceBadge } from "@/components/races/EventBadges";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
@@ -82,6 +83,8 @@ function RaceResultsPage() {
           )}
         </div>
       </header>
+
+      <ClaimProfilePrompt context="results" />
 
       <form action={`/results/${resultSlug(edition)}`} method="get" className="flex flex-wrap items-end gap-3 rounded-xl border border-border bg-surface p-4">
         <label className="min-w-0 flex-1 basis-64 space-y-1.5 text-xs font-medium text-muted">Athlete, bib, club or category

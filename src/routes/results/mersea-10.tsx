@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { ClaimProfilePrompt } from "@/components/athletes/ClaimProfilePrompt";
 import { ArrowLeft } from "lucide-react";
 import { ArchiveResultPanels } from "@/components/races/ArchiveResultPanels";
 import { Button } from "@/components/ui/button";
@@ -183,6 +184,7 @@ function MerseaArchive() {
             : "Choose a year to see its recorded results, or search across the archive."}
         </p>
       </header>
+      <ClaimProfilePrompt context="results" />
       <form
         action={merseaPath}
         method="get"
