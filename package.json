@@ -19,6 +19,8 @@
     "verify:signup-security": "node scripts/verify-production-auth-config.mjs && node scripts/verify-signup-security.mjs && node scripts/verify-athlete-management.mjs",
     "verify:intercom": "node --experimental-strip-types scripts/verify-intercom-identity.mjs && node scripts/verify-intercom-session.mjs && npm run verify:intercom-contact",
     "verify:intercom-contact": "node --experimental-strip-types scripts/verify-intercom-contact.mjs",
+    "verify:fin": "node --experimental-strip-types scripts/verify-fin-onboarding.mjs && node --experimental-strip-types scripts/verify-fin-profile-search.mjs && node --experimental-strip-types scripts/verify-fin-onboarding-flow.mjs",
+    "verify:fin-onboarding-ui": "node scripts/verify-fin-onboarding-ui.mjs",
     "verify:intercom-welcome": "node scripts/verify-intercom-welcome-browser.mjs",
     "verify:catalogue": "node --experimental-strip-types scripts/verify-catalogue.mjs",
     "verify:public-figures": "node --experimental-strip-types scripts/verify-public-figures.mjs",

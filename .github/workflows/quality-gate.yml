@@ -55,8 +55,14 @@ jobs:
       - name: Verify Intercom identity and account session isolation
         run: npm run verify:intercom
 
+      - name: Verify Fin discovery and verified signup handoff
+        run: npm run verify:fin
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+
+      - name: Verify Fin signup continuation on desktop and mobile
+        run: npm run verify:fin-onboarding-ui
 
       - name: Verify Intercom welcome displays on desktop and mobile
         run: npm run verify:intercom-welcome

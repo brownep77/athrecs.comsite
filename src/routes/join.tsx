@@ -1,4 +1,5 @@
 import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
+import { FinSignupContinuation } from "@/components/athletes/FinSignupContinuation";
 import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
 import { ProfileResultsSetup } from "@/components/athletes/ProfileResultsSetup";
 import { saveMyProfileSetup } from "@/lib/athrecs/profile-setup-api";
@@ -28,6 +29,7 @@ import {
   type AthleteSportCode,
 } from "@/lib/athrecs/athlete-account-api";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { parseFinContinuation } from "@/lib/athrecs/fin-onboarding";
 
 const platforms = {
   instagram: "Instagram",
@@ -41,28 +43,51 @@ const platforms = {
 type Platform = keyof typeof platforms;
 
 export const Route = createFileRoute("/join")({
-  validateSearch: (search: Record<string, unknown>): { from?: Platform; step?: "profile" } => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): {
+    from?: Platform;
+    step?: "profile";
+    continuation?: string;
+  } => ({
     from:
       typeof search.from === "string" && Object.hasOwn(platforms, search.from)
         ? (search.from as Platform)
         : undefined,
     step: search.step === "profile" ? "profile" : undefined,
+    continuation: parseFinContinuation(search.continuation),
   }),
-  head: () => ({
-    meta: siteGraphMeta({
-      title: "Join ATHRECS | Every athlete has a story",
-      description:
-        "Create a private athlete account, find your sporting records and request ownership of your profile. Learn how account sharing and public results differ.",
-      url: `${SITE_URL}/join`,
-    }),
+  loaderDeps: ({ search }) => ({ hasContinuation: Boolean(search.continuation) }),
+  headers: ({ match }) =>
+    match.search.continuation
+      ? {
+          "Cache-Control": "private, no-store",
+          "Referrer-Policy": "no-referrer",
+          "X-Robots-Tag": "noindex, nofollow, noarchive",
+        }
+      : undefined,
+  head: ({ match }) => ({
+    meta: [
+      ...siteGraphMeta({
+        title: "Join ATHRECS | Every athlete has a story",
+        description:
+          "Create a private athlete account, find your sporting records and request ownership of your profile. Learn how account sharing and public results differ.",
+        url: `${SITE_URL}/join`,
+      }).map((tag) =>
+        match.search.continuation && "name" in tag && tag.name === "robots"
+          ? { name: "robots", content: "noindex, nofollow, noarchive" }
+          : tag,
+      ),
+      ...(match.search.continuation ? [{ name: "referrer", content: "no-referrer" }] : []),
+    ],
     links: [{ rel: "canonical", href: `${SITE_URL}/join` }],
   }),
   component: JoinPage,
 });
 
 function JoinPage() {
-  const { from } = Route.useSearch();
-  const { user, isPending } = useCurrentUserState();
+  const { from, continuation } = Route.useSearch();
+  const { user, isPending, hasSessionError } = useCurrentUserState();
   const account = useQuery({
     queryKey: ["my-athlete-account", user?.id],
     queryFn: () => getMyAthleteAccount(),
@@ -71,7 +96,8 @@ function JoinPage() {
   });
   const ready = Boolean(account.data?.exists);
   const stage = account.data?.claimedProfiles.length ? 3 : user ? 2 : 1;
-  const callbackURL = `/join?step=profile${from ? `&from=${from}` : ""}`;
+  const callbackURL = `/join?step=profile${from ? `&from=${from}` : ""}${continuation ? `&continuation=${continuation}` : ""}`;
+  const continuationAccount = user && account.data?.userId === user.id ? account.data : undefined;
 
   return (
     <div className="mx-auto max-w-5xl space-y-6 py-2 sm:py-5">
@@ -105,6 +131,15 @@ function JoinPage() {
           )}
         </ol>
       </section>
+
+      {continuation && !isPending && !hasSessionError && (!user || continuationAccount) ? (
+        <FinSignupContinuation
+          key={`${continuation}:${user?.id ?? "visitor"}`}
+          continuation={continuation}
+          account={continuationAccount ?? null}
+          callbackURL={callbackURL}
+        />
+      ) : null}
 
       <div className="grid gap-5 lg:grid-cols-[1.4fr_0.8fr] lg:items-start">
         <section
@@ -291,7 +326,13 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
           <Check className="size-4" aria-hidden="true" />
           Email verified
         </p>
-        <h2 className="mt-2 font-display text-2xl font-semibold">Let’s start your profile</h2>
+        <h2
+          id="private-profile-setup"
+          tabIndex={-1}
+          className="mt-2 scroll-mt-5 font-display text-2xl font-semibold"
+        >
+          Let’s start your profile
+        </h2>
         <p className="mt-2 text-sm text-muted">
           Add your full racing name and first sport. Optional clubs and profile links help us find
           more of your results.
