@@ -25,3 +25,20 @@ Rules it enforces
 
 Adding a source: add or enable it in the registry (with its rights review); the importer picks it up.
 Run `npm run verify:source-importer` for the offline checks.
+
+## Rating sources against the live site
+
+`npm run source-rate -- fixtures.csv --out dir [--history docs/source-registry/source-ratings.csv]`
+
+For every fixture the importer collects, the rater finds the matching race page on athrecs.com (by name, and by town when the slug is abbreviated) and compares date, distances and town. Each fixture gets one verdict:
+
+- **confirmed** - date, distances and town agree with the site.
+- **distance-missing** - date agrees but the page lacks a distance the source lists.
+- **town-differs** - date agrees but the source's town is not on the page.
+- **date-conflict** - the site has the event within 14 days of the source's date, but not on it.
+- **other-edition** / **not-on-site** - nothing to compare yet (neutral).
+- **unverified** - date agrees but the page lists no distances (for example a results page); neutral.
+
+A source's accuracy is confirmed fixtures (plus half credit for distance or town differences) over fixtures that could be compared. Ratings: High needs 95%+ with no date conflict and at least 5 compared; Medium 80%+; Low below that. The rating measures agreement with what is already on the site, not absolute truth, so it improves as the site fills in. With `--history` each run appends one row per source, so trends show over time. Nothing is published.
+
+Run the fixture checks first: `npm run fixture-check -- fixtures.csv`.
