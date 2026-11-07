@@ -10,6 +10,7 @@ import {
   Loader2,
   LockKeyhole,
   Mail,
+  RefreshCw,
   ShieldCheck,
   UserRound,
   X as XIcon,
@@ -52,11 +53,22 @@ function authCallbackPath(callbackURL: string, mode: AuthDialogMode): string {
   return `${url.pathname}${url.search}${url.hash}`;
 }
 
+const NETWORK_ERROR_MESSAGE =
+  "We couldn't reach AthRecs. Check your connection (or turn off any content blocker or VPN) and try again.";
+
+function isNetworkError(message: string): boolean {
+  return /failed to fetch|load failed|networkerror|network request failed/i.test(message);
+}
+
 function errorMessage(error: unknown, fallback: string): string {
-  if (error instanceof Error && error.message) return error.message;
+  if (error instanceof Error && error.message) {
+    return isNetworkError(error.message) ? NETWORK_ERROR_MESSAGE : error.message;
+  }
   if (typeof error === "object" && error && "message" in error) {
     const message = (error as { message?: unknown }).message;
-    if (typeof message === "string" && message) return message;
+    if (typeof message === "string" && message) {
+      return isNetworkError(message) ? NETWORK_ERROR_MESSAGE : message;
+    }
   }
   return fallback;
 }
@@ -98,7 +110,11 @@ export function AthleteAuthDialog() {
     queryFn: () => getAvailableAuthMethods(),
     enabled: open,
     staleTime: 60_000,
-    retry: 1,
+    // Mobile networks and in-app browsers drop the first request now and then;
+    // retry a few times with backoff before showing an error.
+    retry: 3,
+    retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 6000),
+    refetchOnWindowFocus: true,
   });
 
   const emailAvailable = methods.data?.emailPassword === true;
@@ -843,8 +859,25 @@ export function AthleteAuthDialog() {
                   sign-in methods…
                 </div>
               ) : methods.isError ? (
-                <div className="rounded-lg border border-red-500/30 bg-red-50 p-4 text-sm text-red-900">
-                  Sign-in methods could not be loaded. Close this window and try again.
+                <div className="space-y-3 rounded-lg border border-red-500/30 bg-red-50 p-4 text-sm text-red-900">
+                  <p>
+                    We couldn't load the sign-in options. Check your connection, then try again.
+                    If you opened AthRecs inside another app, open it in Safari or Chrome instead.
+                  </p>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="w-full"
+                    disabled={methods.isFetching}
+                    onClick={() => void methods.refetch()}
+                  >
+                    {methods.isFetching ? (
+                      <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                    ) : (
+                      <RefreshCw className="size-4" aria-hidden="true" />
+                    )}
+                    Try again
+                  </Button>
                 </div>
               ) : null}
 
