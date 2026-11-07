@@ -364,7 +364,7 @@ export const auth = betterAuth({
     before: createAuthMiddleware(async (context) => {
       if (
         context.path === "/update-user" &&
-        ["signupDateOfBirth", "signupClubs"].some((field) =>
+        ["signupDateOfBirth", "signupClubs", "signupNationality", "signupPostcode"].some((field) =>
           Object.hasOwn(context.body ?? {}, field),
         )
       )
@@ -445,6 +445,8 @@ export const auth = betterAuth({
               ...user,
               signupDateOfBirth: details?.signupDateOfBirth ?? null,
               signupClubs: details?.signupClubs ?? null,
+              signupNationality: details?.signupNationality ?? null,
+              signupPostcode: details?.signupPostcode || null,
             },
           };
         },

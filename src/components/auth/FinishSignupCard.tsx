@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { Loader2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ClubSuggest } from "./ClubSuggest";
 import {
   SIGNUP_COUNTRIES,
   latestSignupBirthdate,
@@ -35,7 +36,10 @@ export function FinishSignupCard({
     firstName: names.firstName === "Athlete" ? "" : names.firstName,
     lastName: names.lastName,
     signupCountry: account.country ?? "",
+    // Nationality is only ever what the athlete supplied, never their country.
+    signupNationality: account.nationality ?? "",
     signupLocation: account.signupLocation ?? "",
+    signupPostcode: account.postcode ?? "",
     signupDateOfBirth: "",
     signupClubs: "",
   });
@@ -125,6 +129,22 @@ export function FinishSignupCard({
           </select>
         </label>
         <label className="block space-y-1.5 text-sm font-medium text-fg">
+          Nationality
+          <select
+            className={fieldClass}
+            value={details.signupNationality}
+            onChange={(event) => update("signupNationality", event.target.value)}
+            required
+          >
+            <option value="">Choose your nationality</option>
+            {SIGNUP_COUNTRIES.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block space-y-1.5 text-sm font-medium text-fg">
           City or town
           <input
             className={fieldClass}
@@ -133,6 +153,16 @@ export function FinishSignupCard({
             value={details.signupLocation}
             onChange={(event) => update("signupLocation", event.target.value)}
             required
+          />
+        </label>
+        <label className="block space-y-1.5 text-sm font-medium text-fg">
+          Postcode or ZIP code (optional)
+          <input
+            className={`${fieldClass} uppercase`}
+            autoComplete="postal-code"
+            maxLength={12}
+            value={details.signupPostcode}
+            onChange={(event) => update("signupPostcode", event.target.value)}
           />
         </label>
         <label className="block space-y-1.5 text-sm font-medium text-fg">
@@ -148,7 +178,13 @@ export function FinishSignupCard({
             required
           />
         </label>
-        <label className="block space-y-1.5 text-sm font-medium text-fg sm:row-span-2">
+        <div className="sm:col-span-2">
+          <ClubSuggest
+            clubs={details.signupClubs}
+            onChange={(value) => update("signupClubs", value)}
+          />
+        </div>
+        <label className="block space-y-1.5 text-sm font-medium text-fg sm:col-span-2">
           Clubs you have raced for (optional)
           <textarea
             className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"

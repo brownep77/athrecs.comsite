@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { authClient, signInWithProvider } from "@/lib/auth/client";
+import { ClubSuggest } from "./ClubSuggest";
 import { getAvailableAuthMethods } from "@/lib/auth/auth-methods-api";
 import {
   isSignupDetailsError,
@@ -74,7 +75,9 @@ export function AthleteAuthDialog() {
     firstName: "",
     lastName: "",
     signupCountry: "",
+    signupNationality: "",
     signupLocation: "",
+    signupPostcode: "",
     signupDateOfBirth: "",
     signupClubs: "",
   });
@@ -177,7 +180,9 @@ export function AthleteAuthDialog() {
         firstName: "",
         lastName: "",
         signupCountry: "",
+        signupNationality: "",
         signupLocation: "",
+        signupPostcode: "",
         signupDateOfBirth: "",
         signupClubs: "",
       });
@@ -732,6 +737,29 @@ export function AthleteAuthDialog() {
                       ))}
                     </select>
                   </div>
+                  <div className="space-y-1.5 text-sm font-medium text-fg">
+                    <label htmlFor="athrecs-signup-nationality" className="block">
+                      Nationality
+                    </label>
+                    <select
+                      id="athrecs-signup-nationality"
+                      form="athrecs-registration-form"
+                      name="signupNationality"
+                      value={signupDetails.signupNationality}
+                      onChange={(event) =>
+                        updateSignupField("signupNationality", event.target.value)
+                      }
+                      className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                      required
+                    >
+                      <option value="">Choose your nationality</option>
+                      {SIGNUP_COUNTRIES.map((country) => (
+                        <option key={country} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
                     City or town
                     <input
@@ -745,6 +773,19 @@ export function AthleteAuthDialog() {
                       aria-describedby="athrecs-signup-location-help"
                       className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                       required
+                    />
+                  </label>
+                  <label className="block space-y-1.5 text-sm font-medium text-fg">
+                    Postcode or ZIP code (optional)
+                    <input
+                      form="athrecs-registration-form"
+                      name="signupPostcode"
+                      type="text"
+                      autoComplete="postal-code"
+                      value={signupDetails.signupPostcode}
+                      onChange={(event) => updateSignupField("signupPostcode", event.target.value)}
+                      maxLength={12}
+                      className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm uppercase text-fg outline-none focus:ring-2 focus:ring-accent/30"
                     />
                   </label>
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
@@ -766,6 +807,10 @@ export function AthleteAuthDialog() {
                   <p id="athrecs-signup-birthdate-help" className="text-xs text-muted">
                     Your date of birth is stored privately to help identify your results.
                   </p>
+                  <ClubSuggest
+                    clubs={signupDetails.signupClubs}
+                    onChange={(value) => updateSignupField("signupClubs", value)}
+                  />
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
                     Clubs you have raced for (optional)
                     <textarea
@@ -780,7 +825,7 @@ export function AthleteAuthDialog() {
                     />
                   </label>
                   <p id="athrecs-signup-location-help" className="text-xs text-muted">
-                    Your city or town helps us match historical racing results. No street address is
+                    Your nationality, city or town and postcode help us match historical racing results. No street address is
                     needed. These registration details stay in your private account.{" "}
                     <Link
                       to="/privacy"

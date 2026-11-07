@@ -85,6 +85,7 @@ try {
   const firstName = signUpDialog.getByLabel("First name", { exact: true });
   const lastName = signUpDialog.getByLabel("Last name", { exact: true });
   const country = signUpDialog.getByLabel("Country", { exact: true });
+  const nationality = signUpDialog.getByLabel("Nationality", { exact: true });
   const location = signUpDialog.getByLabel("City or town", { exact: true });
   const birthdate = signUpDialog.getByLabel("Date of birth", { exact: true });
   const clubs = signUpDialog.getByLabel("Clubs you have raced for (optional)", { exact: true });
@@ -97,6 +98,7 @@ try {
     firstName,
     lastName,
     country,
+    nationality,
     location,
     birthdate,
     clubs,
@@ -107,7 +109,7 @@ try {
     await field.waitFor({ state: "visible", timeout: timeoutMs });
   }
   record("the complete registration form is present", true);
-  for (const field of [firstName, lastName, country, location, birthdate]) {
+  for (const field of [firstName, lastName, country, nationality, location, birthdate]) {
     record("registration detail is required", await field.evaluate((input) => input.required));
   }
   record("club history is optional", await clubs.evaluate((input) => !input.required));

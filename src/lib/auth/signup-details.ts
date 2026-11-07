@@ -4,7 +4,9 @@ export type SignupDetails = {
   firstName: string;
   lastName: string;
   signupCountry: string;
+  signupNationality: string;
   signupLocation: string;
+  signupPostcode: string;
   signupDateOfBirth: string;
   signupClubs: string;
 };
@@ -16,7 +18,9 @@ export const signupUserFields = {
   firstName: { type: "string", required: false, returned: false },
   lastName: { type: "string", required: false, returned: false },
   signupCountry: { type: "string", required: false, returned: false },
+  signupNationality: { type: "string", required: false, returned: false },
   signupLocation: { type: "string", required: false, returned: false },
+  signupPostcode: { type: "string", required: false, returned: false },
   signupDateOfBirth: { type: "string", required: false, returned: false },
   signupClubs: { type: "string", required: false, returned: false },
 } as const;
@@ -30,6 +34,9 @@ const countryByName = new Map(SIGNUP_COUNTRIES.map((country) => [country.toLower
 export const SIGNUP_ERRORS = {
   SIGNUP_NAME_REQUIRED: "Enter your first and last name to create an account.",
   SIGNUP_COUNTRY_REQUIRED: "Choose your country to create an account.",
+  SIGNUP_NATIONALITY_REQUIRED: "Choose your nationality to create an account.",
+  SIGNUP_POSTCODE_INVALID:
+    "Enter your postcode or ZIP code using letters, numbers, spaces or hyphens (up to 12 characters), or leave it blank.",
   SIGNUP_LOCATION_REQUIRED: "Enter your city or town to create an account.",
   SIGNUP_BIRTHDATE_REQUIRED: "Enter a valid date of birth to create an account.",
   SIGNUP_CLUBS_INVALID: "List up to 20 clubs using readable text (1,000 characters total).",
@@ -44,11 +51,14 @@ function cleanText(value: unknown): string {
 export function normalizeSignupDetails(input: unknown): SignupDetails {
   const value = input && typeof input === "object" ? (input as Partial<SignupDetails>) : {};
   const country = cleanText(value.signupCountry);
+  const nationality = cleanText(value.signupNationality);
   return {
     firstName: cleanText(value.firstName),
     lastName: cleanText(value.lastName),
     signupCountry: countryByName.get(country.toLowerCase()) ?? country,
+    signupNationality: countryByName.get(nationality.toLowerCase()) ?? nationality,
     signupLocation: cleanText(value.signupLocation),
+    signupPostcode: cleanText(value.signupPostcode).toUpperCase(),
     signupDateOfBirth: cleanText(value.signupDateOfBirth),
     signupClubs: typeof value.signupClubs === "string" ? value.signupClubs.trim() : "",
   };
@@ -75,8 +85,12 @@ export function signupDetailsError(input: unknown) {
     code = "SIGNUP_NAME_REQUIRED";
   else if (!countryByName.has(details.signupCountry.toLowerCase()))
     code = "SIGNUP_COUNTRY_REQUIRED";
+  else if (!countryByName.has(details.signupNationality.toLowerCase()))
+    code = "SIGNUP_NATIONALITY_REQUIRED";
   else if (invisibleText.test(details.signupLocation)) code = "SIGNUP_LOCATION_REQUIRED";
   else if (!isValidSignupBirthdate(details.signupDateOfBirth)) code = "SIGNUP_BIRTHDATE_REQUIRED";
+  else if (details.signupPostcode && !/^[A-Z0-9][A-Z0-9 -]{1,11}$/.test(details.signupPostcode))
+    code = "SIGNUP_POSTCODE_INVALID";
   else if (
     invalidText.test(details.signupClubs.replace(/[\r\n\t]/g, "")) ||
     details.signupClubs.length > 1000 ||
@@ -149,6 +163,13 @@ export function usableSignupDetails(input: unknown) {
     firstName: names ? details.firstName : null,
     lastName: names ? details.lastName : null,
     signupCountry: valid({ signupCountry: details.signupCountry }) ? details.signupCountry : null,
+    signupNationality: valid({ signupNationality: details.signupNationality })
+      ? details.signupNationality
+      : null,
+    signupPostcode:
+      details.signupPostcode && valid({ signupPostcode: details.signupPostcode })
+        ? details.signupPostcode
+        : null,
     signupLocation:
       details.signupLocation && valid({ signupLocation: details.signupLocation })
         ? details.signupLocation
@@ -168,7 +189,9 @@ const COMPLETE_PLACEHOLDER: SignupDetails = {
   firstName: "Valid",
   lastName: "Placeholder",
   signupCountry: "England",
+  signupNationality: "United Kingdom",
   signupLocation: "Norwich",
+  signupPostcode: "",
   signupDateOfBirth: "1990-01-01",
   signupClubs: "",
 };

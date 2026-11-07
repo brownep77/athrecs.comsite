@@ -165,6 +165,7 @@ try {
   await signupDialog.getByLabel("First name", { exact: true }).fill("Test");
   await signupDialog.getByLabel("Last name", { exact: true }).fill("Runner");
   await signupDialog.getByLabel("Country", { exact: true }).selectOption("England");
+  await signupDialog.getByLabel("Nationality", { exact: true }).selectOption("United Kingdom");
   await signupDialog.getByLabel("City or town", { exact: true }).fill("Norwich");
   await signupDialog.getByLabel("Date of birth", { exact: true }).fill("2000-02-29");
   assert(await signupDialog.evaluate((dialog) => dialog.scrollWidth <= dialog.clientWidth));

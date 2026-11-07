@@ -201,16 +201,18 @@ try {
     await dialog.getByRole("button", { name: "Continue with an email code" }).click();
     await dialog.getByRole("button", { name: "Continue with email", exact: true }).waitFor();
 
-    // Registration needs name, country, city and DOB; clubs remain optional. Ordinary sign-in needs only email.
+    // Registration needs name, country, nationality, city and DOB; postcode and clubs
+    // remain optional. Ordinary sign-in needs only email.
     dialog = await open("signup");
     assert.equal(
       await dialog.getAttribute("aria-modal"),
       "true",
       "Registration dialog must be exposed as modal to assistive technology",
     );
-    assert.equal(await dialog.getByRole("textbox").count(), 6);
+    assert.equal(await dialog.getByRole("textbox").count(), 7);
     assert.equal(await dialog.locator('input[type="date"]').count(), 1);
-    assert.equal(await dialog.getByRole("combobox").count(), 1);
+    // Country and nationality selects plus the club search.
+    assert.equal(await dialog.getByRole("combobox").count(), 3);
     assert.equal(await dialog.getByText("Find my race results", { exact: true }).count(), 0);
     await dialog.getByLabel("Email address", { exact: true }).fill("quick-runner@example.test");
     const beforeSignup = sent.length;
@@ -231,6 +233,16 @@ try {
     await continueWithEmail.click();
     assert.equal(sent.length, beforeSignup, "Country is required before a code is sent");
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("England");
+    await continueWithEmail.click();
+    assert.equal(sent.length, beforeSignup, "Nationality is required before a code is sent");
+    assert.equal(
+      await dialog.getByRole("combobox", { name: "Nationality", exact: true }).inputValue(),
+      "",
+      "Nationality is never prefilled from the country of residence",
+    );
+    await dialog
+      .getByRole("combobox", { name: "Nationality", exact: true })
+      .selectOption("United Kingdom");
     await continueWithEmail.click();
     assert.equal(sent.length, beforeSignup, "One location value is required before a code is sent");
     const birthdate = dialog.getByLabel("Date of birth", { exact: true });
@@ -259,6 +271,24 @@ try {
     await birthdate.fill("2000-02-29");
     const clubs = dialog.getByLabel("Clubs you have raced for (optional)", { exact: true });
     assert.equal(await clubs.inputValue(), "");
+    if (!runrecs) {
+      // Club suggestions come from the AthRecs club directory; typed clubs still work.
+      const clubSearch = dialog.getByRole("combobox", { name: "Find your club", exact: true });
+      // Finish seeding the catalogue first so the synthetic club is not pruned.
+      await (await server.ssrLoadModule("/src/lib/athrecs/seed.server.ts")).ensureAthrecsSeeded();
+      await database.query(
+        "insert into clubs (slug, name, city, country) values ('synthetic-suggest-harriers', 'Synthetic Suggest Harriers', 'Norwich', 'England') on conflict (slug) do nothing",
+      );
+      await clubSearch.fill("Synthetic Sugg");
+      await dialog.getByRole("option", { name: /Synthetic Suggest Harriers/ }).click();
+      // A filled textarea's accessible name includes its text, so find it by name.
+      const clubsBox = dialog.locator('textarea[name="signupClubs"]');
+      assert.equal(await clubsBox.inputValue(), "Synthetic Suggest Harriers");
+      await clubSearch.fill("My Own Running Club");
+      await clubSearch.press("Enter");
+      assert.equal(await clubsBox.inputValue(), "Synthetic Suggest Harriers\nMy Own Running Club");
+      await clubsBox.fill("");
+    }
     await clubs.fill("Synthetic City AC\nFormer Synthetic Harriers");
     await page.setViewportSize({ width: 1280, height: 900 });
     await dialog.evaluate((element) => {
@@ -390,6 +420,9 @@ try {
     await dialog.getByLabel("First name", { exact: true }).fill("Skip");
     await dialog.getByLabel("Last name", { exact: true }).fill("Results Runner");
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("England");
+    await dialog
+      .getByRole("combobox", { name: "Nationality", exact: true })
+      .selectOption("United Kingdom");
     await dialog.getByLabel("City or town", { exact: true }).fill("Norwich");
     await dialog.getByLabel("Date of birth", { exact: true }).fill("1990-05-15");
     await dialog.getByLabel("Email address", { exact: true }).fill("skip-results@example.test");
@@ -435,6 +468,9 @@ try {
     await dialog.getByLabel("First name", { exact: true }).fill("Fresh");
     await dialog.getByLabel("Last name", { exact: true }).fill("Signin Runner");
     await dialog.getByRole("combobox", { name: "Country", exact: true }).selectOption("France");
+    await dialog
+      .getByRole("combobox", { name: "Nationality", exact: true })
+      .selectOption("United Kingdom");
     await dialog.getByLabel("City or town", { exact: true }).fill("Lyon");
     await dialog.getByLabel("Date of birth", { exact: true }).fill("1990-05-15");
     const emailsBeforeRetry = sent.length;

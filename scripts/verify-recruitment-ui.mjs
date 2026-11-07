@@ -77,6 +77,7 @@ try {
   await dialog.getByLabel("First name", { exact: true }).fill("Fictional");
   await dialog.getByLabel("Last name", { exact: true }).fill("Recruitment Runner");
   await dialog.getByLabel("Country", { exact: true }).selectOption("England");
+  await dialog.getByLabel("Nationality", { exact: true }).selectOption("United Kingdom");
   await dialog.getByLabel("City or town", { exact: true }).fill("Norwich");
   await dialog.getByLabel("Date of birth", { exact: true }).fill("1990-05-15");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
@@ -297,7 +298,11 @@ try {
     assert.equal(await page.locator("#results-history table").count(), 1);
     assert.equal(await page.locator("#results-history tbody tr:visible").count(), 52);
     assert.equal(
-      await page.locator("#results-history").getByRole("row").filter({ hasText: "Synthetic Recruitment 10K" }).count(),
+      await page
+        .locator("#results-history")
+        .getByRole("row")
+        .filter({ hasText: "Synthetic Recruitment 10K" })
+        .count(),
       0,
       "A private result on a public figure must not enter member result tables or PBs",
     );
