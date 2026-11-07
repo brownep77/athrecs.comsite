@@ -568,6 +568,30 @@ try {
   const { readCollectionStats } = await server.ssrLoadModule(
     "/src/lib/collection-stats/service.server.ts",
   );
+  // Histories that predate the stored classification are filled in batches,
+  // then the trigger keeps new and changed histories current.
+  const { backfillHistorySports } = await server.ssrLoadModule(
+    "/src/lib/collection-stats/history-sports-cache.server.ts",
+  );
+  const [{ n: cachedBefore }] = await sql.query(
+    "select count(*)::int as n from athlete_history_sports",
+  );
+  const [{ n: histories }] = await sql.query(
+    "select count(*)::int as n from athlete_source_histories",
+  );
+  assert.equal(cachedBefore, histories, "The trigger classifies every new history");
+  await sql.query("delete from athlete_history_sports");
+  await sql.query("delete from collection_stats_snapshots where key='history-sports-backfill-v1'");
+  let step = await backfillHistorySports(sql, 1);
+  assert.equal(step.complete, histories < 1);
+  for (let i = 0; i < histories + 2 && !step.complete; i += 1)
+    step = await backfillHistorySports(sql, 1);
+  assert.equal(step.complete, true);
+  const [{ n: cachedAfter }] = await sql.query(
+    "select count(*)::int as n from athlete_history_sports",
+  );
+  assert.equal(cachedAfter, histories, "The batched backfill restores every history");
+  assert.deepEqual(await backfillHistorySports(sql, 1), { complete: true, added: 0 });
   const { readProfileSnapshot } = await server.ssrLoadModule(
     "/src/lib/collection-stats/profile-snapshot.server.ts",
   );
