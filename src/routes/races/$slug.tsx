@@ -2,6 +2,8 @@ import { fixtureReferenceText } from "@/lib/athrecs/public-fixture-reference";
 import { isParkrunResult } from "@/lib/athrecs/parkrun-timing";
 import { RaceResultsBoard } from "@/components/races/RaceResultsBoard";
 import { ReviewedEventImage } from "@/components/races/ReviewedEventImage";
+import { RaceEditorialSections } from "@/components/races/RaceEditorialSections";
+import { raceEditorialGuideFor } from "@/data/race-editorial-guides";
 import { RaceActions } from "@/components/races/RaceActions";
 import { catalogueCalendarRace } from "@/lib/athrecs/catalogue-calendar";
 import { FIXTURE_DATE_REVIEWS } from "@/data/fixture-date-reviews";
@@ -71,7 +73,7 @@ import { RaceQuestions } from "@/components/races/RaceQuestions";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { editionEntry } from "@/lib/athrecs/race-information";
 import { raceSearchContent, nextRaceEdition } from "@/lib/athrecs/race-search-content";
-import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
+import { SuggestRaceEdit, RaceEditJumpLink } from "@/components/races/SuggestRaceEdit";
 import { racePageMetadata, raceEditionStart } from "@/lib/athrecs/race-page-metadata";
 import { publicOrganiserName } from "@/lib/athrecs/seo";
 import { reviewedRacePage } from "@/data/race-page-reviews";
@@ -146,11 +148,12 @@ export const Route = createFileRoute("/races/$slug")({
     if (!loaderData) return {};
     const { event, upcoming, archiveResults } = loaderData;
     const searchContent = raceSearchContent(loaderData);
+    const editorialSeo = !IS_RUNRECS_SITE ? raceEditorialGuideFor(event.slug, nextRaceEdition(upcoming)?.event_date) : undefined;
     const canonical = `${SITE_URL}/races/${event.slug}`;
     const title = IS_RUNRECS_SITE
       ? searchContent.title.replace(/\| AthRecs$/, "| RunRecs")
-      : searchContent.title;
-    const description = archiveResults
+      : (editorialSeo?.seoTitle ?? searchContent.title);
+    const description = editorialSeo?.seoDescription ?? (archiveResults
       ? `Recorded ${archiveResults.edition.distance_code} performances at ${event.name}, ${archiveResults.edition.event_date}, ${[event.city, event.country].filter(Boolean).join(", ")}. ${archiveResults.results
           .slice(0, 3)
           .map((result) => result.athlete_name)
@@ -158,7 +161,7 @@ export const Route = createFileRoute("/races/$slug")({
       : IS_RUNRECS_SITE
         ? event.summary ||
           `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`
-        : searchContent.description;
+        : searchContent.description);
     const metadata = racePageMetadata(event, upcoming);
     const next = metadata.next;
 
@@ -177,7 +180,7 @@ export const Route = createFileRoute("/races/$slug")({
             sportsEventJsonLd({
               name: event.name,
               slug: event.slug,
-              description: IS_RUNRECS_SITE ? description : searchContent.biography.join(" "),
+              description: IS_RUNRECS_SITE ? description : (editorialSeo?.seoDescription ?? searchContent.biography.join(" ")),
               city: event.city,
               region: event.county,
               country: event.country,
@@ -300,6 +303,7 @@ export function RacePageContent({
   });
   const location = compactFixtureLocation({ ...event, country: filterCountryName(country) });
   const next = nextRaceEdition(upcoming);
+  const editorialGuide = !IS_RUNRECS_SITE ? raceEditorialGuideFor(event.slug, next?.event_date) : undefined;
   const nextFixtureDetail = FIXTURE_DETAILS[`${event.slug}|${next?.event_date}`];
   const archived = !next && past.length > 0;
   const nextStart = raceEditionStart(event, next);
@@ -489,6 +493,7 @@ export function RacePageContent({
                 </a>
               </Button>
             )}
+            <RaceEditJumpLink />
             <Button asChild variant="secondary">
               <Link to={isRunningEvent && !IS_RUNRECS_SITE ? "/running/calendar" : "/calendar"}>
                 <CalendarDays className="h-3.5 w-3.5" />
@@ -499,7 +504,9 @@ export function RacePageContent({
         </div>
       </header>
 
-      {!IS_RUNRECS_SITE ? (
+      {editorialGuide ? (
+        <RaceEditorialSections guide={editorialGuide} />
+      ) : !IS_RUNRECS_SITE ? (
         <section
           aria-labelledby="race-biography-heading"
           className="space-y-3 rounded-xl border border-border bg-surface p-5"
@@ -577,6 +584,9 @@ export function RacePageContent({
             aria-label="Race information"
             className="flex flex-wrap gap-x-5 gap-y-2 border-b border-border pb-3 text-sm font-semibold text-accent"
           >
+            {editorialGuide && (
+              <a className="inline-flex min-h-10 items-center" href="#race-course">Course & history</a>
+            )}
             <a className="inline-flex min-h-10 items-center" href="#race-schedule">
               Dates & entry
             </a>
@@ -613,7 +623,7 @@ export function RacePageContent({
           />
         ))}
 
-      {!IS_RUNRECS_SITE ? <RaceQuestions data={data} /> : null}
+      {!IS_RUNRECS_SITE && !editorialGuide ? <RaceQuestions data={data} /> : null}
 
       {spectatorAccess && spectatorLabel ? (
         <section className="flex flex-wrap items-start justify-between gap-4 rounded-xl border border-border bg-surface p-5 shadow-card">
@@ -987,7 +997,7 @@ export function RacePageContent({
           )}
         </aside>
       )}
-      <SuggestRaceEdit key={event.slug} slug={event.slug} name={event.name} />
+      <SuggestRaceEdit key={event.slug} slug={event.slug} name={event.name} editionDate={next?.event_date} />
     </div>
   );
 }

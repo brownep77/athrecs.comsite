@@ -1,6 +1,6 @@
 import { ReviewedEventImage } from "@/components/races/ReviewedEventImage";
 import { fixtureSlugForGuide } from "@/data/race-guide-links";
-import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
+import { SuggestRaceEdit, RaceEditJumpLink } from "@/components/races/SuggestRaceEdit";
 import { RaceActions } from "@/components/races/RaceActions";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
@@ -458,6 +458,7 @@ export function RoadMarathonPage({
           <a href="#results" className={linkClass}>
             Past races & results
           </a>
+          <RaceEditJumpLink />
         </div>
         <p className="mt-4 text-xs text-muted">
           AthRecs race guide · Updated{" "}
@@ -839,7 +840,7 @@ export function RoadMarathonPage({
         More road {half ? "half marathons" : "marathons"} in {country.name}{" "}
         <ArrowRight className="size-4" aria-hidden="true" />
       </CountryLink>
-      <SuggestRaceEdit key={race.slug} slug={race.slug} name={race.name} pageType="road" />
+      <SuggestRaceEdit key={race.slug} slug={race.slug} name={race.name} pageType="road" editionDate={upcoming[0]?.date} />
     </article>
   );
 }

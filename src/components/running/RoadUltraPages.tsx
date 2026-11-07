@@ -1,5 +1,5 @@
 import { ReviewedEventImage } from "@/components/races/ReviewedEventImage";
-import { SuggestRaceEdit } from "@/components/races/SuggestRaceEdit";
+import { SuggestRaceEdit, RaceEditJumpLink } from "@/components/races/SuggestRaceEdit";
 import { RaceActions } from "@/components/races/RaceActions";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
@@ -374,6 +374,7 @@ export function RoadUltraDetail({ race, today }: { race: RoadUltra; today: strin
         />
         <p className="text-base text-muted">{race.location}</p>
         <p className="text-lg leading-8">{race.summary}</p>
+        <div className="flex flex-wrap gap-3"><RaceEditJumpLink /></div>
       </header>
       <dl className="grid gap-5 rounded-2xl border border-border bg-surface p-5 sm:grid-cols-2 sm:p-6">
         {[
@@ -468,7 +469,7 @@ export function RoadUltraDetail({ race, today }: { race: RoadUltra; today: strin
       >
         Explore all UK road ultra guides <ArrowRight size={16} aria-hidden="true" />
       </Link>
-      <SuggestRaceEdit key={race.slug} slug={race.slug} name={race.name} pageType="ultra" />
+      <SuggestRaceEdit key={race.slug} slug={race.slug} name={race.name} pageType="ultra" editionDate={editions[0]?.date} />
     </article>
   );
 }

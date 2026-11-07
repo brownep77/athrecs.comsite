@@ -36,7 +36,7 @@ const api = write(
 );
 write(
   "main.tsx",
-  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{SuggestRaceEdit}from'/@fs/${path.resolve("src/components/races/SuggestRaceEdit.tsx")}';import'./style.css';const client=new QueryClient({defaultOptions:{mutations:{retry:false}}});createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1000,margin:'40px auto',padding:16}}><h1 style={{fontSize:28,marginBottom:24}}>Example Half Marathon</h1><SuggestRaceEdit slug="example-half" name="Example Half Marathon" pageType={new URLSearchParams(location.search).get("type") || "catalogue"}/></main></QueryClientProvider>);`,
+  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{SuggestRaceEdit,RaceEditJumpLink}from'/@fs/${path.resolve("src/components/races/SuggestRaceEdit.tsx")}';import'./style.css';const client=new QueryClient({defaultOptions:{mutations:{retry:false}}});createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1000,margin:'40px auto',padding:16}}><h1 style={{fontSize:28,marginBottom:24}}>Example Half Marathon</h1><RaceEditJumpLink/><SuggestRaceEdit slug="example-half" name="Example Half Marathon" editionDate="2027-01-01" pageType={new URLSearchParams(location.search).get("type") || "catalogue"}/></main></QueryClientProvider>);`,
 );
 const server = await createServer({
   configFile: false,
@@ -60,10 +60,13 @@ try {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("http://127.0.0.1:18218");
-  const toggle = page.getByRole("button", { name: "Suggest an edit", exact: true });
-  await toggle.focus();
+  const jump = page.getByRole("link", { name: "Suggest an edit", exact: true });
+  await jump.focus();
   await page.keyboard.press("Enter");
-  await page.getByRole("button", { name: "Sign in to suggest an edit" }).click();
+  await page.getByRole("textbox", { name: "Edition or year (optional)" }).waitFor({ state: "visible" });
+  assert.equal(await page.getByRole("textbox", { name: "Edition or year (optional)" }).inputValue(), "2027-01-01");
+  await page.getByRole("textbox", { name: "Your suggested change" }).fill("The start time should be checked with the organiser.");
+  await page.getByRole("button", { name: "Sign in to submit an edit" }).click();
   assert.equal(
     await page.evaluate(() => window.signinOptions.callbackURL),
     "/races/example-half#suggest-edit",
@@ -74,21 +77,23 @@ try {
   ]) {
     await page.goto(`http://127.0.0.1:18218?type=${type}`);
     await page.getByRole("button", { name: "Suggest an edit", exact: true }).click();
-    await page.getByRole("button", { name: "Sign in to suggest an edit" }).click();
+    await page.getByRole("button", { name: "Sign in to submit an edit" }).click();
     assert.equal(
       await page.evaluate(() => window.signinOptions.callbackURL),
       `${prefix}/example-half#suggest-edit`,
     );
   }
   await page.goto("http://127.0.0.1:18218?signed-in#suggest-edit");
-  const field = page.getByRole("textbox", { name: "What needs changing?" });
+  const field = page.getByRole("textbox", { name: "Your suggested change" });
   await field.waitFor({ state: "visible" });
   const suggestion =
     "The half marathon start is beside the west entrance. Please check the race instructions.";
   await field.fill(suggestion);
   await page
-    .getByRole("textbox", { name: "Supporting link (optional)" })
+    .getByRole("textbox", { name: "Supporting source or results link (optional)" })
     .fill("https://example.test/race");
+  await page.getByRole("combobox", { name: "What would you like to amend?" }).selectOption("Distance or course");
+  await page.getByRole("textbox", { name: "Edition or year (optional)" }).fill("2025");
   await page.evaluate(() => {
     window.failSubmission = true;
   });
@@ -106,12 +111,12 @@ try {
   await page.getByRole("button", { name: "Send suggestion for review" }).click();
   assert(await page.getByRole("button", { name: "Sending suggestion…" }).isDisabled());
   await page.getByRole("status").waitFor();
-  assert.match(await page.getByRole("status").innerText(), /sent to our team for review/);
+  assert.match(await page.getByRole("status").innerText(), /sent for review/);
   assert.equal(await page.evaluate(() => window.calls.length), 2);
   assert.deepEqual(await page.evaluate(() => window.calls[1]), {
     slug: "example-half",
     pageType: "catalogue",
-    suggestion,
+    suggestion: "Area: Distance or course\nRace: Example Half Marathon\nEdition/date: 2025\n\n" + suggestion,
     evidenceUrl: "https://example.test/race",
   });
   await page.getByRole("button", { name: "Suggest another edit" }).click();
