@@ -130,3 +130,13 @@ results and linking result IDs to an athlete account. This supports the broad
 product model, not a claim about their private database schema:
 https://api.athlinks.com/results and https://api.athlinks.com/races (checked
 9 October 2026).
+
+## Bulk matching to existing athletes
+
+On the staff **Collected results** page (`/admin/result-archive`), select one dataset under **Bulk match to existing athletes**. Choose a row limit (default 25, maximum 500) and click **Preview this batch**. Preview is read-only. Compare every proposed source row, bib, finish, target athlete and reason with the source and staff evidence. If any proposal is uncertain, leave the batch unapplied and use individual review. Confirm the checkbox and click **Approve private links** only after reviewing every proposal. **Select next batch** requires another preview and approval.
+
+Approval is bound to the staff identity, dataset, cursor, limit, source revisions, targets and evidence. The server recomputes the proposal inside a serializable transaction. A changed proposal, lock conflict or concurrent approval requires a fresh preview. Each accepted row gets a private archive association and an audit decision. In **Source results**, filter by **held** to see the athlete ID and reviewed revision. **Reopen** releases the association with an audit record.
+
+The history rule requires an exact event, date, discipline, bib and finish time. The fallback requires a unique normalized name with the same club or an explicitly labelled source nationality and recorded profile nationality. A general country or residence field cannot support that tier. Competing names, aliases, source IDs, bibs, existing edition results, claims, recorded gender conflicts and unsupported source formats stay for staff review.
+
+A private archive association never inserts a canonical result, changes an athlete or grants account ownership. Public-figure feeds cannot read it. Source verification and a publication decision are separate. The bulk selector uses central archive datasets. Rows available only in the capture browser need an edition-specific, deduplicated staging step before they appear here.

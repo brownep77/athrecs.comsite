@@ -184,10 +184,11 @@ export async function archiveOverview(sql: Sql) {
 
 const ENTRY_SELECT = `select a.id,a.dataset_id as "datasetId",a.source_key as "sourceKey",a.revision,a.applied_revision as "appliedRevision",
   exists(select 1 from result_change_history h where h.result_id=a.canonical_result_id and h.id>a.applied_history_id) as "canonicalChanged",
-  a.review_state as state,a.canonical_result_id as "resultId",r.athlete_id as "athleteId",at.display_name as "athleteName",a.payload,
+  pm.athlete_id as "privateAthleteId",pm.revision as "privateRevision",a.review_state as state,a.canonical_result_id as "resultId",r.athlete_id as "athleteId",at.display_name as "athleteName",a.payload,
   e.name as "eventName",ed.event_date::text as "eventDate",ed.distance_code as distance,d.provider,d.source_url as "sourceUrl"
   from result_archive_entries a join result_archive_datasets d on d.id=a.dataset_id
   join editions ed on ed.id=d.edition_id join events e on e.id=ed.event_id
+  left join result_archive_private_matches pm on pm.entry_id=a.id
   left join results r on r.id=a.canonical_result_id left join athletes at on at.id=r.athlete_id`;
 export async function listArchiveEntries(
   sql: Sql,
@@ -196,7 +197,7 @@ export async function listArchiveEntries(
   const rows = await sql.query<ArchiveEntry>(
     `${ENTRY_SELECT}
     where ($1::uuid is null or a.dataset_id=$1) and a.id>$2 and (
-      $3='all' or ($3='changed' and (a.revision>a.applied_revision or exists(select 1 from result_change_history h where h.result_id=a.canonical_result_id and h.id>a.applied_history_id))) or ($3='unmatched' and a.canonical_result_id is null and a.review_state='unmatched')
+      $3='all' or ($3='changed' and (a.revision>pm.revision or a.revision>a.applied_revision or exists(select 1 from result_change_history h where h.result_id=a.canonical_result_id and h.id>a.applied_history_id))) or ($3='unmatched' and a.canonical_result_id is null and a.review_state='unmatched')
       or ($3='linked' and a.canonical_result_id is not null and a.revision=a.applied_revision and a.review_state='linked' and not exists(select 1 from result_change_history h where h.result_id=a.canonical_result_id and h.id>a.applied_history_id)) or ($3='held' and a.review_state='held'))
       and ($4='' or to_tsvector('simple',coalesce(a.payload->>'name','') || ' ' || coalesce(a.payload->>'bib','') || ' ' || coalesce(a.payload->>'club','')) @@ plainto_tsquery('simple',$4)
         or a.source_key=$4)
@@ -345,9 +346,14 @@ export async function reviewArchiveEntry(sql: Sql, raw: ReviewInput, actor: Arch
     if (input.action === "hold" || input.action === "reopen") {
       const state =
         input.action === "hold" ? "held" : entry.canonical_result_id ? "linked" : "unmatched";
+      const [released] =
+        input.action === "reopen"
+          ? await tx<{ athlete_id: number; revision: number }>`
+        delete from result_archive_private_matches where entry_id=${entry.id} returning athlete_id,revision`
+          : [];
       await tx`update result_archive_entries set review_state=${state},review_note=${input.identityNote},reviewed_by=${actor.userId},reviewed_at=now() where id=${entry.id}`;
       await tx`insert into result_archive_decisions(entry_id,revision,action,actor_id,note,before_value,after_value)
-        values(${entry.id},${entry.revision},${input.action},${actor.userId},${input.identityNote},${JSON.stringify(before)}::jsonb,${JSON.stringify({ ...before, state })}::jsonb)`;
+        values(${entry.id},${entry.revision},${input.action},${actor.userId},${input.identityNote},${JSON.stringify(released ? { ...before, privateAthleteId: released.athlete_id, privateRevision: released.revision } : before)}::jsonb,${JSON.stringify({ ...before, state })}::jsonb)`;
       return { resultId: entry.canonical_result_id, state };
     }
     if (!input.sourceChecked)

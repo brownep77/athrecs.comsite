@@ -98,6 +98,7 @@ const api = load("src/lib/results-archive/api.ts", {
   "../db": { getSql: async () => sql, dbSource: "neon" },
   "./core": core,
   "./service.server": service,
+  "./bulk-match.server": load("src/lib/results-archive/bulk-match.server.ts", {"node:crypto":crypto, "./core":core}),
 });
 const methods = {
   ...api,
@@ -128,7 +129,7 @@ file(
 );
 file(
   "main.tsx",
-  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{ResultsArchiveWorkspace}from'/@fs/${resolve("src/components/staff/ResultsArchiveWorkspace.tsx")}';import{ArchivedResultSuggestions}from'/@fs/${resolve("src/components/athletes/ArchivedResultSuggestions.tsx")}';import'./style.css';const client=new QueryClient({defaultOptions:{queries:{retry:false}}});createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1280,margin:'auto',padding:16}}><p>SYNTHETIC VERIFICATION · DISPOSABLE DATABASE</p>{location.search.includes('member')?<ArchivedResultSuggestions userId="archive-browser-member"/>:<ResultsArchiveWorkspace/>}</main></QueryClientProvider>);`,
+  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{ResultsArchiveWorkspace}from'/@fs/${resolve("src/components/staff/ResultsArchiveWorkspace.tsx")}';import{ArchiveBulkMatch}from'/@fs/${resolve("src/components/staff/ArchiveBulkMatch.tsx")}';import{ArchivedResultSuggestions}from'/@fs/${resolve("src/components/athletes/ArchivedResultSuggestions.tsx")}';import'./style.css';const client=new QueryClient({defaultOptions:{queries:{retry:false}}});createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1280,margin:'auto',padding:16}}><p>SYNTHETIC VERIFICATION · DISPOSABLE DATABASE</p>{location.search.includes('member')?<ArchivedResultSuggestions userId="archive-browser-member"/>:location.search.includes('bulk')?<ArchiveBulkMatch/>:<ResultsArchiveWorkspace/>}</main></QueryClientProvider>);`,
 );
 file("style.css", `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);
 let loseFirstReceipt = true;
@@ -439,6 +440,28 @@ try {
   await collectionStaff.setViewportSize({ width: 390, height: 844 });
   assert(await collectionStaff.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Collection has no mobile page overflow");
   await collectionContext.close();
+
+  const [past] = await sql`insert into editions(event_id,event_date,distance_code,status) values(${event.id},'2020-10-01','10K','Finished') returning id`;
+  const batch = await service.createArchiveDataset(sql, {editionId:past.id,provider:"Browser approval test",sourceRaceKey:"bulk",sourceUrl:"https://example.test/bulk",permissionNote:"Synthetic browser regression only"},actor);
+  for (const [i,name] of ["Batch One", "Batch Two"].entries()) {
+    await sql`insert into athletes(slug,display_name,source_club_name) values(${"batch-"+i},${name},'Example Harriers')`;
+    await service.ingestArchiveBatch(sql,{datasetId:batch.id,requestId:crypto.randomUUID(),rows:[core.archiveRowSchema.parse({sourceKey:String(i),name,bib:String(i+1),club:"Example Harriers",status:"finished",finishSeconds:2400+i})]},actor);
+  }
+  await page.goto("http://127.0.0.1:8139/?bulk");
+  await page.getByLabel("Race dataset").selectOption(batch.id);
+  assert.equal(await page.getByLabel("Rows to preview").inputValue(),"25");
+  await page.getByLabel("Rows to preview").selectOption("1");
+  assert.equal(await page.getByRole("button",{name:"Approve private links"}).count(),0);
+  await page.getByRole("button",{name:"Preview this batch"}).click();
+  await page.getByRole("table",{name:"All proposed links in this batch"}).waitFor();
+  assert(await page.getByRole("button",{name:"Approve private links"}).isDisabled());
+  await page.getByLabel("I reviewed every proposed link").check();
+  await page.getByRole("button",{name:"Approve private links"}).click();
+  await page.getByText("Saved 1 private archive associations.").waitFor();
+  await page.getByRole("button",{name:"Select next batch"}).click();
+  assert.equal(await page.getByRole("button",{name:"Approve private links"}).count(),0);
+  assert.equal((await sql`select count(*)::int n from result_archive_private_matches`)[0].n,1);
+  assert.equal((await sql`select count(*)::int n from results where edition_id=${past.id}`)[0].n,0);
   assert.deepEqual(errors, []);
   console.log(
     "Archive browser -> validated API -> disposable database -> UI passed: upload, lost-response resume, stored-entry deep link with a pending import, private matching request, staff link, canonical view and mobile layout.",

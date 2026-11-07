@@ -380,10 +380,13 @@ export function ResultsArchiveWorkspace() {
                         <td className="p-2">
                           {r.provider}
                           <p className="text-xs">
-                            {r.canonicalChanged ||
+                            {(r.privateRevision && r.revision > r.privateRevision) ||
+                            r.canonicalChanged ||
                             (r.appliedRevision && r.revision > r.appliedRevision)
                               ? "Changed since review"
-                              : r.state}{" "}
+                              : r.privateAthleteId
+                                ? `Privately matched to athlete #${r.privateAthleteId}`
+                                : r.state}{" "}
                             · revision {r.revision}
                           </p>
                         </td>
@@ -597,6 +600,12 @@ function ArchiveReview({
               )}
             </div>
           </div>
+          {data.entry.privateAthleteId && (
+            <p>
+              Privately matched to athlete #{data.entry.privateAthleteId} at revision{" "}
+              {data.entry.privateRevision}. Reopening releases this association for a new review.
+            </p>
+          )}
           {!data.entry.resultId && (
             <>
               <form

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ResultsArchiveWorkspace } from "@/components/staff/ResultsArchiveWorkspace";
 import { CapturedResultsBrowser } from "@/components/staff/CapturedResultsBrowser";
+import { ArchiveBulkMatch } from "@/components/staff/ArchiveBulkMatch";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Archive, Database, ExternalLink, FileUp, RefreshCw, ShieldCheck } from "lucide-react";
@@ -154,6 +155,8 @@ function ResultArchivePage() {
       <CapturedResultsBrowser />
 
       <ResultsArchiveWorkspace />
+
+      <ArchiveBulkMatch />
 
       <ResultReconciliationPanel />
 
