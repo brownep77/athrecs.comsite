@@ -47,6 +47,7 @@ import { authClient, openAthleteAuth, signOut } from "@/lib/auth/client";
 import { getAvailableAuthMethods } from "@/lib/auth/auth-methods-api";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { SessionCheckError } from "@/components/auth/SessionCheckError";
+import { FinishSignupCard } from "@/components/auth/FinishSignupCard";
 import {
   ATHLETE_SPORTS,
   getMyAthleteAccount,
@@ -398,6 +399,16 @@ function SignedInAccount() {
           </Link>
           .
         </p>
+      ) : null}
+      {account.data.signupDetailsComplete === false ? (
+        <FinishSignupCard
+          account={account.data}
+          onSaved={(updated) => {
+            lastLoadedForm.current = accountToForm(updated);
+            setForm(lastLoadedForm.current);
+            setMessage("Thanks. We're now looking for your results.");
+          }}
+        />
       ) : null}
       {IS_ATHRECS_SITE ? (
         <ProfileResultsSetup

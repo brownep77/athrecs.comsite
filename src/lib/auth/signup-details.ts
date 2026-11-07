@@ -108,3 +108,29 @@ export function isSignupDetailsError(error: { code?: string; message?: string } 
     Object.values(SIGNUP_ERRORS).some((message) => message === error.message)
   );
 }
+
+/** Split a provider display name ("Paula Radcliffe") into first and last names. */
+export function splitProviderName(
+  name: string | null | undefined,
+  email?: string | null,
+): { firstName: string; lastName: string } {
+  const cleaned = cleanText(name).slice(0, 120);
+  const fallback = cleanText(email?.split("@")[0]?.replace(/[._-]+/g, " ")).slice(0, 60);
+  const parts = (cleaned || fallback).split(" ").filter(Boolean);
+  if (!parts.length) return { firstName: "Athlete", lastName: "" };
+  const [first, ...rest] = parts;
+  return { firstName: first.slice(0, 60), lastName: rest.join(" ").slice(0, 60) };
+}
+
+/** True when the private details needed to match historical results are saved. */
+export function signupDetailsComplete(details: {
+  signupCountry?: string | null;
+  signupLocation?: string | null;
+  signupDateOfBirth?: string | null;
+}): boolean {
+  return Boolean(
+    cleanText(details.signupCountry) &&
+    cleanText(details.signupLocation) &&
+    cleanText(details.signupDateOfBirth),
+  );
+}

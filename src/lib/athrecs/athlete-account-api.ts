@@ -4,6 +4,12 @@ import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { getSql, dbSource } from "@/lib/db";
+import {
+  normalizeSignupDetails,
+  signupDetailsComplete,
+  signupDetailsError,
+  type SignupDetails,
+} from "@/lib/auth/signup-details";
 import { ensureAthrecsSeeded, ensureDevPreviewAthleteAccount } from "./seed.server";
 import type { ProfileResult } from "./profile-records";
 
@@ -106,6 +112,8 @@ export type AthleteAccountData = {
   postcode: string;
   /** Private free-form sign-up location; never infer a city or postcode from it. */
   signupLocation?: string;
+  /** False for accounts created via Google that still need private details. */
+  signupDetailsComplete?: boolean;
   profileDetails?: AthleteProfileDetails;
   nationality: string;
   clubOrTeam: string;
@@ -174,6 +182,7 @@ type UserRow = {
   image: string | null;
   signup_country?: string | null;
   signup_location?: string | null;
+  signup_date_of_birth_set?: boolean;
 };
 
 type ProfileRow = {
@@ -549,7 +558,8 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       account_user."emailVerified" as email_verified,
       account_user."image" as image,
       account_user."signupCountry" as signup_country,
-      account_user."signupLocation" as signup_location
+      account_user."signupLocation" as signup_location,
+      (nullif(trim(account_user."signupDateOfBirth"), '') is not null) as signup_date_of_birth_set
     from "user" account_user
     join athlete_identifiers identifier on identifier.user_id = account_user."id"
     where account_user."id" = ${userId}
@@ -650,6 +660,13 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     city: profile?.city ?? "",
     postcode: profile?.postcode ?? "",
     signupLocation: user.signup_location ?? "",
+    // Accounts created straight from Google start without these; the account
+    // page asks for them before anything else so results can be matched.
+    signupDetailsComplete: signupDetailsComplete({
+      signupCountry: user.signup_country,
+      signupLocation: user.signup_location,
+      signupDateOfBirth: user.signup_date_of_birth_set ? "set" : "",
+    }),
     profileDetails: readProfileDetails(profile?.profile_details),
     nationality: profile?.nationality ?? "",
     clubOrTeam: profile?.club_or_team ?? "",
@@ -771,6 +788,34 @@ export const syncAthleteAccountAfterClaim = createServerOnlyFn(async (userId: st
 export const getMyAthleteAccount = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }) => loadAccount(await ready(), context.userId));
+
+// Finishes an account created straight from Google. Country, town and clubs
+// can be filled once here; a date of birth is only written while it is empty,
+// so an existing private date of birth can never be changed this way.
+export const completeMySignupDetails = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .validator((input: SignupDetails) => {
+    const details = normalizeSignupDetails(input);
+    const invalid = signupDetailsError(details);
+    if (invalid) throw new Error(invalid.message);
+    return details;
+  })
+  .handler(async ({ data, context }) => {
+    const sql = await ready();
+    await sql`
+      update "user" set
+        "firstName" = ${data.firstName},
+        "lastName" = ${data.lastName},
+        "name" = ${`${data.firstName} ${data.lastName}`},
+        "signupCountry" = ${data.signupCountry},
+        "signupLocation" = ${data.signupLocation},
+        "signupDateOfBirth" = coalesce(nullif(trim("signupDateOfBirth"), ''), ${data.signupDateOfBirth}),
+        "signupClubs" = coalesce(nullif(trim("signupClubs"), ''), nullif(${data.signupClubs}, '')),
+        "updatedAt" = now()
+      where "id" = ${context.userId}
+    `;
+    return loadAccount(sql, context.userId);
+  });
 
 // The quick discovery form must never save draft profile or consent fields.
 export const saveMyAthleteRacingName = createServerFn({ method: "POST" })
