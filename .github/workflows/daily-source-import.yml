@@ -26,11 +26,10 @@ jobs:
     timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
+      # The importer uses only Node's built-in modules, so no package install is needed.
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: npm
-      - run: npm ci --ignore-scripts
+          node-version: 24
       - name: Collect fixtures from enabled sources
         run: |
           FROM=$(date -u +%F)
