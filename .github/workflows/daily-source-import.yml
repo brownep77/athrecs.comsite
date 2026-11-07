@@ -1,0 +1,55 @@
+name: Daily fixture collection
+
+# Owner decision, 7 November 2026: collect fixtures daily from every enabled,
+# owner-cleared source. robots.txt, crawl delays and page budgets are enforced
+# by the importer. Rows go through the same duplicate and publication checks as
+# a staff upload; anything that fails stays in the review queue.
+on:
+  schedule:
+    - cron: "17 3 * * *" # 03:17 UTC daily
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Days ahead to collect"
+        default: "120"
+
+concurrency:
+  group: daily-source-import
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Collect fixtures from enabled sources
+        run: |
+          FROM=$(date -u +%F)
+          TO=$(date -u -d "+${DAYS:-120} days" +%F)
+          echo "FROM=$FROM" >> "$GITHUB_ENV"
+          echo "TO=$TO" >> "$GITHUB_ENV"
+          node scripts/source-importer/run.mjs --from "$FROM" --to "$TO" --concurrency 8 --out tmp/source-import
+          cat tmp/source-import/report.md >> "$GITHUB_STEP_SUMMARY"
+        env:
+          DAYS: ${{ github.event.inputs.days }}
+      - name: Import and publish through the site's checks
+        if: ${{ env.SOURCE_IMPORT_TOKEN != '' }}
+        run: node scripts/source-importer/post.mjs tmp/source-import/fixtures.csv "$FROM" "$TO"
+        env:
+          SOURCE_IMPORT_URL: https://www.athrecs.com
+          SOURCE_IMPORT_TOKEN: ${{ secrets.SOURCE_IMPORT_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: source-import
+          path: tmp/source-import
+          retention-days: 14

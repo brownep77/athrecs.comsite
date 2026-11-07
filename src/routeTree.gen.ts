@@ -72,6 +72,7 @@ import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-co
 import { Route as ApiResultCertificatesRouteImport } from './routes/api/result-certificates'
 import { Route as ApiResultClaimAlertsRouteImport } from './routes/api/result-claim-alerts'
 import { Route as ApiSignupAlertsRouteImport } from './routes/api/signup-alerts'
+import { Route as ApiSourceImportWorkerRouteImport } from './routes/api/source-import-worker'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as BrandsIndexRouteImport } from './routes/brands/index'
@@ -440,6 +441,11 @@ const ApiSignupAlertsRoute = ApiSignupAlertsRouteImport.update({
   path: '/api/signup-alerts',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiSourceImportWorkerRoute = ApiSourceImportWorkerRouteImport.update({
+  id: '/api/source-import-worker',
+  path: '/api/source-import-worker',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AthletesIndexRoute = AthletesIndexRouteImport.update({
   id: '/athletes/',
   path: '/athletes/',
@@ -752,6 +758,7 @@ export interface FileRoutesByFullPath {
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
+  '/api/source-import-worker': typeof ApiSourceImportWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -865,6 +872,7 @@ export interface FileRoutesByTo {
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
+  '/api/source-import-worker': typeof ApiSourceImportWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -979,6 +987,7 @@ export interface FileRoutesById {
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
+  '/api/source-import-worker': typeof ApiSourceImportWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -1094,6 +1103,7 @@ export interface FileRouteTypes {
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
+    | '/api/source-import-worker'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -1207,6 +1217,7 @@ export interface FileRouteTypes {
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
+    | '/api/source-import-worker'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -1320,6 +1331,7 @@ export interface FileRouteTypes {
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
+    | '/api/source-import-worker'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -1434,6 +1446,7 @@ export interface RootRouteChildren {
   ApiResultCertificatesRoute: typeof ApiResultCertificatesRoute
   ApiResultClaimAlertsRoute: typeof ApiResultClaimAlertsRoute
   ApiSignupAlertsRoute: typeof ApiSignupAlertsRoute
+  ApiSourceImportWorkerRoute: typeof ApiSourceImportWorkerRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   BrandsManageRoute: typeof BrandsManageRoute
   BrandsRegisterRoute: typeof BrandsRegisterRoute
@@ -1928,6 +1941,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSignupAlertsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/source-import-worker': {
+      id: '/api/source-import-worker'
+      path: '/api/source-import-worker'
+      fullPath: '/api/source-import-worker'
+      preLoaderRoute: typeof ApiSourceImportWorkerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/athletes/': {
       id: '/athletes/'
       path: '/athletes'
@@ -2330,6 +2350,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiResultCertificatesRoute: ApiResultCertificatesRoute,
   ApiResultClaimAlertsRoute: ApiResultClaimAlertsRoute,
   ApiSignupAlertsRoute: ApiSignupAlertsRoute,
+  ApiSourceImportWorkerRoute: ApiSourceImportWorkerRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   BrandsManageRoute: BrandsManageRoute,
   BrandsRegisterRoute: BrandsRegisterRoute,
