@@ -103,6 +103,7 @@ export type EditorialArticle = {
     id: string;
     heading: string;
     paragraphs: string[];
+    image?: EditorialArticle["image"];
     standings?: EditorialStandings;
     table?: { caption: string; headings: string[]; rows: string[][] };
     sources?: { label: string; url: string }[];

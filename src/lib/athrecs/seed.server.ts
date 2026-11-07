@@ -26,6 +26,13 @@ import { nationalAgeAthletes, nationalAgeResults } from "@/data/featured-gbr-irl
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 import { parkrunDates, parkrunDistance } from "./parkrun-dates";
 import { runCatalogueTransaction } from "./catalogue-transaction";
+import reviewedParkrunRelease from "@/data/parkrun-review-2026-11-06.json";
+
+// These identities are owned by the source-reviewed publisher. A map entry alone
+// must never acquire dates from the legacy country-default recurrence generator.
+const reviewedParkrunVenueSlugs = reviewedParkrunRelease.events
+  .filter((item) => item.isNew)
+  .map((item) => item.event.slug);
 
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-14-v2-world-athletics-track-field-2026-10-19-79064b5939";
@@ -788,6 +795,11 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
       e.website,
       e.website,
       case
+        when d::date >= date '2026-11-07'
+          and e.slug in ('eastcoastpark-parkrun', 'bishan-parkrun', 'westcoastpark-parkrun')
+          then '07:30'
+        when d::date >= date '2026-11-07' and e.slug = 'coffsharbour-parkrun'
+          then '07:00'
         when e.country in (
           'Australia', 'New Zealand', 'South Africa', 'Namibia',
           'Eswatini', 'Singapore', 'Malaysia', 'Japan'
@@ -800,6 +812,7 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
     where e.sport = 'Parkrun'
       and e.country not in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland')
       and e.name not ilike '%junior%'
+      and not (e.slug = any(${reviewedParkrunVenueSlugs}::text[]))
     on conflict (event_id, event_date, distance_code) do nothing
   `;
   await sql`
@@ -822,6 +835,7 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
     where e.sport = 'Parkrun'
       and e.country not in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland')
       and e.name ilike '%junior%'
+      and not (e.slug = any(${reviewedParkrunVenueSlugs}::text[]))
     on conflict (event_id, event_date, distance_code) do nothing
   `;
 }
@@ -2170,7 +2184,10 @@ async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
     (row) =>
       !(row.date === "2026-09-27" && (row.distance === "Marathon" || row.distance === "10K")),
   );
-  const eventSlugs = await resolveEventSeedSlugs(sql, sourceHistories.map((row) => row.eventSlug));
+  const eventSlugs = await resolveEventSeedSlugs(
+    sql,
+    sourceHistories.map((row) => row.eventSlug),
+  );
   const histories = sourceHistories.map((row) => ({
     ...row,
     eventSlug: eventSlugs.get(row.eventSlug) ?? row.eventSlug,

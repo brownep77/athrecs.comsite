@@ -1,0 +1,2292 @@
+{
+  "sourceKey": "athrecs-code:parkrun-reviewed:2026-11-06-v1",
+  "sourceUrl": "https://images.parkrun.com/events.json",
+  "checkedAt": "2026-11-06",
+  "fromDate": "2026-11-07",
+  "toDate": "2027-02-06",
+  "events": [
+    {
+      "event": {
+        "slug": "castletown-parkrun",
+        "name": "Castletown parkrun",
+        "sport": "Parkrun",
+        "country": "Ireland",
+        "county": "Kildare",
+        "city": "Celbridge",
+        "area": "Castletown House",
+        "surface": "",
+        "summary": "Castletown parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 09:30 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ie/castletown/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 1338,
+        "officialKey": "castletown",
+        "coordinates": [-6.528707, 53.348946],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://images.parkrun.com/events.json",
+            "sourceType": "official_event_map",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Official country domain, event identifier, canonical slug, series identifier, name, venue and coordinates. Presence confirms a published venue identity, not its launch date or schedule."
+          },
+          {
+            "url": "https://de.linkedin.com/company/parkrun-ireland",
+            "sourceType": "official_parkrun_social",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "parkrun Ireland confirms the October return of Castletown after its 2023 pause, and launches of Cork Harbour Greenway, Corkagh junior and Dungarvan Greenway. A shared post by territory manager Jenny Branigan describes Irish 5k parkruns as Saturdays at 09:30.",
+            "webRef": "turn129view2",
+            "limitations": "Relative social dates are not used to determine exact inaugural dates. The national 5k timing statement is not applied to juniors."
+          },
+          {
+            "url": "https://run.hersport.ie/locations/",
+            "sourceType": "partner_event_host",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "The Celbridge hub lists Castletown, County Kildare, 5km and 09:30.",
+            "webRef": "turn137view1",
+            "limitations": "Historical 2023/2024 campaign page; corroboration only. Current activity is established by official parkrun Ireland."
+          },
+          {
+            "url": "https://podcasts.apple.com/au/podcast/ep-81-castletown-parkrun/id1835276796?i=1000795936529",
+            "sourceType": "participant_firsthand_report",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "12 October podcast describes attending the Castletown restart on 10 October 2026.",
+            "webRef": "turn101search3",
+            "limitations": "Independent participant report, not the event organiser; exact date retained as a lead."
+          }
+        ],
+        "firstDate": null,
+        "identityDecision": "Recovered missing returning venue, not a brand-new parkrun. No canonical URL, slug or Castletown-name match in the live inventory."
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "09:30",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://de.linkedin.com/company/parkrun-ireland",
+        "timezone": "Europe/Dublin"
+      }
+    },
+    {
+      "event": {
+        "slug": "yorktimbers-parkrun",
+        "name": "York Timbers parkrun",
+        "sport": "Parkrun",
+        "country": "South Africa",
+        "county": "",
+        "city": "",
+        "area": "York Timbers",
+        "surface": "",
+        "summary": "York Timbers parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.za/yorktimbers/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3961,
+        "officialKey": "yorktimbers",
+        "coordinates": [30.745764, -25.107011],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "hiroshimastadiumpark-parkrun",
+        "name": "Hiroshima Stadium Park parkrun",
+        "sport": "Parkrun",
+        "country": "Japan",
+        "county": "",
+        "city": "",
+        "area": "Hiroshima Stadium Park",
+        "surface": "",
+        "summary": "Hiroshima Stadium Park parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.jp/hiroshimastadiumpark/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3971,
+        "officialKey": "hiroshimastadiumpark",
+        "coordinates": [132.452551, 34.401449],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "unchecked",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "stormsriver-parkrun",
+        "name": "Storms River parkrun",
+        "sport": "Parkrun",
+        "country": "South Africa",
+        "county": "",
+        "city": "",
+        "area": "Storms River",
+        "surface": "",
+        "summary": "Storms River parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.za/stormsriver/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3972,
+        "officialKey": "stormsriver",
+        "coordinates": [23.886769, -33.965961],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "valducharron-parkrun",
+        "name": "Val du Charron parkrun",
+        "sport": "Parkrun",
+        "country": "South Africa",
+        "county": "",
+        "city": "",
+        "area": "Val du Charron",
+        "surface": "",
+        "summary": "Val du Charron parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.za/valducharron/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3975,
+        "officialKey": "valducharron",
+        "coordinates": [19.048987, -33.62479],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "valkeinen-parkrun",
+        "name": "Valkeinen parkrun",
+        "sport": "Parkrun",
+        "country": "Finland",
+        "county": "",
+        "city": "",
+        "area": "Valkeinen",
+        "surface": "",
+        "summary": "Valkeinen parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.fi/valkeinen/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3976,
+        "officialKey": "valkeinen",
+        "coordinates": [27.663325, 62.891779],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "unchecked",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "zuiderparkrotterdam-parkrun",
+        "name": "Zuiderpark parkrun, Rotterdam",
+        "sport": "Parkrun",
+        "country": "Netherlands",
+        "county": "",
+        "city": "Rotterdam",
+        "area": "Zuiderpark, Rotterdam",
+        "surface": "",
+        "summary": "Zuiderpark parkrun, Rotterdam. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 09:00 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.nl/zuiderparkrotterdam/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3977,
+        "officialKey": "zuiderparkrotterdam",
+        "coordinates": [4.487687, 51.879237],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://www.uitagendarotterdam.nl/en/agenda/zuiderpark-parkrun/",
+            "checkedAt": "2026-11-06",
+            "sourceType": "municipal_tourism_hosted_organiser_listing",
+            "evidenceSummary": "Organiser text explicitly states weekly Saturday 09:00 and 5km. Current listing contains November 2026 dates. PARK21 08:45 is arrival, not the start."
+          }
+        ],
+        "firstDate": "2026-09-05"
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "09:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://www.uitagendarotterdam.nl/en/agenda/zuiderpark-parkrun/",
+        "timezone": "Europe/Amsterdam"
+      }
+    },
+    {
+      "event": {
+        "slug": "oldgolfcoursenarrogin-parkrun",
+        "name": "Old Golf Course parkrun, Narrogin",
+        "sport": "Parkrun",
+        "country": "Australia",
+        "county": "Western Australia",
+        "city": "Narrogin",
+        "area": "Old Golf Course, Narrogin",
+        "surface": "",
+        "summary": "Old Golf Course parkrun, Narrogin. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 08:00 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/oldgolfcoursenarrogin/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3979,
+        "officialKey": "oldgolfcoursenarrogin",
+        "coordinates": [117.17514, -32.925766],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://images.parkrun.com/events.json",
+            "sourceType": "official_event_map",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Official country domain, event identifier, canonical slug, series identifier, name, venue and coordinates. Presence confirms a published venue identity, not its launch date or schedule."
+          },
+          {
+            "url": "https://www.dryandratourism.org.au/plan/news/event-calendar/event/1280-old-golf-course-parkrun-narrogin",
+            "sourceType": "official_local_tourism_event_listing",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Narrogin tourism lists the specific Old Golf Course event as free weekly 5km, every Saturday 08:00, Earl Street, Narrogin WA 6312.",
+            "webRef": "turn133search0",
+            "shortExcerpt": "Every Saturday at 8:00am.",
+            "limitations": "Search index accessible; one direct open of the shorter alias URL timed out. No exact launch date is asserted from this page."
+          },
+          {
+            "url": "https://log.5kadventures.net/segments/launches-and-anniversaries-where-is-the-cake",
+            "sourceType": "independent_participant_podcast",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Reports Narrogin inaugural 12 September, Moot Yang Gunya 26 September; Endeavour, Sunnynook and Queen Elizabeth Kapiti 3 October 2026. Describes Endeavour as the successor to Nathan Road.",
+            "webRef": "turn133search5",
+            "limitations": "Secondary discovery for dates/alias; not primary start-time verification."
+          }
+        ],
+        "firstDate": null,
+        "identityDecision": ""
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "08:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://www.dryandratourism.org.au/plan/news/event-calendar/event/1280-old-golf-course-parkrun-narrogin",
+        "timezone": "Australia/Perth"
+      }
+    },
+    {
+      "event": {
+        "slug": "tione-parkrun",
+        "name": "Tione parkrun",
+        "sport": "Parkrun",
+        "country": "Italy",
+        "county": "",
+        "city": "",
+        "area": "Tione",
+        "surface": "",
+        "summary": "Tione parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.it/tione/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3980,
+        "officialKey": "tione",
+        "coordinates": [10.831036, 45.354242],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "unchecked",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "mootyanggunyaswamp-parkrun",
+        "name": "Moot Yang Gunya Swamp parkrun",
+        "sport": "Parkrun",
+        "country": "Australia",
+        "county": "South Australia",
+        "city": "Mundulla",
+        "area": "Moot Yang Gunya Swamp",
+        "surface": "",
+        "summary": "Moot Yang Gunya Swamp parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/mootyanggunyaswamp/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3986,
+        "officialKey": "mootyanggunyaswamp",
+        "coordinates": [140.690227, -36.355726],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Launch reported locally; schedule only mirrored. Primary event time still required."
+      }
+    },
+    {
+      "event": {
+        "slug": "park21-parkrun",
+        "name": "PARK21 parkrun",
+        "sport": "Parkrun",
+        "country": "Netherlands",
+        "county": "",
+        "city": "",
+        "area": "PARK21",
+        "surface": "",
+        "summary": "PARK21 parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 09:00 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.nl/park21/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3991,
+        "officialKey": "park21",
+        "coordinates": [4.628945, 52.296586],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://visithaarlemmermeer.nl/agenda/park21-parkrun",
+            "checkedAt": "2026-11-06",
+            "sourceType": "municipal_tourism_hosted_organiser_listing",
+            "evidenceSummary": "Organiser text explicitly states weekly Saturday 09:00 and 5km. Current listing contains November 2026 dates. PARK21 08:45 is arrival, not the start."
+          }
+        ],
+        "firstDate": null
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "09:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://visithaarlemmermeer.nl/agenda/park21-parkrun",
+        "timezone": "Europe/Amsterdam"
+      }
+    },
+    {
+      "event": {
+        "slug": "queenelizabethkapiticoast-parkrun",
+        "name": "Queen Elizabeth parkrun, Kapiti Coast",
+        "sport": "Parkrun",
+        "country": "New Zealand",
+        "county": "Wellington",
+        "city": "Kapiti Coast",
+        "area": "Queen Elizabeth, Kapiti Coast",
+        "surface": "",
+        "summary": "Queen Elizabeth parkrun, Kapiti Coast. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.nz/queenelizabethkapiticoast/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3992,
+        "officialKey": "queenelizabethkapiticoast",
+        "coordinates": [174.968319, -40.960682],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Current map identity verified, but accessible local schedule evidence is secondary. Do not infer 08:00 from North Island geography."
+      }
+    },
+    {
+      "event": {
+        "slug": "sunnynook-parkrun",
+        "name": "Sunnynook parkrun",
+        "sport": "Parkrun",
+        "country": "New Zealand",
+        "county": "Auckland",
+        "city": "Auckland",
+        "area": "Sunnynook",
+        "surface": "",
+        "summary": "Sunnynook parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.nz/sunnynook/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3995,
+        "officialKey": "sunnynook",
+        "coordinates": [174.741069, -36.757964],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Current map identity verified, but accessible local schedule evidence is secondary. Do not infer 08:00 from North Island geography."
+      }
+    },
+    {
+      "event": {
+        "slug": "lostshoresurfresort-parkrun",
+        "name": "Lost Shore Surf Resort parkrun",
+        "sport": "Parkrun",
+        "country": "Scotland",
+        "county": "City of Edinburgh",
+        "city": "Newbridge / Ratho",
+        "area": "Lost Shore Surf Resort",
+        "surface": "",
+        "summary": "Lost Shore Surf Resort parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/lostshoresurfresort/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3996,
+        "officialKey": "lostshoresurfresort",
+        "coordinates": [-3.397714, 55.920006],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "endeavour-parkrun",
+        "name": "Endeavour parkrun",
+        "sport": "Parkrun",
+        "country": "Australia",
+        "county": "Queensland",
+        "city": "Newport",
+        "area": "Endeavour",
+        "surface": "",
+        "summary": "Endeavour parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/endeavour/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3997,
+        "officialKey": "endeavour",
+        "coordinates": [153.097583, -27.20285],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Specific 07:00 schedule exists only in independent mirror; official park/council schedule unverified."
+      }
+    },
+    {
+      "event": {
+        "slug": "hhknolllakeview-parkrun",
+        "name": "H.H. Knoll Lakeview parkrun",
+        "sport": "Parkrun",
+        "country": "Canada",
+        "county": "",
+        "city": "",
+        "area": "H.H. Knoll Lakeview",
+        "surface": "",
+        "summary": "H.H. Knoll Lakeview parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ca/hhknolllakeview/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3998,
+        "officialKey": "hhknolllakeview",
+        "coordinates": [-79.256996, 42.880132],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "redwillowtrail-parkrun",
+        "name": "Red Willow Trail parkrun",
+        "sport": "Parkrun",
+        "country": "Canada",
+        "county": "",
+        "city": "",
+        "area": "Red Willow Trail",
+        "surface": "",
+        "summary": "Red Willow Trail parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ca/redwillowtrail/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 3999,
+        "officialKey": "redwillowtrail",
+        "coordinates": [-113.620693, 53.641781],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "okurakaigankoen-parkrun",
+        "name": "Okura kaigan koen parkrun",
+        "sport": "Parkrun",
+        "country": "Japan",
+        "county": "",
+        "city": "",
+        "area": "Okura kaigan koen",
+        "surface": "",
+        "summary": "Okura kaigan koen parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.jp/okurakaigankoen/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4000,
+        "officialKey": "okurakaigankoen",
+        "coordinates": [135.008025, 34.642379],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "unchecked",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "grosserspektesee-parkrun",
+        "name": "Großer Spektesee parkrun",
+        "sport": "Parkrun",
+        "country": "Germany",
+        "county": "",
+        "city": "",
+        "area": "Großer Spektesee",
+        "surface": "",
+        "summary": "Großer Spektesee parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.de/grosserspektesee/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4003,
+        "officialKey": "grosserspektesee",
+        "coordinates": [13.164824, 52.546411],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "unchecked",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "corkagh-juniors-parkrun",
+        "name": "Corkagh junior parkrun",
+        "sport": "Parkrun",
+        "country": "Ireland",
+        "county": "Dublin",
+        "city": "Clondalkin",
+        "area": "Corkagh juniors",
+        "surface": "",
+        "summary": "Corkagh junior parkrun. A local junior parkrun community.",
+        "description": "Visit the official junior event page for course information, eligibility, launch details and current notices.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ie/corkagh-juniors/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4005,
+        "officialKey": "corkagh-juniors",
+        "coordinates": [-6.410015, 53.318005],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Official launch confirmed, but actual junior local start time is not established. Do not use adult Corkagh time or Palaner 09:00 default."
+      }
+    },
+    {
+      "event": {
+        "slug": "dungarvangreenway-parkrun",
+        "name": "Dungarvan Greenway parkrun",
+        "sport": "Parkrun",
+        "country": "Ireland",
+        "county": "Waterford",
+        "city": "Dungarvan",
+        "area": "Dungarvan Greenway",
+        "surface": "",
+        "summary": "Dungarvan Greenway parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 09:30 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ie/dungarvangreenway/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4006,
+        "officialKey": "dungarvangreenway",
+        "coordinates": [-7.563808, 52.100642],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://images.parkrun.com/events.json",
+            "sourceType": "official_event_map",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Official country domain, event identifier, canonical slug, series identifier, name, venue and coordinates. Presence confirms a published venue identity, not its launch date or schedule."
+          },
+          {
+            "url": "https://www.waterfordsportspartnership.ie/dungarvan-parkrun-coming-soon/",
+            "sourceType": "official_delivery_partner",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Sport Ireland local partnership announces the Dungarvan Greenway October launch, with weekly Saturday 09:30 starts at the Railway Cottage. Modified 27 August 2026.",
+            "webRef": "turn132view1",
+            "shortExcerpt": "Saturdays @ 9:30am from the Railway Cottage"
+          },
+          {
+            "url": "https://www.waterfordsportspartnership.ie/parkrun/",
+            "sourceType": "official_delivery_partner",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Partner explains the 5k Saturday and 2k Sunday formats.",
+            "webRef": "turn136view0",
+            "limitations": "January 2025 page; contains an erroneous 2014 origin date, which must not be reused. It predates the new adult Dungarvan event."
+          },
+          {
+            "url": "https://de.linkedin.com/company/parkrun-ireland",
+            "sourceType": "official_parkrun_social",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "parkrun Ireland confirms the October return of Castletown after its 2023 pause, and launches of Cork Harbour Greenway, Corkagh junior and Dungarvan Greenway. A shared post by territory manager Jenny Branigan describes Irish 5k parkruns as Saturdays at 09:30.",
+            "webRef": "turn129view2",
+            "limitations": "Relative social dates are not used to determine exact inaugural dates. The national 5k timing statement is not applied to juniors."
+          },
+          {
+            "url": "https://corkrunning.blogspot.com/2026/10/the-dungarvan-5k-parkrun-started-on.html?m=1",
+            "sourceType": "independent_local_running_report",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Reports adult Dungarvan Greenway inaugural 17 October 2026 and 5km out-and-back route at Ballinroad.",
+            "webRef": "turn102search1",
+            "limitations": "Launch date is a secondary lead, not needed to create future regular fixtures."
+          }
+        ],
+        "firstDate": null,
+        "identityDecision": ""
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "09:30",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://www.waterfordsportspartnership.ie/dungarvan-parkrun-coming-soon/",
+        "timezone": "Europe/Dublin"
+      }
+    },
+    {
+      "event": {
+        "slug": "yellowwoodsfarm-parkrun",
+        "name": "Yellow Woods Farm parkrun",
+        "sport": "Parkrun",
+        "country": "South Africa",
+        "county": "",
+        "city": "",
+        "area": "Yellow Woods Farm",
+        "surface": "",
+        "summary": "Yellow Woods Farm parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.za/yellowwoodsfarm/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4007,
+        "officialKey": "yellowwoodsfarm",
+        "coordinates": [27.938997, -32.93069],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "corkharbourgreenwaycarrigaline-parkrun",
+        "name": "Cork Harbour Greenway parkrun, Carrigaline",
+        "sport": "Parkrun",
+        "country": "Ireland",
+        "county": "Cork",
+        "city": "Carrigaline",
+        "area": "Cork Harbour Greenway, Carrigaline",
+        "surface": "",
+        "summary": "Cork Harbour Greenway parkrun, Carrigaline. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 09:30 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ie/corkharbourgreenwaycarrigaline/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4009,
+        "officialKey": "corkharbourgreenwaycarrigaline",
+        "coordinates": [-8.370587, 51.811322],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://images.parkrun.com/events.json",
+            "sourceType": "official_event_map",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Official country domain, event identifier, canonical slug, series identifier, name, venue and coordinates. Presence confirms a published venue identity, not its launch date or schedule."
+          },
+          {
+            "url": "https://corksports.ie/cork-parkruns/",
+            "sourceType": "official_delivery_partner",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Cork Sports Partnership current event list includes Cork Harbour Greenway, Carrigaline among its adult events and describes the adult format as 5km. Its FAQ expressly states all listed events start at 09:30 (search-confirmed turn161search3).",
+            "webRef": "turn132view0"
+          },
+          {
+            "url": "https://de.linkedin.com/company/parkrun-ireland",
+            "sourceType": "official_parkrun_social",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "parkrun Ireland confirms the October return of Castletown after its 2023 pause, and launches of Cork Harbour Greenway, Corkagh junior and Dungarvan Greenway. A shared post by territory manager Jenny Branigan describes Irish 5k parkruns as Saturdays at 09:30.",
+            "webRef": "turn129view2",
+            "limitations": "Relative social dates are not used to determine exact inaugural dates. The national 5k timing statement is not applied to juniors."
+          },
+          {
+            "url": "https://www.thecork.ie/2026/10/21/vhi-parkrun-takes-place-every-saturday-on-carrigaline-to-crosshaven-greenway/",
+            "sourceType": "published_organiser_press_release",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "21 October coverage with Vhi and parkrun Ireland named statements gives first event 17 October 2026, weekly Saturdays 09:30 and 5km at Carrigaline.",
+            "webRef": "turn132view2",
+            "limitations": "Hosted by a newspaper, corroborated by parkrun Ireland and its delivery partner."
+          }
+        ],
+        "firstDate": "2026-10-17",
+        "identityDecision": "New distinct Carrigaline venue; not Cork city Marina or an existing Corkagh venue."
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "09:30",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://www.thecork.ie/2026/10/21/vhi-parkrun-takes-place-every-saturday-on-carrigaline-to-crosshaven-greenway/",
+        "timezone": "Europe/Dublin"
+      }
+    },
+    {
+      "event": {
+        "slug": "waitangiforest-parkrun",
+        "name": "Waitangi Forest parkrun",
+        "sport": "Parkrun",
+        "country": "New Zealand",
+        "county": "Northland",
+        "city": "Waitangi",
+        "area": "Waitangi Forest",
+        "surface": "",
+        "summary": "Waitangi Forest parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.nz/waitangiforest/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4011,
+        "officialKey": "waitangiforest",
+        "coordinates": [174.068961, -35.25374],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Current map identity verified, but accessible local schedule evidence is secondary. Do not infer 08:00 from North Island geography."
+      }
+    },
+    {
+      "event": {
+        "slug": "coffscreek-parkrun",
+        "name": "Coffs Creek parkrun",
+        "sport": "Parkrun",
+        "country": "Australia",
+        "county": "New South Wales",
+        "city": "Coffs Harbour",
+        "area": "Coffs Harbour Showground, Coffs Creek",
+        "surface": "",
+        "summary": "Coffs Creek parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 07:00 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/coffscreek/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4012,
+        "officialKey": "coffscreek",
+        "coordinates": [153.121997, -30.293502],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://images.parkrun.com/events.json",
+            "sourceType": "official_event_map",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Official country domain, event identifier, canonical slug, series identifier, name, venue and coordinates. Presence confirms a published venue identity, not its launch date or schedule."
+          },
+          {
+            "url": "https://embed-rech-01.dialog.cm/newsofthearea/docs/coffs_coast_news_of_the_area_23_october_2026",
+            "sourceType": "firsthand_event_director_interview",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "23 October local newspaper interviews event director Keelan Birch about Coffs Creek: inaugural 24 October 2026, then weekly Saturday 07:00, 5km from Coffs Harbour Showground. It explicitly distinguishes the new event from Park Beach Reserve and Bongil Bongil.",
+            "webRef": "turn133search6",
+            "limitations": "Direct organiser interview hosted in local newspaper, not on the parkrun domain."
+          },
+          {
+            "url": "https://au.linkedin.com/company/parkrun-australia",
+            "sourceType": "official_parkrun_social",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Official Australia page confirms Coffs Creek launch and the subsequent launches of JC Slaughter Falls and Nijong Oval. It defines Saturday events as 5k and Sunday juniors as 2k.",
+            "webRef": "turn120view3",
+            "limitations": "No venue start times. Relative post dates are not used alone to derive launch dates."
+          },
+          {
+            "url": "https://www.coffsharbour.nsw.gov.au/Your-Council/Public-notices/Current-public-notices/Proposed-Licence-Agreement-%E2%80%93-Community-Land-Coffs-Creek-Coffs-Harbour",
+            "sourceType": "municipal_venue_licensing",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Council notice licenses community land at Coffs Creek to parkrun Australia for Saturday morning organised running. Submission deadline 15 October 2026.",
+            "webRef": "turn95search9",
+            "limitations": "Does not itself establish the local start time."
+          }
+        ],
+        "firstDate": "2026-10-24",
+        "identityDecision": "Distinct from existing Coffs Harbour parkrun at Park Beach Reserve, id 3062475. Article explicitly says new third local venue."
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "07:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://embed-rech-01.dialog.cm/newsofthearea/docs/coffs_coast_news_of_the_area_23_october_2026",
+        "timezone": "Australia/Sydney"
+      }
+    },
+    {
+      "event": {
+        "slug": "forgefield-juniors-parkrun",
+        "name": "Forge Field junior parkrun",
+        "sport": "Parkrun",
+        "country": "Ireland",
+        "county": "Dublin",
+        "city": "",
+        "area": "Forge Field juniors",
+        "surface": "",
+        "summary": "Forge Field junior parkrun. A local junior parkrun community.",
+        "description": "Visit the official junior event page for course information, eligibility, launch details and current notices.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ie/forgefield-juniors/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4013,
+        "officialKey": "forgefield-juniors",
+        "coordinates": [-6.167043, 53.520181],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Only secondary launch/time listings. Directory 09:00 is not reliable evidence; organiser/venue confirmation required."
+      }
+    },
+    {
+      "event": {
+        "slug": "norfolkshowgroundtrail-parkrun",
+        "name": "Norfolk Showground Trail parkrun",
+        "sport": "Parkrun",
+        "country": "England",
+        "county": "Norfolk",
+        "city": "New Costessey",
+        "area": "Norfolk Showground Trail",
+        "surface": "",
+        "summary": "Norfolk Showground Trail parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 09:00 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/norfolkshowgroundtrail/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4014,
+        "officialKey": "norfolkshowgroundtrail",
+        "coordinates": [1.169303, 52.651749],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://norfolkfoodhall.co.uk/parkrun-at-norfolk-food-hall",
+            "source_type": "venue_owner",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "web_open",
+            "summary": "Explicit free weekly5K everySaturday09:00 at Norfolk Food Hall/Norfolk Showground. Page still says launch coming soon.",
+            "local_capture": "/workspace/scratch/526a0fc02c42/norfolk-foodhall-parkrun.html",
+            "excerpt": "Time: Every Saturday at 9:00am",
+            "sha256": "e8a02985445dbeacd68266dd30cab09463bc6b15dd01ff324546b4382235f381"
+          },
+          {
+            "url": "https://www.native2norfolk.co.uk/the-norfolk-food-hall",
+            "source_type": "venue_market_partner",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "web_open",
+            "summary": "Autumn market clearly moved to24October2026; text says parkrun launches the same day. An earlier10October sentence remains but is explicitly superseded by moved-to24October wording. This is market organiser evidence, not the parkrun organiser."
+          },
+          {
+            "url": "https://norfolkfoodhall.co.uk/norfolk-farmers-market",
+            "source_type": "venue_owner",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "web_open",
+            "summary": "Venue confirms its farmers market date24October, supporting market-partner page context; does not itself confirm parkrun date."
+          },
+          {
+            "url": "https://norfolkshowground.co.uk/contact/",
+            "source_type": "venue_owner",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "web_open",
+            "summary": "FAQ identifies Norfolk Showground on Dereham Road, New Costessey, Norfolk NR5 0TT."
+          },
+          {
+            "url": "https://www.elliottline.com/parkrun/2026/10/25/parkrun-attendance-and-milestone-stats-for-24-october-2026-and-25-october-2026",
+            "source_type": "independent_statistics",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "search_extraction",
+            "summary": "Reports Norfolk Showground Trail as new UK parkrun on24October2026; not promoted to official result source."
+          }
+        ],
+        "firstDate": null
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "09:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://norfolkfoodhall.co.uk/parkrun-at-norfolk-food-hall",
+        "timezone": "Europe/London"
+      }
+    },
+    {
+      "event": {
+        "slug": "juronglakegardens-parkrun",
+        "name": "Jurong Lake Gardens parkrun",
+        "sport": "Parkrun",
+        "country": "Singapore",
+        "county": "Singapore",
+        "city": "Singapore",
+        "area": "Jurong Lake Gardens",
+        "surface": "",
+        "summary": "Jurong Lake Gardens parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.sg/juronglakegardens/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4015,
+        "officialKey": "juronglakegardens",
+        "coordinates": [103.723335, 1.340802],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Specific 07:30 is only on independent calendar; official national poster is corroboration, not independent local timetable."
+      }
+    },
+    {
+      "event": {
+        "slug": "linklaterreserve-parkrun",
+        "name": "Linklater Reserve parkrun",
+        "sport": "Parkrun",
+        "country": "New Zealand",
+        "county": "Manawatu-Wanganui",
+        "city": "Palmerston North",
+        "area": "Linklater Reserve",
+        "surface": "",
+        "summary": "Linklater Reserve parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.nz/linklaterreserve/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4016,
+        "officialKey": "linklaterreserve",
+        "coordinates": [175.641091, -40.32319],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Very specific founding-team posts establish 08:00/24 October in a mirror, but direct official Facebook could not be retrieved. Needs acceptance of reproduced organiser material or direct primary confirmation."
+      }
+    },
+    {
+      "event": {
+        "slug": "nijongoval-parkrun",
+        "name": "Nijong Oval parkrun",
+        "sport": "Parkrun",
+        "country": "Australia",
+        "county": "New South Wales",
+        "city": "Cooma",
+        "area": "Nijong Oval",
+        "surface": "",
+        "summary": "Nijong Oval parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/nijongoval/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4017,
+        "officialKey": "nijongoval",
+        "coordinates": [149.119775, -36.231558],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Official parkrun Australia confirms launch. No accessible primary local start-time evidence found. Do not assume 08:00 from state."
+      }
+    },
+    {
+      "event": {
+        "slug": "gumsloop-parkrun",
+        "name": "Gums Loop parkrun",
+        "sport": "Parkrun",
+        "country": "New Zealand",
+        "county": "Wellington",
+        "city": "Lower Hutt",
+        "area": "Gums Loop",
+        "surface": "",
+        "summary": "Gums Loop parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.nz/gumsloop/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4018,
+        "officialKey": "gumsloop",
+        "coordinates": [174.971074, -41.276263],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Current map identity verified, but accessible local schedule evidence is secondary. Do not infer 08:00 from North Island geography."
+      }
+    },
+    {
+      "event": {
+        "slug": "jcslaughterfalls-parkrun",
+        "name": "JC Slaughter Falls parkrun",
+        "sport": "Parkrun",
+        "country": "Australia",
+        "county": "Queensland",
+        "city": "Brisbane",
+        "area": "JC Slaughter Falls",
+        "surface": "",
+        "summary": "JC Slaughter Falls parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/jcslaughterfalls/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4020,
+        "officialKey": "jcslaughterfalls",
+        "coordinates": [152.97003, -27.472872],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Official parkrun Australia confirms launch. City council general 07:00 listings refer to other named parks, so cannot transfer their time to this venue."
+      }
+    },
+    {
+      "event": {
+        "slug": "wasserwerkoberwerth-parkrun",
+        "name": "Wasserwerk Oberwerth parkrun",
+        "sport": "Parkrun",
+        "country": "Germany",
+        "county": "",
+        "city": "",
+        "area": "Wasserwerk Oberwerth",
+        "surface": "",
+        "summary": "Wasserwerk Oberwerth parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.de/wasserwerkoberwerth/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4021,
+        "officialKey": "wasserwerkoberwerth",
+        "coordinates": [7.588044, 50.331106],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "unchecked",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "stonebridgetrail-parkrun",
+        "name": "Stonebridge Trail parkrun",
+        "sport": "Parkrun",
+        "country": "Canada",
+        "county": "",
+        "city": "",
+        "area": "Stonebridge Trail",
+        "surface": "",
+        "summary": "Stonebridge Trail parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ca/stonebridgetrail/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4022,
+        "officialKey": "stonebridgetrail",
+        "coordinates": [-75.708224, 45.251399],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "historickopubridge-parkrun",
+        "name": "Historic Kōpū Bridge parkrun",
+        "sport": "Parkrun",
+        "country": "New Zealand",
+        "county": "Waikato",
+        "city": "Kopu",
+        "area": "Historic Kōpū Bridge",
+        "surface": "",
+        "summary": "Historic Kōpū Bridge parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.nz/historickopubridge/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4024,
+        "officialKey": "historickopubridge",
+        "coordinates": [175.56561, -37.190061],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "5 September was a test only. Secondary tracker says 7 November formal launch; no current primary start-date/time confirmation."
+      }
+    },
+    {
+      "event": {
+        "slug": "cabarita-parkrun",
+        "name": "Cabarita parkrun",
+        "sport": "Parkrun",
+        "country": "Australia",
+        "county": "New South Wales",
+        "city": "Cabarita",
+        "area": "Cabarita",
+        "surface": "",
+        "summary": "Cabarita parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/cabarita/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4025,
+        "officialKey": "cabarita",
+        "coordinates": [151.115751, -33.843131],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Council-approved schedule is clear, but April approval was conditional and only secondary tracker confirms 7 November launch. Hold until actual current launch is verified."
+      }
+    },
+    {
+      "event": {
+        "slug": "marykinross-juniors-parkrun",
+        "name": "Mary Kinross junior parkrun",
+        "sport": "Parkrun",
+        "country": "Australia",
+        "county": "Queensland",
+        "city": "Bargara",
+        "area": "Mary Kinross juniors",
+        "surface": "",
+        "summary": "Mary Kinross junior parkrun. A local junior parkrun community.",
+        "description": "Visit the official junior event page for course information, eligibility, launch details and current notices.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/marykinross-juniors/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4027,
+        "officialKey": "marykinross-juniors",
+        "coordinates": [152.474677, -24.847157],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Tracker marks proposed launch TBC following a test event; no primary start time or confirmed first official date."
+      }
+    },
+    {
+      "event": {
+        "slug": "larkspurlanding-parkrun",
+        "name": "Larkspur Landing parkrun",
+        "sport": "Parkrun",
+        "country": "United States",
+        "county": "California",
+        "city": "Larkspur",
+        "area": "Larkspur Landing",
+        "surface": "",
+        "summary": "Larkspur Landing parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.us/larkspurlanding/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4029,
+        "officialKey": "larkspurlanding",
+        "coordinates": [-122.50987, 37.945546],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "Directory generated fixtures before reported launch. Need primary 14 November launch and local 09:00 confirmation."
+      }
+    },
+    {
+      "event": {
+        "slug": "diehoenderhok-parkrun",
+        "name": "Die Hoenderhok parkrun",
+        "sport": "Parkrun",
+        "country": "South Africa",
+        "county": "",
+        "city": "",
+        "area": "Die Hoenderhok",
+        "surface": "",
+        "summary": "Die Hoenderhok parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.za/diehoenderhok/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4030,
+        "officialKey": "diehoenderhok",
+        "coordinates": [26.853033, -28.091324],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "mondscheinwiese-parkrun",
+        "name": "Mondscheinwiese parkrun",
+        "sport": "Parkrun",
+        "country": "Germany",
+        "county": "",
+        "city": "",
+        "area": "Mondscheinwiese",
+        "surface": "",
+        "summary": "Mondscheinwiese parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.de/mondscheinwiese/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4032,
+        "officialKey": "mondscheinwiese",
+        "coordinates": [7.016968, 51.417712],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "unchecked",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "meadowbank-junior-parkrun",
+        "name": "Meadowbank junior parkrun",
+        "sport": "Parkrun",
+        "country": "England",
+        "county": "Surrey",
+        "city": "Dorking",
+        "area": "Meadowbank juniors",
+        "surface": "",
+        "summary": "Meadowbank junior parkrun. A local junior parkrun community.",
+        "description": "Free 2K junior parkrun for children aged four to 14, launching at the Meadowbank Park bandstand on Sunday 22 November 2026 at 09:00. Scheduled weekly on Sundays. Check the official event page for current notices.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/meadowbank-juniors/",
+        "distances": ["2K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4034,
+        "officialKey": "meadowbank-juniors",
+        "coordinates": [-0.331399, 51.235109],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://news.molevalley.gov.uk/2026/10/30/brand-new-junior-parkrun-to-launch-in-meadowbank-park-dorking/",
+            "source_type": "supporting_council_official_press_release",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "direct_http_200_after_web_502",
+            "summary": "Council confirmsSunday22November2026 09:00,weekly2km,ages4–14,bandstand start/finish. Event director and parkrun engagement manager quoted.",
+            "local_capture": "/workspace/scratch/526a0fc02c42/meadowbank-council.html",
+            "local_text": "/workspace/scratch/526a0fc02c42/meadowbank-council.txt",
+            "excerpt": "At 9am on Sunday 22 November 2026 a brand-new junior parkrun will launch in Meadowbank Park in Dorking",
+            "sha256": "eb4c000e5d93dc6493900de79b26015673b3bfbd19777913508691124b186a11"
+          }
+        ],
+        "firstDate": "2026-11-22"
+      },
+      "schedule": {
+        "fromDate": "2026-11-22",
+        "weekday": 0,
+        "startTime": "09:00",
+        "distance": "2K",
+        "distanceKm": 2,
+        "sourceUrl": "https://news.molevalley.gov.uk/2026/10/30/brand-new-junior-parkrun-to-launch-in-meadowbank-park-dorking/",
+        "timezone": "Europe/London"
+      }
+    },
+    {
+      "event": {
+        "slug": "provoriverdeltagateway-parkrun",
+        "name": "Provo River Delta Gateway parkrun",
+        "sport": "Parkrun",
+        "country": "United States",
+        "county": "Utah",
+        "city": "Provo",
+        "area": "Provo River Delta Gateway",
+        "surface": "",
+        "summary": "Provo River Delta Gateway parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun at Delta Gateway Park, with its official launch on 21 November 2026. Scheduled Saturday starts are 09:00 from November to April and 08:00 from May to October. Check the official event page for cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.us/provoriverdeltagateway/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4035,
+        "officialKey": "provoriverdeltagateway",
+        "coordinates": [-111.712141, 40.239851],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "sources": [
+          {
+            "url": "https://images.parkrun.com/events.json",
+            "sourceType": "official_event_map",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Official country domain, event identifier, canonical slug, series identifier, name, venue and coordinates. Presence confirms a published venue identity, not its launch date or schedule."
+          },
+          {
+            "url": "https://www.roadrunners.club/events/parkrun",
+            "sourceType": "organising_club",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Organising Roadrunner Club explicitly states 5km every Saturday at Delta Gateway Park, 311 N Lakeshore Drive, Provo; practice starts 17 October, official launch 21 November 2026. Local starts are 09:00 November–April and 08:00 May–October.",
+            "webRef": "turn120view1",
+            "shortExcerpt": "Official Start Nov 21, 2026"
+          }
+        ],
+        "firstDate": "2026-11-21",
+        "identityDecision": ""
+      },
+      "schedule": {
+        "fromDate": "2026-11-21",
+        "weekday": 6,
+        "startTime": "09:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://www.roadrunners.club/events/parkrun",
+        "timezone": "America/Denver",
+        "seasonalStartTimes": [
+          {
+            "months": [11, 12, 1, 2, 3, 4],
+            "startTime": "09:00"
+          },
+          {
+            "months": [5, 6, 7, 8, 9, 10],
+            "startTime": "08:00"
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "slug": "auerwelsbachpark-parkrun",
+        "name": "Auer-Welsbach-Park parkrun",
+        "sport": "Parkrun",
+        "country": "Austria",
+        "county": "",
+        "city": "",
+        "area": "Auer-Welsbach-Park",
+        "surface": "",
+        "summary": "Auer-Welsbach-Park parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.at/auerwelsbachpark/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4036,
+        "officialKey": "auerwelsbachpark",
+        "coordinates": [16.319424, 48.189546],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "unchecked",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "austindrive-parkrun",
+        "name": "Austin Drive parkrun",
+        "sport": "Parkrun",
+        "country": "Canada",
+        "county": "",
+        "city": "",
+        "area": "Austin Drive",
+        "surface": "",
+        "summary": "Austin Drive parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.ca/austindrive/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4037,
+        "officialKey": "austindrive",
+        "coordinates": [-79.299261, 43.867445],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "dundeegolfclub-parkrun",
+        "name": "Dundee Golf Club parkrun",
+        "sport": "Parkrun",
+        "country": "South Africa",
+        "county": "",
+        "city": "",
+        "area": "Dundee Golf Club",
+        "surface": "",
+        "summary": "Dundee Golf Club parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Visit the official event page for course information, current notices and how to take part.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.co.za/dundeegolfclub/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4039,
+        "officialKey": "dundeegolfclub",
+        "coordinates": [30.221544, -28.169723],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "elsenzufer-parkrun",
+        "name": "Elsenzufer parkrun",
+        "sport": "Parkrun",
+        "country": "Germany",
+        "county": "",
+        "city": "Eppingen",
+        "area": "Elsenzufer",
+        "surface": "",
+        "summary": "Elsenzufer parkrun. Walk, jog, run or volunteer with your local parkrun community.",
+        "description": "Free 5K parkrun at the Elsenz river path in Eppingen, with its official launch on 28 November 2026. Scheduled weekly on Saturdays at 09:00 local time. Check the official event page for meeting instructions and cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.de/elsenzufer/",
+        "distances": ["5K"]
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4040,
+        "officialKey": "elsenzufer",
+        "coordinates": [8.918972, 49.139229],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "confirmed_regular_schedule",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "firstDate": "2026-11-28",
+        "sources": [
+          {
+            "url": "https://www.gueglingen.de/news?action=view_one_article&article_id=66018",
+            "checkedAt": "2026-11-06",
+            "sourceType": "municipal_official_announcement",
+            "evidenceSummary": "3 November council announcement states official launch28November,5km,Saturday09:00 start;08:45 meeting time. Earlier Saturdays explicitly practice events, excluded."
+          }
+        ]
+      },
+      "schedule": {
+        "fromDate": "2026-11-28",
+        "weekday": 6,
+        "startTime": "09:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://www.gueglingen.de/news?action=view_one_article&article_id=66018",
+        "timezone": "Europe/Berlin"
+      }
+    },
+    {
+      "event": {
+        "slug": "theoldshowfield-junior-parkrun",
+        "name": "The Old Showfield junior parkrun",
+        "sport": "Parkrun",
+        "country": "England",
+        "county": "Somerset",
+        "city": "Frome",
+        "area": "The Old Showfield juniors",
+        "surface": "",
+        "summary": "The Old Showfield junior parkrun. A local junior parkrun community.",
+        "description": "Visit the official junior event page for course information, eligibility, launch details and current notices.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/theoldshowfield-juniors/",
+        "distances": []
+      },
+      "isNew": true,
+      "reviewEvidence": {
+        "officialMapId": 4041,
+        "officialKey": "theoldshowfield-juniors",
+        "coordinates": [-2.309763, 51.236053],
+        "identitySource": "https://images.parkrun.com/events.json",
+        "checkedAt": "2026-11-06",
+        "scheduleStatus": "inaccessible",
+        "nextCheckOn": "2026-11-07",
+        "auditPath": "docs/fixture-geography/reviews/parkrun-2026-11-06/",
+        "holdReason": "No reviewed current venue programme establishing the distance, launch date and local start; no dated fixtures generated."
+      }
+    },
+    {
+      "event": {
+        "slug": "grizedaleforest-parkrun",
+        "sport": "Parkrun",
+        "name": "Grizedale Forest parkrun",
+        "country": "England",
+        "county": "Cumbria",
+        "city": "Grizedale",
+        "area": "Grizedale Forest",
+        "surface": "Mixed Terrain",
+        "summary": "Grizedale Forest parkrun at Grizedale Forest in Grizedale, Cumbria.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 09:00 local time. Check the official event page for meeting instructions and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/grizedaleforest/",
+        "distances": ["5K"]
+      },
+      "isNew": false,
+      "expected": {
+        "id": 4393861,
+        "slug": "grizedaleforest-parkrun",
+        "sport": "Parkrun",
+        "name": "Grizedale Forest parkrun",
+        "country": "England",
+        "county": "Cumbria",
+        "city": "Grizedale",
+        "area": "Grizedale Forest",
+        "surface": "Mixed Terrain",
+        "summary": "Grizedale Forest parkrun at Grizedale Forest in Grizedale, Cumbria.",
+        "description": "Venue listed in the official parkrun event map, checked 21 October 2026. Check the local event website for course details, start time, cancellations and junior eligibility. Future dates have not been extrapolated.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/grizedaleforest/"
+      },
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "canonicalEventId": 4393861,
+        "sources": [
+          {
+            "url": "https://www.forestryengland.uk/grizedale/parkrun-grizedale",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Specific current weekly 5km Saturday 09:00 listing from venue owner or council tourism service with event contact."
+          }
+        ]
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "09:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://www.forestryengland.uk/grizedale/parkrun-grizedale",
+        "timezone": "Europe/London"
+      }
+    },
+    {
+      "event": {
+        "slug": "impeywalkknightshayes-parkrun",
+        "sport": "Parkrun",
+        "name": "Impey Walk Knightshayes parkrun",
+        "country": "England",
+        "county": "Devon",
+        "city": "Tiverton",
+        "area": "Impey Walk Knightshayes",
+        "surface": "Mixed Terrain",
+        "summary": "Impey Walk Knightshayes parkrun at Impey Walk Knightshayes in Tiverton, Devon.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 09:00 local time. Check the official event page for meeting instructions and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/impeywalkknightshayes/",
+        "distances": ["5K"]
+      },
+      "isNew": false,
+      "expected": {
+        "id": 4393860,
+        "slug": "impeywalkknightshayes-parkrun",
+        "sport": "Parkrun",
+        "name": "Impey Walk Knightshayes parkrun",
+        "country": "England",
+        "county": "Devon",
+        "city": "Tiverton",
+        "area": "Impey Walk Knightshayes",
+        "surface": "Mixed Terrain",
+        "summary": "Impey Walk Knightshayes parkrun at Impey Walk Knightshayes in Tiverton, Devon.",
+        "description": "Venue listed in the official parkrun event map, checked 21 October 2026. Check the local event website for course details, start time, cancellations and junior eligibility. Future dates have not been extrapolated.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/impeywalkknightshayes/"
+      },
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "canonicalEventId": 4393860,
+        "sources": [
+          {
+            "url": "https://visitmiddevon.co.uk/listing/impey-walk-knightshayes-parkrun/",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Specific current weekly 5km Saturday 09:00 listing from venue owner or council tourism service with event contact."
+          }
+        ]
+      },
+      "schedule": {
+        "fromDate": "2026-11-07",
+        "weekday": 6,
+        "startTime": "09:00",
+        "distance": "5K",
+        "distanceKm": 5,
+        "sourceUrl": "https://visitmiddevon.co.uk/listing/impey-walk-knightshayes-parkrun/",
+        "timezone": "Europe/London"
+      }
+    },
+    {
+      "event": {
+        "slug": "wakehurst-parkrun",
+        "sport": "Parkrun",
+        "name": "Kew Wakehurst parkrun",
+        "country": "England",
+        "county": "West Sussex",
+        "city": "Ardingly",
+        "area": "Wakehurst",
+        "surface": "Mixed",
+        "summary": "Free weekly 5K parkrun at Wakehurst, Ardingly, West Sussex.",
+        "description": "Free 5K parkrun at Wakehurst, scheduled each Saturday at 09:00. Follow the signs from the visitor centre car park and check the official event page for cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/kewwakehurst/",
+        "distances": ["5K"]
+      },
+      "isNew": false,
+      "expected": {
+        "id": 3064327,
+        "slug": "wakehurst-parkrun",
+        "sport": "Parkrun",
+        "name": "Wakehurst parkrun",
+        "country": "England",
+        "county": "Surrey",
+        "city": "Wakehurst",
+        "area": "Wakehurst",
+        "surface": "Mixed",
+        "summary": "Weekly 5K parkrun at Wakehurst, Surrey, England.",
+        "description": "Wakehurst parkrun is a free weekly timed parkrun in Surrey, England. 5K events are Saturday 09:00 local time. Check the parkrun page for cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.org.uk/wakehurst/"
+      },
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "canonicalEventId": 3064327,
+        "sources": [
+          {
+            "url": "https://www.kew.org/wakehurst/whats-on/parkrun",
+            "source_type": "venue_owner",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "web_open",
+            "summary": "Explicit year-round Saturday 09:00 schedule and 5k. It also links to the old /wakehurst/ official key. A 3 October cancellation is past, not a November cancellation.",
+            "excerpt": "Every Saturday, year-round; 9am"
+          },
+          {
+            "url": "https://www.kew.org/about-us/contact-us",
+            "source_type": "venue_owner",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "web_open",
+            "summary": "Wakehurst visitor address is Ardingly, West Sussex, RH17 6TN."
+          },
+          {
+            "url": "https://www.kew.org/about-us/press-media/january-2026",
+            "source_type": "venue_owner_press_release",
+            "checked_on": "2026-11-06",
+            "retrieval_method": "web_open",
+            "summary": "Released 16 December 2025; lists Wakehurst parkrun as operating every Saturday at 09:00 over 5k. This predates the current map-key change."
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "slug": "coffsharbour-parkrun",
+        "sport": "Parkrun",
+        "name": "Coffs Harbour parkrun",
+        "country": "Australia",
+        "county": "New South Wales",
+        "city": "Coffs Harbour",
+        "area": "Park Beach Reserve",
+        "surface": "Mixed",
+        "summary": "Free weekly 5K parkrun at Park Beach Reserve, Coffs Harbour, New South Wales.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 07:00 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/coffsharbour/",
+        "distances": ["5K"]
+      },
+      "isNew": false,
+      "expected": {
+        "id": 3062475,
+        "slug": "coffsharbour-parkrun",
+        "sport": "Parkrun",
+        "name": "Coffs Harbour parkrun",
+        "country": "Australia",
+        "county": "Queensland",
+        "city": "Coffs Harbour",
+        "area": "Park Beach Reserve",
+        "surface": "Mixed",
+        "summary": "Weekly 5K parkrun at Park Beach Reserve, Queensland, Australia.",
+        "description": "Coffs Harbour parkrun is a free weekly timed parkrun in Queensland, Australia. 5K events are Saturday 08:00 local time. Check the parkrun page for cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.com.au/coffsharbour/"
+      },
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "canonicalEventId": 3062475,
+        "sources": [
+          {
+            "url": "https://www.activeandhealthy.nsw.gov.au/program/view/3406",
+            "sourceType": "government_hosted_organiser_listing",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "NSW Health listing links the exact Coffs Harbour parkrun website and organiser email, identifies Park Beach Reserve, 5km and weekly Saturdays 07:00.",
+            "webRef": "turn137view0",
+            "shortExcerpt": "Every Saturday morning commencing at 7.00am",
+            "limitations": "Page has no dated schedule revision. Some unrelated milestone-shirt text is outdated and must not be reused."
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "slug": "eastcoastpark-parkrun",
+        "sport": "Parkrun",
+        "name": "East Coast Park parkrun",
+        "country": "Singapore",
+        "county": "Singapore",
+        "city": "East Coast Park",
+        "area": "East Coast Park",
+        "surface": "Mixed",
+        "summary": "Weekly 5K parkrun at East Coast Park, Singapore, Singapore.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 07:30 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.sg/eastcoastpark/",
+        "distances": ["5K"]
+      },
+      "isNew": false,
+      "expected": {
+        "id": 3062563,
+        "slug": "eastcoastpark-parkrun",
+        "sport": "Parkrun",
+        "name": "East Coast Park parkrun",
+        "country": "Singapore",
+        "county": "Singapore",
+        "city": "East Coast Park",
+        "area": "East Coast Park",
+        "surface": "Mixed",
+        "summary": "Weekly 5K parkrun at East Coast Park, Singapore, Singapore.",
+        "description": "East Coast Park parkrun is a free weekly timed parkrun in Singapore, Singapore. 5K events are Saturday 08:00 local time. Check the parkrun page for cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.sg/eastcoastpark/"
+      },
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "canonicalEventId": 3062563,
+        "sources": [
+          {
+            "url": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+            "sourceType": "official_parkrun_resource",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Current official Singapore event-poster resource is explicitly titled 7.30am start.",
+            "webRef": "turn120view0",
+            "shortExcerpt": "Singapore Event Poster — 7.30am Start",
+            "limitations": "National collateral template does not independently name or confirm all six local schedules."
+          },
+          {
+            "url": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+            "sourceType": "government_hosted_organiser_opportunity",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Team Nila volunteer opportunity explicitly names East Coast Park, Bishan and West Coast Park and gives a free 5km every Saturday at 07:30.",
+            "webRef": "turn90view1",
+            "limitations": "Volunteer shift dates on the page are from 2019. Combined with current official 07:30 poster, strong correction evidence for those three, not a fresh cancellation check."
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "slug": "bishan-parkrun",
+        "sport": "Parkrun",
+        "name": "Bishan parkrun",
+        "country": "Singapore",
+        "county": "Singapore",
+        "city": "Bishan",
+        "area": "Bishan-Ang Mo Kio Park",
+        "surface": "Mixed",
+        "summary": "Weekly 5K parkrun at Bishan-Ang Mo Kio Park, Singapore, Singapore.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 07:30 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.sg/bishan/",
+        "distances": ["5K"]
+      },
+      "isNew": false,
+      "expected": {
+        "id": 3063206,
+        "slug": "bishan-parkrun",
+        "sport": "Parkrun",
+        "name": "Bishan parkrun",
+        "country": "Singapore",
+        "county": "Singapore",
+        "city": "Bishan",
+        "area": "Bishan-Ang Mo Kio Park",
+        "surface": "Mixed",
+        "summary": "Weekly 5K parkrun at Bishan-Ang Mo Kio Park, Singapore, Singapore.",
+        "description": "Bishan parkrun is a free weekly timed parkrun in Singapore, Singapore. 5K events are Saturday 08:00 local time. Check the parkrun page for cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.sg/bishan/"
+      },
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "canonicalEventId": 3063206,
+        "sources": [
+          {
+            "url": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+            "sourceType": "official_parkrun_resource",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Current official Singapore event-poster resource is explicitly titled 7.30am start.",
+            "webRef": "turn120view0",
+            "shortExcerpt": "Singapore Event Poster — 7.30am Start",
+            "limitations": "National collateral template does not independently name or confirm all six local schedules."
+          },
+          {
+            "url": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+            "sourceType": "government_hosted_organiser_opportunity",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Team Nila volunteer opportunity explicitly names East Coast Park, Bishan and West Coast Park and gives a free 5km every Saturday at 07:30.",
+            "webRef": "turn90view1",
+            "limitations": "Volunteer shift dates on the page are from 2019. Combined with current official 07:30 poster, strong correction evidence for those three, not a fresh cancellation check."
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "slug": "westcoastpark-parkrun",
+        "sport": "Parkrun",
+        "name": "West Coast Park parkrun",
+        "country": "Singapore",
+        "county": "Singapore",
+        "city": "West Coast Park",
+        "area": "West Coast Park",
+        "surface": "Mixed",
+        "summary": "Free weekly 5K parkrun at West Coast Park, Singapore.",
+        "description": "Free 5K parkrun, scheduled each Saturday at 07:30 local time. Check the official event page for the meeting point and any cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.sg/westcoastpark/",
+        "distances": ["5K"]
+      },
+      "isNew": false,
+      "expected": {
+        "id": 3062970,
+        "slug": "westcoastpark-parkrun",
+        "sport": "Parkrun",
+        "name": "West Coast Park parkrun",
+        "country": "Singapore",
+        "county": "Singapore",
+        "city": "West Coast Park",
+        "area": "West Coast Park Park",
+        "surface": "Mixed",
+        "summary": "Weekly 5K parkrun at West Coast Park Park, Singapore, Singapore.",
+        "description": "West Coast Park parkrun is a free weekly timed parkrun in Singapore, Singapore. 5K events are Saturday 08:00 local time. Check the parkrun page for cancellations.",
+        "organiser": "parkrun",
+        "website": "https://www.parkrun.sg/westcoastpark/"
+      },
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "canonicalEventId": 3062970,
+        "sources": [
+          {
+            "url": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+            "sourceType": "official_parkrun_resource",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Current official Singapore event-poster resource is explicitly titled 7.30am start.",
+            "webRef": "turn120view0",
+            "shortExcerpt": "Singapore Event Poster — 7.30am Start",
+            "limitations": "National collateral template does not independently name or confirm all six local schedules."
+          },
+          {
+            "url": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+            "sourceType": "government_hosted_organiser_opportunity",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Team Nila volunteer opportunity explicitly names East Coast Park, Bishan and West Coast Park and gives a free 5km every Saturday at 07:30.",
+            "webRef": "turn90view1",
+            "limitations": "Volunteer shift dates on the page are from 2019. Combined with current official 07:30 poster, strong correction evidence for those three, not a fresh cancellation check."
+          }
+        ]
+      }
+    }
+  ],
+  "startCorrections": [
+    {
+      "slug": "coffsharbour-parkrun",
+      "expectedStartTime": "08:00",
+      "startTime": "07:00",
+      "distance": "5K",
+      "distanceKm": 5,
+      "sourceUrl": "https://www.activeandhealthy.nsw.gov.au/program/view/3406",
+      "fromDate": "2026-11-07",
+      "toDate": "2027-12-31",
+      "timezone": "Australia/Sydney",
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "sources": [
+          {
+            "url": "https://www.activeandhealthy.nsw.gov.au/program/view/3406",
+            "sourceType": "government_hosted_organiser_listing",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "NSW Health listing links the exact Coffs Harbour parkrun website and organiser email, identifies Park Beach Reserve, 5km and weekly Saturdays 07:00.",
+            "webRef": "turn137view0",
+            "shortExcerpt": "Every Saturday morning commencing at 7.00am",
+            "limitations": "Page has no dated schedule revision. Some unrelated milestone-shirt text is outdated and must not be reused."
+          }
+        ],
+        "scope": "Existing future 5K dates only; preserve past results, cancellations and all other edition fields."
+      }
+    },
+    {
+      "slug": "eastcoastpark-parkrun",
+      "expectedStartTime": "08:00",
+      "startTime": "07:30",
+      "distance": "5K",
+      "distanceKm": 5,
+      "sourceUrl": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+      "fromDate": "2026-11-07",
+      "toDate": "2027-12-31",
+      "timezone": "Asia/Singapore",
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "sources": [
+          {
+            "url": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+            "sourceType": "official_parkrun_resource",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Current official Singapore event-poster resource is explicitly titled 7.30am start.",
+            "webRef": "turn120view0",
+            "shortExcerpt": "Singapore Event Poster — 7.30am Start",
+            "limitations": "National collateral template does not independently name or confirm all six local schedules."
+          },
+          {
+            "url": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+            "sourceType": "government_hosted_organiser_opportunity",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Team Nila volunteer opportunity explicitly names East Coast Park, Bishan and West Coast Park and gives a free 5km every Saturday at 07:30.",
+            "webRef": "turn90view1",
+            "limitations": "Volunteer shift dates on the page are from 2019. Combined with current official 07:30 poster, strong correction evidence for those three, not a fresh cancellation check."
+          }
+        ],
+        "scope": "Existing future 5K dates only; preserve past results, cancellations and all other edition fields."
+      }
+    },
+    {
+      "slug": "bishan-parkrun",
+      "expectedStartTime": "08:00",
+      "startTime": "07:30",
+      "distance": "5K",
+      "distanceKm": 5,
+      "sourceUrl": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+      "fromDate": "2026-11-07",
+      "toDate": "2027-12-31",
+      "timezone": "Asia/Singapore",
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "sources": [
+          {
+            "url": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+            "sourceType": "official_parkrun_resource",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Current official Singapore event-poster resource is explicitly titled 7.30am start.",
+            "webRef": "turn120view0",
+            "shortExcerpt": "Singapore Event Poster — 7.30am Start",
+            "limitations": "National collateral template does not independently name or confirm all six local schedules."
+          },
+          {
+            "url": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+            "sourceType": "government_hosted_organiser_opportunity",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Team Nila volunteer opportunity explicitly names East Coast Park, Bishan and West Coast Park and gives a free 5km every Saturday at 07:30.",
+            "webRef": "turn90view1",
+            "limitations": "Volunteer shift dates on the page are from 2019. Combined with current official 07:30 poster, strong correction evidence for those three, not a fresh cancellation check."
+          }
+        ],
+        "scope": "Existing future 5K dates only; preserve past results, cancellations and all other edition fields."
+      }
+    },
+    {
+      "slug": "westcoastpark-parkrun",
+      "expectedStartTime": "08:00",
+      "startTime": "07:30",
+      "distance": "5K",
+      "distanceKm": 5,
+      "sourceUrl": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+      "fromDate": "2026-11-07",
+      "toDate": "2027-12-31",
+      "timezone": "Asia/Singapore",
+      "reviewEvidence": {
+        "checkedAt": "2026-11-06",
+        "sources": [
+          {
+            "url": "https://resources.parkrun.com/resources/singapore-event-poster-7-30am-start",
+            "sourceType": "official_parkrun_resource",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Current official Singapore event-poster resource is explicitly titled 7.30am start.",
+            "webRef": "turn120view0",
+            "shortExcerpt": "Singapore Event Poster — 7.30am Start",
+            "limitations": "National collateral template does not independently name or confirm all six local schedules."
+          },
+          {
+            "url": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+            "sourceType": "government_hosted_organiser_opportunity",
+            "checkedAt": "2026-11-06",
+            "evidenceSummary": "Team Nila volunteer opportunity explicitly names East Coast Park, Bishan and West Coast Park and gives a free 5km every Saturday at 07:30.",
+            "webRef": "turn90view1",
+            "limitations": "Volunteer shift dates on the page are from 2019. Combined with current official 07:30 poster, strong correction evidence for those three, not a fresh cancellation check."
+          }
+        ],
+        "scope": "Existing future 5K dates only; preserve past results, cancellations and all other edition fields."
+      }
+    }
+  ],
+  "reviewEvidence": {
+    "officialMapCount": 3017,
+    "liveInventoryCount": 2985,
+    "identityRule": "Preserve existing canonical URLs and names; do not create a second event for a rename. Map listing establishes venue identity, not an inaugural date or timed schedule.",
+    "recurrenceRule": "Only explicit current organiser, venue or authorised local-partner weekly schedules generate dates. Scheduled dates remain subject to cancellation; no extra holiday events inferred.",
+    "cancellationReview": {
+      "status": "inaccessible",
+      "checked_on": "2026-11-06",
+      "attempted_url": "https://www.parkrun.org.uk/cancellations/",
+      "outcome": "Web retrieval returned HTTP 405; no claim that next edition is confirmed uncancelled.",
+      "next_check_on": "2026-11-07"
+    },
+    "heldAlias": {
+      "eventKey": "sakurafurusatohiroba",
+      "existingSlug": "sunsethillsshitasanbashi-parkrun",
+      "reason": "Possible rename/relocation; retain for canonical review before any insertion.",
+      "sourceUrl": "https://sakura-yotsukaido-yachimata.goguynet.jp/2025/08/23/sunsethills-shitasanbashi-parkrun-new-course/"
+    },
+    "existingMapMatches": [
+      {
+        "key": "brockshillcountrypark",
+        "slug": "brockshillcountrypark-parkrun"
+      },
+      {
+        "key": "impeywalkknightshayes",
+        "slug": "impeywalkknightshayes-parkrun"
+      },
+      {
+        "key": "grizedaleforest",
+        "slug": "grizedaleforest-parkrun"
+      },
+      {
+        "key": "parklanerecreationground-juniors",
+        "slug": "parklanerecreationground-junior-parkrun"
+      },
+      {
+        "key": "peterpanparkkirriemuir-juniors",
+        "slug": "peterpanparkkirriemuir-junior-parkrun"
+      },
+      {
+        "key": "wymondhamhighacademy-juniors",
+        "slug": "wymondhamhighacademy-junior-parkrun"
+      },
+      {
+        "key": "coalvillepark-juniors",
+        "slug": "coalvillepark-junior-parkrun"
+      }
+    ]
+  }
+}

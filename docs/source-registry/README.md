@@ -21,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 1641 unique sources as of 2 November 2026. Only 41 are enabled; the other 1600 remain
+The registry contains 1708 unique sources as of 6 November 2026. Only 41 are enabled; the other 1667 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -85,9 +85,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 1641 sources create exactly one source job;
+- all 1708 sources create exactly one source job;
 - the 41 enabled and rights-approved sources are queued;
-- the other 1600 sources are retained as blocked jobs with their reason;
+- the other 1667 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
@@ -590,3 +590,29 @@ All seven additions remain disabled. Existing enabled flags, permission records,
 page limits and rate limits are unchanged. The registry contains 1641 sources:
 41 enabled and 1600 disabled. Registration neither starts collection nor verifies
 all participants or permits unrelated personal-data reuse.
+
+
+## Parkrun fixture and venue references, 6 November 2026
+
+Added 23 disabled manual references: nine primary delivery-partner, organising-club
+and public-authority sources from Australia, Ireland, Singapore and the USA; ten
+UK venue, land-manager, council and venue-partner references; and three municipal
+tourism/city-agenda references for Rotterdam and PARK21 in the Netherlands.
+The final addition is Güglingen council’s opened 3 November announcement of the
+28 November Elsenzufer launch in Eppingen; pre-launch test runs remain distinct
+from official weekly fixtures.
+Each row preserves its exact inspected URL, check date, observed capabilities and
+limitations. Proposed trials, historical volunteer listings, adult programmes and
+venue-only pages do not verify current launches, junior programmes or missing
+local start times. Arrival windows remain distinct from event start times.
+
+The registry and wider event-source inventory were checked for existing hosts.
+Forestry England already has a wider-inventory identity; its prior status is
+preserved and the missing CSV reference is now registered. The existing
+`parkrun_global` row and every prior collection setting remain unchanged. No live
+source inventory was mutated by this repository update.
+
+All 23 additions use `enabled=0`, `follow_history_links=0` and the existing manual
+reference profile. No collection is enabled and no participant results are
+ingested. The registry now contains 1708 sources: 41 enabled and 1667 disabled.
+The runtime reads the canonical CSV directly; no generated registry is required.

@@ -22,6 +22,14 @@ for (const name of [
 ]) {
   await pg.exec(await readFile(new URL(`../migrations/${name}`, import.meta.url), "utf8"));
 }
+// The focused partnership fixture loads a deliberately small set of migrations.
+// Production's 20261106_private_test_brand.sql adds this privacy flag, but
+// applying that full migration here would require unrelated fictional-athlete
+// tables and triggers. Mirror the column in this isolated test database so
+// partnership queries are checked against the current production table shape.
+await pg.exec(
+  "alter table partner_brands add column if not exists synthetic_test boolean not null default false",
+);
 function wrap(db) {
   const sql = async (strings, ...params) => {
     const query = strings.reduce((text, part, i) => text + (i ? `$${i}` : "") + part, "");

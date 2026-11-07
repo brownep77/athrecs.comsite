@@ -1,0 +1,314 @@
+{
+  "checkedAt": "2026-11-06",
+  "additions": [
+    {
+      "id": "dryandra_narrogin_parkrun",
+      "name": "Shire of Narrogin / Dryandra tourism - parkrun",
+      "url": "https://www.dryandratourism.org.au/plan/news/event-calendar/event/1280-old-golf-course-parkrun-narrogin",
+      "region": "Oceania",
+      "country": "Australia",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Selected official local tourism parkrun schedule and venue",
+      "evidence": "The Shire of Narrogin tourism page identifies Old Golf Course parkrun, Earl Street, Narrogin, as a free weekly 5 km on Saturdays at 08:00. Fresh direct HTTP 200 body supersedes the earlier shorter-alias timeout. No inaugural date is established."
+    },
+    {
+      "id": "roadrunner_club_provo_parkrun",
+      "name": "Roadrunner Club - Provo parkrun programme",
+      "url": "https://www.roadrunners.club/events/parkrun",
+      "region": "North America",
+      "country": "United States",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Organising club parkrun launch and seasonal local start programme",
+      "evidence": "The organising club gives Delta Gateway Park, Provo, 5 km every Saturday, practice from 17 October and official launch on 21 November 2026. It specifies 09:00 November-April and 08:00 May-October; practice events are not official fixtures."
+    },
+    {
+      "id": "waterford_sports_partnership_parkrun",
+      "name": "Waterford Sports Partnership - parkrun",
+      "url": "https://www.waterfordsportspartnership.ie/dungarvan-parkrun-coming-soon/",
+      "region": "Europe",
+      "country": "Ireland",
+      "years": [
+        2025,
+        2026
+      ],
+      "scope": "Local delivery partner parkrun launch, format and regular schedule",
+      "evidence": "The article modified 27 August 2026 announces an October Dungarvan Greenway launch and Saturday 09:30 starts at the Railway Cottage. It is a pre-launch article, so actual launch requires separate evidence. Format reference https://www.waterfordsportspartnership.ie/parkrun/ (January 2025) distinguishes Saturday 5 km and Sunday 2 km; its erroneous origin-year sentence is not reused."
+    },
+    {
+      "id": "cork_sports_partnership_parkrun",
+      "name": "Cork Sports Partnership - parkrun programmes",
+      "url": "https://corksports.ie/cork-parkruns/",
+      "region": "Europe",
+      "country": "Ireland",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Local delivery partner current adult parkrun list and start-time FAQ",
+      "evidence": "The current adult list includes Cork Harbour Greenway, Carrigaline, and identifies the 5 km format. The FAQ states 09:30 starts. This does not establish an individual cancellation check or the inaugural date."
+    },
+    {
+      "id": "nsw_health_parkrun_fixtures",
+      "name": "NSW Health Active and Healthy - parkrun listing",
+      "url": "https://www.activeandhealthy.nsw.gov.au/program/view/3406",
+      "region": "Oceania",
+      "country": "Australia",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Government-hosted organiser listing for Coffs Harbour parkrun",
+      "evidence": "The opened listing links the exact Coffs Harbour parkrun website and organiser email and identifies Park Beach Reserve, 5 km, Saturdays at 07:00. The page has no dated schedule revision. Unrelated outdated milestone-shirt text is not reused. This is the existing Coffs Harbour event, not the new Coffs Creek event."
+    },
+    {
+      "id": "coffs_harbour_council_parkrun",
+      "name": "City of Coffs Harbour - parkrun land licence",
+      "url": "https://www.coffsharbour.nsw.gov.au/Your-Council/Public-notices/Current-public-notices/Proposed-Licence-Agreement-%E2%80%93-Community-Land-Coffs-Creek-Coffs-Harbour",
+      "region": "Oceania",
+      "country": "Australia",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Municipal parkrun venue and land-licence context",
+      "evidence": "The council notice proposes licensing Coffs Creek community land to parkrun Australia for Saturday morning organised running; submissions closed 15 October 2026. This notice alone does not establish the local start time, distance or fulfilled launch conditions."
+    },
+    {
+      "id": "singapore_team_nila_parkrun",
+      "name": "Team Nila / Volunteer Singapore - parkrun opportunity",
+      "url": "https://www.volunteer.gov.sg/volunteer/opportunity/details/?id=c23de849-62cc-e911-a9e3-c19173e2013b",
+      "region": "Asia",
+      "country": "Singapore",
+      "years": [
+        2019,
+        2019
+      ],
+      "scope": "Government-hosted organiser opportunity and historical venue schedules",
+      "evidence": "The organiser opportunity names East Coast Park, Bishan and West Coast Park and gives free 5 km events on Saturdays at 07:30. Its volunteer shift dates are from 2019. This is historical corroboration, not a fresh 2026 local cancellation check or evidence for the other Singapore venues. The current official national 07:30 poster is separate parkrun provenance."
+    },
+    {
+      "id": "south_dublin_council_parkrun",
+      "name": "South Dublin County Council - parkrun programmes",
+      "url": "https://www.sdcc.ie/en/activesouthdublin/get-active/active-communities/park-run/",
+      "region": "Europe",
+      "country": "Ireland",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Municipal adult and junior parkrun programme reference",
+      "evidence": "Council information identifies adult Corkagh as 5 km, Saturday 09:30, and Griffeen juniors as 2 km, Sunday 09:30. It does not list the new Corkagh junior event. Do not transfer a different venue or adult schedule to an unverified junior programme."
+    },
+    {
+      "id": "canada_bay_council_parkrun",
+      "name": "City of Canada Bay - Cabarita parkrun proposal",
+      "url": "https://www.canadabay.nsw.gov.au/sites/default/files/Agenda%2021%20April%202026.pdf",
+      "region": "Oceania",
+      "country": "Australia",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Municipal conditional parkrun trial approval and proposed schedule",
+      "evidence": "The 21 April 2026 council agenda describes a six-month Cabarita trial, 5 km on Saturdays at 08:00, from western Cabarita Park towards Breakfast Point. Launch remains contingent on fundraising. Approval and a proposed timetable do not establish that the launch conditions were met."
+    },
+    {
+      "id": "kew_wakehurst_parkrun",
+      "name": "Royal Botanic Gardens Kew - Wakehurst parkrun",
+      "url": "https://www.kew.org/wakehurst/whats-on/parkrun",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2025,
+        2026
+      ],
+      "scope": "Primary venue parkrun schedule, location and launch context",
+      "evidence": "The primary venue page gives year-round Saturday 09:00 starts and 5 km at Wakehurst. The 16 December 2025 release at https://www.kew.org/about-us/press-media/january-2026 already describes the event operating. Venue address evidence: https://www.kew.org/about-us/contact-us . The official current map key is kewwakehurst; an earlier wakehurst key must be reconciled before creating another event. A past 3 October cancellation is not a November cancellation."
+    },
+    {
+      "id": "lost_shore_venue_fixtures",
+      "name": "Lost Shore Surf Resort - venue events",
+      "url": "https://www.lostshore.com/whats-on/",
+      "region": "UK",
+      "country": "Scotland",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Primary venue event discovery and address context",
+      "evidence": "The primary venue and https://www.lostshore.com/visit/getting-here/ establish Lost Shore at 11 South Platt Hill, Newbridge, EH28 8AY, near Ratho. No explicit local parkrun timetable was found. This is venue context only; it does not verify a distance, start time or first date."
+    },
+    {
+      "id": "norfolk_food_hall_parkrun",
+      "name": "Norfolk Food Hall - parkrun programme",
+      "url": "https://norfolkfoodhall.co.uk/parkrun-at-norfolk-food-hall",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Primary venue weekly parkrun schedule and distance",
+      "evidence": "Fresh direct HTTP 200 content on 6 November gives every Saturday at 09:00, a free weekly 5 km around Norfolk Showground. The current body contains no coming-soon qualification; it supersedes the earlier indexed pre-launch wording. This regular schedule is not a guarantee against later cancellations."
+    },
+    {
+      "id": "native2norfolk_market_parkrun_reference",
+      "name": "Native2Norfolk - Norfolk Food Hall launch context",
+      "url": "https://www.native2norfolk.co.uk/the-norfolk-food-hall",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Venue market partner parkrun launch context",
+      "evidence": "The market partner says the autumn market moved to 24 October 2026 to coincide with the parkrun launch; this supersedes the older 10 October market wording. Native2Norfolk is the market organiser, not the parkrun organiser. Use the primary Norfolk Food Hall programme for the running timetable."
+    },
+    {
+      "id": "norfolk_showground_venue_reference",
+      "name": "Norfolk Showground - venue address",
+      "url": "https://norfolkshowground.co.uk/contact/",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Primary venue address reference",
+      "evidence": "The venue contact page identifies Norfolk Showground, Dereham Road, New Costessey, Norfolk, NR5 0TT. This is address context, not independent verification of a parkrun schedule, distance or launch date."
+    },
+    {
+      "id": "mole_valley_junior_parkrun",
+      "name": "Mole Valley District Council - Meadowbank junior parkrun",
+      "url": "https://news.molevalley.gov.uk/2026/10/30/brand-new-junior-parkrun-to-launch-in-meadowbank-park-dorking/",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Council and event-director junior launch programme",
+      "evidence": "The council release dated 30 October 2026 gives the Meadowbank, Dorking launch as Sunday 22 November 2026 at 09:00, then weekly Sundays, 2 km, ages 4-14, meeting at the bandstand. It includes the event director. Direct retrieval succeeded after an earlier web retrieval error; a planned launch is retained as planned."
+    },
+    {
+      "id": "frome_town_council_parkrun",
+      "name": "Frome Town Council - Old Showfield parkrun context",
+      "url": "https://www.frometowncouncil.gov.uk/our-community/parks-and-green-spaces/spaces-we-care-for/the-old-showfield/",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Council park and existing adult parkrun reference",
+      "evidence": "The primary park page identifies the Old Showfield in Frome and the existing adult Saturday 09:00 parkrun. It does not establish the schedule or launch of the new junior event. Adult and junior programmes must remain separate."
+    },
+    {
+      "id": "mid_devon_tourism_parkrun",
+      "name": "Visit Mid Devon - Impey Walk Knightshayes parkrun",
+      "url": "https://visitmiddevon.co.uk/listing/impey-walk-knightshayes-parkrun/",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Official council tourism parkrun venue and timetable",
+      "evidence": "The official tourism listing identifies a 5 km parkrun at the Knightshayes estate near Tiverton, Saturdays at 09:00, with arrival from 08:45. Arrival and start times are distinct. Separate inaugural-date evidence is required before calling a particular week the first event."
+    },
+    {
+      "id": "forestry_england_parkrun",
+      "name": "Forestry England - Grizedale parkrun",
+      "url": "https://www.forestryengland.uk/grizedale/parkrun-grizedale",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Primary land manager parkrun programme and venue",
+      "evidence": "The primary land-manager page describes the new autumn 2026 Grizedale event, 5 km on Saturdays at 09:00, Hawkshead LA22 0QJ. The wider event inventory already contains the forestryengland.uk host under observed-host:5a7651846db5a23e1ad75d732b659ed9 for Bedgebury; that identity, unknown prior check date and collection status are preserved. This adds the missing disabled CSV reference, not another live provider."
+    },
+    {
+      "id": "north_west_leicestershire_junior_parkrun",
+      "name": "North West Leicestershire District Council - Coalville junior proposal",
+      "url": "https://minutes-1.nwleics.gov.uk/ieListDocuments.aspx?CId=131&MId=2654",
+      "region": "UK",
+      "country": "England",
+      "years": [
+        2025,
+        2025
+      ],
+      "scope": "Council junior parkrun proposal and park context",
+      "evidence": "The June 2025 council material supports a weekly junior parkrun proposal in Coalville Park. Indexed council text was available; the inspected evidence does not give a confirmed 2026 launch or local start time. Do not create dated fixtures from this proposal alone."
+    },
+    {
+      "id": "rotterdam_tourism_parkrun",
+      "name": "Rotterdam tourism - Zuiderpark parkrun",
+      "url": "https://www.rotterdam.info/nl/visit/finder-events/zuiderpark-parkrun",
+      "region": "Europe",
+      "country": "Netherlands",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Official destination partner parkrun organiser programme",
+      "evidence": "Indexed organiser text gives Zuiderpark Rotterdam Saturday 09:00 starts and a 5 September 2026 launch, meeting by the canoe lake on Zuiderparkpromenade Oost. Direct web retrieval exposed only its iframe. The fully opened partner programme at https://www.uitagendarotterdam.nl/agenda/zuiderpark-parkrun/ separately confirms 5 km, the start and launch date. Do not confuse this venue with Zuiderpark Den Haag or Hoogeveen."
+    },
+    {
+      "id": "uitagenda_rotterdam_parkrun",
+      "name": "Uitagenda Rotterdam - Zuiderpark parkrun programme",
+      "url": "https://www.uitagendarotterdam.nl/agenda/zuiderpark-parkrun/",
+      "region": "Europe",
+      "country": "Netherlands",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Official city cultural agenda hosting the organiser parkrun programme",
+      "evidence": "Opened organiser programme explicitly states weekly Saturday 09:00 starts, 5 km, and launch on 5 September 2026 at Zuiderpark Rotterdam by the canoe lake on Zuiderparkpromenade Oost. Current listing includes 7 November 2026. Its long repeating calendar is not proof that every future occurrence will proceed."
+    },
+    {
+      "id": "haarlemmermeer_tourism_parkrun",
+      "name": "Visit Haarlemmermeer - PARK21 parkrun",
+      "url": "https://visithaarlemmermeer.nl/agenda/park21-parkrun",
+      "region": "Europe",
+      "country": "Netherlands",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Municipal tourism partner current parkrun programme",
+      "evidence": "The opened municipal tourism page currently advertises 7 November 2026 and explicitly states every Saturday at 09:00, 5 km. The displayed 08:45-11:00 calendar window is an attendance window, not the start time. It links the official parkrun site and identifies Sportpark21. This is an active listing with no coming-soon wording; no exact inaugural date is established by this source."
+    },
+    {
+      "id": "gueglingen_council_elsenzufer_parkrun",
+      "name": "Güglingen council - Elsenzufer parkrun launch",
+      "url": "https://www.gueglingen.de/news?action=view_one_article&article_id=66018",
+      "region": "Europe",
+      "country": "Germany",
+      "years": [
+        2026,
+        2026
+      ],
+      "scope": "Primary municipal announcement of a nearby parkrun launch and weekly programme",
+      "evidence": "The full council announcement dated 3 November 2026 was opened on 6 November. It gives the official Elsenzufer parkrun launch in Eppingen as Saturday 28 November 2026, 5 km at 09:00, with arrival at 08:45 and weekly Saturday operation. Earlier sessions are test runs, not official dated fixtures. The planned launch must remain distinct from a completed inaugural event."
+    }
+  ],
+  "counts": {
+    "before": 1685,
+    "added": 23,
+    "total": 1708,
+    "enabled": 41,
+    "disabled": 1667
+  },
+  "noLiveWrites": true,
+  "originalRowsUnchanged": true,
+  "allAdditionsDisabled": true
+}
