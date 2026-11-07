@@ -628,3 +628,12 @@ All 23 additions use `enabled=0`, `follow_history_links=0` and the existing manu
 reference profile. No collection is enabled and no participant results are
 ingested. The registry now contains 1708 sources: 41 enabled and 1667 disabled.
 The runtime reads the canonical CSV directly; no generated registry is required.
+
+## Owner-cleared sources (26 October 2026)
+
+The owner confirmed the rights review for the remaining fixture directories and asked for them to be switched on. 1,011 sources now carry the status "Cleared by owner rights review 2026-10-26; robots.txt still enforced at run time", so the registry has 1,052 enabled sources and 656 off.
+
+- Still off: sources marked blocked by site terms or crawl rules, "automated collection not enabled", supervised-review-only, the two race-calendar discovery sites, results archives and athlete-profile sources.
+- The source importer (`npm run source-importer`) reads every enabled source but still honours each site's robots.txt, crawl delay and page budget on every run; a site that disallows a path is skipped, never worked around.
+- The site's own bulk run (`bulk-source-run`) queues only sources whose status is in `RUNNABLE_SOURCE_RIGHTS_STATUSES`. The new status is deliberately not in that list, so enabling these sources does not queue them there; that is a separate decision.
+- Event metadata only. Participant result rows stay excluded.
