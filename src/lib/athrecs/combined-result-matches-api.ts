@@ -2,7 +2,11 @@ import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
 import { memberArchiveMatches, type MemberArchiveMatch } from "../results-archive/member.server";
-import { listMyPotentialResultMatches, type PotentialResultMatch } from "./result-match-api";
+import {
+  listMyPotentialResultMatches,
+  signupClubList,
+  type PotentialResultMatch,
+} from "./result-match-api";
 import {
   resultSearchSchema,
   distanceSearchAliases,
@@ -107,10 +111,16 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
         previous_clubs: string[] | null;
         dob: string | null;
         nationality: string | null;
+        signup_clubs: string | null;
       }>`
-        select city,region,country,club_or_team as club,date_of_birth::text as dob,nationality,
-          profile_details->>'previousClub' as previous_club,s.settings->'previousClubs' as previous_clubs
-        from athlete_private_profiles p left join athlete_result_matching_settings s on s.user_id=p.user_id where p.user_id=${context.userId}`,
+        select coalesce(nullif(p.city,''),nullif(u."signupLocation",'')) as city,p.region,
+          coalesce(nullif(p.country,''),u."signupCountry") as country,p.club_or_team as club,
+          coalesce(p.date_of_birth::text,nullif(u."signupDateOfBirth",'')) as dob,
+          coalesce(nullif(p.nationality,''),u."signupNationality") as nationality,
+          p.profile_details->>'previousClub' as previous_club,s.settings->'previousClubs' as previous_clubs,
+          u."signupClubs" as signup_clubs
+        from "user" u left join athlete_private_profiles p on p.user_id=u.id
+        left join athlete_result_matching_settings s on s.user_id=u.id where u.id=${context.userId}`,
     ]);
     // Evidence is used only on the server for comparison, never returned to members.
     const archiveDates = [...new Set(archive.map((row) => row.date))];
@@ -155,10 +165,12 @@ export const listMyCombinedResultMatches = createServerFn({ method: "GET" })
       city: account?.city,
       region: account?.region,
       country: account?.country,
-      clubOrTeam: account?.club,
-      previousClubs: [account?.previous_club, ...(account?.previous_clubs ?? [])].filter(
-        (v): v is string => Boolean(v),
-      ),
+      clubOrTeam: account?.club || signupClubList(account?.signup_clubs)[0] || null,
+      previousClubs: [
+        account?.previous_club,
+        ...(account?.previous_clubs ?? []),
+        ...signupClubList(account?.signup_clubs),
+      ].filter((v): v is string => Boolean(v)),
       dateOfBirth: account?.dob,
       nationality: account?.nationality,
     };

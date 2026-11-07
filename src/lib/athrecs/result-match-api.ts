@@ -71,6 +71,7 @@ type IdentityRow = {
   country: string | null;
   club_or_team: string | null;
   previous_club: string | null;
+  signup_clubs: string | null;
   power_of_10_url: string | null;
   world_athletics_url: string | null;
   parkrun_id: string | null;
@@ -110,6 +111,15 @@ async function ready() {
   return getSql();
 }
 
+/** Clubs typed at sign-up, one per line. */
+export function signupClubList(value: string | null | undefined): string[] {
+  return (value ?? "")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .slice(0, 20);
+}
+
 export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .validator((input?: Partial<ResultSearchFilters>) => resultSearchSchema.parse(input))
@@ -124,15 +134,20 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           profile.full_name,
           profile.display_name,
           profile.previous_names,
-          settings.settings as matching_settings, profile.date_of_birth::text as date_of_birth, profile.nationality,
+          settings.settings as matching_settings,
+          -- Sign-up details are used until the athlete fills in their profile,
+          -- so discovery works straight after registration.
+          coalesce(profile.date_of_birth::text, nullif(account_user."signupDateOfBirth", '')) as date_of_birth,
+          coalesce(nullif(profile.nationality, ''), account_user."signupNationality") as nationality,
           profile.power_of_10_url,
           profile.world_athletics_url,
           profile.parkrun_id,
           profile.athletics_urn,
-          profile.city,
+          coalesce(nullif(profile.city, ''), nullif(account_user."signupLocation", '')) as city,
           profile.region,
-          profile.country,
-          profile.club_or_team, profile.profile_details->>'previousClub' as previous_club
+          coalesce(nullif(profile.country, ''), account_user."signupCountry") as country,
+          profile.club_or_team, profile.profile_details->>'previousClub' as previous_club,
+          account_user."signupClubs" as signup_clubs
         from "user" account_user
         left join athlete_private_profiles profile on profile.user_id = account_user."id"
         left join athlete_result_matching_settings settings on settings.user_id=account_user."id"
@@ -246,10 +261,11 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
       city: identity.city,
       region: identity.region,
       country: identity.country,
-      clubOrTeam: identity.club_or_team,
+      clubOrTeam: identity.club_or_team || signupClubList(identity.signup_clubs)[0] || null,
       previousClubs: [
         identity.previous_club,
         ...(identity.matching_settings?.previousClubs ?? []),
+        ...signupClubList(identity.signup_clubs),
       ].filter((v): v is string => Boolean(v)),
       dateOfBirth: identity.date_of_birth,
       nationality: identity.nationality,
