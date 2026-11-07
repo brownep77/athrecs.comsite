@@ -68,10 +68,12 @@ import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scan
 import { Route as ApiCollectionStatsWorkerRouteImport } from './routes/api/collection-stats-worker'
 import { Route as ApiDiagnosticsRouteImport } from './routes/api/diagnostics'
 import { Route as ApiEventCalendarRouteImport } from './routes/api/event-calendar'
+import { Route as ApiFixtureDuplicateScanRouteImport } from './routes/api/fixture-duplicate-scan'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
 import { Route as ApiResultCertificatesRouteImport } from './routes/api/result-certificates'
 import { Route as ApiResultClaimAlertsRouteImport } from './routes/api/result-claim-alerts'
 import { Route as ApiSignupAlertsRouteImport } from './routes/api/signup-alerts'
+import { Route as ApiSourceImportWorkerRouteImport } from './routes/api/source-import-worker'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as BrandsIndexRouteImport } from './routes/brands/index'
@@ -420,6 +422,11 @@ const ApiEventCalendarRoute = ApiEventCalendarRouteImport.update({
   path: '/api/event-calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiFixtureDuplicateScanRoute = ApiFixtureDuplicateScanRouteImport.update({
+  id: '/api/fixture-duplicate-scan',
+  path: '/api/fixture-duplicate-scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRaceCollectorWorkerRoute = ApiRaceCollectorWorkerRouteImport.update({
   id: '/api/race-collector-worker',
   path: '/api/race-collector-worker',
@@ -438,6 +445,11 @@ const ApiResultClaimAlertsRoute = ApiResultClaimAlertsRouteImport.update({
 const ApiSignupAlertsRoute = ApiSignupAlertsRouteImport.update({
   id: '/api/signup-alerts',
   path: '/api/signup-alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSourceImportWorkerRoute = ApiSourceImportWorkerRouteImport.update({
+  id: '/api/source-import-worker',
+  path: '/api/source-import-worker',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AthletesIndexRoute = AthletesIndexRouteImport.update({
@@ -748,10 +760,12 @@ export interface FileRoutesByFullPath {
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
+  '/api/fixture-duplicate-scan': typeof ApiFixtureDuplicateScanRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
+  '/api/source-import-worker': typeof ApiSourceImportWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -861,10 +875,12 @@ export interface FileRoutesByTo {
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
+  '/api/fixture-duplicate-scan': typeof ApiFixtureDuplicateScanRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
+  '/api/source-import-worker': typeof ApiSourceImportWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -975,10 +991,12 @@ export interface FileRoutesById {
   '/api/collection-stats-worker': typeof ApiCollectionStatsWorkerRoute
   '/api/diagnostics': typeof ApiDiagnosticsRoute
   '/api/event-calendar': typeof ApiEventCalendarRoute
+  '/api/fixture-duplicate-scan': typeof ApiFixtureDuplicateScanRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-certificates': typeof ApiResultCertificatesRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/api/signup-alerts': typeof ApiSignupAlertsRoute
+  '/api/source-import-worker': typeof ApiSourceImportWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -1090,10 +1108,12 @@ export interface FileRouteTypes {
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
     | '/api/event-calendar'
+    | '/api/fixture-duplicate-scan'
     | '/api/race-collector-worker'
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
+    | '/api/source-import-worker'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -1203,10 +1223,12 @@ export interface FileRouteTypes {
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
     | '/api/event-calendar'
+    | '/api/fixture-duplicate-scan'
     | '/api/race-collector-worker'
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
+    | '/api/source-import-worker'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -1316,10 +1338,12 @@ export interface FileRouteTypes {
     | '/api/collection-stats-worker'
     | '/api/diagnostics'
     | '/api/event-calendar'
+    | '/api/fixture-duplicate-scan'
     | '/api/race-collector-worker'
     | '/api/result-certificates'
     | '/api/result-claim-alerts'
     | '/api/signup-alerts'
+    | '/api/source-import-worker'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -1430,10 +1454,12 @@ export interface RootRouteChildren {
   ApiCollectionStatsWorkerRoute: typeof ApiCollectionStatsWorkerRoute
   ApiDiagnosticsRoute: typeof ApiDiagnosticsRoute
   ApiEventCalendarRoute: typeof ApiEventCalendarRoute
+  ApiFixtureDuplicateScanRoute: typeof ApiFixtureDuplicateScanRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
   ApiResultCertificatesRoute: typeof ApiResultCertificatesRoute
   ApiResultClaimAlertsRoute: typeof ApiResultClaimAlertsRoute
   ApiSignupAlertsRoute: typeof ApiSignupAlertsRoute
+  ApiSourceImportWorkerRoute: typeof ApiSourceImportWorkerRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   BrandsManageRoute: typeof BrandsManageRoute
   BrandsRegisterRoute: typeof BrandsRegisterRoute
@@ -1900,6 +1926,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiEventCalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/fixture-duplicate-scan': {
+      id: '/api/fixture-duplicate-scan'
+      path: '/api/fixture-duplicate-scan'
+      fullPath: '/api/fixture-duplicate-scan'
+      preLoaderRoute: typeof ApiFixtureDuplicateScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/race-collector-worker': {
       id: '/api/race-collector-worker'
       path: '/api/race-collector-worker'
@@ -1926,6 +1959,13 @@ declare module '@tanstack/react-router' {
       path: '/api/signup-alerts'
       fullPath: '/api/signup-alerts'
       preLoaderRoute: typeof ApiSignupAlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/source-import-worker': {
+      id: '/api/source-import-worker'
+      path: '/api/source-import-worker'
+      fullPath: '/api/source-import-worker'
+      preLoaderRoute: typeof ApiSourceImportWorkerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/athletes/': {
@@ -2326,10 +2366,12 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCollectionStatsWorkerRoute: ApiCollectionStatsWorkerRoute,
   ApiDiagnosticsRoute: ApiDiagnosticsRoute,
   ApiEventCalendarRoute: ApiEventCalendarRoute,
+  ApiFixtureDuplicateScanRoute: ApiFixtureDuplicateScanRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
   ApiResultCertificatesRoute: ApiResultCertificatesRoute,
   ApiResultClaimAlertsRoute: ApiResultClaimAlertsRoute,
   ApiSignupAlertsRoute: ApiSignupAlertsRoute,
+  ApiSourceImportWorkerRoute: ApiSourceImportWorkerRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   BrandsManageRoute: BrandsManageRoute,
   BrandsRegisterRoute: BrandsRegisterRoute,

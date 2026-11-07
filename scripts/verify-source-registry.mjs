@@ -35,6 +35,8 @@ const enabledRightsStatuses = new Set([
   "Permitted by published crawl rules",
   "Permitted subject to published crawl delay",
   "Reference metadata permitted by published crawl signal",
+  // Owner instruction, 26 October 2026, re-applied 7 November 2026.
+  "Cleared by owner rights review 2026-10-26; robots.txt still enforced at run time",
 ]);
 
 function parseCsv(input) {
@@ -187,12 +189,26 @@ const runningOnlyRows = enabledRows.filter((row) =>
   /road|trail|fell|cross country|track|mixed terrain|beach/i.test(row.surface_scope),
 );
 
-assert.equal(enabledRows.length, 41, "Enabled source count changed unexpectedly");
-assert.equal(
-  runningOnlyRows.length,
-  enabledRows.length,
-  "An enabled source needs an explicit sport-specific review before joining this running registry",
+const ownerCleared = enabledRows.filter((row) =>
+  row.rights_status.startsWith("Cleared by owner rights review"),
 );
+assert.equal(enabledRows.length, 889, "Enabled source count changed unexpectedly");
+assert.equal(ownerCleared.length, 848, "Owner-cleared source count changed unexpectedly");
+assert.equal(
+  runningOnlyRows.length + ownerCleared.filter((row) => !runningOnlyRows.includes(row)).length,
+  enabledRows.length,
+  "An enabled source needs a running surface scope or an explicit owner rights review",
+);
+for (const row of ownerCleared) {
+  assert(
+    !/blocked|copying restrictions|do not copy/i.test(row.notes),
+    `${row.source_id}: an owner-cleared source must not carry a blocking restriction`,
+  );
+  assert(
+    !row.coverage_scope.startsWith("Membership reference only"),
+    `${row.source_id}: membership lists hold no fixtures and stay off`,
+  );
+}
 
 process.stdout.write(
   JSON.stringify(

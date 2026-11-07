@@ -628,3 +628,37 @@ All 23 additions use `enabled=0`, `follow_history_links=0` and the existing manu
 reference profile. No collection is enabled and no participant results are
 ingested. The registry now contains 1708 sources: 41 enabled and 1667 disabled.
 The runtime reads the canonical CSV directly; no generated registry is required.
+
+## Owner-cleared sources re-applied and daily collection (7 November 2026)
+
+The owner confirmed on 7 November 2026 that the 26 October rights clearance should be
+re-applied and fixtures collected daily. 848 of the 1,011 cleared sources are enabled
+(889 enabled in total). Held back:
+
+- 11 sources whose notes record bot-blocking or copying restrictions (for example the
+  British Triathlon, British Cycling and French athletics organisation pages).
+- 146 "Membership reference only" club directories, which hold no fixtures.
+- 6 athletics platforms and federations that the athletics rollout order keeps held until
+  an API, licence or reuse agreement is confirmed (European Athletics, World Athletics
+  member federations, World Para Athletics, World Masters Athletics, DirectAthletics and
+  MileSplit).
+
+`.github/workflows/daily-source-import.yml` runs the source importer at 03:17 UTC every
+day across all enabled sources, honouring robots.txt, crawl delays and page budgets.
+`access.csv` and `source-outcomes.md` in each run's artifact list every source as
+collecting, no fixtures found, unreachable, or refused by its robots.txt. A failed
+robots.txt fetch is never treated as a refusal.
+
+Collected rows are posted to `/api/source-import-worker` (secret `SOURCE_IMPORT_TOKEN`)
+and saved to the collector review queue with the normal duplicate check. Ready rows
+publish automatically when `AUTO_PUBLISH_SOURCE_FIXTURES=true`; the owner switched this
+on on 7 November 2026, replacing the manual programme check for this pipeline. A daily
+Vercel cron (`/api/fixture-duplicate-scan`, 07:41 UTC) flags likely duplicate upcoming
+fixtures and emails new ones to paul@athrecs.com; it never merges anything itself.
+
+Sites whose robots.txt refuses collection receive one partnership email from
+info@athrecs.com asking whether we may list their races with links back to their site.
+Contact addresses are read only from pages the site's robots.txt allows. At most one
+email is sent per site and per address, replies go to info@athrecs.com, and sending
+happens only when `SOURCE_OUTREACH_ENABLED=true`; otherwise each run reports who would
+be emailed.

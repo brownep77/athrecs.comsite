@@ -12,6 +12,14 @@
 
 ## Fixture dates and start times
 
+- Owner instruction, 7 November 2026: fixtures collected automatically from enabled,
+  owner-cleared sources publish without a manual check of the organiser's programme
+  (`AUTO_PUBLISH_SOURCE_FIXTURES=true`), replacing that part of the 26 October rule for
+  this pipeline. Rows still need a stated date, distance, town and country from the
+  source page, and must pass the duplicate check; nothing is inferred. A separate daily
+  scan (`/api/fixture-duplicate-scan`) flags likely duplicate upcoming fixtures for
+  review and emails new ones to the owner. It never merges or hides fixtures itself.
+
 - Owner instruction, 26 October 2026: all published race fixtures need a confirmed
   distance. Research each edition against its organiser, authorised entry programme
   or governing body. Do not infer distance from a race name. Keep unresolved

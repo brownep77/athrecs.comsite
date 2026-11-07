@@ -330,9 +330,17 @@ export async function runSource(source, ctx) {
     });
   }
   let pages = 0;
+  const start = new URL(source.start_url);
+  const startRobots = await robotsFor(start.origin);
+  if (startRobots.published && !startRobots.allows(start.pathname + start.search)) {
+    // The site explicitly asks automated tools not to collect this page.
+    log.push(`skip ${source.start_url}: disallowed by robots.txt`);
+    const contactEmail = await findContactEmail(start, startRobots, ctx);
+    return { rows, skipped, log, pages, access: "prohibited", contactEmail };
+  }
   const listing = await get(source.start_url);
   pages++;
-  if (!listing) return { rows, skipped, log, pages };
+  if (!listing) return { rows, skipped, log, pages, access: "unreachable" };
   const direct = extractEvents(listing);
   if (direct.length) events.push({ url: source.start_url, events: direct });
   const links = extractLinks(listing, source.start_url, source)
@@ -352,7 +360,49 @@ export async function runSource(source, ctx) {
     rows.push(...out.rows);
     skipped.push(...out.skipped);
   }
-  return { rows, skipped, log, pages };
+  return { rows, skipped, log, pages, access: rows.length ? "collected" : "no-fixtures-found" };
+}
+
+const CONTACT_PATHS = ["/contact", "/contact-us", "/contact/", "/about", "/"];
+const PREFERRED_MAILBOXES = ["info", "contact", "hello", "enquiries", "inquiries", "office", "admin", "events", "race", "races"];
+
+/** Public contact address for a site that refuses collection, reading only pages its robots.txt allows. */
+export function pickContactEmail(html, host) {
+  const site = host.replace(/^www\./, "").toLowerCase();
+  const found = [
+    ...String(html).matchAll(/(?:mailto:)?([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})/gi),
+  ].map((m) => m[1].toLowerCase().replace(/\.$/, ""));
+  const own = [...new Set(found)].filter(
+    (email) =>
+      !/\.(png|jpe?g|gif|svg|webp)$/.test(email) &&
+      (email.endsWith(`@${site}`) || email.split("@")[1].endsWith(`.${site}`)),
+  );
+  for (const box of PREFERRED_MAILBOXES) {
+    const match = own.find((email) => email.split("@")[0] === box);
+    if (match) return match;
+  }
+  return own[0] ?? "";
+}
+
+async function findContactEmail(start, robots, { fetchImpl, gate }) {
+  for (const path of CONTACT_PATHS) {
+    if (!robots.allows(path)) continue;
+    const url = new URL(path, start.origin).href;
+    const html = await gate(start.hostname, Math.max(1, robots.delay), async () => {
+      try {
+        const res = await fetchImpl(url, {
+          headers: { "user-agent": USER_AGENT, accept: "text/html" },
+          signal: AbortSignal.timeout(15000),
+        });
+        return res.ok ? (await res.text()).slice(0, 2_000_000) : "";
+      } catch {
+        return "";
+      }
+    });
+    const email = pickContactEmail(html, start.hostname);
+    if (email) return email;
+  }
+  return "";
 }
 
 export async function runAll(sources, { fetchImpl = fetch, options, concurrency = 4, sleep }) {
@@ -369,10 +419,12 @@ export async function runAll(sources, { fetchImpl = fetch, options, concurrency 
               signal: AbortSignal.timeout(15000),
             });
             if (res.status >= 400 && res.status < 500) return parseRobots("");
-            if (!res.ok) return parseRobots("User-agent: *\nDisallow: /");
-            return parseRobots(await res.text());
+            // A server error or timeout is treated as "keep out" for safety, but it
+            // is not the site saying no: only a published robots.txt counts.
+            if (!res.ok) return { ...parseRobots("User-agent: *\nDisallow: /"), published: false };
+            return { ...parseRobots(await res.text()), published: true };
           } catch {
-            return parseRobots("User-agent: *\nDisallow: /");
+            return { ...parseRobots("User-agent: *\nDisallow: /"), published: false };
           }
         })(),
       );

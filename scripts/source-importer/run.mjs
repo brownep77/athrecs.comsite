@@ -53,5 +53,22 @@ const report = [
   "Upload fixtures.csv to Import running fixtures. It runs the duplicate check; nothing is published until you Keep and Publish.",
 ].join("\n");
 await writeFile(join(out, "report.md"), report + "\n");
+// Per-source outcome: collected, no fixtures found, unreachable, or prohibited by
+// the site's robots.txt (with a public contact address when one could be read).
+const byId = new Map(sources.map((s) => [s.source_id, s]));
+await writeFile(
+  join(out, "access.csv"),
+  toCsv(
+    ["source_id", "source_name", "url", "status", "rows", "contact_email"],
+    results.map((r) => ({
+      source_id: r.source,
+      source_name: byId.get(r.source)?.source_name ?? "",
+      url: byId.get(r.source)?.start_url ?? "",
+      status: r.access ?? "",
+      rows: String(r.rows.length),
+      contact_email: r.contactEmail ?? "",
+    })),
+  ),
+);
 console.log(report.split("\n").slice(0, 3).join("\n"));
 console.log(`Files written to ${out}`);

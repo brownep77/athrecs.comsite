@@ -52,7 +52,7 @@
     "source-importer": "node scripts/source-importer/run.mjs",
     "sources:score": "node scripts/source-registry/score-sources.mjs",
     "verify:source-scorecard": "node scripts/verify-source-scorecard.mjs",
-    "verify:source-importer": "node scripts/verify-source-importer.mjs",
+    "verify:source-importer": "node scripts/verify-source-importer.mjs && node scripts/verify-source-access.mjs && node --experimental-strip-types scripts/verify-automated-source-import.mjs && node --experimental-strip-types scripts/verify-source-outreach.mjs && node --experimental-strip-types scripts/verify-fixture-duplicate-scan.mjs",
     "verify:sources": "node scripts/verify-source-registry.mjs && node scripts/verify-source-scorecard.mjs && node --experimental-strip-types scripts/verify-organisation-sources.mjs",
     "verify:bulk-source-run": "node --experimental-strip-types scripts/verify-bulk-source-run.mjs",
     "verify:workbook-overrides": "node scripts/verify-workbook-event-overrides.mjs",
