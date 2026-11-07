@@ -13,6 +13,18 @@ The canonical machine-readable file is:
 
 - docs/source-registry/fixture-result-sources.csv
 
+Every source is profiled, scored (0-100) and tiered in the generated scorecard:
+
+- docs/source-registry/source-scorecard.csv (one row per source)
+- docs/source-registry/source-scorecard.md (summary and top sources to unlock)
+
+Tier A sources are checked every 2 hours, B daily, C weekly and Retired monthly.
+Run `npm run sources:score` after any registry change; `npm run verify:sources`
+fails while the scorecard is stale. Collector runs and the source rater record
+live results in `source-live-metrics.csv` (source_id, last_checked, last_new_item,
+records_30d, rejection_rate_pct), which adjust each score at the monthly re-score.
+A score ranks effort only; it never grants permission to collect.
+
 Independently verified corrections to staged workbook editions are recorded in:
 
 - docs/source-registry/workbook-event-overrides.json
