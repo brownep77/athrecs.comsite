@@ -38,10 +38,9 @@ export const RACE_EDITORIAL_GUIDES: readonly RaceEditorialGuide[] = [
     ],
     course: [
       "The race starts and finishes on Lady's Lane, on the outskirts of Wymondham. Its rural-road route runs through countryside towards Morley, following undulating roads rather than a completely flat circuit.",
-      "Those rolling sections make pacing important. Keep something in reserve for the later rises, especially if you're chasing a personal best. The route remains open to normal traffic, so follow marshal instructions throughout.",
+      "What stands out is the setting: country lanes, open countryside and the natural rises and falls of the roads around Morley. It has the character of a Norfolk club race rather than a big-city 10K. The route remains open to traffic, with marshals along the course.",
       "The organiser provides water around halfway and at the finish. Check the final 2027 map and race-day instructions before travelling; older course maps are useful background, not proof that every detail is unchanged."
     ],
-    pacingTip: "Run the hills by effort rather than trying to force identical kilometre splits. If you're racing for a time, make your move when the course allows it, not just when your watch demands it.",
     practical: [
       { label: "Race date", value: "Friday 1 January 2027" },
       { label: "Start time", value: "10:00 GMT" },
