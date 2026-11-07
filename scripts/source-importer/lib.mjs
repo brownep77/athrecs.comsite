@@ -27,7 +27,8 @@ export const OUTPUT_HEADERS = [
   "entryStatus",
   "notes",
 ];
-const PEOPLE_PATH = /\/(results?|raceresults?|athletes?|runners?|participants?|entrants?|startlist|start-list|profile|user)s?(\/|$|\?)/i;
+const PEOPLE_PATH =
+  /\/(results?|raceresults?|athletes?|runners?|participants?|entrants?|startlist|start-list|profile|user)s?(\/|$|\?)/i;
 const DISCOVERY_HOST = /(^|\.)(runabc|findarace|racecalendar|runningcalendar)\./i;
 
 export function parseCsv(text) {
@@ -63,8 +64,12 @@ export function parseCsv(text) {
   return body.map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ""])));
 }
 export function toCsv(headers, rows) {
-  const esc = (v) => (/[",\n\r]/.test(String(v ?? "")) ? `"${String(v).replace(/"/g, '""')}"` : (v ?? ""));
-  return [headers.join(","), ...rows.map((r) => headers.map((h) => esc(r[h])).join(","))].join("\n") + "\n";
+  const esc = (v) =>
+    /[",\n\r]/.test(String(v ?? "")) ? `"${String(v).replace(/"/g, '""')}"` : (v ?? "");
+  return (
+    [headers.join(","), ...rows.map((r) => headers.map((h) => esc(r[h])).join(","))].join("\n") +
+    "\n"
+  );
 }
 
 export function enabledSources(registry, only = []) {
@@ -104,16 +109,23 @@ export function parseRobots(text) {
       lastWasAgent = true;
     } else if (current) {
       lastWasAgent = false;
-      if (key === "allow" || key === "disallow") current.rules.push({ allow: key === "allow", path: value });
+      if (key === "allow" || key === "disallow")
+        current.rules.push({ allow: key === "allow", path: value });
       else if (key === "crawl-delay") current.delay = Number(value) || 0;
     }
   }
-  const mine = groups.find((g) => g.agents.some((a) => a !== "*" && "athrecssourcebot".includes(a)));
+  const mine = groups.find((g) =>
+    g.agents.some((a) => a !== "*" && "athrecssourcebot".includes(a)),
+  );
   const group = mine ?? groups.find((g) => g.agents.includes("*")) ?? { rules: [], delay: 0 };
   const test = (rule, path) => {
     if (!rule.path) return -1;
     const rx = new RegExp(
-      "^" + rule.path.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*").replace(/\\\$$/, "$"),
+      "^" +
+        rule.path
+          .replace(/[.+?^${}()|[\]\\]/g, "\\$&")
+          .replace(/\*/g, ".*")
+          .replace(/\\\$$/, "$"),
     );
     return rx.test(path) ? rule.path.length : -1;
   };
@@ -123,7 +135,8 @@ export function parseRobots(text) {
       let best = { len: -1, allow: true };
       for (const rule of group.rules) {
         const len = test(rule, path);
-        if (len > best.len || (len === best.len && rule.allow)) if (len >= 0) best = { len, allow: rule.allow };
+        if (len > best.len || (len === best.len && rule.allow))
+          if (len >= 0) best = { len, allow: rule.allow };
       }
       return best.allow;
     },
@@ -132,8 +145,12 @@ export function parseRobots(text) {
 
 export function extractLinks(html, baseUrl, source) {
   const domains = new Set(String(source.allowed_domains).split("|").filter(Boolean));
-  const include = source.race_link_include_regex ? new RegExp(source.race_link_include_regex) : null;
-  const exclude = source.race_link_exclude_regex ? new RegExp(source.race_link_exclude_regex) : null;
+  const include = source.race_link_include_regex
+    ? new RegExp(source.race_link_include_regex)
+    : null;
+  const exclude = source.race_link_exclude_regex
+    ? new RegExp(source.race_link_exclude_regex)
+    : null;
   const out = new Set();
   for (const m of html.matchAll(/<a\s[^>]*href\s*=\s*["']([^"'#]+)["']/gi)) {
     let url;
@@ -162,7 +179,9 @@ function walk(node, out) {
 /** schema.org Event entries from JSON-LD blocks. Nothing else on the page is read. */
 export function extractEvents(html) {
   const found = [];
-  for (const m of html.matchAll(/<script[^>]+type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+  for (const m of html.matchAll(
+    /<script[^>]+type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi,
+  )) {
     try {
       walk(JSON.parse(m[1].trim()), found);
     } catch {
@@ -172,14 +191,26 @@ export function extractEvents(html) {
   return found.map((e) => {
     const loc = [].concat(e.location ?? [])[0] ?? {};
     const addr = typeof loc.address === "object" ? (loc.address ?? {}) : {};
-    const offers = [].concat(e.offers ?? []).map((o) => o?.name).filter(Boolean);
-    const subs = [].concat(e.subEvent ?? []).map((s) => s?.name).filter(Boolean);
+    const offers = []
+      .concat(e.offers ?? [])
+      .map((o) => o?.name)
+      .filter(Boolean);
+    const subs = []
+      .concat(e.subEvent ?? [])
+      .map((s) => s?.name)
+      .filter(Boolean);
     return {
       name: String(e.name ?? "").trim(),
       startDate: String(e.startDate ?? ""),
-      city: String(addr.addressLocality ?? (typeof loc.address === "string" ? "" : loc.name) ?? "").trim(),
+      city: String(
+        addr.addressLocality ?? (typeof loc.address === "string" ? "" : loc.name) ?? "",
+      ).trim(),
       region: String(addr.addressRegion ?? "").trim(),
-      country: String((typeof addr.addressCountry === "object" ? addr.addressCountry?.name : addr.addressCountry) ?? "").trim(),
+      country: String(
+        (typeof addr.addressCountry === "object"
+          ? addr.addressCountry?.name
+          : addr.addressCountry) ?? "",
+      ).trim(),
       text: [e.name, e.description, ...offers, ...subs].filter(Boolean).join(" \n "),
       availability: JSON.stringify(e.offers ?? ""),
       url: String(e.url ?? ""),
@@ -238,7 +269,15 @@ export function toRows(source, pageUrl, events, { today, from, to }) {
           : null;
     const dist = why ? [] : distancesFrom(e.text);
     const country = countryName(e.country, fallback);
-    const reason = why ?? (!dist.length ? "no distance stated on the page" : !e.city ? "no town or city" : !country ? "no country" : null);
+    const reason =
+      why ??
+      (!dist.length
+        ? "no distance stated on the page"
+        : !e.city
+          ? "no town or city"
+          : !country
+            ? "no country"
+            : null);
     if (reason) {
       skipped.push({ source: source.source_id, url: pageUrl, name: e.name, date, reason });
       continue;
@@ -260,7 +299,11 @@ export function toRows(source, pageUrl, events, { today, from, to }) {
         sourceKind: kindFor(source),
         evidence: `Event data on ${new URL(pageUrl).hostname} gives "${e.name}" on ${date} with a ${d.distance}${d.unit} distance in ${e.city}`,
         checkedAt: today,
-        entryStatus: /SoldOut|OutOfStock|Discontinued/i.test(e.availability) ? "Closed" : /InStock|PreOrder|LimitedAvailability/i.test(e.availability) ? "Open" : "TBC",
+        entryStatus: /SoldOut|OutOfStock|Discontinued/i.test(e.availability)
+          ? "Closed"
+          : /InStock|PreOrder|LimitedAvailability/i.test(e.availability)
+            ? "Open"
+            : "TBC",
         notes: `Collected by the parallel source importer from ${source.source_id}; held for source review`,
       });
   }
@@ -281,7 +324,10 @@ export function createHostGate(sleep = (ms) => new Promise((r) => setTimeout(r, 
         last.set(host, Date.now());
       }
     });
-    tails.set(host, run.catch(() => {}));
+    tails.set(
+      host,
+      run.catch(() => {}),
+    );
     return run;
   };
 }
@@ -353,7 +399,14 @@ export async function runSource(source, ctx) {
     if (!html) continue;
     const found = extractEvents(html);
     if (found.length) events.push({ url: link, events: found });
-    else skipped.push({ source: source.source_id, url: link, name: "", date: "", reason: "no event data on the page" });
+    else
+      skipped.push({
+        source: source.source_id,
+        url: link,
+        name: "",
+        date: "",
+        reason: "no event data on the page",
+      });
   }
   for (const page of events) {
     const out = toRows(source, page.url, page.events, options);
@@ -364,7 +417,18 @@ export async function runSource(source, ctx) {
 }
 
 const CONTACT_PATHS = ["/contact", "/contact-us", "/contact/", "/about", "/"];
-const PREFERRED_MAILBOXES = ["info", "contact", "hello", "enquiries", "inquiries", "office", "admin", "events", "race", "races"];
+const PREFERRED_MAILBOXES = [
+  "info",
+  "contact",
+  "hello",
+  "enquiries",
+  "inquiries",
+  "office",
+  "admin",
+  "events",
+  "race",
+  "races",
+];
 
 /** Public contact address for a site that refuses collection, reading only pages its robots.txt allows. */
 export function pickContactEmail(html, host) {
@@ -405,7 +469,24 @@ async function findContactEmail(start, robots, { fetchImpl, gate }) {
   return "";
 }
 
-export async function runAll(sources, { fetchImpl = fetch, options, concurrency = 4, sleep }) {
+// Shards keep every source from one website in the same shard, so the per-host
+// crawl delay still holds when shards run side by side.
+export function shardOf(source, count) {
+  let host = "";
+  try {
+    host = new URL(source.start_url).hostname.replace(/^www\./, "");
+  } catch {
+    host = source.source_id ?? "";
+  }
+  let h = 0;
+  for (const ch of host) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return h % count;
+}
+
+export async function runAll(
+  sources,
+  { fetchImpl = fetch, options, concurrency = 4, sleep, deadline = Infinity, now = Date.now },
+) {
   const gate = createHostGate(sleep);
   const robotsCache = new Map();
   const robotsFor = (origin) => {
@@ -436,6 +517,19 @@ export async function runAll(sources, { fetchImpl = fetch, options, concurrency 
     Array.from({ length: Math.min(concurrency, sources.length) }, async () => {
       while (next < sources.length) {
         const i = next++;
+        // Past the time budget, record the rest as not reached so the run still
+        // finishes and saves everything it did collect.
+        if (now() >= deadline) {
+          results[i] = {
+            source: sources[i].source_id,
+            pages: 0,
+            rows: [],
+            skipped: [],
+            log: ["not reached before the run's time limit"],
+            access: "not-reached",
+          };
+          continue;
+        }
         results[i] = {
           source: sources[i].source_id,
           ...(await runSource(sources[i], { fetchImpl, gate, robotsFor, options })),
@@ -447,7 +541,9 @@ export async function runAll(sources, { fetchImpl = fetch, options, concurrency 
     rows = [];
   for (const r of results)
     for (const row of r.rows) {
-      const key = [row.name, row.date, row.distance, row.unit, row.sourceUrl].join("|").toLowerCase();
+      const key = [row.name, row.date, row.distance, row.unit, row.sourceUrl]
+        .join("|")
+        .toLowerCase();
       if (!seen.has(key)) {
         seen.add(key);
         rows.push(row);

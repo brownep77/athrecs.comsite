@@ -94,6 +94,7 @@ const label = {
   "no-fixtures-found": "Set up, no fixtures found this run",
   unreachable: "Could not be reached this run",
   prohibited: "Site says no (robots.txt)",
+  "not-reached": "Not reached before the time limit",
 };
 const outcomeLines = [
   "# Source outcomes",

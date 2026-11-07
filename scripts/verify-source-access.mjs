@@ -64,3 +64,22 @@ assert.equal(
 console.log(
   "Source access checks passed: refusals need a published robots.txt; contacts come only from allowed pages.",
 );
+
+// Shards group sources by website, and a time budget leaves later sources "not-reached".
+{
+  const { shardOf, runAll: runAllShards } = await import("./source-importer/lib.mjs");
+  const a = { source_id: "a", start_url: "https://www.example.org/races" };
+  const b = { source_id: "b", start_url: "https://example.org/calendar" };
+  if (shardOf(a, 4) !== shardOf(b, 4)) throw new Error("same website must share a shard");
+  const late = await runAllShards([a, b], {
+    concurrency: 1,
+    deadline: 0,
+    options: { today: "2026-11-07", from: "2026-11-07", to: "2027-01-01", maxEvents: 5 },
+    fetchImpl: async () => {
+      throw new Error("must not fetch after the deadline");
+    },
+  });
+  if (late.results.some((r) => r.access !== "not-reached"))
+    throw new Error("sources past the deadline should be not-reached");
+  console.log("Source sharding and time budget checks passed.");
+}
