@@ -1488,6 +1488,23 @@ export const listClubs = createServerFn({ method: "GET" })
   .validator((input: { q?: string } | undefined) => input ?? {})
   .handler(async ({ data }) => (await readClubCards({ q: data.q }, false)).clubs);
 
+/** Up to eight club-name suggestions for the sign-up form (public directory data). */
+export const suggestClubs = createServerFn({ method: "GET" })
+  .validator((input: { q?: string } | undefined) => ({
+    q: typeof input?.q === "string" ? input.q.replace(/\s+/g, " ").trim().slice(0, 80) : "",
+  }))
+  .handler(async ({ data }) => {
+    if (data.q.length < 2) return [];
+    const sql = await ready();
+    const escaped = data.q.replace(/[\\%_]/g, (ch) => `\\${ch}`);
+    return sql<{ name: string; city: string; country: string }>`
+      select name, city, country from clubs
+      where name ilike ${`%${escaped}%`}
+      order by (name ilike ${`${escaped}%`}) desc, length(name), name
+      limit 8
+    `;
+  });
+
 export const getClubDirectoryPage = createServerFn({ method: "GET" })
   .validator(parseClubDirectorySearch)
   .handler(async ({ data }) => {

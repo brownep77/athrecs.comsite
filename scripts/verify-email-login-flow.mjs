@@ -191,6 +191,21 @@ try {
       "SIGNUP_COUNTRY_REQUIRED",
     ],
     [
+      "missing-nationality",
+      { ...signupDetails(), signupNationality: undefined },
+      "SIGNUP_NATIONALITY_REQUIRED",
+    ],
+    [
+      "invalid-nationality",
+      { ...signupDetails(), signupNationality: "Atlantis" },
+      "SIGNUP_NATIONALITY_REQUIRED",
+    ],
+    [
+      "invalid-postcode",
+      { ...signupDetails(), signupPostcode: "NR1 <script>" },
+      "SIGNUP_POSTCODE_INVALID",
+    ],
+    [
       "missing-location",
       { ...signupDetails(), signupLocation: undefined },
       "SIGNUP_LOCATION_REQUIRED",
@@ -376,7 +391,9 @@ try {
       firstName: "  Ana\u00a0María  ",
       lastName: " O’Neill-Smith ",
       signupCountry: " england ",
+      signupNationality: " ireland ",
       signupLocation: "  St  Albans  ",
+      signupPostcode: " al1 3jx ",
       signupDateOfBirth: "2000-02-29",
     });
     assert.equal(recovered.status, 200, await recovered.clone().text());
@@ -384,15 +401,24 @@ try {
     assertPrivateSignupOmitted(recoveredPayload, { signupDateOfBirth: "2000-02-29" });
     const recoveredUser = recoveredPayload.user;
     assert.equal(recoveredUser.name, "Ana María O’Neill-Smith");
-    for (const key of ["firstName", "lastName", "signupCountry", "signupLocation"])
+    for (const key of [
+      "firstName",
+      "lastName",
+      "signupCountry",
+      "signupNationality",
+      "signupLocation",
+      "signupPostcode",
+    ])
       assert(!(key in recoveredUser), `${key} stays out of the auth response`);
     const [storedDetails] =
-      await sql`select "firstName","lastName","signupCountry","signupLocation" from "user" where id=${recoveredUser.id}`;
+      await sql`select "firstName","lastName","signupCountry","signupNationality","signupLocation","signupPostcode" from "user" where id=${recoveredUser.id}`;
     assert.deepEqual(storedDetails, {
       firstName: "Ana María",
       lastName: "O’Neill-Smith",
       signupCountry: "England",
+      signupNationality: "Ireland",
       signupLocation: "St Albans",
+      signupPostcode: "AL1 3JX",
     });
     // Synthetic legacy data explicitly represents registrations made before this requirement.
     await sql`update "user" set name='',"firstName"=null,"lastName"=null,"signupCountry"=null,"signupLocation"=null,"signupDateOfBirth"=null,"signupClubs"=null where id=${recoveredUser.id}`;
